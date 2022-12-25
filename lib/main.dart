@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutterpp/App/Views/Pages/test_page.dart';
+import 'package:flutterpp/App/Views/Pages/Auth/splash_page.dart';
 import 'package:flutterpp/Config/app_binding.dart';
 import 'package:get/get.dart';
 
@@ -18,7 +18,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.green,
       ),
-      home: const TestPage(),
+      home: const SplashPage(),
     );
   }
 }
