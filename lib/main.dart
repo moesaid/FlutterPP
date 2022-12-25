@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutterpp/App/Views/Pages/test_page.dart';
+import 'package:flutterpp/Config/app_binding.dart';
 import 'package:get/get.dart';
 
 void main() {
@@ -12,24 +14,11 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       title: 'Flutter ++',
+      initialBinding: AppBinding(),
       theme: ThemeData(
-        primarySwatch: Colors.red,
+        primarySwatch: Colors.green,
       ),
-      home: const MyHomePage(),
-    );
-  }
-}
-
-class MyHomePage extends StatelessWidget {
-  const MyHomePage({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: const Text('MyHomePage 1111')),
-      body: Container(
-        child: const Text('Hello World'),
-      ),
+      home: const TestPage(),
     );
   }
 }
