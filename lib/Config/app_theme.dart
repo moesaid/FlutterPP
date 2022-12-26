@@ -36,13 +36,13 @@ class AppTheme {
   ThemeData darkThemeData() {
     return ThemeData(
       useMaterial3: true,
-      scaffoldBackgroundColor: const Color.fromRGBO(13, 15, 16, 1),
+      scaffoldBackgroundColor: const Color.fromRGBO(22, 22, 24, 1),
       colorScheme: ColorScheme.fromSeed(
         brightness: Brightness.dark,
-        seedColor: Colors.green,
-        primary: Colors.green.shade700,
+        seedColor: const Color.fromRGBO(51, 33, 99, 1),
+        primary: const Color.fromRGBO(51, 33, 99, 1),
         onPrimary: Colors.white,
-        secondary: Colors.red,
+        secondary: const Color.fromRGBO(110, 77, 210, 1),
         onSecondary: Colors.white,
       ),
       outlinedButtonTheme: OutlinedButtonThemeData(
@@ -54,6 +54,10 @@ class AppTheme {
       ),
       progressIndicatorTheme: ProgressIndicatorThemeData(
         color: Colors.grey.shade800,
+      ),
+      switchTheme: SwitchThemeData(
+        thumbColor: MaterialStateProperty.all(Colors.white38),
+        trackColor: MaterialStateProperty.all(Colors.white10),
       ),
       appBarTheme: const AppBarTheme(
         backgroundColor: Colors.transparent,
