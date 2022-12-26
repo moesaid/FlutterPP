@@ -7,80 +7,34 @@ class SplashPage extends GetView<SplashController> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: const Text('Splash Page')),
-      body: SafeArea(
-        child: SizedBox(
-          width: Get.width,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              const Text('SplashController'),
-              const SizedBox(height: 20),
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
+    return GetBuilder<SplashController>(
+      init: SplashController(),
+      initState: (_) {},
+      builder: (context) {
+        return Scaffold(
+          body: SafeArea(
+            child: SizedBox(
+              width: Get.width,
+              child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  ElevatedButton(
-                    onPressed: () {
-                      Get.changeThemeMode(
-                        Get.isDarkMode ? ThemeMode.light : ThemeMode.dark,
-                      );
-                    },
-                    child: const Text('switch'),
-                  ),
-                  const SizedBox(width: 20),
-                  const ElevatedButton(
-                    onPressed: null,
-                    child: Text('null'),
+                  const FlutterLogo(size: 100),
+                  const SizedBox(height: 10),
+                  const Text('Flutter ++'),
+                  const Text('v0.0.1'),
+                  const SizedBox(height: 20),
+                  SizedBox(
+                    width: Get.width * 0.02,
+                    height: Get.width * 0.02,
+                    child: const CircularProgressIndicator(strokeWidth: 2),
                   ),
                 ],
               ),
-              const SizedBox(height: 20),
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  OutlinedButton(
-                    onPressed: () {
-                      Get.changeThemeMode(
-                        Get.isDarkMode ? ThemeMode.light : ThemeMode.dark,
-                      );
-                    },
-                    child: const Text('switch'),
-                  ),
-                  const SizedBox(width: 20),
-                  const OutlinedButton(
-                    onPressed: null,
-                    child: Text('null'),
-                  ),
-                ],
-              ),
-              const SizedBox(height: 20),
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  OutlinedButton(
-                    onPressed: () {
-                      Get.changeThemeMode(
-                        Get.isDarkMode ? ThemeMode.light : ThemeMode.dark,
-                      );
-                    },
-                    child: const Text('switch'),
-                  ),
-                  const SizedBox(width: 20),
-                  const OutlinedButton(
-                    onPressed: null,
-                    child: Text('null'),
-                  ),
-                ],
-              ),
-            ],
+            ),
           ),
-        ),
-      ),
+        );
+      },
     );
   }
 }
