@@ -8,6 +8,7 @@ class SplashPage extends GetView<SplashController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(title: const Text('SplashPage')),
       body: const SafeArea(
         child: Text('SplashController'),
