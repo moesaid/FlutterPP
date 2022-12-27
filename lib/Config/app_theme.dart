@@ -72,6 +72,19 @@ class AppTheme {
           disabledBackgroundColor: Colors.black12,
         ),
       ),
+      elevatedButtonTheme: ElevatedButtonThemeData(
+        style: ElevatedButton.styleFrom(
+          foregroundColor: Colors.white,
+          backgroundColor: darkColors['primary']!,
+          disabledBackgroundColor: Colors.black12,
+          textStyle: const TextStyle(
+            color: Colors.white,
+            fontWeight: FontWeight.w300,
+            letterSpacing: 0.6,
+            height: 0,
+          ),
+        ),
+      ),
       progressIndicatorTheme: ProgressIndicatorThemeData(
         color: Colors.grey.shade800,
       ),

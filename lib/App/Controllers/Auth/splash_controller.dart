@@ -1,4 +1,5 @@
 import 'package:flutterpp/App/Providers/Local/user_token.dart';
+import 'package:flutterpp/Routes/app_pages.dart';
 import 'package:get/get.dart';
 
 class SplashController extends GetxController {
@@ -14,9 +15,9 @@ class SplashController extends GetxController {
 
     Future.delayed(const Duration(seconds: 2), () {
       if (isAuth) {
-        Get.offNamed('/home');
+        Get.offNamed(AppRoutes.HOME);
       } else {
-        Get.offNamed('/login');
+        Get.offNamed(AppRoutes.REGISTER);
       }
     });
   }

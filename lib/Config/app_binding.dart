@@ -1,4 +1,5 @@
 import 'package:flutterpp/App/Controllers/Auth/login_controller.dart';
+import 'package:flutterpp/App/Controllers/Auth/register_controller.dart';
 import 'package:flutterpp/App/Controllers/Auth/splash_controller.dart';
 import 'package:flutterpp/App/Controllers/Home/home_controller.dart';
 import 'package:get/get.dart';
@@ -8,6 +9,7 @@ class AppBinding implements Bindings {
   void dependencies() {
     // Auth
     Get.lazyPut<SplashController>(() => SplashController());
+    Get.lazyPut<RegisterController>(() => RegisterController());
     Get.lazyPut<LoginController>(() => LoginController());
 
     // Home
