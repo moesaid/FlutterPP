@@ -34,6 +34,7 @@ class MyApp extends StatelessWidget {
         themeMode: Get.isDarkMode ? ThemeMode.dark : ThemeMode.light,
         initialBinding: AppBinding(),
         getPages: AppPages.routes,
+        defaultTransition: Transition.native,
         // home: const DragToMoveArea(child: SplashPage()),
       ),
     );

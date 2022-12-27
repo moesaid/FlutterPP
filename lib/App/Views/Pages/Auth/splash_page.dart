@@ -12,25 +12,22 @@ class SplashPage extends GetView<SplashController> {
       initState: (_) {},
       builder: (context) {
         return Scaffold(
-          body: SafeArea(
-            child: SizedBox(
-              width: Get.width,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  const FlutterLogo(size: 100),
-                  const SizedBox(height: 10),
-                  const Text('Flutter ++'),
-                  const Text('v0.0.1'),
-                  const SizedBox(height: 20),
-                  SizedBox(
-                    width: Get.width * 0.02,
-                    height: Get.width * 0.02,
-                    child: const CircularProgressIndicator(strokeWidth: 2),
-                  ),
-                ],
-              ),
+          body: Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                const FlutterLogo(size: 100),
+                const SizedBox(height: 10),
+                const Text('Flutter ++'),
+                const Text('v0.0.1'),
+                const SizedBox(height: 20),
+                SizedBox(
+                  width: Get.width * 0.02,
+                  height: Get.width * 0.02,
+                  child: const CircularProgressIndicator(strokeWidth: 2),
+                ),
+              ],
             ),
           ),
         );
