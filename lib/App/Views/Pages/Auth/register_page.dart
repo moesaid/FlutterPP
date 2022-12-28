@@ -17,11 +17,9 @@ class RegisterPage extends GetView<RegisterController> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               ElevatedButton(
-                onPressed: () {
-                  AuthServices().register(
+                onPressed: () async {
+                  await AuthServices().signInWithOtp(
                     email: 'masedup@gmail.com',
-                    password: 'password',
-                    name: 'moe',
                   );
                 },
                 child: const Text('register'),

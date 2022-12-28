@@ -15,19 +15,19 @@ class LoginPage extends GetView<LoginController> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              const Text('LoginPage'),
-              const SizedBox(height: 20),
-              ElevatedButton(
-                onPressed: () {
-                  AuthServices().register(
-                    email: 'masedup@gmail.com',
-                    password: 'password',
-                    name: 'moe',
-                  );
-                },
-                child: const Text('register'),
-              ),
+            children: const [
+              Text('LoginPage'),
+              SizedBox(height: 20),
+              // ElevatedButton(
+              //   onPressed: () {
+              //     AuthServices().register(
+              //       email: 'masedup@gmail.com',
+              //       password: 'password',
+              //       name: 'moe',
+              //     );
+              //   },
+              //   child: const Text('register'),
+              // ),
             ],
           ),
         ),

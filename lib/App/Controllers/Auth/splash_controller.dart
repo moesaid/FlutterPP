@@ -1,8 +1,10 @@
-import 'package:flutterpp/App/Providers/Local/user_token.dart';
 import 'package:flutterpp/Routes/app_pages.dart';
 import 'package:get/get.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 class SplashController extends GetxController {
+  final supabase = Supabase.instance.client;
+
   @override
   Future<void> onReady() async {
     await _nextPage();
@@ -10,11 +12,11 @@ class SplashController extends GetxController {
   }
 
   _nextPage() async {
-    String token = await UserToken().read();
-    bool isAuth = token.isNotEmpty;
+    // String token = await UserToken().read();
+    final Session? session = supabase.auth.currentSession;
 
     Future.delayed(const Duration(seconds: 2), () {
-      if (isAuth) {
+      if (session != null) {
         Get.offNamed(AppRoutes.HOME);
       } else {
         Get.offNamed(AppRoutes.REGISTER);

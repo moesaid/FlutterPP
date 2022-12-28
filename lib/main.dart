@@ -35,7 +35,6 @@ class MyApp extends StatelessWidget {
         initialBinding: AppBinding(),
         getPages: AppPages.routes,
         defaultTransition: Transition.native,
-        // home: const DragToMoveArea(child: SplashPage()),
       ),
     );
   }
