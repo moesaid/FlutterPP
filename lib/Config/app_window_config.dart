@@ -6,17 +6,19 @@ class AppWindowConfig {
   void config() {
     // config window
     WindowOptions windowOptions = const WindowOptions(
-      size: Size(1024, 768),
-      minimumSize: Size(800, 600),
+      size: Size(1200, 720),
+      minimumSize: Size(960, 660),
       title: 'Flutter++',
-      center: true,
       backgroundColor: Colors.transparent,
-      skipTaskbar: false,
       titleBarStyle: TitleBarStyle.hidden,
+      center: true,
+      fullScreen: false,
+      skipTaskbar: false,
     );
 
     // show window
     windowManager.waitUntilReadyToShow(windowOptions, () async {
+      await windowManager.ensureInitialized();
       await windowManager.show();
       await windowManager.focus();
     });

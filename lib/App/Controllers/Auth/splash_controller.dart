@@ -12,14 +12,13 @@ class SplashController extends GetxController {
   }
 
   _nextPage() async {
-    // String token = await UserToken().read();
     final Session? session = supabase.auth.currentSession;
 
     Future.delayed(const Duration(seconds: 2), () {
       if (session != null) {
         Get.offNamed(AppRoutes.HOME);
       } else {
-        Get.offNamed(AppRoutes.REGISTER);
+        Get.offNamed(AppRoutes.LOGIN);
       }
     });
   }
