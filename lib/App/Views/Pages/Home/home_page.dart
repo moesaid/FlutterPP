@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutterpp/App/Controllers/Home/home_controller.dart';
-import 'package:flutterpp/App/Services/Auth/auth_services.dart';
 import 'package:flutterpp/App/Views/Global/build_layout.dart';
 import 'package:get/get.dart';
 
