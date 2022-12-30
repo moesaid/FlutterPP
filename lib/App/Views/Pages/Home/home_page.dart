@@ -8,6 +8,16 @@ class HomePage extends GetView<HomeController> {
 
   @override
   Widget build(BuildContext context) {
-    return const BuildLayout();
+    return GetBuilder<HomeController>(
+      init: HomeController(),
+      initState: (_) {},
+      builder: (_) {
+        return BuildLayout(
+          tabs: controller.tabs,
+          selectedIndex: controller.selectedTab,
+          onDestinationSelected: (index) => controller.changeTab(index),
+        );
+      },
+    );
   }
 }

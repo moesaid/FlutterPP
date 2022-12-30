@@ -3,8 +3,14 @@ import 'package:flutterpp/Config/app_config.dart';
 import 'package:get/get.dart';
 
 class BuildRail extends StatelessWidget {
+  final List<Map<String, dynamic>> tabs;
+  final int selectedIndex;
+  final Function(int) onDestinationSelected;
   const BuildRail({
     Key? key,
+    required this.tabs,
+    required this.selectedIndex,
+    required this.onDestinationSelected,
   }) : super(key: key);
 
   @override
@@ -37,27 +43,17 @@ class BuildRail extends StatelessWidget {
           Expanded(
             child: NavigationRail(
               minWidth: AppConfig.rail,
-              selectedIndex: 0,
-              onDestinationSelected: (int index) {
-                print(index);
-              },
-              destinations: const <NavigationRailDestination>[
-                NavigationRailDestination(
-                  icon: Icon(Icons.favorite_border),
-                  selectedIcon: Icon(Icons.favorite),
-                  label: Text('First'),
-                ),
-                NavigationRailDestination(
-                  icon: Icon(Icons.bookmark_border),
-                  selectedIcon: Icon(Icons.book),
-                  label: Text('Second'),
-                ),
-                NavigationRailDestination(
-                  icon: Icon(Icons.star_border),
-                  selectedIcon: Icon(Icons.star),
-                  label: Text('Third'),
-                ),
-              ],
+              selectedIndex: selectedIndex,
+              labelType: NavigationRailLabelType.none,
+              onDestinationSelected: (int index) =>
+                  onDestinationSelected(index),
+              destinations: tabs.map((e) {
+                return NavigationRailDestination(
+                  icon: Icon(e['icon']),
+                  selectedIcon: Icon(e['icon']),
+                  label: Text(e['title']),
+                );
+              }).toList(),
             ),
           ),
           IconButton(
