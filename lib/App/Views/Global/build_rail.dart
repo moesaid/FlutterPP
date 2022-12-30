@@ -17,6 +17,7 @@ class BuildRail extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      width: AppConfig.rail,
       decoration: BoxDecoration(
         color: Get.theme.colorScheme.background,
         border: Border(
@@ -43,21 +44,15 @@ class BuildRail extends StatelessWidget {
           ),
           Expanded(
             child: NavigationRail(
-              minWidth: AppConfig.rail,
+              minWidth: AppConfig.rail * 0.7,
               selectedIndex: selectedIndex,
-              labelType: NavigationRailLabelType.none,
               onDestinationSelected: (int index) =>
                   onDestinationSelected(index),
               destinations: tabs.map((e) {
                 return NavigationRailDestination(
-                  icon: HeroIcon(
-                    e['icon'],
-                    style: HeroIconStyle.outline,
-                  ),
-                  selectedIcon: HeroIcon(
-                    e['icon'],
-                    style: HeroIconStyle.solid,
-                  ),
+                  padding: const EdgeInsets.all(0),
+                  icon: HeroIcon(e['icon'], style: HeroIconStyle.outline),
+                  selectedIcon: HeroIcon(e['icon'], style: HeroIconStyle.solid),
                   label: Text(e['title']),
                 );
               }).toList(),

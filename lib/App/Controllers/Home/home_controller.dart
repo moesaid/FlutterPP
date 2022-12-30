@@ -34,6 +34,18 @@ class HomeController extends GetxController {
       'isActive': false,
       'tab': const Text('time tracking'),
     },
+    {
+      'title': 'scrum',
+      'icon': HeroIcons.rectangleStack,
+      'isActive': false,
+      'tab': const Text('scrum'),
+    },
+    {
+      'title': 'witeboard',
+      'icon': HeroIcons.paintBrush,
+      'isActive': false,
+      'tab': const Text('witeboard'),
+    },
   ].obs;
 
   List<Map<String, dynamic>> get tabs => _tabs;

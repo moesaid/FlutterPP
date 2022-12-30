@@ -106,22 +106,17 @@ class AppTheme {
       ),
       navigationRailTheme: NavigationRailThemeData(
         backgroundColor: darkColors['background'],
-        selectedIconTheme: const IconThemeData(
-          color: Colors.white,
-          size: 20,
-        ),
+        useIndicator: false,
+        labelType: NavigationRailLabelType.none,
+        elevation: 0,
+        selectedIconTheme: const IconThemeData(color: Colors.white, size: 20),
+        selectedLabelTextStyle: const TextStyle(color: Colors.white),
+        unselectedLabelTextStyle: const TextStyle(color: Colors.white38),
         unselectedIconTheme: const IconThemeData(
           color: Colors.white38,
           size: 20,
           opacity: 0.5,
         ),
-        selectedLabelTextStyle: const TextStyle(
-          color: Colors.white,
-        ),
-        unselectedLabelTextStyle: const TextStyle(
-          color: Colors.white38,
-        ),
-        indicatorColor: Colors.transparent,
       ),
       appBarTheme: const AppBarTheme(
         backgroundColor: Colors.transparent,
