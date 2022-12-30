@@ -1,19 +1,38 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:heroicons/heroicons.dart';
 
 class HomeController extends GetxController {
   final _tabs = [
     {
       'title': 'dashboard',
-      'icon': Icons.dashboard,
+      'icon': HeroIcons.home,
       'isActive': true,
       'tab': const Text('dashboard'),
     },
     {
-      'title': 'home',
-      'icon': Icons.home,
+      'title': 'projects',
+      'icon': HeroIcons.squaresPlus,
       'isActive': false,
-      'tab': const Text('home'),
+      'tab': const Text('projects'),
+    },
+    {
+      'title': 'chat',
+      'icon': HeroIcons.chatBubbleOvalLeftEllipsis,
+      'isActive': false,
+      'tab': const Text('chat'),
+    },
+    {
+      'title': 'invoices',
+      'icon': HeroIcons.banknotes,
+      'isActive': false,
+      'tab': const Text('invoices'),
+    },
+    {
+      'title': 'time tracking',
+      'icon': HeroIcons.clock,
+      'isActive': false,
+      'tab': const Text('time tracking'),
     },
   ].obs;
 

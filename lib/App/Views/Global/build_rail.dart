@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutterpp/Config/app_config.dart';
 import 'package:get/get.dart';
+import 'package:heroicons/heroicons.dart';
 
 class BuildRail extends StatelessWidget {
   final List<Map<String, dynamic>> tabs;
@@ -49,18 +50,33 @@ class BuildRail extends StatelessWidget {
                   onDestinationSelected(index),
               destinations: tabs.map((e) {
                 return NavigationRailDestination(
-                  icon: Icon(e['icon']),
-                  selectedIcon: Icon(e['icon']),
+                  icon: HeroIcon(
+                    e['icon'],
+                    style: HeroIconStyle.outline,
+                  ),
+                  selectedIcon: HeroIcon(
+                    e['icon'],
+                    style: HeroIconStyle.solid,
+                  ),
                   label: Text(e['title']),
                 );
               }).toList(),
             ),
           ),
           IconButton(
-            onPressed: () {
-              print('object');
-            },
-            icon: const Icon(Icons.settings),
+            onPressed: () => print('object'),
+            icon: const HeroIcon(
+              HeroIcons.informationCircle,
+              style: HeroIconStyle.mini,
+            ),
+            color: Get.theme.colorScheme.secondaryContainer,
+          ),
+          IconButton(
+            onPressed: () => print('object'),
+            icon: const HeroIcon(
+              HeroIcons.cog,
+              style: HeroIconStyle.mini,
+            ),
             color: Get.theme.colorScheme.secondaryContainer,
           ),
           const SizedBox(height: 20),
