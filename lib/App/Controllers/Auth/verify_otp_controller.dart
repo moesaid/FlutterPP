@@ -1,11 +1,12 @@
-import 'package:flutter/material.dart';
 import 'package:flutterpp/App/Services/Auth/auth_services.dart';
+import 'package:flutterpp/App/Views/Global/build_snackbar.dart';
 import 'package:flutterpp/Routes/app_pages.dart';
 import 'package:get/get.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 class VerifyOtpController extends GetxController {
-  String email = Get.parameters['email'] ?? '';
+  String email = Get.arguments['email'] ?? '';
+  OtpType otpType = Get.arguments['otpType'] ?? OtpType.magiclink;
 
   final AuthServices _authServices = AuthServices();
 
@@ -13,24 +14,25 @@ class VerifyOtpController extends GetxController {
   bool get needToResendOtp => _needToResendOtp.value;
 
   Future<void> verifyOtp(Map<String, dynamic> value) async {
-    print({value['otp'], email});
     try {
       AuthResponse? res = await _authServices.verifyOtp(
+        type: otpType,
         otp: value['otp'],
         email: email,
       );
 
       if (res == null) {
-        Get.snackbar(
-          'Error',
-          'Something went wrong',
-          snackPosition: SnackPosition.BOTTOM,
-        );
+        BuildSnackBar(
+          title: 'Error',
+          message:
+              'Something went wrong while verifying OTP , please try again',
+        ).error();
         return;
       }
 
       if (res.session != null) {
         Get.offAllNamed(AppRoutes.HOME);
+        return;
       }
     } on AuthException catch (e) {
       if (e.statusCode == '401') {
@@ -38,14 +40,19 @@ class VerifyOtpController extends GetxController {
         update();
       }
 
-      Get.snackbar(
-        'Error',
-        e.message,
-        snackPosition: SnackPosition.BOTTOM,
-        margin: const EdgeInsets.all(20),
-      );
+      BuildSnackBar(
+        title: 'Error',
+        message: e.message,
+      ).error();
+
+      return;
     } catch (e) {
-      print('error: $e');
+      BuildSnackBar(
+        title: 'Error',
+        message: e.toString(),
+      ).error();
+
+      return;
     }
   }
 
@@ -53,12 +60,10 @@ class VerifyOtpController extends GetxController {
   Future<void> resendOtp() async {
     bool isSent = await _authServices.signInWithOtp(email: email);
     if (isSent) {
-      Get.snackbar(
-        'Success',
-        'OTP sent',
-        snackPosition: SnackPosition.BOTTOM,
-        margin: const EdgeInsets.all(20),
-      );
+      BuildSnackBar(
+        title: 'Success',
+        message: 'OTP sent successfully, please check your email',
+      ).success();
     }
   }
 }

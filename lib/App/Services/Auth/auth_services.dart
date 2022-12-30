@@ -36,21 +36,21 @@ class AuthServices {
   }
 
   // signUp
-  Future signUp({
+  Future<AuthResponse?> signUp({
+    required String name,
     required String email,
     required String password,
   }) async {
     AuthResponse? res = await _callPipeline.futurePipeline(
-      future: () => _authProvider.signUp(email: email, password: password),
+      future: () => _authProvider.signUp(
+        name: name,
+        email: email,
+        password: password,
+      ),
       name: 'signUp',
     );
 
-    print({
-      'res': res,
-      'session accessToken': res?.session?.accessToken,
-      'session user id': res?.session?.user.id,
-      'user id': res?.user?.id,
-    });
+    return res;
   }
 
   // signIn

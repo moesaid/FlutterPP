@@ -5,6 +5,7 @@ part of 'app_pages.dart';
 abstract class AppRoutes {
   // auth
   static const SPLASH = '/';
+  static const SIGNUP = '/signup';
   static const LOGIN = '/login';
   static const VERIFY_OTP = '/verify-otp';
 

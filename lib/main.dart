@@ -5,7 +5,6 @@ import 'package:flutterpp/Config/app_theme.dart';
 import 'package:flutterpp/Config/app_window_config.dart';
 import 'package:flutterpp/Routes/app_pages.dart';
 import 'package:get/get.dart';
-import 'package:window_manager/window_manager.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -25,17 +24,15 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return DragToMoveArea(
-      child: GetMaterialApp(
-        title: 'Flutter ++',
-        debugShowCheckedModeBanner: false,
-        theme: AppTheme().lightThemeData(),
-        darkTheme: AppTheme().darkThemeData(),
-        themeMode: Get.isDarkMode ? ThemeMode.dark : ThemeMode.light,
-        initialBinding: AppBinding(),
-        getPages: AppPages.routes,
-        defaultTransition: Transition.native,
-      ),
+    return GetMaterialApp(
+      title: 'Flutter ++',
+      debugShowCheckedModeBanner: false,
+      theme: AppTheme().lightThemeData(),
+      darkTheme: AppTheme().darkThemeData(),
+      themeMode: Get.isDarkMode ? ThemeMode.dark : ThemeMode.light,
+      initialBinding: AppBinding(),
+      getPages: AppPages.routes,
+      defaultTransition: Transition.native,
     );
   }
 }

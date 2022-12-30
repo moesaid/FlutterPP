@@ -11,6 +11,7 @@ class AppTheme {
     'onBackground': Colors.white,
     'primaryContainer': const Color.fromRGBO(33, 32, 36, 1),
     'secondaryContainer': const Color.fromRGBO(46, 46, 50, 1),
+    'error': Colors.red.shade500,
   };
 
   ThemeData lightThemeData() {
@@ -176,11 +177,10 @@ class AppTheme {
           fontWeight: FontWeight.w300,
           letterSpacing: 0.6,
         ),
-        errorStyle: const TextStyle(
-          color: Colors.white,
-          fontSize: 12,
+        errorStyle: TextStyle(
+          color: darkColors['error']!,
+          fontSize: 10,
           fontWeight: FontWeight.w300,
-          letterSpacing: 0.6,
         ),
       ),
       textTheme: TextTheme(

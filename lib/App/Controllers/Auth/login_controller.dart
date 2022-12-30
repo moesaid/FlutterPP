@@ -23,8 +23,9 @@ class LoginController extends GetxController {
     bool isSend = await AuthServices().signInWithOtp(email: value['email']);
 
     if (isSend) {
-      Get.toNamed(AppRoutes.VERIFY_OTP, parameters: {
+      Get.toNamed(AppRoutes.VERIFY_OTP, arguments: {
         'email': value['email'],
+        'otpType': OtpType.magiclink,
       });
     }
   }

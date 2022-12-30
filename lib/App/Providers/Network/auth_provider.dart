@@ -30,9 +30,11 @@ class AuthProvider {
   // sign up
   Future<AuthResponse> signUp({
     required String email,
+    required String name,
     required String password,
   }) async {
     AuthResponse res = await supabase.auth.signUp(
+      data: {'name': name},
       email: email,
       password: password,
       emailRedirectTo: AppConfig().supabaseCallback,
