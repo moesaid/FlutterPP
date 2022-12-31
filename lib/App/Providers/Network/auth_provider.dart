@@ -34,7 +34,7 @@ class AuthProvider {
     required String password,
   }) async {
     AuthResponse res = await supabase.auth.signUp(
-      data: {'name': name},
+      data: {'full_name': name},
       email: email,
       password: password,
       emailRedirectTo: AppConfig().supabaseCallback,

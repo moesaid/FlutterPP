@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutterpp/App/Services/Auth/auth_services.dart';
 import 'package:get/get.dart';
 import 'package:heroicons/heroicons.dart';
 
@@ -8,7 +9,12 @@ class HomeController extends GetxController {
       'title': 'dashboard',
       'icon': HeroIcons.home,
       'isActive': true,
-      'tab': const Text('dashboard'),
+      'tab': ElevatedButton(
+        onPressed: () async {
+          await AuthServices().signOut();
+        },
+        child: const Text('data'),
+      ),
     },
     {
       'title': 'projects',
