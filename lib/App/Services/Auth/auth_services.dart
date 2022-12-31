@@ -75,4 +75,9 @@ class AuthServices {
 
     Get.offAllNamed(AppRoutes.SPLASH);
   }
+
+  // current user
+  User? currentUser() {
+    return _authProvider.currentUser();
+  }
 }

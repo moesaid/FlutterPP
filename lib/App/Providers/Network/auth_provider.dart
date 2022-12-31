@@ -60,4 +60,8 @@ class AuthProvider {
   Future<void> signOut() async {
     await supabase.auth.signOut();
   }
+
+  User? currentUser() {
+    return supabase.auth.currentUser!;
+  }
 }

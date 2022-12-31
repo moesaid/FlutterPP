@@ -17,6 +17,7 @@ dependencies:
   flutter_form_builder: ^7.7.0
   form_builder_validators: ^8.4.0
   heroicons: ^0.7.0
+  loading_animation_widget: ^1.2.0+4
 
 # dev_dependencies
 dev_dependencies:
