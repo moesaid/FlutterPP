@@ -6,19 +6,6 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 class LoginController extends GetxController {
   final supabase = Supabase.instance.client;
 
-  @override
-  void onReady() {
-    supabase.auth.onAuthStateChange.listen((data) {
-      final session = data.session;
-      final event = data.event;
-
-      if (event == AuthChangeEvent.signedIn && session != null) {
-        Get.offNamed(AppRoutes.HOME);
-      }
-    });
-    super.onReady();
-  }
-
   Future<void> login(Map<String, dynamic> value) async {
     bool isSend = await AuthServices().signInWithOtp(email: value['email']);
 

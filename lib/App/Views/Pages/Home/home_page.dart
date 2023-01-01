@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutterpp/App/Controllers/Home/home_controller.dart';
 import 'package:flutterpp/App/Views/Global/build_layout.dart';
 import 'package:flutterpp/App/Views/Global/build_loading_page.dart';
+import 'package:flutterpp/App/Views/Pages/Team/no_team_page.dart';
 import 'package:get/get.dart';
 
 class HomePage extends GetView<HomeController> {
@@ -27,7 +28,7 @@ class HomePage extends GetView<HomeController> {
                         onDestinationSelected: (index) =>
                             controller.changeTab(index),
                       )
-                    : const Center(child: Text('not in team')),
+                    : const NoTeamPage(),
           ),
         );
       },
