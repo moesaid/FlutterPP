@@ -1,5 +1,5 @@
 import 'package:flutterpp/App/Controllers/Home/home_controller.dart';
-import 'package:flutterpp/App/Services/team_services.dart';
+import 'package:flutterpp/App/Services/Team/team_services.dart';
 import 'package:flutterpp/App/Views/Global/build_overlay.dart';
 import 'package:get/get.dart';
 
