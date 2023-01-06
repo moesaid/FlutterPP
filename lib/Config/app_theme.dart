@@ -8,6 +8,7 @@ class AppTheme {
     'primary': const Color.fromRGBO(51, 33, 99, 1),
     'secondary': const Color.fromRGBO(110, 77, 210, 1),
     'background': const Color.fromRGBO(10, 10, 10, 1),
+    'dark': const Color.fromRGBO(0, 0, 0, 1),
     'onBackground': Colors.white,
     'primaryContainer': const Color.fromRGBO(33, 32, 36, 1),
     'secondaryContainer': const Color.fromRGBO(46, 46, 50, 1),
@@ -117,6 +118,9 @@ class AppTheme {
           size: 20,
           opacity: 0.5,
         ),
+      ),
+      bottomSheetTheme: BottomSheetThemeData(
+        backgroundColor: darkColors['dark']!,
       ),
       appBarTheme: const AppBarTheme(
         backgroundColor: Colors.transparent,

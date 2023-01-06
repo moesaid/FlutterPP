@@ -1,3 +1,6 @@
+import 'dart:convert';
+
+import 'package:flutterpp/App/Models/team_model.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:uuid/uuid.dart';
 
@@ -26,6 +29,20 @@ class TeamProvider {
         'admin_id': supabase.auth.currentUser!.id,
       }
     ]).select();
+  }
+
+  // get team for auth user
+  Future<TeamModel> getTeamForAuthUser() async {
+    Map? data = await supabase
+        .from('teams')
+        .select('*')
+        .eq('admin_id', supabase.auth.currentUser!.id)
+        .single();
+
+    if (data == null) return TeamModel();
+
+    var localJson = json.encode(data);
+    return TeamModel.fromJson(json.decode(localJson));
   }
 
   // link team member

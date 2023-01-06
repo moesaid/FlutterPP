@@ -1,5 +1,6 @@
+import 'package:flutterpp/App/Models/team_model.dart';
 import 'package:flutterpp/App/Providers/Network/team_provider.dart';
-import 'package:flutterpp/App/Services/call_pipeline.dart';
+import 'package:flutterpp/App/Services/Global/call_pipeline.dart';
 
 class TeamServices {
   final CallPipeline _callPipeline = CallPipeline();
@@ -42,5 +43,15 @@ class TeamServices {
     if (members == null || members.isEmpty) return false;
 
     return true;
+  }
+
+  // get team for auth user
+  Future<TeamModel?> getTeamForAuthUser() async {
+    TeamModel? team = await _callPipeline.futurePipeline(
+      future: () => _teamProvider.getTeamForAuthUser(),
+      name: 'getTeamForAuthUser',
+    );
+
+    return team;
   }
 }

@@ -3,6 +3,7 @@ import 'package:flutterpp/App/Controllers/Auth/signup_controller.dart';
 import 'package:flutterpp/App/Controllers/Auth/splash_controller.dart';
 import 'package:flutterpp/App/Controllers/Auth/verify_otp_controller.dart';
 import 'package:flutterpp/App/Controllers/Home/home_controller.dart';
+import 'package:flutterpp/App/Controllers/Project/project_index_controller.dart';
 import 'package:flutterpp/App/Controllers/Team/no_team_controller.dart';
 import 'package:flutterpp/App/Controllers/dashboard_controller.dart';
 import 'package:get/get.dart';
@@ -24,5 +25,8 @@ class AppBinding implements Bindings {
 
     // team
     Get.lazyPut<NoTeamController>(() => NoTeamController());
+
+    // project
+    Get.lazyPut<ProjectIndexController>(() => ProjectIndexController());
   }
 }

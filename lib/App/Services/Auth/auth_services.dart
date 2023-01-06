@@ -1,5 +1,5 @@
 import 'package:flutterpp/App/Providers/Network/auth_provider.dart';
-import 'package:flutterpp/App/Services/call_pipeline.dart';
+import 'package:flutterpp/App/Services/Global/call_pipeline.dart';
 import 'package:flutterpp/Routes/app_pages.dart';
 import 'package:get/get.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';

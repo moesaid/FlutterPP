@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutterpp/App/Services/Auth/auth_services.dart';
-import 'package:flutterpp/App/Services/team_services.dart';
+import 'package:flutterpp/App/Services/Team/team_services.dart';
+import 'package:flutterpp/App/Views/Pages/Project/project_index_page.dart';
 import 'package:get/get.dart';
 import 'package:heroicons/heroicons.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
@@ -28,7 +29,7 @@ class HomeController extends GetxController {
       'title': 'projects',
       'icon': HeroIcons.squaresPlus,
       'isActive': false,
-      'tab': const Text('projects'),
+      'tab': const ProjectIndexPage(),
     },
     {
       'title': 'chat',
