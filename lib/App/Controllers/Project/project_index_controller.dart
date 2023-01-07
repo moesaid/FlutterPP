@@ -4,14 +4,15 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutterpp/App/Models/project_model.dart';
 import 'package:flutterpp/App/Models/team_model.dart';
-import 'package:flutterpp/App/Providers/Network/project_provider.dart';
+import 'package:flutterpp/App/Services/Team/project_services.dart';
 import 'package:flutterpp/App/Services/Team/team_services.dart';
 import 'package:flutterpp/App/Views/Global/build_overlay.dart';
+import 'package:flutterpp/App/Views/Global/build_snackbar.dart';
 import 'package:flutterpp/Config/app_gradients.dart';
 import 'package:get/get.dart';
 
 class ProjectIndexController extends GetxController {
-  final ProjectProvider _projectProvider = ProjectProvider();
+  final ProjectServices _projectServices = ProjectServices();
   final TeamServices _teamServices = TeamServices();
 
   final _isLoading = true.obs;
@@ -56,12 +57,12 @@ class ProjectIndexController extends GetxController {
       loadingWidget: const BuildOverlay(),
       asyncFunction: () async {
         TeamModel? team = await _teamServices.getTeamForAuthUser();
-        List<ProjectModel> projects = await _projectProvider.getProjects(
+        List<ProjectModel>? projects = await _projectServices.getProjects(
           teamId: team!.id!,
         );
 
         _team.value = team;
-        _projects.value = projects;
+        _projects.value = projects!;
 
         if (projects.isNotEmpty) {
           onProjectChange(projects.first);
@@ -143,5 +144,39 @@ class ProjectIndexController extends GetxController {
   void onSVGChange(String svg) {
     _selectedSVG.value = svg;
     update();
+  }
+
+  // create project
+  void createProject({required Map formData}) async {
+    // make sure icon and colors are selected
+    if (_selectedSVG.value.isEmpty || _selectedColors.isEmpty) {
+      BuildSnackBar(
+        title: 'Error',
+        message: 'Please select icon and colors',
+      ).error();
+      return;
+    }
+
+    // form data
+    String title = formData['title'];
+    String description = formData['description'];
+
+    Get.showOverlay(
+      loadingWidget: const BuildOverlay(),
+      asyncFunction: () async {
+        ProjectModel? project = await _projectServices.createProject(
+          teamId: team.id!,
+          color1: _selectedColors.first.value.toString(),
+          color2: _selectedColors.last.value.toString(),
+          icon: _selectedSVG.value,
+          title: title,
+          description: description,
+        );
+
+        _projects.add(project!);
+        onProjectChange(project);
+        update();
+      },
+    );
   }
 }

@@ -1,11 +1,11 @@
 class CallPipeline {
   // futurePipeline is a function that takes a future and a name and returns a future
   Future<T?> futurePipeline<T>({
-    required Future<T> Function() future,
+    required Future<T?> Function() future,
     required String name,
   }) async {
     try {
-      T res = await future();
+      T? res = await future();
       return res;
     } catch (e) {
       rethrow;

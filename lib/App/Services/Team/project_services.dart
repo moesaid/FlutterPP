@@ -15,4 +15,36 @@ class ProjectServices {
 
     return projects;
   }
+
+  // create project
+  Future<ProjectModel?> createProject({
+    required String title,
+    required String icon,
+    required String color1,
+    required String color2,
+    required String teamId,
+    required String description,
+    String? cleintId,
+  }) async {
+    return await _callPipeline.futurePipeline(
+      future: () => _projectProvider.createProject(
+        title: title,
+        icon: icon,
+        color1: color1,
+        color2: color2,
+        teamId: teamId,
+        description: description,
+        cleintId: cleintId,
+      ),
+      name: 'createProject',
+    );
+  }
+
+  // update project
+  Future<ProjectModel?> updateProject({required ProjectModel project}) async {
+    return await _callPipeline.futurePipeline(
+      future: () => _projectProvider.updateProject(project: project),
+      name: 'updateProject',
+    );
+  }
 }

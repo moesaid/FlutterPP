@@ -27,17 +27,44 @@ class ProjectProvider {
   }
 
   // create project
-  Future<void> createProject({
-    required String name,
+  Future<ProjectModel?> createProject({
+    required String title,
+    required String icon,
+    required String color1,
+    required String color2,
     required String teamId,
     required String description,
+    String? cleintId,
   }) async {
-    await supabase.from('projects').insert([
+    List<Map> data = await supabase.from('projects').insert([
       {
-        'name': name,
+        'title': title,
         'description': description,
         'team_id': teamId,
+        'client_id': cleintId,
+        'admin_id': supabase.auth.currentUser!.id,
+        'icon': icon,
+        'color_1': color1,
+        'color_2': color2,
+        'created_at': DateTime.now().toIso8601String(),
       }
     ]).select();
+
+    if (data.isEmpty) return null;
+    var localJson = json.encode(data[0]);
+    return ProjectModel.fromJson(json.decode(localJson));
+  }
+
+  // update project
+  Future<ProjectModel?> updateProject({required ProjectModel project}) async {
+    List<Map> data = await supabase
+        .from('projects')
+        .update(project.toJson())
+        .eq('id', project.id)
+        .select();
+
+    if (data.isEmpty) return null;
+    var localJson = json.encode(data[0]);
+    return ProjectModel.fromJson(json.decode(localJson));
   }
 }

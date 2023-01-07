@@ -23,6 +23,9 @@ class ProjectIndexPage extends GetView<ProjectIndexController> {
                     ? BuildCreateProjectPage(
                         onColorChange: (val) => controller.onColorChange(val),
                         onSvgChange: (val) => controller.onSVGChange(val),
+                        createTeam: (val) => controller.createProject(
+                          formData: val,
+                        ),
                         colors: controller.colors,
                         activeColors: controller.selectedColors,
                         activeSVG: controller.selectedSVG,
@@ -42,6 +45,7 @@ class BuildCreateProjectPage extends StatelessWidget {
   final List<Color> activeColors;
   final Function(List<Color>) onColorChange;
   final Function(String) onSvgChange;
+  final Function(Map) createTeam;
   final List<List<Color>> colors;
   const BuildCreateProjectPage({
     Key? key,
@@ -51,6 +55,7 @@ class BuildCreateProjectPage extends StatelessWidget {
     required this.activeColors,
     required this.svgs,
     required this.onSvgChange,
+    required this.createTeam,
   }) : super(key: key);
 
   @override
@@ -102,8 +107,8 @@ class BuildCreateProjectPage extends StatelessWidget {
               const SizedBox(height: 10),
               FormBuilderTextField(
                 name: 'title',
-                decoration: const InputDecoration(
-                  labelText: 'project Name',
+                decoration: InputDecoration(
+                  labelText: 'project title'.capitalize,
                 ),
                 validator: FormBuilderValidators.compose([
                   FormBuilderValidators.required(),
@@ -114,8 +119,8 @@ class BuildCreateProjectPage extends StatelessWidget {
               const SizedBox(height: 10),
               FormBuilderTextField(
                 name: 'description',
-                decoration: const InputDecoration(
-                  labelText: 'Project Description',
+                decoration: InputDecoration(
+                  labelText: 'Project Description'.capitalize,
                 ),
                 minLines: 3,
                 maxLines: 5,
@@ -132,7 +137,7 @@ class BuildCreateProjectPage extends StatelessWidget {
                 child: ElevatedButton(
                   onPressed: () {
                     if (formKey.currentState!.saveAndValidate()) {
-                      // controller.createTeam(formKey.currentState!.value);
+                      createTeam.call(formKey.currentState!.value);
                     }
                   },
                   child: const Text('Create project'),
@@ -269,7 +274,7 @@ class _BuildIconSection extends StatelessWidget {
               style: Get.textTheme.headline6,
             ),
             const SizedBox(height: 5),
-            const Text('Time to choose an icon, people!'),
+            const Text('Time to choose an icon, peeps!'),
             const SizedBox(height: 20),
             Expanded(
               child: GridView.builder(
