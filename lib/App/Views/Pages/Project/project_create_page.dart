@@ -6,7 +6,7 @@ import 'package:flutterpp/Config/app_gradients.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:get/get.dart';
 
-class BuildCreateProjectPage extends StatelessWidget {
+class ProjectCreatePage extends StatelessWidget {
   final List<String> svgs;
   final String activeSVG;
   final List<Color> activeColors;
@@ -14,7 +14,7 @@ class BuildCreateProjectPage extends StatelessWidget {
   final Function(String) onSvgChange;
   final Function(Map) createTeam;
   final List<List<Color>> colors;
-  const BuildCreateProjectPage({
+  const ProjectCreatePage({
     Key? key,
     required this.onColorChange,
     required this.colors,
