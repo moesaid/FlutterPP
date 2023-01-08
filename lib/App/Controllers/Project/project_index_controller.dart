@@ -133,10 +133,7 @@ class ProjectIndexController extends GetxController {
 
     // set selected colors
     _selectedColors.value = colors;
-
-    // set original selected colors
     _oreginalSelectedColors.value = hexColors;
-
     update();
   }
 
@@ -147,7 +144,7 @@ class ProjectIndexController extends GetxController {
   }
 
   // create project
-  void createProject({required Map formData}) async {
+  Future<void> createProject({required Map formData}) async {
     // make sure icon and colors are selected
     if (_selectedSVG.value.isEmpty || _selectedColors.isEmpty) {
       BuildSnackBar(

@@ -20,12 +20,12 @@ class BuildActiveProjectIndecator extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () => Get.defaultDialog(
+        radius: 8,
         title: 'Project pick time!',
         titlePadding: const EdgeInsets.only(top: 15),
         contentPadding: const EdgeInsets.all(15),
         titleStyle: Get.textTheme.bodyMedium,
         backgroundColor: Get.theme.dialogBackgroundColor,
-        radius: 8,
         content: _BuildDialog(
           activeProject: activeProject,
           projectIndexController: projectIndexController,
@@ -106,7 +106,7 @@ class _BuildDialog extends StatelessWidget {
         const Divider(),
         const SizedBox(height: 10),
         SizedBox(
-          height: 200,
+          height: 300,
           width: 600,
           child: GridView.builder(
             itemBuilder: (_, int index) {

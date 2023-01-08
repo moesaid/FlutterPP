@@ -83,8 +83,8 @@ class AppTheme {
           disabledBackgroundColor: Colors.black12,
           splashFactory: NoSplash.splashFactory,
           shadowColor: Colors.transparent,
-          elevation: 0,
           minimumSize: Size.zero,
+          elevation: 0,
           padding: const EdgeInsets.symmetric(
             horizontal: 20,
             vertical: 16,
