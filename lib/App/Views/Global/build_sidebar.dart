@@ -3,14 +3,17 @@ import 'package:flutterpp/Config/app_config.dart';
 import 'package:get/get.dart';
 
 class BuildSidebar extends StatelessWidget {
+  final Widget? child;
   const BuildSidebar({
     Key? key,
+    this.child,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
       width: AppConfig.sidebar,
+      height: double.infinity,
       decoration: BoxDecoration(
         color: Get.theme.colorScheme.background.withOpacity(0.7),
         border: Border(
@@ -20,6 +23,7 @@ class BuildSidebar extends StatelessWidget {
           ),
         ),
       ),
+      child: child ?? const Text('sidebar'),
     );
   }
 }

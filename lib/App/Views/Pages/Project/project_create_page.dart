@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:flutterpp/App/Views/Pages/Project/Widgets/build_icon_and_gradients.dart';
-import 'package:flutterpp/Config/app_gradients.dart';
+import 'package:flutterpp/App/Views/Pages/Project/Widgets/build_project_avatar.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:get/get.dart';
 
@@ -48,27 +47,9 @@ class ProjectCreatePage extends StatelessWidget {
                     ),
                   );
                 },
-                child: Container(
-                  width: 50,
-                  height: 50,
-                  decoration: BoxDecoration(
-                    borderRadius: const BorderRadius.all(Radius.circular(6)),
-                    gradient: AppGradients.getGradient(colors: activeColors),
-                  ),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      SizedBox(
-                        child: SvgPicture.asset(
-                          'assets/svg/$activeSVG',
-                          width: 22,
-                          height: 22,
-                          color: Colors.white,
-                        ),
-                      ),
-                    ],
-                  ),
+                child: BuildProjectAvatar(
+                  colors: activeColors,
+                  icon: activeSVG,
                 ),
               ),
               const SizedBox(height: 10),

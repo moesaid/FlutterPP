@@ -4,11 +4,12 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutterpp/App/Models/project_model.dart';
 import 'package:flutterpp/App/Models/team_model.dart';
-import 'package:flutterpp/App/Services/Team/project_services.dart';
+import 'package:flutterpp/App/Services/Project/project_services.dart';
 import 'package:flutterpp/App/Services/Team/team_services.dart';
 import 'package:flutterpp/App/Views/Global/build_overlay.dart';
 import 'package:flutterpp/App/Views/Global/build_snackbar.dart';
 import 'package:flutterpp/Config/app_gradients.dart';
+import 'package:flutterpp/Helpers/helper_colors.dart';
 import 'package:get/get.dart';
 
 class ProjectIndexController extends GetxController {
@@ -126,8 +127,7 @@ class ProjectIndexController extends GetxController {
     // from colors to hexcolor
     List<String> hexColors = colors
         .map(
-          (e) =>
-              '#${e.value.toRadixString(16).padLeft(8, '0').toUpperCase().substring(2)}',
+          (e) => ColorHelper.colorToHex(e),
         )
         .toList();
 
@@ -166,8 +166,8 @@ class ProjectIndexController extends GetxController {
       asyncFunction: () async {
         ProjectModel? project = await _projectServices.createProject(
           teamId: team.id!,
-          color1: _selectedColors.first.value.toString(),
-          color2: _selectedColors.last.value.toString(),
+          color1: ColorHelper.colorToHex(_selectedColors.first),
+          color2: ColorHelper.colorToHex(_selectedColors.last),
           icon: _selectedSVG.value,
           title: title,
           description: description,

@@ -62,6 +62,7 @@ class AppTheme {
         primaryContainer: darkColors['primaryContainer']!,
         secondaryContainer: darkColors['secondaryContainer']!,
       ),
+      dialogBackgroundColor: darkColors['primaryContainer']!,
       hoverColor: Colors.transparent,
       highlightColor: Colors.transparent,
       splashFactory: NoSplash.splashFactory,
