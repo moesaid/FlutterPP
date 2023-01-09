@@ -185,7 +185,8 @@ class _BuildTabs extends StatelessWidget {
           isScrollable: true,
           labelPadding: const EdgeInsets.only(right: 20),
           labelColor: Get.theme.colorScheme.secondary,
-          unselectedLabelColor: Get.theme.colorScheme.primary.withOpacity(0.7),
+          unselectedLabelColor:
+              Get.theme.colorScheme.secondary.withOpacity(0.5),
           tabs: const [
             Tab(text: 'Create Team'),
             Tab(text: 'Join Team'),

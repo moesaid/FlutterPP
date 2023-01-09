@@ -25,25 +25,23 @@ class ProjectSinglePage extends GetView<ProjectSingleController> {
       init: ProjectSingleController(),
       initState: (_) {},
       builder: (_) {
-        return Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            BuildSidebar(
-              child: BuildProjectSidebar(
-                projectIndexController: projectIndexController,
-                controller: controller,
+        return DefaultTabController(
+          length: 10,
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              BuildSidebar(
+                child: BuildProjectSidebar(
+                  projectIndexController: projectIndexController,
+                  controller: controller,
+                ),
               ),
-            ),
-            Expanded(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: const [
-                  Text('data'),
-                ],
-              ),
-            )
-          ],
+              Expanded(
+                child: controller.tabs
+                    .firstWhere((el) => el['isActive'] == true)['page'],
+              )
+            ],
+          ),
         );
       },
     );
@@ -74,9 +72,48 @@ class BuildProjectSidebar extends StatelessWidget {
             activeProject: activeProject,
             projectIndexController: projectIndexController,
           ),
+          const SizedBox(height: 30),
           Expanded(
-            child: Container(
-              color: Colors.red.withOpacity(0),
+            child: ListView.separated(
+              itemCount: controller.tabs.length,
+              padding: const EdgeInsets.all(5),
+              physics: const BouncingScrollPhysics(),
+              separatorBuilder: (_, __) => const SizedBox(height: 20),
+              itemBuilder: (_, int index) {
+                final Map<String, dynamic> tab = controller.tabs[index];
+                return InkWell(
+                  onTap: () => controller.updateTabs(index),
+                  child: SizedBox(
+                    // color: Colors.red,
+                    width: double.infinity,
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Icon(
+                          tab['icon'],
+                          size: 16,
+                          color: index == controller.selectedTab
+                              ? Get.theme.colorScheme.primary
+                              : Get.theme.backgroundColor.withOpacity(0.5),
+                        ),
+                        const SizedBox(width: 4),
+                        Text(
+                          tab['title'],
+                          style: TextStyle(
+                            height: 1,
+                            color: index == controller.selectedTab
+                                ? Get.theme.colorScheme.secondary
+                                : Get.theme.backgroundColor,
+                            // color: Get.isDarkMode
+                            //     ? Colors.white.withOpacity(0.7)
+                            //     : Colors.black.withOpacity(0.7),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                );
+              },
             ),
           ),
           SizedBox(
