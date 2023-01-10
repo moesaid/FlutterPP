@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:heroicons/heroicons.dart';
 
 class ProjectSingleController extends GetxController {
   final _isLoading = true.obs;
@@ -10,27 +11,15 @@ class ProjectSingleController extends GetxController {
 
   final _tabs = [
     {
-      'icon': Icons.home,
-      'title': 'Home',
+      'icon': HeroIcons.informationCircle,
+      'title': 'wiki',
       'page': const Text('home'),
       'isActive': true,
     },
     {
-      'icon': Icons.settings,
-      'title': 'Settings',
+      'icon': HeroIcons.clipboardDocumentList,
+      'title': 'board',
       'page': const Text('settings'),
-      'isActive': false,
-    },
-    {
-      'icon': Icons.people,
-      'title': 'Members',
-      'page': const Text('members'),
-      'isActive': false,
-    },
-    {
-      'icon': Icons.info,
-      'title': 'About',
-      'page': const Text('about'),
       'isActive': false,
     },
   ].obs;

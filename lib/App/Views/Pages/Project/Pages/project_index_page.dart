@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutterpp/App/Controllers/Project/project_index_controller.dart';
-import 'package:flutterpp/App/Views/Pages/Project/project_create_page.dart';
-import 'package:flutterpp/App/Views/Pages/Project/project_single_page.dart';
+import 'package:flutterpp/App/Views/Pages/Project/Pages/project_create_page.dart';
+import 'package:flutterpp/App/Views/Pages/Project/Pages/project_single_page.dart';
+
 import 'package:get/get.dart';
 
 class ProjectIndexPage extends GetView<ProjectIndexController> {

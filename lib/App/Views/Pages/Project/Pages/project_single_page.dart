@@ -89,24 +89,21 @@ class BuildProjectSidebar extends StatelessWidget {
                     child: Row(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        Icon(
+                        HeroIcon(
                           tab['icon'],
                           size: 16,
                           color: index == controller.selectedTab
-                              ? Get.theme.colorScheme.primary
+                              ? Get.theme.colorScheme.secondary.withOpacity(0.6)
                               : Get.theme.backgroundColor.withOpacity(0.5),
                         ),
                         const SizedBox(width: 4),
                         Text(
-                          tab['title'],
+                          tab['title'].toString().capitalize!,
                           style: TextStyle(
                             height: 1,
                             color: index == controller.selectedTab
                                 ? Get.theme.colorScheme.secondary
                                 : Get.theme.backgroundColor,
-                            // color: Get.isDarkMode
-                            //     ? Colors.white.withOpacity(0.7)
-                            //     : Colors.black.withOpacity(0.7),
                           ),
                         ),
                       ],
