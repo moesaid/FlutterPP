@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutterpp/App/Views/Pages/Project/InnerPages/project_single_wiki_page.dart';
 import 'package:get/get.dart';
 import 'package:heroicons/heroicons.dart';
 
@@ -13,7 +14,7 @@ class ProjectSingleController extends GetxController {
     {
       'icon': HeroIcons.informationCircle,
       'title': 'wiki',
-      'page': const Text('home'),
+      'page': const ProjectSingleWikiPage(),
       'isActive': true,
     },
     {

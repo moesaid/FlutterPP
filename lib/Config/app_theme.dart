@@ -267,6 +267,15 @@ class AppTheme {
         selectionColor: Colors.white10,
         selectionHandleColor: Colors.white,
       ),
+      floatingActionButtonTheme: FloatingActionButtonThemeData(
+        backgroundColor: darkColors['secondary'],
+        foregroundColor: Colors.white,
+        elevation: 0,
+        focusElevation: 0,
+        hoverElevation: 0,
+        highlightElevation: 0,
+        splashColor: Colors.white10,
+      ),
     );
   }
 }
