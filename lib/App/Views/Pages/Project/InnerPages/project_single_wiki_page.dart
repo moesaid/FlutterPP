@@ -13,35 +13,40 @@ class ProjectSingleWikiPage extends GetView<ProjectSingleWikiController> {
       initState: (_) {},
       builder: (_) {
         return Scaffold(
-          body: Column(
-            children: [
-              Text(controller.isNeedToSave ? 'Need to save' : 'Saved'),
-              Expanded(
-                child: KeyboardListener(
-                  focusNode: controller.focusNode,
-                  onKeyEvent: (_) {
-                    controller.updateEditorState();
-                  },
-                  child: AppFlowyEditor(
-                    themeData: customizeEditorTheme(context),
-                    editorState: controller.editorState,
-                    autoFocus: true,
-                  ),
+          body: controller.isLoading
+              ? const SizedBox()
+              : Column(
+                  children: [
+                    Expanded(
+                      child: KeyboardListener(
+                        focusNode: controller.focusNode,
+                        onKeyEvent: (_) {
+                          controller.updateEditorState(true);
+                        },
+                        child: AppFlowyEditor(
+                          themeData: customizeEditorTheme(context),
+                          editorState: controller.editorState,
+                          autoFocus: true,
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
-              ),
-            ],
-          ),
           floatingActionButton: FloatingActionButton(
-            onPressed: controller.isNeedToSave ? () => controller.save() : null,
+            onPressed: controller.isNeedToSave
+                ? () => controller.createOrUpdateWiki()
+                : null,
             backgroundColor: controller.isNeedToSave
                 ? Get.theme.colorScheme.secondary
                 : Get.theme.colorScheme.primaryContainer,
-            child: Icon(
-              Icons.save,
-              color: controller.isNeedToSave
-                  ? Get.theme.iconTheme.color
-                  : Get.theme.colorScheme.secondaryContainer,
-            ),
+            child: controller.isSaving
+                ? const CircularProgressIndicator()
+                : Icon(
+                    Icons.save,
+                    color: controller.isNeedToSave
+                        ? Get.theme.iconTheme.color
+                        : Get.theme.colorScheme.secondaryContainer,
+                  ),
           ),
         );
       },
