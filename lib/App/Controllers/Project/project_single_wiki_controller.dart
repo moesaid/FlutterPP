@@ -37,28 +37,25 @@ class ProjectSingleWikiController extends GetxController {
 
   @override
   Future<void> onReady() async {
-    await _fetchApi();
+    await fetchApi();
 
-    if (_wiki.value.id == null) return;
-    supabase
-        .from('wikis')
-        .stream(primaryKey: ['id'])
-        .eq('id', _wiki.value.id)
-        .listen((List data) {
-          print('listening to wiki');
+    // if (_wiki.value.id == null) return;
+    // supabase
+    //     .from('wikis')
+    //     .stream(primaryKey: ['id'])
+    //     .eq('id', 5)
+    //     .listen((List data) {
+    //       if (data.isEmpty) return;
 
-          if (data.isEmpty) return;
+    //       final localWiki = WikiModel.fromJson(data[0]);
 
-          final localWiki = WikiModel.fromJson(data[0]);
+    //       _wiki.value = localWiki;
 
-          _wiki.value = localWiki;
-          print('js: ${json.decode(localWiki.document!)}');
-
-          _editorState.value = EditorState(
-            document: Document.fromJson(json.decode(localWiki.document!)),
-          );
-          update();
-        });
+    //       _editorState.value = EditorState(
+    //         document: Document.fromJson(json.decode(localWiki.document!)),
+    //       );
+    //       update();
+    //     });
 
     super.onReady();
   }
@@ -66,6 +63,7 @@ class ProjectSingleWikiController extends GetxController {
   @override
   Future<void> onClose() async {
     await supabase.removeAllChannels();
+
     super.onClose();
   }
 
@@ -75,24 +73,25 @@ class ProjectSingleWikiController extends GetxController {
   }
 
   // fetch project wiki
-  Future<void> _fetchApi() async {
-    WikiModel? wiki = await Get.showOverlay(
+  Future<void> fetchApi({int? id}) async {
+    print('fetching wiki');
+
+    WikiModel? localWiki = await Get.showOverlay(
       loadingWidget: const BuildOverlay(),
       asyncFunction: () => _wikiServices.getWiki(
-        projectId: projectController.activeProject.id!,
+        projectId: id ?? projectController.activeProject.id!,
       ),
     );
 
-    if (wiki == null) {
+    print('from fetch wiki: ${localWiki!.id} , ${localWiki.document}');
+
+    if (localWiki == null) {
       _isLoading.value = false;
       update();
       return;
     }
 
-    _editorState.value = EditorState(
-      document: Document.fromJson(json.decode(wiki.document!)),
-    );
-    _wiki.value = wiki;
+    _wiki.value = localWiki;
     _isLoading.value = false;
     update();
   }
