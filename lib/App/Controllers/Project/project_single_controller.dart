@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutterpp/App/Controllers/Project/project_single_wiki_controller.dart';
 import 'package:flutterpp/App/Views/Pages/Project/InnerPages/project_single_wiki_page.dart';
 import 'package:get/get.dart';
 import 'package:heroicons/heroicons.dart';
@@ -34,5 +35,11 @@ class ProjectSingleController extends GetxController {
     _selectedTab.value = index;
     _tabs[index]['isActive'] = true;
     update();
+  }
+
+  @override
+  void onClose() {
+    Get.delete<ProjectSingleWikiController>();
+    super.onClose();
   }
 }

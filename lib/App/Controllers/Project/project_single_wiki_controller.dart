@@ -74,10 +74,6 @@ class ProjectSingleWikiController extends GetxController {
 
   // fetch project wiki
   Future<void> fetchApi({int? id}) async {
-    print('fetching wiki');
-
-    print('project id: ${projectController.activeProject.id}   ----  $id');
-
     WikiModel? localWiki = await Get.showOverlay(
       loadingWidget: const BuildOverlay(),
       asyncFunction: () => _wikiServices.getWiki(
@@ -103,8 +99,6 @@ class ProjectSingleWikiController extends GetxController {
     _wiki.value = localWiki;
     _isLoading.value = false;
     update();
-
-    print('local: ${localWiki.id} - new ${_wiki.value.id}');
   }
 
   // create or update project wiki
@@ -127,8 +121,6 @@ class ProjectSingleWikiController extends GetxController {
       projectId: projectController.activeProject.id!,
       document: json.encode(_editorState.value.document.toJson()),
     );
-
-    print('id ${localWiki!.id}');
 
     if (localWiki == null) {
       _editorState.value = EditorState(

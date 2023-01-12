@@ -45,6 +45,12 @@ class ProjectIndexController extends GetxController {
   String get selectedSVG => _selectedSVG.value;
 
   @override
+  void onInit() {
+    _initControllers();
+    super.onInit();
+  }
+
+  @override
   Future<void> onReady() async {
     await _fetchTeamAndProjects();
     _listOfColors();
@@ -180,6 +186,14 @@ class ProjectIndexController extends GetxController {
         onProjectChange(project);
         update();
       },
+    );
+  }
+
+  // init controllers
+  void _initControllers() {
+    // lazy load controllers
+    Get.lazyPut<ProjectSingleWikiController>(
+      () => ProjectSingleWikiController(),
     );
   }
 }

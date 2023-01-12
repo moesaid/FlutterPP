@@ -17,8 +17,6 @@ class WikiProvider {
 
     if (data.isEmpty) return null;
 
-    print(data[0]);
-
     var localJson = json.encode(data[0]);
     return WikiModel.fromJson(json.decode(localJson));
   }
