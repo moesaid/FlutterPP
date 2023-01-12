@@ -43,7 +43,7 @@ class ProjectSingleWikiController extends GetxController {
     // supabase
     //     .from('wikis')
     //     .stream(primaryKey: ['id'])
-    //     .eq('id', 5)
+    //     .eq('id', _wiki.value.id)
     //     .listen((List data) {
     //       if (data.isEmpty) return;
 
@@ -76,6 +76,8 @@ class ProjectSingleWikiController extends GetxController {
   Future<void> fetchApi({int? id}) async {
     print('fetching wiki');
 
+    print('project id: ${projectController.activeProject.id}   ----  $id');
+
     WikiModel? localWiki = await Get.showOverlay(
       loadingWidget: const BuildOverlay(),
       asyncFunction: () => _wikiServices.getWiki(
@@ -83,21 +85,32 @@ class ProjectSingleWikiController extends GetxController {
       ),
     );
 
-    print('from fetch wiki: ${localWiki!.id} , ${localWiki.document}');
-
     if (localWiki == null) {
-      _isLoading.value = false;
+      _editorState.value = EditorState(
+        document: markdownToDocument(r'''### 🙌 Hello from Flutter++!'''),
+      );
+
+      _wiki.value = WikiModel();
       update();
+
       return;
     }
+
+    _editorState.value = EditorState(
+      document: Document.fromJson(json.decode(localWiki.document!)),
+    );
 
     _wiki.value = localWiki;
     _isLoading.value = false;
     update();
+
+    print('local: ${localWiki.id} - new ${_wiki.value.id}');
   }
 
   // create or update project wiki
   Future<void> createOrUpdateWiki() async {
+    // print('creating wiki ${_wiki.value.projectId}');
+
     if (wiki.id == null) {
       await _createWiki();
     } else {
@@ -115,7 +128,17 @@ class ProjectSingleWikiController extends GetxController {
       document: json.encode(_editorState.value.document.toJson()),
     );
 
-    _wiki.value = localWiki!;
+    print('id ${localWiki!.id}');
+
+    if (localWiki == null) {
+      _editorState.value = EditorState(
+        document: markdownToDocument(r'''### 🙌 Hello from Flutter++!'''),
+      );
+
+      return;
+    }
+
+    _wiki.value = localWiki;
     _isSaving.value = false;
     update();
 

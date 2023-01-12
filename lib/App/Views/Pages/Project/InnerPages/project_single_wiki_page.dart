@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:appflowy_editor/appflowy_editor.dart';
 import 'package:flutter/material.dart';
 import 'package:flutterpp/App/Controllers/Project/project_single_wiki_controller.dart';
@@ -14,7 +12,6 @@ class ProjectSingleWikiPage extends GetView<ProjectSingleWikiController> {
       init: ProjectSingleWikiController(),
       initState: (_) {},
       builder: (_) {
-        print({controller.wiki.id, controller.wiki.document});
         return Scaffold(
           body: controller.isLoading
               ? const SizedBox()
@@ -28,11 +25,7 @@ class ProjectSingleWikiPage extends GetView<ProjectSingleWikiController> {
                         },
                         child: AppFlowyEditor(
                           themeData: customizeEditorTheme(context),
-                          editorState: EditorState(
-                            document: Document.fromJson(
-                              json.decode(controller.wiki.document!),
-                            ),
-                          ),
+                          editorState: controller.editorState,
                           autoFocus: true,
                         ),
                       ),
