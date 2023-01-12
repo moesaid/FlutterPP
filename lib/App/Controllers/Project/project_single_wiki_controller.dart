@@ -35,28 +35,12 @@ class ProjectSingleWikiController extends GetxController {
   final _wiki = WikiModel().obs;
   WikiModel get wiki => _wiki.value;
 
+  final _isStreaming = false.obs;
+  bool get isStreaming => _isStreaming.value;
+
   @override
   Future<void> onReady() async {
     await fetchApi();
-
-    // if (_wiki.value.id == null) return;
-    // supabase
-    //     .from('wikis')
-    //     .stream(primaryKey: ['id'])
-    //     .eq('id', _wiki.value.id)
-    //     .listen((List data) {
-    //       if (data.isEmpty) return;
-
-    //       final localWiki = WikiModel.fromJson(data[0]);
-
-    //       _wiki.value = localWiki;
-
-    //       _editorState.value = EditorState(
-    //         document: Document.fromJson(json.decode(localWiki.document!)),
-    //       );
-    //       update();
-    //     });
-
     super.onReady();
   }
 
@@ -99,6 +83,34 @@ class ProjectSingleWikiController extends GetxController {
     _wiki.value = localWiki;
     _isLoading.value = false;
     update();
+
+    // start streaming
+
+    // if (_isStreaming.value) {
+    //   await supabase.removeAllChannels();
+    // }
+
+    // _isStreaming.value = true;
+    // update();
+
+    // supabase
+    //     .from('wikis')
+    //     .stream(primaryKey: ['id'])
+    //     .eq('id', _wiki.value.id)
+    //     .listen((List data) {
+    //       print('stream data $data');
+
+    //       if (data.isEmpty) return;
+
+    //       final localWiki = WikiModel.fromJson(data[0]);
+
+    //       _wiki.value = localWiki;
+
+    //       _editorState.value = EditorState(
+    //         document: Document.fromJson(json.decode(localWiki.document!)),
+    //       );
+    //       update();
+    //     });
   }
 
   // create or update project wiki
