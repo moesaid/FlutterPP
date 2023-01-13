@@ -6,6 +6,7 @@ class TaskModel {
       dueDate,
       originalEstimate,
       priority,
+      status,
       environment,
       createdAt,
       updatedAt;
@@ -21,6 +22,7 @@ class TaskModel {
     this.dueDate,
     this.originalEstimate,
     this.priority,
+    this.status,
     this.environment,
     this.createdAt,
     this.updatedAt,
@@ -37,6 +39,7 @@ class TaskModel {
     dueDate = json['due_date'];
     originalEstimate = json['original_estimate'];
     priority = json['priority'];
+    status = json['status'];
     environment = json['environment'];
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
@@ -54,6 +57,7 @@ class TaskModel {
     data['due_date'] = dueDate;
     data['original_estimate'] = originalEstimate;
     data['priority'] = priority;
+    data['status'] = status;
     data['environment'] = environment;
     data['created_at'] = createdAt;
     data['updated_at'] = updatedAt;
