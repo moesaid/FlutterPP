@@ -1,5 +1,5 @@
 import 'package:flutterpp/App/Models/wiki_model.dart';
-import 'package:flutterpp/App/Providers/Network/wiki_provider.dart';
+import 'package:flutterpp/App/Providers/Network/Project/wiki_provider.dart';
 import 'package:flutterpp/App/Services/Global/call_pipeline.dart';
 
 class WikiServices {

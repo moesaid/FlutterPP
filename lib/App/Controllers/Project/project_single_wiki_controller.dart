@@ -4,7 +4,7 @@ import 'package:appflowy_editor/appflowy_editor.dart';
 import 'package:flutter/material.dart';
 import 'package:flutterpp/App/Controllers/Project/project_index_controller.dart';
 import 'package:flutterpp/App/Models/wiki_model.dart';
-import 'package:flutterpp/App/Services/Wiki/wiki_services.dart';
+import 'package:flutterpp/App/Services/Project/wiki_services.dart';
 import 'package:flutterpp/App/Views/Global/build_overlay.dart';
 import 'package:get/get.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
