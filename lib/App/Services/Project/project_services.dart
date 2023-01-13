@@ -1,5 +1,5 @@
 import 'package:flutterpp/App/Models/project_model.dart';
-import 'package:flutterpp/App/Providers/Network/project_provider.dart';
+import 'package:flutterpp/App/Providers/Network/Project/project_provider.dart';
 import 'package:flutterpp/App/Services/Global/call_pipeline.dart';
 
 class ProjectServices {
