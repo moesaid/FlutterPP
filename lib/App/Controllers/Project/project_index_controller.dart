@@ -9,6 +9,7 @@ import 'package:flutterpp/App/Services/Project/project_services.dart';
 import 'package:flutterpp/App/Services/Team/team_services.dart';
 import 'package:flutterpp/App/Views/Global/build_overlay.dart';
 import 'package:flutterpp/App/Views/Global/build_snackbar.dart';
+import 'package:flutterpp/Config/Bindings/Project/app_project_binding.dart';
 import 'package:flutterpp/Config/app_gradients.dart';
 import 'package:flutterpp/Helpers/helper_colors.dart';
 import 'package:get/get.dart';
@@ -46,8 +47,14 @@ class ProjectIndexController extends GetxController {
 
   @override
   void onInit() {
-    _initControllers();
+    AppProjectBinding.int();
     super.onInit();
+  }
+
+  @override
+  void onClose() {
+    AppProjectBinding.close();
+    super.onClose();
   }
 
   @override
@@ -186,14 +193,6 @@ class ProjectIndexController extends GetxController {
         onProjectChange(project);
         update();
       },
-    );
-  }
-
-  // init controllers
-  void _initControllers() {
-    // lazy load controllers
-    Get.lazyPut<ProjectSingleWikiController>(
-      () => ProjectSingleWikiController(),
     );
   }
 }
