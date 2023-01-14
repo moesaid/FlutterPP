@@ -5,6 +5,7 @@ import 'package:flutterpp/App/Models/board_model.dart';
 import 'package:flutterpp/App/Models/task_model.dart';
 import 'package:flutterpp/App/Services/Project/board_services.dart';
 import 'package:flutterpp/App/Services/Project/task_services.dart';
+import 'package:flutterpp/App/Views/Global/build_overlay.dart';
 import 'package:flutterpp/App/Views/Pages/Project/Widgets/build_board_widges.dart';
 import 'package:get/get.dart';
 
@@ -25,14 +26,28 @@ class ProjectSingleBoardController extends GetxController {
 
   // board controller
   final AppFlowyBoardController _boardController = AppFlowyBoardController(
-    onMoveGroup: (fromGroupId, fromIndex, toGroupId, toIndex) {
-      debugPrint('Move item from $fromIndex to $toIndex');
+    onMoveGroup: (fromGroupId, fromIndex, toGroupId, toIndex) async {
+      await BoardServices().updateBoard(
+        board: BoardModel(
+          id: int.parse(fromGroupId),
+          index: toIndex,
+        ),
+      );
+
+      await BoardServices().updateBoard(
+        board: BoardModel(
+          id: int.parse(toGroupId),
+          index: fromIndex,
+        ),
+      );
     },
     onMoveGroupItem: (groupId, fromIndex, toIndex) {
-      debugPrint('Move $groupId:$fromIndex to $groupId:$toIndex');
+      debugPrint('onMoveGroupItem $groupId:$fromIndex to $groupId:$toIndex');
     },
     onMoveGroupItemToGroup: (fromGroupId, fromIndex, toGroupId, toIndex) {
-      debugPrint('Move $fromGroupId:$fromIndex to $toGroupId:$toIndex');
+      debugPrint(
+        'onMoveGroupItem $fromGroupId:$fromIndex to $toGroupId:$toIndex',
+      );
     },
   );
   AppFlowyBoardController get boardController => _boardController;
@@ -46,7 +61,7 @@ class ProjectSingleBoardController extends GetxController {
   List<BoardModel> get boards => _boards;
 
   @override
-  Future<void> onReady() async {
+  Future<void> onInit() async {
     await fetchApi();
     super.onInit();
   }
@@ -105,5 +120,68 @@ class ProjectSingleBoardController extends GetxController {
   _addGroupsToController() {
     _boardController.addGroups(_listGroupData);
     update();
+  }
+
+  // clear controller
+  clearController() {
+    _boardController.clear();
+    update();
+  }
+
+  // create board
+  createBoard(Map<String, dynamic> data) {
+    final String title = data['title'];
+
+    _boardServices
+        .createBoard(
+      name: title,
+      projectId: _projectIndexController.activeProject.id!,
+      index: _boards.length + 1,
+    )
+        .then((value) {
+      if (value != null) {
+        _boards.add(value);
+        _listGroupData.add(
+          AppFlowyGroupData(
+            id: value.id.toString(),
+            name: value.name!,
+            items: [],
+          ),
+        );
+        _boardController.addGroups(_listGroupData);
+        update();
+      }
+    });
+  }
+
+  // update board
+  updateBoardName(Map data) async {
+    final String title = data['title'];
+    final int id = int.parse(data['id']);
+
+    await _boardServices.updateBoard(
+      board: BoardModel(
+        id: id,
+        name: title,
+      ),
+    );
+
+    // clear
+    clearController();
+
+    // refitsh boards
+    Get.showOverlay(
+      loadingWidget: const BuildOverlay(),
+      asyncFunction: () async => await fetchApi(),
+    );
+  }
+
+  // count tasks in listGroupData
+  int countTasks() {
+    int count = 0;
+    for (var element in _listGroupData) {
+      count += element.items.length;
+    }
+    return count;
   }
 }

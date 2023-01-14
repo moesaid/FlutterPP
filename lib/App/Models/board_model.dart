@@ -29,4 +29,16 @@ class BoardModel {
     data['updated_at'] = updatedAt;
     return data;
   }
+
+  // to map
+  Map<String, dynamic> toMap() {
+    return {
+      'id': id,
+      'project_id': projectId,
+      'name': name,
+      'index': index,
+      'created_at': createdAt,
+      'updated_at': updatedAt,
+    };
+  }
 }

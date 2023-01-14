@@ -20,11 +20,13 @@ class BoardServices {
   Future<BoardModel?> createBoard({
     required String name,
     required int projectId,
+    required int index,
   }) async {
     BoardModel? board = await _callPipeline.futurePipeline(
       future: () => _boardProvider.createBoard(
         name: name,
         projectId: projectId,
+        index: index,
       ),
       name: 'createBoard',
     );

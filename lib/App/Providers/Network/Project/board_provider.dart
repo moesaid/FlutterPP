@@ -10,11 +10,13 @@ class BoardProvider {
   Future<BoardModel?> createBoard({
     required String name,
     required int projectId,
+    required int index,
   }) async {
     List<Map> data = await supabase.from('boards').insert([
       {
         'name': name,
         'project_id': projectId,
+        'index': index,
         'created_at': DateTime.now().toIso8601String(),
       }
     ]).select();
@@ -30,6 +32,7 @@ class BoardProvider {
         .from('boards')
         .select('*')
         .eq('project_id', projectId)
+        .order('index', ascending: true)
         .select();
 
     if (data.isEmpty) return [];
@@ -45,12 +48,13 @@ class BoardProvider {
 
   // update board
   Future<BoardModel?> updateBoard({required BoardModel board}) async {
+    Map boardMap = board.toMap();
+
+    boardMap.removeWhere((key, value) => value == null);
+
     List<Map> data = await supabase
         .from('boards')
-        .update({
-          'name': board.name,
-          'updated_at': DateTime.now().toIso8601String(),
-        })
+        .update(boardMap)
         .eq('id', board.id)
         .select();
 

@@ -70,8 +70,11 @@ class AppTheme {
       primaryColorLight: darkColors['secondary']!,
       outlinedButtonTheme: OutlinedButtonThemeData(
         style: OutlinedButton.styleFrom(
-          side: const BorderSide(color: Colors.white10),
-          disabledBackgroundColor: Colors.black12,
+          side: BorderSide(color: darkColors['secondaryContainer']!),
+          backgroundColor: darkColors['primaryContainer']!.withOpacity(0.3),
+          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 16),
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
+          foregroundColor: darkColors['secondary']!,
         ),
       ),
       elevatedButtonTheme: ElevatedButtonThemeData(

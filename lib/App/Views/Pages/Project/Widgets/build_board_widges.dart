@@ -1,5 +1,7 @@
 import 'package:appflowy_board/appflowy_board.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_form_builder/flutter_form_builder.dart';
+import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:get/get.dart';
 
 class BuildAppFlowyHeader extends StatelessWidget {
@@ -7,18 +9,68 @@ class BuildAppFlowyHeader extends StatelessWidget {
     Key? key,
     required this.appFlowyController,
     required this.columnData,
+    required this.updateBoard,
   }) : super(key: key);
 
   final AppFlowyBoardController appFlowyController;
   final AppFlowyGroupData columnData;
+  final Function(Map) updateBoard;
 
   @override
   Widget build(BuildContext context) {
+    final formKey = GlobalKey<FormBuilderState>();
+
     return AppFlowyGroupHeader(
       height: 50,
       moreIcon: const Icon(Icons.more_vert, size: 20),
       onMoreButtonClick: () {
-        print('More button clicked on ${columnData.id}');
+        Get.defaultDialog(
+          radius: 6,
+          title: 'update board title'.capitalize!,
+          titlePadding: const EdgeInsets.all(20),
+          titleStyle: Get.textTheme.headline6,
+          contentPadding: const EdgeInsets.only(
+            top: 20,
+            left: 20,
+            right: 20,
+            bottom: 20,
+          ),
+          content: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              FormBuilder(
+                key: formKey,
+                child: FormBuilderTextField(
+                  name: 'title',
+                  decoration: InputDecoration(
+                    labelText: 'title'.capitalize!,
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(6),
+                    ),
+                  ),
+                  validator: FormBuilderValidators.compose([
+                    FormBuilderValidators.required(),
+                  ]),
+                ),
+              ),
+              const SizedBox(height: 10),
+              ElevatedButton(
+                onPressed: () async {
+                  if (formKey.currentState!.saveAndValidate()) {
+                    Map data = {
+                      'id': columnData.id,
+                      'title': formKey.currentState!.value['title'],
+                    };
+
+                    await updateBoard(data);
+                    Get.back();
+                  }
+                },
+                child: const Text('Update'),
+              )
+            ],
+          ),
+        );
       },
       title: Expanded(
         child: Container(
@@ -100,16 +152,4 @@ class RichTextCard extends StatelessWidget {
       ),
     );
   }
-}
-
-Widget _buildCard(AppFlowyGroupItem item) {
-  if (item is TextItem) {
-    return RichTextCard(item: item.s);
-  }
-
-  if (item is RichTextItem) {
-    return RichTextCard(item: item.title);
-  }
-
-  throw UnimplementedError();
 }
