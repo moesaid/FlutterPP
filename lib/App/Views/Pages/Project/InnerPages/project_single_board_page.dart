@@ -69,6 +69,10 @@ class ProjectSingleBoardPage extends GetView<ProjectSingleBoardController> {
                                 footerBuilder: (context, columnData) {
                                   return BuildAppFlowyFooter(
                                     columnData: columnData,
+                                    addTask: (data) => controller.addTask(
+                                      data.cast<String, dynamic>(),
+                                      columnData,
+                                    ),
                                   );
                                 },
                                 groupConstraints: const BoxConstraints.tightFor(

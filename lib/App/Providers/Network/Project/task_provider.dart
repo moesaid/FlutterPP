@@ -13,18 +13,20 @@ class TaskProvider {
     List<Map> data = await supabase.from('tasks').insert([
       {
         'title': task.title,
-        'description': task.description,
         'board_id': task.boardId,
         'reporter_id': task.reporterId,
         'assignee_id': task.assigneeId,
-        'status': task.status ?? 'todo',
-        'start_date': task.startDate ?? DateTime.now().toIso8601String(),
-        'due_date': task.dueDate,
-        'original_estimate': task.originalEstimate,
+        'index': task.index,
+        'status': task.status,
         'priority': task.priority,
+        'due_date': task.dueDate,
+        'start_date': task.startDate,
+        'original_estimate': task.originalEstimate,
         'environment': task.environment,
+        'description': task.description,
         'created_at': DateTime.now().toIso8601String(),
-      },
+        'updated_at': DateTime.now().toIso8601String(),
+      }
     ]).select();
 
     if (data.isEmpty) return null;
@@ -39,6 +41,7 @@ class TaskProvider {
         .from('tasks')
         .select('*')
         .eq('board_id', boardId)
+        .order('index', ascending: true)
         .select();
 
     if (data.isEmpty) return [];
@@ -54,22 +57,7 @@ class TaskProvider {
 
   // update task
   Future<TaskModel?> updateTask({required TaskModel task}) async {
-    // update where value not null
-    Map<String, dynamic> updateData = {
-      'title': task.title,
-      'description': task.description,
-      'board_id': task.boardId,
-      'reporter_id': task.reporterId,
-      'assignee_id': task.assigneeId,
-      'status': task.status,
-      'start_date': task.startDate,
-      'due_date': task.dueDate,
-      'original_estimate': task.originalEstimate,
-      'priority': task.priority,
-      'environment': task.environment,
-      'updated_at': DateTime.now().toIso8601String(),
-    };
-
+    Map updateData = task.toMap();
     updateData.removeWhere((key, value) => value == null);
 
     List<Map> data = await supabase

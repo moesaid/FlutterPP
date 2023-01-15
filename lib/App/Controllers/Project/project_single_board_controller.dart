@@ -8,8 +8,11 @@ import 'package:flutterpp/App/Services/Project/task_services.dart';
 import 'package:flutterpp/App/Views/Global/build_overlay.dart';
 import 'package:flutterpp/App/Views/Pages/Project/Widgets/build_board_widges.dart';
 import 'package:get/get.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 class ProjectSingleBoardController extends GetxController {
+  final supabase = Supabase.instance.client;
+
   // services
   final BoardServices _boardServices = BoardServices();
   final TaskServices _taskServices = TaskServices();
@@ -68,8 +71,6 @@ class ProjectSingleBoardController extends GetxController {
 
   Future<void> fetchApi() async {
     await _getBoards(_projectIndexController.activeProject.id!);
-    await _getTasks();
-    await _addGroupsToController();
 
     _isLoading.value = false;
     update();
@@ -84,42 +85,32 @@ class ProjectSingleBoardController extends GetxController {
     if (loaclBoards != null) {
       _boards.value = loaclBoards;
 
-      _listGroupData.value = loaclBoards
-          .map((e) => AppFlowyGroupData(
-                id: e.id.toString(),
-                name: e.name!,
-                items: [],
-              ))
-          .toList();
-      update();
-    }
-  }
+      // get all tasks by board id
+      for (var item in _boards) {
+        List<TaskModel>? localTasks = await _taskServices.getTasks(
+          boardId: item.id!,
+        );
 
-  // get tasks
-  _getTasks() async {
-    // get all tasks by board id
-    for (var board in _boards) {
-      List<TaskModel>? localTasks = await _taskServices.getTasks(
-        boardId: board.id!,
-      );
+        // create listgroupdata per board
+        // add tasks to listgroupdata
+        _listGroupData.add(
+          AppFlowyGroupData(
+            id: item.id.toString(),
+            name: item.name!,
+            items: [],
+          ),
+        );
 
-      if (localTasks != null) {
-        // add tasks to listGroupData where boardId == groupId
-        for (var task in localTasks) {
-          for (var element in _listGroupData) {
-            if (element.id == task.boardId.toString()) {
-              element.items.add(TextItem(task.title!));
-            }
-          }
+        _boardController.addGroups(_listGroupData);
+
+        for (var task in localTasks!) {
+          AppFlowyGroupItem newTask = TextItem(task.title!);
+          _boardController.addGroupItem(item.id.toString(), newTask);
         }
+
+        update();
       }
     }
-  }
-
-  // add groups to controller
-  _addGroupsToController() {
-    _boardController.addGroups(_listGroupData);
-    update();
   }
 
   // clear controller
@@ -183,5 +174,27 @@ class ProjectSingleBoardController extends GetxController {
       count += element.items.length;
     }
     return count;
+  }
+
+  // add a task to a board
+  addTask(Map<String, dynamic> data, AppFlowyGroupData columnData) async {
+    // string to date
+
+    Map<String, dynamic> newMap = {
+      ...data.map((key, value) => MapEntry(key, value.toString())),
+      'board_id': int.parse(columnData.id),
+      'reporter_id': supabase.auth.currentUser!.id,
+      'assignee_id': supabase.auth.currentUser!.id,
+      'index': columnData.items.length + 1
+    };
+
+    TaskModel task = TaskModel.fromMap(newMap);
+    TaskModel? newTask = await _taskServices.createTask(task: task);
+
+    if (newTask != null) {
+      AppFlowyGroupItem newTaskItem = TextItem(newTask.title!);
+      _boardController.addGroupItem(columnData.id, newTaskItem);
+      update();
+    }
   }
 }

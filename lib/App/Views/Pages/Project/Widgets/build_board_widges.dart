@@ -84,9 +84,11 @@ class BuildAppFlowyHeader extends StatelessWidget {
 
 class BuildAppFlowyFooter extends StatelessWidget {
   final AppFlowyGroupData columnData;
+  final Function(Map) addTask;
   const BuildAppFlowyFooter({
     Key? key,
     required this.columnData,
+    required this.addTask,
   }) : super(key: key);
 
   @override
@@ -96,9 +98,186 @@ class BuildAppFlowyFooter extends StatelessWidget {
       icon: const Icon(Icons.add, size: 20),
       title: const Text('Add Card'),
       onAddButtonClick: () {
-        // boardController.scrollToBottom(columnData.id);
-        print('Add Card to :  ${columnData.id}');
+        Get.bottomSheet(
+          BuildAddTaskBottomsheet(addTask: addTask),
+          isScrollControlled: true,
+        );
       },
+    );
+  }
+}
+
+class BuildAddTaskBottomsheet extends StatelessWidget {
+  final Function(Map) addTask;
+
+  const BuildAddTaskBottomsheet({
+    Key? key,
+    required this.addTask,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final formKey = GlobalKey<FormBuilderState>();
+    return Container(
+      decoration: BoxDecoration(
+        color: Get.theme.colorScheme.background,
+        border: Border(
+          top: BorderSide(color: Get.theme.colorScheme.primaryContainer),
+        ),
+      ),
+      height: double.infinity,
+      child: Stack(
+        alignment: Alignment.topCenter,
+        children: [
+          const Positioned(
+            top: 20,
+            right: 20,
+            child: CloseButton(),
+          ),
+          SizedBox(
+            width: 500,
+            child: FormBuilder(
+              autovalidateMode: AutovalidateMode.onUserInteraction,
+              key: formKey,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const Text('Create Task'),
+                  const SizedBox(height: 20),
+                  SizedBox(
+                    width: 150,
+                    child: FormBuilderDropdown(
+                      name: 'status',
+                      decoration: InputDecoration(
+                        labelText: 'status'.capitalize!,
+                      ),
+                      validator: FormBuilderValidators.compose([
+                        FormBuilderValidators.required(),
+                      ]),
+                      initialValue: 'todo',
+                      items: const [
+                        DropdownMenuItem(
+                          value: 'todo',
+                          child: Text('To Do'),
+                        ),
+                        DropdownMenuItem(
+                          value: 'inprogress',
+                          child: Text('In Progress'),
+                        ),
+                        DropdownMenuItem(
+                          value: 'done',
+                          child: Text('Done'),
+                        ),
+                      ],
+                    ),
+                  ),
+                  const SizedBox(height: 20),
+                  FormBuilderTextField(
+                    name: 'title',
+                    decoration: const InputDecoration(labelText: 'Title'),
+                    validator: FormBuilderValidators.compose([
+                      FormBuilderValidators.required(),
+                      FormBuilderValidators.minLength(3),
+                    ]),
+                  ),
+                  const SizedBox(height: 20),
+                  FormBuilderTextField(
+                    name: 'description',
+                    decoration: const InputDecoration(labelText: 'Description'),
+                    minLines: 3,
+                    maxLines: 5,
+                    validator: FormBuilderValidators.compose([
+                      FormBuilderValidators.required(),
+                      FormBuilderValidators.minLength(10),
+                    ]),
+                  ),
+                  const SizedBox(height: 20),
+                  // Due date
+                  FormBuilderDateTimePicker(
+                    name: 'due_date',
+                    inputType: InputType.date,
+                    decoration: const InputDecoration(labelText: 'Due Date'),
+                    initialValue: DateTime.now().add(const Duration(days: 30)),
+                    validator: FormBuilderValidators.compose([
+                      FormBuilderValidators.required(),
+                    ]),
+                  ),
+                  const SizedBox(height: 20),
+                  // start date
+                  FormBuilderDateTimePicker(
+                    name: 'start_date',
+                    inputType: InputType.date,
+                    decoration: const InputDecoration(labelText: 'Start Date'),
+                    initialValue: DateTime.now(),
+                    validator: FormBuilderValidators.compose([
+                      FormBuilderValidators.required(),
+                    ]),
+                  ),
+                  const SizedBox(height: 20),
+                  // Priority
+                  FormBuilderDropdown(
+                    name: 'priority',
+                    decoration: const InputDecoration(labelText: 'Priority'),
+                    validator: FormBuilderValidators.compose([
+                      FormBuilderValidators.required(),
+                    ]),
+                    initialValue: 'medium',
+                    items: const [
+                      DropdownMenuItem(
+                        value: 'highest',
+                        child: Text('Highest'),
+                      ),
+                      DropdownMenuItem(
+                        value: 'high',
+                        child: Text('High'),
+                      ),
+                      DropdownMenuItem(
+                        value: 'medium',
+                        child: Text('Medium'),
+                      ),
+                      DropdownMenuItem(
+                        value: 'low',
+                        child: Text('Low'),
+                      ),
+                      DropdownMenuItem(
+                        value: 'lowest',
+                        child: Text('Lowest'),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 20),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      ElevatedButton(
+                        onPressed: () => Get.back(),
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor:
+                              Get.theme.colorScheme.primaryContainer,
+                        ),
+                        child: const Text('Cancel'),
+                      ),
+                      const SizedBox(width: 10),
+                      ElevatedButton(
+                        onPressed: () {
+                          if (formKey.currentState!.saveAndValidate()) {
+                            Map<String, dynamic> data =
+                                formKey.currentState!.value;
+                            addTask(data);
+                            Get.back();
+                          }
+                        },
+                        child: const Text('Create'),
+                      ),
+                    ],
+                  )
+                ],
+              ),
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
