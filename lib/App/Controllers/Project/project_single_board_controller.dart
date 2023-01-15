@@ -5,7 +5,6 @@ import 'package:flutterpp/App/Models/task_model.dart';
 import 'package:flutterpp/App/Services/Project/board_services.dart';
 import 'package:flutterpp/App/Services/Project/task_services.dart';
 import 'package:flutterpp/App/Views/Global/build_overlay.dart';
-import 'package:flutterpp/App/Views/Global/build_snackbar.dart';
 import 'package:flutterpp/App/Views/Pages/Project/Widgets/build_board_widges.dart';
 import 'package:get/get.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
@@ -78,10 +77,22 @@ class ProjectSingleBoardController extends GetxController {
       }
     },
     onMoveGroupItemToGroup: (fromGroupId, fromIndex, toGroupId, toIndex) async {
-      BuildSnackBar(
-        title: 'Error',
-        message: 'we dont support moveing items between boards yet',
-      ).error();
+      // get from task
+      TaskModel? fromTask = await TaskServices().getTaskByIndex(
+        boardId: int.parse(fromGroupId),
+        index: fromIndex,
+      );
+
+      // update from task
+      if (fromTask != null) {
+        await TaskServices().updateTask(
+          task: TaskModel(
+            id: fromTask.id,
+            boardId: int.parse(toGroupId),
+            index: toIndex,
+          ),
+        );
+      }
     },
   );
   AppFlowyBoardController get boardController => _boardController;

@@ -1,4 +1,5 @@
 import 'package:flutterpp/App/Views/Pages/Project/InnerPages/project_single_board_page.dart';
+import 'package:flutterpp/App/Views/Pages/Project/InnerPages/project_single_generator_page.dart';
 import 'package:flutterpp/App/Views/Pages/Project/InnerPages/project_single_wiki_page.dart';
 import 'package:get/get.dart';
 import 'package:heroicons/heroicons.dart';
@@ -21,6 +22,12 @@ class ProjectSingleController extends GetxController {
       'icon': HeroIcons.clipboardDocumentList,
       'title': 'board',
       'page': const ProjectSingleBoardPage(),
+      'isActive': false,
+    },
+    {
+      'icon': HeroIcons.commandLine,
+      'title': 'generator',
+      'page': const ProjectSingleGeneratorPage(),
       'isActive': false,
     },
   ].obs;
