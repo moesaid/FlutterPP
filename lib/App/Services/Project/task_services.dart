@@ -30,6 +30,32 @@ class TaskServices {
     return tasks;
   }
 
+  // get task by id
+  Future<TaskModel?> getTask({required int taskId}) async {
+    TaskModel? task = await _callPipeline.futurePipeline(
+      future: () => _taskProvider.getTask(taskId: taskId),
+      name: 'getTask',
+    );
+
+    return task;
+  }
+
+  // get task by index
+  Future<TaskModel?> getTaskByIndex({
+    required int boardId,
+    required int index,
+  }) async {
+    TaskModel? task = await _callPipeline.futurePipeline(
+      future: () => _taskProvider.getTaskByIndex(
+        boardId: boardId,
+        index: index,
+      ),
+      name: 'getTaskByIndex',
+    );
+
+    return task;
+  }
+
   // update task
   Future<TaskModel?> updateTask({required TaskModel task}) async {
     TaskModel? updatedTask = await _callPipeline.futurePipeline(

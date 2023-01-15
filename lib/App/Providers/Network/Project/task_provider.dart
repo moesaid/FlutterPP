@@ -55,6 +55,41 @@ class TaskProvider {
     return tasks;
   }
 
+  // get task by id
+  Future<TaskModel?> getTask({required int taskId}) async {
+    List<Map> data = await supabase
+        .from('tasks')
+        .select('*')
+        .eq(
+          'id',
+          taskId,
+        )
+        .select();
+
+    if (data.isEmpty) return null;
+
+    var localJson = json.encode(data[0]);
+    return TaskModel.fromJson(json.decode(localJson));
+  }
+
+  // get task by index
+  Future<TaskModel?> getTaskByIndex({
+    required int boardId,
+    required int index,
+  }) async {
+    List<Map> data = await supabase
+        .from('tasks')
+        .select('*')
+        .eq('board_id', boardId)
+        .eq('index', index)
+        .select();
+
+    if (data.isEmpty) return null;
+
+    var localJson = json.encode(data[0]);
+    return TaskModel.fromJson(json.decode(localJson));
+  }
+
   // update task
   Future<TaskModel?> updateTask({required TaskModel task}) async {
     Map updateData = task.toMap();

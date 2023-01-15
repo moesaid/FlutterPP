@@ -1,11 +1,11 @@
 import 'package:appflowy_board/appflowy_board.dart';
-import 'package:flutter/material.dart';
 import 'package:flutterpp/App/Controllers/Project/project_index_controller.dart';
 import 'package:flutterpp/App/Models/board_model.dart';
 import 'package:flutterpp/App/Models/task_model.dart';
 import 'package:flutterpp/App/Services/Project/board_services.dart';
 import 'package:flutterpp/App/Services/Project/task_services.dart';
 import 'package:flutterpp/App/Views/Global/build_overlay.dart';
+import 'package:flutterpp/App/Views/Global/build_snackbar.dart';
 import 'package:flutterpp/App/Views/Pages/Project/Widgets/build_board_widges.dart';
 import 'package:get/get.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
@@ -44,13 +44,44 @@ class ProjectSingleBoardController extends GetxController {
         ),
       );
     },
-    onMoveGroupItem: (groupId, fromIndex, toIndex) {
-      debugPrint('onMoveGroupItem $groupId:$fromIndex to $groupId:$toIndex');
-    },
-    onMoveGroupItemToGroup: (fromGroupId, fromIndex, toGroupId, toIndex) {
-      debugPrint(
-        'onMoveGroupItem $fromGroupId:$fromIndex to $toGroupId:$toIndex',
+    onMoveGroupItem: (groupId, fromIndex, toIndex) async {
+      // get from task
+      TaskModel? fromTask = await TaskServices().getTaskByIndex(
+        boardId: int.parse(groupId),
+        index: fromIndex,
       );
+
+      // get to task
+      TaskModel? toTask = await TaskServices().getTaskByIndex(
+        boardId: int.parse(groupId),
+        index: toIndex,
+      );
+
+      // update from task
+      if (fromTask != null) {
+        await TaskServices().updateTask(
+          task: TaskModel(
+            id: fromTask.id,
+            index: toIndex,
+          ),
+        );
+      }
+
+      // update to task
+      if (toTask != null) {
+        await TaskServices().updateTask(
+          task: TaskModel(
+            id: toTask.id,
+            index: fromIndex,
+          ),
+        );
+      }
+    },
+    onMoveGroupItemToGroup: (fromGroupId, fromIndex, toGroupId, toIndex) async {
+      BuildSnackBar(
+        title: 'Error',
+        message: 'we dont support moveing items between boards yet',
+      ).error();
     },
   );
   AppFlowyBoardController get boardController => _boardController;
@@ -113,12 +144,6 @@ class ProjectSingleBoardController extends GetxController {
     }
   }
 
-  // clear controller
-  clearController() {
-    _boardController.clear();
-    update();
-  }
-
   // create board
   createBoard(Map<String, dynamic> data) {
     final String title = data['title'];
@@ -158,7 +183,9 @@ class ProjectSingleBoardController extends GetxController {
     );
 
     // clear
-    clearController();
+    _listGroupData.clear();
+
+    _boardController.addListener(() {});
 
     // refitsh boards
     Get.showOverlay(
@@ -176,6 +203,17 @@ class ProjectSingleBoardController extends GetxController {
     return count;
   }
 
+  // create task by board id
+  int countTasksByBoardId(int boardId) {
+    int count = 0;
+    for (var element in _listGroupData) {
+      if (int.parse(element.id) == boardId) {
+        count += element.items.length;
+      }
+    }
+    return count;
+  }
+
   // add a task to a board
   addTask(Map<String, dynamic> data, AppFlowyGroupData columnData) async {
     // string to date
@@ -185,7 +223,9 @@ class ProjectSingleBoardController extends GetxController {
       'board_id': int.parse(columnData.id),
       'reporter_id': supabase.auth.currentUser!.id,
       'assignee_id': supabase.auth.currentUser!.id,
-      'index': columnData.items.length + 1
+      'index': columnData.items.length,
+
+      // 'index': countTasksByBoardId(int.parse(columnData.id)),
     };
 
     TaskModel task = TaskModel.fromMap(newMap);
