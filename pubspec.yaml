@@ -22,6 +22,7 @@ dependencies:
   flutter_svg: ^1.1.6
   appflowy_editor: ^0.0.9
   appflowy_board: ^0.0.9
+  zoom_widget: ^2.0.0
 
 # dev_dependencies
 dev_dependencies:

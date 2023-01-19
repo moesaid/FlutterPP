@@ -13,8 +13,29 @@ class ProjectSingleGeneratorPage
       initState: (_) {},
       builder: (_) {
         return Scaffold(
-          appBar: AppBar(title: const Text('ProjectSingleGeneratorPage')),
-          body: const SafeArea(child: Text('ProjectSingleGeneratorController')),
+          body: SafeArea(
+            child: InteractiveViewer(
+              scaleEnabled: true,
+              alignPanAxis: true,
+              boundaryMargin: const EdgeInsets.all(100),
+              child: Column(
+                children: [
+                  Container(
+                    color: Colors.red,
+                    width: 5000,
+                    height: 200,
+                    child: const Text('ProjectSingleGeneratorController'),
+                  ),
+                  Container(
+                    color: Colors.red,
+                    width: 5000,
+                    height: 200,
+                    child: const Text('ProjectSingleGeneratorController'),
+                  ),
+                ],
+              ),
+            ),
+          ),
         );
       },
     );
