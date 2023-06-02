@@ -28,12 +28,12 @@ class NoTeamPage extends GetView<NoTeamController> {
                   children: [
                     Text(
                       'kick off your journey with Flutter++ !',
-                      style: Get.theme.textTheme.bodyText1,
+                      style: Get.theme.textTheme.bodyLarge,
                     ),
                     const SizedBox(height: 10),
                     Text(
                       'by creating a team or joining one !',
-                      style: Get.theme.textTheme.bodyText2,
+                      style: Get.theme.textTheme.bodyMedium,
                     ),
                     const SizedBox(height: 60),
                     const _BuildTabs(),
@@ -69,7 +69,7 @@ class _BuildJoinTeamForm extends StatelessWidget {
     return FormBuilder(
       key: formKey,
       autovalidateMode: AutovalidateMode.onUserInteraction,
-      autoFocusOnValidationFailure: true,
+      // autoFocusOnValidationFailure: true,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
@@ -116,7 +116,7 @@ class _BuildCreateTeamForm extends StatelessWidget {
     return FormBuilder(
       key: formKey,
       autovalidateMode: AutovalidateMode.onUserInteraction,
-      autoFocusOnValidationFailure: true,
+      // autoFocusOnValidationFailure: true,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [

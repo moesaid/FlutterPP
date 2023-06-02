@@ -16,19 +16,19 @@ class SignupPage extends GetView<SignupController> {
         child: Center(
           child: FormBuilder(
             key: formKey,
-            autovalidateMode: AutovalidateMode.onUserInteraction,
+            // autovalidateMode: AutovalidateMode.onUserInteraction,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Text(
                   'Sign up for Flutter++',
-                  style: Get.theme.textTheme.headline5,
+                  style: Get.theme.textTheme.headlineSmall,
                 ),
                 const SizedBox(height: 10),
                 Text(
                   'to start creating and sharing your projects.',
-                  style: Get.theme.textTheme.caption,
+                  style: Get.theme.textTheme.bodySmall,
                 ),
                 const SizedBox(height: 20),
                 SizedBox(

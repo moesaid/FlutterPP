@@ -1,4 +1,4 @@
-import 'package:appflowy_editor/appflowy_editor.dart';
+// import 'package:appflowy_editor/appflowy_editor.dart';
 import 'package:flutter/material.dart';
 import 'package:flutterpp/Config/Bindings/app_binding.dart';
 import 'package:flutterpp/Config/app_initializer.dart';
@@ -35,7 +35,7 @@ class MyApp extends StatelessWidget {
       getPages: AppPages.routes,
       defaultTransition: Transition.native,
       localizationsDelegates: const [
-        AppFlowyEditorLocalizations.delegate,
+        // AppFlowyEditorLocalizations.delegate,
       ],
     );
   }

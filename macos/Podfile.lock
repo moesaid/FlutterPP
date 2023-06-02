@@ -2,11 +2,17 @@ PODS:
   - app_links (1.0.0):
     - FlutterMacOS
   - FlutterMacOS (1.0.0)
-  - path_provider_macos (0.0.1):
+  - path_provider_foundation (0.0.1):
+    - Flutter
     - FlutterMacOS
   - rich_clipboard_macos (0.0.1):
     - FlutterMacOS
   - screen_retriever (0.0.1):
+    - FlutterMacOS
+  - shared_preferences_foundation (0.0.1):
+    - Flutter
+    - FlutterMacOS
+  - sign_in_with_apple (0.0.1):
     - FlutterMacOS
   - url_launcher_macos (0.0.1):
     - FlutterMacOS
@@ -16,9 +22,11 @@ PODS:
 DEPENDENCIES:
   - app_links (from `Flutter/ephemeral/.symlinks/plugins/app_links/macos`)
   - FlutterMacOS (from `Flutter/ephemeral`)
-  - path_provider_macos (from `Flutter/ephemeral/.symlinks/plugins/path_provider_macos/macos`)
+  - path_provider_foundation (from `Flutter/ephemeral/.symlinks/plugins/path_provider_foundation/darwin`)
   - rich_clipboard_macos (from `Flutter/ephemeral/.symlinks/plugins/rich_clipboard_macos/macos`)
   - screen_retriever (from `Flutter/ephemeral/.symlinks/plugins/screen_retriever/macos`)
+  - shared_preferences_foundation (from `Flutter/ephemeral/.symlinks/plugins/shared_preferences_foundation/darwin`)
+  - sign_in_with_apple (from `Flutter/ephemeral/.symlinks/plugins/sign_in_with_apple/macos`)
   - url_launcher_macos (from `Flutter/ephemeral/.symlinks/plugins/url_launcher_macos/macos`)
   - window_manager (from `Flutter/ephemeral/.symlinks/plugins/window_manager/macos`)
 
@@ -27,12 +35,16 @@ EXTERNAL SOURCES:
     :path: Flutter/ephemeral/.symlinks/plugins/app_links/macos
   FlutterMacOS:
     :path: Flutter/ephemeral
-  path_provider_macos:
-    :path: Flutter/ephemeral/.symlinks/plugins/path_provider_macos/macos
+  path_provider_foundation:
+    :path: Flutter/ephemeral/.symlinks/plugins/path_provider_foundation/darwin
   rich_clipboard_macos:
     :path: Flutter/ephemeral/.symlinks/plugins/rich_clipboard_macos/macos
   screen_retriever:
     :path: Flutter/ephemeral/.symlinks/plugins/screen_retriever/macos
+  shared_preferences_foundation:
+    :path: Flutter/ephemeral/.symlinks/plugins/shared_preferences_foundation/darwin
+  sign_in_with_apple:
+    :path: Flutter/ephemeral/.symlinks/plugins/sign_in_with_apple/macos
   url_launcher_macos:
     :path: Flutter/ephemeral/.symlinks/plugins/url_launcher_macos/macos
   window_manager:
@@ -40,13 +52,15 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   app_links: 4481ed4d71f384b0c3ae5016f4633aa73d32ff67
-  FlutterMacOS: ae6af50a8ea7d6103d888583d46bd8328a7e9811
-  path_provider_macos: 3c0c3b4b0d4a76d2bf989a913c2de869c5641a19
+  FlutterMacOS: 8f6f14fa908a6fb3fba0cd85dbd81ec4b251fb24
+  path_provider_foundation: eaf5b3e458fc0e5fbb9940fb09980e853fe058b8
   rich_clipboard_macos: 43364b66b9dc69d203eb8dd6d758e2d12e02723c
   screen_retriever: 59634572a57080243dd1bf715e55b6c54f241a38
-  url_launcher_macos: 597e05b8e514239626bcf4a850fcf9ef5c856ec3
+  shared_preferences_foundation: e2dae3258e06f44cc55f49d42024fd8dd03c590c
+  sign_in_with_apple: a9e97e744e8edc36aefc2723111f652102a7a727
+  url_launcher_macos: 5335912b679c073563f29d89d33d10d459f95451
   window_manager: 3a1844359a6295ab1e47659b1a777e36773cd6e8
 
 PODFILE CHECKSUM: a1604d6ceef77743b0be14ce0a076d42c645fcfa
 
-COCOAPODS: 1.11.3
+COCOAPODS: 1.12.0

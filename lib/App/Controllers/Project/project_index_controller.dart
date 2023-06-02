@@ -2,7 +2,6 @@ import 'dart:convert';
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:flutterpp/App/Controllers/Project/project_single_wiki_controller.dart';
 import 'package:flutterpp/App/Models/project_model.dart';
 import 'package:flutterpp/App/Models/team_model.dart';
 import 'package:flutterpp/App/Services/Project/project_services.dart';
@@ -129,10 +128,10 @@ class ProjectIndexController extends GetxController {
     _activeProject.value = project;
     update();
 
-    // update project single wiki
-    await Get.find<ProjectSingleWikiController>().fetchApi(
-      id: project.id!,
-    );
+    // // update project single wiki
+    // await Get.find<ProjectSingleWikiController>().fetchApi(
+    //   id: project.id!,
+    // );
   }
 
   // update loading
