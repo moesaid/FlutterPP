@@ -14,7 +14,7 @@ class NoTeamPage extends GetView<NoTeamController> {
       init: NoTeamController(),
       initState: (_) {},
       builder: (_) {
-        return ByukdPageLayout(
+        return BuildPageLayout(
           child: Center(
             child: SizedBox(
               width: 400,

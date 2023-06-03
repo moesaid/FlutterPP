@@ -10,4 +10,7 @@ abstract class AppRoutes {
   static const VERIFY_OTP = '/verify-otp';
 
   static const HOME = '/home';
+
+  // mockup
+  static const MOCKUP_INDEX = '/mockup-index';
 }

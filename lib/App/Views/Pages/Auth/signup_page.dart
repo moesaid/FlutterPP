@@ -11,121 +11,129 @@ class SignupPage extends GetView<SignupController> {
   @override
   Widget build(BuildContext context) {
     final formKey = GlobalKey<FormBuilderState>();
-    return Scaffold(
-      body: SafeArea(
-        child: Center(
-          child: FormBuilder(
-            key: formKey,
-            // autovalidateMode: AutovalidateMode.onUserInteraction,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Text(
-                  'Sign up for Flutter++',
-                  style: Get.theme.textTheme.headlineSmall,
-                ),
-                const SizedBox(height: 10),
-                Text(
-                  'to start creating and sharing your projects.',
-                  style: Get.theme.textTheme.bodySmall,
-                ),
-                const SizedBox(height: 20),
-                SizedBox(
-                  width: 300,
+    return GetBuilder<SignupController>(
+        init: SignupController(),
+        initState: (_) {},
+        builder: (context) {
+          return Scaffold(
+            body: SafeArea(
+              child: Center(
+                child: FormBuilder(
+                  key: formKey,
+                  // autovalidateMode: AutovalidateMode.onUserInteraction,
                   child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      FormBuilderTextField(
-                        name: 'name',
-                        decoration: const InputDecoration(
-                          border: OutlineInputBorder(),
-                          labelText: 'Name',
-                        ),
-                        validator: FormBuilderValidators.compose([
-                          FormBuilderValidators.required(),
-                          FormBuilderValidators.maxLength(10),
-                          FormBuilderValidators.minLength(3),
-                        ]),
-                        maxLines: 1,
+                      Text(
+                        'Sign up for Flutter++',
+                        style: Get.theme.textTheme.headlineSmall,
                       ),
                       const SizedBox(height: 10),
-                      FormBuilderTextField(
-                        name: 'email',
-                        decoration: const InputDecoration(
-                          border: OutlineInputBorder(),
-                          labelText: 'Email',
-                        ),
-                        validator: FormBuilderValidators.compose([
-                          FormBuilderValidators.required(),
-                          FormBuilderValidators.email(),
-                        ]),
-                      ),
-                      const SizedBox(height: 10),
-                      FormBuilderTextField(
-                        name: 'password',
-                        obscureText: true,
-                        decoration: const InputDecoration(
-                          border: OutlineInputBorder(),
-                          labelText: 'Password',
-                        ),
-                        validator: FormBuilderValidators.compose([
-                          FormBuilderValidators.required(),
-                          FormBuilderValidators.minLength(8),
-                        ]),
+                      Text(
+                        'to start creating and sharing your projects.',
+                        style: Get.theme.textTheme.bodySmall,
                       ),
                       const SizedBox(height: 20),
                       SizedBox(
-                        width: Get.width,
-                        child: ElevatedButton(
-                          onPressed: () {
-                            if (formKey.currentState!.saveAndValidate()) {
-                              controller.signup(formKey.currentState!.value);
-                            }
-                          },
-                          child: const Text('sign up'),
-                        ),
-                      ),
-                      const SizedBox(height: 30),
-                      const Text(
-                        'do you have an account?',
-                        style: TextStyle(
-                          color: Colors.grey,
-                        ),
-                      ),
-                      const SizedBox(height: 10),
-                      Row(
-                        children: [
-                          TextButton(
-                            onPressed: () => Get.toNamed(AppRoutes.LOGIN),
-                            style: TextButton.styleFrom(
-                              padding: const EdgeInsets.all(0),
-                              minimumSize: Size.zero,
+                        width: 300,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            FormBuilderTextField(
+                              name: 'name',
+                              decoration: const InputDecoration(
+                                border: OutlineInputBorder(),
+                                labelText: 'Name',
+                              ),
+                              validator: FormBuilderValidators.compose([
+                                FormBuilderValidators.required(),
+                                FormBuilderValidators.maxLength(10),
+                                FormBuilderValidators.minLength(3),
+                              ]),
+                              maxLines: 1,
                             ),
-                            child: Text(
-                              'login'.toUpperCase(),
-                              style: TextStyle(
-                                color: Get.isDarkMode
-                                    ? Colors.white
-                                    : Colors.black,
+                            const SizedBox(height: 10),
+                            FormBuilderTextField(
+                              name: 'email',
+                              decoration: const InputDecoration(
+                                border: OutlineInputBorder(),
+                                labelText: 'Email',
+                              ),
+                              validator: FormBuilderValidators.compose([
+                                FormBuilderValidators.required(),
+                                FormBuilderValidators.email(),
+                              ]),
+                            ),
+                            const SizedBox(height: 10),
+                            FormBuilderTextField(
+                              name: 'password',
+                              obscureText: true,
+                              decoration: const InputDecoration(
+                                border: OutlineInputBorder(),
+                                labelText: 'Password',
+                              ),
+                              validator: FormBuilderValidators.compose([
+                                FormBuilderValidators.required(),
+                                FormBuilderValidators.minLength(8),
+                              ]),
+                            ),
+                            const SizedBox(height: 20),
+                            SizedBox(
+                              width: Get.width,
+                              child: ElevatedButton(
+                                onPressed: () {
+                                  if (formKey.currentState!.saveAndValidate()) {
+                                    controller
+                                        .signup(formKey.currentState!.value);
+                                  }
+                                },
+                                child: const Text('sign up'),
                               ),
                             ),
-                          ),
-                          Icon(
-                            Icons.arrow_forward,
-                            size: 14,
-                            color: Get.isDarkMode ? Colors.white : Colors.black,
-                          ),
-                        ],
+                            const SizedBox(height: 30),
+                            const Text(
+                              'do you have an account?',
+                              style: TextStyle(
+                                color: Colors.grey,
+                              ),
+                            ),
+                            const SizedBox(height: 10),
+                            Row(
+                              children: [
+                                TextButton(
+                                  onPressed: () => Get.toNamed(AppRoutes.LOGIN),
+                                  style: TextButton.styleFrom(
+                                    padding: const EdgeInsets.all(0),
+                                    minimumSize: Size.zero,
+                                  ),
+                                  child: Text(
+                                    'login'.toUpperCase(),
+                                    style: TextStyle(
+                                      color: Get.isDarkMode
+                                          ? Colors.white
+                                          : Colors.black,
+                                    ),
+                                  ),
+                                ),
+                                Icon(
+                                  Icons.arrow_forward,
+                                  size: 14,
+                                  color: Get.isDarkMode
+                                      ? Colors.white
+                                      : Colors.black,
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
                       ),
                     ],
                   ),
                 ),
-              ],
+              ),
             ),
-          ),
-        ),
-      ),
-    );
+          );
+        });
   }
 }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutterpp/App/Services/Auth/auth_services.dart';
 import 'package:flutterpp/App/Services/Team/team_services.dart';
+import 'package:flutterpp/App/Views/Pages/Mockup/mockup_index_page.dart';
 import 'package:flutterpp/App/Views/Pages/Project/Pages/project_index_page.dart';
 import 'package:get/get.dart';
 import 'package:heroicons/heroicons.dart';
@@ -60,6 +61,12 @@ class HomeController extends GetxController {
       'icon': HeroIcons.paintBrush,
       'isActive': false,
       'tab': const Text('witeboard'),
+    },
+    {
+      'title': 'mockups',
+      'icon': HeroIcons.deviceTablet,
+      'isActive': false,
+      'tab': const MockupIndexPage(),
     },
   ].obs;
 
