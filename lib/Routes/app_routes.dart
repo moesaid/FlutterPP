@@ -13,4 +13,5 @@ abstract class AppRoutes {
 
   // mockup
   static const MOCKUP_INDEX = '/mockup-index';
+  static const MOCKUP_CREATE = '/mockup-create';
 }
