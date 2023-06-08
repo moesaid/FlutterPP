@@ -9,11 +9,11 @@ class AppWindowConfig {
       size: Size(1200, 720),
       minimumSize: Size(960, 660),
       title: 'Flutter++',
-      backgroundColor: Colors.transparent,
+      backgroundColor: Colors.black,
       titleBarStyle: TitleBarStyle.hidden,
       center: true,
       fullScreen: false,
-      skipTaskbar: false,
+      skipTaskbar: true,
     );
 
     // show window

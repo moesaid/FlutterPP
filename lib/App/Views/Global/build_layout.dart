@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutterpp/App/Views/Global/build_rail.dart';
+import 'package:get/get.dart';
 
 class BuildLayout extends StatelessWidget {
   final List<Map<String, dynamic>> tabs;
@@ -16,20 +17,62 @@ class BuildLayout extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Row(
+      body: Column(
         children: [
-          BuildRail(
-            tabs: tabs,
-            selectedIndex: selectedIndex,
-            onDestinationSelected: (index) => onDestinationSelected(index),
-          ),
+          BuildMacAppbar(tabs: tabs),
           Expanded(
-            child: Container(
-              color: Colors.transparent,
-              child: tabs.firstWhere((el) => el['isActive'] == true)['tab'],
+            child: Row(
+              children: [
+                BuildRail(
+                  tabs: tabs,
+                  selectedIndex: selectedIndex,
+                  onDestinationSelected: (index) =>
+                      onDestinationSelected(index),
+                ),
+                Expanded(
+                  child: Container(
+                    color: Colors.transparent,
+                    child:
+                        tabs.firstWhere((el) => el['isActive'] == true)['tab'],
+                  ),
+                ),
+              ],
             ),
           ),
         ],
+      ),
+    );
+  }
+}
+
+class BuildMacAppbar extends StatelessWidget {
+  final List<Map<String, dynamic>> tabs;
+  const BuildMacAppbar({super.key, required this.tabs});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: 28,
+      width: context.width,
+      decoration: BoxDecoration(
+        color: Get.theme.colorScheme.background.withOpacity(0.2),
+        border: Border(
+          bottom: BorderSide(
+            width: 1,
+            color: Get.theme.colorScheme.primaryContainer,
+          ),
+        ),
+      ),
+      child: Center(
+        child: Text(
+          tabs
+              .firstWhere((el) => el['isActive'] == true)['title']
+              .toString()
+              .capitalizeFirst!,
+          style: Get.textTheme.titleSmall!.copyWith(
+            fontSize: 12,
+          ),
+        ),
       ),
     );
   }
