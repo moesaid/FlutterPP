@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutterpp/App/Controllers/Mockup/mockup_index_controller.dart';
 import 'package:flutterpp/App/Views/Global/build_overlay.dart';
 import 'package:flutterpp/App/Views/Global/build_page_layout.dart';
-import 'package:flutterpp/Routes/app_pages.dart';
+import 'package:flutterpp/App/Views/Pages/Mockup/mockup_create_page.dart';
 import 'package:get/get.dart';
 
 class MockupIndexPage extends GetView<MockupIndexController> {
@@ -89,7 +89,12 @@ class BuildEmptyPage extends StatelessWidget {
           ),
           const SizedBox(height: 20),
           ElevatedButton(
-            onPressed: () => Get.toNamed(AppRoutes.MOCKUP_CREATE),
+            onPressed: () {
+              Get.bottomSheet(
+                const MockupCreatePage(),
+                isScrollControlled: true,
+              );
+            },
             child: const Text('Create a new mockup'),
           ),
         ],
