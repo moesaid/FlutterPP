@@ -27,12 +27,12 @@ class VerifyOtpPage extends GetView<VerifyOtpController> {
                       children: [
                         Text(
                           'Enter Code',
-                          style: Get.theme.textTheme.headline5,
+                          style: Get.theme.textTheme.headlineSmall,
                         ),
                         const SizedBox(height: 10),
                         Text(
                           'we have sent you a OTP code to your email address',
-                          style: Get.theme.textTheme.caption,
+                          style: Get.theme.textTheme.bodySmall,
                         ),
                         const SizedBox(height: 40),
                         SizedBox(

@@ -59,7 +59,7 @@ class BuildRail extends StatelessWidget {
             ),
           ),
           IconButton(
-            onPressed: () => print('object'),
+            onPressed: () => debugPrint('object'),
             icon: const HeroIcon(
               HeroIcons.informationCircle,
               style: HeroIconStyle.mini,
@@ -67,7 +67,7 @@ class BuildRail extends StatelessWidget {
             color: Get.theme.colorScheme.secondaryContainer,
           ),
           IconButton(
-            onPressed: () => print('object'),
+            onPressed: () => debugPrint('object'),
             icon: const HeroIcon(
               HeroIcons.cog,
               style: HeroIconStyle.mini,

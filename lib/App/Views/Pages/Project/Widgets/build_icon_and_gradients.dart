@@ -64,7 +64,7 @@ class _BuildColorsSection extends StatelessWidget {
           children: [
             Text(
               '${colors.length} Colors',
-              style: Get.textTheme.headline6,
+              style: Get.textTheme.titleLarge,
             ),
             const SizedBox(height: 5),
             const Text('Color us creative, yo.'),
@@ -123,7 +123,7 @@ class _BuildIconSection extends StatelessWidget {
           children: [
             Text(
               '${svgs.length} Icons',
-              style: Get.textTheme.headline6,
+              style: Get.textTheme.titleLarge,
             ),
             const SizedBox(height: 5),
             const Text('Time to choose an icon, peeps!'),
@@ -151,7 +151,7 @@ class _BuildIconSection extends StatelessWidget {
                         ),
                         SvgPicture.asset(
                           'assets/svg/${svgs[i]}',
-                          color: Colors.grey.withOpacity(0.5),
+                          // color: Colors.grey.withOpacity(0.5),
                           height: 22,
                           width: 22,
                         ),

@@ -35,7 +35,6 @@ class BuildProjectAvatar extends StatelessWidget {
               'assets/svg/$icon',
               width: svgWidth,
               height: svgHeight,
-              color: Colors.white,
             ),
           ),
         ],

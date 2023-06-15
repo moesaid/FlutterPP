@@ -16,7 +16,7 @@ class ProjectSingleGeneratorPage
           body: SafeArea(
             child: InteractiveViewer(
               scaleEnabled: true,
-              alignPanAxis: true,
+              // alignPanAxis: true,
               boundaryMargin: const EdgeInsets.all(100),
               child: Column(
                 children: [

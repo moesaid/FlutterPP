@@ -60,7 +60,7 @@ class AuthServices {
     required String email,
     required String password,
   }) async {
-    AuthResponse? res = await _callPipeline.futurePipeline(
+    await _callPipeline.futurePipeline(
       future: () => _authProvider.signIn(email: email, password: password),
       name: 'signIn',
     );

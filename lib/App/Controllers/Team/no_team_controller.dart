@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutterpp/App/Controllers/Home/home_controller.dart';
 import 'package:flutterpp/App/Services/Team/team_services.dart';
 import 'package:flutterpp/App/Views/Global/build_overlay.dart';
@@ -35,6 +36,6 @@ class NoTeamController extends GetxController {
     // code
     final String code = value['code'];
 
-    print({'code': code});
+    debugPrint({'code': code}.toString());
   }
 }

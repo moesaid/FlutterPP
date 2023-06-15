@@ -122,7 +122,7 @@ class _BuildDialog extends StatelessWidget {
                     borderRadius: BorderRadius.circular(6),
                     color: activeProject.id == project.id
                         ? Get.theme.colorScheme.primary.withOpacity(0.1)
-                        : Get.theme.backgroundColor.withOpacity(0.1),
+                        : Get.theme.colorScheme.background.withOpacity(0.1),
                     border: Border.all(
                       color: activeProject.id == project.id
                           ? Get.theme.colorScheme.secondary
@@ -134,7 +134,7 @@ class _BuildDialog extends StatelessWidget {
                       CircleAvatar(
                         backgroundColor: activeProject.id == project.id
                             ? Get.theme.colorScheme.secondary
-                            : Get.theme.backgroundColor.withOpacity(0.3),
+                            : Get.theme.colorScheme.background.withOpacity(0.3),
                         radius: 6,
                       ),
                       const SizedBox(width: 8),

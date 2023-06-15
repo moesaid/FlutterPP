@@ -187,78 +187,78 @@ class AppTheme {
         ),
       ),
       textTheme: TextTheme(
-        headline1: const TextStyle(
+        displayLarge: const TextStyle(
           color: Colors.white,
           fontSize: 96,
           fontWeight: FontWeight.w300,
           letterSpacing: -1.5,
         ),
-        headline2: const TextStyle(
+        displayMedium: const TextStyle(
           color: Colors.white,
           fontSize: 60,
           fontWeight: FontWeight.w300,
           letterSpacing: -0.5,
         ),
-        headline3: const TextStyle(
+        displaySmall: const TextStyle(
           color: Colors.white,
           fontSize: 48,
           fontWeight: FontWeight.w400,
         ),
-        headline4: const TextStyle(
+        headlineMedium: const TextStyle(
           color: Colors.white,
           fontSize: 34,
           fontWeight: FontWeight.w400,
           letterSpacing: 0.25,
         ),
-        headline5: const TextStyle(
+        headlineSmall: const TextStyle(
           color: Colors.white,
           fontSize: 24,
           fontWeight: FontWeight.w500,
         ),
-        headline6: const TextStyle(
+        titleLarge: const TextStyle(
           color: Colors.white,
           fontSize: 20,
           fontWeight: FontWeight.w500,
           letterSpacing: 0.15,
         ),
-        subtitle1: const TextStyle(
+        titleMedium: const TextStyle(
           color: Colors.white,
           fontSize: 15,
           fontWeight: FontWeight.w400,
           letterSpacing: 0.15,
         ),
-        subtitle2: const TextStyle(
+        titleSmall: const TextStyle(
           color: Colors.white,
           fontSize: 14,
           fontWeight: FontWeight.w500,
           letterSpacing: 0.1,
         ),
-        bodyText1: const TextStyle(
+        bodyLarge: const TextStyle(
           color: Colors.white,
           fontSize: 16,
           fontWeight: FontWeight.w400,
           letterSpacing: 0.5,
         ),
-        bodyText2: const TextStyle(
+        bodyMedium: const TextStyle(
           color: Colors.white,
           fontSize: 14,
           fontWeight: FontWeight.w400,
           letterSpacing: 0.25,
         ),
-        button: const TextStyle(
+        labelLarge: const TextStyle(
           color: Colors.white,
           fontSize: 14,
           fontWeight: FontWeight.w500,
           letterSpacing: 1.25,
         ),
-        caption: TextStyle(
+        bodySmall: TextStyle(
           color: Colors.white.withOpacity(0.5),
           fontSize: 12,
           fontWeight: FontWeight.w400,
           letterSpacing: 0.4,
           fontStyle: FontStyle.italic,
         ),
-        overline: const TextStyle(
+        labelSmall: const TextStyle(
           color: Colors.white,
           fontSize: 10,
           fontWeight: FontWeight.w400,

@@ -94,7 +94,7 @@ class BuildProjectSidebar extends StatelessWidget {
                           size: 16,
                           color: index == controller.selectedTab
                               ? Get.theme.colorScheme.secondary.withOpacity(0.6)
-                              : Get.theme.backgroundColor.withOpacity(0.5),
+                              : Get.theme.colorScheme.background.withOpacity(0.5),
                         ),
                         const SizedBox(width: 4),
                         Text(
@@ -103,7 +103,7 @@ class BuildProjectSidebar extends StatelessWidget {
                             height: 1,
                             color: index == controller.selectedTab
                                 ? Get.theme.colorScheme.secondary
-                                : Get.theme.backgroundColor,
+                                : Get.theme.colorScheme.background,
                           ),
                         ),
                       ],

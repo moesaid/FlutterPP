@@ -24,7 +24,7 @@ class BuildLoadingPage extends StatelessWidget {
             Text(
               'Loading...',
               style: TextStyle(
-                color: Get.theme.backgroundColor,
+                color: Get.theme.colorScheme.background,
                 fontSize: 13,
                 letterSpacing: 1.5,
               ),
