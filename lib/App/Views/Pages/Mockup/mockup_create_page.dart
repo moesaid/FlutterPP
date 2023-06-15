@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutterpp/App/Controllers/Mockup/mockup_create_controller.dart';
 import 'package:flutterpp/App/Views/Global/build_close_button.dart';
 import 'package:flutterpp/App/Views/Pages/Mockup/Widgets/Create/build_create_mockup_choose_template.dart';
+import 'package:flutterpp/App/Views/Pages/Mockup/Widgets/Create/build_create_mockup_link_project.dart';
 import 'package:get/get.dart';
 
 class MockupCreatePage extends GetView<MockupCreateController> {
@@ -56,33 +57,6 @@ class MockupCreatePage extends GetView<MockupCreateController> {
           ),
         );
       },
-    );
-  }
-}
-
-class BuildCreateMockupLinkProject extends StatelessWidget {
-  const BuildCreateMockupLinkProject({
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return const Text('link to a project');
-  }
-}
-
-class BuildCreateMockupInfo extends StatelessWidget {
-  const BuildCreateMockupInfo({
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.all(20),
-      width: double.infinity,
-      color: Colors.red,
-      child: const Text('asd'),
     );
   }
 }
