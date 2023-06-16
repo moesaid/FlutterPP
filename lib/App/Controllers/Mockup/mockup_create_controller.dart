@@ -3,6 +3,7 @@ import 'package:flutterpp/App/Models/project_model.dart';
 import 'package:flutterpp/App/Models/team_model.dart';
 import 'package:flutterpp/App/Services/Project/project_services.dart';
 import 'package:flutterpp/App/Services/Team/team_services.dart';
+import 'package:flutterpp/App/Views/Global/build_snackbar.dart';
 import 'package:get/get.dart';
 
 class MockupCreateController extends GetxController {
@@ -31,6 +32,9 @@ class MockupCreateController extends GetxController {
   final _projects = <ProjectModel>[].obs;
   List<ProjectModel> get projects => _projects;
 
+  final _selectedProject = ProjectModel().obs;
+  ProjectModel get selectedProject => _selectedProject.value;
+
   // auth team
   final _team = TeamModel().obs;
   TeamModel get team => _team.value;
@@ -47,8 +51,18 @@ class MockupCreateController extends GetxController {
 
   // next step
   void onStepContinue() {
-    // if last step return
-    if (_currentStep.value >= 2) return;
+    // if going to step 1 make sure title & description & category is not empty
+    if (_currentStep.value == 0) {
+      if (_title.value.isEmpty ||
+          _description.value.isEmpty ||
+          _category.value.isEmpty) {
+        BuildSnackBar(
+          title: 'Error',
+          message: 'Please fill all fields',
+        ).error();
+        return;
+      }
+    }
 
     // if going to step 2 and user has no has no projects
     if (_currentStep.value == 0 && _projects.isEmpty) {
@@ -57,6 +71,19 @@ class MockupCreateController extends GetxController {
       update();
       return;
     }
+
+    // if in step 2 and going to step 3
+    // make sure user has selected a project
+    if (_currentStep.value == 1 && _selectedProject.value.id == null) {
+      BuildSnackBar(
+        title: 'Error',
+        message: 'Please select a project',
+      ).error();
+      return;
+    }
+
+    // if last step return
+    if (_currentStep.value >= 2) return;
 
     _currentStep.value++;
     update();
@@ -68,7 +95,6 @@ class MockupCreateController extends GetxController {
 
     // if going to step 2 and user has no has no projects
     if (_currentStep.value == 2 && _projects.isEmpty) {
-      print('no projects');
       _currentStep.value = 0;
       update();
       return;
@@ -102,12 +128,11 @@ class MockupCreateController extends GetxController {
     } else if (type == 'category') {
       _category.value = value;
     }
+  }
 
-    print({
-      '❌ title': _title.value,
-      'description': _description.value,
-      'category': _category.value,
-    });
+  // set selected project
+  onProjectChange(ProjectModel project) {
+    _selectedProject.value = project;
   }
 
   Future<void> _fetchApi() async {

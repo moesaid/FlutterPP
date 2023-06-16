@@ -7,10 +7,12 @@ import 'package:get/get.dart';
 
 class BuildCreateMockupLinkProject extends StatelessWidget {
   final List<ProjectModel> projects;
+  final void Function(ProjectModel) onProjectChange;
 
   const BuildCreateMockupLinkProject({
     super.key,
     required this.projects,
+    required this.onProjectChange,
   });
 
   @override
@@ -33,10 +35,11 @@ class BuildCreateMockupLinkProject extends StatelessWidget {
               disabledBorder: InputBorder.none,
               focusedErrorBorder: InputBorder.none,
             ),
+            onChanged: (val) => onProjectChange(val!),
             options: projects
                 .map(
                   (e) => FormBuilderChipOption(
-                    value: e.id,
+                    value: e,
                     avatar: BuildProjectAvatar(
                       colors: [
                         ColorHelper.hexToColor(e.color1!),

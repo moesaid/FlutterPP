@@ -86,6 +86,7 @@ class MockupCreatePage extends GetView<MockupCreateController> {
                         ),
                         content: BuildCreateMockupLinkProject(
                           projects: controller.projects,
+                          onProjectChange: controller.onProjectChange,
                         ),
                       ),
                       Step(
