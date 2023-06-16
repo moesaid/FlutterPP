@@ -279,6 +279,72 @@ class AppTheme {
         highlightElevation: 0,
         splashColor: Colors.white10,
       ),
+      dropdownMenuTheme: DropdownMenuThemeData(
+        textStyle: const TextStyle(
+          color: Colors.white,
+          fontSize: 12,
+          fontWeight: FontWeight.w400,
+          letterSpacing: 0.25,
+        ),
+        inputDecorationTheme: const InputDecorationTheme(
+          border: OutlineInputBorder(
+            borderSide: BorderSide(color: Colors.white10),
+            borderRadius: BorderRadius.all(Radius.circular(4)),
+          ),
+          enabledBorder: OutlineInputBorder(
+            borderSide: BorderSide(color: Colors.white10),
+            borderRadius: BorderRadius.all(Radius.circular(4)),
+          ),
+          focusedBorder: OutlineInputBorder(
+            borderSide: BorderSide(color: Colors.white10),
+            borderRadius: BorderRadius.all(Radius.circular(4)),
+          ),
+          disabledBorder: OutlineInputBorder(
+            borderSide: BorderSide(color: Colors.white10),
+            borderRadius: BorderRadius.all(Radius.circular(4)),
+          ),
+          errorBorder: OutlineInputBorder(
+            borderSide: BorderSide(color: Colors.white10),
+            borderRadius: BorderRadius.all(Radius.circular(4)),
+          ),
+          focusedErrorBorder: OutlineInputBorder(
+            borderSide: BorderSide(color: Colors.white10),
+            borderRadius: BorderRadius.all(Radius.circular(4)),
+          ),
+          filled: true,
+          isDense: true,
+          fillColor: Colors.white10,
+          contentPadding: EdgeInsets.all(12),
+          hintStyle: TextStyle(
+            color: Colors.white38,
+            fontSize: 12,
+            fontWeight: FontWeight.w300,
+            letterSpacing: 0.6,
+          ),
+          labelStyle: TextStyle(
+            color: Colors.white38,
+            fontSize: 12,
+            fontWeight: FontWeight.w300,
+            letterSpacing: 0.6,
+          ),
+          errorStyle: TextStyle(
+            color: Colors.red,
+            fontSize: 10,
+            fontWeight: FontWeight.w300,
+          ),
+        ),
+        menuStyle: MenuStyle(
+          padding: MaterialStateProperty.all(
+            const EdgeInsets.symmetric(
+              vertical: 8,
+              horizontal: 16,
+            ),
+          ),
+          backgroundColor: MaterialStateProperty.all(
+            Colors.white10,
+          ),
+        ),
+      ),
     );
   }
 }

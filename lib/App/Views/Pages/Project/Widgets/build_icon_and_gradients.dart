@@ -93,7 +93,7 @@ class _BuildColorsSection extends StatelessWidget {
                 itemCount: colors.length,
                 shrinkWrap: true,
                 itemBuilder: (_, int i) {
-                  return GestureDetector(
+                  return InkWell(
                     onTap: () {
                       onColorChange.call(colors[i]);
                     },
@@ -152,7 +152,7 @@ class _BuildIconSection extends StatelessWidget {
                 itemCount: svgs.length,
                 shrinkWrap: true,
                 itemBuilder: (_, int i) {
-                  return GestureDetector(
+                  return InkWell(
                     onTap: () {
                       onSvgChange.call(svgs[i]);
                     },

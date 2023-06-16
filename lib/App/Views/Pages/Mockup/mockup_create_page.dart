@@ -37,14 +37,50 @@ class MockupCreatePage extends GetView<MockupCreateController> {
                     currentStep: controller.currentStep,
                     onStepContinue: () => controller.onStepContinue(),
                     onStepCancel: () => controller.onStepCancel(),
+                    // controlsBuilder: ,
                     steps: [
                       Step(
                         title: Text('mockup info'.capitalizeFirst!),
-                        content: const BuildCreateMockupInfo(),
+                        content: BuildCreateMockupInfo(
+                          onTitleOrDescriptionOrCategory:
+                              controller.onTitleOrDescriptionOrCategory,
+                          onColorChange: controller.onGradientChange,
+                          onSvgChange: controller.onIconChange,
+                          activeColors: controller.activeGradient,
+                          activeSVG: controller.activeIcon,
+                          title: controller.title,
+                          description: controller.description,
+                          category: controller.category,
+                        ),
                       ),
                       Step(
-                        title: Text('link to a project'.capitalizeFirst!),
-                        content: const BuildCreateMockupLinkProject(),
+                        title: Row(
+                          children: [
+                            Text('link to a project'.capitalizeFirst!),
+                            const SizedBox(width: 10),
+                            if (controller.projects.isEmpty)
+                              const Text(
+                                'no projects found 😢',
+                                style: TextStyle(
+                                  fontStyle: FontStyle.italic,
+                                  color: Colors.grey,
+                                  fontSize: 12,
+                                ),
+                              ),
+                            if (controller.projects.isNotEmpty)
+                              Text(
+                                'found ${controller.projects.length} projects',
+                                style: const TextStyle(
+                                  fontStyle: FontStyle.italic,
+                                  color: Colors.grey,
+                                  fontSize: 12,
+                                ),
+                              ),
+                          ],
+                        ),
+                        content: BuildCreateMockupLinkProject(
+                          projects: controller.projects,
+                        ),
                       ),
                       Step(
                         title: Text('choose a template'.capitalizeFirst!),

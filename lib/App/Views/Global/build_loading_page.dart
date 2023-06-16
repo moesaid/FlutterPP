@@ -21,10 +21,9 @@ class BuildLoadingPage extends StatelessWidget {
               size: 40,
             ),
             const SizedBox(height: 10),
-            Text(
+            const Text(
               'Loading...',
               style: TextStyle(
-                color: Get.theme.colorScheme.background,
                 fontSize: 13,
                 letterSpacing: 1.5,
               ),
