@@ -88,9 +88,11 @@ class AppTheme {
           shadowColor: Colors.transparent,
           minimumSize: Size.zero,
           elevation: 0,
-          padding: const EdgeInsets.symmetric(
-            horizontal: 20,
-            vertical: 16,
+          padding: const EdgeInsets.only(
+            left: 22,
+            right: 22,
+            top: 16,
+            bottom: 11 + 8,
           ),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(5),

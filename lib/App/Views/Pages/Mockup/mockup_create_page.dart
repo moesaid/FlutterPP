@@ -37,7 +37,34 @@ class MockupCreatePage extends GetView<MockupCreateController> {
                     currentStep: controller.currentStep,
                     onStepContinue: () => controller.onStepContinue(),
                     onStepCancel: () => controller.onStepCancel(),
-                    // controlsBuilder: ,
+                    controlsBuilder: (context, details) {
+                      return Padding(
+                        padding: const EdgeInsets.only(left: 10),
+                        child: Row(
+                          children: [
+                            if (controller.currentStep != 0)
+                              ElevatedButton(
+                                onPressed: () => controller.onStepCancel(),
+                                style: ElevatedButton.styleFrom(
+                                  backgroundColor: Colors.grey.withOpacity(0.1),
+                                ),
+                                child: const Text('back'),
+                              ),
+                            const SizedBox(width: 10),
+                            if (controller.currentStep != 2)
+                              ElevatedButton(
+                                onPressed: () => controller.onStepContinue(),
+                                child: const Text('next'),
+                              ),
+                            if (controller.currentStep == 2)
+                              ElevatedButton(
+                                onPressed: () => controller.onStepContinue(),
+                                child: const Text('finish'),
+                              ),
+                          ],
+                        ),
+                      );
+                    },
                     steps: [
                       Step(
                         title: Text('mockup info'.capitalizeFirst!),
@@ -54,29 +81,8 @@ class MockupCreatePage extends GetView<MockupCreateController> {
                         ),
                       ),
                       Step(
-                        title: Row(
-                          children: [
-                            Text('link to a project'.capitalizeFirst!),
-                            const SizedBox(width: 10),
-                            if (controller.projects.isEmpty)
-                              const Text(
-                                'no projects found 😢',
-                                style: TextStyle(
-                                  fontStyle: FontStyle.italic,
-                                  color: Colors.grey,
-                                  fontSize: 12,
-                                ),
-                              ),
-                            if (controller.projects.isNotEmpty)
-                              Text(
-                                'found ${controller.projects.length} projects',
-                                style: const TextStyle(
-                                  fontStyle: FontStyle.italic,
-                                  color: Colors.grey,
-                                  fontSize: 12,
-                                ),
-                              ),
-                          ],
+                        title: BuildCreateMockupLinkProjectTitle(
+                          controller: controller,
                         ),
                         content: BuildCreateMockupLinkProject(
                           projects: controller.projects,
@@ -94,6 +100,43 @@ class MockupCreatePage extends GetView<MockupCreateController> {
           ),
         );
       },
+    );
+  }
+}
+
+class BuildCreateMockupLinkProjectTitle extends StatelessWidget {
+  const BuildCreateMockupLinkProjectTitle({
+    super.key,
+    required this.controller,
+  });
+
+  final MockupCreateController controller;
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        Text('link to a project'.capitalizeFirst!),
+        const SizedBox(width: 10),
+        if (controller.projects.isEmpty)
+          const Text(
+            'no projects found 😢',
+            style: TextStyle(
+              fontStyle: FontStyle.italic,
+              color: Colors.grey,
+              fontSize: 12,
+            ),
+          ),
+        if (controller.projects.isNotEmpty)
+          Text(
+            'found ${controller.projects.length} projects',
+            style: const TextStyle(
+              fontStyle: FontStyle.italic,
+              color: Colors.grey,
+              fontSize: 12,
+            ),
+          ),
+      ],
     );
   }
 }
