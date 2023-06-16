@@ -42,8 +42,8 @@ class ProjectCreatePage extends StatelessWidget {
                     BuildIconAndGradients(
                       onColorChange: (val) => onColorChange.call(val),
                       onSvgChange: (val) => onSvgChange.call(val),
-                      colors: colors,
-                      svgs: svgs,
+                      // colors: colors,
+                      // svgs: svgs,
                     ),
                   );
                 },

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
+import 'package:flutterpp/App/Views/Pages/Project/Widgets/build_icon_and_gradients.dart';
+import 'package:get/get.dart';
 
 class BuildCreateMockupInfo extends StatelessWidget {
   const BuildCreateMockupInfo({
@@ -17,14 +19,22 @@ class BuildCreateMockupInfo extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // BuildIconAndGradients(
-            //   colors: const [
-            //     [Colors.red, Colors.blue]
-            //   ],
-            //   svgs: const ['fi-br-a.svg'],
-            //   onColorChange: (val) {},
-            //   onSvgChange: (val) {},
-            // ),
+            IconButton(
+              onPressed: () {
+                Get.bottomSheet(
+                  BuildIconAndGradients(
+                    onColorChange: (val) {
+                      print('❌ val: $val');
+                    },
+                    onSvgChange: (val) {
+                      print('❌ val: $val');
+                    },
+                  ),
+                  // isScrollControlled: true,
+                );
+              },
+              icon: const Icon(Icons.cloud_download_outlined),
+            ),
             Row(
               children: [
                 Expanded(

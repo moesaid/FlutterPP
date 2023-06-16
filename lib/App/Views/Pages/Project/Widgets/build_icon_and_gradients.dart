@@ -1,45 +1,64 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:flutterpp/App/Controllers/Global/build_icon_and_gradients_controllers.dart';
+import 'package:flutterpp/App/Views/Pages/Mockup/mockup_index_page.dart';
 import 'package:flutterpp/Config/app_gradients.dart';
 import 'package:get/get.dart';
 
 class BuildIconAndGradients extends StatelessWidget {
-  final List<String> svgs;
-  final List<List<Color>> colors;
+  // final List<String> svgs;
+  // final List<List<Color>> colors;
   final Function(List<Color>) onColorChange;
   final Function(String) onSvgChange;
   const BuildIconAndGradients({
     Key? key,
     required this.onColorChange,
-    required this.colors,
-    required this.svgs,
+    // required this.colors,
+    // required this.svgs,
     required this.onSvgChange,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 400,
-      decoration: BoxDecoration(
-        color: Get.theme.bottomSheetTheme.backgroundColor,
-        border: Border(
-          top: BorderSide(
-            color: Get.theme.scaffoldBackgroundColor,
-            width: 1,
+    return GetBuilder<BuildIconAndGradientsController>(
+      init: BuildIconAndGradientsController(),
+      initState: (_) {},
+      builder: (_) {
+        return Container(
+          height: 400,
+          decoration: BoxDecoration(
+            color: Get.theme.bottomSheetTheme.backgroundColor,
+            border: Border(
+              top: BorderSide(
+                color: Get.theme.scaffoldBackgroundColor,
+                width: 1,
+              ),
+            ),
           ),
-        ),
-      ),
-      child: Row(
-        children: [
-          _BuildIconSection(
-            svgs: svgs,
-            onSvgChange: onSvgChange,
-            colors: colors,
-          ),
-          const VerticalDivider(width: 0),
-          _BuildColorsSection(colors: colors, onColorChange: onColorChange),
-        ],
-      ),
+          child: (_.colors.isEmpty || _.svgs.isEmpty)
+              ? const BuildEmptyPage()
+              : Row(
+                  children: [
+                    _BuildIconSection(
+                      svgs: _.svgs,
+                      onSvgChange: (val) {
+                        _.onSVGChange(val);
+                        onSvgChange.call(val);
+                      },
+                      colors: _.colors,
+                    ),
+                    const VerticalDivider(width: 0),
+                    _BuildColorsSection(
+                      colors: _.colors,
+                      onColorChange: (val) {
+                        _.onColorChange(val);
+                        onColorChange.call(val);
+                      },
+                    ),
+                  ],
+                ),
+        );
+      },
     );
   }
 }
@@ -152,6 +171,10 @@ class _BuildIconSection extends StatelessWidget {
                         SvgPicture.asset(
                           'assets/svg/${svgs[i]}',
                           // color: Colors.grey.withOpacity(0.5),
+                          colorFilter: ColorFilter.mode(
+                            Colors.white.withOpacity(0.7),
+                            BlendMode.srcATop,
+                          ),
                           height: 22,
                           width: 22,
                         ),
