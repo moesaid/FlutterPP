@@ -5,6 +5,7 @@ import 'package:flutterpp/App/Controllers/Auth/verify_otp_controller.dart';
 import 'package:flutterpp/App/Controllers/Home/home_controller.dart';
 import 'package:flutterpp/App/Controllers/Mockup/mockup_create_controller.dart';
 import 'package:flutterpp/App/Controllers/Mockup/mockup_index_controller.dart';
+import 'package:flutterpp/App/Controllers/Mockup/mockup_single_controller.dart';
 import 'package:flutterpp/App/Controllers/Project/project_index_controller.dart';
 import 'package:flutterpp/App/Controllers/Project/project_single_controller.dart';
 import 'package:flutterpp/App/Controllers/Team/no_team_controller.dart';
@@ -39,5 +40,6 @@ class AppBinding implements Bindings {
     // mockup
     Get.lazyPut<MockupIndexController>(() => MockupIndexController());
     Get.lazyPut<MockupCreateController>(() => MockupCreateController());
+    Get.lazyPut<MockupSingleController>(() => MockupSingleController());
   }
 }

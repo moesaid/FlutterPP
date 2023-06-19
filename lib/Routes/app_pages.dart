@@ -5,6 +5,7 @@ import 'package:flutterpp/App/Views/Pages/Auth/verify_otp_page.dart';
 import 'package:flutterpp/App/Views/Pages/Home/home_page.dart';
 import 'package:flutterpp/App/Views/Pages/Mockup/mockup_create_page.dart';
 import 'package:flutterpp/App/Views/Pages/Mockup/mockup_index_page.dart';
+import 'package:flutterpp/App/Views/Pages/Mockup/mockup_single_page.dart';
 import 'package:get/get.dart';
 
 part 'app_routes.dart';
@@ -20,6 +21,10 @@ class AppPages {
     GetPage(
       name: AppRoutes.MOCKUP_CREATE,
       page: () => const MockupCreatePage(),
+    ),
+    GetPage(
+      name: AppRoutes.MOCKUP_SINGLE,
+      page: () => const MockupSinglePage(),
     ),
   ];
 }

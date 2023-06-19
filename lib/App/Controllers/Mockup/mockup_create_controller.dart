@@ -4,6 +4,7 @@ import 'package:flutterpp/App/Models/team_model.dart';
 import 'package:flutterpp/App/Services/Project/project_services.dart';
 import 'package:flutterpp/App/Services/Team/team_services.dart';
 import 'package:flutterpp/App/Views/Global/build_snackbar.dart';
+import 'package:flutterpp/Routes/app_pages.dart';
 import 'package:get/get.dart';
 
 class MockupCreateController extends GetxController {
@@ -83,7 +84,15 @@ class MockupCreateController extends GetxController {
     }
 
     // if last step return
-    if (_currentStep.value >= 2) return;
+    if (_currentStep.value >= 2) {
+      // Todo: create mockup
+
+      // got to single mockup page
+      Get.offAndToNamed(AppRoutes.MOCKUP_SINGLE, arguments: {
+        'mockupId': 'mockupId',
+      });
+      return;
+    }
 
     _currentStep.value++;
     update();

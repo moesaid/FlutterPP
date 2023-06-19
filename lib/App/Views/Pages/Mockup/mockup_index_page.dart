@@ -93,6 +93,8 @@ class BuildEmptyPage extends StatelessWidget {
               Get.bottomSheet(
                 const MockupCreatePage(),
                 isScrollControlled: true,
+                isDismissible: false,
+                enableDrag: false,
               );
             },
             child: const Text('Create a new mockup'),
