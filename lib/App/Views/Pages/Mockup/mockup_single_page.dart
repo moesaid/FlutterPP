@@ -15,12 +15,13 @@ class MockupSinglePage extends GetView<MockupSingleController> {
         return Scaffold(
           appBar: BuildAppBar(
             title: 'Mockup',
-            onBack: () => {
-              print('onBack'),
-            },
+            onBack: () => {print('onBack')},
           ),
           body: const SafeArea(
-            child: Text('MockupSingleController'),
+            child: Padding(
+              padding: EdgeInsets.all(18.0),
+              child: Text('MockupSingleController'),
+            ),
           ),
         );
       },
