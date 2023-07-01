@@ -91,7 +91,10 @@ class MockupCreatePage extends GetView<MockupCreateController> {
                       ),
                       Step(
                         title: Text('choose a template'.capitalizeFirst!),
-                        content: const BuildCreateMockupChooseTemplate(),
+                        content: BuildCreateMockupChooseTemplate(
+                          onTemplateChange: controller.onTemplateChange,
+                          templateId: controller.templateId,
+                        ),
                       ),
                     ],
                   ),

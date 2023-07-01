@@ -2,8 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class BuildCreateMockupChooseTemplate extends StatelessWidget {
+  final Function(String templateId) onTemplateChange;
+  final String templateId;
   const BuildCreateMockupChooseTemplate({
     super.key,
+    required this.onTemplateChange,
+    required this.templateId,
   });
 
   @override
@@ -21,16 +25,24 @@ class BuildCreateMockupChooseTemplate extends StatelessWidget {
           },
           itemBuilder: (ctx, int index) {
             return InkWell(
-              onTap: () => print('object'),
+              onTap: () => onTemplateChange(array[index]),
               child: Container(
                 width: 500,
                 height: 300,
                 decoration: BoxDecoration(
-                  color: Get.theme.colorScheme.primaryContainer,
+                  color: templateId == array[index]
+                      ? Get.theme.colorScheme.secondary.withOpacity(
+                          0.4,
+                        )
+                      : Get.theme.colorScheme.primaryContainer,
                   border: Border.all(
-                    color: Get.theme.colorScheme.onPrimaryContainer.withOpacity(
-                      0.1,
-                    ),
+                    color: templateId == array[index]
+                        ? Get.theme.colorScheme.onPrimaryContainer.withOpacity(
+                            0.2,
+                          )
+                        : Get.theme.colorScheme.onPrimaryContainer.withOpacity(
+                            0.1,
+                          ),
                   ),
                   borderRadius: const BorderRadius.all(Radius.circular(5)),
                 ),

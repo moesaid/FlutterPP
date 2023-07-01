@@ -44,6 +44,10 @@ class MockupCreateController extends GetxController {
   final _currentStep = 0.obs;
   int get currentStep => _currentStep.value;
 
+  // template id
+  final _templateId = 'spotify'.obs;
+  String get templateId => _templateId.value;
+
   @override
   void onReady() {
     _fetchApi();
@@ -162,5 +166,13 @@ class MockupCreateController extends GetxController {
       '❌ team': _team.value,
       'projects': _projects,
     });
+  }
+
+  // update template id
+  void onTemplateChange(String templateId) {
+    _templateId.value = templateId;
+    update();
+
+    print('templateId: $templateId');
   }
 }
