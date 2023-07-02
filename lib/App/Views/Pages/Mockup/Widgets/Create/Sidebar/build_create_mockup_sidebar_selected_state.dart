@@ -1,6 +1,7 @@
 import 'package:expansion_tile_group/expansion_tile_group.dart';
 import 'package:flutter/material.dart';
 import 'package:flutterpp/App/Controllers/Mockup/build_create_mockup_sidebar_selected_state_controller.dart';
+import 'package:flutterpp/App/Models/background_type_model.dart';
 import 'package:flutterpp/App/Views/Pages/Mockup/Widgets/build_sidebar_option.dart';
 import 'package:get/get.dart';
 
@@ -67,9 +68,9 @@ class BuildCreateMockupSidebarSelectedState
                 ),
                 const Divider(height: 20),
                 if (controller.activeBackgroundType.id == 'solid')
-                  const _BuildColorOption(),
+                  const _BuildSolidColorOption(),
                 if (controller.activeBackgroundType.id == 'gradient')
-                  const Text('Gradient'),
+                  const _BuildColorPresetGradient(),
                 if (controller.activeBackgroundType.id == 'image')
                   const Text('Image'),
               ],
@@ -190,8 +191,27 @@ class BuildCreateMockupSidebarSelectedState
   }
 }
 
-class _BuildColorOption extends StatelessWidget {
-  const _BuildColorOption();
+class _BuildColorPresetGradient extends StatelessWidget {
+  const _BuildColorPresetGradient();
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        BuildSidebarOption(
+          title: 'preset',
+          rightWidget: InkWell(
+            onTap: () => print('open gradient dialog'),
+            child: const Text('data'),
+          ),
+        )
+      ],
+    );
+  }
+}
+
+class _BuildSolidColorOption extends StatelessWidget {
+  const _BuildSolidColorOption();
 
   @override
   Widget build(BuildContext context) {
