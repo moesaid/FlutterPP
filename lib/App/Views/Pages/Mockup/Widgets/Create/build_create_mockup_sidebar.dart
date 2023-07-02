@@ -18,7 +18,7 @@ class BuildCreateMockupSidebar extends StatelessWidget {
       right: 0,
       bottom: 0,
       child: Container(
-        padding: const EdgeInsets.only(top: 15),
+        padding: const EdgeInsets.all(15),
         decoration: BoxDecoration(
           color: Colors.grey.withOpacity(0.1),
           border: Border(
