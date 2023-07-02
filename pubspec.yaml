@@ -23,6 +23,7 @@ dependencies:
   # appflowy_editor: ^0.1.12
   # appflowy_board: ^0.1.0
   zoom_widget: ^2.0.1
+  expansion_tile_group: ^1.2.1
 
 # dev_dependencies
 dev_dependencies:

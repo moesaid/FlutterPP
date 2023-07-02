@@ -53,10 +53,10 @@ packages:
     dependency: transitive
     description:
       name: collection
-      sha256: "4a07be6cb69c84d677a6c3096fcf960cc3285a8330b4603e0d463d15d9bd934c"
+      sha256: f092b211a4319e98e5ff58223576de6c2803db36221657b46c82574721240687
       url: "https://pub.dev"
     source: hosted
-    version: "1.17.1"
+    version: "1.17.2"
   crypto:
     dependency: transitive
     description:
@@ -73,6 +73,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.0.5"
+  expansion_tile_group:
+    dependency: "direct main"
+    description:
+      name: expansion_tile_group
+      sha256: c829743aaf97a4c2cfbf74a40cb1c3e603e709fb879b4bdef842d2ab3b88d39f
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.2.1"
   fake_async:
     dependency: transitive
     description:
@@ -225,10 +233,10 @@ packages:
     dependency: transitive
     description:
       name: intl
-      sha256: a3715e3bc90294e971cb7dc063fbf3cd9ee0ebf8604ffeafabd9e6f16abbdbe6
+      sha256: "3bc132a9dbce73a7e4a21a17d06e1878839ffbf975568bc875c60537824b0c4d"
       url: "https://pub.dev"
     source: hosted
-    version: "0.18.0"
+    version: "0.18.1"
   js:
     dependency: transitive
     description:
@@ -261,14 +269,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.2.0+4"
-  matcher:
-    dependency: transitive
-    description:
-      name: matcher
-      sha256: "6501fbd55da300384b768785b83e5ce66991266cec21af89ab9ae7f5ce1c4cbb"
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.12.15"
   material_color_utilities:
     dependency: transitive
     description:
@@ -518,10 +518,10 @@ packages:
     dependency: transitive
     description:
       name: source_span
-      sha256: dd904f795d4b4f3b870833847c461801f6750a9fa8e61ea5ac53f9422b31f250
+      sha256: "53e943d4206a5e30df338fd4c6e7a077e02254531b138a15aec3bd143c1a8b3c"
       url: "https://pub.dev"
     source: hosted
-    version: "1.9.1"
+    version: "1.10.0"
   stack_trace:
     dependency: transitive
     description:
@@ -582,10 +582,10 @@ packages:
     dependency: transitive
     description:
       name: test_api
-      sha256: eb6ac1540b26de412b3403a163d919ba86f6a973fe6cc50ae3541b80092fdcfb
+      sha256: "75760ffd7786fffdfb9597c35c5b27eaeec82be8edfb6d71d32651128ed7aab8"
       url: "https://pub.dev"
     source: hosted
-    version: "0.5.1"
+    version: "0.6.0"
   typed_data:
     dependency: transitive
     description:
