@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutterpp/App/Controllers/Mockup/mockup_single_controller.dart';
 import 'package:flutterpp/App/Views/Global/build_appbar.dart';
+import 'package:flutterpp/App/Views/Pages/Mockup/Widgets/Create/build_create_mockup_sidebar.dart';
 import 'package:get/get.dart';
 
 class MockupSinglePage extends GetView<MockupSingleController> {
@@ -15,12 +16,18 @@ class MockupSinglePage extends GetView<MockupSingleController> {
         return Scaffold(
           appBar: BuildAppBar(
             title: 'Mockup',
-            onBack: () => {print('onBack')},
+            onBack: () => print('onBack'),
           ),
-          body: const SafeArea(
-            child: Padding(
-              padding: EdgeInsets.all(18.0),
-              child: Text('MockupSingleController'),
+          body: SafeArea(
+            child: Stack(
+              children: [
+                Container(
+                  color: Colors.black87,
+                ),
+                const BuildCreateMockupSidebar(
+                  isScreenshotSelected: true,
+                )
+              ],
             ),
           ),
         );
