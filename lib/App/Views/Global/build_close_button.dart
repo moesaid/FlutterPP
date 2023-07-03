@@ -2,8 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class BuildCloseButton extends StatelessWidget {
+  final double? iconSize, size;
+  final Color? bgColor;
+
   const BuildCloseButton({
     super.key,
+    this.iconSize,
+    this.size,
+    this.bgColor,
   });
 
   @override
@@ -11,16 +17,17 @@ class BuildCloseButton extends StatelessWidget {
     return InkWell(
       onTap: () => Get.back(),
       child: Container(
-        width: 35,
+        width: size ?? 35,
+        height: size ?? 35,
         decoration: BoxDecoration(
-          color: Get.theme.colorScheme.primaryContainer,
-          shape: BoxShape.circle,
+          color: bgColor ?? Get.theme.colorScheme.primaryContainer,
+          borderRadius: const BorderRadius.all(Radius.circular(100)),
         ),
-        child: const Center(
+        child: Center(
           child: Icon(
             Icons.close_rounded,
             color: Colors.white,
-            size: 20,
+            size: iconSize ?? 20,
           ),
         ),
       ),

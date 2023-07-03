@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class BuildAppBar extends StatelessWidget implements PreferredSizeWidget {
+  final bool? hasBackButton;
   final String? title;
   final VoidCallback? onBack;
 
@@ -9,6 +10,7 @@ class BuildAppBar extends StatelessWidget implements PreferredSizeWidget {
     super.key,
     this.title,
     this.onBack,
+    this.hasBackButton,
   });
 
   @override
@@ -20,30 +22,31 @@ class BuildAppBar extends StatelessWidget implements PreferredSizeWidget {
       toolbarHeight: preferredSize.height,
       title: SizedBox(
         width: double.infinity,
-        // color: Colors.red,
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            SizedBox(
-              height: preferredSize.height,
-              width: 0,
-              child: VerticalDivider(color: Colors.grey.withOpacity(0.35)),
-            ),
-            InkWell(
-              onTap: onBack ?? () => Get.back(),
-              child: Container(
+            if (hasBackButton != null && hasBackButton!)
+              SizedBox(
                 height: preferredSize.height,
-                width: preferredSize.height,
-                decoration: BoxDecoration(
-                  color: Colors.grey.withOpacity(0.1),
-                ),
-                child: Icon(
-                  Icons.arrow_back,
-                  color: Get.theme.colorScheme.secondary,
-                  size: 15,
+                width: 0,
+                child: VerticalDivider(color: Colors.grey.withOpacity(0.35)),
+              ),
+            if (hasBackButton != null && hasBackButton!)
+              InkWell(
+                onTap: onBack ?? () => Get.back(),
+                child: Container(
+                  height: preferredSize.height,
+                  width: preferredSize.height,
+                  decoration: BoxDecoration(
+                    color: Colors.grey.withOpacity(0.1),
+                  ),
+                  child: Icon(
+                    Icons.arrow_back,
+                    color: Get.theme.colorScheme.secondary,
+                    size: 15,
+                  ),
                 ),
               ),
-            ),
             SizedBox(
               height: preferredSize.height,
               width: 0,

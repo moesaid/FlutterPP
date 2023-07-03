@@ -2,6 +2,7 @@ import 'package:expansion_tile_group/expansion_tile_group.dart';
 import 'package:flutter/material.dart';
 import 'package:flutterpp/App/Controllers/Mockup/build_create_mockup_sidebar_selected_state_controller.dart';
 import 'package:flutterpp/App/Models/background_type_model.dart';
+import 'package:flutterpp/App/Views/Global/build_preeset_gradient_list.dart';
 import 'package:flutterpp/App/Views/Pages/Mockup/Widgets/build_sidebar_option.dart';
 import 'package:get/get.dart';
 
@@ -201,8 +202,32 @@ class _BuildColorPresetGradient extends StatelessWidget {
         BuildSidebarOption(
           title: 'preset',
           rightWidget: InkWell(
-            onTap: () => print('open gradient dialog'),
-            child: const Text('data'),
+            onTap: () => Get.bottomSheet(
+              const BuildPresetGradientList(),
+              isDismissible: false,
+              enableDrag: false,
+              isScrollControlled: true,
+            ),
+            child: Container(
+              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+              decoration: BoxDecoration(
+                color: Get.theme.primaryColor.withOpacity(0.5),
+                borderRadius: BorderRadius.circular(5),
+                border: Border.all(
+                  color: Colors.white.withOpacity(0.1),
+                  width: 0.5,
+                ),
+              ),
+              child: const Row(
+                children: [
+                  Expanded(child: Text('Gradient name')),
+                  Icon(
+                    Icons.arrow_drop_down_circle_outlined,
+                    color: Colors.white,
+                  ),
+                ],
+              ),
+            ),
           ),
         )
       ],
