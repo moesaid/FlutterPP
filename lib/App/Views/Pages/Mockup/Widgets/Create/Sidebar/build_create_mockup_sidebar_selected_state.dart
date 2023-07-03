@@ -2,6 +2,7 @@ import 'package:expansion_tile_group/expansion_tile_group.dart';
 import 'package:flutter/material.dart';
 import 'package:flutterpp/App/Controllers/Mockup/build_create_mockup_sidebar_selected_state_controller.dart';
 import 'package:flutterpp/App/Models/background_type_model.dart';
+import 'package:flutterpp/App/Models/gradient_model.dart';
 import 'package:flutterpp/App/Views/Global/build_preeset_gradient_list.dart';
 import 'package:flutterpp/App/Views/Pages/Mockup/Widgets/build_sidebar_option.dart';
 import 'package:get/get.dart';
@@ -203,7 +204,9 @@ class _BuildColorPresetGradient extends StatelessWidget {
           title: 'preset',
           rightWidget: InkWell(
             onTap: () => Get.bottomSheet(
-              const BuildPresetGradientList(),
+              BuildPresetGradientList(
+                onGradientSelected: (GradientModel gradient) => print(gradient),
+              ),
               isDismissible: false,
               enableDrag: false,
               isScrollControlled: true,
