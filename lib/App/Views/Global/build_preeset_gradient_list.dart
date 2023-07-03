@@ -11,8 +11,14 @@ class BuildPresetGradientList
     extends GetView<BuildPresetGradientListController> {
   final Function(GradientModel) onGradientSelected;
 
+  final int? crossAxisCount;
+  final double? crossAxisSpacing, mainAxisSpacing;
+
   const BuildPresetGradientList({
     required this.onGradientSelected,
+    this.crossAxisCount,
+    this.crossAxisSpacing,
+    this.mainAxisSpacing,
     super.key,
   });
 
@@ -40,11 +46,10 @@ class BuildPresetGradientList
                     child: GridView.builder(
                       itemCount: list.length,
                       shrinkWrap: true,
-                      gridDelegate:
-                          const SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 8,
-                        crossAxisSpacing: 10,
-                        mainAxisSpacing: 10,
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: crossAxisCount ?? 8,
+                        crossAxisSpacing: crossAxisSpacing ?? 10,
+                        mainAxisSpacing: mainAxisSpacing ?? 10,
                       ),
                       itemBuilder: (context, index) {
                         GradientModel item = list[index];
