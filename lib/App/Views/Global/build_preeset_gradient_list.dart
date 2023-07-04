@@ -72,6 +72,9 @@ class BuildPresetGradientList
                                   child: Container(
                                     decoration: BoxDecoration(
                                       gradient: LinearGradient(
+                                        begin: const Alignment(-1.0, 0.0),
+                                        end: const Alignment(1.0, 0.0),
+                                        transform: const GradientRotation(0),
                                         colors: item.colors != null &&
                                                 item.colors!.isNotEmpty
                                             ? item.colors!
@@ -79,8 +82,6 @@ class BuildPresetGradientList
                                                     ColorHelper.hexToColor(e))
                                                 .toList()
                                             : [Colors.red, Colors.blue],
-                                        begin: Alignment.topLeft,
-                                        end: Alignment.bottomRight,
                                       ),
                                       borderRadius: BorderRadius.circular(5),
                                     ),
@@ -107,7 +108,7 @@ class BuildPresetGradientList
                 top: 20,
                 right: 20,
                 child: BuildCloseButton(
-                  bgColor: Get.theme.colorScheme.secondary.withOpacity(0.4),
+                  bgColor: Get.theme.colorScheme.secondary,
                 ),
               ),
             ],
