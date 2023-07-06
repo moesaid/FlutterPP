@@ -5,6 +5,10 @@ import 'package:flutterpp/App/Controllers/Mockup/build_create_mockup_sidebar_sel
 import 'package:flutterpp/App/Models/background_type_model.dart';
 import 'package:flutterpp/App/Models/gradient_model.dart';
 import 'package:flutterpp/App/Views/Global/build_preeset_gradient_list.dart';
+import 'package:flutterpp/App/Views/Pages/Mockup/Widgets/Create/Sidebar/build_alignment_option.dart';
+import 'package:flutterpp/App/Views/Pages/Mockup/Widgets/Create/Sidebar/build_pick_color.dart';
+import 'package:flutterpp/App/Views/Pages/Mockup/Widgets/Create/Sidebar/build_slider_enable_option.dart';
+import 'package:flutterpp/App/Views/Pages/Mockup/Widgets/Create/Sidebar/build_slider_with_value_box.dart';
 import 'package:flutterpp/App/Views/Pages/Mockup/Widgets/build_sidebar_option.dart';
 import 'package:get/get.dart';
 
@@ -385,70 +389,6 @@ class BuildCreateMockupSidebarSelectedState
                 ),
               ],
             ),
-          ),
-        ),
-      ],
-    );
-  }
-}
-
-class BuildSliderEnableOption extends StatelessWidget {
-  const BuildSliderEnableOption({
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return BuildSidebarOption(
-      title: 'Enable',
-      rightWidget: Switch(
-        value: true,
-        onChanged: (bool value) {
-          print(value);
-        },
-      ),
-    );
-  }
-}
-
-class BuildSliderWithValueBox extends StatelessWidget {
-  const BuildSliderWithValueBox({
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      children: [
-        Expanded(
-          flex: 2,
-          child: Container(
-            decoration: BoxDecoration(
-              color: Colors.white.withOpacity(0.1),
-              borderRadius: BorderRadius.circular(5),
-            ),
-            padding: const EdgeInsets.symmetric(
-              horizontal: 10,
-              vertical: 10,
-            ),
-            child: const Center(
-              child: Text(
-                '12 px',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 13,
-                ),
-              ),
-            ),
-          ),
-        ),
-        Expanded(
-          flex: 4,
-          child: Slider(
-            max: 50,
-            min: 10,
-            value: 30,
-            onChanged: (val) => print('object'),
           ),
         ),
       ],
