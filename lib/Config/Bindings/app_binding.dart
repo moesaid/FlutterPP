@@ -4,6 +4,7 @@ import 'package:flutterpp/App/Controllers/Auth/splash_controller.dart';
 import 'package:flutterpp/App/Controllers/Auth/verify_otp_controller.dart';
 import 'package:flutterpp/App/Controllers/Home/home_controller.dart';
 import 'package:flutterpp/App/Controllers/Mockup/build_create_mockup_sidebar_selected_state_controller.dart';
+import 'package:flutterpp/App/Controllers/Mockup/change_fontfamily_controller.dart';
 import 'package:flutterpp/App/Controllers/Mockup/mockup_create_controller.dart';
 import 'package:flutterpp/App/Controllers/Mockup/mockup_index_controller.dart';
 import 'package:flutterpp/App/Controllers/Mockup/mockup_single_controller.dart';
@@ -45,5 +46,6 @@ class AppBinding implements Bindings {
     Get.lazyPut<BuildCreateMockupSidebarSelectedStateController>(
       () => BuildCreateMockupSidebarSelectedStateController(),
     );
+    Get.lazyPut<ChangeFontfamilyController>(() => ChangeFontfamilyController());
   }
 }

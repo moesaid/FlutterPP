@@ -6,6 +6,7 @@ import 'package:flutterpp/App/Models/background_type_model.dart';
 import 'package:flutterpp/App/Models/gradient_model.dart';
 import 'package:flutterpp/App/Views/Global/build_preeset_gradient_list.dart';
 import 'package:flutterpp/App/Views/Pages/Mockup/Widgets/Create/Sidebar/build_alignment_option.dart';
+import 'package:flutterpp/App/Views/Pages/Mockup/Widgets/Create/Sidebar/build_change_fontfamily.dart';
 import 'package:flutterpp/App/Views/Pages/Mockup/Widgets/Create/Sidebar/build_pick_color.dart';
 import 'package:flutterpp/App/Views/Pages/Mockup/Widgets/Create/Sidebar/build_slider_enable_option.dart';
 import 'package:flutterpp/App/Views/Pages/Mockup/Widgets/Create/Sidebar/build_slider_with_value_box.dart';
@@ -195,31 +196,9 @@ class BuildCreateMockupSidebarSelectedState
           ),
         ),
         const SizedBox(height: 20),
-        BuildSidebarOption(
+        const BuildSidebarOption(
           title: 'Font family',
-          rightWidget: InkWell(
-            onTap: () => print('open font dialog'),
-            child: Container(
-              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-              decoration: BoxDecoration(
-                color: Get.theme.primaryColor.withOpacity(0.5),
-                borderRadius: BorderRadius.circular(5),
-                border: Border.all(
-                  color: Colors.white.withOpacity(0.1),
-                  width: 0.5,
-                ),
-              ),
-              child: const Row(
-                children: [
-                  Expanded(child: Text('Font name')),
-                  Icon(
-                    Icons.arrow_drop_down_circle_outlined,
-                    color: Colors.white,
-                  ),
-                ],
-              ),
-            ),
-          ),
+          rightWidget: BuildChangeFontFamily(),
         ),
         const SizedBox(height: 20),
         const BuildAlignmentOption(),

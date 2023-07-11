@@ -43,5 +43,7 @@
         </dict>
     </array>
     <!-- ... other tags -->
+	<key>com.apple.security.network.client</key>
+	<true/>
 </dict>
 </plist>
