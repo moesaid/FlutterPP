@@ -45,11 +45,12 @@ class BuildFullPageBottomSheet extends StatelessWidget {
                 ),
               ),
         ),
-        Positioned(
-          top: 20,
-          right: 20,
-          child: closeWidget ?? const BuildCloseButton(),
-        )
+        closeWidget ??
+            const Positioned(
+              top: 20,
+              right: 20,
+              child: BuildCloseButton(),
+            )
       ],
     );
   }
