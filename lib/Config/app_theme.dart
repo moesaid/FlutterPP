@@ -347,6 +347,26 @@ class AppTheme {
           ),
         ),
       ),
+      dialogTheme: DialogTheme(
+        backgroundColor: darkColors['primaryContainer'],
+        titleTextStyle: const TextStyle(
+          color: Colors.white,
+          fontSize: 16,
+          fontWeight: FontWeight.w500,
+          letterSpacing: 0.15,
+        ),
+        contentTextStyle: const TextStyle(
+          color: Colors.white,
+          fontSize: 14,
+          fontWeight: FontWeight.w400,
+          letterSpacing: 0.25,
+        ),
+        iconColor: Colors.white,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(5),
+        ),
+        surfaceTintColor: Colors.white,
+      ),
     );
   }
 }

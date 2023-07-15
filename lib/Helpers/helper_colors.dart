@@ -20,3 +20,23 @@ class ColorHelper {
     return Color(int.parse(hex.substring(1, 7), radix: 16) + 0xFF000000);
   }
 }
+
+extension ColorExtension on Color {
+  MaterialColor toMaterialColor() {
+    Map<int, Color> swatch = {
+      50: withOpacity(0.1),
+      100: withOpacity(0.2),
+      200: withOpacity(0.3),
+      300: withOpacity(0.4),
+      400: withOpacity(0.5),
+      500: withOpacity(0.6),
+      600: withOpacity(0.7),
+      700: withOpacity(0.8),
+      800: withOpacity(0.9),
+      900: withOpacity(1.0),
+    };
+
+    MaterialColor materialColor = MaterialColor(value, swatch);
+    return materialColor;
+  }
+}
