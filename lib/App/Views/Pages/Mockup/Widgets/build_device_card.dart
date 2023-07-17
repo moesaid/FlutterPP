@@ -336,13 +336,50 @@ class TemplateLayoutConfig {
     );
   }
 
+  // return title up config
+  TemplateLayoutConfig titleDown() {
+    return TemplateLayoutConfig(
+      type: TemplateLayoutType.titleUp,
+      bodyDirection: Axis.horizontal,
+      bodyVerticalDirection: VerticalDirection.up,
+      bodyCrossAxisAlignment: WrapCrossAlignment.center,
+      logoAlignment: MainAxisAlignment.center,
+      titleAlignment: MainAxisAlignment.center,
+      subtitleAlignment: MainAxisAlignment.center,
+      devicePositionTop: null,
+      devicePositionLeft: null,
+      devicePositionRight: null,
+      devicePositionBottom: null,
+      bodyRunSpacing: 20,
+      bodySpacing: 20,
+      rotate: 0,
+      titlePaddingTop: 0,
+      titlePaddingBottom: 0,
+      titlePaddingLeft: 0,
+      titlePaddingRight: 0,
+      subtitlePaddingTop: 0,
+      subtitlePaddingBottom: 30,
+      subtitlePaddingLeft: 0,
+      subtitlePaddingRight: 0,
+      logoPaddingTop: 20,
+      logoPaddingBottom: 20,
+      logoPaddingLeft: 20,
+      logoPaddingRight: 20,
+      showLogo: false,
+      showTitle: true,
+      showSubtitle: true,
+      title: 'Your Title',
+      subtitle: 'your Subtitle',
+    );
+  }
+
   // swich case returns
   TemplateLayoutConfig getLayoutConfig() {
     switch (type) {
       case TemplateLayoutType.titleUp:
         return titleUp();
       case TemplateLayoutType.titleDown:
-        return titleUp();
+        return titleDown();
       case TemplateLayoutType.rightSideTitleUp:
         return titleUp();
       case TemplateLayoutType.leftSideTitleUp:
