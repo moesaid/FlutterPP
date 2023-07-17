@@ -27,7 +27,7 @@ class MockupSinglePage extends GetView<MockupSingleController> {
                     color: Colors.black87,
                     child: const Center(
                       child: BuildDeviceCard(
-                        config: TemplateLayoutType.titleDown,
+                        config: TemplateLayoutType.leftSideTitleDown,
                       ),
                     ),
                   ),
