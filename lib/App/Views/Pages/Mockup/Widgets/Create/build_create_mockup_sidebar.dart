@@ -13,26 +13,21 @@ class BuildCreateMockupSidebar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Positioned(
-      top: 0,
-      right: 0,
-      bottom: 0,
-      child: Container(
-        padding: const EdgeInsets.all(15),
-        decoration: BoxDecoration(
-          color: Colors.grey.withOpacity(0.1),
-          border: Border(
-            left: BorderSide(
-              color: Colors.grey.withOpacity(0.2),
-              width: 0.5,
-            ),
+    return Container(
+      padding: const EdgeInsets.all(15),
+      decoration: BoxDecoration(
+        color: Colors.grey.withOpacity(0.1),
+        border: Border(
+          left: BorderSide(
+            color: Colors.grey.withOpacity(0.2),
+            width: 0.5,
           ),
         ),
-        width: Get.width * 0.25,
-        child: !isScreenshotSelected!
-            ? const BuildCreateMockupSidebarEmpty()
-            : const BuildCreateMockupSidebarSelectedState(),
       ),
+      width: Get.width * 0.25,
+      child: !isScreenshotSelected!
+          ? const BuildCreateMockupSidebarEmpty()
+          : const BuildCreateMockupSidebarSelectedState(),
     );
   }
 }

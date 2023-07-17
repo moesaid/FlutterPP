@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutterpp/App/Controllers/Mockup/mockup_single_controller.dart';
 import 'package:flutterpp/App/Views/Global/build_appbar.dart';
 import 'package:flutterpp/App/Views/Pages/Mockup/Widgets/Create/build_create_mockup_sidebar.dart';
+import 'package:flutterpp/App/Views/Pages/Mockup/Widgets/build_device_card.dart';
 import 'package:get/get.dart';
 
 class MockupSinglePage extends GetView<MockupSingleController> {
@@ -19,10 +20,17 @@ class MockupSinglePage extends GetView<MockupSingleController> {
             onBack: () => print('onBack'),
           ),
           body: SafeArea(
-            child: Stack(
+            child: Row(
               children: [
-                Container(
-                  color: Colors.black87,
+                Expanded(
+                  child: Container(
+                    color: Colors.black87,
+                    child: const Center(
+                      child: BuildDeviceCard(
+                        config: TemplateLayoutType.defaultLayout,
+                      ),
+                    ),
+                  ),
                 ),
                 const BuildCreateMockupSidebar(
                   isScreenshotSelected: true,
