@@ -5,8 +5,13 @@ class AlignmentOptionController extends GetxController {
   final _alignment = AlignmentOptionEnum.left.obs;
   AlignmentOptionEnum get alignment => _alignment.value;
 
-  void setAlignment(AlignmentOptionEnum alignment) {
+  void setAlignment({
+    required AlignmentOptionEnum alignment,
+    Function(AlignmentOptionEnum)? onToggle,
+  }) {
     _alignment.value = alignment;
     update();
+
+    onToggle?.call(alignment);
   }
 }

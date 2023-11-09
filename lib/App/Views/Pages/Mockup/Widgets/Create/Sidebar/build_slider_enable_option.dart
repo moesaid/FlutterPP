@@ -4,7 +4,7 @@ import 'package:flutterpp/App/Views/Pages/Mockup/Widgets/build_sidebar_option.da
 import 'package:get/get.dart';
 
 class BuildSliderEnableOption extends GetView<BoolToggleController> {
-  final Function(bool)? onToggle;
+  final void Function(bool)? onToggle;
   final String? controllerTag;
 
   const BuildSliderEnableOption({

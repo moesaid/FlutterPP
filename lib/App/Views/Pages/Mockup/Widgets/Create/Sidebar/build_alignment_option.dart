@@ -6,7 +6,8 @@ import 'package:get/get.dart';
 
 class BuildAlignmentOption extends GetView<AlignmentOptionController> {
   final IconData? firtIcon, secondIcon, thirdIcon;
-  final String? title;
+  final String? title, controllerTag;
+  final void Function(AlignmentOptionEnum)? onToggle;
 
   const BuildAlignmentOption({
     super.key,
@@ -14,6 +15,8 @@ class BuildAlignmentOption extends GetView<AlignmentOptionController> {
     this.secondIcon,
     this.thirdIcon,
     this.title,
+    this.controllerTag,
+    this.onToggle,
   });
 
   @override
@@ -21,6 +24,7 @@ class BuildAlignmentOption extends GetView<AlignmentOptionController> {
     return GetBuilder<AlignmentOptionController>(
       init: AlignmentOptionController(),
       initState: (_) {},
+      tag: controllerTag,
       builder: (_) {
         return BuildSidebarOption(
           title: title ?? 'Alignment',
@@ -38,8 +42,10 @@ class BuildAlignmentOption extends GetView<AlignmentOptionController> {
               children: [
                 Expanded(
                   child: InkWell(
-                    onTap: () =>
-                        controller.setAlignment(AlignmentOptionEnum.left),
+                    onTap: () => controller.setAlignment(
+                      alignment: AlignmentOptionEnum.left,
+                      onToggle: onToggle,
+                    ),
                     child: Container(
                       padding: const EdgeInsets.all(5),
                       decoration: BoxDecoration(
@@ -59,8 +65,10 @@ class BuildAlignmentOption extends GetView<AlignmentOptionController> {
                 ),
                 Expanded(
                   child: InkWell(
-                    onTap: () =>
-                        controller.setAlignment(AlignmentOptionEnum.center),
+                    onTap: () => controller.setAlignment(
+                      alignment: AlignmentOptionEnum.center,
+                      onToggle: onToggle,
+                    ),
                     child: Container(
                       padding: const EdgeInsets.all(5),
                       decoration: BoxDecoration(
@@ -80,8 +88,10 @@ class BuildAlignmentOption extends GetView<AlignmentOptionController> {
                 ),
                 Expanded(
                   child: InkWell(
-                    onTap: () =>
-                        controller.setAlignment(AlignmentOptionEnum.right),
+                    onTap: () => controller.setAlignment(
+                      alignment: AlignmentOptionEnum.right,
+                      onToggle: onToggle,
+                    ),
                     child: Container(
                       padding: const EdgeInsets.all(5),
                       decoration: BoxDecoration(
