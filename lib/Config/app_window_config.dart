@@ -6,7 +6,7 @@ class AppWindowConfig {
   void config() {
     // config window
     WindowOptions windowOptions = const WindowOptions(
-      size: Size(1600, 1080),
+      size: Size(1280, 800),
       minimumSize: Size(960, 660),
       title: 'Flutter++',
       backgroundColor: Colors.black,

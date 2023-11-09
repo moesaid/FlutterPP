@@ -25,6 +25,7 @@ class BuildCreateMockupSidebar extends StatelessWidget {
         ),
       ),
       width: Get.width * 0.25,
+      height: Get.height,
       child: !isScreenshotSelected!
           ? const BuildCreateMockupSidebarEmpty()
           : const BuildCreateMockupSidebarSelectedState(),

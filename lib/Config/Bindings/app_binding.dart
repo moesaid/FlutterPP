@@ -3,6 +3,8 @@ import 'package:flutterpp/App/Controllers/Auth/signup_controller.dart';
 import 'package:flutterpp/App/Controllers/Auth/splash_controller.dart';
 import 'package:flutterpp/App/Controllers/Auth/verify_otp_controller.dart';
 import 'package:flutterpp/App/Controllers/Home/home_controller.dart';
+import 'package:flutterpp/App/Controllers/Mockup/Micro/alignment_option_controller.dart';
+import 'package:flutterpp/App/Controllers/Mockup/Micro/bool_toggle_controller.dart';
 import 'package:flutterpp/App/Controllers/Mockup/build_create_mockup_sidebar_selected_state_controller.dart';
 import 'package:flutterpp/App/Controllers/Mockup/change_fontfamily_controller.dart';
 import 'package:flutterpp/App/Controllers/Mockup/mockup_create_controller.dart';
@@ -47,5 +49,9 @@ class AppBinding implements Bindings {
       () => BuildCreateMockupSidebarSelectedStateController(),
     );
     Get.lazyPut<ChangeFontfamilyController>(() => ChangeFontfamilyController());
+
+    // mockup mictro
+    Get.lazyPut<BoolToggleController>(() => BoolToggleController());
+    Get.lazyPut<AlignmentOptionController>(() => AlignmentOptionController());
   }
 }

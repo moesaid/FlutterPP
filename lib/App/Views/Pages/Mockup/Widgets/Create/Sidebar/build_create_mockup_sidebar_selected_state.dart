@@ -25,26 +25,28 @@ class BuildCreateMockupSidebarSelectedState
       init: BuildCreateMockupSidebarSelectedStateController(),
       initState: (_) {},
       builder: (_) {
-        return ExpansionTileGroup(
-          toggleType: ToggleType.expandOnlyCurrent,
-          children: [
-            _buildLayoutStep(),
-            _buildBackgroundStep(),
-            _buildingIconStep(),
-            _buildTitleStep(),
-            _buildSubtitleStep(),
-            _buildDeviceStep(),
-            _buildDeviceStep(
-              title: 'Device Two',
-              leading: const Row(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Icon(Icons.devices),
-                  Icon(Icons.looks_two_outlined),
-                ],
+        return SingleChildScrollView(
+          child: ExpansionTileGroup(
+            toggleType: ToggleType.expandOnlyCurrent,
+            children: [
+              _buildLayoutStep(),
+              _buildBackgroundStep(),
+              _buildingIconStep(),
+              _buildTitleStep(),
+              _buildSubtitleStep(),
+              _buildDeviceStep(),
+              _buildDeviceStep(
+                title: 'Device Two',
+                leading: const Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Icon(Icons.devices),
+                    Icon(Icons.looks_two_outlined),
+                  ],
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         );
       },
     );
@@ -67,19 +69,12 @@ class BuildCreateMockupSidebarSelectedState
         const BuildSliderEnableOption(),
         const Divider(height: 30),
         const SizedBox(height: 10),
-        const BuildAlignmentOption(
-          isFirtIconSelected: true,
-          isSecondIconSelected: false,
-          isThirdIconSelected: false,
-        ),
+        const BuildAlignmentOption(),
         const BuildAlignmentOption(
           title: '',
           firtIcon: Icons.vertical_align_top_rounded,
           secondIcon: Icons.vertical_align_center_rounded,
           thirdIcon: Icons.vertical_align_bottom_rounded,
-          isFirtIconSelected: false,
-          isSecondIconSelected: true,
-          isThirdIconSelected: false,
         ),
         const SizedBox(height: 20),
         BuildSidebarOption(
@@ -123,7 +118,7 @@ class BuildCreateMockupSidebarSelectedState
 
   ExpansionTileBorderItem _buildSubtitleStep() {
     return ExpansionTileBorderItem(
-      title: const Text('Subtitle'),
+      title: const Text('Subtitle1'),
       leading: const Icon(Icons.text_increase),
       collapsedBorderColor: Colors.transparent,
       collapsedTextColor: Colors.grey.withOpacity(0.8),
@@ -247,15 +242,7 @@ class BuildCreateMockupSidebarSelectedState
       textColor: Colors.white,
       iconColor: Colors.white,
       children: [
-        BuildSidebarOption(
-          title: 'Enable',
-          rightWidget: Switch(
-            value: true,
-            onChanged: (bool value) {
-              print(value);
-            },
-          ),
-        ),
+        const BuildSliderEnableOption(),
         const Divider(height: 30),
         const SizedBox(height: 10),
         BuildSidebarOption(
