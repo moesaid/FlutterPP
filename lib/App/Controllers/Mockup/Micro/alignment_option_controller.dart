@@ -1,3 +1,4 @@
+import 'package:flutterpp/App/Enums/alignment_option_enum.dart';
 import 'package:get/get.dart';
 
 class AlignmentOptionController extends GetxController {
@@ -8,10 +9,4 @@ class AlignmentOptionController extends GetxController {
     _alignment.value = alignment;
     update();
   }
-}
-
-enum AlignmentOptionEnum {
-  left,
-  center,
-  right,
 }
