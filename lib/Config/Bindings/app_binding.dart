@@ -10,6 +10,7 @@ import 'package:flutterpp/App/Controllers/Mockup/change_fontfamily_controller.da
 import 'package:flutterpp/App/Controllers/Mockup/mockup_create_controller.dart';
 import 'package:flutterpp/App/Controllers/Mockup/mockup_index_controller.dart';
 import 'package:flutterpp/App/Controllers/Mockup/mockup_single_controller.dart';
+import 'package:flutterpp/App/Controllers/Mockup/pickup_color_controller.dart';
 import 'package:flutterpp/App/Controllers/Project/project_index_controller.dart';
 import 'package:flutterpp/App/Controllers/Project/project_single_controller.dart';
 import 'package:flutterpp/App/Controllers/Team/no_team_controller.dart';
@@ -53,5 +54,6 @@ class AppBinding implements Bindings {
     // mockup mictro
     Get.lazyPut<BoolToggleController>(() => BoolToggleController());
     Get.lazyPut<AlignmentOptionController>(() => AlignmentOptionController());
+    Get.lazyPut<PickupColorController>(() => PickupColorController());
   }
 }

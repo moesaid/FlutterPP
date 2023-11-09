@@ -14,8 +14,8 @@ class BuildCreateMockupSidebarSelectedStateController extends GetxController {
   List<BackgroundTypeModel> get backgroundTypeList => _backgroundTypeList;
 
   // active background type
-  BackgroundTypeModel get activeBackgroundType =>
-      _backgroundTypeList.firstWhere((el) => el.isSelected == true);
+  final _activeBackgroundType = BackgroundTypeModel().obs;
+  BackgroundTypeModel get activeBackgroundType => _activeBackgroundType.value;
 
   // on select background type change
   void onSelectBackgroundType({
@@ -28,7 +28,10 @@ class BuildCreateMockupSidebarSelectedStateController extends GetxController {
         element.isSelected = false;
       }
     }
-    update();
+
+    _activeBackgroundType.value =
+        _backgroundTypeList.firstWhere((el) => el.isSelected == true);
+    // update();
   }
 
   updateSelectedTitle(String title) {

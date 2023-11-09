@@ -4,10 +4,12 @@ import 'package:flutterpp/App/Controllers/Mockup/pickup_color_controller.dart';
 import 'package:get/get.dart';
 
 class BuildPickColor extends GetView<PickupColorController> {
-  final Function(Color)? onColorChangedCallback;
+  final void Function(Color)? onColorChangedCallback;
+  final String? controllerTag;
 
   const BuildPickColor({
     this.onColorChangedCallback,
+    this.controllerTag,
     super.key,
   });
 
@@ -15,6 +17,7 @@ class BuildPickColor extends GetView<PickupColorController> {
   Widget build(BuildContext context) {
     return GetBuilder<PickupColorController>(
       init: PickupColorController(),
+      tag: controllerTag,
       builder: (_) {
         return Row(
           children: [
@@ -25,18 +28,20 @@ class BuildPickColor extends GetView<PickupColorController> {
                   await colorPickerDialog(
                     context: context,
                     customColorSwatchesAndNames: {},
-                    dialogPickerColor: controller.dialogPickerColor,
-                    onColorChanged: (Color color) => controller.onColorChanged(
+                    dialogPickerColor: _.dialogPickerColor,
+                    onColorChanged: (Color color) => _.onColorChanged(
                       color: color,
                       callback: onColorChangedCallback,
                     ),
                   );
                 },
-                child: Container(
-                  height: 30,
-                  decoration: BoxDecoration(
-                    color: controller.screenPickerColor,
-                    borderRadius: BorderRadius.circular(5),
+                child: Obx(
+                  () => Container(
+                    height: 30,
+                    decoration: BoxDecoration(
+                      color: _.screenPickerColor,
+                      borderRadius: BorderRadius.circular(5),
+                    ),
                   ),
                 ),
               ),

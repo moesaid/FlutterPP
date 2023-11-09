@@ -279,46 +279,57 @@ class BuildCreateMockupSidebarSelectedState
       textColor: Colors.white,
       iconColor: Colors.white,
       children: [
-        BuildSidebarOption(
-          title: 'Type',
-          rightWidget: DropdownButton<String>(
-            value: controller.activeBackgroundType.name,
-            icon: const Expanded(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  Icon(Icons.arrow_downward, size: 15),
-                ],
-              ),
-            ),
-            isDense: true,
-            padding: EdgeInsets.zero,
-            elevation: 0,
-            focusColor: Colors.transparent,
-            underline: Container(height: 0),
-            onChanged: (String? value) {
-              controller.onSelectBackgroundType(name: value ?? '');
-            },
-            items: controller.backgroundTypeList.map<DropdownMenuItem<String>>(
-              (BackgroundTypeModel el) {
-                return DropdownMenuItem<String>(
-                  value: el.name,
-                  child: Text(
-                    el.name!.capitalize!,
-                    style: Get.textTheme.bodyMedium
-                        ?.copyWith(fontWeight: FontWeight.w600),
+        GetBuilder<BuildCreateMockupSidebarSelectedStateController>(
+          init: BuildCreateMockupSidebarSelectedStateController(),
+          initState: (_) {},
+          builder: (_) {
+            return BuildSidebarOption(
+              title: 'Type',
+              rightWidget: Obx(
+                () => DropdownButton<String>(
+                  value: _.activeBackgroundType.name,
+                  icon: const Expanded(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        Icon(Icons.arrow_downward, size: 15),
+                      ],
+                    ),
                   ),
-                );
-              },
-            ).toList(),
-          ),
+                  isDense: true,
+                  padding: EdgeInsets.zero,
+                  elevation: 0,
+                  focusColor: Colors.transparent,
+                  underline: Container(height: 0),
+                  onChanged: (String? value) {
+                    controller.onSelectBackgroundType(name: value ?? '');
+                  },
+                  items: controller.backgroundTypeList
+                      .map<DropdownMenuItem<String>>(
+                    (BackgroundTypeModel el) {
+                      return DropdownMenuItem<String>(
+                        value: el.name,
+                        child: Text(
+                          el.name!.capitalize!,
+                          style: Get.textTheme.bodyMedium
+                              ?.copyWith(fontWeight: FontWeight.w600),
+                        ),
+                      );
+                    },
+                  ).toList(),
+                ),
+              ),
+            );
+          },
         ),
         const Divider(height: 20),
-        if (controller.activeBackgroundType.id == 'solid')
-          const _BuildSolidColorOption(),
-        if (controller.activeBackgroundType.id == 'gradient')
-          const _BuildColorPresetGradient(),
-        if (controller.activeBackgroundType.id == 'image') const Text('Image'),
+        Obx(
+          () => (controller.activeBackgroundType.id == 'solid')
+              ? const _BuildSolidColorOption()
+              : (controller.activeBackgroundType.id == 'gradient')
+                  ? const _BuildColorPresetGradient()
+                  : const Text('Image'),
+        ),
       ],
     );
   }
@@ -415,12 +426,12 @@ class _BuildColorPresetGradient extends StatelessWidget {
         const SizedBox(height: 20),
         const BuildSidebarOption(
           title: 'Color one',
-          rightWidget: BuildPickColor(),
+          rightWidget: BuildPickColor(controllerTag: 'gradiantColorOne'),
         ),
         const SizedBox(height: 20),
         const BuildSidebarOption(
           title: 'Color two',
-          rightWidget: BuildPickColor(),
+          rightWidget: BuildPickColor(controllerTag: 'gradiantColorTwo'),
         ),
         const SizedBox(height: 20),
       ],
@@ -435,7 +446,7 @@ class _BuildSolidColorOption extends StatelessWidget {
   Widget build(BuildContext context) {
     return const BuildSidebarOption(
       title: 'Color',
-      rightWidget: BuildPickColor(),
+      rightWidget: BuildPickColor(controllerTag: 'solidColor'),
     );
   }
 }
