@@ -331,7 +331,9 @@ class BuildCreateMockupSidebarSelectedState
           () => (controller.activeBackgroundType.id == 'solid')
               ? const _BuildSolidColorOption()
               : (controller.activeBackgroundType.id == 'gradient')
-                  ? const _BuildColorPresetGradient()
+                  ? _BuildColorPresetGradient(
+                      name: controller.gradientName,
+                    )
                   : const Text('Image'),
         ),
       ],
@@ -378,7 +380,8 @@ class BuildCreateMockupSidebarSelectedState
 }
 
 class _BuildColorPresetGradient extends StatelessWidget {
-  const _BuildColorPresetGradient();
+  final String? name;
+  const _BuildColorPresetGradient({this.name});
 
   @override
   Widget build(BuildContext context) {
@@ -405,10 +408,10 @@ class _BuildColorPresetGradient extends StatelessWidget {
                   width: 0.5,
                 ),
               ),
-              child: const Row(
+              child: Row(
                 children: [
-                  Expanded(child: Text('Gradient name')),
-                  Icon(
+                  Expanded(child: Text(name ?? 'Gradient name')),
+                  const Icon(
                     Icons.arrow_drop_down_circle_outlined,
                     color: Colors.white,
                   ),

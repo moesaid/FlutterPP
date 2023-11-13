@@ -6,6 +6,9 @@ class BuildCreateMockupSidebarSelectedStateController extends GetxController {
   final _selectedTitle = 'one'.obs;
   String get selectedTitle => _selectedTitle.value;
 
+  final _gradientName = 'select gradient'.obs;
+  String get gradientName => _gradientName.value;
+
   final _backgroundTypeList = <BackgroundTypeModel>[
     BackgroundTypeModel(
       id: BackgroundEnum.solid.id,

@@ -4,8 +4,10 @@ import 'package:flutterpp/App/Models/gradient_model.dart';
 import 'package:flutterpp/App/Views/Global/build_appbar.dart';
 import 'package:flutterpp/App/Views/Global/build_close_button.dart';
 import 'package:flutterpp/App/Views/Pages/Mockup/mockup_index_page.dart';
-import 'package:flutterpp/Helpers/helper_colors.dart';
+import 'package:flutterpp/Helpers/colors_helper.dart';
+import 'package:flutterpp/Helpers/text_helper.dart';
 import 'package:get/get.dart';
+import 'package:sizer/sizer.dart';
 
 class BuildPresetGradientList
     extends GetView<BuildPresetGradientListController> {
@@ -90,9 +92,9 @@ class BuildPresetGradientList
                                 Padding(
                                   padding: const EdgeInsets.all(14.0),
                                   child: Text(
-                                    item.name ?? 'No Name',
+                                    item.name?.limitLength(10) ?? 'No Name',
                                     style: Get.textTheme.bodyMedium
-                                        ?.copyWith(fontSize: 13),
+                                        ?.copyWith(fontSize: 5.sp),
                                   ),
                                 ),
                               ],
