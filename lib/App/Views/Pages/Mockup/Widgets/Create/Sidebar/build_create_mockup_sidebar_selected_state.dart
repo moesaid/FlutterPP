@@ -5,6 +5,7 @@ import 'package:flutterpp/App/Controllers/Mockup/build_create_mockup_sidebar_sel
 import 'package:flutterpp/App/Models/background_type_model.dart';
 import 'package:flutterpp/App/Models/gradient_model.dart';
 import 'package:flutterpp/App/Views/Global/build_preeset_gradient_list.dart';
+import 'package:flutterpp/App/Views/Global/build_slider.dart';
 import 'package:flutterpp/App/Views/Pages/Mockup/Widgets/Create/Sidebar/build_alignment_option.dart';
 import 'package:flutterpp/App/Views/Pages/Mockup/Widgets/Create/Sidebar/build_change_fontfamily.dart';
 import 'package:flutterpp/App/Views/Pages/Mockup/Widgets/Create/Sidebar/build_pick_color.dart';
@@ -282,6 +283,9 @@ class BuildCreateMockupSidebarSelectedState
         GetBuilder<BuildCreateMockupSidebarSelectedStateController>(
           init: BuildCreateMockupSidebarSelectedStateController(),
           initState: (_) {},
+          didChangeDependencies: (state) {
+            state.controller?.updateActive();
+          },
           builder: (_) {
             return BuildSidebarOption(
               title: 'Type',
@@ -414,13 +418,10 @@ class _BuildColorPresetGradient extends StatelessWidget {
           ),
         ),
         const SizedBox(height: 20),
-        BuildSidebarOption(
+        const BuildSidebarOption(
           title: 'Angle',
-          rightWidget: Slider(
-            min: 0,
-            max: 5,
-            value: 3,
-            onChanged: (double value) {},
+          rightWidget: BuildSlider(
+            controllerTag: 'gradiantAngle',
           ),
         ),
         const SizedBox(height: 20),

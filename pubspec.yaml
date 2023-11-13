@@ -26,6 +26,7 @@ dependencies:
   expansion_tile_group: ^1.2.1
   google_fonts: ^5.1.0
   flex_color_picker: ^3.2.2
+  sizer: ^2.0.15
 
 # dev_dependencies
 dev_dependencies:

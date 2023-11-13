@@ -1,3 +1,4 @@
+import 'package:flutterpp/App/Enums/background_enum.dart';
 import 'package:flutterpp/App/Models/background_type_model.dart';
 import 'package:get/get.dart';
 
@@ -6,9 +7,21 @@ class BuildCreateMockupSidebarSelectedStateController extends GetxController {
   String get selectedTitle => _selectedTitle.value;
 
   final _backgroundTypeList = <BackgroundTypeModel>[
-    BackgroundTypeModel(id: 'solid', name: 'solid color', isSelected: true),
-    BackgroundTypeModel(id: 'gradient', name: 'gradient', isSelected: false),
-    BackgroundTypeModel(id: 'image', name: 'image', isSelected: false),
+    BackgroundTypeModel(
+      id: BackgroundEnum.solid.id,
+      name: 'solid color',
+      isSelected: true,
+    ),
+    BackgroundTypeModel(
+      id: BackgroundEnum.gradient.id,
+      name: 'gradient',
+      isSelected: false,
+    ),
+    BackgroundTypeModel(
+      id: BackgroundEnum.image.id,
+      name: 'image',
+      isSelected: false,
+    ),
   ].obs;
 
   List<BackgroundTypeModel> get backgroundTypeList => _backgroundTypeList;
@@ -29,13 +42,18 @@ class BuildCreateMockupSidebarSelectedStateController extends GetxController {
       }
     }
 
-    _activeBackgroundType.value =
-        _backgroundTypeList.firstWhere((el) => el.isSelected == true);
-    // update();
+    updateActive();
   }
 
+  // update selected title
   updateSelectedTitle(String title) {
     _selectedTitle.value = title;
     update();
+  }
+
+  // on change background type
+  void updateActive() {
+    _activeBackgroundType.value =
+        _backgroundTypeList.firstWhere((el) => el.isSelected == true);
   }
 }
