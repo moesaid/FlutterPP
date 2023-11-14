@@ -6,6 +6,7 @@ import 'package:sizer/sizer.dart';
 class BuildSlider extends StatelessWidget {
   final double? min, max, defaultValue;
   final String? controllerTag;
+  final int? divisions;
   final void Function(double)? onChanged;
   const BuildSlider({
     super.key,
@@ -14,6 +15,7 @@ class BuildSlider extends StatelessWidget {
     this.max,
     this.defaultValue,
     this.onChanged,
+    this.divisions,
   });
 
   @override
@@ -49,7 +51,7 @@ class BuildSlider extends StatelessWidget {
           child: Slider(
             min: min ?? 0,
             max: max ?? 100,
-            divisions: 20,
+            divisions: divisions ?? 20,
             activeColor: Get.theme.primaryColor,
             inactiveColor: Get.theme.colorScheme.onBackground.withOpacity(0.1),
             thumbColor: Get.theme.primaryColor,

@@ -335,8 +335,9 @@ class BuildCreateMockupSidebarSelectedState
               : (controller.activeBackgroundType.id == 'gradient')
                   ? _BuildColorPresetGradient(
                       name: controller.gradientName,
-                      callback: controller.onGradientSelect,
                       gradient: controller.activeGradient,
+                      callback: controller.onGradientSelect,
+                      angleCallback: controller.updateAngle,
                     )
                   : const Text('Image'),
         ),
@@ -387,8 +388,13 @@ class _BuildColorPresetGradient extends StatelessWidget {
   final String? name;
   final Function(GradientModel) callback;
   final GradientModel? gradient;
-  const _BuildColorPresetGradient(
-      {this.name, required this.callback, this.gradient});
+  final void Function(double angle)? angleCallback;
+  const _BuildColorPresetGradient({
+    this.name,
+    required this.callback,
+    this.gradient,
+    this.angleCallback,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -430,10 +436,14 @@ class _BuildColorPresetGradient extends StatelessWidget {
           ),
         ),
         const SizedBox(height: 20),
-        const BuildSidebarOption(
+        BuildSidebarOption(
           title: 'Angle',
           rightWidget: BuildSlider(
+            min: 0,
+            max: 360,
+            divisions: 360,
             controllerTag: 'gradiantAngle',
+            onChanged: angleCallback,
           ),
         ),
         const SizedBox(height: 20),

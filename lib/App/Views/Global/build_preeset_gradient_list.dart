@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutterpp/App/Controllers/Global/build_preset_gradient_list_controller.dart';
 import 'package:flutterpp/App/Models/gradient_model.dart';
@@ -79,7 +81,8 @@ class BuildPresetGradientList
                                       gradient: LinearGradient(
                                         begin: const Alignment(-1.0, 0.0),
                                         end: const Alignment(1.0, 0.0),
-                                        transform: const GradientRotation(0),
+                                        transform: const GradientRotation(
+                                            0 * pi / 180),
                                         colors: item.colors != null &&
                                                 item.colors!.isNotEmpty
                                             ? item.colors!

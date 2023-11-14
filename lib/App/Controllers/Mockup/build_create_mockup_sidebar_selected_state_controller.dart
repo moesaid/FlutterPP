@@ -72,4 +72,9 @@ class BuildCreateMockupSidebarSelectedStateController extends GetxController {
 
     Get.back();
   }
+
+  // update angle
+  void updateAngle(double angle) {
+    _activeGradient.value.angle = angle;
+  }
 }

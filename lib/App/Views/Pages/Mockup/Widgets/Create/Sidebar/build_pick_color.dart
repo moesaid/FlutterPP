@@ -22,7 +22,6 @@ class BuildPickColor extends GetView<PickupColorController> {
       tag: controllerTag,
       didChangeDependencies: (state) {
         if (initialColor != null) {
-          print('❌initialColor: $initialColor');
           state.controller?.onColorChanged(
             color: initialColor!,
           );
