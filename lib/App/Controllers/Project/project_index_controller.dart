@@ -10,7 +10,7 @@ import 'package:flutterpp/App/Views/Global/build_overlay.dart';
 import 'package:flutterpp/App/Views/Global/build_snackbar.dart';
 import 'package:flutterpp/Config/Bindings/Project/app_project_binding.dart';
 import 'package:flutterpp/Config/app_gradients.dart';
-import 'package:flutterpp/Helpers/helper_colors.dart';
+import 'package:flutterpp/Helpers/colors_helper.dart';
 import 'package:get/get.dart';
 
 class ProjectIndexController extends GetxController {

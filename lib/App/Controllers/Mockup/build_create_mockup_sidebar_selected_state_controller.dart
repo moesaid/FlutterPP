@@ -1,5 +1,6 @@
 import 'package:flutterpp/App/Enums/background_enum.dart';
 import 'package:flutterpp/App/Models/background_type_model.dart';
+import 'package:flutterpp/App/Models/gradient_model.dart';
 import 'package:get/get.dart';
 
 class BuildCreateMockupSidebarSelectedStateController extends GetxController {
@@ -8,6 +9,9 @@ class BuildCreateMockupSidebarSelectedStateController extends GetxController {
 
   final _gradientName = 'select gradient'.obs;
   String get gradientName => _gradientName.value;
+
+  final _activeGradient = GradientModel().obs;
+  GradientModel get activeGradient => _activeGradient.value;
 
   final _backgroundTypeList = <BackgroundTypeModel>[
     BackgroundTypeModel(
@@ -58,5 +62,14 @@ class BuildCreateMockupSidebarSelectedStateController extends GetxController {
   void updateActive() {
     _activeBackgroundType.value =
         _backgroundTypeList.firstWhere((el) => el.isSelected == true);
+  }
+
+  // on gradient select
+  void onGradientSelect(GradientModel item) {
+    _activeGradient.value = item;
+    _gradientName.value = item.name ?? 'select gradient';
+    update();
+
+    Get.back();
   }
 }

@@ -12,6 +12,8 @@ import 'package:flutterpp/App/Views/Pages/Mockup/Widgets/Create/Sidebar/build_pi
 import 'package:flutterpp/App/Views/Pages/Mockup/Widgets/Create/Sidebar/build_slider_enable_option.dart';
 import 'package:flutterpp/App/Views/Pages/Mockup/Widgets/Create/Sidebar/build_slider_with_value_box.dart';
 import 'package:flutterpp/App/Views/Pages/Mockup/Widgets/build_sidebar_option.dart';
+import 'package:flutterpp/Helpers/colors_helper.dart';
+import 'package:flutterpp/Helpers/text_helper.dart';
 import 'package:get/get.dart';
 
 class BuildCreateMockupSidebarSelectedState
@@ -333,6 +335,8 @@ class BuildCreateMockupSidebarSelectedState
               : (controller.activeBackgroundType.id == 'gradient')
                   ? _BuildColorPresetGradient(
                       name: controller.gradientName,
+                      callback: controller.onGradientSelect,
+                      gradient: controller.activeGradient,
                     )
                   : const Text('Image'),
         ),
@@ -381,7 +385,10 @@ class BuildCreateMockupSidebarSelectedState
 
 class _BuildColorPresetGradient extends StatelessWidget {
   final String? name;
-  const _BuildColorPresetGradient({this.name});
+  final Function(GradientModel) callback;
+  final GradientModel? gradient;
+  const _BuildColorPresetGradient(
+      {this.name, required this.callback, this.gradient});
 
   @override
   Widget build(BuildContext context) {
@@ -392,7 +399,7 @@ class _BuildColorPresetGradient extends StatelessWidget {
           rightWidget: InkWell(
             onTap: () => Get.bottomSheet(
               BuildPresetGradientList(
-                onGradientSelected: (GradientModel gradient) => print(gradient),
+                onGradientSelected: callback,
               ),
               isDismissible: false,
               enableDrag: false,
@@ -410,7 +417,9 @@ class _BuildColorPresetGradient extends StatelessWidget {
               ),
               child: Row(
                 children: [
-                  Expanded(child: Text(name ?? 'Gradient name')),
+                  Expanded(
+                    child: Text(name?.limitLength(10) ?? 'Gradient name'),
+                  ),
                   const Icon(
                     Icons.arrow_drop_down_circle_outlined,
                     color: Colors.white,
@@ -428,14 +437,28 @@ class _BuildColorPresetGradient extends StatelessWidget {
           ),
         ),
         const SizedBox(height: 20),
-        const BuildSidebarOption(
+        BuildSidebarOption(
           title: 'Color one',
-          rightWidget: BuildPickColor(controllerTag: 'gradiantColorOne'),
+          rightWidget: BuildPickColor(
+            controllerTag: 'gradiantColorOne',
+            initialColor: (gradient == null ||
+                    gradient!.colors == null ||
+                    gradient!.colors!.isEmpty)
+                ? null
+                : ColorHelper.hexToColor(gradient!.colors!.first),
+          ),
         ),
         const SizedBox(height: 20),
-        const BuildSidebarOption(
+        BuildSidebarOption(
           title: 'Color two',
-          rightWidget: BuildPickColor(controllerTag: 'gradiantColorTwo'),
+          rightWidget: BuildPickColor(
+            controllerTag: 'gradiantColorTwo',
+            initialColor: (gradient == null ||
+                    gradient!.colors == null ||
+                    gradient!.colors!.isEmpty)
+                ? null
+                : ColorHelper.hexToColor(gradient!.colors!.last),
+          ),
         ),
         const SizedBox(height: 20),
       ],

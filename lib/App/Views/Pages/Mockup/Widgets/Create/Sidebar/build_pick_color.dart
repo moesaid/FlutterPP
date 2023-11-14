@@ -4,12 +4,14 @@ import 'package:flutterpp/App/Controllers/Mockup/pickup_color_controller.dart';
 import 'package:get/get.dart';
 
 class BuildPickColor extends GetView<PickupColorController> {
+  final Color? initialColor;
   final void Function(Color)? onColorChangedCallback;
   final String? controllerTag;
 
   const BuildPickColor({
     this.onColorChangedCallback,
     this.controllerTag,
+    this.initialColor,
     super.key,
   });
 
@@ -18,6 +20,14 @@ class BuildPickColor extends GetView<PickupColorController> {
     return GetBuilder<PickupColorController>(
       init: PickupColorController(),
       tag: controllerTag,
+      didChangeDependencies: (state) {
+        if (initialColor != null) {
+          print('❌initialColor: $initialColor');
+          state.controller?.onColorChanged(
+            color: initialColor!,
+          );
+        }
+      },
       builder: (_) {
         return InkWell(
           onTap: () async {

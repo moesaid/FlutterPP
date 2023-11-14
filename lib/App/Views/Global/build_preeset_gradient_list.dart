@@ -57,7 +57,10 @@ class BuildPresetGradientList
                         GradientModel item = list[index];
                         return InkWell(
                           onTap: () {
-                            onGradientSelected.call(item);
+                            controller.onSelectGradient(
+                              gradient: item,
+                              callback: onGradientSelected,
+                            );
                           },
                           child: Container(
                             padding: const EdgeInsets.all(5),

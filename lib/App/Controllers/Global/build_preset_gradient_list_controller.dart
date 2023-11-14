@@ -40,4 +40,12 @@ class BuildPresetGradientListController extends GetxController {
       BuildSnackBar(title: 'error', message: e.toString()).error();
     }
   }
+
+  // on select gradient
+  void onSelectGradient({
+    required GradientModel gradient,
+    required Function(GradientModel) callback,
+  }) {
+    callback.call(gradient);
+  }
 }

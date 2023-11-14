@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutterpp/Helpers/helper_colors.dart';
+import 'package:flutterpp/Helpers/colors_helper.dart';
 import 'package:get/get.dart';
 
 class PickupColorController extends GetxController {

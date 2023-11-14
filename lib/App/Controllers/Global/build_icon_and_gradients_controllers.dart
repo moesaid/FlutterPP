@@ -3,7 +3,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutterpp/Config/app_gradients.dart';
-import 'package:flutterpp/Helpers/helper_colors.dart';
+import 'package:flutterpp/Helpers/colors_helper.dart';
 import 'package:get/get.dart';
 
 class BuildIconAndGradientsController extends GetxController {
