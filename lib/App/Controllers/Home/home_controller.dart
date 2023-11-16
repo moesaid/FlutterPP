@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutterpp/App/Services/Auth/auth_services.dart';
 import 'package:flutterpp/App/Services/Team/team_services.dart';
+import 'package:flutterpp/App/Views/Pages/Dashboard/dashboard_page.dart';
 import 'package:flutterpp/App/Views/Pages/Mockup/mockup_index_page.dart';
 import 'package:flutterpp/App/Views/Pages/Project/Pages/project_index_page.dart';
 import 'package:get/get.dart';
@@ -19,12 +20,7 @@ class HomeController extends GetxController {
       'title': 'dashboard',
       'icon': HeroIcons.home,
       'isActive': true,
-      'tab': ElevatedButton(
-        onPressed: () async {
-          await AuthServices().signOut();
-        },
-        child: const Text('data'),
-      ),
+      'tab': const DashboardPage(),
     },
     {
       'title': 'projects',
