@@ -1,6 +1,7 @@
 import 'package:expansion_tile_group/expansion_tile_group.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
+import 'package:flutterpp/App/Controllers/Mockup/Micro/select_image_option_controller.dart';
 import 'package:flutterpp/App/Controllers/Mockup/build_create_mockup_sidebar_selected_state_controller.dart';
 import 'package:flutterpp/App/Models/background_type_model.dart';
 import 'package:flutterpp/App/Models/gradient_model.dart';
@@ -339,7 +340,10 @@ class BuildCreateMockupSidebarSelectedState
                       callback: controller.onGradientSelect,
                       angleCallback: controller.updateAngle,
                     )
-                  : const Text('Image'),
+                  : _BuildSelectImageOption(
+                      controllerTag: 'backgroundImage',
+                      callback: controller.onSelectImage,
+                    ),
         ),
       ],
     );
@@ -380,6 +384,30 @@ class BuildCreateMockupSidebarSelectedState
           ),
         ),
       ],
+    );
+  }
+}
+
+class _BuildSelectImageOption extends StatelessWidget {
+  final String? controllerTag;
+  final Function(String) callback;
+  const _BuildSelectImageOption({
+    this.controllerTag,
+    required this.callback,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return GetBuilder<SelectImageOptionController>(
+      init: SelectImageOptionController(),
+      tag: controllerTag,
+      initState: (_) {},
+      builder: (_) {
+        return ElevatedButton(
+          onPressed: () => _.getImage(),
+          child: const Text('add image'),
+        );
+      },
     );
   }
 }

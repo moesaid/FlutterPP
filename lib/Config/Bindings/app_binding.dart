@@ -6,6 +6,7 @@ import 'package:flutterpp/App/Controllers/Home/home_controller.dart';
 import 'package:flutterpp/App/Controllers/Mockup/Micro/alignment_option_controller.dart';
 import 'package:flutterpp/App/Controllers/Mockup/Micro/bool_toggle_controller.dart';
 import 'package:flutterpp/App/Controllers/Mockup/Micro/build_slider_controller.dart';
+import 'package:flutterpp/App/Controllers/Mockup/Micro/select_image_option_controller.dart';
 import 'package:flutterpp/App/Controllers/Mockup/build_create_mockup_sidebar_selected_state_controller.dart';
 import 'package:flutterpp/App/Controllers/Mockup/change_fontfamily_controller.dart';
 import 'package:flutterpp/App/Controllers/Mockup/mockup_create_controller.dart';
@@ -57,5 +58,8 @@ class AppBinding implements Bindings {
     Get.lazyPut<AlignmentOptionController>(() => AlignmentOptionController());
     Get.lazyPut<PickupColorController>(() => PickupColorController());
     Get.lazyPut<BuildSliderController>(() => BuildSliderController());
+    Get.lazyPut<SelectImageOptionController>(
+      () => SelectImageOptionController(),
+    );
   }
 }
