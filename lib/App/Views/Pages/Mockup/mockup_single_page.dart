@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutterpp/App/Controllers/Mockup/mockup_single_controller.dart';
+import 'package:flutterpp/App/Enums/template_layout_enum.dart';
 import 'package:flutterpp/App/Views/Global/build_appbar.dart';
 import 'package:flutterpp/App/Views/Pages/Mockup/Widgets/Create/build_create_mockup_sidebar.dart';
 import 'package:flutterpp/App/Views/Pages/Mockup/Widgets/build_device_card.dart';
@@ -27,7 +28,7 @@ class MockupSinglePage extends GetView<MockupSingleController> {
                     color: Colors.black87,
                     child: const Center(
                       child: BuildDeviceCard(
-                        config: TemplateLayoutType.leftSideTitleDown,
+                        config: TemplateLayoutEnum.titleUp,
                       ),
                     ),
                   ),
