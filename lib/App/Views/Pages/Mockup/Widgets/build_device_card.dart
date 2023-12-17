@@ -73,7 +73,7 @@ class BuildDeviceBodyIphoneCase extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Transform.rotate(
-      angle: 0,
+      angle: config.rotate!,
       child: SizedBox(
         width: 300,
         height: 550,
@@ -86,7 +86,6 @@ class BuildDeviceBodyIphoneCase extends StatelessWidget {
               top: config.devicePositionTop,
               bottom: config.devicePositionBottom,
               child: Container(
-                width: 280,
                 height: 530,
                 margin: const EdgeInsets.only(top: 10),
                 clipBehavior: Clip.hardEdge,
@@ -95,7 +94,8 @@ class BuildDeviceBodyIphoneCase extends StatelessWidget {
                   borderRadius: BorderRadius.circular(50),
                 ),
                 child: const Image(
-                  image: AssetImage('assets/images/test.png'),
+                  fit: BoxFit.cover,
+                  image: AssetImage('assets/images/screenshots/index.jpeg'),
                 ),
               ),
             ),
@@ -105,9 +105,9 @@ class BuildDeviceBodyIphoneCase extends StatelessWidget {
               top: config.devicePositionTop,
               bottom: config.devicePositionBottom,
               child: const SizedBox(
-                width: 280,
                 height: 550,
                 child: Image(
+                  fit: BoxFit.cover,
                   image: AssetImage('assets/images/iphone.png'),
                   color: null,
                 ),
