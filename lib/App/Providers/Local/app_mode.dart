@@ -18,7 +18,7 @@ class AppMode {
   }
 
   // write mode
-  Future<void> change() async {
+  Future<void> change(BuildContext context) async {
     String? value = box.read('mode');
 
     if (value == 'dark') {
@@ -28,6 +28,9 @@ class AppMode {
       await box.write('mode', 'dark');
       Get.changeThemeMode(ThemeMode.dark);
     }
+
+    // remove all routes and push home
+    Get.offAllNamed('/');
   }
 
   // delete mode

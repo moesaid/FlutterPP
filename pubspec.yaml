@@ -28,6 +28,7 @@ dependencies:
   flex_color_picker: ^3.2.2
   sizer: ^2.0.15
   file_selector: ^1.0.1
+  awesome_side_sheet: ^0.0.3
 
 # dev_dependencies
 dev_dependencies:

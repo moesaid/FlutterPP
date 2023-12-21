@@ -1,10 +1,10 @@
-import 'dart:math';
-
+import 'package:awesome_side_sheet/Enums/sheet_position.dart';
+import 'package:awesome_side_sheet/side_sheet.dart';
 import 'package:flutter/material.dart';
 import 'package:flutterpp/App/Controllers/Mockup/mockup_index_controller.dart';
+import 'package:flutterpp/App/Providers/Local/app_mode.dart';
 import 'package:flutterpp/App/Views/Global/build_overlay.dart';
 import 'package:flutterpp/App/Views/Global/build_page_layout.dart';
-import 'package:flutterpp/App/Views/Pages/Mockup/mockup_create_page.dart';
 import 'package:get/get.dart';
 
 class MockupIndexPage extends GetView<MockupIndexController> {
@@ -83,18 +83,24 @@ class BuildEmptyPage extends StatelessWidget {
               fit: BoxFit.contain,
             ),
           ),
-          Text(
-            list![Random().nextInt(list!.length)],
-            style: Get.theme.textTheme.titleMedium,
+          // Text(
+          //   list![Random().nextInt(list!.length)],
+          //   style: Get.theme.textTheme.titleMedium,
+          // ),
+          const SizedBox(height: 20),
+          ElevatedButton(
+            onPressed: () {
+              AppMode().change(context);
+            },
+            child: const Text('mode'),
           ),
           const SizedBox(height: 20),
           ElevatedButton(
             onPressed: () {
-              Get.bottomSheet(
-                const MockupCreatePage(),
-                isScrollControlled: true,
-                isDismissible: false,
-                enableDrag: false,
+              // side sheet
+              aweSideSheet(
+                context: context,
+                sheetPosition: SheetPosition.right,
               );
             },
             child: const Text('Create a new mockup'),
