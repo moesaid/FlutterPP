@@ -4,18 +4,20 @@ import 'package:get/get.dart';
 class BuildCloseButton extends StatelessWidget {
   final double? iconSize, size;
   final Color? bgColor;
+  final void Function()? onTap;
 
   const BuildCloseButton({
     super.key,
     this.iconSize,
     this.size,
     this.bgColor,
+    this.onTap,
   });
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () => Get.back(),
+      onTap: onTap ?? () => Get.back(),
       child: Container(
         width: size ?? 35,
         height: size ?? 35,

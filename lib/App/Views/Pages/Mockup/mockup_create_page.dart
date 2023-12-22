@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutterpp/App/Controllers/Mockup/mockup_create_controller.dart';
-import 'package:flutterpp/App/Views/Global/build_close_button.dart';
 import 'package:flutterpp/App/Views/Pages/Mockup/Widgets/Create/build_create_mockup_choose_template.dart';
 import 'package:flutterpp/App/Views/Pages/Mockup/Widgets/Create/build_create_mockup_info.dart';
 import 'package:flutterpp/App/Views/Pages/Mockup/Widgets/Create/build_create_mockup_link_project.dart';
@@ -16,15 +15,6 @@ class MockupCreatePage extends GetView<MockupCreateController> {
       initState: (_) {},
       builder: (_) {
         return Scaffold(
-          appBar: AppBar(
-            leading: const SizedBox.shrink(),
-            actions: const [
-              Padding(
-                padding: EdgeInsets.all(8.0),
-                child: BuildCloseButton(),
-              ),
-            ],
-          ),
           body: GetBuilder<MockupCreateController>(
             init: MockupCreateController(),
             initState: (_) {},

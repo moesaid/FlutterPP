@@ -1,11 +1,14 @@
+import 'dart:math';
+
 import 'package:awesome_side_sheet/Enums/sheet_position.dart';
 import 'package:awesome_side_sheet/side_sheet.dart';
 import 'package:flutter/material.dart';
 import 'package:flutterpp/App/Controllers/Mockup/mockup_index_controller.dart';
-import 'package:flutterpp/App/Providers/Local/app_mode.dart';
 import 'package:flutterpp/App/Views/Global/build_overlay.dart';
 import 'package:flutterpp/App/Views/Global/build_page_layout.dart';
+import 'package:flutterpp/App/Views/Pages/Mockup/mockup_create_page.dart';
 import 'package:get/get.dart';
+import 'package:sizer/sizer.dart';
 
 class MockupIndexPage extends GetView<MockupIndexController> {
   const MockupIndexPage({super.key});
@@ -69,38 +72,32 @@ class BuildEmptyPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      width: double.infinity,
-      height: double.infinity,
+    return Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           SizedBox(
-            width: 300,
+            width: 30.h,
             child: Image.asset(
               'assets/images/Clay_Black0041.png',
               fit: BoxFit.contain,
             ),
           ),
-          // Text(
-          //   list![Random().nextInt(list!.length)],
-          //   style: Get.theme.textTheme.titleMedium,
-          // ),
-          const SizedBox(height: 20),
-          ElevatedButton(
-            onPressed: () {
-              AppMode().change(context);
-            },
-            child: const Text('mode'),
+          Text(
+            list![Random().nextInt(list!.length)],
+            style: Get.theme.textTheme.titleMedium,
           ),
-          const SizedBox(height: 20),
           ElevatedButton(
             onPressed: () {
               // side sheet
               aweSideSheet(
                 context: context,
                 sheetPosition: SheetPosition.right,
+                body: const MockupCreatePage(),
+                sheetWidth: 50.h,
+                title: 'Create a new mockup',
+                footer: const SizedBox(),
               );
             },
             child: const Text('Create a new mockup'),

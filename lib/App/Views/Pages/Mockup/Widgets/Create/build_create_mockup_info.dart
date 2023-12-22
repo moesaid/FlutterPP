@@ -39,12 +39,23 @@ class BuildCreateMockupInfo extends StatelessWidget {
           children: [
             InkWell(
               onTap: () {
-                Get.bottomSheet(
-                  BuildIconAndGradients(
+                showBottomSheet(
+                  context: context,
+                  enableDrag: false,
+                  builder: (context) => BuildIconAndGradients(
                     onColorChange: onColorChange,
                     onSvgChange: onSvgChange,
                   ),
                 );
+                // aweSideSheet(
+                //   context: context,
+                //   sheetPosition: SheetPosition.right,
+                //   sheetWidth: 70.h,
+                //   body: BuildIconAndGradients(
+                //     onColorChange: onColorChange,
+                //     onSvgChange: onSvgChange,
+                //   ),
+                // );
               },
               // child: const Text('Icon and Gradients'),
               child: BuildProjectAvatar(

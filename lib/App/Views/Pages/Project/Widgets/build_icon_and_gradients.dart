@@ -1,21 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:flutterpp/App/Controllers/Global/build_icon_and_gradients_controllers.dart';
-import 'package:flutterpp/App/Views/Pages/Mockup/mockup_index_page.dart';
+import 'package:flutterpp/App/Views/Global/build_close_button.dart';
+import 'package:flutterpp/App/Views/Global/build_loading_page.dart';
 import 'package:flutterpp/Config/app_gradients.dart';
 import 'package:get/get.dart';
+import 'package:sizer/sizer.dart';
 
 class BuildIconAndGradients extends StatelessWidget {
-  // final List<String> svgs;
-  // final List<List<Color>> colors;
   final Function(List<Color>) onColorChange;
   final Function(String) onSvgChange;
+  final double? height;
+
   const BuildIconAndGradients({
     Key? key,
     required this.onColorChange,
-    // required this.colors,
-    // required this.svgs,
     required this.onSvgChange,
+    this.height,
   }) : super(key: key);
 
   @override
@@ -24,39 +25,55 @@ class BuildIconAndGradients extends StatelessWidget {
       init: BuildIconAndGradientsController(),
       initState: (_) {},
       builder: (_) {
-        return Container(
-          height: 400,
-          decoration: BoxDecoration(
-            color: Get.theme.bottomSheetTheme.backgroundColor,
-            border: Border(
-              top: BorderSide(
-                color: Get.theme.scaffoldBackgroundColor,
-                width: 1,
+        return Stack(
+          clipBehavior: Clip.none,
+          children: [
+            Container(
+              height: height ?? 50.w,
+              decoration: BoxDecoration(
+                color: Get.theme.bottomSheetTheme.backgroundColor,
+                border: Border(
+                  top: BorderSide(
+                    color: Get.theme.scaffoldBackgroundColor,
+                    width: 1,
+                  ),
+                ),
+              ),
+              child: (_.colors.isEmpty || _.svgs.isEmpty)
+                  ? const BuildLoadingPage()
+                  : Row(
+                      children: [
+                        _BuildIconSection(
+                          svgs: _.svgs,
+                          onSvgChange: (val) {
+                            _.onSVGChange(val);
+                            onSvgChange.call(val);
+                          },
+                          colors: _.colors,
+                        ),
+                        const VerticalDivider(width: 0),
+                        _BuildColorsSection(
+                          colors: _.colors,
+                          onColorChange: (val) {
+                            _.onColorChange(val);
+                            onColorChange.call(val);
+                          },
+                        ),
+                      ],
+                    ),
+            ),
+            Positioned(
+              top: -20,
+              right: 20,
+              child: BuildCloseButton(
+                bgColor: Get.theme.primaryColor,
+                size: 20.sp,
+                onTap: () {
+                  Navigator.pop(context);
+                },
               ),
             ),
-          ),
-          child: (_.colors.isEmpty || _.svgs.isEmpty)
-              ? const BuildEmptyPage()
-              : Row(
-                  children: [
-                    _BuildIconSection(
-                      svgs: _.svgs,
-                      onSvgChange: (val) {
-                        _.onSVGChange(val);
-                        onSvgChange.call(val);
-                      },
-                      colors: _.colors,
-                    ),
-                    const VerticalDivider(width: 0),
-                    _BuildColorsSection(
-                      colors: _.colors,
-                      onColorChange: (val) {
-                        _.onColorChange(val);
-                        onColorChange.call(val);
-                      },
-                    ),
-                  ],
-                ),
+          ],
         );
       },
     );
@@ -106,9 +123,9 @@ class _BuildColorsSection extends StatelessWidget {
                   );
                 },
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: colors.length ~/ (Get.width * 0.007),
-                  crossAxisSpacing: 10,
-                  mainAxisSpacing: 10,
+                  crossAxisCount: 6,
+                  crossAxisSpacing: 2.sp,
+                  mainAxisSpacing: 2.sp,
                   childAspectRatio: 1,
                 ),
               ),
@@ -144,9 +161,9 @@ class _BuildIconSection extends StatelessWidget {
               '${svgs.length} Icons',
               style: Get.textTheme.titleLarge,
             ),
-            const SizedBox(height: 5),
+            SizedBox(height: 1.sp),
             const Text('Time to choose an icon, peeps!'),
-            const SizedBox(height: 20),
+            SizedBox(height: 10.sp),
             Expanded(
               child: GridView.builder(
                 itemCount: svgs.length,
@@ -160,6 +177,7 @@ class _BuildIconSection extends StatelessWidget {
                       alignment: Alignment.center,
                       children: [
                         Container(
+                          padding: EdgeInsets.all(3.sp),
                           decoration: BoxDecoration(
                             color: Colors.grey.withOpacity(0.1),
                             border: Border.all(
@@ -167,25 +185,23 @@ class _BuildIconSection extends StatelessWidget {
                             ),
                             borderRadius: BorderRadius.circular(6),
                           ),
-                        ),
-                        SvgPicture.asset(
-                          'assets/svg/${svgs[i]}',
-                          // color: Colors.grey.withOpacity(0.5),
-                          colorFilter: ColorFilter.mode(
-                            Colors.white.withOpacity(0.7),
-                            BlendMode.srcATop,
+                          child: SvgPicture.asset(
+                            'assets/svg/${svgs[i]}',
+                            // color: Colors.grey.withOpacity(0.5),
+                            colorFilter: const ColorFilter.mode(
+                              Colors.white,
+                              BlendMode.srcATop,
+                            ),
                           ),
-                          height: 22,
-                          width: 22,
                         ),
                       ],
                     ),
                   );
                 },
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: colors.length ~/ (Get.width * 0.007),
-                  crossAxisSpacing: 10,
-                  mainAxisSpacing: 10,
+                  crossAxisCount: 6,
+                  crossAxisSpacing: 2.sp,
+                  mainAxisSpacing: 2.sp,
                   childAspectRatio: 1,
                 ),
               ),
