@@ -23,7 +23,6 @@ class BuildAlignmentOption extends GetView<AlignmentOptionController> {
   Widget build(BuildContext context) {
     return GetBuilder<AlignmentOptionController>(
       init: AlignmentOptionController(),
-      initState: (_) {},
       tag: controllerTag,
       builder: (_) {
         return BuildSidebarOption(
@@ -42,7 +41,7 @@ class BuildAlignmentOption extends GetView<AlignmentOptionController> {
               children: [
                 Expanded(
                   child: InkWell(
-                    onTap: () => controller.setAlignment(
+                    onTap: () => _.setAlignment(
                       alignment: AlignmentOptionEnum.left,
                       onToggle: onToggle,
                     ),
@@ -50,9 +49,7 @@ class BuildAlignmentOption extends GetView<AlignmentOptionController> {
                       padding: const EdgeInsets.all(5),
                       decoration: BoxDecoration(
                         color: Colors.white.withOpacity(
-                            controller.alignment == AlignmentOptionEnum.left
-                                ? 0.1
-                                : 0),
+                            _.alignment == AlignmentOptionEnum.left ? 0.1 : 0),
                         borderRadius: BorderRadius.circular(5),
                       ),
                       child: Icon(
@@ -65,7 +62,7 @@ class BuildAlignmentOption extends GetView<AlignmentOptionController> {
                 ),
                 Expanded(
                   child: InkWell(
-                    onTap: () => controller.setAlignment(
+                    onTap: () => _.setAlignment(
                       alignment: AlignmentOptionEnum.center,
                       onToggle: onToggle,
                     ),
@@ -73,7 +70,7 @@ class BuildAlignmentOption extends GetView<AlignmentOptionController> {
                       padding: const EdgeInsets.all(5),
                       decoration: BoxDecoration(
                         color: Colors.white.withOpacity(
-                            controller.alignment == AlignmentOptionEnum.center
+                            _.alignment == AlignmentOptionEnum.center
                                 ? 0.1
                                 : 0),
                         borderRadius: BorderRadius.circular(5),
@@ -88,7 +85,7 @@ class BuildAlignmentOption extends GetView<AlignmentOptionController> {
                 ),
                 Expanded(
                   child: InkWell(
-                    onTap: () => controller.setAlignment(
+                    onTap: () => _.setAlignment(
                       alignment: AlignmentOptionEnum.right,
                       onToggle: onToggle,
                     ),
@@ -96,9 +93,7 @@ class BuildAlignmentOption extends GetView<AlignmentOptionController> {
                       padding: const EdgeInsets.all(5),
                       decoration: BoxDecoration(
                         color: Colors.white.withOpacity(
-                            controller.alignment == AlignmentOptionEnum.right
-                                ? 0.1
-                                : 0),
+                            _.alignment == AlignmentOptionEnum.right ? 0.1 : 0),
                         borderRadius: BorderRadius.circular(5),
                       ),
                       child: Icon(

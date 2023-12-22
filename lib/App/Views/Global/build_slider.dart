@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutterpp/App/Controllers/Mockup/Micro/build_slider_controller.dart';
+import 'package:flutterpp/App/Controllers/Mockup/Micro/slider_option_controller.dart';
 import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
 
@@ -20,8 +20,8 @@ class BuildSlider extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<BuildSliderController>(
-      init: BuildSliderController(),
+    return GetBuilder<SliderOptionController>(
+      init: SliderOptionController(),
       tag: controllerTag,
       initState: (_) {},
       didChangeDependencies: (state) {

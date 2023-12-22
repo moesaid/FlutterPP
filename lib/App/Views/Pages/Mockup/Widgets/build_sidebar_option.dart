@@ -4,6 +4,7 @@ class BuildSidebarOption extends StatelessWidget {
   final Widget? leftWidget, rightWidget;
   final int? flexLeft, flexRight;
   final String? title;
+
   const BuildSidebarOption({
     super.key,
     this.leftWidget,

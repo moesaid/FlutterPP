@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
 
-class BuildSliderController extends GetxController {
+class SliderOptionController extends GetxController {
   final _sliderValue = 0.0.obs;
   double get sliderValue => _sliderValue.value;
 

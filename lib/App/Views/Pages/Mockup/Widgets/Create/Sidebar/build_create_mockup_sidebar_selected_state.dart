@@ -70,12 +70,18 @@ class BuildCreateMockupSidebarSelectedState
       textColor: Colors.white,
       iconColor: Colors.white,
       children: [
-        const BuildSliderEnableOption(),
+        const BuildSliderEnableOption(
+          controllerTag: 'deviceEnable',
+        ),
         const Divider(height: 30),
         const SizedBox(height: 10),
-        const BuildAlignmentOption(),
         const BuildAlignmentOption(
           title: '',
+          controllerTag: 'deviceAlignmentHorizontal',
+        ),
+        const BuildAlignmentOption(
+          title: '',
+          controllerTag: 'deviceAlignmentVertical',
           firtIcon: Icons.vertical_align_top_rounded,
           secondIcon: Icons.vertical_align_center_rounded,
           thirdIcon: Icons.vertical_align_bottom_rounded,
@@ -97,23 +103,34 @@ class BuildCreateMockupSidebarSelectedState
           ),
         ),
         const SizedBox(height: 20),
-        const BuildSidebarOption(
+        BuildSidebarOption(
           title: 'Size',
-          rightWidget: BuildSliderWithValueBox(),
+          rightWidget: BuildSliderWithValueBox(
+            controllerTag: 'deviceSize',
+            onChanged: (val) => print('❌ - $val'),
+          ),
         ),
-        const BuildSidebarOption(
+        const SizedBox(height: 10),
+        BuildSidebarOption(
           title: 'Rotate',
-          rightWidget: BuildSliderWithValueBox(),
+          rightWidget: BuildSliderWithValueBox(
+            controllerTag: 'deviceRotate',
+            onChanged: (val) => print('❌ - $val'),
+          ),
         ),
         const SizedBox(height: 20),
         const BuildSidebarOption(
           title: 'Stroke',
-          rightWidget: BuildPickColor(),
+          rightWidget: BuildPickColor(
+            controllerTag: 'deviceStrokeColor',
+          ),
         ),
         const SizedBox(height: 10),
         const BuildSidebarOption(
           title: 'Shadow',
-          rightWidget: BuildPickColor(),
+          rightWidget: BuildPickColor(
+            controllerTag: 'deviceShadowColor',
+          ),
         ),
         const SizedBox(height: 10),
       ],
@@ -122,7 +139,7 @@ class BuildCreateMockupSidebarSelectedState
 
   ExpansionTileBorderItem _buildSubtitleStep() {
     return ExpansionTileBorderItem(
-      title: const Text('Subtitle1'),
+      title: const Text('Subtitle'),
       leading: const Icon(Icons.text_increase),
       collapsedBorderColor: Colors.transparent,
       collapsedTextColor: Colors.grey.withOpacity(0.8),
@@ -131,37 +148,50 @@ class BuildCreateMockupSidebarSelectedState
       textColor: Colors.white,
       iconColor: Colors.white,
       children: [
-        const BuildSliderEnableOption(),
+        const BuildSliderEnableOption(
+          controllerTag: 'subtitleEnable',
+        ),
         const Divider(height: 30),
         const SizedBox(height: 10),
-        const BuildAlignmentOption(),
-        const SizedBox(height: 10),
-        const BuildSidebarOption(
-          title: 'Font size',
-          rightWidget: BuildSliderWithValueBox(),
+        const BuildAlignmentOption(
+          controllerTag: 'subtitleAlignmentHorizontal',
         ),
-        const BuildSidebarOption(
+        const SizedBox(height: 10),
+        BuildSidebarOption(
+          title: 'Font size',
+          rightWidget: BuildSliderWithValueBox(
+            controllerTag: 'subtitleFontSize',
+            onChanged: (val) => print('❌ - $val'),
+          ),
+        ),
+        const SizedBox(height: 10),
+        BuildSidebarOption(
           title: 'Line Height',
-          rightWidget: BuildSliderWithValueBox(),
+          rightWidget: BuildSliderWithValueBox(
+            controllerTag: 'subtitleLineHeight',
+            onChanged: (val) => print('❌ - $val'),
+          ),
         ),
         const SizedBox(height: 20),
         const BuildSidebarOption(
           title: 'Color',
-          rightWidget: BuildPickColor(),
+          rightWidget: BuildPickColor(
+            controllerTag: 'subtitleColor',
+          ),
         ),
         const SizedBox(height: 20),
         const BuildSidebarOption(
           title: 'Stroke',
-          rightWidget: BuildPickColor(),
+          rightWidget: BuildPickColor(
+            controllerTag: 'subtitleStroke',
+          ),
         ),
         const SizedBox(height: 20),
         BuildSidebarOption(
           title: 'Margin',
-          rightWidget: Slider(
-            max: 50,
-            min: 10,
-            value: 30,
-            onChanged: (val) => print('object'),
+          rightWidget: BuildSlider(
+            controllerTag: 'subtitleMargin',
+            onChanged: (val) => print('❌ - $val'),
           ),
         ),
         const SizedBox(height: 10),
@@ -180,7 +210,9 @@ class BuildCreateMockupSidebarSelectedState
       textColor: Colors.white,
       iconColor: Colors.white,
       children: [
-        const BuildSliderEnableOption(),
+        const BuildSliderEnableOption(
+          controllerTag: 'titleEnable',
+        ),
         const Divider(height: 30),
         const SizedBox(height: 10),
         FormBuilder(
@@ -200,15 +232,24 @@ class BuildCreateMockupSidebarSelectedState
           rightWidget: BuildChangeFontFamily(),
         ),
         const SizedBox(height: 20),
-        const BuildAlignmentOption(),
-        const SizedBox(height: 20),
-        const BuildSidebarOption(
-          title: 'Font size',
-          rightWidget: BuildSliderWithValueBox(),
+        const BuildAlignmentOption(
+          controllerTag: 'titleAlignmentHorizontal',
         ),
-        const BuildSidebarOption(
+        const SizedBox(height: 20),
+        BuildSidebarOption(
+          title: 'Font size',
+          rightWidget: BuildSliderWithValueBox(
+            controllerTag: 'titleFontSize',
+            onChanged: (val) => print('❌ - $val'),
+          ),
+        ),
+        const SizedBox(height: 10),
+        BuildSidebarOption(
           title: 'Line Height',
-          rightWidget: BuildSliderWithValueBox(),
+          rightWidget: BuildSliderWithValueBox(
+            controllerTag: 'titleLineHeight',
+            onChanged: (val) => print('❌ - $val'),
+          ),
         ),
         const SizedBox(height: 20),
         const BuildSidebarOption(
@@ -223,11 +264,9 @@ class BuildCreateMockupSidebarSelectedState
         const SizedBox(height: 20),
         BuildSidebarOption(
           title: 'Margin',
-          rightWidget: Slider(
-            max: 50,
-            min: 10,
-            value: 30,
-            onChanged: (val) => print('object'),
+          rightWidget: BuildSlider(
+            controllerTag: 'titleMargin',
+            onChanged: (val) => print('❌ - $val'),
           ),
         ),
         const SizedBox(height: 10),
@@ -246,7 +285,9 @@ class BuildCreateMockupSidebarSelectedState
       textColor: Colors.white,
       iconColor: Colors.white,
       children: [
-        const BuildSliderEnableOption(),
+        const BuildSliderEnableOption(
+          controllerTag: 'iconEnable',
+        ),
         const Divider(height: 30),
         const SizedBox(height: 10),
         BuildSidebarOption(
@@ -257,16 +298,17 @@ class BuildCreateMockupSidebarSelectedState
           ),
         ),
         const SizedBox(height: 20),
-        const BuildAlignmentOption(),
+        const BuildAlignmentOption(
+          controllerTag: 'iconAlignmentHorizontal',
+        ),
         const SizedBox(height: 20),
         BuildSidebarOption(
-            title: 'Margin',
-            rightWidget: Slider(
-              max: 50,
-              min: 10,
-              value: 30,
-              onChanged: (val) => print('object'),
-            )),
+          title: 'Margin',
+          rightWidget: BuildSlider(
+            controllerTag: 'iconMargin',
+            onChanged: (val) => print('❌ - $val'),
+          ),
+        ),
         const SizedBox(height: 10),
       ],
     );

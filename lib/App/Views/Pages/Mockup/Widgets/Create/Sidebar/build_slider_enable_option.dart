@@ -17,16 +17,15 @@ class BuildSliderEnableOption extends GetView<BoolToggleController> {
   Widget build(BuildContext context) {
     return GetBuilder<BoolToggleController>(
       init: BoolToggleController(),
-      initState: (_) {},
       tag: controllerTag,
       builder: (_) {
         return BuildSidebarOption(
           title: 'Enable',
           rightWidget: Obx(
             () => Switch(
-              value: controller.isOn,
+              value: _.isOn,
               onChanged: (bool value) {
-                controller.toggle();
+                _.toggle();
                 onToggle?.call(value);
               },
               activeColor: Get.theme.primaryColor,
