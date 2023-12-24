@@ -86,16 +86,16 @@ class BuildDeviceBodyIphoneCase extends StatelessWidget {
               top: config.devicePositionTop,
               bottom: config.devicePositionBottom,
               child: Container(
-                height: 530,
+                height: 520,
                 margin: const EdgeInsets.only(top: 10),
                 clipBehavior: Clip.hardEdge,
                 decoration: BoxDecoration(
-                  color: Colors.grey.withOpacity(0.1),
-                  borderRadius: BorderRadius.circular(50),
+                  color: Colors.black,
+                  borderRadius: BorderRadius.circular(15),
                 ),
                 child: const Image(
                   fit: BoxFit.cover,
-                  image: AssetImage('assets/images/screenshots/index.jpeg'),
+                  image: AssetImage('assets/screenshots/screen_1.jpg'),
                 ),
               ),
             ),

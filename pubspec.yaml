@@ -41,6 +41,6 @@ flutter:
   assets:
     - assets/svg/
     - assets/images/
-    - assets/images/screenshots/
+    - assets/screenshots/
     - assets/templates/
     - assets/jsons/
