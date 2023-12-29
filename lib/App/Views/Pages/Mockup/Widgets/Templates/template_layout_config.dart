@@ -1,12 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:flutterpp/App/Enums/template_layout_enum.dart';
+import 'package:flutterpp/App/Views/Pages/Mockup/Widgets/Templates/Types/device_advance_rotate_right_title_down.dart';
+import 'package:flutterpp/App/Views/Pages/Mockup/Widgets/Templates/Types/device_advance_rotate_right_title_up.dart';
+import 'package:flutterpp/App/Views/Pages/Mockup/Widgets/Templates/Types/device_rotate_right_title_down.dart';
+import 'package:flutterpp/App/Views/Pages/Mockup/Widgets/Templates/Types/device_rotate_right_title_up.dart';
+import 'package:flutterpp/App/Views/Pages/Mockup/Widgets/Templates/Types/left_side_title_down.dart';
+import 'package:flutterpp/App/Views/Pages/Mockup/Widgets/Templates/Types/left_side_title_up.dart';
+import 'package:flutterpp/App/Views/Pages/Mockup/Widgets/Templates/Types/right_side_title_down.dart';
+import 'package:flutterpp/App/Views/Pages/Mockup/Widgets/Templates/Types/right_side_title_up.dart';
+import 'package:flutterpp/App/Views/Pages/Mockup/Widgets/Templates/Types/title_down.dart';
+import 'package:flutterpp/App/Views/Pages/Mockup/Widgets/Templates/Types/title_up.dart';
 
 class TemplateLayoutConfig {
   final TemplateLayoutEnum type;
   final Axis? bodyDirection;
   final VerticalDirection? bodyVerticalDirection;
   final WrapCrossAlignment? bodyCrossAxisAlignment;
-  final bool? showLogo, showTitle, showSubtitle;
+  final bool? showLogo, showTitle, showSubtitle, deviceFullSize;
   final MainAxisAlignment? logoAlignment, titleAlignment, subtitleAlignment;
   final String? title, subtitle;
   final double? devicePositionTop,
@@ -59,194 +69,10 @@ class TemplateLayoutConfig {
     this.showLogo,
     this.showTitle,
     this.showSubtitle,
+    this.deviceFullSize = false,
     this.title,
     this.subtitle,
   });
-
-  // return title up config
-  TemplateLayoutConfig titleUp() {
-    return TemplateLayoutConfig(
-      type: TemplateLayoutEnum.titleUp,
-      bodyDirection: Axis.horizontal,
-      bodyVerticalDirection: VerticalDirection.down,
-      bodyCrossAxisAlignment: WrapCrossAlignment.center,
-      logoAlignment: MainAxisAlignment.center,
-      titleAlignment: MainAxisAlignment.center,
-      subtitleAlignment: MainAxisAlignment.center,
-      devicePositionTop: null,
-      devicePositionLeft: null,
-      devicePositionRight: null,
-      devicePositionBottom: null,
-      bodyRunSpacing: 20,
-      bodySpacing: 20,
-      rotate: 0,
-      titlePaddingTop: 30,
-      titlePaddingBottom: 0,
-      titlePaddingLeft: 0,
-      titlePaddingRight: 0,
-      subtitlePaddingTop: 0,
-      subtitlePaddingBottom: 0,
-      subtitlePaddingLeft: 0,
-      subtitlePaddingRight: 0,
-      logoPaddingTop: 20,
-      logoPaddingBottom: 20,
-      logoPaddingLeft: 20,
-      logoPaddingRight: 20,
-      showLogo: false,
-      showTitle: true,
-      showSubtitle: true,
-      title: 'Your Title',
-      subtitle: 'your Subtitle',
-    );
-  }
-
-  // return title up config
-  TemplateLayoutConfig titleDown() {
-    return TemplateLayoutConfig(
-      type: TemplateLayoutEnum.titleDown,
-      bodyDirection: Axis.horizontal,
-      bodyVerticalDirection: VerticalDirection.up,
-      bodyCrossAxisAlignment: WrapCrossAlignment.center,
-      logoAlignment: MainAxisAlignment.center,
-      titleAlignment: MainAxisAlignment.center,
-      subtitleAlignment: MainAxisAlignment.center,
-      devicePositionTop: null,
-      devicePositionLeft: null,
-      devicePositionRight: null,
-      devicePositionBottom: null,
-      bodyRunSpacing: 20,
-      bodySpacing: 20,
-      rotate: 0,
-      titlePaddingTop: 0,
-      titlePaddingBottom: 0,
-      titlePaddingLeft: 0,
-      titlePaddingRight: 0,
-      subtitlePaddingTop: 0,
-      subtitlePaddingBottom: 30,
-      subtitlePaddingLeft: 0,
-      subtitlePaddingRight: 0,
-      logoPaddingTop: 20,
-      logoPaddingBottom: 20,
-      logoPaddingLeft: 20,
-      logoPaddingRight: 20,
-      showLogo: false,
-      showTitle: true,
-      showSubtitle: true,
-      title: 'Your Title',
-      subtitle: 'your Subtitle',
-    );
-  }
-
-  // return right side title up config
-  TemplateLayoutConfig rightSideTitleUp() {
-    return TemplateLayoutConfig(
-      type: TemplateLayoutEnum.rightSideTitleUp,
-      bodyDirection: Axis.horizontal,
-      bodyVerticalDirection: VerticalDirection.down,
-      bodyCrossAxisAlignment: WrapCrossAlignment.center,
-      logoAlignment: MainAxisAlignment.center,
-      titleAlignment: MainAxisAlignment.center,
-      subtitleAlignment: MainAxisAlignment.center,
-      devicePositionTop: null,
-      devicePositionLeft: 130,
-      devicePositionRight: null,
-      devicePositionBottom: null,
-      bodyRunSpacing: 20,
-      bodySpacing: 20,
-      rotate: 0,
-      titlePaddingTop: 30,
-      titlePaddingBottom: 0,
-      titlePaddingLeft: 0,
-      titlePaddingRight: 0,
-      subtitlePaddingTop: 0,
-      subtitlePaddingBottom: 0,
-      subtitlePaddingLeft: 0,
-      subtitlePaddingRight: 0,
-      logoPaddingTop: 20,
-      logoPaddingBottom: 20,
-      logoPaddingLeft: 20,
-      logoPaddingRight: 20,
-      showLogo: false,
-      showTitle: true,
-      showSubtitle: true,
-      title: 'Your Title',
-      subtitle: 'your Subtitle',
-    );
-  }
-
-  // return left side title up config
-  TemplateLayoutConfig leftSideTitleUp() {
-    return TemplateLayoutConfig(
-      type: TemplateLayoutEnum.leftSideTitleUp,
-      bodyDirection: Axis.horizontal,
-      bodyVerticalDirection: VerticalDirection.down,
-      bodyCrossAxisAlignment: WrapCrossAlignment.center,
-      logoAlignment: MainAxisAlignment.center,
-      titleAlignment: MainAxisAlignment.center,
-      subtitleAlignment: MainAxisAlignment.center,
-      devicePositionTop: null,
-      devicePositionLeft: null,
-      devicePositionRight: 150,
-      devicePositionBottom: null,
-      bodyRunSpacing: 20,
-      bodySpacing: 20,
-      rotate: 0,
-      titlePaddingTop: 30,
-      titlePaddingBottom: 0,
-      titlePaddingLeft: 0,
-      titlePaddingRight: 0,
-      subtitlePaddingTop: 0,
-      subtitlePaddingBottom: 0,
-      subtitlePaddingLeft: 0,
-      subtitlePaddingRight: 0,
-      logoPaddingTop: 20,
-      logoPaddingBottom: 20,
-      logoPaddingLeft: 20,
-      logoPaddingRight: 20,
-      showLogo: false,
-      showTitle: true,
-      showSubtitle: true,
-      title: 'Your Title',
-      subtitle: 'your Subtitle',
-    );
-  }
-
-  // return right side title up config
-  TemplateLayoutConfig rightSideTitleDown() {
-    return TemplateLayoutConfig(
-      type: TemplateLayoutEnum.rightSideTitleUp,
-      bodyDirection: Axis.horizontal,
-      bodyVerticalDirection: VerticalDirection.up,
-      bodyCrossAxisAlignment: WrapCrossAlignment.center,
-      logoAlignment: MainAxisAlignment.center,
-      titleAlignment: MainAxisAlignment.center,
-      subtitleAlignment: MainAxisAlignment.center,
-      devicePositionTop: null,
-      devicePositionLeft: 130,
-      devicePositionRight: null,
-      devicePositionBottom: null,
-      bodyRunSpacing: 20,
-      bodySpacing: 20,
-      rotate: 0,
-      titlePaddingTop: 0,
-      titlePaddingBottom: 0,
-      titlePaddingLeft: 0,
-      titlePaddingRight: 0,
-      subtitlePaddingTop: 0,
-      subtitlePaddingBottom: 30,
-      subtitlePaddingLeft: 0,
-      subtitlePaddingRight: 0,
-      logoPaddingTop: 20,
-      logoPaddingBottom: 20,
-      logoPaddingLeft: 20,
-      logoPaddingRight: 20,
-      showLogo: false,
-      showTitle: true,
-      showSubtitle: true,
-      title: 'Your Title',
-      subtitle: 'your Subtitle',
-    );
-  }
 
   // swich case returns
   TemplateLayoutConfig getLayoutConfig() {
@@ -263,45 +89,16 @@ class TemplateLayoutConfig {
         return rightSideTitleDown();
       case TemplateLayoutEnum.leftSideTitleDown:
         return leftSideTitleDown();
+      case TemplateLayoutEnum.deviceRotateRightTitleUp:
+        return deviceRotateRightTitleUp();
+      case TemplateLayoutEnum.deviceRotateRightTitleDown:
+        return deviceRotateRightTitleDown();
+      case TemplateLayoutEnum.deviceAdvanceRotateRightTitleUp:
+        return deviceAdvanceRotateRightTitleUp();
+      case TemplateLayoutEnum.deviceAdvanceRotateRightTitleDown:
+        return deviceAdvanceRotateRightTitleDown();
       default:
         return titleUp();
     }
   }
-}
-
-// return left side title up config
-TemplateLayoutConfig leftSideTitleDown() {
-  return TemplateLayoutConfig(
-    type: TemplateLayoutEnum.leftSideTitleUp,
-    bodyDirection: Axis.horizontal,
-    bodyVerticalDirection: VerticalDirection.up,
-    bodyCrossAxisAlignment: WrapCrossAlignment.center,
-    logoAlignment: MainAxisAlignment.center,
-    titleAlignment: MainAxisAlignment.center,
-    subtitleAlignment: MainAxisAlignment.center,
-    devicePositionTop: null,
-    devicePositionLeft: null,
-    devicePositionRight: 150,
-    devicePositionBottom: null,
-    bodyRunSpacing: 20,
-    bodySpacing: 20,
-    rotate: 0,
-    titlePaddingTop: 0,
-    titlePaddingBottom: 0,
-    titlePaddingLeft: 0,
-    titlePaddingRight: 0,
-    subtitlePaddingTop: 0,
-    subtitlePaddingBottom: 30,
-    subtitlePaddingLeft: 0,
-    subtitlePaddingRight: 0,
-    logoPaddingTop: 20,
-    logoPaddingBottom: 20,
-    logoPaddingLeft: 20,
-    logoPaddingRight: 20,
-    showLogo: false,
-    showTitle: true,
-    showSubtitle: true,
-    title: 'Your Title',
-    subtitle: 'your Subtitle',
-  );
 }

@@ -5,6 +5,7 @@ import 'package:flutterpp/App/Views/Global/build_appbar.dart';
 import 'package:flutterpp/App/Views/Pages/Mockup/Widgets/Create/build_create_mockup_sidebar.dart';
 import 'package:flutterpp/App/Views/Pages/Mockup/Widgets/build_device_card.dart';
 import 'package:get/get.dart';
+import 'package:sizer/sizer.dart';
 
 class MockupSinglePage extends GetView<MockupSingleController> {
   const MockupSinglePage({super.key});
@@ -21,20 +22,47 @@ class MockupSinglePage extends GetView<MockupSingleController> {
             onBack: () => print('onBack'),
           ),
           body: SafeArea(
-            child: Row(
+            child: Stack(
               children: [
-                Expanded(
+                Positioned.fill(
                   child: Container(
-                    color: Colors.black87,
-                    child: const Center(
-                      child: BuildDeviceCard(
-                        config: TemplateLayoutEnum.titleUp,
+                    color: Colors.black26,
+                    padding: EdgeInsets.all(10.sp),
+                    child: SingleChildScrollView(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          SizedBox(
+                            height: 700,
+                            child: ListView(
+                              scrollDirection: Axis.horizontal,
+                              shrinkWrap: true,
+                              children: [
+                                const BuildDeviceCard(
+                                  config: TemplateLayoutEnum
+                                      .deviceAdvanceRotateRightTitleUp,
+                                ),
+                                SizedBox(width: 5.sp),
+                                const BuildDeviceCard(
+                                  config: TemplateLayoutEnum
+                                      .deviceAdvanceRotateRightTitleDown,
+                                ),
+                                SizedBox(width: 5.sp),
+                                const SizedBox(width: 300),
+                              ],
+                            ),
+                          ),
+                        ],
                       ),
                     ),
                   ),
                 ),
-                const BuildCreateMockupSidebar(
-                  isScreenshotSelected: true,
+                const Positioned(
+                  right: 0,
+                  top: 0,
+                  child: BuildCreateMockupSidebar(
+                    isScreenshotSelected: true,
+                  ),
                 )
               ],
             ),

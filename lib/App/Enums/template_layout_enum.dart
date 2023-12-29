@@ -6,4 +6,12 @@ enum TemplateLayoutEnum {
   leftSideTitleUp,
   rightSideTitleDown,
   leftSideTitleDown,
+  deviceRotateRightTitleUp,
+  deviceRotateRightTitleDown,
+  deviceRotateLeftTitleUp,
+  deviceRotateLeftTitleDown,
+  deviceAdvanceRotateRightTitleUp,
+  deviceAdvanceRotateRightTitleDown,
+  deviceAdvanceRotateLeftTitleUp,
+  deviceAdvanceRotateLeftTitleDown,
 }

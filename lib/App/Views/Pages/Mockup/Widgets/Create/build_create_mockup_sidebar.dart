@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutterpp/App/Views/Pages/Mockup/Widgets/Create/Sidebar/build_create_mockup_sidebar_empty.dart';
 import 'package:flutterpp/App/Views/Pages/Mockup/Widgets/Create/Sidebar/build_create_mockup_sidebar_selected_state.dart';
 import 'package:get/get.dart';
+import 'package:sizer/sizer.dart';
 
 class BuildCreateMockupSidebar extends StatelessWidget {
   final bool? isScreenshotSelected;
@@ -14,9 +15,11 @@ class BuildCreateMockupSidebar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      width: 300,
+      height: 100.h,
       padding: const EdgeInsets.all(15),
       decoration: BoxDecoration(
-        color: Colors.grey.withOpacity(0.1),
+        color: Get.theme.scaffoldBackgroundColor,
         border: Border(
           left: BorderSide(
             color: Colors.grey.withOpacity(0.2),
@@ -24,8 +27,6 @@ class BuildCreateMockupSidebar extends StatelessWidget {
           ),
         ),
       ),
-      width: Get.width * 0.25,
-      height: Get.height,
       child: !isScreenshotSelected!
           ? const BuildCreateMockupSidebarEmpty()
           : const BuildCreateMockupSidebarSelectedState(),

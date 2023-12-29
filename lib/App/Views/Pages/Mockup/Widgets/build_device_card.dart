@@ -76,22 +76,28 @@ class BuildDeviceBodyIphoneCase extends StatelessWidget {
       angle: config.rotate!,
       child: SizedBox(
         width: 300,
-        height: 550,
+        height: config.deviceFullSize! ? 700 : 550,
         child: Stack(
+          clipBehavior: Clip.none,
           alignment: Alignment.center,
           children: [
             Positioned(
-              left: config.devicePositionLeft,
-              right: config.devicePositionRight,
+              left: (config.devicePositionLeft != null)
+                  ? config.devicePositionLeft! + 20
+                  : null,
+              right: (config.devicePositionRight != null)
+                  ? config.devicePositionRight! + 20
+                  : null,
               top: config.devicePositionTop,
               bottom: config.devicePositionBottom,
               child: Container(
-                height: 520,
+                height: config.deviceFullSize! ? 670 : 520,
                 margin: const EdgeInsets.only(top: 10),
                 clipBehavior: Clip.hardEdge,
                 decoration: BoxDecoration(
                   color: Colors.black,
-                  borderRadius: BorderRadius.circular(15),
+                  borderRadius:
+                      BorderRadius.circular(config.deviceFullSize! ? 20 : 15),
                 ),
                 child: const Image(
                   fit: BoxFit.cover,
@@ -104,9 +110,9 @@ class BuildDeviceBodyIphoneCase extends StatelessWidget {
               right: config.devicePositionRight,
               top: config.devicePositionTop,
               bottom: config.devicePositionBottom,
-              child: const SizedBox(
-                height: 550,
-                child: Image(
+              child: SizedBox(
+                height: config.deviceFullSize! ? 700 : 550,
+                child: const Image(
                   fit: BoxFit.cover,
                   image: AssetImage('assets/images/iphone.png'),
                   color: null,
@@ -132,7 +138,7 @@ class BuildDeviceBodyHead extends StatelessWidget {
     return Column(
       children: [
         Row(
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: config.logoAlignment!,
           children: [
             if (config.showLogo!)
               Container(
