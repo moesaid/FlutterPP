@@ -12,14 +12,11 @@ import 'package:flutterpp/Config/app_gradients.dart';
 import 'package:flutterpp/Helpers/colors_helper.dart';
 import 'package:flutterpp/Storage/active_project_storage.dart';
 import 'package:get/get.dart';
-import 'package:get_storage/get_storage.dart';
 
 class DashboardController extends GetxController {
   final _teamServices = TeamServices();
   final _projectServices = ProjectServices();
   final _activeProjectStorage = ActiveProjectStorage();
-
-  final GetStorage _box = GetStorage();
 
   final _isLoading = true.obs;
   bool get isLoading => _isLoading.value;
