@@ -8,6 +8,7 @@ class CallPipeline {
       T? res = await future();
       return res;
     } catch (e) {
+      print(e);
       rethrow;
     }
   }

@@ -13,7 +13,7 @@ class ProjectCreatePage extends StatelessWidget {
   final List<Color> activeColors;
   final Function(List<Color>) onColorChange;
   final Function(String) onSvgChange;
-  final Function(Map) createTeam;
+  final Function(Map) createProject;
   final List<List<Color>> colors;
   const ProjectCreatePage({
     super.key,
@@ -23,7 +23,7 @@ class ProjectCreatePage extends StatelessWidget {
     required this.activeColors,
     required this.svgs,
     required this.onSvgChange,
-    required this.createTeam,
+    required this.createProject,
   });
 
   @override
@@ -91,7 +91,7 @@ class ProjectCreatePage extends StatelessWidget {
                 child: ElevatedButton(
                   onPressed: () {
                     if (formKey.currentState!.saveAndValidate()) {
-                      createTeam.call(formKey.currentState!.value);
+                      createProject.call(formKey.currentState!.value);
                     }
                   },
                   child: const Text('Create project'),
