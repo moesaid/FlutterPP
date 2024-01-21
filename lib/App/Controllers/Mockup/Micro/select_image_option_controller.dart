@@ -15,5 +15,7 @@ class SelectImageOptionController extends GetxController {
       file: res!,
       bucketId: 'images',
     );
+
+    print(url);
   }
 }

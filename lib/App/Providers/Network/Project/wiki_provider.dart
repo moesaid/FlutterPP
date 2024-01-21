@@ -47,7 +47,7 @@ class WikiProvider {
           'document': wiki.document,
           'updated_at': DateTime.now().toIso8601String(),
         })
-        .eq('id', wiki.id)
+        .eq('id', wiki.id!)
         .select();
 
     if (data.isEmpty) return null;

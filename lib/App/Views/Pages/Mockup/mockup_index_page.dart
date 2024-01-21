@@ -88,6 +88,7 @@ class BuildEmptyPage extends StatelessWidget {
             list![Random().nextInt(list!.length)],
             style: Get.theme.textTheme.titleMedium,
           ),
+          const SizedBox(height: 20),
           ElevatedButton(
             onPressed: () {
               // side sheet

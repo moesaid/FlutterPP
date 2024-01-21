@@ -39,8 +39,6 @@ class TeamProvider {
         .eq('admin_id', supabase.auth.currentUser!.id)
         .single();
 
-    if (data == null) return TeamModel();
-
     var localJson = json.encode(data);
     return TeamModel.fromJson(json.decode(localJson));
   }

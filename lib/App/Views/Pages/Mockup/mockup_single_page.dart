@@ -19,7 +19,8 @@ class MockupSinglePage extends GetView<MockupSingleController> {
         return Scaffold(
           appBar: BuildAppBar(
             title: 'Mockup',
-            onBack: () => print('onBack'),
+            hasBackButton: true,
+            onBack: () => Get.back(),
           ),
           body: SafeArea(
             child: Stack(

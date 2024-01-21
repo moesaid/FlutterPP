@@ -55,7 +55,7 @@ class BoardProvider {
     List<Map> data = await supabase
         .from('boards')
         .update(boardMap)
-        .eq('id', board.id)
+        .eq('id', board.id!)
         .select();
 
     if (data.isEmpty) return null;

@@ -60,7 +60,7 @@ class ProjectProvider {
     List<Map> data = await supabase
         .from('projects')
         .update(project.toJson())
-        .eq('id', project.id)
+        .eq('id', project.id!)
         .select();
 
     if (data.isEmpty) return null;

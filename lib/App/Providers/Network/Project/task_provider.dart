@@ -98,7 +98,7 @@ class TaskProvider {
     List<Map> data = await supabase
         .from('tasks')
         .update(updateData)
-        .eq('id', task.id)
+        .eq('id', task.id!)
         .select();
 
     if (data.isEmpty) return null;
