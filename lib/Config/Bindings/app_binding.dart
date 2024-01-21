@@ -13,7 +13,6 @@ import 'package:flutterpp/App/Controllers/Mockup/mockup_create_controller.dart';
 import 'package:flutterpp/App/Controllers/Mockup/mockup_index_controller.dart';
 import 'package:flutterpp/App/Controllers/Mockup/mockup_single_controller.dart';
 import 'package:flutterpp/App/Controllers/Mockup/pickup_color_controller.dart';
-import 'package:flutterpp/App/Controllers/Project/project_index_controller.dart';
 import 'package:flutterpp/App/Controllers/Project/project_single_controller.dart';
 import 'package:flutterpp/App/Controllers/Team/no_team_controller.dart';
 import 'package:flutterpp/App/Controllers/dashboard_controller.dart';
@@ -38,7 +37,7 @@ class AppBinding implements Bindings {
     Get.lazyPut<NoTeamController>(() => NoTeamController());
 
     // project
-    Get.lazyPut<ProjectIndexController>(() => ProjectIndexController());
+    // Get.lazyPut<ProjectIndexController>(() => ProjectIndexController());
     Get.lazyPut<ProjectSingleController>(() => ProjectSingleController());
     // Get.lazyPut<ProjectSingleWikiController>(
     //   () => ProjectSingleWikiController(),

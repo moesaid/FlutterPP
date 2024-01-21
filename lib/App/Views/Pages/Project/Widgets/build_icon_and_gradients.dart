@@ -10,14 +10,19 @@ import 'package:sizer/sizer.dart';
 class BuildIconAndGradients extends StatelessWidget {
   final Function(List<Color>) onColorChange;
   final Function(String) onSvgChange;
-  final double? height;
+  final double? height, width;
+  final bool? hasCloseButton;
+  final PossionAlignment? alignment;
 
   const BuildIconAndGradients({
-    Key? key,
+    super.key,
     required this.onColorChange,
     required this.onSvgChange,
     this.height,
-  }) : super(key: key);
+    this.width,
+    this.hasCloseButton = true,
+    this.alignment = PossionAlignment.sideBySide,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +34,8 @@ class BuildIconAndGradients extends StatelessWidget {
           clipBehavior: Clip.none,
           children: [
             Container(
-              height: height ?? 50.w,
+              height: height ?? context.height,
+              width: width ?? context.width,
               decoration: BoxDecoration(
                 color: Get.theme.bottomSheetTheme.backgroundColor,
                 border: Border(
@@ -41,38 +47,62 @@ class BuildIconAndGradients extends StatelessWidget {
               ),
               child: (_.colors.isEmpty || _.svgs.isEmpty)
                   ? const BuildLoadingPage()
-                  : Row(
-                      children: [
-                        _BuildIconSection(
-                          svgs: _.svgs,
-                          onSvgChange: (val) {
-                            _.onSVGChange(val);
-                            onSvgChange.call(val);
-                          },
-                          colors: _.colors,
+                  : alignment == PossionAlignment.sideBySide
+                      ? Row(
+                          children: [
+                            _BuildIconSection(
+                              svgs: _.svgs,
+                              onSvgChange: (val) {
+                                _.onSVGChange(val);
+                                onSvgChange.call(val);
+                              },
+                              colors: _.colors,
+                            ),
+                            const VerticalDivider(width: 0),
+                            _BuildColorsSection(
+                              colors: _.colors,
+                              onColorChange: (val) {
+                                _.onColorChange(val);
+                                onColorChange.call(val);
+                              },
+                            ),
+                          ],
+                        )
+                      : Column(
+                          children: [
+                            _BuildIconSection(
+                              svgs: _.svgs,
+                              onSvgChange: (val) {
+                                _.onSVGChange(val);
+                                onSvgChange.call(val);
+                              },
+                              colors: _.colors,
+                              crossAxisCount: 10,
+                            ),
+                            const Divider(),
+                            _BuildColorsSection(
+                              colors: _.colors,
+                              onColorChange: (val) {
+                                _.onColorChange(val);
+                                onColorChange.call(val);
+                              },
+                              crossAxisCount: 10,
+                            ),
+                          ],
                         ),
-                        const VerticalDivider(width: 0),
-                        _BuildColorsSection(
-                          colors: _.colors,
-                          onColorChange: (val) {
-                            _.onColorChange(val);
-                            onColorChange.call(val);
-                          },
-                        ),
-                      ],
-                    ),
             ),
-            Positioned(
-              top: -20,
-              right: 20,
-              child: BuildCloseButton(
-                bgColor: Get.theme.primaryColor,
-                size: 20.sp,
-                onTap: () {
-                  Navigator.pop(context);
-                },
+            if (hasCloseButton == true)
+              Positioned(
+                top: -20,
+                right: 20,
+                child: BuildCloseButton(
+                  bgColor: Get.theme.primaryColor,
+                  size: 20.sp,
+                  onTap: () {
+                    Navigator.pop(context);
+                  },
+                ),
               ),
-            ),
           ],
         );
       },
@@ -82,13 +112,19 @@ class BuildIconAndGradients extends StatelessWidget {
 
 class _BuildColorsSection extends StatelessWidget {
   const _BuildColorsSection({
-    Key? key,
+    super.key,
     required this.colors,
     required this.onColorChange,
-  }) : super(key: key);
+    this.crossAxisCount,
+    this.childAspectRatio,
+    this.crossAxisSpacing,
+    this.mainAxisSpacing,
+  });
 
   final List<List<Color>> colors;
   final Function(List<Color> p1) onColorChange;
+  final int? crossAxisCount;
+  final double? childAspectRatio, crossAxisSpacing, mainAxisSpacing;
 
   @override
   Widget build(BuildContext context) {
@@ -123,10 +159,10 @@ class _BuildColorsSection extends StatelessWidget {
                   );
                 },
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 6,
-                  crossAxisSpacing: 2.sp,
-                  mainAxisSpacing: 2.sp,
-                  childAspectRatio: 1,
+                  crossAxisCount: crossAxisCount ?? 6,
+                  crossAxisSpacing: crossAxisSpacing ?? 2.sp,
+                  mainAxisSpacing: mainAxisSpacing ?? 2.sp,
+                  childAspectRatio: childAspectRatio ?? 1,
                 ),
               ),
             ),
@@ -139,15 +175,21 @@ class _BuildColorsSection extends StatelessWidget {
 
 class _BuildIconSection extends StatelessWidget {
   const _BuildIconSection({
-    Key? key,
+    super.key,
     required this.svgs,
     required this.onSvgChange,
     required this.colors,
-  }) : super(key: key);
+    this.crossAxisCount,
+    this.childAspectRatio,
+    this.crossAxisSpacing,
+    this.mainAxisSpacing,
+  });
 
   final List<String> svgs;
   final Function(String p1) onSvgChange;
   final List<List<Color>> colors;
+  final int? crossAxisCount;
+  final double? childAspectRatio, crossAxisSpacing, mainAxisSpacing;
 
   @override
   Widget build(BuildContext context) {
@@ -199,10 +241,10 @@ class _BuildIconSection extends StatelessWidget {
                   );
                 },
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 6,
-                  crossAxisSpacing: 2.sp,
-                  mainAxisSpacing: 2.sp,
-                  childAspectRatio: 1,
+                  crossAxisCount: crossAxisCount ?? 6,
+                  crossAxisSpacing: crossAxisSpacing ?? 2.sp,
+                  mainAxisSpacing: mainAxisSpacing ?? 2.sp,
+                  childAspectRatio: childAspectRatio ?? 1,
                 ),
               ),
             ),
@@ -211,4 +253,9 @@ class _BuildIconSection extends StatelessWidget {
       ),
     );
   }
+}
+
+enum PossionAlignment {
+  sideBySide,
+  topBottom,
 }

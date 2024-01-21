@@ -1,6 +1,6 @@
 class WikiModel {
-  int? id, projectId;
-  String? createdAt, updatedAt, document;
+  int? projectId;
+  String? id, createdAt, updatedAt, document;
 
   WikiModel({
     this.id,

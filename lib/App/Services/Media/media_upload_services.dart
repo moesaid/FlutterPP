@@ -1,5 +1,5 @@
 import 'package:file_selector/file_selector.dart';
-import 'package:flutterpp/App/Providers/Network/media/media_upload_provider.dart';
+import 'package:flutterpp/App/Providers/Network/Media/media_upload_provider.dart';
 
 class MediaUploadServices {
   final MediaUploadProvider _provider = MediaUploadProvider();

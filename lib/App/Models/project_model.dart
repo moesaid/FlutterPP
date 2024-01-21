@@ -1,5 +1,5 @@
 class ProjectModel {
-  int? id;
+  String? id;
   String? teamId;
   String? clientId;
   String? createdAt;

@@ -1,6 +1,6 @@
 class BoardModel {
-  int? id, index, projectId;
-  String? name, createdAt, updatedAt;
+  int? index, projectId;
+  String? id, name, createdAt, updatedAt;
 
   BoardModel({
     this.id,

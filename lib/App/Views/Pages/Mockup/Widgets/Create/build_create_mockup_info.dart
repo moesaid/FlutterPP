@@ -1,3 +1,5 @@
+import 'package:awesome_side_sheet/Enums/sheet_position.dart';
+import 'package:awesome_side_sheet/side_sheet.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutterpp/App/Views/Pages/Project/Widgets/build_icon_and_gradients.dart';
@@ -39,12 +41,16 @@ class BuildCreateMockupInfo extends StatelessWidget {
           children: [
             InkWell(
               onTap: () {
-                showBottomSheet(
+                aweSideSheet(
                   context: context,
-                  enableDrag: false,
-                  builder: (context) => BuildIconAndGradients(
+                  sheetPosition: SheetPosition.right,
+                  footer: const SizedBox.shrink(),
+                  title: 'customize mpckup avatar',
+                  body: BuildIconAndGradients(
                     onColorChange: onColorChange,
                     onSvgChange: onSvgChange,
+                    hasCloseButton: false,
+                    alignment: PossionAlignment.topBottom,
                   ),
                 );
                 // aweSideSheet(

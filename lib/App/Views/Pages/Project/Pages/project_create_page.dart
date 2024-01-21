@@ -1,3 +1,5 @@
+import 'package:awesome_side_sheet/Enums/sheet_position.dart';
+import 'package:awesome_side_sheet/side_sheet.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutterpp/App/Views/Pages/Project/Widgets/build_icon_and_gradients.dart';
@@ -14,7 +16,7 @@ class ProjectCreatePage extends StatelessWidget {
   final Function(Map) createTeam;
   final List<List<Color>> colors;
   const ProjectCreatePage({
-    Key? key,
+    super.key,
     required this.onColorChange,
     required this.colors,
     required this.activeSVG,
@@ -22,7 +24,7 @@ class ProjectCreatePage extends StatelessWidget {
     required this.svgs,
     required this.onSvgChange,
     required this.createTeam,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -38,12 +40,16 @@ class ProjectCreatePage extends StatelessWidget {
             children: [
               GestureDetector(
                 onTap: () {
-                  Get.bottomSheet(
-                    BuildIconAndGradients(
+                  aweSideSheet(
+                    context: context,
+                    sheetPosition: SheetPosition.right,
+                    header: const SizedBox.shrink(),
+                    footer: const SizedBox.shrink(),
+                    body: BuildIconAndGradients(
                       onColorChange: (val) => onColorChange.call(val),
                       onSvgChange: (val) => onSvgChange.call(val),
-                      // colors: colors,
-                      // svgs: svgs,
+                      hasCloseButton: false,
+                      alignment: PossionAlignment.topBottom,
                     ),
                   );
                 },

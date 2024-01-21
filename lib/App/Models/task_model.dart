@@ -1,6 +1,6 @@
 class TaskModel {
-  int? id;
-  int? boardId;
+  String? id;
+  String? boardId;
   String? reporterId;
   String? assigneeId;
   String? title, status;
