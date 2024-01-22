@@ -9,7 +9,8 @@ class CallPipeline {
       return res;
     } catch (e) {
       print(e);
-      rethrow;
+      // rethrow;
+      return null;
     }
   }
 

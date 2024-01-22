@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutterpp/App/Controllers/Mockup/mockup_index_controller.dart';
+import 'package:flutterpp/App/Models/mockup_model.dart';
 import 'package:flutterpp/App/Models/project_model.dart';
 import 'package:flutterpp/App/Models/team_model.dart';
+import 'package:flutterpp/App/Services/Mockups/mockup_services.dart';
 import 'package:flutterpp/App/Services/Project/project_services.dart';
 import 'package:flutterpp/App/Services/Team/team_services.dart';
+import 'package:flutterpp/App/Views/Global/build_overlay.dart';
 import 'package:flutterpp/App/Views/Global/build_snackbar.dart';
 import 'package:flutterpp/Routes/app_pages.dart';
 import 'package:get/get.dart';
@@ -10,6 +14,7 @@ import 'package:get/get.dart';
 class MockupCreateController extends GetxController {
   final ProjectServices _projectServices = ProjectServices();
   final TeamServices _teamServices = TeamServices();
+  final MockupServices _mockupServices = MockupServices();
 
   final _activeIcon = 'fi-br-a.svg'.obs;
   String get activeIcon => _activeIcon.value;
@@ -89,12 +94,7 @@ class MockupCreateController extends GetxController {
 
     // if last step return
     if (_currentStep.value >= 2) {
-      // Todo: create mockup
-
-      // got to single mockup page
-      Get.offAndToNamed(AppRoutes.MOCKUP_SINGLE, arguments: {
-        'mockupId': 'mockupId',
-      });
+      _createMockup();
       return;
     }
 
@@ -161,11 +161,6 @@ class MockupCreateController extends GetxController {
     if (localProjects == null) return;
     _projects.addAll(localProjects);
     update();
-
-    print({
-      '❌ team': _team.value,
-      'projects': _projects,
-    });
   }
 
   // update template id
@@ -174,5 +169,36 @@ class MockupCreateController extends GetxController {
     update();
 
     print('templateId: $templateId');
+  }
+
+  // create mockup
+  Future<void> _createMockup() async {
+    MockupModel? item = await Get.showOverlay(
+      asyncFunction: () => _mockupServices.createMockup(
+        mockup: MockupModel(
+          projectId: _selectedProject.value.id!,
+          templateId: _templateId.value,
+          teamId: _team.value.id!,
+          title: _title.value,
+          description: _description.value,
+          category: _category.value,
+          icon: _activeIcon.value,
+          color1: _activeGradient[0].value.toRadixString(16),
+          color2: _activeGradient[1].value.toRadixString(16),
+        ),
+      ),
+      loadingWidget: const BuildOverlay(),
+    );
+
+    if (Get.isRegistered<MockupIndexController>()) {
+      MockupIndexController useMockupIndexController =
+          Get.find<MockupIndexController>();
+      await useMockupIndexController.fetchApi();
+    }
+
+    Get.offAndToNamed(
+      AppRoutes.MOCKUP_SINGLE,
+      arguments: item,
+    );
   }
 }

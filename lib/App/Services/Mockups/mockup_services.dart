@@ -27,4 +27,15 @@ class MockupServices {
     }
     return null;
   }
+
+  // create mockup
+  Future<MockupModel?> createMockup({
+    required MockupModel mockup,
+  }) async {
+    MockupModel? item = await mockupProvider.createMockup(item: mockup);
+
+    // print(item?.toJson());
+
+    return item;
+  }
 }

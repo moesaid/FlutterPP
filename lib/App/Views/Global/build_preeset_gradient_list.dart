@@ -5,7 +5,7 @@ import 'package:flutterpp/App/Controllers/Global/build_preset_gradient_list_cont
 import 'package:flutterpp/App/Models/gradient_model.dart';
 import 'package:flutterpp/App/Views/Global/build_appbar.dart';
 import 'package:flutterpp/App/Views/Global/build_close_button.dart';
-import 'package:flutterpp/App/Views/Pages/Mockup/mockup_index_page.dart';
+import 'package:flutterpp/App/Views/Global/build_loading_or_empty_layout.dart';
 import 'package:flutterpp/Helpers/colors_helper.dart';
 import 'package:flutterpp/Helpers/text_helper.dart';
 import 'package:get/get.dart';
