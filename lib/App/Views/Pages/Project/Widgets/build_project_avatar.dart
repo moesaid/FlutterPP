@@ -4,14 +4,14 @@ import 'package:flutterpp/Config/app_gradients.dart';
 
 class BuildProjectAvatar extends StatelessWidget {
   const BuildProjectAvatar({
-    Key? key,
+    super.key,
     required this.colors,
     required this.icon,
     this.width = 50,
     this.height = 50,
     this.svgWidth = 22,
     this.svgHeight = 22,
-  }) : super(key: key);
+  });
 
   final List<Color> colors;
   final String icon;

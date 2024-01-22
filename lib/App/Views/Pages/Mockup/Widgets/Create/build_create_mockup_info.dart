@@ -53,15 +53,6 @@ class BuildCreateMockupInfo extends StatelessWidget {
                     alignment: PossionAlignment.topBottom,
                   ),
                 );
-                // aweSideSheet(
-                //   context: context,
-                //   sheetPosition: SheetPosition.right,
-                //   sheetWidth: 70.h,
-                //   body: BuildIconAndGradients(
-                //     onColorChange: onColorChange,
-                //     onSvgChange: onSvgChange,
-                //   ),
-                // );
               },
               // child: const Text('Icon and Gradients'),
               child: BuildProjectAvatar(
