@@ -25,15 +25,47 @@ class DashboardPage extends GetView<DashboardController> {
               isLoading: controller.isLoading,
               child: Container(
                 width: double.infinity,
-                padding: EdgeInsets.all(4.sp),
+                padding: EdgeInsets.all(5.sp),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    BuildDashboardProjectSection(controller: controller),
                     Text(
-                      'active projects: ${controller.activeProject.title}'
-                          .capitalize!,
+                      'Hey ${controller.profile.fullName} 🖐️'.capitalize!,
+                      style: TextStyle(
+                        fontSize: 6.sp,
+                        fontWeight: FontWeight.w600,
+                      ),
                     ),
+                    SizedBox(height: 1.sp),
+                    Text(
+                      'welcome to the mysterious realm of limitless potential, where blank pages eagerly await your unique imprint. 🚀',
+                      style: TextStyle(
+                        fontSize: 5.sp,
+                        fontWeight: FontWeight.w300,
+                      ),
+                    ),
+                    SizedBox(height: 10.sp),
+                    SizedBox(
+                      height: 60.sp,
+                      child: GridView(
+                        scrollDirection: Axis.vertical,
+                        physics: const NeverScrollableScrollPhysics(),
+                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 4,
+                          crossAxisSpacing: 5.sp,
+                          mainAxisSpacing: 5.sp,
+                          mainAxisExtent: 60.sp,
+                        ),
+                        children: [
+                          BuildDashboardNumbersItem(controller: controller),
+                          BuildDashboardNumbersItem(controller: controller),
+                          BuildDashboardNumbersItem(controller: controller),
+                          BuildDashboardNumbersItem(controller: controller),
+                        ],
+                      ),
+                    ),
+                    SizedBox(height: 10.sp),
+                    BuildDashboardProjectSection(controller: controller),
                   ],
                 ),
               ),
@@ -41,6 +73,94 @@ class DashboardPage extends GetView<DashboardController> {
           ),
         );
       },
+    );
+  }
+}
+
+class BuildDashboardNumbersItem extends StatelessWidget {
+  const BuildDashboardNumbersItem({
+    super.key,
+    required this.controller,
+  });
+
+  final DashboardController controller;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(2.sp),
+        color: Get.theme.colorScheme.primaryContainer,
+        border: Border.all(
+          width: 1,
+          color: Get.theme.colorScheme.secondaryContainer,
+        ),
+      ),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Expanded(
+            child: Padding(
+              padding: EdgeInsets.all(10.sp),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'team members'.capitalize!,
+                        style: TextStyle(
+                          fontSize: 4.sp,
+                          fontWeight: FontWeight.w400,
+                          color: Get.theme.colorScheme.onBackground.withOpacity(
+                            0.3,
+                          ),
+                        ),
+                      ),
+                      Text(
+                        controller.teamMembers.length.toString(),
+                        style: TextStyle(
+                          fontSize: 10.sp,
+                          fontWeight: FontWeight.w800,
+                        ),
+                      ),
+                    ],
+                  ),
+                  Container(
+                    padding: EdgeInsets.all(1.sp),
+                    decoration: const BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: Colors.indigo,
+                    ),
+                    child: Icon(
+                      Icons.supervised_user_circle_rounded,
+                      size: 10.sp,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+          const Divider(thickness: 0.5, height: 0),
+          Padding(
+            padding: EdgeInsets.all(1.sp),
+            child: TextButton(
+              onPressed: () => print('object'),
+              child: Text(
+                'view all'.capitalize!,
+                style: TextStyle(
+                  fontSize: 3.6.sp,
+                  color: Get.theme.colorScheme.onBackground,
+                  fontWeight: FontWeight.w400,
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
@@ -226,6 +346,7 @@ class BuildDashboardCreateProject extends StatelessWidget {
         height: 180,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(2.sp),
+          color: Get.theme.colorScheme.background,
           border: Border.all(
             width: 1,
             color: Get.theme.colorScheme.primaryContainer,
@@ -235,7 +356,7 @@ class BuildDashboardCreateProject extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            const Icon(Icons.add, size: 50),
+            const Icon(Icons.add_rounded, size: 50),
             SizedBox(height: 1.sp),
             Text(
               'create new project'.capitalize!,

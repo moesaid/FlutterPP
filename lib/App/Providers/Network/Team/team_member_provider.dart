@@ -7,7 +7,9 @@ class TeamMemberProvider {
   final supabase = Supabase.instance.client;
 
   // Get team members
-  Future<List<TeamMemberModel>?> getTeamMembers(String teamId) async {
+  Future<List<TeamMemberModel>?> getTeamMembers({
+    required String teamId,
+  }) async {
     List<Map> data = await supabase
         .from('members')
         .select('*')

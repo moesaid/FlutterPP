@@ -1,4 +1,4 @@
-import 'package:flutterpp/App/Providers/Network/auth_provider.dart';
+import 'package:flutterpp/App/Providers/Network/Auth/auth_provider.dart';
 import 'package:flutterpp/App/Services/Global/call_pipeline.dart';
 import 'package:flutterpp/Routes/app_pages.dart';
 import 'package:get/get.dart';

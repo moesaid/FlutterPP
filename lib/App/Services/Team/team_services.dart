@@ -1,5 +1,5 @@
 import 'package:flutterpp/App/Models/team_model.dart';
-import 'package:flutterpp/App/Providers/Network/team_provider.dart';
+import 'package:flutterpp/App/Providers/Network/Team/team_provider.dart';
 import 'package:flutterpp/App/Services/Global/call_pipeline.dart';
 
 class TeamServices {

@@ -2,9 +2,13 @@ import 'dart:convert';
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:flutterpp/App/Models/profile_model.dart';
 import 'package:flutterpp/App/Models/project_model.dart';
+import 'package:flutterpp/App/Models/team_member_model.dart';
 import 'package:flutterpp/App/Models/team_model.dart';
+import 'package:flutterpp/App/Services/Auth/profile_services.dart';
 import 'package:flutterpp/App/Services/Project/project_services.dart';
+import 'package:flutterpp/App/Services/Team/team_member_services.dart';
 import 'package:flutterpp/App/Services/Team/team_services.dart';
 import 'package:flutterpp/App/Views/Global/build_overlay.dart';
 import 'package:flutterpp/App/Views/Global/build_snackbar.dart';
@@ -17,6 +21,8 @@ class DashboardController extends GetxController {
   final _teamServices = TeamServices();
   final _projectServices = ProjectServices();
   final _activeProjectStorage = ActiveProjectStorage();
+  final _teamMemberServices = TeamMemberServices();
+  final _profileServices = ProfileServices();
 
   final _isLoading = true.obs;
   bool get isLoading => _isLoading.value;
@@ -29,6 +35,12 @@ class DashboardController extends GetxController {
 
   final _activeProject = ProjectModel().obs;
   ProjectModel get activeProject => _activeProject.value;
+
+  final _teamMembers = <TeamMemberModel>[].obs;
+  List<TeamMemberModel> get teamMembers => _teamMembers;
+
+  final _profile = ProfileModel().obs;
+  ProfileModel get profile => _profile.value;
 
   final _colors = <List<Color>>[].obs;
   List<List<Color>> get colors => _colors;
@@ -49,8 +61,10 @@ class DashboardController extends GetxController {
   Future<void> onInit() async {
     _listOfColors();
     _listOFSVGs();
+    await _getAuthProfile();
     await _fetchTeamAndProjects();
     await _fetchActiveProject();
+    await _getTeamMembers();
     _updateLoading(false);
     super.onInit();
   }
@@ -185,5 +199,23 @@ class DashboardController extends GetxController {
   void onSVGChange(String svg) {
     _selectedSVG.value = svg;
     update();
+  }
+
+  // get team members
+  _getTeamMembers() async {
+    if (team.id == null) return;
+
+    List<TeamMemberModel>? items = await _teamMemberServices.getTeamMembers(
+      teamId: team.id!,
+    );
+
+    if (items == null || items.isEmpty) return;
+
+    _teamMembers.assignAll(items);
+  }
+
+  // get auth user
+  _getAuthProfile() async {
+    _profile.value = (await _profileServices.getAuthProfile())!;
   }
 }
