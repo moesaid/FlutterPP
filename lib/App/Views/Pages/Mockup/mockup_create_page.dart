@@ -61,7 +61,7 @@ class MockupCreatePage extends GetView<MockupCreateController> {
                         content: BuildCreateMockupInfo(
                           onTitleOrDescriptionOrCategory:
                               controller.onTitleOrDescriptionOrCategory,
-                          onColorChange: controller.onGradientChange,
+                          onColorChange: (val) => controller.onColorChange(val),
                           onSvgChange: controller.onIconChange,
                           activeColors: controller.activeGradient,
                           activeSVG: controller.activeIcon,

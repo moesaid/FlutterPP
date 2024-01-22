@@ -8,6 +8,7 @@ import 'package:flutterpp/App/Services/Project/project_services.dart';
 import 'package:flutterpp/App/Services/Team/team_services.dart';
 import 'package:flutterpp/App/Views/Global/build_overlay.dart';
 import 'package:flutterpp/App/Views/Global/build_snackbar.dart';
+import 'package:flutterpp/Helpers/colors_helper.dart';
 import 'package:flutterpp/Routes/app_pages.dart';
 import 'package:get/get.dart';
 
@@ -24,6 +25,12 @@ class MockupCreateController extends GetxController {
     const Color(0xffcc80cc),
   ].obs;
   List<Color> get activeGradient => _activeGradient;
+
+  final _activeHexColor = <String>[
+    '4d80cc',
+    'cc80cc',
+  ].obs;
+  List<String> get activeHexColor => _activeHexColor;
 
   final _title = ''.obs;
   String get title => _title.value;
@@ -124,8 +131,10 @@ class MockupCreateController extends GetxController {
   }
 
   // set active gradient
-  void onGradientChange(List<Color> gradient) {
+  void onColorChange(List<Color> gradient) {
     _activeGradient.value = gradient;
+    _activeHexColor.value =
+        gradient.map((e) => ColorHelper.colorToHexWithoutHash(e)).toList();
     update();
   }
 
@@ -167,8 +176,6 @@ class MockupCreateController extends GetxController {
   void onTemplateChange(String templateId) {
     _templateId.value = templateId;
     update();
-
-    print('templateId: $templateId');
   }
 
   // create mockup
@@ -183,8 +190,8 @@ class MockupCreateController extends GetxController {
           description: _description.value,
           category: _category.value,
           icon: _activeIcon.value,
-          color1: _activeGradient[0].value.toRadixString(16),
-          color2: _activeGradient[1].value.toRadixString(16),
+          color1: _activeHexColor.first,
+          color2: _activeHexColor.last,
         ),
       ),
       loadingWidget: const BuildOverlay(),

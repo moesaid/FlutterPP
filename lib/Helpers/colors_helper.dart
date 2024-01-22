@@ -6,6 +6,11 @@ class ColorHelper {
     return '#${color.value.toRadixString(16).substring(2, 8)}';
   }
 
+  // Color to Hex without #
+  static String colorToHexWithoutHash(Color color) {
+    return color.value.toRadixString(16).substring(2, 8);
+  }
+
   // Hex to Color
   static Color hexToColor(String hex) {
     // of length less than 6
