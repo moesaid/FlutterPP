@@ -8,6 +8,7 @@ import 'package:flutterpp/App/Views/Pages/Mockup/Widgets/Create/Sidebar/Steps/bu
 import 'package:flutterpp/App/Views/Pages/Mockup/Widgets/Create/Sidebar/Steps/build_device_step.dart';
 import 'package:flutterpp/App/Views/Pages/Mockup/Widgets/Create/Sidebar/Steps/build_icon_step.dart';
 import 'package:flutterpp/App/Views/Pages/Mockup/Widgets/Create/Sidebar/Steps/build_layout_step.dart';
+import 'package:flutterpp/App/Views/Pages/Mockup/Widgets/Create/Sidebar/Steps/build_subtitle_step.dart';
 import 'package:flutterpp/App/Views/Pages/Mockup/Widgets/Create/Sidebar/build_alignment_option.dart';
 import 'package:flutterpp/App/Views/Pages/Mockup/Widgets/Create/Sidebar/build_change_fontfamily.dart';
 import 'package:flutterpp/App/Views/Pages/Mockup/Widgets/Create/Sidebar/build_pick_color.dart';
@@ -68,7 +69,7 @@ class BuildCreateMockupSidebarSelectedState
                 onIconUpload: onIconUpload,
               ),
               _buildTitleStep(),
-              _buildSubtitleStep(),
+              buildSubtitleStep(),
               buildDeviceStep(),
               buildDeviceStep(
                 title: 'Device Two',
@@ -84,68 +85,6 @@ class BuildCreateMockupSidebarSelectedState
           ),
         );
       },
-    );
-  }
-
-  ExpansionTileBorderItem _buildSubtitleStep() {
-    return ExpansionTileBorderItem(
-      title: const Text('Subtitle'),
-      leading: const Icon(Icons.text_increase),
-      collapsedBorderColor: Colors.transparent,
-      collapsedTextColor: Colors.grey.withOpacity(0.8),
-      collapsedIconColor: Colors.grey.withOpacity(0.8),
-      expendedBorderColor: Colors.grey.withOpacity(0.2),
-      textColor: Colors.white,
-      iconColor: Colors.white,
-      children: [
-        const BuildSliderEnableOption(
-          controllerTag: 'subtitleEnable',
-        ),
-        const Divider(height: 30),
-        const SizedBox(height: 10),
-        const BuildAlignmentOption(
-          controllerTag: 'subtitleAlignmentHorizontal',
-        ),
-        const SizedBox(height: 10),
-        BuildSidebarOption(
-          title: 'Font size',
-          rightWidget: BuildSliderWithValueBox(
-            controllerTag: 'subtitleFontSize',
-            onChanged: (val) => print('❌ - $val'),
-          ),
-        ),
-        const SizedBox(height: 10),
-        BuildSidebarOption(
-          title: 'Line Height',
-          rightWidget: BuildSliderWithValueBox(
-            controllerTag: 'subtitleLineHeight',
-            onChanged: (val) => print('❌ - $val'),
-          ),
-        ),
-        const SizedBox(height: 20),
-        const BuildSidebarOption(
-          title: 'Color',
-          rightWidget: BuildPickColor(
-            controllerTag: 'subtitleColor',
-          ),
-        ),
-        const SizedBox(height: 20),
-        const BuildSidebarOption(
-          title: 'Stroke',
-          rightWidget: BuildPickColor(
-            controllerTag: 'subtitleStroke',
-          ),
-        ),
-        const SizedBox(height: 20),
-        BuildSidebarOption(
-          title: 'Margin',
-          rightWidget: BuildSlider(
-            controllerTag: 'subtitleMargin',
-            onChanged: (val) => print('❌ - $val'),
-          ),
-        ),
-        const SizedBox(height: 10),
-      ],
     );
   }
 
