@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutterpp/App/Models/gradient_model.dart';
 import 'package:flutterpp/App/Models/mockup_model.dart';
 import 'package:flutterpp/App/Models/template_config_model.dart';
 import 'package:flutterpp/App/Services/Mockups/mockup_services.dart';
 import 'package:flutterpp/App/Views/Global/build_overlay.dart';
+import 'package:flutterpp/Helpers/colors_helper.dart';
 import 'package:get/get.dart';
 
 class MockupSingleController extends GetxController {
@@ -53,12 +55,19 @@ class MockupSingleController extends GetxController {
   void updateBackground({
     Color? color,
     String? image,
-    List<Color>? gradient,
+    GradientModel? gradient,
   }) {
     _seletedItem.value = _seletedItem.value.copyWith(
       backgroundColor: color,
       backgroundImage: image,
-      backgroundGradient: gradient,
+      backgroundGradient: gradient == null ||
+              gradient.colors == null ||
+              gradient.colors!.isEmpty
+          ? null
+          : [
+              ColorHelper.hexToColor(gradient.colors!.first),
+              ColorHelper.hexToColor(gradient.colors!.last),
+            ],
     );
 
     // update mockup jsonData

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutterpp/App/Models/gradient_model.dart';
 import 'package:flutterpp/App/Views/Pages/Mockup/Widgets/Create/Sidebar/build_create_mockup_sidebar_empty.dart';
 import 'package:flutterpp/App/Views/Pages/Mockup/Widgets/Create/Sidebar/build_create_mockup_sidebar_selected_state.dart';
 import 'package:get/get.dart';
@@ -6,14 +7,20 @@ import 'package:sizer/sizer.dart';
 
 class BuildCreateMockupSidebar extends StatelessWidget {
   final bool? isScreenshotSelected;
+  final String? mockupId;
   final Color? initialColor;
+  final void Function(String)? onImageUpload;
   final void Function(Color)? onColorChangedCallback;
+  final void Function(GradientModel)? onGradiantChangedCallback;
 
   const BuildCreateMockupSidebar({
     super.key,
     this.isScreenshotSelected = false,
+    this.mockupId,
     this.initialColor,
+    this.onImageUpload,
     this.onColorChangedCallback,
+    this.onGradiantChangedCallback,
   });
 
   @override
@@ -35,7 +42,10 @@ class BuildCreateMockupSidebar extends StatelessWidget {
           ? const BuildCreateMockupSidebarEmpty()
           : BuildCreateMockupSidebarSelectedState(
               initialColor: initialColor,
+              mockupId: mockupId,
+              onImageUpload: onImageUpload,
               onColorChangedCallback: onColorChangedCallback,
+              onGradiantChangedCallback: onGradiantChangedCallback,
             ),
     );
   }

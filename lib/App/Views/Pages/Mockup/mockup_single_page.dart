@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutterpp/App/Controllers/Mockup/mockup_single_controller.dart';
+import 'package:flutterpp/App/Models/gradient_model.dart';
 import 'package:flutterpp/App/Models/template_config_model.dart';
 import 'package:flutterpp/App/Views/Global/build_appbar.dart';
 import 'package:flutterpp/App/Views/Pages/Mockup/Widgets/Create/build_create_mockup_sidebar.dart';
@@ -73,12 +74,20 @@ class MockupSinglePage extends GetView<MockupSingleController> {
                   right: 0,
                   top: 0,
                   child: BuildCreateMockupSidebar(
+                    mockupId: controller.mockup.id,
                     isScreenshotSelected: controller.seletedItem.id != null,
 
                     // start background
                     initialColor: controller.seletedItem.backgroundColor,
                     onColorChangedCallback: (Color color) =>
                         controller.updateBackground(color: color),
+                    onGradiantChangedCallback: (GradientModel gradient) =>
+                        controller.updateBackground(
+                      gradient: gradient,
+                    ),
+                    onImageUpload: (String image) =>
+                        controller.updateBackground(image: image),
+
                     // end background
                   ),
                 ),

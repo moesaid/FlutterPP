@@ -77,6 +77,4 @@ class BuildCreateMockupSidebarSelectedStateController extends GetxController {
   void updateAngle(double angle) {
     _activeGradient.value.angle = angle;
   }
-
-  onSelectImage(String el) {}
 }

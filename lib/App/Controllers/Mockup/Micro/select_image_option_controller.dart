@@ -5,7 +5,10 @@ import 'package:get/get.dart';
 
 class SelectImageOptionController extends GetxController {
   // Get image
-  getImage() async {
+  getImage({
+    String? mockupId,
+    Function(String url)? callback,
+  }) async {
     XFile? res = await FileManegerProvider().pickFile(
       label: 'select image',
       extensions: ['jpg', 'png'],
@@ -14,8 +17,11 @@ class SelectImageOptionController extends GetxController {
     String? url = await MediaUploadServices().uploadFile(
       file: res!,
       bucketId: 'images',
+      mockupId: mockupId,
     );
 
-    print(url);
+    if (url == null) return;
+
+    callback?.call(url);
   }
 }

@@ -1,3 +1,5 @@
+import 'package:awesome_side_sheet/Enums/sheet_position.dart';
+import 'package:awesome_side_sheet/side_sheet.dart';
 import 'package:expansion_tile_group/expansion_tile_group.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
@@ -21,12 +23,18 @@ class BuildCreateMockupSidebarSelectedState
     extends GetView<BuildCreateMockupSidebarSelectedStateController> {
   const BuildCreateMockupSidebarSelectedState({
     super.key,
+    this.mockupId,
     this.initialColor,
+    this.onImageUpload,
     this.onColorChangedCallback,
+    this.onGradiantChangedCallback,
   });
 
+  final String? mockupId;
   final Color? initialColor;
   final void Function(Color)? onColorChangedCallback;
+  final void Function(GradientModel)? onGradiantChangedCallback;
+  final void Function(String)? onImageUpload;
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +49,9 @@ class BuildCreateMockupSidebarSelectedState
               _buildLayoutStep(),
               _buildBackgroundStep(
                 initialColor: initialColor,
+                onImageUpload: onImageUpload,
                 onColorChangedCallback: onColorChangedCallback,
+                onGradiantChangedCallback: onGradiantChangedCallback,
               ),
               _buildingIconStep(),
               _buildTitleStep(),
@@ -324,7 +334,9 @@ class BuildCreateMockupSidebarSelectedState
 
   ExpansionTileBorderItem _buildBackgroundStep({
     Color? initialColor,
-    Function(Color)? onColorChangedCallback,
+    final Function(String)? onImageUpload,
+    final Function(Color)? onColorChangedCallback,
+    final void Function(GradientModel)? onGradiantChangedCallback,
   }) {
     return ExpansionTileBorderItem(
       title: const Text('Background'),
@@ -393,12 +405,16 @@ class BuildCreateMockupSidebarSelectedState
                   ? _BuildColorPresetGradient(
                       name: controller.gradientName,
                       gradient: controller.activeGradient,
-                      callback: controller.onGradientSelect,
+                      callback: (val) {
+                        controller.onGradientSelect(val);
+                        onGradiantChangedCallback?.call(val);
+                      },
                       angleCallback: controller.updateAngle,
                     )
                   : _BuildSelectImageOption(
+                      mockupId: mockupId,
                       controllerTag: 'backgroundImage',
-                      callback: controller.onSelectImage,
+                      callback: (val) => onImageUpload?.call(val),
                     ),
         ),
       ],
@@ -445,10 +461,12 @@ class BuildCreateMockupSidebarSelectedState
 }
 
 class _BuildSelectImageOption extends StatelessWidget {
-  final String? controllerTag;
+  final String? controllerTag, mockupId;
+
   final Function(String) callback;
   const _BuildSelectImageOption({
     this.controllerTag,
+    this.mockupId,
     required this.callback,
   });
 
@@ -460,7 +478,10 @@ class _BuildSelectImageOption extends StatelessWidget {
       initState: (_) {},
       builder: (_) {
         return ElevatedButton(
-          onPressed: () => _.getImage(),
+          onPressed: () => _.getImage(
+            mockupId: mockupId,
+            callback: callback,
+          ),
           child: const Text('add image'),
         );
       },
@@ -487,13 +508,15 @@ class _BuildColorPresetGradient extends StatelessWidget {
         BuildSidebarOption(
           title: 'preset',
           rightWidget: InkWell(
-            onTap: () => Get.bottomSheet(
-              BuildPresetGradientList(
+            onTap: () => aweSideSheet(
+              context: context,
+              sheetPosition: SheetPosition.right,
+              title: 'Gradients',
+              sheetWidth: context.width * 0.5,
+              footer: const SizedBox.shrink(),
+              body: BuildPresetGradientList(
                 onGradientSelected: callback,
               ),
-              isDismissible: false,
-              enableDrag: false,
-              isScrollControlled: true,
             ),
             child: Container(
               padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
