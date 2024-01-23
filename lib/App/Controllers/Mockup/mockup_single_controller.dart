@@ -92,4 +92,14 @@ class MockupSingleController extends GetxController {
     jsonData[index] = _seletedItem.value;
     _mockup.value = _mockup.value.copyWith(jsonData: jsonData);
   }
+
+  // update logo
+  updateLogo({required String logo}) {
+    _seletedItem.value = _seletedItem.value.copyWith(
+      logo: logo,
+    );
+
+    // update mockup jsonData
+    _updateMockupData();
+  }
 }

@@ -171,15 +171,17 @@ class BuildDeviceBodyHead extends StatelessWidget {
           children: [
             if (config.showLogo!)
               Container(
-                width: 30,
-                height: 30,
+                width: 50,
+                height: 50,
                 margin: EdgeInsets.only(
                   top: config.logoPaddingTop!,
                   bottom: config.logoPaddingBottom!,
                   left: config.logoPaddingLeft!,
                   right: config.logoPaddingRight!,
                 ),
-                child: const Placeholder(),
+                child: config.logo != null
+                    ? Image.network(config.logo!)
+                    : const Placeholder(),
               ),
           ],
         ),

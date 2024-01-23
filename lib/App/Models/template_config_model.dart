@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutterpp/Helpers/colors_helper.dart';
 
 class TemplateConfigModel {
-  String? id, image;
+  String? id, image, logo;
   String? type;
   Axis? bodyDirection;
   VerticalDirection? bodyVerticalDirection;
@@ -42,6 +42,7 @@ class TemplateConfigModel {
   TemplateConfigModel({
     this.id,
     this.image,
+    this.logo,
     this.type,
     this.bodyDirection,
     this.bodyVerticalDirection,
@@ -83,6 +84,7 @@ class TemplateConfigModel {
   TemplateConfigModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     image = json['image'];
+    logo = json['logo'];
     type = json['type'];
 
     // bodyDirection = json['bodyDirection'];
@@ -221,6 +223,7 @@ class TemplateConfigModel {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['id'] = id;
     data['image'] = image;
+    data['logo'] = logo;
     data['type'] = type.toString();
 
     // data['bodyDirection'] = bodyDirection;
@@ -373,6 +376,7 @@ class TemplateConfigModel {
   // copy with
   TemplateConfigModel copyWith({
     String? id,
+    String? logo,
     String? image,
     String? type,
     Axis? bodyDirection,
@@ -413,6 +417,7 @@ class TemplateConfigModel {
   }) {
     return TemplateConfigModel(
       id: id ?? this.id,
+      logo: logo ?? this.logo,
       image: image ?? this.image,
       type: type ?? this.type,
       bodyDirection: bodyDirection ?? this.bodyDirection,

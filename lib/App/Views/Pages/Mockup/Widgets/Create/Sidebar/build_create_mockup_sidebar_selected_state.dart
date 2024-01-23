@@ -3,12 +3,12 @@ import 'package:awesome_side_sheet/side_sheet.dart';
 import 'package:expansion_tile_group/expansion_tile_group.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
-import 'package:flutterpp/App/Controllers/Mockup/Micro/select_image_option_controller.dart';
 import 'package:flutterpp/App/Controllers/Mockup/build_create_mockup_sidebar_selected_state_controller.dart';
 import 'package:flutterpp/App/Models/background_type_model.dart';
 import 'package:flutterpp/App/Models/gradient_model.dart';
 import 'package:flutterpp/App/Views/Global/build_preeset_gradient_list.dart';
 import 'package:flutterpp/App/Views/Global/build_slider.dart';
+import 'package:flutterpp/App/Views/Pages/Mockup/Widgets/Create/Sidebar/Widgets/build_select_image_option.dart';
 import 'package:flutterpp/App/Views/Pages/Mockup/Widgets/Create/Sidebar/build_alignment_option.dart';
 import 'package:flutterpp/App/Views/Pages/Mockup/Widgets/Create/Sidebar/build_change_fontfamily.dart';
 import 'package:flutterpp/App/Views/Pages/Mockup/Widgets/Create/Sidebar/build_pick_color.dart';
@@ -31,6 +31,7 @@ class BuildCreateMockupSidebarSelectedState
     this.activeGradient,
     this.onIconToggle,
     this.isIconToggled,
+    this.onIconUpload,
   });
 
   final String? mockupId;
@@ -40,6 +41,7 @@ class BuildCreateMockupSidebarSelectedState
   final void Function(String)? onImageUpload;
   final GradientModel? activeGradient;
   final void Function(bool)? onIconToggle;
+  final void Function(String)? onIconUpload;
   final bool? isIconToggled;
 
   @override
@@ -59,7 +61,11 @@ class BuildCreateMockupSidebarSelectedState
                 onColorChangedCallback: onColorChangedCallback,
                 onGradiantChangedCallback: onGradiantChangedCallback,
               ),
-              _buildingIconStep(isIconToggled: isIconToggled),
+              _buildingIconStep(
+                isIconToggled: isIconToggled,
+                onIconToggle: onIconToggle,
+                onIconUpload: onIconUpload,
+              ),
               _buildTitleStep(),
               _buildSubtitleStep(),
               _buildDeviceStep(),
@@ -298,7 +304,11 @@ class BuildCreateMockupSidebarSelectedState
     );
   }
 
-  ExpansionTileBorderItem _buildingIconStep({bool? isIconToggled}) {
+  ExpansionTileBorderItem _buildingIconStep({
+    bool? isIconToggled,
+    void Function(bool)? onIconToggle,
+    void Function(String)? onIconUpload,
+  }) {
     return ExpansionTileBorderItem(
       title: const Text('Icon'),
       leading: const Icon(Icons.invert_colors_on_sharp),
@@ -317,10 +327,12 @@ class BuildCreateMockupSidebarSelectedState
         const Divider(height: 30),
         const SizedBox(height: 10),
         BuildSidebarOption(
-          title: 'Image',
-          rightWidget: ElevatedButton(
-            onPressed: () {},
-            child: const Text('add image'),
+          title: 'logo',
+          rightWidget: BuildSelectImageOption(
+            mockupId: mockupId,
+            controllerTag: 'logoImageUpload',
+            title: 'add logo',
+            callback: (val) => onIconUpload?.call(val),
           ),
         ),
         const SizedBox(height: 20),
@@ -433,7 +445,7 @@ class BuildCreateMockupSidebarSelectedState
                         );
                       },
                     )
-                  : _BuildSelectImageOption(
+                  : BuildSelectImageOption(
                       mockupId: mockupId,
                       controllerTag: 'backgroundImage',
                       callback: (val) => onImageUpload?.call(val),
@@ -478,35 +490,6 @@ class BuildCreateMockupSidebarSelectedState
           ),
         ),
       ],
-    );
-  }
-}
-
-class _BuildSelectImageOption extends StatelessWidget {
-  final String? controllerTag, mockupId;
-
-  final Function(String) callback;
-  const _BuildSelectImageOption({
-    this.controllerTag,
-    this.mockupId,
-    required this.callback,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return GetBuilder<SelectImageOptionController>(
-      init: SelectImageOptionController(),
-      tag: controllerTag,
-      initState: (_) {},
-      builder: (_) {
-        return ElevatedButton(
-          onPressed: () => _.getImage(
-            mockupId: mockupId,
-            callback: callback,
-          ),
-          child: const Text('add image'),
-        );
-      },
     );
   }
 }

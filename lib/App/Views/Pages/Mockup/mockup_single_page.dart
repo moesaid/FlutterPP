@@ -106,6 +106,8 @@ class MockupSinglePage extends GetView<MockupSingleController> {
                     isIconToggled: controller.seletedItem.showLogo,
                     onIconToggle: (bool value) =>
                         controller.onIconToggle(value),
+                    onIconUpload: (String icon) =>
+                        controller.updateLogo(logo: icon),
                     // end icon
                   ),
                 ),
