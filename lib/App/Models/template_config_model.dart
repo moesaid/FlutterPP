@@ -332,7 +332,6 @@ class TemplateConfigModel {
     return value.toDouble();
   }
 
-
   // copy with
   TemplateConfigModel copyWith({
     String? id,
@@ -375,8 +374,10 @@ class TemplateConfigModel {
       image: image ?? this.image,
       type: type ?? this.type,
       bodyDirection: bodyDirection ?? this.bodyDirection,
-      bodyVerticalDirection: bodyVerticalDirection ?? this.bodyVerticalDirection,
-      bodyCrossAxisAlignment: bodyCrossAxisAlignment ?? this.bodyCrossAxisAlignment,
+      bodyVerticalDirection:
+          bodyVerticalDirection ?? this.bodyVerticalDirection,
+      bodyCrossAxisAlignment:
+          bodyCrossAxisAlignment ?? this.bodyCrossAxisAlignment,
       logoAlignment: logoAlignment ?? this.logoAlignment,
       titleAlignment: titleAlignment ?? this.titleAlignment,
       subtitleAlignment: subtitleAlignment ?? this.subtitleAlignment,
@@ -392,7 +393,8 @@ class TemplateConfigModel {
       titlePaddingLeft: titlePaddingLeft ?? this.titlePaddingLeft,
       titlePaddingRight: titlePaddingRight ?? this.titlePaddingRight,
       subtitlePaddingTop: subtitlePaddingTop ?? this.subtitlePaddingTop,
-      subtitlePaddingBottom: subtitlePaddingBottom  ?? this.subtitlePaddingBottom,
+      subtitlePaddingBottom:
+          subtitlePaddingBottom ?? this.subtitlePaddingBottom,
       subtitlePaddingLeft: subtitlePaddingLeft ?? this.subtitlePaddingLeft,
       subtitlePaddingRight: subtitlePaddingRight ?? this.subtitlePaddingRight,
       logoPaddingTop: logoPaddingTop ?? this.logoPaddingTop,
@@ -406,4 +408,5 @@ class TemplateConfigModel {
       title: title ?? this.title,
       subtitle: subtitle ?? this.subtitle,
     );
+  }
 }
