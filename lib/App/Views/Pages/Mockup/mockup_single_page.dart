@@ -100,8 +100,13 @@ class MockupSinglePage extends GetView<MockupSingleController> {
                               .toList(),
                       angle: controller.seletedItem.gradientAngle,
                     ),
-
                     // end background
+
+                    // start icon
+                    isIconToggled: controller.seletedItem.showLogo,
+                    onIconToggle: (bool value) =>
+                        controller.onIconToggle(value),
+                    // end icon
                   ),
                 ),
                 Positioned(

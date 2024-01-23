@@ -13,6 +13,8 @@ class BuildCreateMockupSidebar extends StatelessWidget {
   final void Function(String)? onImageUpload;
   final void Function(Color)? onColorChangedCallback;
   final void Function(GradientModel)? onGradiantChangedCallback;
+  final void Function(bool)? onIconToggle;
+  final bool? isIconToggled;
 
   const BuildCreateMockupSidebar({
     super.key,
@@ -23,6 +25,8 @@ class BuildCreateMockupSidebar extends StatelessWidget {
     this.onColorChangedCallback,
     this.onGradiantChangedCallback,
     this.activeGradient,
+    this.onIconToggle,
+    this.isIconToggled,
   });
 
   @override
@@ -49,6 +53,8 @@ class BuildCreateMockupSidebar extends StatelessWidget {
               onImageUpload: onImageUpload,
               onColorChangedCallback: onColorChangedCallback,
               onGradiantChangedCallback: onGradiantChangedCallback,
+              onIconToggle: onIconToggle,
+              isIconToggled: isIconToggled,
             ),
     );
   }

@@ -72,10 +72,24 @@ class MockupSingleController extends GetxController {
     );
 
     // update mockup jsonData
+    _updateMockupData();
+  }
+
+  // update icon toggle
+  onIconToggle(bool value) {
+    _seletedItem.value = _seletedItem.value.copyWith(
+      showLogo: value,
+    );
+
+    // update mockup jsonData
+    _updateMockupData();
+  }
+
+  // update mockup data
+  _updateMockupData() {
     List<TemplateConfigModel> jsonData = mockup.jsonData!;
     int index = jsonData.indexWhere((el) => el.id == _seletedItem.value.id);
     jsonData[index] = _seletedItem.value;
     _mockup.value = _mockup.value.copyWith(jsonData: jsonData);
-    // update();
   }
 }

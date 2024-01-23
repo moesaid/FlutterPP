@@ -29,6 +29,8 @@ class BuildCreateMockupSidebarSelectedState
     this.onColorChangedCallback,
     this.onGradiantChangedCallback,
     this.activeGradient,
+    this.onIconToggle,
+    this.isIconToggled,
   });
 
   final String? mockupId;
@@ -37,6 +39,8 @@ class BuildCreateMockupSidebarSelectedState
   final void Function(GradientModel)? onGradiantChangedCallback;
   final void Function(String)? onImageUpload;
   final GradientModel? activeGradient;
+  final void Function(bool)? onIconToggle;
+  final bool? isIconToggled;
 
   @override
   Widget build(BuildContext context) {
@@ -55,7 +59,7 @@ class BuildCreateMockupSidebarSelectedState
                 onColorChangedCallback: onColorChangedCallback,
                 onGradiantChangedCallback: onGradiantChangedCallback,
               ),
-              _buildingIconStep(),
+              _buildingIconStep(isIconToggled: isIconToggled),
               _buildTitleStep(),
               _buildSubtitleStep(),
               _buildDeviceStep(),
@@ -294,7 +298,7 @@ class BuildCreateMockupSidebarSelectedState
     );
   }
 
-  ExpansionTileBorderItem _buildingIconStep() {
+  ExpansionTileBorderItem _buildingIconStep({bool? isIconToggled}) {
     return ExpansionTileBorderItem(
       title: const Text('Icon'),
       leading: const Icon(Icons.invert_colors_on_sharp),
@@ -305,8 +309,10 @@ class BuildCreateMockupSidebarSelectedState
       textColor: Colors.white,
       iconColor: Colors.white,
       children: [
-        const BuildSliderEnableOption(
+        BuildSliderEnableOption(
           controllerTag: 'iconEnable',
+          initialValue: isIconToggled,
+          onToggle: onIconToggle,
         ),
         const Divider(height: 30),
         const SizedBox(height: 10),

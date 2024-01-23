@@ -6,11 +6,13 @@ import 'package:get/get.dart';
 class BuildSliderEnableOption extends GetView<BoolToggleController> {
   final void Function(bool)? onToggle;
   final String? controllerTag;
+  final bool? initialValue;
 
   const BuildSliderEnableOption({
     super.key,
     this.onToggle,
     this.controllerTag,
+    this.initialValue,
   });
 
   @override
@@ -18,6 +20,9 @@ class BuildSliderEnableOption extends GetView<BoolToggleController> {
     return GetBuilder<BoolToggleController>(
       init: BoolToggleController(),
       tag: controllerTag,
+      didChangeDependencies: (state) {
+        state.controller?.setInitialValue(initialValue ?? false);
+      },
       builder: (_) {
         return BuildSidebarOption(
           title: 'Enable',
