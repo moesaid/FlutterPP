@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutterpp/App/Enums/template_layout_enum.dart';
-import 'package:flutterpp/App/Views/Pages/Mockup/Widgets/Templates/template_layout_config.dart';
+import 'package:flutterpp/App/Models/template_config_model.dart';
 
 class BuildDeviceCard extends StatelessWidget {
-  final TemplateLayoutEnum config;
-  const BuildDeviceCard({Key? key, required this.config}) : super(key: key);
+  final TemplateConfigModel config;
+  const BuildDeviceCard({super.key, required this.config});
 
   @override
   Widget build(BuildContext context) {
@@ -14,9 +13,7 @@ class BuildDeviceCard extends StatelessWidget {
       child: Column(
         children: [
           const BuildDeviceHead(),
-          BuildDeviceBody(
-            config: TemplateLayoutConfig(type: config).getLayoutConfig(),
-          ),
+          BuildDeviceBody(config: config),
         ],
       ),
     );
@@ -24,7 +21,7 @@ class BuildDeviceCard extends StatelessWidget {
 }
 
 class BuildDeviceBody extends StatelessWidget {
-  final TemplateLayoutConfig config;
+  final TemplateConfigModel config;
   const BuildDeviceBody({
     super.key,
     required this.config,
@@ -64,7 +61,7 @@ class BuildDeviceBody extends StatelessWidget {
 }
 
 class BuildDeviceBodyIphoneCase extends StatelessWidget {
-  final TemplateLayoutConfig config;
+  final TemplateConfigModel config;
   const BuildDeviceBodyIphoneCase({
     super.key,
     required this.config,
@@ -76,7 +73,7 @@ class BuildDeviceBodyIphoneCase extends StatelessWidget {
       angle: config.rotate!,
       child: SizedBox(
         width: 300,
-        height: config.deviceFullSize! ? 700 : 550,
+        height: config.deviceFullSize == false ? 700 : 550,
         child: Stack(
           clipBehavior: Clip.none,
           alignment: Alignment.center,
@@ -91,13 +88,13 @@ class BuildDeviceBodyIphoneCase extends StatelessWidget {
               top: config.devicePositionTop,
               bottom: config.devicePositionBottom,
               child: Container(
-                height: config.deviceFullSize! ? 670 : 520,
+                height: config.deviceFullSize == false ? 670 : 520,
                 margin: const EdgeInsets.only(top: 10),
                 clipBehavior: Clip.hardEdge,
                 decoration: BoxDecoration(
                   color: Colors.black,
-                  borderRadius:
-                      BorderRadius.circular(config.deviceFullSize! ? 20 : 15),
+                  borderRadius: BorderRadius.circular(
+                      config.deviceFullSize == false ? 20 : 15),
                 ),
                 child: const Image(
                   fit: BoxFit.cover,
@@ -111,7 +108,7 @@ class BuildDeviceBodyIphoneCase extends StatelessWidget {
               top: config.devicePositionTop,
               bottom: config.devicePositionBottom,
               child: SizedBox(
-                height: config.deviceFullSize! ? 700 : 550,
+                height: config.deviceFullSize == false ? 700 : 550,
                 child: const Image(
                   fit: BoxFit.cover,
                   image: AssetImage('assets/images/iphone.png'),
@@ -127,7 +124,7 @@ class BuildDeviceBodyIphoneCase extends StatelessWidget {
 }
 
 class BuildDeviceBodyHead extends StatelessWidget {
-  final TemplateLayoutConfig config;
+  final TemplateConfigModel config;
   const BuildDeviceBodyHead({
     super.key,
     required this.config,

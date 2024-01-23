@@ -14,6 +14,7 @@ class MockupProvider {
         .from('mockups')
         .select('*')
         .eq('project_id', projectId)
+        .order('created_at', ascending: true)
         .select();
 
     if (data.isEmpty) return null;
@@ -33,6 +34,7 @@ class MockupProvider {
         .from('mockups')
         .select('*')
         .eq('team_id', teamId)
+        .order('created_at', ascending: true)
         .select();
 
     if (data.isEmpty) return null;
@@ -54,6 +56,7 @@ class MockupProvider {
         .select('*')
         .eq('team_id', teamId)
         .eq('project_id', projectId)
+        .order('created_at', ascending: true)
         .select();
 
     if (data.isEmpty) return null;

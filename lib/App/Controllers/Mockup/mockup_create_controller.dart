@@ -1,16 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutterpp/App/Controllers/Mockup/mockup_index_controller.dart';
+import 'package:flutterpp/App/Enums/template_layout_enum.dart';
 import 'package:flutterpp/App/Models/mockup_model.dart';
 import 'package:flutterpp/App/Models/project_model.dart';
 import 'package:flutterpp/App/Models/team_model.dart';
+import 'package:flutterpp/App/Models/template_config_model.dart';
 import 'package:flutterpp/App/Services/Mockups/mockup_services.dart';
 import 'package:flutterpp/App/Services/Project/project_services.dart';
 import 'package:flutterpp/App/Services/Team/team_services.dart';
 import 'package:flutterpp/App/Views/Global/build_overlay.dart';
 import 'package:flutterpp/App/Views/Global/build_snackbar.dart';
+import 'package:flutterpp/App/Views/Pages/Mockup/Widgets/Templates/template_layout_config.dart';
 import 'package:flutterpp/Helpers/colors_helper.dart';
-import 'package:flutterpp/Routes/app_pages.dart';
 import 'package:get/get.dart';
+import 'package:uuid/uuid.dart';
 
 class MockupCreateController extends GetxController {
   final ProjectServices _projectServices = ProjectServices();
@@ -192,6 +195,33 @@ class MockupCreateController extends GetxController {
           icon: _activeIcon.value,
           color1: _activeHexColor.first,
           color2: _activeHexColor.last,
+          jsonData: [
+            TemplateConfigModel.fromJson(
+              TemplateLayoutConfig().getLayoutConfig(
+                TemplateLayoutEnum.rightSideTitleUp,
+              ),
+            )..id = const Uuid().v4(),
+            TemplateConfigModel.fromJson(
+              TemplateLayoutConfig().getLayoutConfig(
+                TemplateLayoutEnum.leftSideTitleUp,
+              ),
+            )..id = const Uuid().v4(),
+            TemplateConfigModel.fromJson(
+              TemplateLayoutConfig().getLayoutConfig(
+                TemplateLayoutEnum.titleDown,
+              ),
+            )..id = const Uuid().v4(),
+            TemplateConfigModel.fromJson(
+              TemplateLayoutConfig().getLayoutConfig(
+                TemplateLayoutEnum.titleDown,
+              ),
+            )..id = const Uuid().v4(),
+            TemplateConfigModel.fromJson(
+              TemplateLayoutConfig().getLayoutConfig(
+                TemplateLayoutEnum.titleDown,
+              ),
+            )..id = const Uuid().v4(),
+          ],
         ),
       ),
       loadingWidget: const BuildOverlay(),
@@ -203,9 +233,9 @@ class MockupCreateController extends GetxController {
       await useMockupIndexController.fetchApi();
     }
 
-    Get.offAndToNamed(
-      AppRoutes.MOCKUP_SINGLE,
-      arguments: item,
-    );
+    // Get.offAndToNamed(
+    //   AppRoutes.MOCKUP_SINGLE,
+    //   arguments: item,
+    // );
   }
 }

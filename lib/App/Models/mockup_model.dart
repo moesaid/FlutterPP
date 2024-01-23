@@ -1,3 +1,5 @@
+import 'package:flutterpp/App/Models/template_config_model.dart';
+
 class MockupModel {
   String? id;
   String? projectId;
@@ -6,7 +8,7 @@ class MockupModel {
   String? description;
   String? category;
   String? icon;
-  String? data;
+  List<TemplateConfigModel>? jsonData;
   String? createdAt;
   String? color1;
   String? color2;
@@ -20,7 +22,7 @@ class MockupModel {
     this.description,
     this.category,
     this.icon,
-    this.data,
+    this.jsonData,
     this.createdAt,
     this.color1,
     this.color2,
@@ -35,7 +37,16 @@ class MockupModel {
     description = json['description'];
     category = json['category'];
     icon = json['icon'];
-    data = json['data'];
+    // jsonData = json['json_data'] != null
+    //     ? TemplateConfigModel.fromJson(json['json_data'])
+    //     : null;
+
+    if (json['json_data'] != null) {
+      jsonData = <TemplateConfigModel>[];
+      json['json_data'].forEach((v) {
+        jsonData!.add(TemplateConfigModel.fromJson(v));
+      });
+    }
     createdAt = json['created_at'];
     color1 = json['color_1'];
     color2 = json['color_2'];
@@ -51,7 +62,13 @@ class MockupModel {
     data['description'] = description;
     data['category'] = category;
     data['icon'] = icon;
-    data['data'] = this.data;
+    // if (jsonData != null) {
+    //   data['json_data'] = jsonData!.toJson();
+    // }
+
+    if (jsonData != null) {
+      data['json_data'] = jsonData!.map((v) => v.toJson()).toList();
+    }
     data['created_at'] = createdAt;
     data['color_1'] = color1;
     data['color_2'] = color2;
@@ -61,19 +78,21 @@ class MockupModel {
 
   // to map skip null
   Map<String, dynamic> toMap() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    if (id != null) data['id'] = id;
-    if (projectId != null) data['project_id'] = projectId;
-    if (teamId != null) data['team_id'] = teamId;
-    if (title != null) data['title'] = title;
-    if (description != null) data['description'] = description;
-    if (category != null) data['category'] = category;
-    if (icon != null) data['icon'] = icon;
-    // data['data'] = this.data;
-    if (createdAt != null) data['created_at'] = createdAt;
-    if (color1 != null) data['color_1'] = color1;
-    if (color2 != null) data['color_2'] = color2;
-    if (templateId != null) data['template_id'] = templateId;
-    return data;
+    return {
+      if (id != null) 'id': id,
+      if (projectId != null) 'project_id': projectId,
+      if (teamId != null) 'team_id': teamId,
+      if (title != null) 'title': title,
+      if (description != null) 'description': description,
+      if (category != null) 'category': category,
+      if (icon != null) 'icon': icon,
+      if (createdAt != null) 'created_at': createdAt,
+      if (color1 != null) 'color_1': color1,
+      if (color2 != null) 'color_2': color2,
+      if (templateId != null) 'template_id': templateId,
+      // if (jsonData != null) 'json_data': jsonData!.toJson(),
+      if (jsonData != null)
+        'json_data': jsonData!.map((v) => v.toJson()).toList(),
+    };
   }
 }

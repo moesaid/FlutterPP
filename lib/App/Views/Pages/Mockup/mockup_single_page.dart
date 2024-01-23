@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutterpp/App/Controllers/Mockup/mockup_single_controller.dart';
-import 'package:flutterpp/App/Enums/template_layout_enum.dart';
 import 'package:flutterpp/App/Views/Global/build_appbar.dart';
 import 'package:flutterpp/App/Views/Pages/Mockup/Widgets/Create/build_create_mockup_sidebar.dart';
 import 'package:flutterpp/App/Views/Pages/Mockup/Widgets/build_device_card.dart';
@@ -35,22 +34,19 @@ class MockupSinglePage extends GetView<MockupSingleController> {
                         children: [
                           SizedBox(
                             height: 700,
-                            child: ListView(
+                            child: ListView.separated(
                               scrollDirection: Axis.horizontal,
                               shrinkWrap: true,
-                              children: [
-                                const BuildDeviceCard(
-                                  config: TemplateLayoutEnum
-                                      .deviceAdvanceRotateRightTitleUp,
-                                ),
-                                SizedBox(width: 5.sp),
-                                const BuildDeviceCard(
-                                  config: TemplateLayoutEnum
-                                      .deviceAdvanceRotateRightTitleDown,
-                                ),
-                                SizedBox(width: 5.sp),
-                                const SizedBox(width: 300),
-                              ],
+                              itemCount: controller.mockup.jsonData!.length,
+                              padding: EdgeInsets.only(right: 140.sp),
+                              itemBuilder: (_, int i) {
+                                return BuildDeviceCard(
+                                  config: controller.mockup.jsonData![i],
+                                );
+                              },
+                              separatorBuilder: (_, __) => SizedBox(
+                                width: 3.sp,
+                              ),
                             ),
                           ),
                         ],

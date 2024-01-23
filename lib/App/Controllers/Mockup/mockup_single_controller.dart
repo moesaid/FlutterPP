@@ -12,7 +12,6 @@ class MockupSingleController extends GetxController {
   void onInit() {
     _getMockup();
 
-    print(mockup.toJson());
     super.onInit();
   }
 
