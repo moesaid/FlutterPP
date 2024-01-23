@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutterpp/App/Enums/padding_destination_enum.dart';
 import 'package:flutterpp/App/Models/gradient_model.dart';
 import 'package:flutterpp/App/Models/mockup_model.dart';
 import 'package:flutterpp/App/Models/template_config_model.dart';
@@ -107,6 +108,30 @@ class MockupSingleController extends GetxController {
   updateLogoAlignment({required MainAxisAlignment alignment}) {
     _seletedItem.value = _seletedItem.value.copyWith(
       logoAlignment: alignment,
+    );
+
+    // update mockup jsonData
+    _updateMockupData();
+  }
+
+  // update logo padding
+  updateLogoPadding({
+    required double padding,
+    required PaddingDestination destination,
+  }) {
+    _seletedItem.value = _seletedItem.value.copyWith(
+      logoPaddingBottom: destination == PaddingDestination.bottom
+          ? padding
+          : _seletedItem.value.logoPaddingBottom,
+      logoPaddingTop: destination == PaddingDestination.top
+          ? padding
+          : _seletedItem.value.logoPaddingTop,
+      logoPaddingLeft: destination == PaddingDestination.left
+          ? padding
+          : _seletedItem.value.logoPaddingLeft,
+      logoPaddingRight: destination == PaddingDestination.right
+          ? padding
+          : _seletedItem.value.logoPaddingRight,
     );
 
     // update mockup jsonData

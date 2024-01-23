@@ -5,14 +5,17 @@ class AlignmentOptionController extends GetxController {
   final _alignment = MainAxisAlignment.center.obs;
   MainAxisAlignment get alignment => _alignment.value;
 
-  setInitialAlignment(MainAxisAlignment alignment) {
+  setInitialAlignment(MainAxisAlignment? alignment) {
+    if (alignment == null) return;
     _alignment.value = alignment;
   }
 
   void setAlignment({
-    required MainAxisAlignment alignment,
+    MainAxisAlignment? alignment,
     Function(MainAxisAlignment)? onToggle,
   }) {
+    if (alignment == null) return;
+
     _alignment.value = alignment;
     update();
 

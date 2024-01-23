@@ -26,7 +26,7 @@ class BuildAlignmentOption extends GetView<AlignmentOptionController> {
       init: AlignmentOptionController(),
       tag: controllerTag,
       didChangeDependencies: (state) {
-        state.controller?.setAlignment(alignment: initialAlignment!);
+        state.controller?.setAlignment(alignment: initialAlignment);
       },
       builder: (_) {
         return BuildSidebarOption(

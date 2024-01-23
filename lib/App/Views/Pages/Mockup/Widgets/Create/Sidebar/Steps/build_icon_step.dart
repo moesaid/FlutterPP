@@ -46,13 +46,51 @@ ExpansionTileBorderItem buildingIconStep({
         initialAlignment: initialAlignment,
         onToggle: onIconAlignmentChanged,
       ),
+      const Divider(height: 40),
+      const Text('Padding', style: TextStyle(fontWeight: FontWeight.bold)),
       const SizedBox(height: 20),
-      BuildSidebarOption(
-        title: 'Margin',
-        rightWidget: BuildSlider(
-          controllerTag: 'iconMargin',
-          onChanged: (val) => print('❌ - $val'),
-        ),
+      Column(
+        children: [
+          BuildSidebarOption(
+            title: 'Top',
+            flexLeft: 1,
+            flexRight: 3,
+            rightWidget: BuildSlider(
+              controllerTag: 'logoPaddingTop',
+              onChanged: (val) => print('❌ - $val'),
+            ),
+          ),
+          const SizedBox(height: 10),
+          BuildSidebarOption(
+            title: 'Bottom',
+            flexLeft: 1,
+            flexRight: 3,
+            rightWidget: BuildSlider(
+              controllerTag: 'logoPaddingBottom',
+              onChanged: (val) => print('❌ - $val'),
+            ),
+          ),
+          const SizedBox(height: 10),
+          BuildSidebarOption(
+            title: 'Left',
+            flexLeft: 1,
+            flexRight: 3,
+            rightWidget: BuildSlider(
+              controllerTag: 'logoPaddingLeft',
+              onChanged: (val) => print('❌ - $val'),
+            ),
+          ),
+          const SizedBox(height: 10),
+          BuildSidebarOption(
+            title: 'Right',
+            flexLeft: 1,
+            flexRight: 3,
+            rightWidget: BuildSlider(
+              controllerTag: 'logoPaddingRight',
+              onChanged: (val) => print('❌ - $val'),
+            ),
+          ),
+        ],
       ),
       const SizedBox(height: 10),
     ],
