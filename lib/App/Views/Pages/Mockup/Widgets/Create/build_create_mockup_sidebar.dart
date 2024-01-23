@@ -9,6 +9,7 @@ class BuildCreateMockupSidebar extends StatelessWidget {
   final bool? isScreenshotSelected;
   final String? mockupId;
   final Color? initialColor;
+  final GradientModel? activeGradient;
   final void Function(String)? onImageUpload;
   final void Function(Color)? onColorChangedCallback;
   final void Function(GradientModel)? onGradiantChangedCallback;
@@ -21,6 +22,7 @@ class BuildCreateMockupSidebar extends StatelessWidget {
     this.onImageUpload,
     this.onColorChangedCallback,
     this.onGradiantChangedCallback,
+    this.activeGradient,
   });
 
   @override
@@ -42,6 +44,7 @@ class BuildCreateMockupSidebar extends StatelessWidget {
           ? const BuildCreateMockupSidebarEmpty()
           : BuildCreateMockupSidebarSelectedState(
               initialColor: initialColor,
+              activeGradient: activeGradient,
               mockupId: mockupId,
               onImageUpload: onImageUpload,
               onColorChangedCallback: onColorChangedCallback,

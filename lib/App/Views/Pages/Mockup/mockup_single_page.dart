@@ -5,6 +5,7 @@ import 'package:flutterpp/App/Models/template_config_model.dart';
 import 'package:flutterpp/App/Views/Global/build_appbar.dart';
 import 'package:flutterpp/App/Views/Pages/Mockup/Widgets/Create/build_create_mockup_sidebar.dart';
 import 'package:flutterpp/App/Views/Pages/Mockup/Widgets/build_device_card.dart';
+import 'package:flutterpp/Helpers/colors_helper.dart';
 import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
 
@@ -34,34 +35,36 @@ class MockupSinglePage extends GetView<MockupSingleController> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          SizedBox(
-                            height: 700,
-                            child: ListView.separated(
-                              scrollDirection: Axis.horizontal,
-                              shrinkWrap: true,
-                              itemCount: controller.mockup.jsonData!.length,
-                              padding: EdgeInsets.only(
-                                right: 140.sp,
-                                left: 2.sp,
-                                top: 2.sp,
-                                bottom: 2.sp,
-                              ),
-                              itemBuilder: (_, int i) {
-                                TemplateConfigModel config =
-                                    controller.mockup.jsonData![i];
-                                return InkWell(
-                                  onTap: () => controller.updateSelectedItem(
-                                    config,
-                                  ),
-                                  child: BuildDeviceCard(
-                                    config: config,
-                                    isSeleted:
-                                        controller.seletedItem.id == config.id,
-                                  ),
-                                );
-                              },
-                              separatorBuilder: (_, __) => SizedBox(
-                                width: 3.sp,
+                          Obx(
+                            () => SizedBox(
+                              height: 700,
+                              child: ListView.separated(
+                                scrollDirection: Axis.horizontal,
+                                shrinkWrap: true,
+                                itemCount: controller.mockup.jsonData!.length,
+                                padding: EdgeInsets.only(
+                                  right: 140.sp,
+                                  left: 2.sp,
+                                  top: 2.sp,
+                                  bottom: 2.sp,
+                                ),
+                                itemBuilder: (_, int i) {
+                                  TemplateConfigModel config =
+                                      controller.mockup.jsonData![i];
+                                  return InkWell(
+                                    onTap: () => controller.updateSelectedItem(
+                                      config,
+                                    ),
+                                    child: BuildDeviceCard(
+                                      config: config,
+                                      isSeleted: controller.seletedItem.id ==
+                                          config.id,
+                                    ),
+                                  );
+                                },
+                                separatorBuilder: (_, __) => SizedBox(
+                                  width: 3.sp,
+                                ),
                               ),
                             ),
                           ),
@@ -87,6 +90,16 @@ class MockupSinglePage extends GetView<MockupSingleController> {
                     ),
                     onImageUpload: (String image) =>
                         controller.updateBackground(image: image),
+                    activeGradient: GradientModel(
+                      colors: controller.seletedItem.backgroundGradient == null
+                          ? ['#000000', '#000000']
+                          : controller.seletedItem.backgroundGradient!
+                              .map(
+                                (e) => ColorHelper.colorToHex(e),
+                              )
+                              .toList(),
+                      angle: controller.seletedItem.gradientAngle,
+                    ),
 
                     // end background
                   ),

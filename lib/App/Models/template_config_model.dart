@@ -37,6 +37,7 @@ class TemplateConfigModel {
   String? backgroundImage;
   Color? backgroundColor;
   List<Color>? backgroundGradient;
+  double? gradientAngle;
 
   TemplateConfigModel({
     this.id,
@@ -76,6 +77,7 @@ class TemplateConfigModel {
     this.showLogo = false,
     this.showTitle = false,
     this.showSubtitle = false,
+    this.gradientAngle = 0,
   });
 
   TemplateConfigModel.fromJson(Map<String, dynamic> json) {
@@ -211,6 +213,8 @@ class TemplateConfigModel {
             ColorHelper.hexToColor(json['backgroundGradient'][1]),
           ]
         : null;
+
+    gradientAngle = json['gradientAngle'] ?? 0;
   }
 
   Map<String, dynamic> toJson() {
@@ -347,6 +351,8 @@ class TemplateConfigModel {
                 ColorHelper.colorToHexWithoutHash(backgroundGradient![1]),
               ]
             : null;
+
+    data['gradientAngle'] = gradientAngle;
     return data;
   }
 
@@ -403,6 +409,7 @@ class TemplateConfigModel {
     String? backgroundImage,
     Color? backgroundColor,
     List<Color>? backgroundGradient,
+    double? gradientAngle,
   }) {
     return TemplateConfigModel(
       id: id ?? this.id,
@@ -445,6 +452,7 @@ class TemplateConfigModel {
       backgroundImage: backgroundImage ?? this.backgroundImage,
       backgroundColor: backgroundColor ?? this.backgroundColor,
       backgroundGradient: backgroundGradient ?? this.backgroundGradient,
+      gradientAngle: gradientAngle ?? this.gradientAngle,
     );
   }
 }

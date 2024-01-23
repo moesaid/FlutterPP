@@ -28,6 +28,7 @@ class BuildCreateMockupSidebarSelectedState
     this.onImageUpload,
     this.onColorChangedCallback,
     this.onGradiantChangedCallback,
+    this.activeGradient,
   });
 
   final String? mockupId;
@@ -35,6 +36,7 @@ class BuildCreateMockupSidebarSelectedState
   final void Function(Color)? onColorChangedCallback;
   final void Function(GradientModel)? onGradiantChangedCallback;
   final void Function(String)? onImageUpload;
+  final GradientModel? activeGradient;
 
   @override
   Widget build(BuildContext context) {
@@ -404,12 +406,26 @@ class BuildCreateMockupSidebarSelectedState
               : (controller.activeBackgroundType.id == 'gradient')
                   ? _BuildColorPresetGradient(
                       name: controller.gradientName,
-                      gradient: controller.activeGradient,
+                      gradient: (controller.activeGradient.colors == null ||
+                              controller.activeGradient.colors!.isEmpty)
+                          ? activeGradient
+                          : controller.activeGradient,
+                      onSingleColorUpdate: (val, index) {
+                        controller.updateSingleColor(val, index);
+                        onGradiantChangedCallback?.call(
+                          controller.activeGradient,
+                        );
+                      },
                       callback: (val) {
                         controller.onGradientSelect(val);
                         onGradiantChangedCallback?.call(val);
                       },
-                      angleCallback: controller.updateAngle,
+                      angleCallback: (val) {
+                        controller.updateAngle(val);
+                        onGradiantChangedCallback?.call(
+                          controller.activeGradient,
+                        );
+                      },
                     )
                   : _BuildSelectImageOption(
                       mockupId: mockupId,
@@ -491,14 +507,16 @@ class _BuildSelectImageOption extends StatelessWidget {
 
 class _BuildColorPresetGradient extends StatelessWidget {
   final String? name;
-  final Function(GradientModel) callback;
   final GradientModel? gradient;
+  final Function(GradientModel) callback;
+  final Function(Color, int) onSingleColorUpdate;
   final void Function(double angle)? angleCallback;
   const _BuildColorPresetGradient({
     this.name,
-    required this.callback,
     this.gradient,
     this.angleCallback,
+    required this.callback,
+    required this.onSingleColorUpdate,
   });
 
   @override
@@ -557,6 +575,7 @@ class _BuildColorPresetGradient extends StatelessWidget {
         BuildSidebarOption(
           title: 'Color one',
           rightWidget: BuildPickColor(
+            onColorChangedCallback: (val) => onSingleColorUpdate.call(val, 0),
             controllerTag: 'gradiantColorOne',
             initialColor: (gradient == null ||
                     gradient!.colors == null ||
@@ -569,6 +588,7 @@ class _BuildColorPresetGradient extends StatelessWidget {
         BuildSidebarOption(
           title: 'Color two',
           rightWidget: BuildPickColor(
+            onColorChangedCallback: (val) => onSingleColorUpdate.call(val, 1),
             controllerTag: 'gradiantColorTwo',
             initialColor: (gradient == null ||
                     gradient!.colors == null ||

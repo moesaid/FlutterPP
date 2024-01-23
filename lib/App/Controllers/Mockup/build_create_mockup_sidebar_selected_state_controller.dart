@@ -1,6 +1,9 @@
+import 'dart:ui';
+
 import 'package:flutterpp/App/Enums/background_enum.dart';
 import 'package:flutterpp/App/Models/background_type_model.dart';
 import 'package:flutterpp/App/Models/gradient_model.dart';
+import 'package:flutterpp/Helpers/colors_helper.dart';
 import 'package:get/get.dart';
 
 class BuildCreateMockupSidebarSelectedStateController extends GetxController {
@@ -68,7 +71,6 @@ class BuildCreateMockupSidebarSelectedStateController extends GetxController {
   void onGradientSelect(GradientModel item) {
     _activeGradient.value = item;
     _gradientName.value = item.name ?? 'select gradient';
-    update();
 
     Get.back();
   }
@@ -76,5 +78,11 @@ class BuildCreateMockupSidebarSelectedStateController extends GetxController {
   // update angle
   void updateAngle(double angle) {
     _activeGradient.value.angle = angle;
+  }
+
+  // update gradient single color
+  void updateSingleColor(Color val, int index) {
+    if (_activeGradient.value.colors == null) return;
+    _activeGradient.value.colors![index] = ColorHelper.colorToHex(val);
   }
 }

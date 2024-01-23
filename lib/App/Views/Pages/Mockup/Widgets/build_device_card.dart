@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutterpp/App/Models/template_config_model.dart';
-import 'package:flutterpp/Config/app_gradients.dart';
 import 'package:get/get.dart';
 
 class BuildDeviceCard extends StatelessWidget {
@@ -56,9 +55,14 @@ class BuildDeviceBody extends StatelessWidget {
                 fit: BoxFit.cover,
               )
             : null,
-        gradient: config.backgroundGradient != null
-            ? AppGradients.getGradient(colors: config.backgroundGradient!)
-            : null,
+        gradient: config.backgroundGradient == null
+            ? null
+            : LinearGradient(
+                colors: config.backgroundGradient!,
+                transform: config.gradientAngle == null
+                    ? null
+                    : GradientRotation(config.gradientAngle! / 180 * 3.14),
+              ),
       ),
       child: Card(
         elevation: 0,
@@ -101,7 +105,7 @@ class BuildDeviceBodyIphoneCase extends StatelessWidget {
       angle: config.rotate!,
       child: SizedBox(
         width: 300,
-        height: config.deviceFullSize == false ? 700 : 550,
+        height: config.deviceFullSize == false ? 700 : 530,
         child: Stack(
           clipBehavior: Clip.none,
           alignment: Alignment.center,
@@ -116,7 +120,7 @@ class BuildDeviceBodyIphoneCase extends StatelessWidget {
               top: config.devicePositionTop,
               bottom: config.devicePositionBottom,
               child: Container(
-                height: config.deviceFullSize == false ? 670 : 520,
+                height: config.deviceFullSize == false ? 670 : 500,
                 margin: const EdgeInsets.only(top: 10),
                 clipBehavior: Clip.hardEdge,
                 decoration: BoxDecoration(
@@ -136,7 +140,7 @@ class BuildDeviceBodyIphoneCase extends StatelessWidget {
               top: config.devicePositionTop,
               bottom: config.devicePositionBottom,
               child: SizedBox(
-                height: config.deviceFullSize == false ? 700 : 550,
+                height: config.deviceFullSize == false ? 700 : 530,
                 child: const Image(
                   fit: BoxFit.cover,
                   image: AssetImage('assets/images/iphone.png'),

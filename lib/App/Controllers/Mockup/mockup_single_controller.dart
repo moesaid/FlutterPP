@@ -68,6 +68,7 @@ class MockupSingleController extends GetxController {
               ColorHelper.hexToColor(gradient.colors!.first),
               ColorHelper.hexToColor(gradient.colors!.last),
             ],
+      gradientAngle: gradient?.angle,
     );
 
     // update mockup jsonData
@@ -75,6 +76,6 @@ class MockupSingleController extends GetxController {
     int index = jsonData.indexWhere((el) => el.id == _seletedItem.value.id);
     jsonData[index] = _seletedItem.value;
     _mockup.value = _mockup.value.copyWith(jsonData: jsonData);
-    update();
+    // update();
   }
 }
