@@ -5,6 +5,7 @@ import 'package:flutterpp/App/Controllers/Mockup/build_create_mockup_sidebar_sel
 import 'package:flutterpp/App/Models/gradient_model.dart';
 import 'package:flutterpp/App/Views/Global/build_slider.dart';
 import 'package:flutterpp/App/Views/Pages/Mockup/Widgets/Create/Sidebar/Steps/build_background_step.dart';
+import 'package:flutterpp/App/Views/Pages/Mockup/Widgets/Create/Sidebar/Steps/build_device_step.dart';
 import 'package:flutterpp/App/Views/Pages/Mockup/Widgets/Create/Sidebar/Steps/build_icon_step.dart';
 import 'package:flutterpp/App/Views/Pages/Mockup/Widgets/Create/Sidebar/build_alignment_option.dart';
 import 'package:flutterpp/App/Views/Pages/Mockup/Widgets/Create/Sidebar/build_change_fontfamily.dart';
@@ -67,8 +68,8 @@ class BuildCreateMockupSidebarSelectedState
               ),
               _buildTitleStep(),
               _buildSubtitleStep(),
-              _buildDeviceStep(),
-              _buildDeviceStep(
+              buildDeviceStep(),
+              buildDeviceStep(
                 title: 'Device Two',
                 leading: const Row(
                   mainAxisSize: MainAxisSize.min,
@@ -82,87 +83,6 @@ class BuildCreateMockupSidebarSelectedState
           ),
         );
       },
-    );
-  }
-
-  ExpansionTileBorderItem _buildDeviceStep({
-    String? title,
-    Widget? leading,
-  }) {
-    return ExpansionTileBorderItem(
-      title: Text(title ?? 'Device'),
-      leading: leading ?? const Icon(Icons.devices),
-      collapsedBorderColor: Colors.transparent,
-      collapsedTextColor: Colors.grey.withOpacity(0.8),
-      collapsedIconColor: Colors.grey.withOpacity(0.8),
-      expendedBorderColor: Colors.grey.withOpacity(0.2),
-      textColor: Colors.white,
-      iconColor: Colors.white,
-      children: [
-        const BuildSliderEnableOption(
-          controllerTag: 'deviceEnable',
-        ),
-        const Divider(height: 30),
-        const SizedBox(height: 10),
-        const BuildAlignmentOption(
-          title: '',
-          controllerTag: 'deviceAlignmentHorizontal',
-        ),
-        const BuildAlignmentOption(
-          title: '',
-          controllerTag: 'deviceAlignmentVertical',
-          firtIcon: Icons.vertical_align_top_rounded,
-          secondIcon: Icons.vertical_align_center_rounded,
-          thirdIcon: Icons.vertical_align_bottom_rounded,
-        ),
-        const SizedBox(height: 20),
-        BuildSidebarOption(
-          title: 'Screen',
-          rightWidget: ElevatedButton(
-            onPressed: () {},
-            child: Text('add Screen'.capitalize!),
-          ),
-        ),
-        const SizedBox(height: 10),
-        BuildSidebarOption(
-          title: 'Frame',
-          rightWidget: ElevatedButton(
-            onPressed: () {},
-            child: Text('edit Frame'.capitalize!),
-          ),
-        ),
-        const SizedBox(height: 20),
-        BuildSidebarOption(
-          title: 'Size',
-          rightWidget: BuildSliderWithValueBox(
-            controllerTag: 'deviceSize',
-            onChanged: (val) => print('❌ - $val'),
-          ),
-        ),
-        const SizedBox(height: 10),
-        BuildSidebarOption(
-          title: 'Rotate',
-          rightWidget: BuildSliderWithValueBox(
-            controllerTag: 'deviceRotate',
-            onChanged: (val) => print('❌ - $val'),
-          ),
-        ),
-        const SizedBox(height: 20),
-        const BuildSidebarOption(
-          title: 'Stroke',
-          rightWidget: BuildPickColor(
-            controllerTag: 'deviceStrokeColor',
-          ),
-        ),
-        const SizedBox(height: 10),
-        const BuildSidebarOption(
-          title: 'Shadow',
-          rightWidget: BuildPickColor(
-            controllerTag: 'deviceShadowColor',
-          ),
-        ),
-        const SizedBox(height: 10),
-      ],
     );
   }
 
