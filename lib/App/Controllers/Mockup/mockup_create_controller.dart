@@ -12,6 +12,7 @@ import 'package:flutterpp/App/Views/Global/build_overlay.dart';
 import 'package:flutterpp/App/Views/Global/build_snackbar.dart';
 import 'package:flutterpp/App/Views/Pages/Mockup/Widgets/Templates/template_layout_config.dart';
 import 'package:flutterpp/Helpers/colors_helper.dart';
+import 'package:flutterpp/Routes/app_pages.dart';
 import 'package:get/get.dart';
 import 'package:uuid/uuid.dart';
 
@@ -233,9 +234,9 @@ class MockupCreateController extends GetxController {
       await useMockupIndexController.fetchApi();
     }
 
-    // Get.offAndToNamed(
-    //   AppRoutes.MOCKUP_SINGLE,
-    //   arguments: item,
-    // );
+    Get.offAndToNamed(
+      AppRoutes.MOCKUP_SINGLE,
+      arguments: item,
+    );
   }
 }

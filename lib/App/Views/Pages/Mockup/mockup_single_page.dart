@@ -93,8 +93,18 @@ class BuildMockupSinglePageSidebar extends StatelessWidget {
         onIconToggle: (value) => controller.onIconToggle(value),
         onIconUpload: (icon) => controller.updateLogo(logo: icon),
         initialAlignment: controller.seletedItem.logoAlignment,
+        initialIconTopPadding: controller.seletedItem.logoPaddingTop,
+        initialIconBottomPadding: controller.seletedItem.logoPaddingBottom,
+        initialIconLeftPadding: controller.seletedItem.logoPaddingLeft,
+        initialIconRightPadding: controller.seletedItem.logoPaddingRight,
         onIconAlignmentChanged: (alignment) {
           controller.updateLogoAlignment(alignment: alignment);
+        },
+        onIconPaddingChanged: (padding, destination) {
+          controller.updateLogoPadding(
+            padding: padding,
+            destination: destination,
+          );
         },
         // end icon
       ),

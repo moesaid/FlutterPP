@@ -1,6 +1,7 @@
 import 'package:expansion_tile_group/expansion_tile_group.dart';
 import 'package:flutter/material.dart';
 import 'package:flutterpp/App/Controllers/Mockup/build_create_mockup_sidebar_selected_state_controller.dart';
+import 'package:flutterpp/App/Enums/padding_destination_enum.dart';
 import 'package:flutterpp/App/Models/gradient_model.dart';
 import 'package:flutterpp/App/Views/Pages/Mockup/Widgets/Create/Sidebar/Steps/build_background_step.dart';
 import 'package:flutterpp/App/Views/Pages/Mockup/Widgets/Create/Sidebar/Steps/build_device_step.dart';
@@ -25,19 +26,30 @@ class BuildCreateMockupSidebarSelectedState
     this.onIconUpload,
     this.onIconAlignmentChanged,
     this.initialAlignment,
+    this.onIconPaddingChanged,
+    this.initialIconTopPadding,
+    this.initialIconBottomPadding,
+    this.initialIconLeftPadding,
+    this.initialIconRightPadding,
   });
 
   final String? mockupId;
   final Color? initialColor;
-  final void Function(Color)? onColorChangedCallback;
-  final void Function(GradientModel)? onGradiantChangedCallback;
-  final void Function(String)? onImageUpload;
   final GradientModel? activeGradient;
+  final bool? isIconToggled;
+  final MainAxisAlignment? initialAlignment;
+  final double? initialIconRightPadding;
+  final double? initialIconLeftPadding;
+  final double? initialIconBottomPadding;
+  final double? initialIconTopPadding;
   final void Function(bool)? onIconToggle;
   final void Function(String)? onIconUpload;
-  final bool? isIconToggled;
+  final void Function(String)? onImageUpload;
+  final void Function(Color)? onColorChangedCallback;
+  final void Function(GradientModel)? onGradiantChangedCallback;
   final void Function(MainAxisAlignment alignment)? onIconAlignmentChanged;
-  final MainAxisAlignment? initialAlignment;
+  final void Function(double padding, PaddingDestination destination)?
+      onIconPaddingChanged;
 
   @override
   Widget build(BuildContext context) {
@@ -65,7 +77,12 @@ class BuildCreateMockupSidebarSelectedState
                 onIconToggle: onIconToggle,
                 onIconUpload: onIconUpload,
                 initialAlignment: initialAlignment,
+                initialIconTopPadding: initialIconTopPadding,
+                initialIconBottomPadding: initialIconBottomPadding,
+                initialIconLeftPadding: initialIconLeftPadding,
+                initialIconRightPadding: initialIconRightPadding,
                 onIconAlignmentChanged: onIconAlignmentChanged,
+                onIconPaddingChanged: onIconPaddingChanged,
               ),
               buildTitleStep(),
               buildSubtitleStep(),

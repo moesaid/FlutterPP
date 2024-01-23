@@ -1,5 +1,6 @@
 import 'package:expansion_tile_group/expansion_tile_group.dart';
 import 'package:flutter/material.dart';
+import 'package:flutterpp/App/Enums/padding_destination_enum.dart';
 import 'package:flutterpp/App/Views/Global/build_slider.dart';
 import 'package:flutterpp/App/Views/Pages/Mockup/Widgets/Create/Sidebar/Widgets/build_select_image_option.dart';
 import 'package:flutterpp/App/Views/Pages/Mockup/Widgets/Create/Sidebar/build_alignment_option.dart';
@@ -13,6 +14,12 @@ ExpansionTileBorderItem buildingIconStep({
   void Function(String)? onIconUpload,
   void Function(MainAxisAlignment alignment)? onIconAlignmentChanged,
   MainAxisAlignment? initialAlignment,
+  void Function(double padding, PaddingDestination destination)?
+      onIconPaddingChanged,
+  double? initialIconRightPadding,
+  double? initialIconLeftPadding,
+  double? initialIconBottomPadding,
+  double? initialIconTopPadding,
 }) {
   return ExpansionTileBorderItem(
     title: const Text('Icon'),
@@ -56,9 +63,12 @@ ExpansionTileBorderItem buildingIconStep({
             flexLeft: 1,
             flexRight: 3,
             rightWidget: BuildSlider(
-              controllerTag: 'logoPaddingTop',
-              onChanged: (val) => print('❌ - $val'),
-            ),
+                controllerTag: 'logoPaddingTop',
+                defaultValue: initialIconTopPadding,
+                onChanged: (val) => onIconPaddingChanged?.call(
+                      val,
+                      PaddingDestination.top,
+                    )),
           ),
           const SizedBox(height: 10),
           BuildSidebarOption(
@@ -67,7 +77,11 @@ ExpansionTileBorderItem buildingIconStep({
             flexRight: 3,
             rightWidget: BuildSlider(
               controllerTag: 'logoPaddingBottom',
-              onChanged: (val) => print('❌ - $val'),
+              defaultValue: initialIconBottomPadding,
+              onChanged: (val) => onIconPaddingChanged?.call(
+                val,
+                PaddingDestination.bottom,
+              ),
             ),
           ),
           const SizedBox(height: 10),
@@ -77,7 +91,11 @@ ExpansionTileBorderItem buildingIconStep({
             flexRight: 3,
             rightWidget: BuildSlider(
               controllerTag: 'logoPaddingLeft',
-              onChanged: (val) => print('❌ - $val'),
+              defaultValue: initialIconLeftPadding,
+              onChanged: (val) => onIconPaddingChanged?.call(
+                val,
+                PaddingDestination.left,
+              ),
             ),
           ),
           const SizedBox(height: 10),
@@ -87,7 +105,11 @@ ExpansionTileBorderItem buildingIconStep({
             flexRight: 3,
             rightWidget: BuildSlider(
               controllerTag: 'logoPaddingRight',
-              onChanged: (val) => print('❌ - $val'),
+              defaultValue: initialIconRightPadding,
+              onChanged: (val) => onIconPaddingChanged?.call(
+                val,
+                PaddingDestination.right,
+              ),
             ),
           ),
         ],
