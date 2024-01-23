@@ -1,30 +1,22 @@
-import 'package:awesome_side_sheet/Enums/sheet_position.dart';
-import 'package:awesome_side_sheet/side_sheet.dart';
 import 'package:expansion_tile_group/expansion_tile_group.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutterpp/App/Controllers/Mockup/build_create_mockup_sidebar_selected_state_controller.dart';
 import 'package:flutterpp/App/Models/background_type_model.dart';
 import 'package:flutterpp/App/Models/gradient_model.dart';
-import 'package:flutterpp/App/Views/Global/build_preeset_gradient_list.dart';
-import 'package:flutterpp/App/Views/Global/build_slider.dart';
+import 'package:flutterpp/App/Views/Pages/Mockup/Widgets/Create/Sidebar/Widgets/build_color_preset_gradient.dart';
 import 'package:flutterpp/App/Views/Pages/Mockup/Widgets/Create/Sidebar/Widgets/build_select_image_option.dart';
-import 'package:flutterpp/App/Views/Pages/Mockup/Widgets/Create/Sidebar/build_alignment_option.dart';
-import 'package:flutterpp/App/Views/Pages/Mockup/Widgets/Create/Sidebar/build_change_fontfamily.dart';
-import 'package:flutterpp/App/Views/Pages/Mockup/Widgets/Create/Sidebar/build_pick_color.dart';
-import 'package:flutterpp/App/Views/Pages/Mockup/Widgets/Create/Sidebar/build_slider_enable_option.dart';
-import 'package:flutterpp/App/Views/Pages/Mockup/Widgets/Create/Sidebar/build_slider_with_value_box.dart';
+import 'package:flutterpp/App/Views/Pages/Mockup/Widgets/Create/Sidebar/Widgets/build_solid_color_option.dart';
 import 'package:flutterpp/App/Views/Pages/Mockup/Widgets/build_sidebar_option.dart';
-import 'package:flutterpp/Helpers/colors_helper.dart';
-import 'package:flutterpp/Helpers/text_helper.dart';
 import 'package:get/get.dart';
 
 ExpansionTileBorderItem buildBackgroundStep({
-  required BuildCreateMockupSidebarSelectedStateController controller,
+  String? mockupId,
   Color? initialColor,
-  final Function(String)? onImageUpload,
-  final Function(Color)? onColorChangedCallback,
-  final void Function(GradientModel)? onGradiantChangedCallback,
+  GradientModel? activeGradient,
+  Function(String)? onImageUpload,
+  Function(Color)? onColorChangedCallback,
+  void Function(GradientModel)? onGradiantChangedCallback,
+  required BuildCreateMockupSidebarSelectedStateController controller,
 }) {
   return ExpansionTileBorderItem(
     title: const Text('Background'),
@@ -85,12 +77,12 @@ ExpansionTileBorderItem buildBackgroundStep({
       const Divider(height: 20),
       Obx(
         () => (controller.activeBackgroundType.id == 'solid')
-            ? _BuildSolidColorOption(
+            ? BuildSolidColorOption(
                 initialColor: initialColor,
                 onColorChangedCallback: onColorChangedCallback,
               )
             : (controller.activeBackgroundType.id == 'gradient')
-                ? _BuildColorPresetGradient(
+                ? BuildColorPresetGradient(
                     name: controller.gradientName,
                     gradient: (controller.activeGradient.colors == null ||
                             controller.activeGradient.colors!.isEmpty)
