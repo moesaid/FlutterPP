@@ -1,19 +1,35 @@
 import 'package:flutter/material.dart';
 import 'package:flutterpp/App/Models/template_config_model.dart';
+import 'package:flutterpp/Config/app_gradients.dart';
+import 'package:get/get.dart';
 
 class BuildDeviceCard extends StatelessWidget {
   final TemplateConfigModel config;
-  const BuildDeviceCard({super.key, required this.config});
+  final bool isSeleted;
+  const BuildDeviceCard({
+    super.key,
+    required this.config,
+    required this.isSeleted,
+  });
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
+    return AnimatedContainer(
       width: 300,
       height: 700,
+      duration: const Duration(milliseconds: 300),
+      decoration: BoxDecoration(
+        border: Border.all(
+          strokeAlign: BorderSide.strokeAlignCenter,
+          color:
+              isSeleted ? Get.theme.colorScheme.secondary : Colors.transparent,
+          width: 2,
+        ),
+      ),
       child: Column(
         children: [
           const BuildDeviceHead(),
-          BuildDeviceBody(config: config),
+          Expanded(child: BuildDeviceBody(config: config)),
         ],
       ),
     );
@@ -29,12 +45,24 @@ class BuildDeviceBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
+    return Container(
       width: 300,
       height: 650,
+      decoration: BoxDecoration(
+        color: config.backgroundColor ?? Colors.white,
+        image: config.backgroundImage != null
+            ? DecorationImage(
+                image: NetworkImage(config.backgroundImage!),
+                fit: BoxFit.cover,
+              )
+            : null,
+        gradient: config.backgroundGradient != null
+            ? AppGradients.getGradient(colors: config.backgroundGradient!)
+            : null,
+      ),
       child: Card(
         elevation: 0,
-        color: Colors.white,
+        color: Colors.transparent,
         clipBehavior: Clip.antiAlias,
         margin: const EdgeInsets.all(0),
         shape: RoundedRectangleBorder(

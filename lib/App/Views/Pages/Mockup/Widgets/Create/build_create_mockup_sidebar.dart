@@ -6,10 +6,14 @@ import 'package:sizer/sizer.dart';
 
 class BuildCreateMockupSidebar extends StatelessWidget {
   final bool? isScreenshotSelected;
+  final Color? initialColor;
+  final void Function(Color)? onColorChangedCallback;
 
   const BuildCreateMockupSidebar({
     super.key,
     this.isScreenshotSelected = false,
+    this.initialColor,
+    this.onColorChangedCallback,
   });
 
   @override
@@ -29,7 +33,10 @@ class BuildCreateMockupSidebar extends StatelessWidget {
       ),
       child: !isScreenshotSelected!
           ? const BuildCreateMockupSidebarEmpty()
-          : const BuildCreateMockupSidebarSelectedState(),
+          : BuildCreateMockupSidebarSelectedState(
+              initialColor: initialColor,
+              onColorChangedCallback: onColorChangedCallback,
+            ),
     );
   }
 }

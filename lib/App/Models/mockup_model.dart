@@ -95,4 +95,35 @@ class MockupModel {
         'json_data': jsonData!.map((v) => v.toJson()).toList(),
     };
   }
+
+  // copy with
+  MockupModel copyWith({
+    String? id,
+    String? projectId,
+    String? teamId,
+    String? title,
+    String? description,
+    String? category,
+    String? icon,
+    List<TemplateConfigModel>? jsonData,
+    String? createdAt,
+    String? color1,
+    String? color2,
+    String? templateId,
+  }) {
+    return MockupModel(
+      id: id ?? this.id,
+      projectId: projectId ?? this.projectId,
+      teamId: teamId ?? this.teamId,
+      title: title ?? this.title,
+      description: description ?? this.description,
+      category: category ?? this.category,
+      icon: icon ?? this.icon,
+      jsonData: jsonData ?? this.jsonData,
+      createdAt: createdAt ?? this.createdAt,
+      color1: color1 ?? this.color1,
+      color2: color2 ?? this.color2,
+      templateId: templateId ?? this.templateId,
+    );
+  }
 }

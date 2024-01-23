@@ -21,7 +21,12 @@ class BuildCreateMockupSidebarSelectedState
     extends GetView<BuildCreateMockupSidebarSelectedStateController> {
   const BuildCreateMockupSidebarSelectedState({
     super.key,
+    this.initialColor,
+    this.onColorChangedCallback,
   });
+
+  final Color? initialColor;
+  final void Function(Color)? onColorChangedCallback;
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +39,10 @@ class BuildCreateMockupSidebarSelectedState
             toggleType: ToggleType.expandOnlyCurrent,
             children: [
               _buildLayoutStep(),
-              _buildBackgroundStep(),
+              _buildBackgroundStep(
+                initialColor: initialColor,
+                onColorChangedCallback: onColorChangedCallback,
+              ),
               _buildingIconStep(),
               _buildTitleStep(),
               _buildSubtitleStep(),
@@ -314,7 +322,10 @@ class BuildCreateMockupSidebarSelectedState
     );
   }
 
-  ExpansionTileBorderItem _buildBackgroundStep() {
+  ExpansionTileBorderItem _buildBackgroundStep({
+    Color? initialColor,
+    Function(Color)? onColorChangedCallback,
+  }) {
     return ExpansionTileBorderItem(
       title: const Text('Background'),
       leading: const Icon(Icons.crop_original_rounded),
@@ -374,7 +385,10 @@ class BuildCreateMockupSidebarSelectedState
         const Divider(height: 20),
         Obx(
           () => (controller.activeBackgroundType.id == 'solid')
-              ? const _BuildSolidColorOption()
+              ? _BuildSolidColorOption(
+                  initialColor: initialColor,
+                  onColorChangedCallback: onColorChangedCallback,
+                )
               : (controller.activeBackgroundType.id == 'gradient')
                   ? _BuildColorPresetGradient(
                       name: controller.gradientName,
@@ -547,13 +561,22 @@ class _BuildColorPresetGradient extends StatelessWidget {
 }
 
 class _BuildSolidColorOption extends StatelessWidget {
-  const _BuildSolidColorOption();
+  final Color? initialColor;
+  final void Function(Color)? onColorChangedCallback;
+  const _BuildSolidColorOption({
+    this.initialColor,
+    this.onColorChangedCallback,
+  });
 
   @override
   Widget build(BuildContext context) {
-    return const BuildSidebarOption(
+    return BuildSidebarOption(
       title: 'Color',
-      rightWidget: BuildPickColor(controllerTag: 'solidColor'),
+      rightWidget: BuildPickColor(
+        controllerTag: 'solidColor',
+        initialColor: initialColor,
+        onColorChangedCallback: onColorChangedCallback,
+      ),
     );
   }
 }

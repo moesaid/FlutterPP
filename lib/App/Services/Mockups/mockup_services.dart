@@ -38,4 +38,13 @@ class MockupServices {
 
     return item;
   }
+
+  // update mockup
+  Future<MockupModel?> updateMockup({
+    required MockupModel mockup,
+  }) async {
+    MockupModel? item = await mockupProvider.updateMockup(item: mockup);
+
+    return item;
+  }
 }

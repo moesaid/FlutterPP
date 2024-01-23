@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutterpp/App/Controllers/Mockup/mockup_single_controller.dart';
+import 'package:flutterpp/App/Models/template_config_model.dart';
 import 'package:flutterpp/App/Views/Global/build_appbar.dart';
 import 'package:flutterpp/App/Views/Pages/Mockup/Widgets/Create/build_create_mockup_sidebar.dart';
 import 'package:flutterpp/App/Views/Pages/Mockup/Widgets/build_device_card.dart';
@@ -38,10 +39,24 @@ class MockupSinglePage extends GetView<MockupSingleController> {
                               scrollDirection: Axis.horizontal,
                               shrinkWrap: true,
                               itemCount: controller.mockup.jsonData!.length,
-                              padding: EdgeInsets.only(right: 140.sp),
+                              padding: EdgeInsets.only(
+                                right: 140.sp,
+                                left: 2.sp,
+                                top: 2.sp,
+                                bottom: 2.sp,
+                              ),
                               itemBuilder: (_, int i) {
-                                return BuildDeviceCard(
-                                  config: controller.mockup.jsonData![i],
+                                TemplateConfigModel config =
+                                    controller.mockup.jsonData![i];
+                                return InkWell(
+                                  onTap: () => controller.updateSelectedItem(
+                                    config,
+                                  ),
+                                  child: BuildDeviceCard(
+                                    config: config,
+                                    isSeleted:
+                                        controller.seletedItem.id == config.id,
+                                  ),
                                 );
                               },
                               separatorBuilder: (_, __) => SizedBox(
@@ -54,11 +69,25 @@ class MockupSinglePage extends GetView<MockupSingleController> {
                     ),
                   ),
                 ),
-                const Positioned(
+                Positioned(
                   right: 0,
                   top: 0,
                   child: BuildCreateMockupSidebar(
-                    isScreenshotSelected: true,
+                    isScreenshotSelected: controller.seletedItem.id != null,
+
+                    // start background
+                    initialColor: controller.seletedItem.backgroundColor,
+                    onColorChangedCallback: (Color color) =>
+                        controller.updateBackground(color: color),
+                    // end background
+                  ),
+                ),
+                Positioned(
+                  bottom: 10,
+                  left: 10,
+                  child: ElevatedButton(
+                    onPressed: () => controller.updateMockup(),
+                    child: const Text('save'),
                   ),
                 )
               ],

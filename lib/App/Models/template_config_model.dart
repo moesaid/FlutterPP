@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutterpp/Helpers/colors_helper.dart';
 
 class TemplateConfigModel {
   String? id, image;
@@ -33,6 +34,9 @@ class TemplateConfigModel {
   bool? showSubtitle;
   String? title;
   String? subtitle;
+  String? backgroundImage;
+  Color? backgroundColor;
+  List<Color>? backgroundGradient;
 
   TemplateConfigModel({
     this.id,
@@ -65,6 +69,9 @@ class TemplateConfigModel {
     this.logoPaddingRight,
     this.title,
     this.subtitle,
+    this.backgroundImage,
+    this.backgroundColor,
+    this.backgroundGradient,
     this.deviceFullSize = false,
     this.showLogo = false,
     this.showTitle = false,
@@ -192,6 +199,18 @@ class TemplateConfigModel {
     showSubtitle = json['showSubtitle'];
     title = json['title'];
     subtitle = json['subtitle'];
+
+    backgroundImage = json['backgroundImage'];
+    backgroundColor = json['backgroundColor'] != null
+        ? ColorHelper.hexToColor(json['backgroundColor'])
+        : null;
+
+    backgroundGradient = json['backgroundGradient'] != null
+        ? [
+            ColorHelper.hexToColor(json['backgroundGradient'][0]),
+            ColorHelper.hexToColor(json['backgroundGradient'][1]),
+          ]
+        : null;
   }
 
   Map<String, dynamic> toJson() {
@@ -315,6 +334,19 @@ class TemplateConfigModel {
     data['showSubtitle'] = showSubtitle;
     data['title'] = title;
     data['subtitle'] = subtitle;
+
+    data['backgroundImage'] = backgroundImage;
+    data['backgroundColor'] = backgroundColor != null
+        ? ColorHelper.colorToHexWithoutHash(backgroundColor!)
+        : null;
+
+    data['backgroundGradient'] =
+        backgroundGradient != null && backgroundGradient!.length == 2
+            ? [
+                ColorHelper.colorToHexWithoutHash(backgroundGradient![0]),
+                ColorHelper.colorToHexWithoutHash(backgroundGradient![1]),
+              ]
+            : null;
     return data;
   }
 
@@ -368,6 +400,9 @@ class TemplateConfigModel {
     bool? showSubtitle,
     String? title,
     String? subtitle,
+    String? backgroundImage,
+    Color? backgroundColor,
+    List<Color>? backgroundGradient,
   }) {
     return TemplateConfigModel(
       id: id ?? this.id,
@@ -407,6 +442,9 @@ class TemplateConfigModel {
       showSubtitle: showSubtitle ?? this.showSubtitle,
       title: title ?? this.title,
       subtitle: subtitle ?? this.subtitle,
+      backgroundImage: backgroundImage ?? this.backgroundImage,
+      backgroundColor: backgroundColor ?? this.backgroundColor,
+      backgroundGradient: backgroundGradient ?? this.backgroundGradient,
     );
   }
 }
