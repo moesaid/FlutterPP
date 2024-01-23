@@ -23,6 +23,8 @@ class BuildCreateMockupSidebarSelectedState
     this.onIconToggle,
     this.isIconToggled,
     this.onIconUpload,
+    this.onIconAlignmentChanged,
+    this.initialAlignment,
   });
 
   final String? mockupId;
@@ -34,6 +36,8 @@ class BuildCreateMockupSidebarSelectedState
   final void Function(bool)? onIconToggle;
   final void Function(String)? onIconUpload;
   final bool? isIconToggled;
+  final void Function(MainAxisAlignment alignment)? onIconAlignmentChanged;
+  final MainAxisAlignment? initialAlignment;
 
   @override
   Widget build(BuildContext context) {
@@ -60,6 +64,8 @@ class BuildCreateMockupSidebarSelectedState
                 isIconToggled: isIconToggled,
                 onIconToggle: onIconToggle,
                 onIconUpload: onIconUpload,
+                initialAlignment: initialAlignment,
+                onIconAlignmentChanged: onIconAlignmentChanged,
               ),
               buildTitleStep(),
               buildSubtitleStep(),

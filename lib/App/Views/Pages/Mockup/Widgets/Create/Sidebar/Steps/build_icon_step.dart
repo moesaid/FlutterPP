@@ -11,6 +11,8 @@ ExpansionTileBorderItem buildingIconStep({
   String? mockupId,
   void Function(bool)? onIconToggle,
   void Function(String)? onIconUpload,
+  void Function(MainAxisAlignment alignment)? onIconAlignmentChanged,
+  MainAxisAlignment? initialAlignment,
 }) {
   return ExpansionTileBorderItem(
     title: const Text('Icon'),
@@ -32,15 +34,17 @@ ExpansionTileBorderItem buildingIconStep({
       BuildSidebarOption(
         title: 'logo',
         rightWidget: BuildSelectImageOption(
-          mockupId: mockupId,
-          controllerTag: 'logoImageUpload',
           title: 'add logo',
+          controllerTag: 'logoImageUpload',
+          mockupId: mockupId,
           callback: (val) => onIconUpload?.call(val),
         ),
       ),
       const SizedBox(height: 20),
-      const BuildAlignmentOption(
+      BuildAlignmentOption(
         controllerTag: 'iconAlignmentHorizontal',
+        initialAlignment: initialAlignment,
+        onToggle: onIconAlignmentChanged,
       ),
       const SizedBox(height: 20),
       BuildSidebarOption(

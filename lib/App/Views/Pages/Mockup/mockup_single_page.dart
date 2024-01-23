@@ -27,90 +27,8 @@ class MockupSinglePage extends GetView<MockupSingleController> {
           body: SafeArea(
             child: Stack(
               children: [
-                Positioned.fill(
-                  child: Container(
-                    color: Colors.black26,
-                    padding: EdgeInsets.all(10.sp),
-                    child: SingleChildScrollView(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Obx(
-                            () => SizedBox(
-                              height: 700,
-                              child: ListView.separated(
-                                scrollDirection: Axis.horizontal,
-                                shrinkWrap: true,
-                                itemCount: controller.mockup.jsonData!.length,
-                                padding: EdgeInsets.only(
-                                  right: 140.sp,
-                                  left: 2.sp,
-                                  top: 2.sp,
-                                  bottom: 2.sp,
-                                ),
-                                itemBuilder: (_, int i) {
-                                  TemplateConfigModel config =
-                                      controller.mockup.jsonData![i];
-                                  return InkWell(
-                                    onTap: () => controller.updateSelectedItem(
-                                      config,
-                                    ),
-                                    child: BuildDeviceCard(
-                                      config: config,
-                                      isSeleted: controller.seletedItem.id ==
-                                          config.id,
-                                    ),
-                                  );
-                                },
-                                separatorBuilder: (_, __) => SizedBox(
-                                  width: 3.sp,
-                                ),
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
-                Positioned(
-                  right: 0,
-                  top: 0,
-                  child: BuildCreateMockupSidebar(
-                    mockupId: controller.mockup.id,
-                    isScreenshotSelected: controller.seletedItem.id != null,
-
-                    // start background
-                    initialColor: controller.seletedItem.backgroundColor,
-                    onColorChangedCallback: (Color color) =>
-                        controller.updateBackground(color: color),
-                    onGradiantChangedCallback: (GradientModel gradient) =>
-                        controller.updateBackground(
-                      gradient: gradient,
-                    ),
-                    onImageUpload: (String image) =>
-                        controller.updateBackground(image: image),
-                    activeGradient: GradientModel(
-                      colors: controller.seletedItem.backgroundGradient == null
-                          ? ['#000000', '#000000']
-                          : controller.seletedItem.backgroundGradient!
-                              .map(
-                                (e) => ColorHelper.colorToHex(e),
-                              )
-                              .toList(),
-                      angle: controller.seletedItem.gradientAngle,
-                    ),
-                    // end background
-
-                    // start icon
-                    isIconToggled: controller.seletedItem.showLogo,
-                    onIconToggle: (bool value) =>
-                        controller.onIconToggle(value),
-                    onIconUpload: (String icon) =>
-                        controller.updateLogo(logo: icon),
-                    // end icon
-                  ),
-                ),
+                BuildMockupSinglePageBuddy(controller: controller),
+                BuildMockupSinglePageSidebar(controller: controller),
                 Positioned(
                   bottom: 10,
                   left: 10,
@@ -124,6 +42,120 @@ class MockupSinglePage extends GetView<MockupSingleController> {
           ),
         );
       },
+    );
+  }
+}
+
+class BuildMockupSinglePageSidebar extends StatelessWidget {
+  const BuildMockupSinglePageSidebar({
+    super.key,
+    required this.controller,
+  });
+
+  final MockupSingleController controller;
+
+  @override
+  Widget build(BuildContext context) {
+    return Positioned(
+      right: 0,
+      top: 0,
+      child: BuildCreateMockupSidebar(
+        mockupId: controller.mockup.id,
+        isScreenshotSelected: controller.seletedItem.id != null,
+
+        // start background
+        initialColor: controller.seletedItem.backgroundColor,
+        onColorChangedCallback: (color) {
+          controller.updateBackground(color: color);
+        },
+        onGradiantChangedCallback: (gradient) {
+          controller.updateBackground(
+            gradient: gradient,
+          );
+        },
+        onImageUpload: (image) {
+          controller.updateBackground(image: image);
+        },
+        activeGradient: GradientModel(
+          colors: controller.seletedItem.backgroundGradient == null
+              ? ['#000000', '#000000']
+              : controller.seletedItem.backgroundGradient!
+                  .map(
+                    (e) => ColorHelper.colorToHex(e),
+                  )
+                  .toList(),
+          angle: controller.seletedItem.gradientAngle,
+        ),
+        // end background
+
+        // start icon
+        isIconToggled: controller.seletedItem.showLogo,
+        onIconToggle: (value) => controller.onIconToggle(value),
+        onIconUpload: (icon) => controller.updateLogo(logo: icon),
+        initialAlignment: controller.seletedItem.logoAlignment,
+        onIconAlignmentChanged: (alignment) {
+          controller.updateLogoAlignment(alignment: alignment);
+        },
+        // end icon
+      ),
+    );
+  }
+}
+
+class BuildMockupSinglePageBuddy extends StatelessWidget {
+  const BuildMockupSinglePageBuddy({
+    super.key,
+    required this.controller,
+  });
+
+  final MockupSingleController controller;
+
+  @override
+  Widget build(BuildContext context) {
+    return Positioned.fill(
+      child: Container(
+        color: Colors.black26,
+        padding: EdgeInsets.all(10.sp),
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Obx(
+                () => SizedBox(
+                  height: 700,
+                  child: ListView.separated(
+                    scrollDirection: Axis.horizontal,
+                    shrinkWrap: true,
+                    itemCount: controller.mockup.jsonData!.length,
+                    padding: EdgeInsets.only(
+                      right: 140.sp,
+                      left: 2.sp,
+                      top: 2.sp,
+                      bottom: 2.sp,
+                    ),
+                    itemBuilder: (_, int i) {
+                      TemplateConfigModel config =
+                          controller.mockup.jsonData![i];
+                      return InkWell(
+                        onTap: () => controller.updateSelectedItem(
+                          config,
+                        ),
+                        child: BuildDeviceCard(
+                          config: config,
+                          isSeleted: controller.seletedItem.id == config.id,
+                        ),
+                      );
+                    },
+                    separatorBuilder: (_, __) => SizedBox(
+                      width: 3.sp,
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
     );
   }
 }

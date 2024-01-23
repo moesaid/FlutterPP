@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutterpp/App/Controllers/Mockup/Micro/alignment_option_controller.dart';
-import 'package:flutterpp/App/Enums/alignment_option_enum.dart';
 import 'package:flutterpp/App/Views/Pages/Mockup/Widgets/build_sidebar_option.dart';
 import 'package:get/get.dart';
 
 class BuildAlignmentOption extends GetView<AlignmentOptionController> {
   final IconData? firtIcon, secondIcon, thirdIcon;
   final String? title, controllerTag;
-  final void Function(AlignmentOptionEnum)? onToggle;
+  final void Function(MainAxisAlignment)? onToggle;
+  final MainAxisAlignment? initialAlignment;
 
   const BuildAlignmentOption({
     super.key,
@@ -17,6 +17,7 @@ class BuildAlignmentOption extends GetView<AlignmentOptionController> {
     this.title,
     this.controllerTag,
     this.onToggle,
+    this.initialAlignment,
   });
 
   @override
@@ -24,6 +25,9 @@ class BuildAlignmentOption extends GetView<AlignmentOptionController> {
     return GetBuilder<AlignmentOptionController>(
       init: AlignmentOptionController(),
       tag: controllerTag,
+      didChangeDependencies: (state) {
+        state.controller?.setAlignment(alignment: initialAlignment!);
+      },
       builder: (_) {
         return BuildSidebarOption(
           title: title ?? 'Alignment',
@@ -42,14 +46,14 @@ class BuildAlignmentOption extends GetView<AlignmentOptionController> {
                 Expanded(
                   child: InkWell(
                     onTap: () => _.setAlignment(
-                      alignment: AlignmentOptionEnum.left,
+                      alignment: MainAxisAlignment.start,
                       onToggle: onToggle,
                     ),
                     child: Container(
                       padding: const EdgeInsets.all(5),
                       decoration: BoxDecoration(
                         color: Colors.white.withOpacity(
-                            _.alignment == AlignmentOptionEnum.left ? 0.1 : 0),
+                            _.alignment == MainAxisAlignment.start ? 0.1 : 0),
                         borderRadius: BorderRadius.circular(5),
                       ),
                       child: Icon(
@@ -63,16 +67,14 @@ class BuildAlignmentOption extends GetView<AlignmentOptionController> {
                 Expanded(
                   child: InkWell(
                     onTap: () => _.setAlignment(
-                      alignment: AlignmentOptionEnum.center,
+                      alignment: MainAxisAlignment.center,
                       onToggle: onToggle,
                     ),
                     child: Container(
                       padding: const EdgeInsets.all(5),
                       decoration: BoxDecoration(
                         color: Colors.white.withOpacity(
-                            _.alignment == AlignmentOptionEnum.center
-                                ? 0.1
-                                : 0),
+                            _.alignment == MainAxisAlignment.center ? 0.1 : 0),
                         borderRadius: BorderRadius.circular(5),
                       ),
                       child: Icon(
@@ -86,14 +88,14 @@ class BuildAlignmentOption extends GetView<AlignmentOptionController> {
                 Expanded(
                   child: InkWell(
                     onTap: () => _.setAlignment(
-                      alignment: AlignmentOptionEnum.right,
+                      alignment: MainAxisAlignment.end,
                       onToggle: onToggle,
                     ),
                     child: Container(
                       padding: const EdgeInsets.all(5),
                       decoration: BoxDecoration(
                         color: Colors.white.withOpacity(
-                            _.alignment == AlignmentOptionEnum.right ? 0.1 : 0),
+                            _.alignment == MainAxisAlignment.end ? 0.1 : 0),
                         borderRadius: BorderRadius.circular(5),
                       ),
                       child: Icon(

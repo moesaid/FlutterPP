@@ -102,4 +102,14 @@ class MockupSingleController extends GetxController {
     // update mockup jsonData
     _updateMockupData();
   }
+
+  // update logo alignment
+  updateLogoAlignment({required MainAxisAlignment alignment}) {
+    _seletedItem.value = _seletedItem.value.copyWith(
+      logoAlignment: alignment,
+    );
+
+    // update mockup jsonData
+    _updateMockupData();
+  }
 }
