@@ -24,6 +24,10 @@ class MockupSingleController extends GetxController {
   void onInit() {
     _getMockup();
 
+    ever(_seletedItem, (_) {
+      _updateMockupData();
+    });
+
     super.onInit();
   }
 
@@ -47,8 +51,8 @@ class MockupSingleController extends GetxController {
   // update selected item
   void updateSelectedItem(TemplateConfigModel item) {
     if (item.id == _seletedItem.value.id) return;
-
     _seletedItem.value = item;
+
     update();
   }
 
@@ -71,9 +75,6 @@ class MockupSingleController extends GetxController {
             ],
       gradientAngle: gradient?.angle,
     );
-
-    // update mockup jsonData
-    _updateMockupData();
   }
 
   // update icon toggle
@@ -81,9 +82,6 @@ class MockupSingleController extends GetxController {
     _seletedItem.value = _seletedItem.value.copyWith(
       showLogo: value,
     );
-
-    // update mockup jsonData
-    _updateMockupData();
   }
 
   // update logo
@@ -91,9 +89,6 @@ class MockupSingleController extends GetxController {
     _seletedItem.value = _seletedItem.value.copyWith(
       logo: logo,
     );
-
-    // update mockup jsonData
-    _updateMockupData();
   }
 
   // update logo alignment
@@ -101,9 +96,6 @@ class MockupSingleController extends GetxController {
     _seletedItem.value = _seletedItem.value.copyWith(
       logoAlignment: alignment,
     );
-
-    // update mockup jsonData
-    _updateMockupData();
   }
 
   // update logo padding
@@ -125,9 +117,6 @@ class MockupSingleController extends GetxController {
           ? padding
           : _seletedItem.value.logoPaddingRight,
     );
-
-    // update mockup jsonData
-    _updateMockupData();
   }
 
   // update title
@@ -135,9 +124,6 @@ class MockupSingleController extends GetxController {
     _seletedItem.value = _seletedItem.value.copyWith(
       title: title,
     );
-
-    // update mockup jsonData
-    _updateMockupData();
   }
 
   // update title visibility
@@ -145,9 +131,6 @@ class MockupSingleController extends GetxController {
     _seletedItem.value = _seletedItem.value.copyWith(
       showTitle: value,
     );
-
-    // update mockup jsonData
-    _updateMockupData();
   }
 
   // update title alignment
@@ -155,42 +138,30 @@ class MockupSingleController extends GetxController {
     _seletedItem.value = _seletedItem.value.copyWith(
       titleAlignment: alignment,
     );
-
-    // update mockup jsonData
-    _updateMockupData();
   }
 
   void updateTitleFontSize(double fontSize) {
     _seletedItem.value = _seletedItem.value.copyWith(
       titleFontSize: fontSize,
     );
-
-    // update mockup jsonData
-    _updateMockupData();
   }
 
   void updateTitleLineHeight(double lineHeight) {
     _seletedItem.value = _seletedItem.value.copyWith(
       titleLineHeight: lineHeight,
     );
-
-    // update mockup jsonData
-    _updateMockupData();
   }
 
   void updateTitleColor(Color color) {
     _seletedItem.value = _seletedItem.value.copyWith(
       titleColor: color,
     );
-
-    // update mockup jsonData
-    _updateMockupData();
   }
 
-  void updateTitlePadding({
-    required double padding,
-    required PaddingDestination destination,
-  }) {
+  void updateTitlePadding(
+    double padding,
+    PaddingDestination destination,
+  ) {
     _seletedItem.value = _seletedItem.value.copyWith(
       titlePaddingBottom: destination == PaddingDestination.bottom
           ? padding
@@ -205,9 +176,79 @@ class MockupSingleController extends GetxController {
           ? padding
           : _seletedItem.value.titlePaddingRight,
     );
+  }
 
-    // update mockup jsonData
-    _updateMockupData();
+  // update Subtitle
+  updateSubtitle(String title) {
+    _seletedItem.value = _seletedItem.value.copyWith(
+      subtitle: title,
+    );
+  }
+
+  // update Subtitle visibility
+  updateSubtitleVisibility(bool value) {
+    _seletedItem.value = _seletedItem.value.copyWith(
+      showSubtitle: value,
+    );
+  }
+
+  // update Subtitle alignment
+  updateSubtitleAlignment(MainAxisAlignment alignment) {
+    _seletedItem.value = _seletedItem.value.copyWith(
+      subtitleAlignment: alignment,
+    );
+  }
+
+  void updateSubtitleFontSize(double fontSize) {
+    _seletedItem.value = _seletedItem.value.copyWith(
+      subtitleFontSize: fontSize,
+    );
+  }
+
+  void updateSubtitleLineHeight(double lineHeight) {
+    _seletedItem.value = _seletedItem.value.copyWith(
+      subtitleLineHeight: lineHeight,
+    );
+  }
+
+  void updateSubtitleColor(Color color) {
+    _seletedItem.value = _seletedItem.value.copyWith(
+      subtitleColor: color,
+    );
+  }
+
+  void updateSubtitlePadding(
+    double padding,
+    PaddingDestination destination,
+  ) {
+    _seletedItem.value = _seletedItem.value.copyWith(
+      subtitlePaddingBottom: destination == PaddingDestination.bottom
+          ? padding
+          : _seletedItem.value.subtitlePaddingBottom,
+      subtitlePaddingTop: destination == PaddingDestination.top
+          ? padding
+          : _seletedItem.value.subtitlePaddingTop,
+      subtitlePaddingLeft: destination == PaddingDestination.left
+          ? padding
+          : _seletedItem.value.subtitlePaddingLeft,
+      subtitlePaddingRight: destination == PaddingDestination.right
+          ? padding
+          : _seletedItem.value.subtitlePaddingRight,
+    );
+  }
+
+  // update title font family
+  void updateTitleFontFamily(String val) {
+    _seletedItem.value = _seletedItem.value.copyWith(
+      titleFontFamily: val,
+    );
+  }
+
+  // update subtitle font family
+  void updateSubtitleFontFamily(String val) {
+    _seletedItem.value = _seletedItem.value.copyWith(
+      subtitleFontFamily: val,
+    );
   }
 
   // update mockup data

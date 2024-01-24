@@ -17,27 +17,34 @@ class BuildCreateMockupSidebar extends StatelessWidget {
   final double? initialIconLeftPadding;
   final double? initialIconBottomPadding;
   final double? initialIconTopPadding;
-  final String? titleText;
-  final String? titleFontFamily;
-  final bool? showTitle;
-  final MainAxisAlignment? titleAlignment;
-  final double? titleFontSize;
-  final double? titleLineHeight;
-  final Color? titleColor;
-  final Color? titleStrokeColor;
-  final double? titlePaddingTop;
-  final double? titlePaddingBottom;
-  final double? titlePaddingLeft;
-  final double? titlePaddingRight;
 
-  final void Function(bool)? onShowTitleChanged;
-  final void Function(String)? onTitleChanged;
-  final void Function(MainAxisAlignment)? onTitleAlignmentChanged;
-  final void Function(double)? onTitleFontSizeChanged;
-  final void Function(double)? onTitleLineHeightChanged;
-  final void Function(Color)? onTitleColorChanged;
+  final String? titleText, subtitleText;
+  final String? titleFontFamily, subtitleFontFamily;
+  final bool? showTitle, showSubtitle;
+  final MainAxisAlignment? titleAlignment, subtitleAlignment;
+  final double? titleFontSize, subtitleFontSize;
+  final double? titleLineHeight, subtitleLineHeight;
+  final Color? titleColor, subtitleColor;
+  final Color? titleStrokeColor, subtitleStrokeColor;
+  final double? titlePaddingTop, subtitlePaddingTop;
+  final double? titlePaddingBottom, subtitlePaddingBottom;
+  final double? titlePaddingLeft, subtitlePaddingLeft;
+  final double? titlePaddingRight, subtitlePaddingRight;
 
-  final void Function(double, PaddingDestination)? onTitlePaddingChanged;
+  final void Function(bool)? onShowTitleChanged, onShowSubtitleChanged;
+  final void Function(String)? onTitleChanged, onSubtitleChanged;
+  final void Function(String)? onTitleFontFamilyChanged,
+      onSubtitleFontFamilyChanged;
+  final void Function(MainAxisAlignment)? onTitleAlignmentChanged,
+      onSubtitleAlignmentChanged;
+  final void Function(double)? onTitleFontSizeChanged,
+      onSubtitleFontSizeChanged;
+  final void Function(double)? onTitleLineHeightChanged,
+      onSubtitleLineHeightChanged;
+  final void Function(Color)? onTitleColorChanged, onSubtitleColorChanged;
+
+  final void Function(double, PaddingDestination)? onTitlePaddingChanged,
+      onSubtitlePaddingChanged;
   final void Function(String)? onImageUpload;
   final void Function(Color)? onColorChangedCallback;
   final void Function(GradientModel)? onGradiantChangedCallback;
@@ -85,6 +92,27 @@ class BuildCreateMockupSidebar extends StatelessWidget {
     this.onTitleColorChanged,
     this.onTitlePaddingChanged,
     this.onTitleChanged,
+    this.subtitleText,
+    this.subtitleFontFamily,
+    this.showSubtitle,
+    this.subtitleAlignment,
+    this.subtitleFontSize,
+    this.subtitleLineHeight,
+    this.subtitleColor,
+    this.subtitleStrokeColor,
+    this.subtitlePaddingTop,
+    this.subtitlePaddingBottom,
+    this.subtitlePaddingLeft,
+    this.subtitlePaddingRight,
+    this.onShowSubtitleChanged,
+    this.onSubtitleAlignmentChanged,
+    this.onSubtitleFontSizeChanged,
+    this.onSubtitleLineHeightChanged,
+    this.onSubtitleColorChanged,
+    this.onSubtitlePaddingChanged,
+    this.onSubtitleChanged,
+    this.onTitleFontFamilyChanged,
+    this.onSubtitleFontFamilyChanged,
   });
 
   @override
@@ -140,6 +168,27 @@ class BuildCreateMockupSidebar extends StatelessWidget {
               onTitleColorChanged: onTitleColorChanged,
               onTitlePaddingChanged: onTitlePaddingChanged,
               onTitleChanged: onTitleChanged,
+              subtitleText: subtitleText,
+              subtitleFontFamily: subtitleFontFamily,
+              showSubtitle: showSubtitle,
+              subtitleAlignment: subtitleAlignment,
+              subtitleFontSize: subtitleFontSize,
+              subtitleLineHeight: subtitleLineHeight,
+              subtitleColor: subtitleColor,
+              subtitleStrokeColor: subtitleStrokeColor,
+              subtitlePaddingTop: subtitlePaddingTop,
+              subtitlePaddingBottom: subtitlePaddingBottom,
+              subtitlePaddingLeft: subtitlePaddingLeft,
+              subtitlePaddingRight: subtitlePaddingRight,
+              onShowSubtitleChanged: onShowSubtitleChanged,
+              onSubtitleAlignmentChanged: onSubtitleAlignmentChanged,
+              onSubtitleFontSizeChanged: onSubtitleFontSizeChanged,
+              onSubtitleLineHeightChanged: onSubtitleLineHeightChanged,
+              onSubtitleColorChanged: onSubtitleColorChanged,
+              onSubtitlePaddingChanged: onSubtitlePaddingChanged,
+              onSubtitleChanged: onSubtitleChanged,
+              onTitleFontFamilyChanged: onTitleFontFamilyChanged,
+              onSubtitleFontFamilyChanged: onSubtitleFontFamilyChanged,
             ),
     );
   }

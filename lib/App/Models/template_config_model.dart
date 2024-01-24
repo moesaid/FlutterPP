@@ -17,26 +17,21 @@ class TemplateConfigModel {
   double? bodyRunSpacing;
   double? bodySpacing;
   double? rotate;
-  double? titlePaddingTop;
-  double? titlePaddingBottom;
-  double? titlePaddingLeft;
-  double? titlePaddingRight;
-  double? subtitlePaddingTop;
-  double? subtitlePaddingBottom;
-  double? subtitlePaddingLeft;
-  double? subtitlePaddingRight;
+  double? titlePaddingTop, subtitlePaddingTop;
+  double? titlePaddingBottom, subtitlePaddingBottom;
+  double? titlePaddingLeft, subtitlePaddingLeft;
+  double? titlePaddingRight, subtitlePaddingRight;
   double? logoPaddingTop;
   double? logoPaddingBottom;
   double? logoPaddingLeft;
   double? logoPaddingRight;
-  double? titleFontSize, titleLineHeight;
+  double? titleFontSize, titleLineHeight, subtitleFontSize, subtitleLineHeight;
   bool? showLogo, deviceFullSize;
-  bool? showTitle;
-  bool? showSubtitle;
-  String? title;
-  String? subtitle;
+  bool? showTitle, showSubtitle;
+  String? title, subtitle;
+  String? titleFontFamily, subtitleFontFamily;
   String? backgroundImage;
-  Color? backgroundColor, titleColor, titleStrokeColor;
+  Color? backgroundColor, titleColor, subtitleColor;
   List<Color>? backgroundGradient;
   double? gradientAngle;
 
@@ -76,9 +71,13 @@ class TemplateConfigModel {
     this.backgroundColor,
     this.backgroundGradient,
     this.titleColor,
-    this.titleStrokeColor,
     this.titleFontSize,
     this.titleLineHeight,
+    this.subtitleFontSize,
+    this.subtitleLineHeight,
+    this.subtitleFontFamily,
+    this.titleFontFamily,
+    this.subtitleColor,
     this.deviceFullSize = false,
     this.showLogo = false,
     this.showTitle = false,
@@ -225,13 +224,16 @@ class TemplateConfigModel {
     titleColor = json['titleColor'] != null
         ? ColorHelper.hexToColor(json['titleColor'])
         : null;
-
-    titleStrokeColor = json['titleStrokeColor'] != null
-        ? ColorHelper.hexToColor(json['titleStrokeColor'])
+    subtitleColor = json['subtitleColor'] != null
+        ? ColorHelper.hexToColor(json['subtitleColor'])
         : null;
 
     titleFontSize = convertIntToDouble(json['titleFontSize']);
     titleLineHeight = convertIntToDouble(json['titleLineHeight']);
+    subtitleFontSize = convertIntToDouble(json['subtitleFontSize']);
+    subtitleLineHeight = convertIntToDouble(json['subtitleLineHeight']);
+    titleFontFamily = json['titleFontFamily'];
+    subtitleFontFamily = json['subtitleFontFamily'];
   }
 
   Map<String, dynamic> toJson() {
@@ -375,12 +377,16 @@ class TemplateConfigModel {
         ? ColorHelper.colorToHexWithoutHash(titleColor!)
         : null;
 
-    data['titleStrokeColor'] = titleStrokeColor != null
-        ? ColorHelper.colorToHexWithoutHash(titleStrokeColor!)
+    data['subtitleColor'] = subtitleColor != null
+        ? ColorHelper.colorToHexWithoutHash(subtitleColor!)
         : null;
 
     data['titleFontSize'] = convertIntToDouble(titleFontSize);
     data['titleLineHeight'] = convertIntToDouble(titleLineHeight);
+    data['subtitleFontSize'] = convertIntToDouble(subtitleFontSize);
+    data['subtitleLineHeight'] = convertIntToDouble(subtitleLineHeight);
+    data['titleFontFamily'] = titleFontFamily;
+    data['subtitleFontFamily'] = subtitleFontFamily;
     return data;
   }
 
@@ -443,6 +449,11 @@ class TemplateConfigModel {
     double? titleLineHeight,
     Color? titleColor,
     Color? titleStrokeColor,
+    String? titleFontFamily,
+    double? subtitleFontSize,
+    double? subtitleLineHeight,
+    Color? subtitleColor,
+    String? subtitleFontFamily,
   }) {
     return TemplateConfigModel(
       id: id ?? this.id,
@@ -490,6 +501,11 @@ class TemplateConfigModel {
       titleFontSize: titleFontSize ?? this.titleFontSize,
       titleLineHeight: titleLineHeight ?? this.titleLineHeight,
       titleColor: titleColor ?? this.titleColor,
+      subtitleColor: subtitleColor ?? this.subtitleColor,
+      subtitleFontSize: subtitleFontSize ?? this.subtitleFontSize,
+      subtitleLineHeight: subtitleLineHeight ?? this.subtitleLineHeight,
+      titleFontFamily: titleFontFamily ?? this.titleFontFamily,
+      subtitleFontFamily: subtitleFontFamily ?? subtitleFontFamily,
     );
   }
 }

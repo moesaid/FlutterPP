@@ -10,8 +10,10 @@ import 'package:flutterpp/App/Views/Pages/Mockup/Widgets/Create/Sidebar/build_sl
 import 'package:flutterpp/App/Views/Pages/Mockup/Widgets/Create/Sidebar/build_slider_with_value_box.dart';
 import 'package:flutterpp/App/Views/Pages/Mockup/Widgets/build_sidebar_option.dart';
 import 'package:get/get.dart';
+import 'package:uuid/uuid.dart';
 
 ExpansionTileBorderItem buildTitleStep({
+  String? widgetTitle = 'title',
   String? titleText,
   String? titleFontFamily,
   bool? showTitle,
@@ -29,12 +31,14 @@ ExpansionTileBorderItem buildTitleStep({
   Function(String)? onTitleChanged,
   Function(MainAxisAlignment)? onTitleAlignmentChanged,
   Function(double)? onTitleFontSizeChanged,
+  Function(String)? onTitleFontFamilyChanged,
   Function(double)? onTitleLineHeightChanged,
   Function(Color)? onTitleColorChanged,
   Function(double, PaddingDestination)? onTitlePaddingChanged,
 }) {
+  String uuid = const Uuid().v1();
   return ExpansionTileBorderItem(
-    title: const Text('Title'),
+    title: Text(widgetTitle!),
     leading: const Icon(Icons.text_fields),
     collapsedBorderColor: Colors.transparent,
     collapsedTextColor: Colors.grey.withOpacity(0.8),
@@ -44,7 +48,7 @@ ExpansionTileBorderItem buildTitleStep({
     iconColor: Colors.white,
     children: [
       BuildSliderEnableOption(
-        controllerTag: 'titleEnable',
+        controllerTag: '$widgetTitle-Enable-$uuid',
         initialValue: showTitle,
         onToggle: onShowTitleChanged,
       ),
@@ -66,11 +70,14 @@ ExpansionTileBorderItem buildTitleStep({
       const SizedBox(height: 20),
       BuildSidebarOption(
         title: 'Font family',
-        rightWidget: BuildChangeFontFamily(sheetContext: titleSheetContext),
+        rightWidget: BuildChangeFontFamily(
+          sheetContext: titleSheetContext,
+          callback: (val) => onTitleFontFamilyChanged?.call(val),
+        ),
       ),
       const SizedBox(height: 20),
       BuildAlignmentOption(
-        controllerTag: 'titleAlignmentHorizontal',
+        controllerTag: '$widgetTitle-AlignmentHorizontal-$uuid',
         initialAlignment: titleAlignment,
         onToggle: (val) => onTitleAlignmentChanged?.call(val),
       ),
@@ -78,8 +85,9 @@ ExpansionTileBorderItem buildTitleStep({
       BuildSidebarOption(
         title: 'Font size',
         rightWidget: BuildSliderWithValueBox(
-          controllerTag: 'titleFontSize',
+          controllerTag: '$widgetTitle-titleFontSize-$uuid',
           defaultValue: titleFontSize ?? 20,
+          max: 30,
           onChanged: (val) => onTitleFontSizeChanged?.call(val),
         ),
       ),
@@ -87,7 +95,7 @@ ExpansionTileBorderItem buildTitleStep({
       BuildSidebarOption(
         title: 'Line Height',
         rightWidget: BuildSliderWithValueBox(
-          controllerTag: 'titleLineHeight',
+          controllerTag: '$widgetTitle-titleLineHeight-$uuid',
           defaultValue: titleLineHeight ?? 1,
           min: -0,
           max: 5,
@@ -99,20 +107,65 @@ ExpansionTileBorderItem buildTitleStep({
       BuildSidebarOption(
         title: 'Color',
         rightWidget: BuildPickColor(
-          controllerTag: 'titleColor',
+          controllerTag: '$widgetTitle-titleColor-$uuid',
           initialColor: titleColor,
           onColorChangedCallback: (val) => onTitleColorChanged?.call(val),
         ),
       ),
-      const SizedBox(height: 20),
+      const Divider(height: 40),
+      const Text('Padding'),
+      const SizedBox(height: 10),
       BuildSidebarOption(
-        title: 'Margin',
+        title: 'Top',
         rightWidget: BuildSlider(
-          controllerTag: 'titleMargin',
-          onChanged: (val) => print('❌ - $val'),
+          min: 0,
+          max: 30,
+          controllerTag: '$widgetTitle-titlePadding-top-$uuid',
+          onChanged: (val) => onTitlePaddingChanged?.call(
+            val,
+            PaddingDestination.top,
+          ),
         ),
       ),
       const SizedBox(height: 10),
+      BuildSidebarOption(
+        title: 'Bottom',
+        rightWidget: BuildSlider(
+          min: 0,
+          max: 30,
+          controllerTag: '$widgetTitle-titlePadding-bottom-$uuid',
+          onChanged: (val) => onTitlePaddingChanged?.call(
+            val,
+            PaddingDestination.bottom,
+          ),
+        ),
+      ),
+      const SizedBox(height: 10),
+      BuildSidebarOption(
+        title: 'Left',
+        rightWidget: BuildSlider(
+          min: 0,
+          max: 30,
+          controllerTag: '$widgetTitle-titlePadding-left-$uuid',
+          onChanged: (val) => onTitlePaddingChanged?.call(
+            val,
+            PaddingDestination.left,
+          ),
+        ),
+      ),
+      const SizedBox(height: 10),
+      BuildSidebarOption(
+        title: 'Right',
+        rightWidget: BuildSlider(
+          min: 0,
+          max: 30,
+          controllerTag: '$widgetTitle-titlePadding-right-$uuid',
+          onChanged: (val) => onTitlePaddingChanged?.call(
+            val,
+            PaddingDestination.right,
+          ),
+        ),
+      ),
     ],
   );
 }

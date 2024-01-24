@@ -9,22 +9,28 @@ class ChangeFontfamilyController extends GetxController {
   final _preActiveFontFamily = GoogleFonts.roboto().obs;
   TextStyle get preActiveFontFamily => _preActiveFontFamily.value;
 
+  final _fontKey = ''.obs;
+  String get fontKey => _fontKey.value;
+
   // search result
   final _searchResult = <GoogleFonts>[].obs;
   List<GoogleFonts> get searchResult => _searchResult;
 
   // cjange font family
   void changeFontFamily({
-    required TextStyle fontFamily,
+    String? key,
   }) {
-    _preActiveFontFamily.value = fontFamily;
+    _preActiveFontFamily.value = GoogleFonts.getFont(key!);
+    _fontKey.value = key;
     update();
   }
 
   // save font family
-  void saveFontFamily() {
+  void saveFontFamily({required void Function(String)? callback}) {
     _activeFontFamily.value = _preActiveFontFamily.value;
-    update();
+
+    // callback
+    callback?.call(fontKey);
 
     Get.back();
   }

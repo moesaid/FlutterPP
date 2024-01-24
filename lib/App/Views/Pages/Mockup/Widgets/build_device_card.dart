@@ -1,14 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutterpp/App/Models/template_config_model.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class BuildDeviceCard extends StatelessWidget {
   final TemplateConfigModel config;
   final bool isSeleted;
+  // final TextStyle titleStyle, subtitleStyle;
   const BuildDeviceCard({
     super.key,
     required this.config,
     required this.isSeleted,
+    // required this.titleStyle,
+    // required this.subtitleStyle,
   });
 
   @override
@@ -28,7 +32,13 @@ class BuildDeviceCard extends StatelessWidget {
       child: Column(
         children: [
           const BuildDeviceHead(),
-          Expanded(child: BuildDeviceBody(config: config)),
+          Expanded(
+            child: BuildDeviceBody(
+              config: config,
+              // titleStyle: titleStyle,
+              // subtitleStyle: subtitleStyle,
+            ),
+          ),
         ],
       ),
     );
@@ -37,9 +47,12 @@ class BuildDeviceCard extends StatelessWidget {
 
 class BuildDeviceBody extends StatelessWidget {
   final TemplateConfigModel config;
+  // final TextStyle titleStyle, subtitleStyle;
   const BuildDeviceBody({
     super.key,
     required this.config,
+    // required this.titleStyle,
+    // required this.subtitleStyle,
   });
 
   @override
@@ -80,7 +93,11 @@ class BuildDeviceBody extends StatelessWidget {
           runSpacing: config.bodyRunSpacing!,
           spacing: config.bodySpacing!,
           children: [
-            BuildDeviceBodyHead(config: config),
+            BuildDeviceBodyHead(
+              config: config,
+              // titleStyle: titleStyle,
+              // subtitleStyle: subtitleStyle,
+            ),
             Transform.rotate(
               angle: config.rotate!,
               child: BuildDeviceBodyIphoneCase(config: config),
@@ -198,7 +215,8 @@ class BuildDeviceBodyHead extends StatelessWidget {
               children: [
                 Text(
                   config.title!,
-                  style: TextStyle(
+                  style: GoogleFonts.getFont(
+                    config.titleFontFamily ?? 'Roboto',
                     fontSize: config.titleFontSize ?? 18,
                     color: config.titleColor ?? Colors.black,
                     height: config.titleLineHeight,
@@ -208,27 +226,30 @@ class BuildDeviceBodyHead extends StatelessWidget {
               ],
             ),
           ),
-        Padding(
-          padding: EdgeInsets.only(
-            top: config.subtitlePaddingTop!,
-            bottom: config.subtitlePaddingBottom!,
-            left: config.subtitlePaddingLeft!,
-            right: config.subtitlePaddingRight!,
-          ),
-          child: Row(
-            mainAxisAlignment: config.subtitleAlignment!,
-            children: [
-              Text(
-                config.subtitle!,
-                style: const TextStyle(
-                  fontSize: 16,
-                  color: Colors.black,
-                  fontWeight: FontWeight.bold,
+        if (config.showSubtitle!)
+          Padding(
+            padding: EdgeInsets.only(
+              top: config.subtitlePaddingTop!,
+              bottom: config.subtitlePaddingBottom!,
+              left: config.subtitlePaddingLeft!,
+              right: config.subtitlePaddingRight!,
+            ),
+            child: Row(
+              mainAxisAlignment: config.subtitleAlignment!,
+              children: [
+                Text(
+                  config.subtitle!,
+                  style: GoogleFonts.getFont(
+                    config.subtitleFontFamily ?? 'Roboto',
+                    fontSize: config.subtitleFontSize ?? 16,
+                    color: config.subtitleColor ?? Colors.black,
+                    height: config.subtitleLineHeight,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
-        ),
       ],
     );
   }

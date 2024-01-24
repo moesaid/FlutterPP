@@ -69,9 +69,7 @@ class BuildMockupSinglePageSidebar extends StatelessWidget {
           controller.updateBackground(color: color);
         },
         onGradiantChangedCallback: (gradient) {
-          controller.updateBackground(
-            gradient: gradient,
-          );
+          controller.updateBackground(gradient: gradient);
         },
         onImageUpload: (image) {
           controller.updateBackground(image: image);
@@ -110,44 +108,47 @@ class BuildMockupSinglePageSidebar extends StatelessWidget {
 
         // start title
         titleText: controller.seletedItem.title,
-        // titleFontFamily: controller.seletedItem.titleFontFamily,
+        titleFontFamily: controller.seletedItem.titleFontFamily,
         showTitle: controller.seletedItem.showTitle,
         titleAlignment: controller.seletedItem.titleAlignment,
         titleFontSize: controller.seletedItem.titleFontSize,
         titleLineHeight: controller.seletedItem.titleLineHeight,
         titleColor: controller.seletedItem.titleColor,
-        titleStrokeColor: controller.seletedItem.titleStrokeColor,
         titlePaddingTop: controller.seletedItem.titlePaddingTop,
         titlePaddingBottom: controller.seletedItem.titlePaddingBottom,
         titlePaddingLeft: controller.seletedItem.titlePaddingLeft,
         titlePaddingRight: controller.seletedItem.titlePaddingRight,
-        onShowTitleChanged: (value) {
-          controller.updateTitleVisibility(value);
-        },
-        onTitleAlignmentChanged: (alignment) {
-          controller.updateTitleAlignment(alignment);
-        },
-        onTitleFontSizeChanged: (fontSize) {
-          controller.updateTitleFontSize(fontSize);
-        },
-        onTitleLineHeightChanged: (lineHeight) {
-          controller.updateTitleLineHeight(lineHeight);
-        },
-        onTitleColorChanged: (color) {
-          controller.updateTitleColor(color);
-        },
-
-        onTitlePaddingChanged: (padding, destination) {
-          controller.updateTitlePadding(
-            padding: padding,
-            destination: destination,
-          );
-        },
-        onTitleChanged: (title) {
-          controller.updateTitle(title);
-        },
-
+        onShowTitleChanged: controller.updateTitleVisibility,
+        onTitleAlignmentChanged: controller.updateTitleAlignment,
+        onTitleFontSizeChanged: controller.updateTitleFontSize,
+        onTitleLineHeightChanged: controller.updateTitleLineHeight,
+        onTitleColorChanged: controller.updateTitleColor,
+        onTitlePaddingChanged: controller.updateTitlePadding,
+        onTitleChanged: controller.updateTitle,
+        onTitleFontFamilyChanged: controller.updateTitleFontFamily,
         // end title
+
+        // start subtitle
+        subtitleText: controller.seletedItem.subtitle,
+        subtitleFontFamily: controller.seletedItem.subtitleFontFamily,
+        showSubtitle: controller.seletedItem.showSubtitle,
+        subtitleAlignment: controller.seletedItem.subtitleAlignment,
+        subtitleFontSize: controller.seletedItem.subtitleFontSize,
+        subtitleLineHeight: controller.seletedItem.subtitleLineHeight,
+        subtitleColor: controller.seletedItem.subtitleColor,
+        subtitlePaddingTop: controller.seletedItem.subtitlePaddingTop,
+        subtitlePaddingBottom: controller.seletedItem.subtitlePaddingBottom,
+        subtitlePaddingLeft: controller.seletedItem.subtitlePaddingLeft,
+        subtitlePaddingRight: controller.seletedItem.subtitlePaddingRight,
+        onShowSubtitleChanged: controller.updateSubtitleVisibility,
+        onSubtitleAlignmentChanged: controller.updateSubtitleAlignment,
+        onSubtitleFontSizeChanged: controller.updateSubtitleFontSize,
+        onSubtitleLineHeightChanged: controller.updateSubtitleLineHeight,
+        onSubtitleColorChanged: controller.updateSubtitleColor,
+        onSubtitlePaddingChanged: controller.updateSubtitlePadding,
+        onSubtitleChanged: controller.updateSubtitle,
+        onSubtitleFontFamilyChanged: controller.updateSubtitleFontFamily,
+        // end subtitle
       ),
     );
   }

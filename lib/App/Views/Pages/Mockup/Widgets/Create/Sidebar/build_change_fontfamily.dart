@@ -9,10 +9,12 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class BuildChangeFontFamily extends GetView<ChangeFontfamilyController> {
-  final TextStyle? fontFamily;
+  final String? fontFamily;
   final BuildContext sheetContext;
+  final void Function(String)? callback;
 
   const BuildChangeFontFamily({
+    this.callback,
     this.fontFamily,
     required this.sheetContext,
     super.key,
@@ -24,7 +26,7 @@ class BuildChangeFontFamily extends GetView<ChangeFontfamilyController> {
       init: ChangeFontfamilyController(),
       didChangeDependencies: (state) {
         if (fontFamily == null) return;
-        state.controller?.changeFontFamily(fontFamily: fontFamily!);
+        state.controller?.changeFontFamily(key: fontFamily!);
       },
       builder: (context) {
         return InkWell(
@@ -36,6 +38,7 @@ class BuildChangeFontFamily extends GetView<ChangeFontfamilyController> {
             header: const SizedBox.shrink(),
             body: BuildChangeFontBottomSheet(
               controller: controller,
+              callback: callback,
             ),
           ),
           child: Container(
@@ -70,9 +73,11 @@ class BuildChangeFontFamily extends GetView<ChangeFontfamilyController> {
 
 class BuildChangeFontBottomSheet extends StatelessWidget {
   final ChangeFontfamilyController controller;
+  final void Function(String)? callback;
   const BuildChangeFontBottomSheet({
     super.key,
     required this.controller,
+    this.callback,
   });
 
   @override
@@ -80,7 +85,7 @@ class BuildChangeFontBottomSheet extends StatelessWidget {
     return BuildFullPageBottomSheet(
       bgColor: Get.theme.colorScheme.background,
       closeWidget: BuildBottomSheetTopNavFullWidth(
-        onSave: () => controller.saveFontFamily(),
+        onSave: () => controller.saveFontFamily(callback: callback),
         onCancle: () => controller.onCancle(),
       ),
       child: Column(
@@ -234,46 +239,59 @@ class BuildFontList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListView.separated(
-      itemCount: GoogleFonts.asMap().entries.length,
-      separatorBuilder: (_, int index) {
-        return const Divider();
-      },
-      itemBuilder: (BuildContext context, int index) {
-        return GoogleFonts.asMap().entries.map((e) {
-          return ListTile(
-            style: ListTileStyle.drawer,
-            contentPadding: const EdgeInsets.symmetric(
-              horizontal: 0,
-              vertical: 0,
-            ),
-            onTap: () => controller.changeFontFamily(
-              fontFamily: e.value(),
-            ),
-            title: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  e.key,
+    return FutureBuilder(
+      future: GoogleFonts.pendingFonts([GoogleFonts.asMap()]),
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return const Center(child: CircularProgressIndicator());
+        }
+
+        if (snapshot.hasError) {
+          return const Center(child: Text('Error'));
+        }
+
+        if (snapshot.data == null) {
+          return const Center(child: Text('No data'));
+        }
+
+        return ListView.separated(
+          itemCount: 50,
+          separatorBuilder: (_, int index) {
+            return const Divider();
+          },
+          itemBuilder: (BuildContext context, int index) {
+            return GoogleFonts.asMap().keys.map((e) {
+              return ListTile(
+                style: ListTileStyle.drawer,
+                contentPadding: const EdgeInsets.symmetric(
+                  horizontal: 0,
+                  vertical: 0,
                 ),
-                const SizedBox(height: 5),
-                Text(
-                  'Font Family ${e.value().fontFamily!}',
-                  style: Get.textTheme.bodySmall?.copyWith(
-                    color: Colors.grey.withOpacity(0.5),
-                  ),
-                ),
-                const SizedBox(height: 20),
-                Text(
-                  e.key,
-                  style: e.value().copyWith(
-                        fontSize: 60,
+                onTap: () => controller.changeFontFamily(key: e),
+                title: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      e,
+                    ),
+                    const SizedBox(height: 5),
+                    Text(
+                      'Font Family $e',
+                      style: Get.textTheme.bodySmall?.copyWith(
+                        color: Colors.grey.withOpacity(0.5),
                       ),
+                    ),
+                    const SizedBox(height: 20),
+                    Text(
+                      e,
+                      style: GoogleFonts.getFont(e).copyWith(fontSize: 60),
+                    ),
+                  ],
                 ),
-              ],
-            ),
-          );
-        }).toList()[index];
+              );
+            }).toList()[index];
+          },
+        );
       },
     );
   }

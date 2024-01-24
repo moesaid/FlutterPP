@@ -49,13 +49,15 @@ class BuildSlider extends StatelessWidget {
             ),
           ),
           child: Slider(
-            min: min ?? 0,
+            min: (min != null && max != null)
+                ? (min! > max! ? max! - max! / 2 : min!)
+                : 0,
             max: max ?? 100,
             divisions: divisions ?? 20,
             activeColor: Get.theme.primaryColor,
             inactiveColor: Get.theme.colorScheme.onBackground.withOpacity(0.1),
             thumbColor: Get.theme.primaryColor,
-            value: _.sliderValue,
+            value: _.sliderValue > max! ? max! : _.sliderValue,
             label: _.sliderValue.toStringAsFixed(0),
             onChanged: (double value) {
               _.onChange(

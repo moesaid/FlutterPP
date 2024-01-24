@@ -7,7 +7,6 @@ import 'package:flutterpp/App/Views/Pages/Mockup/Widgets/Create/Sidebar/Steps/bu
 import 'package:flutterpp/App/Views/Pages/Mockup/Widgets/Create/Sidebar/Steps/build_device_step.dart';
 import 'package:flutterpp/App/Views/Pages/Mockup/Widgets/Create/Sidebar/Steps/build_icon_step.dart';
 import 'package:flutterpp/App/Views/Pages/Mockup/Widgets/Create/Sidebar/Steps/build_layout_step.dart';
-import 'package:flutterpp/App/Views/Pages/Mockup/Widgets/Create/Sidebar/Steps/build_subtitle_step.dart';
 import 'package:flutterpp/App/Views/Pages/Mockup/Widgets/Create/Sidebar/Steps/build_title_step.dart';
 import 'package:get/get.dart';
 
@@ -50,6 +49,27 @@ class BuildCreateMockupSidebarSelectedState
     this.onTitleColorChanged,
     this.onTitlePaddingChanged,
     this.onTitleChanged,
+    this.subtitleText,
+    this.subtitleFontFamily,
+    this.showSubtitle,
+    this.subtitleAlignment,
+    this.subtitleFontSize,
+    this.subtitleLineHeight,
+    this.subtitleColor,
+    this.subtitleStrokeColor,
+    this.subtitlePaddingTop,
+    this.subtitlePaddingBottom,
+    this.subtitlePaddingLeft,
+    this.subtitlePaddingRight,
+    this.onShowSubtitleChanged,
+    this.onSubtitleAlignmentChanged,
+    this.onSubtitleFontSizeChanged,
+    this.onSubtitleLineHeightChanged,
+    this.onSubtitleColorChanged,
+    this.onSubtitlePaddingChanged,
+    this.onSubtitleChanged,
+    this.onTitleFontFamilyChanged,
+    this.onSubtitleFontFamilyChanged,
   });
 
   final String? mockupId;
@@ -61,33 +81,44 @@ class BuildCreateMockupSidebarSelectedState
   final double? initialIconLeftPadding;
   final double? initialIconBottomPadding;
   final double? initialIconTopPadding;
-  final String? titleText;
-  final String? titleFontFamily;
-  final bool? showTitle;
-  final MainAxisAlignment? titleAlignment;
-  final double? titleFontSize;
-  final double? titleLineHeight;
-  final Color? titleColor;
-  final Color? titleStrokeColor;
-  final double? titlePaddingTop;
-  final double? titlePaddingBottom;
-  final double? titlePaddingLeft;
-  final double? titlePaddingRight;
 
-  final void Function(bool)? onShowTitleChanged;
-  final void Function(String)? onTitleChanged;
-  final void Function(MainAxisAlignment)? onTitleAlignmentChanged;
-  final void Function(double)? onTitleFontSizeChanged;
-  final void Function(double)? onTitleLineHeightChanged;
-  final void Function(Color)? onTitleColorChanged;
+  final String? titleText, subtitleText;
+  final String? titleFontFamily, subtitleFontFamily;
+  final bool? showTitle, showSubtitle;
+  final MainAxisAlignment? titleAlignment, subtitleAlignment;
+  final double? titleFontSize, subtitleFontSize;
+  final double? titleLineHeight, subtitleLineHeight;
+  final Color? titleColor, subtitleColor;
+  final Color? titleStrokeColor, subtitleStrokeColor;
+  final double? titlePaddingTop, subtitlePaddingTop;
+  final double? titlePaddingBottom, subtitlePaddingBottom;
+  final double? titlePaddingLeft, subtitlePaddingLeft;
+  final double? titlePaddingRight, subtitlePaddingRight;
 
-  final void Function(double, PaddingDestination)? onTitlePaddingChanged;
-  final void Function(bool)? onIconToggle;
-  final void Function(String)? onIconUpload;
-  final void Function(String)? onImageUpload;
-  final void Function(Color)? onColorChangedCallback;
+  final void Function(bool)? onShowTitleChanged,
+      onShowSubtitleChanged,
+      onIconToggle;
+  final void Function(String)? onTitleChanged,
+      onSubtitleChanged,
+      onIconUpload,
+      onImageUpload;
+  final void Function(String)? onSubtitleFontFamilyChanged,
+      onTitleFontFamilyChanged;
+
+  final void Function(MainAxisAlignment)? onTitleAlignmentChanged,
+      onSubtitleAlignmentChanged,
+      onIconAlignmentChanged;
+  final void Function(double)? onTitleFontSizeChanged,
+      onSubtitleFontSizeChanged,
+      onTitleLineHeightChanged,
+      onSubtitleLineHeightChanged;
+  final void Function(Color)? onTitleColorChanged,
+      onSubtitleColorChanged,
+      onColorChangedCallback;
+  final void Function(double, PaddingDestination)? onTitlePaddingChanged,
+      onSubtitlePaddingChanged;
+
   final void Function(GradientModel)? onGradiantChangedCallback;
-  final void Function(MainAxisAlignment alignment)? onIconAlignmentChanged;
   final void Function(double padding, PaddingDestination destination)?
       onIconPaddingChanged;
 
@@ -145,8 +176,32 @@ class BuildCreateMockupSidebarSelectedState
                 onTitleLineHeightChanged: onTitleLineHeightChanged,
                 onTitleColorChanged: onTitleColorChanged,
                 onTitlePaddingChanged: onTitlePaddingChanged,
+                onTitleFontFamilyChanged: onTitleFontFamilyChanged,
               ),
-              buildSubtitleStep(),
+              buildTitleStep(
+                widgetTitle: 'Subtitle',
+                titleSheetContext: context,
+                titleText: subtitleText,
+                titleFontFamily: subtitleFontFamily,
+                showTitle: showSubtitle,
+                titleAlignment: subtitleAlignment,
+                titleFontSize: subtitleFontSize,
+                titleLineHeight: subtitleLineHeight,
+                titleColor: subtitleColor,
+                titleStrokeColor: subtitleStrokeColor,
+                titlePaddingTop: subtitlePaddingTop,
+                titlePaddingBottom: subtitlePaddingBottom,
+                titlePaddingLeft: subtitlePaddingLeft,
+                titlePaddingRight: subtitlePaddingRight,
+                onTitleChanged: onSubtitleChanged,
+                onShowTitleChanged: onShowSubtitleChanged,
+                onTitleAlignmentChanged: onSubtitleAlignmentChanged,
+                onTitleFontSizeChanged: onSubtitleFontSizeChanged,
+                onTitleLineHeightChanged: onSubtitleLineHeightChanged,
+                onTitleColorChanged: onSubtitleColorChanged,
+                onTitlePaddingChanged: onSubtitlePaddingChanged,
+                onTitleFontFamilyChanged: onSubtitleFontFamilyChanged,
+              ),
               buildDeviceStep(),
               buildDeviceStep(
                 title: 'Device Two',
