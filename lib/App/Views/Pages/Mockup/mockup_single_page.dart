@@ -107,6 +107,47 @@ class BuildMockupSinglePageSidebar extends StatelessWidget {
           );
         },
         // end icon
+
+        // start title
+        titleText: controller.seletedItem.title,
+        // titleFontFamily: controller.seletedItem.titleFontFamily,
+        showTitle: controller.seletedItem.showTitle,
+        titleAlignment: controller.seletedItem.titleAlignment,
+        titleFontSize: controller.seletedItem.titleFontSize,
+        titleLineHeight: controller.seletedItem.titleLineHeight,
+        titleColor: controller.seletedItem.titleColor,
+        titleStrokeColor: controller.seletedItem.titleStrokeColor,
+        titlePaddingTop: controller.seletedItem.titlePaddingTop,
+        titlePaddingBottom: controller.seletedItem.titlePaddingBottom,
+        titlePaddingLeft: controller.seletedItem.titlePaddingLeft,
+        titlePaddingRight: controller.seletedItem.titlePaddingRight,
+        onShowTitleChanged: (value) {
+          controller.updateTitleVisibility(value);
+        },
+        onTitleAlignmentChanged: (alignment) {
+          controller.updateTitleAlignment(alignment);
+        },
+        onTitleFontSizeChanged: (fontSize) {
+          controller.updateTitleFontSize(fontSize);
+        },
+        onTitleLineHeightChanged: (lineHeight) {
+          controller.updateTitleLineHeight(lineHeight);
+        },
+        onTitleColorChanged: (color) {
+          controller.updateTitleColor(color);
+        },
+
+        onTitlePaddingChanged: (padding, destination) {
+          controller.updateTitlePadding(
+            padding: padding,
+            destination: destination,
+          );
+        },
+        onTitleChanged: (title) {
+          controller.updateTitle(title);
+        },
+
+        // end title
       ),
     );
   }

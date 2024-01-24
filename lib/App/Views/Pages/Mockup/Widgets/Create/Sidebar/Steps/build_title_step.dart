@@ -1,6 +1,7 @@
 import 'package:expansion_tile_group/expansion_tile_group.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
+import 'package:flutterpp/App/Enums/padding_destination_enum.dart';
 import 'package:flutterpp/App/Views/Global/build_slider.dart';
 import 'package:flutterpp/App/Views/Pages/Mockup/Widgets/Create/Sidebar/build_alignment_option.dart';
 import 'package:flutterpp/App/Views/Pages/Mockup/Widgets/Create/Sidebar/build_change_fontfamily.dart';
@@ -10,7 +11,28 @@ import 'package:flutterpp/App/Views/Pages/Mockup/Widgets/Create/Sidebar/build_sl
 import 'package:flutterpp/App/Views/Pages/Mockup/Widgets/build_sidebar_option.dart';
 import 'package:get/get.dart';
 
-ExpansionTileBorderItem buildTitleStep() {
+ExpansionTileBorderItem buildTitleStep({
+  String? titleText,
+  String? titleFontFamily,
+  bool? showTitle,
+  MainAxisAlignment? titleAlignment,
+  double? titleFontSize,
+  double? titleLineHeight,
+  Color? titleColor,
+  Color? titleStrokeColor,
+  double? titlePaddingTop,
+  double? titlePaddingBottom,
+  double? titlePaddingLeft,
+  double? titlePaddingRight,
+  required BuildContext titleSheetContext,
+  Function(bool)? onShowTitleChanged,
+  Function(String)? onTitleChanged,
+  Function(MainAxisAlignment)? onTitleAlignmentChanged,
+  Function(double)? onTitleFontSizeChanged,
+  Function(double)? onTitleLineHeightChanged,
+  Function(Color)? onTitleColorChanged,
+  Function(double, PaddingDestination)? onTitlePaddingChanged,
+}) {
   return ExpansionTileBorderItem(
     title: const Text('Title'),
     leading: const Icon(Icons.text_fields),
@@ -21,37 +43,44 @@ ExpansionTileBorderItem buildTitleStep() {
     textColor: Colors.white,
     iconColor: Colors.white,
     children: [
-      const BuildSliderEnableOption(
+      BuildSliderEnableOption(
         controllerTag: 'titleEnable',
+        initialValue: showTitle,
+        onToggle: onShowTitleChanged,
       ),
       const Divider(height: 30),
       const SizedBox(height: 10),
       FormBuilder(
         child: FormBuilderTextField(
           name: 'title',
+          onChanged: (val) => onTitleChanged?.call(val!),
           decoration: InputDecoration(
-            hintText: 'your title',
-            hintStyle: Get.textTheme.bodyMedium
-                ?.copyWith(color: Colors.grey.withOpacity(0.5)),
+            hintText: titleText,
+            hintStyle: Get.textTheme.bodyMedium?.copyWith(
+              color: Colors.grey.withOpacity(0.5),
+            ),
             border: InputBorder.none,
           ),
         ),
       ),
       const SizedBox(height: 20),
-      const BuildSidebarOption(
+      BuildSidebarOption(
         title: 'Font family',
-        rightWidget: BuildChangeFontFamily(),
+        rightWidget: BuildChangeFontFamily(sheetContext: titleSheetContext),
       ),
       const SizedBox(height: 20),
-      const BuildAlignmentOption(
+      BuildAlignmentOption(
         controllerTag: 'titleAlignmentHorizontal',
+        initialAlignment: titleAlignment,
+        onToggle: (val) => onTitleAlignmentChanged?.call(val),
       ),
       const SizedBox(height: 20),
       BuildSidebarOption(
         title: 'Font size',
         rightWidget: BuildSliderWithValueBox(
           controllerTag: 'titleFontSize',
-          onChanged: (val) => print('❌ - $val'),
+          defaultValue: titleFontSize ?? 20,
+          onChanged: (val) => onTitleFontSizeChanged?.call(val),
         ),
       ),
       const SizedBox(height: 10),
@@ -59,18 +88,21 @@ ExpansionTileBorderItem buildTitleStep() {
         title: 'Line Height',
         rightWidget: BuildSliderWithValueBox(
           controllerTag: 'titleLineHeight',
-          onChanged: (val) => print('❌ - $val'),
+          defaultValue: titleLineHeight ?? 1,
+          min: -0,
+          max: 5,
+          divisions: 20,
+          onChanged: (val) => onTitleLineHeightChanged?.call(val),
         ),
       ),
       const SizedBox(height: 20),
-      const BuildSidebarOption(
+      BuildSidebarOption(
         title: 'Color',
-        rightWidget: BuildPickColor(),
-      ),
-      const SizedBox(height: 20),
-      const BuildSidebarOption(
-        title: 'Stroke',
-        rightWidget: BuildPickColor(),
+        rightWidget: BuildPickColor(
+          controllerTag: 'titleColor',
+          initialColor: titleColor,
+          onColorChangedCallback: (val) => onTitleColorChanged?.call(val),
+        ),
       ),
       const SizedBox(height: 20),
       BuildSidebarOption(

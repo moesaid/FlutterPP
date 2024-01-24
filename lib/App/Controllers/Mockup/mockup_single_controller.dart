@@ -86,14 +86,6 @@ class MockupSingleController extends GetxController {
     _updateMockupData();
   }
 
-  // update mockup data
-  _updateMockupData() {
-    List<TemplateConfigModel> jsonData = mockup.jsonData!;
-    int index = jsonData.indexWhere((el) => el.id == _seletedItem.value.id);
-    jsonData[index] = _seletedItem.value;
-    _mockup.value = _mockup.value.copyWith(jsonData: jsonData);
-  }
-
   // update logo
   updateLogo({required String logo}) {
     _seletedItem.value = _seletedItem.value.copyWith(
@@ -136,5 +128,93 @@ class MockupSingleController extends GetxController {
 
     // update mockup jsonData
     _updateMockupData();
+  }
+
+  // update title
+  updateTitle(String title) {
+    _seletedItem.value = _seletedItem.value.copyWith(
+      title: title,
+    );
+
+    // update mockup jsonData
+    _updateMockupData();
+  }
+
+  // update title visibility
+  updateTitleVisibility(bool value) {
+    _seletedItem.value = _seletedItem.value.copyWith(
+      showTitle: value,
+    );
+
+    // update mockup jsonData
+    _updateMockupData();
+  }
+
+  // update title alignment
+  updateTitleAlignment(MainAxisAlignment alignment) {
+    _seletedItem.value = _seletedItem.value.copyWith(
+      titleAlignment: alignment,
+    );
+
+    // update mockup jsonData
+    _updateMockupData();
+  }
+
+  void updateTitleFontSize(double fontSize) {
+    _seletedItem.value = _seletedItem.value.copyWith(
+      titleFontSize: fontSize,
+    );
+
+    // update mockup jsonData
+    _updateMockupData();
+  }
+
+  void updateTitleLineHeight(double lineHeight) {
+    _seletedItem.value = _seletedItem.value.copyWith(
+      titleLineHeight: lineHeight,
+    );
+
+    // update mockup jsonData
+    _updateMockupData();
+  }
+
+  void updateTitleColor(Color color) {
+    _seletedItem.value = _seletedItem.value.copyWith(
+      titleColor: color,
+    );
+
+    // update mockup jsonData
+    _updateMockupData();
+  }
+
+  void updateTitlePadding({
+    required double padding,
+    required PaddingDestination destination,
+  }) {
+    _seletedItem.value = _seletedItem.value.copyWith(
+      titlePaddingBottom: destination == PaddingDestination.bottom
+          ? padding
+          : _seletedItem.value.titlePaddingBottom,
+      titlePaddingTop: destination == PaddingDestination.top
+          ? padding
+          : _seletedItem.value.titlePaddingTop,
+      titlePaddingLeft: destination == PaddingDestination.left
+          ? padding
+          : _seletedItem.value.titlePaddingLeft,
+      titlePaddingRight: destination == PaddingDestination.right
+          ? padding
+          : _seletedItem.value.titlePaddingRight,
+    );
+
+    // update mockup jsonData
+    _updateMockupData();
+  }
+
+  // update mockup data
+  _updateMockupData() {
+    List<TemplateConfigModel> jsonData = mockup.jsonData!;
+    int index = jsonData.indexWhere((el) => el.id == _seletedItem.value.id);
+    jsonData[index] = _seletedItem.value;
+    _mockup.value = _mockup.value.copyWith(jsonData: jsonData);
   }
 }

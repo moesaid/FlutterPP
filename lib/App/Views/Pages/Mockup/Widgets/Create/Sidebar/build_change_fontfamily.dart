@@ -1,3 +1,5 @@
+import 'package:awesome_side_sheet/Enums/sheet_position.dart';
+import 'package:awesome_side_sheet/side_sheet.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutterpp/App/Controllers/Mockup/change_fontfamily_controller.dart';
@@ -8,9 +10,11 @@ import 'package:google_fonts/google_fonts.dart';
 
 class BuildChangeFontFamily extends GetView<ChangeFontfamilyController> {
   final TextStyle? fontFamily;
+  final BuildContext sheetContext;
 
   const BuildChangeFontFamily({
     this.fontFamily,
+    required this.sheetContext,
     super.key,
   });
 
@@ -24,13 +28,15 @@ class BuildChangeFontFamily extends GetView<ChangeFontfamilyController> {
       },
       builder: (context) {
         return InkWell(
-          onTap: () => Get.bottomSheet(
-            BuildChangeFontBottomSheet(
+          onTap: () => aweSideSheet(
+            sheetWidth: sheetContext.width,
+            context: sheetContext,
+            sheetPosition: SheetPosition.left,
+            footer: const SizedBox.shrink(),
+            header: const SizedBox.shrink(),
+            body: BuildChangeFontBottomSheet(
               controller: controller,
             ),
-            isDismissible: false,
-            enableDrag: false,
-            isScrollControlled: true,
           ),
           child: Container(
             padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
@@ -81,12 +87,6 @@ class BuildChangeFontBottomSheet extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const SizedBox(height: 80),
-          // BuildSearchBar(
-          //   onSearch: (String search) => controller.searchFontFamily(
-          //     search: search,
-          //   ),
-          // ),
-          // const SizedBox(height: 30),
           Expanded(
             child: Row(
               children: [

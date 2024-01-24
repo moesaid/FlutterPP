@@ -185,27 +185,29 @@ class BuildDeviceBodyHead extends StatelessWidget {
               ),
           ],
         ),
-        Padding(
-          padding: EdgeInsets.only(
-            top: config.titlePaddingTop!,
-            bottom: config.titlePaddingBottom!,
-            left: config.titlePaddingLeft!,
-            right: config.titlePaddingRight!,
-          ),
-          child: Row(
-            mainAxisAlignment: config.titleAlignment!,
-            children: [
-              Text(
-                config.title!,
-                style: const TextStyle(
-                  fontSize: 18,
-                  color: Colors.black,
-                  fontWeight: FontWeight.bold,
+        if (config.showTitle!)
+          Padding(
+            padding: EdgeInsets.only(
+              top: config.titlePaddingTop!,
+              bottom: config.titlePaddingBottom!,
+              left: config.titlePaddingLeft!,
+              right: config.titlePaddingRight!,
+            ),
+            child: Row(
+              mainAxisAlignment: config.titleAlignment!,
+              children: [
+                Text(
+                  config.title!,
+                  style: TextStyle(
+                    fontSize: config.titleFontSize ?? 18,
+                    color: config.titleColor ?? Colors.black,
+                    height: config.titleLineHeight,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
-        ),
         Padding(
           padding: EdgeInsets.only(
             top: config.subtitlePaddingTop!,

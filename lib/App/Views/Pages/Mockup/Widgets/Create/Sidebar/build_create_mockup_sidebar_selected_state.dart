@@ -31,6 +31,25 @@ class BuildCreateMockupSidebarSelectedState
     this.initialIconBottomPadding,
     this.initialIconLeftPadding,
     this.initialIconRightPadding,
+    this.titleText,
+    this.titleFontFamily,
+    this.showTitle,
+    this.titleAlignment,
+    this.titleFontSize,
+    this.titleLineHeight,
+    this.titleColor,
+    this.titleStrokeColor,
+    this.titlePaddingTop,
+    this.titlePaddingBottom,
+    this.titlePaddingLeft,
+    this.titlePaddingRight,
+    this.onShowTitleChanged,
+    this.onTitleAlignmentChanged,
+    this.onTitleFontSizeChanged,
+    this.onTitleLineHeightChanged,
+    this.onTitleColorChanged,
+    this.onTitlePaddingChanged,
+    this.onTitleChanged,
   });
 
   final String? mockupId;
@@ -42,6 +61,27 @@ class BuildCreateMockupSidebarSelectedState
   final double? initialIconLeftPadding;
   final double? initialIconBottomPadding;
   final double? initialIconTopPadding;
+  final String? titleText;
+  final String? titleFontFamily;
+  final bool? showTitle;
+  final MainAxisAlignment? titleAlignment;
+  final double? titleFontSize;
+  final double? titleLineHeight;
+  final Color? titleColor;
+  final Color? titleStrokeColor;
+  final double? titlePaddingTop;
+  final double? titlePaddingBottom;
+  final double? titlePaddingLeft;
+  final double? titlePaddingRight;
+
+  final void Function(bool)? onShowTitleChanged;
+  final void Function(String)? onTitleChanged;
+  final void Function(MainAxisAlignment)? onTitleAlignmentChanged;
+  final void Function(double)? onTitleFontSizeChanged;
+  final void Function(double)? onTitleLineHeightChanged;
+  final void Function(Color)? onTitleColorChanged;
+
+  final void Function(double, PaddingDestination)? onTitlePaddingChanged;
   final void Function(bool)? onIconToggle;
   final void Function(String)? onIconUpload;
   final void Function(String)? onImageUpload;
@@ -84,7 +124,28 @@ class BuildCreateMockupSidebarSelectedState
                 onIconAlignmentChanged: onIconAlignmentChanged,
                 onIconPaddingChanged: onIconPaddingChanged,
               ),
-              buildTitleStep(),
+              buildTitleStep(
+                titleSheetContext: context,
+                titleText: titleText,
+                titleFontFamily: titleFontFamily,
+                showTitle: showTitle,
+                titleAlignment: titleAlignment,
+                titleFontSize: titleFontSize,
+                titleLineHeight: titleLineHeight,
+                titleColor: titleColor,
+                titleStrokeColor: titleStrokeColor,
+                titlePaddingTop: titlePaddingTop,
+                titlePaddingBottom: titlePaddingBottom,
+                titlePaddingLeft: titlePaddingLeft,
+                titlePaddingRight: titlePaddingRight,
+                onTitleChanged: onTitleChanged,
+                onShowTitleChanged: onShowTitleChanged,
+                onTitleAlignmentChanged: onTitleAlignmentChanged,
+                onTitleFontSizeChanged: onTitleFontSizeChanged,
+                onTitleLineHeightChanged: onTitleLineHeightChanged,
+                onTitleColorChanged: onTitleColorChanged,
+                onTitlePaddingChanged: onTitlePaddingChanged,
+              ),
               buildSubtitleStep(),
               buildDeviceStep(),
               buildDeviceStep(

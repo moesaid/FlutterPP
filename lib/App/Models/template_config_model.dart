@@ -29,13 +29,14 @@ class TemplateConfigModel {
   double? logoPaddingBottom;
   double? logoPaddingLeft;
   double? logoPaddingRight;
+  double? titleFontSize, titleLineHeight;
   bool? showLogo, deviceFullSize;
   bool? showTitle;
   bool? showSubtitle;
   String? title;
   String? subtitle;
   String? backgroundImage;
-  Color? backgroundColor;
+  Color? backgroundColor, titleColor, titleStrokeColor;
   List<Color>? backgroundGradient;
   double? gradientAngle;
 
@@ -74,6 +75,10 @@ class TemplateConfigModel {
     this.backgroundImage,
     this.backgroundColor,
     this.backgroundGradient,
+    this.titleColor,
+    this.titleStrokeColor,
+    this.titleFontSize,
+    this.titleLineHeight,
     this.deviceFullSize = false,
     this.showLogo = false,
     this.showTitle = false,
@@ -216,7 +221,17 @@ class TemplateConfigModel {
           ]
         : null;
 
-    gradientAngle = json['gradientAngle'] ?? 0;
+    gradientAngle = convertIntToDouble(json['gradientAngle']);
+    titleColor = json['titleColor'] != null
+        ? ColorHelper.hexToColor(json['titleColor'])
+        : null;
+
+    titleStrokeColor = json['titleStrokeColor'] != null
+        ? ColorHelper.hexToColor(json['titleStrokeColor'])
+        : null;
+
+    titleFontSize = convertIntToDouble(json['titleFontSize']);
+    titleLineHeight = convertIntToDouble(json['titleLineHeight']);
   }
 
   Map<String, dynamic> toJson() {
@@ -355,7 +370,17 @@ class TemplateConfigModel {
               ]
             : null;
 
-    data['gradientAngle'] = gradientAngle;
+    data['gradientAngle'] = convertIntToDouble(gradientAngle);
+    data['titleColor'] = titleColor != null
+        ? ColorHelper.colorToHexWithoutHash(titleColor!)
+        : null;
+
+    data['titleStrokeColor'] = titleStrokeColor != null
+        ? ColorHelper.colorToHexWithoutHash(titleStrokeColor!)
+        : null;
+
+    data['titleFontSize'] = convertIntToDouble(titleFontSize);
+    data['titleLineHeight'] = convertIntToDouble(titleLineHeight);
     return data;
   }
 
@@ -414,6 +439,10 @@ class TemplateConfigModel {
     Color? backgroundColor,
     List<Color>? backgroundGradient,
     double? gradientAngle,
+    double? titleFontSize,
+    double? titleLineHeight,
+    Color? titleColor,
+    Color? titleStrokeColor,
   }) {
     return TemplateConfigModel(
       id: id ?? this.id,
@@ -458,6 +487,9 @@ class TemplateConfigModel {
       backgroundColor: backgroundColor ?? this.backgroundColor,
       backgroundGradient: backgroundGradient ?? this.backgroundGradient,
       gradientAngle: gradientAngle ?? this.gradientAngle,
+      titleFontSize: titleFontSize ?? this.titleFontSize,
+      titleLineHeight: titleLineHeight ?? this.titleLineHeight,
+      titleColor: titleColor ?? this.titleColor,
     );
   }
 }
