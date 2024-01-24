@@ -505,7 +505,7 @@ class TemplateConfigModel {
       subtitleFontSize: subtitleFontSize ?? this.subtitleFontSize,
       subtitleLineHeight: subtitleLineHeight ?? this.subtitleLineHeight,
       titleFontFamily: titleFontFamily ?? this.titleFontFamily,
-      subtitleFontFamily: subtitleFontFamily ?? subtitleFontFamily,
+      subtitleFontFamily: subtitleFontFamily ?? this.subtitleFontFamily,
     );
   }
 }
