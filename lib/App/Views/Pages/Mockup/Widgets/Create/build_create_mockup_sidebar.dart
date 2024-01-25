@@ -54,6 +54,23 @@ class BuildCreateMockupSidebar extends StatelessWidget {
   final void Function(double padding, PaddingDestination destination)?
       onIconPaddingChanged;
 
+  // Device
+  final void Function({
+    double? devicePositionBottom,
+    double? devicePositionLeft,
+    double? devicePositionRight,
+    double? devicePositionTop,
+  })? onUpdateFirstDevicePosition;
+  final void Function(double rotate)? onUpdateFirstDeviceRotate;
+  final void Function(bool value)? onUpdateFirstDeviceFullSize;
+  final void Function(Color color)? updateFirstStrokeColor;
+  final void Function(double width)? updateFirstStrokeWidth;
+  final void Function(String frame)? updateFirstDeviceFrame;
+  final void Function(Color color)? updateFirstShadowColor;
+  final void Function(double blur)? updateFirstDeviceShadowBlur;
+  final void Function(double offset)? updateFirstDeviceShadowXOffset;
+  final void Function(double offset)? updateFirstDeviceShadowYOffset;
+
   const BuildCreateMockupSidebar({
     super.key,
     this.isScreenshotSelected = false,
@@ -113,14 +130,23 @@ class BuildCreateMockupSidebar extends StatelessWidget {
     this.onSubtitleChanged,
     this.onTitleFontFamilyChanged,
     this.onSubtitleFontFamilyChanged,
+    this.onUpdateFirstDevicePosition,
+    this.onUpdateFirstDeviceRotate,
+    this.onUpdateFirstDeviceFullSize,
+    this.updateFirstStrokeColor,
+    this.updateFirstStrokeWidth,
+    this.updateFirstDeviceFrame,
+    this.updateFirstShadowColor,
+    this.updateFirstDeviceShadowBlur,
+    this.updateFirstDeviceShadowXOffset,
+    this.updateFirstDeviceShadowYOffset,
   });
 
   @override
   Widget build(BuildContext context) {
     return Container(
       width: 300,
-      height: 100.h,
-      padding: const EdgeInsets.all(15),
+      height: context.height,
       decoration: BoxDecoration(
         color: Get.theme.scaffoldBackgroundColor,
         border: Border(
@@ -130,66 +156,90 @@ class BuildCreateMockupSidebar extends StatelessWidget {
           ),
         ),
       ),
-      child: !isScreenshotSelected!
-          ? const BuildCreateMockupSidebarEmpty()
-          : BuildCreateMockupSidebarSelectedState(
-              initialColor: initialColor,
-              activeGradient: activeGradient,
-              mockupId: mockupId,
-              onImageUpload: onImageUpload,
-              onColorChangedCallback: onColorChangedCallback,
-              onGradiantChangedCallback: onGradiantChangedCallback,
-              onIconToggle: onIconToggle,
-              isIconToggled: isIconToggled,
-              onIconUpload: onIconUpload,
-              onIconAlignmentChanged: onIconAlignmentChanged,
-              initialAlignment: initialAlignment,
-              onIconPaddingChanged: onIconPaddingChanged,
-              initialIconTopPadding: initialIconTopPadding,
-              initialIconBottomPadding: initialIconBottomPadding,
-              initialIconLeftPadding: initialIconLeftPadding,
-              initialIconRightPadding: initialIconRightPadding,
-              titleText: titleText,
-              titleFontFamily: titleFontFamily,
-              showTitle: showTitle,
-              titleAlignment: titleAlignment,
-              titleFontSize: titleFontSize,
-              titleLineHeight: titleLineHeight,
-              titleColor: titleColor,
-              titleStrokeColor: titleStrokeColor,
-              titlePaddingTop: titlePaddingTop,
-              titlePaddingBottom: titlePaddingBottom,
-              titlePaddingLeft: titlePaddingLeft,
-              titlePaddingRight: titlePaddingRight,
-              onShowTitleChanged: onShowTitleChanged,
-              onTitleAlignmentChanged: onTitleAlignmentChanged,
-              onTitleFontSizeChanged: onTitleFontSizeChanged,
-              onTitleLineHeightChanged: onTitleLineHeightChanged,
-              onTitleColorChanged: onTitleColorChanged,
-              onTitlePaddingChanged: onTitlePaddingChanged,
-              onTitleChanged: onTitleChanged,
-              subtitleText: subtitleText,
-              subtitleFontFamily: subtitleFontFamily,
-              showSubtitle: showSubtitle,
-              subtitleAlignment: subtitleAlignment,
-              subtitleFontSize: subtitleFontSize,
-              subtitleLineHeight: subtitleLineHeight,
-              subtitleColor: subtitleColor,
-              subtitleStrokeColor: subtitleStrokeColor,
-              subtitlePaddingTop: subtitlePaddingTop,
-              subtitlePaddingBottom: subtitlePaddingBottom,
-              subtitlePaddingLeft: subtitlePaddingLeft,
-              subtitlePaddingRight: subtitlePaddingRight,
-              onShowSubtitleChanged: onShowSubtitleChanged,
-              onSubtitleAlignmentChanged: onSubtitleAlignmentChanged,
-              onSubtitleFontSizeChanged: onSubtitleFontSizeChanged,
-              onSubtitleLineHeightChanged: onSubtitleLineHeightChanged,
-              onSubtitleColorChanged: onSubtitleColorChanged,
-              onSubtitlePaddingChanged: onSubtitlePaddingChanged,
-              onSubtitleChanged: onSubtitleChanged,
-              onTitleFontFamilyChanged: onTitleFontFamilyChanged,
-              onSubtitleFontFamilyChanged: onSubtitleFontFamilyChanged,
+      child: Container(
+        width: 300,
+        height: 600,
+        padding: EdgeInsets.only(
+          top: 15,
+          bottom: 20.sp,
+          left: 15,
+          right: 15,
+        ),
+        decoration: BoxDecoration(
+          color: Get.theme.scaffoldBackgroundColor,
+          border: Border(
+            left: BorderSide(
+              color: Colors.grey.withOpacity(0.2),
+              width: 0.5,
             ),
+          ),
+        ),
+        child: !isScreenshotSelected!
+            ? const BuildCreateMockupSidebarEmpty()
+            : SingleChildScrollView(
+                child: BuildCreateMockupSidebarSelectedState(
+                  initialColor: initialColor,
+                  activeGradient: activeGradient,
+                  mockupId: mockupId,
+                  onImageUpload: onImageUpload,
+                  onColorChangedCallback: onColorChangedCallback,
+                  onGradiantChangedCallback: onGradiantChangedCallback,
+                  onIconToggle: onIconToggle,
+                  isIconToggled: isIconToggled,
+                  onIconUpload: onIconUpload,
+                  onIconAlignmentChanged: onIconAlignmentChanged,
+                  initialAlignment: initialAlignment,
+                  onIconPaddingChanged: onIconPaddingChanged,
+                  initialIconTopPadding: initialIconTopPadding,
+                  initialIconBottomPadding: initialIconBottomPadding,
+                  initialIconLeftPadding: initialIconLeftPadding,
+                  initialIconRightPadding: initialIconRightPadding,
+                  titleText: titleText,
+                  titleFontFamily: titleFontFamily,
+                  showTitle: showTitle,
+                  titleAlignment: titleAlignment,
+                  titleFontSize: titleFontSize,
+                  titleLineHeight: titleLineHeight,
+                  titleColor: titleColor,
+                  titleStrokeColor: titleStrokeColor,
+                  titlePaddingTop: titlePaddingTop,
+                  titlePaddingBottom: titlePaddingBottom,
+                  titlePaddingLeft: titlePaddingLeft,
+                  titlePaddingRight: titlePaddingRight,
+                  onShowTitleChanged: onShowTitleChanged,
+                  onTitleAlignmentChanged: onTitleAlignmentChanged,
+                  onTitleFontSizeChanged: onTitleFontSizeChanged,
+                  onTitleLineHeightChanged: onTitleLineHeightChanged,
+                  onTitleColorChanged: onTitleColorChanged,
+                  onTitlePaddingChanged: onTitlePaddingChanged,
+                  onTitleChanged: onTitleChanged,
+                  subtitleText: subtitleText,
+                  subtitleFontFamily: subtitleFontFamily,
+                  showSubtitle: showSubtitle,
+                  subtitleAlignment: subtitleAlignment,
+                  subtitleFontSize: subtitleFontSize,
+                  subtitleLineHeight: subtitleLineHeight,
+                  subtitleColor: subtitleColor,
+                  subtitleStrokeColor: subtitleStrokeColor,
+                  subtitlePaddingTop: subtitlePaddingTop,
+                  subtitlePaddingBottom: subtitlePaddingBottom,
+                  subtitlePaddingLeft: subtitlePaddingLeft,
+                  subtitlePaddingRight: subtitlePaddingRight,
+                  onShowSubtitleChanged: onShowSubtitleChanged,
+                  onSubtitleAlignmentChanged: onSubtitleAlignmentChanged,
+                  onSubtitleFontSizeChanged: onSubtitleFontSizeChanged,
+                  onSubtitleLineHeightChanged: onSubtitleLineHeightChanged,
+                  onSubtitleColorChanged: onSubtitleColorChanged,
+                  onSubtitlePaddingChanged: onSubtitlePaddingChanged,
+                  onSubtitleChanged: onSubtitleChanged,
+                  onTitleFontFamilyChanged: onTitleFontFamilyChanged,
+                  onSubtitleFontFamilyChanged: onSubtitleFontFamilyChanged,
+                  onUpdateFirstDevicePosition: onUpdateFirstDevicePosition,
+                  onUpdateFirstDeviceRotate: onUpdateFirstDeviceRotate,
+                  onUpdateFirstDeviceFullSize: onUpdateFirstDeviceFullSize,
+                ),
+              ),
+      ),
     );
   }
 }

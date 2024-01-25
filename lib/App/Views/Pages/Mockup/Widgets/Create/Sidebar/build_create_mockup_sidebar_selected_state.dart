@@ -70,6 +70,16 @@ class BuildCreateMockupSidebarSelectedState
     this.onSubtitleChanged,
     this.onTitleFontFamilyChanged,
     this.onSubtitleFontFamilyChanged,
+    this.onUpdateFirstDevicePosition,
+    this.onUpdateFirstDeviceRotate,
+    this.onUpdateFirstDeviceFullSize,
+    this.updateFirstStrokeColor,
+    this.updateFirstStrokeWidth,
+    this.updateFirstDeviceFrame,
+    this.updateFirstShadowColor,
+    this.updateFirstDeviceShadowBlur,
+    this.updateFirstDeviceShadowXOffset,
+    this.updateFirstDeviceShadowYOffset,
   });
 
   final String? mockupId;
@@ -122,99 +132,122 @@ class BuildCreateMockupSidebarSelectedState
   final void Function(double padding, PaddingDestination destination)?
       onIconPaddingChanged;
 
+  final void Function({
+    double? devicePositionBottom,
+    double? devicePositionLeft,
+    double? devicePositionRight,
+    double? devicePositionTop,
+  })? onUpdateFirstDevicePosition;
+  final void Function(double rotate)? onUpdateFirstDeviceRotate;
+  final void Function(bool value)? onUpdateFirstDeviceFullSize;
+  final void Function(Color color)? updateFirstStrokeColor;
+  final void Function(double width)? updateFirstStrokeWidth;
+  final void Function(String frame)? updateFirstDeviceFrame;
+  final void Function(Color color)? updateFirstShadowColor;
+  final void Function(double blur)? updateFirstDeviceShadowBlur;
+  final void Function(double offset)? updateFirstDeviceShadowXOffset;
+  final void Function(double offset)? updateFirstDeviceShadowYOffset;
+
   @override
   Widget build(BuildContext context) {
     return GetBuilder<BuildCreateMockupSidebarSelectedStateController>(
       init: BuildCreateMockupSidebarSelectedStateController(),
       initState: (_) {},
       builder: (_) {
-        return SingleChildScrollView(
-          child: ExpansionTileGroup(
-            toggleType: ToggleType.expandOnlyCurrent,
-            children: [
-              buildLayoutStep(),
-              buildBackgroundStep(
-                mockupId: mockupId,
-                controller: controller,
-                initialColor: initialColor,
-                onImageUpload: onImageUpload,
-                activeGradient: activeGradient,
-                onColorChangedCallback: onColorChangedCallback,
-                onGradiantChangedCallback: onGradiantChangedCallback,
+        return ExpansionTileGroup(
+          toggleType: ToggleType.expandOnlyCurrent,
+          children: [
+            buildLayoutStep(),
+            buildBackgroundStep(
+              mockupId: mockupId,
+              controller: controller,
+              initialColor: initialColor,
+              onImageUpload: onImageUpload,
+              activeGradient: activeGradient,
+              onColorChangedCallback: onColorChangedCallback,
+              onGradiantChangedCallback: onGradiantChangedCallback,
+            ),
+            buildingIconStep(
+              mockupId: mockupId,
+              isIconToggled: isIconToggled,
+              onIconToggle: onIconToggle,
+              onIconUpload: onIconUpload,
+              initialAlignment: initialAlignment,
+              initialIconTopPadding: initialIconTopPadding,
+              initialIconBottomPadding: initialIconBottomPadding,
+              initialIconLeftPadding: initialIconLeftPadding,
+              initialIconRightPadding: initialIconRightPadding,
+              onIconAlignmentChanged: onIconAlignmentChanged,
+              onIconPaddingChanged: onIconPaddingChanged,
+            ),
+            buildTitleStep(
+              titleSheetContext: context,
+              titleText: titleText,
+              titleFontFamily: titleFontFamily,
+              showTitle: showTitle,
+              titleAlignment: titleAlignment,
+              titleFontSize: titleFontSize,
+              titleLineHeight: titleLineHeight,
+              titleColor: titleColor,
+              titlePaddingTop: titlePaddingTop,
+              titlePaddingBottom: titlePaddingBottom,
+              titlePaddingLeft: titlePaddingLeft,
+              titlePaddingRight: titlePaddingRight,
+              onTitleChanged: onTitleChanged,
+              onShowTitleChanged: onShowTitleChanged,
+              onTitleAlignmentChanged: onTitleAlignmentChanged,
+              onTitleFontSizeChanged: onTitleFontSizeChanged,
+              onTitleLineHeightChanged: onTitleLineHeightChanged,
+              onTitleColorChanged: onTitleColorChanged,
+              onTitlePaddingChanged: onTitlePaddingChanged,
+              onTitleFontFamilyChanged: onTitleFontFamilyChanged,
+            ),
+            buildTitleStep(
+              widgetTitle: 'Subtitle',
+              titleSheetContext: context,
+              titleText: subtitleText,
+              titleFontFamily: subtitleFontFamily,
+              showTitle: showSubtitle,
+              titleAlignment: subtitleAlignment,
+              titleFontSize: subtitleFontSize,
+              titleLineHeight: subtitleLineHeight,
+              titleColor: subtitleColor,
+              titlePaddingTop: subtitlePaddingTop,
+              titlePaddingBottom: subtitlePaddingBottom,
+              titlePaddingLeft: subtitlePaddingLeft,
+              titlePaddingRight: subtitlePaddingRight,
+              onTitleChanged: onSubtitleChanged,
+              onShowTitleChanged: onShowSubtitleChanged,
+              onTitleAlignmentChanged: onSubtitleAlignmentChanged,
+              onTitleFontSizeChanged: onSubtitleFontSizeChanged,
+              onTitleLineHeightChanged: onSubtitleLineHeightChanged,
+              onTitleColorChanged: onSubtitleColorChanged,
+              onTitlePaddingChanged: onSubtitlePaddingChanged,
+              onTitleFontFamilyChanged: onSubtitleFontFamilyChanged,
+            ),
+            buildDeviceStep(
+              onUpdateFirstDevicePosition: onUpdateFirstDevicePosition,
+              onUpdateFirstDeviceRotate: onUpdateFirstDeviceRotate,
+              onUpdateFirstDeviceFullSize: onUpdateFirstDeviceFullSize,
+              updateFirstStrokeColor: updateFirstStrokeColor,
+              updateFirstStrokeWidth: updateFirstStrokeWidth,
+              updateFirstDeviceFrame: updateFirstDeviceFrame,
+              updateFirstShadowColor: updateFirstShadowColor,
+              updateFirstDeviceShadowBlur: updateFirstDeviceShadowBlur,
+              updateFirstDeviceShadowXOffset: updateFirstDeviceShadowXOffset,
+              updateFirstDeviceShadowYOffset: updateFirstDeviceShadowYOffset,
+            ),
+            buildDeviceStep(
+              title: 'Device Two',
+              leading: const Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Icon(Icons.devices),
+                  Icon(Icons.looks_two_outlined),
+                ],
               ),
-              buildingIconStep(
-                mockupId: mockupId,
-                isIconToggled: isIconToggled,
-                onIconToggle: onIconToggle,
-                onIconUpload: onIconUpload,
-                initialAlignment: initialAlignment,
-                initialIconTopPadding: initialIconTopPadding,
-                initialIconBottomPadding: initialIconBottomPadding,
-                initialIconLeftPadding: initialIconLeftPadding,
-                initialIconRightPadding: initialIconRightPadding,
-                onIconAlignmentChanged: onIconAlignmentChanged,
-                onIconPaddingChanged: onIconPaddingChanged,
-              ),
-              buildTitleStep(
-                titleSheetContext: context,
-                titleText: titleText,
-                titleFontFamily: titleFontFamily,
-                showTitle: showTitle,
-                titleAlignment: titleAlignment,
-                titleFontSize: titleFontSize,
-                titleLineHeight: titleLineHeight,
-                titleColor: titleColor,
-                titleStrokeColor: titleStrokeColor,
-                titlePaddingTop: titlePaddingTop,
-                titlePaddingBottom: titlePaddingBottom,
-                titlePaddingLeft: titlePaddingLeft,
-                titlePaddingRight: titlePaddingRight,
-                onTitleChanged: onTitleChanged,
-                onShowTitleChanged: onShowTitleChanged,
-                onTitleAlignmentChanged: onTitleAlignmentChanged,
-                onTitleFontSizeChanged: onTitleFontSizeChanged,
-                onTitleLineHeightChanged: onTitleLineHeightChanged,
-                onTitleColorChanged: onTitleColorChanged,
-                onTitlePaddingChanged: onTitlePaddingChanged,
-                onTitleFontFamilyChanged: onTitleFontFamilyChanged,
-              ),
-              buildTitleStep(
-                widgetTitle: 'Subtitle',
-                titleSheetContext: context,
-                titleText: subtitleText,
-                titleFontFamily: subtitleFontFamily,
-                showTitle: showSubtitle,
-                titleAlignment: subtitleAlignment,
-                titleFontSize: subtitleFontSize,
-                titleLineHeight: subtitleLineHeight,
-                titleColor: subtitleColor,
-                titleStrokeColor: subtitleStrokeColor,
-                titlePaddingTop: subtitlePaddingTop,
-                titlePaddingBottom: subtitlePaddingBottom,
-                titlePaddingLeft: subtitlePaddingLeft,
-                titlePaddingRight: subtitlePaddingRight,
-                onTitleChanged: onSubtitleChanged,
-                onShowTitleChanged: onShowSubtitleChanged,
-                onTitleAlignmentChanged: onSubtitleAlignmentChanged,
-                onTitleFontSizeChanged: onSubtitleFontSizeChanged,
-                onTitleLineHeightChanged: onSubtitleLineHeightChanged,
-                onTitleColorChanged: onSubtitleColorChanged,
-                onTitlePaddingChanged: onSubtitlePaddingChanged,
-                onTitleFontFamilyChanged: onSubtitleFontFamilyChanged,
-              ),
-              buildDeviceStep(),
-              buildDeviceStep(
-                title: 'Device Two',
-                leading: const Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Icon(Icons.devices),
-                    Icon(Icons.looks_two_outlined),
-                  ],
-                ),
-              ),
-            ],
-          ),
+            ),
+          ],
         );
       },
     );

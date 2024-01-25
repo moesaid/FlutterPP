@@ -23,12 +23,13 @@ dependencies:
   # appflowy_editor: ^0.1.12
   # appflowy_board: ^0.1.0
   zoom_widget: ^2.0.1
-  expansion_tile_group: ^1.2.1
+  expansion_tile_group: ^1.2.4
   google_fonts: ^6.1.0
   flex_color_picker: ^3.2.2
   sizer: ^2.0.15
   file_selector: ^1.0.1
   awesome_side_sheet: ^0.0.3
+  device_frame: ^1.1.0
 
 # dev_dependencies
 dev_dependencies:

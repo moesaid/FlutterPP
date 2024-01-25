@@ -149,6 +149,22 @@ class BuildMockupSinglePageSidebar extends StatelessWidget {
         onSubtitleChanged: controller.updateSubtitle,
         onSubtitleFontFamilyChanged: controller.updateSubtitleFontFamily,
         // end subtitle
+
+        // start device
+        onUpdateFirstDevicePosition: controller.updateFirstDevicePossition,
+        onUpdateFirstDeviceRotate: controller.updateFirstDeviceRotate,
+        onUpdateFirstDeviceFullSize: controller.updateFirstDeviceFullSize,
+        updateFirstStrokeColor: controller.updateFirstDeviceStrokeColor,
+        updateFirstStrokeWidth: controller.updateFirstDeviceStrokeWidth,
+        updateFirstDeviceFrame: controller.updateFirstDeviceFrame,
+        updateFirstShadowColor: controller.updateFirstDeviceShadowColor,
+        updateFirstDeviceShadowBlur: controller.updateFirstDeviceShadowBlur,
+        updateFirstDeviceShadowXOffset:
+            controller.updateFirstDeviceShadowXOffset,
+        updateFirstDeviceShadowYOffset:
+            controller.updateFirstDeviceShadowYOffset,
+
+        // end device
       ),
     );
   }

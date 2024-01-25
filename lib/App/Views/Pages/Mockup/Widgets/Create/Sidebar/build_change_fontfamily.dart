@@ -55,7 +55,8 @@ class BuildChangeFontFamily extends GetView<ChangeFontfamilyController> {
               children: [
                 Expanded(
                   child: Text(
-                    '${controller.activeFontFamily.fontFamily!.split('_').first} ',
+                    '${controller.fontKey} ',
+                    maxLines: 1,
                   ),
                 ),
                 const Icon(

@@ -1,3 +1,6 @@
+import 'dart:math';
+
+import 'package:device_frame/device_frame.dart';
 import 'package:flutter/material.dart';
 import 'package:flutterpp/App/Models/template_config_model.dart';
 import 'package:get/get.dart';
@@ -6,13 +9,11 @@ import 'package:google_fonts/google_fonts.dart';
 class BuildDeviceCard extends StatelessWidget {
   final TemplateConfigModel config;
   final bool isSeleted;
-  // final TextStyle titleStyle, subtitleStyle;
+
   const BuildDeviceCard({
     super.key,
     required this.config,
     required this.isSeleted,
-    // required this.titleStyle,
-    // required this.subtitleStyle,
   });
 
   @override
@@ -33,11 +34,7 @@ class BuildDeviceCard extends StatelessWidget {
         children: [
           const BuildDeviceHead(),
           Expanded(
-            child: BuildDeviceBody(
-              config: config,
-              // titleStyle: titleStyle,
-              // subtitleStyle: subtitleStyle,
-            ),
+            child: BuildDeviceBody(config: config),
           ),
         ],
       ),
@@ -47,12 +44,10 @@ class BuildDeviceCard extends StatelessWidget {
 
 class BuildDeviceBody extends StatelessWidget {
   final TemplateConfigModel config;
-  // final TextStyle titleStyle, subtitleStyle;
+
   const BuildDeviceBody({
     super.key,
     required this.config,
-    // required this.titleStyle,
-    // required this.subtitleStyle,
   });
 
   @override
@@ -95,11 +90,9 @@ class BuildDeviceBody extends StatelessWidget {
           children: [
             BuildDeviceBodyHead(
               config: config,
-              // titleStyle: titleStyle,
-              // subtitleStyle: subtitleStyle,
             ),
             Transform.rotate(
-              angle: config.rotate!,
+              angle: (config.rotate ?? 0) * pi,
               child: BuildDeviceBodyIphoneCase(config: config),
             ),
           ],
@@ -118,54 +111,19 @@ class BuildDeviceBodyIphoneCase extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Transform.rotate(
-      angle: config.rotate!,
+    return Transform(
+      transform: Matrix4.translationValues(0, 0, 0.0),
       child: SizedBox(
-        width: 300,
-        height: config.deviceFullSize == false ? 700 : 530,
-        child: Stack(
-          clipBehavior: Clip.none,
-          alignment: Alignment.center,
-          children: [
-            Positioned(
-              left: (config.devicePositionLeft != null)
-                  ? config.devicePositionLeft! + 20
-                  : null,
-              right: (config.devicePositionRight != null)
-                  ? config.devicePositionRight! + 20
-                  : null,
-              top: config.devicePositionTop,
-              bottom: config.devicePositionBottom,
-              child: Container(
-                height: config.deviceFullSize == false ? 670 : 500,
-                margin: const EdgeInsets.only(top: 10),
-                clipBehavior: Clip.hardEdge,
-                decoration: BoxDecoration(
-                  color: Colors.black,
-                  borderRadius: BorderRadius.circular(
-                      config.deviceFullSize == false ? 20 : 15),
-                ),
-                child: const Image(
-                  fit: BoxFit.cover,
-                  image: AssetImage('assets/screenshots/screen_1.jpg'),
-                ),
-              ),
-            ),
-            Positioned(
-              left: config.devicePositionLeft,
-              right: config.devicePositionRight,
-              top: config.devicePositionTop,
-              bottom: config.devicePositionBottom,
-              child: SizedBox(
-                height: config.deviceFullSize == false ? 700 : 530,
-                child: const Image(
-                  fit: BoxFit.cover,
-                  image: AssetImage('assets/images/iphone.png'),
-                  color: null,
-                ),
-              ),
-            ),
-          ],
+        width: 250,
+        height: 500,
+        child: DeviceFrame(
+          device: Devices.ios.iPhone12ProMax,
+          isFrameVisible: true,
+          orientation: Orientation.portrait,
+          screen: const Image(
+            fit: BoxFit.cover,
+            image: AssetImage('assets/screenshots/screen_1.jpg'),
+          ),
         ),
       ),
     );

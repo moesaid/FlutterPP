@@ -38,6 +38,14 @@ class MockupSingleController extends GetxController {
     update();
   }
 
+  // update mockup data
+  _updateMockupData() {
+    List<TemplateConfigModel> jsonData = mockup.jsonData!;
+    int index = jsonData.indexWhere((el) => el.id == _seletedItem.value.id);
+    jsonData[index] = _seletedItem.value;
+    _mockup.value = _mockup.value.copyWith(jsonData: jsonData);
+  }
+
   // update mockup
   Future<void> updateMockup() async {
     await Get.showOverlay(
@@ -251,11 +259,103 @@ class MockupSingleController extends GetxController {
     );
   }
 
-  // update mockup data
-  _updateMockupData() {
-    List<TemplateConfigModel> jsonData = mockup.jsonData!;
-    int index = jsonData.indexWhere((el) => el.id == _seletedItem.value.id);
-    jsonData[index] = _seletedItem.value;
-    _mockup.value = _mockup.value.copyWith(jsonData: jsonData);
+  //# update first device #//
+  // update first device image
+  updateFirstDeviceImage(String image) {
+    _seletedItem.value = _seletedItem.value.copyWith(
+      image: image,
+    );
+  }
+
+  // update first device frame
+  updateFirstDeviceFrame(String frame) {
+    _seletedItem.value = _seletedItem.value.copyWith(
+        // frame: frame,
+        );
+  }
+
+  // update first device possition
+  updateFirstDevicePossition({
+    double? devicePositionTop,
+    double? devicePositionRight,
+    double? devicePositionBottom,
+    double? devicePositionLeft,
+  }) {
+    if (devicePositionTop != null) {
+      _seletedItem.value = _seletedItem.value.copyWith(
+        devicePositionTop: devicePositionTop,
+      );
+    }
+    if (devicePositionRight != null) {
+      _seletedItem.value = _seletedItem.value.copyWith(
+        devicePositionRight: devicePositionRight,
+      );
+    }
+    if (devicePositionBottom != null) {
+      _seletedItem.value = _seletedItem.value.copyWith(
+        devicePositionBottom: devicePositionBottom,
+      );
+    }
+    if (devicePositionLeft != null) {
+      _seletedItem.value = _seletedItem.value.copyWith(
+        devicePositionLeft: devicePositionLeft,
+      );
+    }
+  }
+
+  // update first device rotate
+  updateFirstDeviceRotate(double rotate) {
+    _seletedItem.value = _seletedItem.value.copyWith(
+      rotate: rotate,
+    );
+  }
+
+  // update first device full size
+  updateFirstDeviceFullSize(bool value) {
+    _seletedItem.value = _seletedItem.value.copyWith(
+      deviceFullSize: value,
+    );
+  }
+
+  // update first stroke color
+  updateFirstDeviceStrokeColor(Color color) {
+    _seletedItem.value = _seletedItem.value.copyWith(
+        // strokeColor: color,
+        );
+  }
+
+  // update first stroke width
+  updateFirstDeviceStrokeWidth(double width) {
+    _seletedItem.value = _seletedItem.value.copyWith(
+        // strokeWidth: width,
+        );
+  }
+
+  // update first shadow color
+  updateFirstDeviceShadowColor(Color color) {
+    _seletedItem.value = _seletedItem.value.copyWith(
+        // shadowColor: color,
+        );
+  }
+
+  // update first shadow blur
+  updateFirstDeviceShadowBlur(double blur) {
+    _seletedItem.value = _seletedItem.value.copyWith(
+        // shadowBlur: blur,
+        );
+  }
+
+  // update first shadow x offset
+  updateFirstDeviceShadowXOffset(double offset) {
+    _seletedItem.value = _seletedItem.value.copyWith(
+        // shadowXOffset: offset,
+        );
+  }
+
+  // update first shadow y offset
+  updateFirstDeviceShadowYOffset(double offset) {
+    _seletedItem.value = _seletedItem.value.copyWith(
+        // shadowYOffset: offset,
+        );
   }
 }

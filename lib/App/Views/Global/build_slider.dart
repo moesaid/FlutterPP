@@ -30,6 +30,9 @@ class BuildSlider extends StatelessWidget {
         }
       },
       builder: (_) {
+        final double localMax = max ?? 100;
+        final double localMin = min ?? 0;
+
         return SliderTheme(
           data: SliderTheme.of(context).copyWith(
             trackHeight: 5.0,
@@ -49,15 +52,13 @@ class BuildSlider extends StatelessWidget {
             ),
           ),
           child: Slider(
-            min: (min != null && max != null)
-                ? (min! > max! ? max! - max! / 2 : min!)
-                : 0,
-            max: max ?? 100,
+            min: (localMin > localMax ? localMax - localMax / 2 : localMin),
+            max: localMax,
             divisions: divisions ?? 20,
             activeColor: Get.theme.primaryColor,
             inactiveColor: Get.theme.colorScheme.onBackground.withOpacity(0.1),
             thumbColor: Get.theme.primaryColor,
-            value: _.sliderValue > max! ? max! : _.sliderValue,
+            value: _.sliderValue > localMax ? localMax : _.sliderValue,
             label: _.sliderValue.toStringAsFixed(0),
             onChanged: (double value) {
               _.onChange(

@@ -21,7 +21,6 @@ ExpansionTileBorderItem buildTitleStep({
   double? titleFontSize,
   double? titleLineHeight,
   Color? titleColor,
-  Color? titleStrokeColor,
   double? titlePaddingTop,
   double? titlePaddingBottom,
   double? titlePaddingLeft,
@@ -72,6 +71,7 @@ ExpansionTileBorderItem buildTitleStep({
         title: 'Font family',
         rightWidget: BuildChangeFontFamily(
           sheetContext: titleSheetContext,
+          fontFamily: titleFontFamily,
           callback: (val) => onTitleFontFamilyChanged?.call(val),
         ),
       ),
