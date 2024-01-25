@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutterpp/Helpers/colors_helper.dart';
 
 class TemplateConfigModel {
-  String? id, image, logo;
+  String? id, image, secondImage, logo;
   String? type;
   Axis? bodyDirection;
   VerticalDirection? bodyVerticalDirection;
@@ -10,10 +10,10 @@ class TemplateConfigModel {
   MainAxisAlignment? logoAlignment;
   MainAxisAlignment? titleAlignment;
   MainAxisAlignment? subtitleAlignment;
-  double? devicePositionTop;
-  double? devicePositionLeft;
-  double? devicePositionRight;
-  double? devicePositionBottom;
+  double? firstDevicePositionTopBottom;
+  double? firstDevicePositionRightLeft;
+  double? secondDevicePositionTopBottom;
+  double? secondDevicePositionRightLeft;
   double? bodyRunSpacing;
   double? bodySpacing;
   double? rotate;
@@ -38,6 +38,7 @@ class TemplateConfigModel {
   TemplateConfigModel({
     this.id,
     this.image,
+    this.secondImage,
     this.logo,
     this.type,
     this.bodyDirection,
@@ -46,10 +47,10 @@ class TemplateConfigModel {
     this.logoAlignment,
     this.titleAlignment,
     this.subtitleAlignment,
-    this.devicePositionTop,
-    this.devicePositionLeft,
-    this.devicePositionRight,
-    this.devicePositionBottom,
+    this.firstDevicePositionTopBottom,
+    this.firstDevicePositionRightLeft,
+    this.secondDevicePositionTopBottom,
+    this.secondDevicePositionRightLeft,
     this.bodyRunSpacing,
     this.bodySpacing,
     this.rotate,
@@ -88,6 +89,7 @@ class TemplateConfigModel {
   TemplateConfigModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     image = json['image'];
+    secondImage = json['secondImage'];
     logo = json['logo'];
     type = json['type'];
 
@@ -183,10 +185,14 @@ class TemplateConfigModel {
     }
 
     deviceFullSize = json['deviceFullSize'];
-    devicePositionTop = convertIntToDouble(json['devicePositionTop']);
-    devicePositionLeft = convertIntToDouble(json['devicePositionLeft']);
-    devicePositionRight = convertIntToDouble(json['devicePositionRight']);
-    devicePositionBottom = convertIntToDouble(json['devicePositionBottom']);
+    firstDevicePositionTopBottom =
+        convertIntToDouble(json['firstDevicePositionTopBottom']);
+    firstDevicePositionRightLeft = convertIntToDouble(
+        json['firstDevicePositionRightLeft'] ?? json['devicePositionRight']);
+    secondDevicePositionTopBottom = convertIntToDouble(
+        json['secondDevicePositionTopBottom'] ?? json['devicePositionBottom']);
+    secondDevicePositionRightLeft = convertIntToDouble(
+        json['secondDevicePositionRightLeft'] ?? json['devicePositionLeft']);
     bodyRunSpacing = convertIntToDouble(json['bodyRunSpacing']);
     bodySpacing = convertIntToDouble(json['bodySpacing']);
     rotate = convertIntToDouble(json['rotate']);
@@ -240,6 +246,7 @@ class TemplateConfigModel {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['id'] = id;
     data['image'] = image;
+    data['secondImage'] = secondImage;
     data['logo'] = logo;
     data['type'] = type.toString();
 
@@ -334,10 +341,14 @@ class TemplateConfigModel {
     }
 
     data['deviceFullSize'] = deviceFullSize;
-    data['devicePositionTop'] = convertIntToDouble(devicePositionTop);
-    data['devicePositionLeft'] = convertIntToDouble(devicePositionLeft);
-    data['devicePositionRight'] = convertIntToDouble(devicePositionRight);
-    data['devicePositionBottom'] = convertIntToDouble(devicePositionBottom);
+    data['firstDevicePositionTopBottom'] =
+        convertIntToDouble(firstDevicePositionTopBottom);
+    data['firstDevicePositionRightLeft'] =
+        convertIntToDouble(firstDevicePositionRightLeft);
+    data['secondDevicePositionTopBottom'] =
+        convertIntToDouble(secondDevicePositionTopBottom);
+    data['secondDevicePositionRightLeft'] =
+        convertIntToDouble(secondDevicePositionRightLeft);
     data['bodyRunSpacing'] = convertIntToDouble(bodyRunSpacing);
     data['bodySpacing'] = convertIntToDouble(bodySpacing);
     data['rotate'] = convertIntToDouble(rotate);
@@ -409,6 +420,7 @@ class TemplateConfigModel {
     String? id,
     String? logo,
     String? image,
+    String? secondImage,
     String? type,
     Axis? bodyDirection,
     VerticalDirection? bodyVerticalDirection,
@@ -416,10 +428,10 @@ class TemplateConfigModel {
     MainAxisAlignment? logoAlignment,
     MainAxisAlignment? titleAlignment,
     MainAxisAlignment? subtitleAlignment,
-    double? devicePositionTop,
-    double? devicePositionLeft,
-    double? devicePositionRight,
-    double? devicePositionBottom,
+    double? firstDevicePositionTopBottom,
+    double? firstDevicePositionRightLeft,
+    double? secondDevicePositionTopBottom,
+    double? secondDevicePositionRightLeft,
     double? bodyRunSpacing,
     double? bodySpacing,
     double? rotate,
@@ -459,6 +471,7 @@ class TemplateConfigModel {
       id: id ?? this.id,
       logo: logo ?? this.logo,
       image: image ?? this.image,
+      secondImage: secondImage ?? this.secondImage,
       type: type ?? this.type,
       bodyDirection: bodyDirection ?? this.bodyDirection,
       bodyVerticalDirection:
@@ -468,10 +481,14 @@ class TemplateConfigModel {
       logoAlignment: logoAlignment ?? this.logoAlignment,
       titleAlignment: titleAlignment ?? this.titleAlignment,
       subtitleAlignment: subtitleAlignment ?? this.subtitleAlignment,
-      devicePositionTop: devicePositionTop ?? this.devicePositionTop,
-      devicePositionLeft: devicePositionLeft ?? this.devicePositionLeft,
-      devicePositionRight: devicePositionRight ?? this.devicePositionRight,
-      devicePositionBottom: devicePositionBottom ?? this.devicePositionBottom,
+      firstDevicePositionTopBottom:
+          firstDevicePositionTopBottom ?? this.firstDevicePositionTopBottom,
+      firstDevicePositionRightLeft:
+          firstDevicePositionRightLeft ?? this.firstDevicePositionRightLeft,
+      secondDevicePositionTopBottom:
+          secondDevicePositionTopBottom ?? this.secondDevicePositionTopBottom,
+      secondDevicePositionRightLeft:
+          secondDevicePositionRightLeft ?? this.secondDevicePositionRightLeft,
       bodyRunSpacing: bodyRunSpacing ?? this.bodyRunSpacing,
       bodySpacing: bodySpacing ?? this.bodySpacing,
       rotate: rotate ?? this.rotate,

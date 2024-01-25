@@ -112,7 +112,11 @@ class BuildDeviceBodyIphoneCase extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Transform(
-      transform: Matrix4.translationValues(0, 0, 0.0),
+      transform: Matrix4.translationValues(
+        config.firstDevicePositionRightLeft ?? 0,
+        config.firstDevicePositionTopBottom ?? 0,
+        0.0,
+      ),
       child: SizedBox(
         width: 250,
         height: 500,
@@ -120,9 +124,11 @@ class BuildDeviceBodyIphoneCase extends StatelessWidget {
           device: Devices.ios.iPhone12ProMax,
           isFrameVisible: true,
           orientation: Orientation.portrait,
-          screen: const Image(
+          screen: Image(
             fit: BoxFit.cover,
-            image: AssetImage('assets/screenshots/screen_1.jpg'),
+            image: config.image == null
+                ? const AssetImage('assets/screenshots/screen_1.jpg')
+                : NetworkImage(config.image!) as ImageProvider,
           ),
         ),
       ),

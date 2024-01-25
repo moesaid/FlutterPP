@@ -17,8 +17,10 @@ class SelectImageOptionController extends GetxController {
           extensions: ['jpg', 'png'],
         );
 
+        if (res == null) return;
+
         String? url = await MediaUploadServices().uploadFile(
-          file: res!,
+          file: res,
           bucketId: 'images',
           mockupId: mockupId,
         );

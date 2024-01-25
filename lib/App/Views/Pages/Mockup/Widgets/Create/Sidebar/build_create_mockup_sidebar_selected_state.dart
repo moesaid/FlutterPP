@@ -17,6 +17,8 @@ class BuildCreateMockupSidebarSelectedState
     this.mockupId,
     this.initialColor,
     this.onImageUpload,
+    this.onDeviceImageUpload,
+    this.onSecondDeviceImageUpload,
     this.onColorChangedCallback,
     this.onGradiantChangedCallback,
     this.activeGradient,
@@ -70,7 +72,7 @@ class BuildCreateMockupSidebarSelectedState
     this.onSubtitleChanged,
     this.onTitleFontFamilyChanged,
     this.onSubtitleFontFamilyChanged,
-    this.onUpdateFirstDevicePosition,
+    this.onUpdateDevicePossition,
     this.onUpdateFirstDeviceRotate,
     this.onUpdateFirstDeviceFullSize,
     this.updateFirstStrokeColor,
@@ -111,7 +113,9 @@ class BuildCreateMockupSidebarSelectedState
   final void Function(String)? onTitleChanged,
       onSubtitleChanged,
       onIconUpload,
-      onImageUpload;
+      onImageUpload,
+      onDeviceImageUpload,
+      onSecondDeviceImageUpload;
   final void Function(String)? onSubtitleFontFamilyChanged,
       onTitleFontFamilyChanged;
 
@@ -133,11 +137,11 @@ class BuildCreateMockupSidebarSelectedState
       onIconPaddingChanged;
 
   final void Function({
-    double? devicePositionBottom,
-    double? devicePositionLeft,
-    double? devicePositionRight,
-    double? devicePositionTop,
-  })? onUpdateFirstDevicePosition;
+    double? firstDevicePositionTopBottom,
+    double? firstDevicePositionRightLeft,
+    double? secondDevicePositionTopBottom,
+    double? secondDevicePositionRightLeft,
+  })? onUpdateDevicePossition;
   final void Function(double rotate)? onUpdateFirstDeviceRotate;
   final void Function(bool value)? onUpdateFirstDeviceFullSize;
   final void Function(Color color)? updateFirstStrokeColor;
@@ -226,7 +230,10 @@ class BuildCreateMockupSidebarSelectedState
               onTitleFontFamilyChanged: onSubtitleFontFamilyChanged,
             ),
             buildDeviceStep(
-              onUpdateFirstDevicePosition: onUpdateFirstDevicePosition,
+              mockupId: mockupId,
+              onDeviceImageUpload: onDeviceImageUpload,
+              onSecondDeviceImageUpload: onSecondDeviceImageUpload,
+              onUpdateDevicePossition: onUpdateDevicePossition,
               onUpdateFirstDeviceRotate: onUpdateFirstDeviceRotate,
               onUpdateFirstDeviceFullSize: onUpdateFirstDeviceFullSize,
               updateFirstStrokeColor: updateFirstStrokeColor,

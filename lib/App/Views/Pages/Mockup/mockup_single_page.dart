@@ -151,7 +151,7 @@ class BuildMockupSinglePageSidebar extends StatelessWidget {
         // end subtitle
 
         // start device
-        onUpdateFirstDevicePosition: controller.updateFirstDevicePossition,
+        onUpdateDevicePossition: controller.onUpdateDevicePossition,
         onUpdateFirstDeviceRotate: controller.updateFirstDeviceRotate,
         onUpdateFirstDeviceFullSize: controller.updateFirstDeviceFullSize,
         updateFirstStrokeColor: controller.updateFirstDeviceStrokeColor,
@@ -159,11 +159,12 @@ class BuildMockupSinglePageSidebar extends StatelessWidget {
         updateFirstDeviceFrame: controller.updateFirstDeviceFrame,
         updateFirstShadowColor: controller.updateFirstDeviceShadowColor,
         updateFirstDeviceShadowBlur: controller.updateFirstDeviceShadowBlur,
+        onDeviceImageUpload: controller.onDeviceImageUpload,
+        onSecondDeviceImageUpload: controller.onSecondDeviceImageUpload,
         updateFirstDeviceShadowXOffset:
             controller.updateFirstDeviceShadowXOffset,
         updateFirstDeviceShadowYOffset:
             controller.updateFirstDeviceShadowYOffset,
-
         // end device
       ),
     );

@@ -1,6 +1,6 @@
 import 'package:expansion_tile_group/expansion_tile_group.dart';
 import 'package:flutter/material.dart';
-import 'package:flutterpp/App/Views/Pages/Mockup/Widgets/Create/Sidebar/build_alignment_option.dart';
+import 'package:flutterpp/App/Views/Pages/Mockup/Widgets/Create/Sidebar/Widgets/build_select_image_option.dart';
 import 'package:flutterpp/App/Views/Pages/Mockup/Widgets/Create/Sidebar/build_pick_color.dart';
 import 'package:flutterpp/App/Views/Pages/Mockup/Widgets/Create/Sidebar/build_slider_enable_option.dart';
 import 'package:flutterpp/App/Views/Pages/Mockup/Widgets/Create/Sidebar/build_slider_with_value_box.dart';
@@ -10,20 +10,23 @@ import 'package:uuid/uuid.dart';
 
 ExpansionTileBorderItem buildDeviceStep({
   String? title,
+  String? mockupId,
   Widget? leading,
-  bool? hasVisabeltyOption = false,
+  bool? isSecondDevice = false,
   double? firstDeviceRotateInitialValue,
   void Function({
-    double? devicePositionBottom,
-    double? devicePositionLeft,
-    double? devicePositionRight,
-    double? devicePositionTop,
-  })? onUpdateFirstDevicePosition,
+    double? firstDevicePositionTopBottom,
+    double? firstDevicePositionRightLeft,
+    double? secondDevicePositionTopBottom,
+    double? secondDevicePositionRightLeft,
+  })? onUpdateDevicePossition,
   void Function(double rotate)? onUpdateFirstDeviceRotate,
   void Function(bool value)? onUpdateFirstDeviceFullSize,
   void Function(Color color)? updateFirstStrokeColor,
   void Function(double width)? updateFirstStrokeWidth,
   void Function(String frame)? updateFirstDeviceFrame,
+  void Function(String img)? onDeviceImageUpload,
+  onSecondDeviceImageUpload,
   void Function(Color color)? updateFirstShadowColor,
   void Function(double blur)? updateFirstDeviceShadowBlur,
   void Function(double offset)? updateFirstDeviceShadowXOffset,
@@ -40,30 +43,23 @@ ExpansionTileBorderItem buildDeviceStep({
     textColor: Colors.white,
     iconColor: Colors.white,
     children: [
-      if (hasVisabeltyOption!)
+      if (isSecondDevice!)
         BuildSliderEnableOption(
           controllerTag: 'deviceEnable-$uuid',
         ),
-      const Divider(height: 30),
-      const Text('Alignment'),
-      const SizedBox(height: 10),
-      BuildAlignmentOption(
-        title: '',
-        controllerTag: 'deviceAlignmentHorizontal-$uuid',
-      ),
-      BuildAlignmentOption(
-        title: '',
-        controllerTag: 'deviceAlignmentVertical-$uuid',
-        firtIcon: Icons.vertical_align_top_rounded,
-        secondIcon: Icons.vertical_align_center_rounded,
-        thirdIcon: Icons.vertical_align_bottom_rounded,
-      ),
       const SizedBox(height: 20),
       BuildSidebarOption(
         title: 'Screen',
-        rightWidget: ElevatedButton(
-          onPressed: () {},
-          child: Text('add Screen'.capitalize!),
+        rightWidget: BuildSelectImageOption(
+          mockupId: mockupId,
+          controllerTag: 'devideImage-$uuid',
+          callback: (val) {
+            if (isSecondDevice) {
+              onSecondDeviceImageUpload?.call(val);
+            } else {
+              onDeviceImageUpload?.call(val);
+            }
+          },
         ),
       ),
       const SizedBox(height: 10),
@@ -110,60 +106,65 @@ ExpansionTileBorderItem buildDeviceStep({
           controllerTag: 'deviceShadowColor-$uuid',
         ),
       ),
-      const SizedBox(height: 30),
-      const Text('Position'),
-      const SizedBox(height: 30),
+      const Divider(height: 50),
+      const Text(
+        'Position',
+        style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+      ),
+      const SizedBox(height: 20),
       BuildSidebarOption(
-        title: 'Top',
+        title: 'horizontal',
         rightWidget: BuildSliderWithValueBox(
-          controllerTag: 'devicePositionTop-$uuid',
-          min: 0,
-          max: Get.height,
-          divisions: Get.height.toInt(),
-          onChanged: (val) => onUpdateFirstDevicePosition?.call(
-            devicePositionTop: val,
+          controllerTag: 'firstDevicePositionRightLeft-$uuid',
+          min: -300,
+          max: 300,
+          divisions: 600,
+          onChanged: (val) => onUpdateDevicePossition?.call(
+            firstDevicePositionRightLeft: val,
           ),
         ),
       ),
       const SizedBox(height: 10),
       BuildSidebarOption(
-        title: 'Bottom',
+        title: 'vertical',
         rightWidget: BuildSliderWithValueBox(
-          controllerTag: 'devicePositionBottom-$uuid',
-          min: 0,
-          max: Get.height,
-          divisions: Get.height.toInt(),
-          onChanged: (val) => onUpdateFirstDevicePosition?.call(
-            devicePositionBottom: val,
+          controllerTag: 'firstDevicePositionTopBottom-$uuid',
+          min: -300,
+          max: 300,
+          divisions: 600,
+          onChanged: (val) => onUpdateDevicePossition?.call(
+            firstDevicePositionTopBottom: val,
           ),
         ),
       ),
-      const SizedBox(height: 10),
-      BuildSidebarOption(
-        title: 'Left',
-        rightWidget: BuildSliderWithValueBox(
-          controllerTag: 'devicePositionLeft-$uuid',
-          min: 0,
-          max: Get.width,
-          divisions: Get.width.toInt(),
-          onChanged: (val) => onUpdateFirstDevicePosition?.call(
-            devicePositionLeft: val,
+      if (isSecondDevice)
+        BuildSidebarOption(
+          title: 'horizontal',
+          rightWidget: BuildSliderWithValueBox(
+            controllerTag: 'secondDevicePositionRightLeft-$uuid',
+            min: -300,
+            max: 300,
+            divisions: 600,
+            onChanged: (val) => onUpdateDevicePossition?.call(
+              secondDevicePositionRightLeft: val,
+            ),
           ),
         ),
-      ),
-      const SizedBox(height: 10),
-      BuildSidebarOption(
-        title: 'Right',
-        rightWidget: BuildSliderWithValueBox(
-          controllerTag: 'devicePositionRight-$uuid',
-          min: 0,
-          max: Get.width,
-          divisions: Get.width.toInt(),
-          onChanged: (val) => onUpdateFirstDevicePosition?.call(
-            devicePositionRight: val,
+      if (isSecondDevice) const SizedBox(height: 10),
+      if (isSecondDevice)
+        BuildSidebarOption(
+          title: 'vertical',
+          rightWidget: BuildSliderWithValueBox(
+            controllerTag: 'secondDevicePositionTopBottom-$uuid',
+            min: -300,
+            max: 300,
+            divisions: 600,
+            onChanged: (val) => onUpdateDevicePossition?.call(
+              secondDevicePositionTopBottom: val,
+            ),
           ),
         ),
-      ),
+      const SizedBox(height: 20),
     ],
   );
 }

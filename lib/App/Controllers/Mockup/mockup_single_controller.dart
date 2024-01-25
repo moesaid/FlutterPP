@@ -275,30 +275,30 @@ class MockupSingleController extends GetxController {
   }
 
   // update first device possition
-  updateFirstDevicePossition({
-    double? devicePositionTop,
-    double? devicePositionRight,
-    double? devicePositionBottom,
-    double? devicePositionLeft,
+  void onUpdateDevicePossition({
+    double? firstDevicePositionTopBottom,
+    double? firstDevicePositionRightLeft,
+    double? secondDevicePositionTopBottom,
+    double? secondDevicePositionRightLeft,
   }) {
-    if (devicePositionTop != null) {
+    if (firstDevicePositionTopBottom != null) {
       _seletedItem.value = _seletedItem.value.copyWith(
-        devicePositionTop: devicePositionTop,
+        firstDevicePositionTopBottom: firstDevicePositionTopBottom,
       );
     }
-    if (devicePositionRight != null) {
+    if (firstDevicePositionRightLeft != null) {
       _seletedItem.value = _seletedItem.value.copyWith(
-        devicePositionRight: devicePositionRight,
+        firstDevicePositionRightLeft: firstDevicePositionRightLeft,
       );
     }
-    if (devicePositionBottom != null) {
+    if (secondDevicePositionTopBottom != null) {
       _seletedItem.value = _seletedItem.value.copyWith(
-        devicePositionBottom: devicePositionBottom,
+        secondDevicePositionTopBottom: secondDevicePositionTopBottom,
       );
     }
-    if (devicePositionLeft != null) {
+    if (secondDevicePositionRightLeft != null) {
       _seletedItem.value = _seletedItem.value.copyWith(
-        devicePositionLeft: devicePositionLeft,
+        secondDevicePositionRightLeft: secondDevicePositionRightLeft,
       );
     }
   }
@@ -357,5 +357,17 @@ class MockupSingleController extends GetxController {
     _seletedItem.value = _seletedItem.value.copyWith(
         // shadowYOffset: offset,
         );
+  }
+
+  void onDeviceImageUpload(String image) {
+    _seletedItem.value = _seletedItem.value.copyWith(
+      image: image,
+    );
+  }
+
+  void onSecondDeviceImageUpload(String image) {
+    _seletedItem.value = _seletedItem.value.copyWith(
+      secondImage: image,
+    );
   }
 }

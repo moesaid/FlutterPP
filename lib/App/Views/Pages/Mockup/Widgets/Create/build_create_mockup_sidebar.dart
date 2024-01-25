@@ -56,20 +56,22 @@ class BuildCreateMockupSidebar extends StatelessWidget {
 
   // Device
   final void Function({
-    double? devicePositionBottom,
-    double? devicePositionLeft,
-    double? devicePositionRight,
-    double? devicePositionTop,
-  })? onUpdateFirstDevicePosition;
+    double? firstDevicePositionTopBottom,
+    double? firstDevicePositionRightLeft,
+    double? secondDevicePositionTopBottom,
+    double? secondDevicePositionRightLeft,
+  })? onUpdateDevicePossition;
   final void Function(double rotate)? onUpdateFirstDeviceRotate;
   final void Function(bool value)? onUpdateFirstDeviceFullSize;
   final void Function(Color color)? updateFirstStrokeColor;
   final void Function(double width)? updateFirstStrokeWidth;
-  final void Function(String frame)? updateFirstDeviceFrame;
   final void Function(Color color)? updateFirstShadowColor;
   final void Function(double blur)? updateFirstDeviceShadowBlur;
   final void Function(double offset)? updateFirstDeviceShadowXOffset;
   final void Function(double offset)? updateFirstDeviceShadowYOffset;
+  final void Function(String frame)? updateFirstDeviceFrame;
+  final void Function(String frame)? onDeviceImageUpload;
+  final void Function(String frame)? onSecondDeviceImageUpload;
 
   const BuildCreateMockupSidebar({
     super.key,
@@ -130,7 +132,7 @@ class BuildCreateMockupSidebar extends StatelessWidget {
     this.onSubtitleChanged,
     this.onTitleFontFamilyChanged,
     this.onSubtitleFontFamilyChanged,
-    this.onUpdateFirstDevicePosition,
+    this.onUpdateDevicePossition,
     this.onUpdateFirstDeviceRotate,
     this.onUpdateFirstDeviceFullSize,
     this.updateFirstStrokeColor,
@@ -140,6 +142,8 @@ class BuildCreateMockupSidebar extends StatelessWidget {
     this.updateFirstDeviceShadowBlur,
     this.updateFirstDeviceShadowXOffset,
     this.updateFirstDeviceShadowYOffset,
+    this.onDeviceImageUpload,
+    this.onSecondDeviceImageUpload,
   });
 
   @override
@@ -234,9 +238,11 @@ class BuildCreateMockupSidebar extends StatelessWidget {
                   onSubtitleChanged: onSubtitleChanged,
                   onTitleFontFamilyChanged: onTitleFontFamilyChanged,
                   onSubtitleFontFamilyChanged: onSubtitleFontFamilyChanged,
-                  onUpdateFirstDevicePosition: onUpdateFirstDevicePosition,
+                  onUpdateDevicePossition: onUpdateDevicePossition,
                   onUpdateFirstDeviceRotate: onUpdateFirstDeviceRotate,
                   onUpdateFirstDeviceFullSize: onUpdateFirstDeviceFullSize,
+                  onDeviceImageUpload: onDeviceImageUpload,
+                  onSecondDeviceImageUpload: onSecondDeviceImageUpload,
                 ),
               ),
       ),
