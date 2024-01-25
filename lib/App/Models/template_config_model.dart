@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutterpp/Helpers/colors_helper.dart';
 
 class TemplateConfigModel {
-  String? id, image, secondImage, logo;
+  String? id, image, secondImage, logo, firstDeviceFrame, secondDeviceFrame;
   String? type;
   Axis? bodyDirection;
   VerticalDirection? bodyVerticalDirection;
@@ -40,6 +40,8 @@ class TemplateConfigModel {
     this.image,
     this.secondImage,
     this.logo,
+    this.firstDeviceFrame,
+    this.secondDeviceFrame,
     this.type,
     this.bodyDirection,
     this.bodyVerticalDirection,
@@ -92,6 +94,8 @@ class TemplateConfigModel {
     secondImage = json['secondImage'];
     logo = json['logo'];
     type = json['type'];
+    firstDeviceFrame = json['firstDeviceFrame'];
+    secondDeviceFrame = json['secondDeviceFrame'];
 
     // bodyDirection = json['bodyDirection'];
     // convert bodyDirection string to Axis enum
@@ -249,6 +253,8 @@ class TemplateConfigModel {
     data['secondImage'] = secondImage;
     data['logo'] = logo;
     data['type'] = type.toString();
+    data['firstDeviceFrame'] = firstDeviceFrame;
+    data['secondDeviceFrame'] = secondDeviceFrame;
 
     // data['bodyDirection'] = bodyDirection;
     // convert bodyDirection enum to string
@@ -422,6 +428,8 @@ class TemplateConfigModel {
     String? image,
     String? secondImage,
     String? type,
+    String? firstDeviceFrame,
+    String? secondDeviceFrame,
     Axis? bodyDirection,
     VerticalDirection? bodyVerticalDirection,
     WrapCrossAlignment? bodyCrossAxisAlignment,
@@ -473,6 +481,8 @@ class TemplateConfigModel {
       image: image ?? this.image,
       secondImage: secondImage ?? this.secondImage,
       type: type ?? this.type,
+      firstDeviceFrame: firstDeviceFrame ?? this.firstDeviceFrame,
+      secondDeviceFrame: secondDeviceFrame ?? this.secondDeviceFrame,
       bodyDirection: bodyDirection ?? this.bodyDirection,
       bodyVerticalDirection:
           bodyVerticalDirection ?? this.bodyVerticalDirection,

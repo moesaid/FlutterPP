@@ -1,3 +1,4 @@
+import 'package:device_frame/device_frame.dart';
 import 'package:flutter/material.dart';
 import 'package:flutterpp/App/Enums/padding_destination_enum.dart';
 import 'package:flutterpp/App/Models/gradient_model.dart';
@@ -69,9 +70,10 @@ class BuildCreateMockupSidebar extends StatelessWidget {
   final void Function(double blur)? updateFirstDeviceShadowBlur;
   final void Function(double offset)? updateFirstDeviceShadowXOffset;
   final void Function(double offset)? updateFirstDeviceShadowYOffset;
-  final void Function(String frame)? updateFirstDeviceFrame;
   final void Function(String frame)? onDeviceImageUpload;
   final void Function(String frame)? onSecondDeviceImageUpload;
+  final void Function(DeviceInfo)? updateFirstDeviceFrame,
+      updateSecondDeviceFrame;
 
   const BuildCreateMockupSidebar({
     super.key,
@@ -138,6 +140,7 @@ class BuildCreateMockupSidebar extends StatelessWidget {
     this.updateFirstStrokeColor,
     this.updateFirstStrokeWidth,
     this.updateFirstDeviceFrame,
+    this.updateSecondDeviceFrame,
     this.updateFirstShadowColor,
     this.updateFirstDeviceShadowBlur,
     this.updateFirstDeviceShadowXOffset,
@@ -243,6 +246,8 @@ class BuildCreateMockupSidebar extends StatelessWidget {
                   onUpdateFirstDeviceFullSize: onUpdateFirstDeviceFullSize,
                   onDeviceImageUpload: onDeviceImageUpload,
                   onSecondDeviceImageUpload: onSecondDeviceImageUpload,
+                  updateFirstDeviceFrame: updateFirstDeviceFrame,
+                  updateSecondDeviceFrame: updateSecondDeviceFrame,
                 ),
               ),
       ),

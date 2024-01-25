@@ -5,6 +5,7 @@ import 'package:flutterpp/App/Controllers/Auth/verify_otp_controller.dart';
 import 'package:flutterpp/App/Controllers/Home/home_controller.dart';
 import 'package:flutterpp/App/Controllers/Mockup/Micro/alignment_option_controller.dart';
 import 'package:flutterpp/App/Controllers/Mockup/Micro/bool_toggle_controller.dart';
+import 'package:flutterpp/App/Controllers/Mockup/Micro/edit_frame_option_controller.dart';
 import 'package:flutterpp/App/Controllers/Mockup/Micro/select_image_option_controller.dart';
 import 'package:flutterpp/App/Controllers/Mockup/Micro/slider_option_controller.dart';
 import 'package:flutterpp/App/Controllers/Mockup/build_create_mockup_sidebar_selected_state_controller.dart';
@@ -56,6 +57,7 @@ class AppBinding implements Bindings {
     Get.lazyPut<BoolToggleController>(() => BoolToggleController());
     Get.lazyPut<AlignmentOptionController>(() => AlignmentOptionController());
     Get.lazyPut<PickupColorController>(() => PickupColorController());
+    Get.lazyPut<EditFrameOptionController>(() => EditFrameOptionController());
 
     Get.lazyPut<SliderOptionController>(() => SliderOptionController());
     Get.lazyPut<SelectImageOptionController>(

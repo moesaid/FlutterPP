@@ -1,3 +1,4 @@
+import 'package:device_frame/device_frame.dart';
 import 'package:expansion_tile_group/expansion_tile_group.dart';
 import 'package:flutter/material.dart';
 import 'package:flutterpp/App/Controllers/Mockup/build_create_mockup_sidebar_selected_state_controller.dart';
@@ -78,6 +79,7 @@ class BuildCreateMockupSidebarSelectedState
     this.updateFirstStrokeColor,
     this.updateFirstStrokeWidth,
     this.updateFirstDeviceFrame,
+    this.updateSecondDeviceFrame,
     this.updateFirstShadowColor,
     this.updateFirstDeviceShadowBlur,
     this.updateFirstDeviceShadowXOffset,
@@ -146,7 +148,8 @@ class BuildCreateMockupSidebarSelectedState
   final void Function(bool value)? onUpdateFirstDeviceFullSize;
   final void Function(Color color)? updateFirstStrokeColor;
   final void Function(double width)? updateFirstStrokeWidth;
-  final void Function(String frame)? updateFirstDeviceFrame;
+  final void Function(DeviceInfo)? updateFirstDeviceFrame,
+      updateSecondDeviceFrame;
   final void Function(Color color)? updateFirstShadowColor;
   final void Function(double blur)? updateFirstDeviceShadowBlur;
   final void Function(double offset)? updateFirstDeviceShadowXOffset;
@@ -238,7 +241,7 @@ class BuildCreateMockupSidebarSelectedState
               onUpdateFirstDeviceFullSize: onUpdateFirstDeviceFullSize,
               updateFirstStrokeColor: updateFirstStrokeColor,
               updateFirstStrokeWidth: updateFirstStrokeWidth,
-              updateFirstDeviceFrame: updateFirstDeviceFrame,
+              updateDeviceFrame: updateFirstDeviceFrame,
               updateFirstShadowColor: updateFirstShadowColor,
               updateFirstDeviceShadowBlur: updateFirstDeviceShadowBlur,
               updateFirstDeviceShadowXOffset: updateFirstDeviceShadowXOffset,

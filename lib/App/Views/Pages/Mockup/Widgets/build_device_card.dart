@@ -121,7 +121,12 @@ class BuildDeviceBodyIphoneCase extends StatelessWidget {
         width: 250,
         height: 500,
         child: DeviceFrame(
-          device: Devices.ios.iPhone12ProMax,
+          device: config.firstDeviceFrame == null
+              ? Devices.ios.iPhone12ProMax
+              : Devices.all.firstWhereOrNull(
+                    (el) => el.name == config.firstDeviceFrame!,
+                  ) ??
+                  Devices.ios.iPhone12ProMax,
           isFrameVisible: true,
           orientation: Orientation.portrait,
           screen: Image(

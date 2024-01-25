@@ -1,11 +1,12 @@
+import 'package:device_frame/device_frame.dart';
 import 'package:expansion_tile_group/expansion_tile_group.dart';
 import 'package:flutter/material.dart';
+import 'package:flutterpp/App/Views/Pages/Mockup/Widgets/Create/Sidebar/Widgets/build_edit_frame_option.dart';
 import 'package:flutterpp/App/Views/Pages/Mockup/Widgets/Create/Sidebar/Widgets/build_select_image_option.dart';
 import 'package:flutterpp/App/Views/Pages/Mockup/Widgets/Create/Sidebar/build_pick_color.dart';
 import 'package:flutterpp/App/Views/Pages/Mockup/Widgets/Create/Sidebar/build_slider_enable_option.dart';
 import 'package:flutterpp/App/Views/Pages/Mockup/Widgets/Create/Sidebar/build_slider_with_value_box.dart';
 import 'package:flutterpp/App/Views/Pages/Mockup/Widgets/build_sidebar_option.dart';
-import 'package:get/get.dart';
 import 'package:uuid/uuid.dart';
 
 ExpansionTileBorderItem buildDeviceStep({
@@ -24,7 +25,7 @@ ExpansionTileBorderItem buildDeviceStep({
   void Function(bool value)? onUpdateFirstDeviceFullSize,
   void Function(Color color)? updateFirstStrokeColor,
   void Function(double width)? updateFirstStrokeWidth,
-  void Function(String frame)? updateFirstDeviceFrame,
+  void Function(DeviceInfo)? updateDeviceFrame,
   void Function(String img)? onDeviceImageUpload,
   onSecondDeviceImageUpload,
   void Function(Color color)? updateFirstShadowColor,
@@ -65,9 +66,9 @@ ExpansionTileBorderItem buildDeviceStep({
       const SizedBox(height: 10),
       BuildSidebarOption(
         title: 'Frame',
-        rightWidget: ElevatedButton(
-          onPressed: () {},
-          child: Text('edit Frame'.capitalize!),
+        rightWidget: BuildEditFrame(
+          controllerTag: 'deviceFrame-$uuid',
+          callback: updateDeviceFrame,
         ),
       ),
       const SizedBox(height: 20),

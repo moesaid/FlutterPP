@@ -1,3 +1,4 @@
+import 'package:device_frame/device_frame.dart';
 import 'package:flutter/material.dart';
 import 'package:flutterpp/App/Enums/padding_destination_enum.dart';
 import 'package:flutterpp/App/Models/gradient_model.dart';
@@ -268,10 +269,11 @@ class MockupSingleController extends GetxController {
   }
 
   // update first device frame
-  updateFirstDeviceFrame(String frame) {
+  updateFirstDeviceFrame(DeviceInfo frame) {
+    print({'❌', frame.name});
     _seletedItem.value = _seletedItem.value.copyWith(
-        // frame: frame,
-        );
+      firstDeviceFrame: frame.name,
+    );
   }
 
   // update first device possition
