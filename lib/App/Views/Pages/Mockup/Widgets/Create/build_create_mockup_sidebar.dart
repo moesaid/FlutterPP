@@ -81,6 +81,10 @@ class BuildCreateMockupSidebar extends StatelessWidget {
   final double? secondDeviceVerticalPosition;
   final double? secondDeviceHorizontalPosition;
 
+  final void Function(double scale, {bool? isSecondDevice})? updateDeviceScale;
+  final double? secondScale;
+  final double? scale;
+
   final void Function(bool value, {bool? isSecondDevice})?
       updateDeviceStrokeVisibility;
   final void Function({
@@ -209,6 +213,9 @@ class BuildCreateMockupSidebar extends StatelessWidget {
     this.secondDeviceHorizontalPosition,
     this.secondRotate,
     this.rotate,
+    this.updateDeviceScale,
+    this.secondScale,
+    this.scale,
   });
 
   @override
@@ -344,6 +351,9 @@ class BuildCreateMockupSidebar extends StatelessWidget {
                       secondDeviceHorizontalPosition,
                   secondRotate: secondRotate,
                   rotate: rotate,
+                  updateDeviceScale: updateDeviceScale,
+                  secondScale: secondScale,
+                  scale: scale,
                 ),
               ),
       ),

@@ -54,7 +54,9 @@ class TemplateConfigModel {
       shadowOffsetX,
       shadowOffsetY,
       secondShadowOffsetX,
-      secondShadowOffsetY;
+      secondShadowOffsetY,
+      scale,
+      secondScale;
 
   TemplateConfigModel({
     this.id,
@@ -128,6 +130,8 @@ class TemplateConfigModel {
     this.shadowOffsetY = 0,
     this.secondShadowOffsetX = 0,
     this.secondShadowOffsetY = 0,
+    this.scale = 1,
+    this.secondScale = 1,
   });
 
   TemplateConfigModel.fromJson(Map<String, dynamic> json) {
@@ -308,6 +312,8 @@ class TemplateConfigModel {
         ? ColorHelper.hexToColor(json['subtitleColor'])
         : null;
 
+    titleFontFamily = json['titleFontFamily'];
+    subtitleFontFamily = json['subtitleFontFamily'];
     titleFontSize = convertIntToDouble(json['titleFontSize']);
     titleLineHeight = convertIntToDouble(json['titleLineHeight']);
     subtitleFontSize = convertIntToDouble(json['subtitleFontSize']);
@@ -318,8 +324,8 @@ class TemplateConfigModel {
     shadowOffsetY = convertIntToDouble(json['shadowOffsetY']);
     secondShadowOffsetX = convertIntToDouble(json['secondShadowOffsetX']);
     secondShadowOffsetY = convertIntToDouble(json['secondShadowOffsetY']);
-    titleFontFamily = json['titleFontFamily'];
-    subtitleFontFamily = json['subtitleFontFamily'];
+    scale = convertIntToDouble(json['scale']);
+    secondScale = convertIntToDouble(json['secondScale']);
   }
 
   Map<String, dynamic> toJson() {
@@ -512,6 +518,8 @@ class TemplateConfigModel {
     data['shadowOffsetY'] = convertIntToDouble(shadowOffsetY);
     data['secondShadowOffsetX'] = convertIntToDouble(secondShadowOffsetX);
     data['secondShadowOffsetY'] = convertIntToDouble(secondShadowOffsetY);
+    data['scale'] = convertIntToDouble(scale);
+    data['secondScale'] = convertIntToDouble(secondScale);
 
     data['titleFontFamily'] = titleFontFamily;
     data['subtitleFontFamily'] = subtitleFontFamily;
@@ -604,6 +612,8 @@ class TemplateConfigModel {
     double? shadowOffsetY,
     double? secondShadowOffsetX,
     double? secondShadowOffsetY,
+    double? scale,
+    double? secondScale,
     Color? subtitleColor,
     String? subtitleFontFamily,
   }) {
@@ -678,14 +688,16 @@ class TemplateConfigModel {
       subtitleColor: subtitleColor ?? this.subtitleColor,
       subtitleFontSize: subtitleFontSize ?? this.subtitleFontSize,
       subtitleLineHeight: subtitleLineHeight ?? this.subtitleLineHeight,
+      titleFontFamily: titleFontFamily ?? this.titleFontFamily,
+      subtitleFontFamily: subtitleFontFamily ?? this.subtitleFontFamily,
       shadowBlur: shadowBlur ?? this.shadowBlur,
       secondShadowBlur: secondShadowBlur ?? this.secondShadowBlur,
       shadowOffsetX: shadowOffsetX ?? this.shadowOffsetX,
       shadowOffsetY: shadowOffsetY ?? this.shadowOffsetY,
       secondShadowOffsetX: secondShadowOffsetX ?? this.secondShadowOffsetX,
       secondShadowOffsetY: secondShadowOffsetY ?? this.secondShadowOffsetY,
-      titleFontFamily: titleFontFamily ?? this.titleFontFamily,
-      subtitleFontFamily: subtitleFontFamily ?? this.subtitleFontFamily,
+      scale: scale ?? this.scale,
+      secondScale: secondScale ?? this.secondScale,
     );
   }
 }

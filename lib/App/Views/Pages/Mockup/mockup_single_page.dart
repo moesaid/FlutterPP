@@ -181,6 +181,9 @@ class BuildMockupSinglePageSidebar extends StatelessWidget {
             controller.seletedItem.secondDevicePositionRightLeft,
         secondDeviceHorizontalPosition:
             controller.seletedItem.secondDevicePositionTopBottom,
+        scale: controller.seletedItem.scale,
+        secondScale: controller.seletedItem.secondScale,
+        updateDeviceScale: controller.updateDeviceScale,
         updateDeviceStrokeVisibility: controller.updateDeviceStrokeVisibility,
         updateShowDevice: controller.updateShowDevice,
         updateShowDeviceFrame: controller.updateShowDeviceFrame,

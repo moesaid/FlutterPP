@@ -93,7 +93,12 @@ class BuildDeviceBody extends StatelessWidget {
             ),
             Transform.rotate(
               angle: (config.rotate ?? 0) * pi,
-              child: BuildDeviceBodyIphoneCase(config: config),
+              child: ScaleTransition(
+                scale: config.scale == null
+                    ? const AlwaysStoppedAnimation(1)
+                    : AlwaysStoppedAnimation(config.scale!),
+                child: BuildDeviceBodyIphoneCase(config: config),
+              ),
             ),
           ],
         ),

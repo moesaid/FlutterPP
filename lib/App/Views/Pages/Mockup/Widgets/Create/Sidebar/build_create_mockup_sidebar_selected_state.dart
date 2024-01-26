@@ -112,6 +112,9 @@ class BuildCreateMockupSidebarSelectedState
     this.secondDeviceHorizontalPosition,
     this.secondRotate,
     this.rotate,
+    this.updateDeviceScale,
+    this.secondScale,
+    this.scale,
   });
 
   final String? mockupId, firstInitalDeviceFrame, secondInitalDeviceFrame;
@@ -190,6 +193,11 @@ class BuildCreateMockupSidebarSelectedState
   final double? secondDeviceHorizontalPosition;
   final double? secondRotate;
   final double? rotate;
+
+  final void Function(double scale, {bool? isSecondDevice})? updateDeviceScale;
+  final double? secondScale;
+  final double? scale;
+
   final void Function(bool value, {bool? isSecondDevice})?
       updateDeviceStrokeVisibility;
 
@@ -335,6 +343,9 @@ class BuildCreateMockupSidebarSelectedState
               secondDeviceHorizontalPosition: secondDeviceHorizontalPosition,
               secondRotate: secondRotate,
               rotate: rotate,
+              updateDeviceScale: updateDeviceScale,
+              secondScale: secondScale,
+              scale: scale,
             ),
             buildDeviceStep(
               title: 'Device Two',

@@ -36,6 +36,9 @@ ExpansionTileBorderItem buildDeviceStep({
   double? firstDeviceHorizontalPosition,
   double? secondDeviceVerticalPosition,
   double? secondDeviceHorizontalPosition,
+  double? secondScale,
+  double? scale,
+  void Function(double scale, {bool? isSecondDevice})? updateDeviceScale,
   void Function(bool value, {bool? isSecondDevice})?
       updateDeviceStrokeVisibility,
   void Function({
@@ -96,7 +99,6 @@ ExpansionTileBorderItem buildDeviceStep({
         ),
       ),
       const SizedBox(height: 10),
-
       BuildSidebarOption(
         title: 'Frame',
         rightWidget: BuildEditFrame(
@@ -106,15 +108,19 @@ ExpansionTileBorderItem buildDeviceStep({
         ),
       ),
       const SizedBox(height: 20),
-      // BuildSidebarOption(
-      //   title: 'Size',
-      //   rightWidget: BuildSliderWithValueBox(
-      //     controllerTag: 'deviceSize-$uuid',
-      //     onChanged: (val) => print('❌ - $val'),
-      //   ),
-      // ),
-      // const SizedBox(height: 10),
-
+      BuildSidebarOption(
+        title: 'Size',
+        rightWidget: BuildSliderWithValueBox(
+          controllerTag: 'deviceSize-$uuid',
+          min: 0.5,
+          max: 1,
+          divisions: 30,
+          fractionDigits: 2,
+          defaultValue: isSecondDevice == true ? secondScale ?? 0 : scale ?? 0,
+          onChanged: (val) => updateDeviceScale?.call(val),
+        ),
+      ),
+      const SizedBox(height: 10),
       const Divider(height: 50),
       const Text(
         'Stroke',
@@ -136,7 +142,6 @@ ExpansionTileBorderItem buildDeviceStep({
           onColorChangedCallback: (val) => updateStrokeColor?.call(val),
         ),
       ),
-
       const SizedBox(height: 10),
       BuildSidebarOption(
         title: 'Width',
@@ -149,7 +154,6 @@ ExpansionTileBorderItem buildDeviceStep({
           onChanged: (val) => updateStrokeWidth?.call(val),
         ),
       ),
-
       const Divider(height: 50),
       const Text(
         'Shadow',
@@ -164,7 +168,6 @@ ExpansionTileBorderItem buildDeviceStep({
           onColorChangedCallback: (val) => updateShadowColor?.call(val),
         ),
       ),
-
       const SizedBox(height: 10),
       BuildSidebarOption(
         title: 'blur',
@@ -212,7 +215,6 @@ ExpansionTileBorderItem buildDeviceStep({
           ),
         ),
       ),
-
       const Divider(height: 50),
       const Text(
         'Position',

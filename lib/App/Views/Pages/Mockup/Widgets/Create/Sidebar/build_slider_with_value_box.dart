@@ -6,7 +6,7 @@ class BuildSliderWithValueBox extends StatelessWidget {
   final double? defaultValue;
   final double? min;
   final double? max;
-  final int? divisions;
+  final int? divisions, fractionDigits;
   final String? blockedMessage;
   final bool? isBlocked;
   final Function(double)? onChanged;
@@ -20,6 +20,7 @@ class BuildSliderWithValueBox extends StatelessWidget {
     this.divisions,
     this.blockedMessage,
     this.isBlocked,
+    this.fractionDigits,
   });
 
   @override
@@ -33,6 +34,7 @@ class BuildSliderWithValueBox extends StatelessWidget {
       controllerTag: controllerTag,
       blockedMessage: blockedMessage,
       isBlocked: isBlocked,
+      fractionDigits: fractionDigits,
     );
   }
 }

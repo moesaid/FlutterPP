@@ -467,4 +467,17 @@ class MockupSingleController extends GetxController {
       showFrame: value,
     );
   }
+
+  void updateDeviceScale(double scale, {bool? isSecondDevice}) {
+    if (isSecondDevice != null && isSecondDevice) {
+      _seletedItem.value = _seletedItem.value.copyWith(
+        secondScale: scale,
+      );
+      return;
+    }
+
+    _seletedItem.value = _seletedItem.value.copyWith(
+      scale: scale,
+    );
+  }
 }

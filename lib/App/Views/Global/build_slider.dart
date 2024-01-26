@@ -6,7 +6,7 @@ import 'package:sizer/sizer.dart';
 class BuildSlider extends StatelessWidget {
   final double? min, max, defaultValue;
   final String? controllerTag;
-  final int? divisions;
+  final int? divisions, fractionDigits;
   final String? blockedMessage;
   final bool? isBlocked;
   final void Function(double)? onChanged;
@@ -20,6 +20,7 @@ class BuildSlider extends StatelessWidget {
     this.divisions,
     this.isBlocked,
     this.blockedMessage,
+    this.fractionDigits,
   });
 
   @override
@@ -68,7 +69,7 @@ class BuildSlider extends StatelessWidget {
             inactiveColor: Get.theme.colorScheme.onBackground.withOpacity(0.1),
             thumbColor: Get.theme.primaryColor,
             value: localValue,
-            label: localValue.toStringAsFixed(0),
+            label: localValue.toStringAsFixed(fractionDigits ?? 0),
             onChanged: (double value) {
               if (isBlocked == true) {
                 Get.snackbar(
