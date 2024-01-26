@@ -132,7 +132,7 @@ ExpansionTileBorderItem buildDeviceStep({
         title: 'Color',
         rightWidget: BuildPickColor(
           controllerTag: 'deviceStrokeColor-$uuid',
-          initialColor: strokeColor,
+          initialColor: strokeColor ?? Colors.black,
           onColorChangedCallback: (val) => updateStrokeColor?.call(val),
         ),
       ),
@@ -151,12 +151,68 @@ ExpansionTileBorderItem buildDeviceStep({
       ),
 
       const Divider(height: 50),
+      const Text(
+        'Shadow',
+        style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+      ),
+      const SizedBox(height: 20),
       BuildSidebarOption(
-        title: 'Shadow',
+        title: 'color',
         rightWidget: BuildPickColor(
+          initialColor: shadowColor ?? Colors.black,
           controllerTag: 'deviceShadowColor-$uuid',
+          onColorChangedCallback: (val) => updateShadowColor?.call(val),
         ),
       ),
+
+      const SizedBox(height: 10),
+      BuildSidebarOption(
+        title: 'blur',
+        rightWidget: BuildSliderWithValueBox(
+          controllerTag: 'deviceShadowblur-$uuid',
+          min: 0,
+          max: 40,
+          divisions: 40,
+          defaultValue:
+              isSecondDevice == true ? secondShadowBlur ?? 0 : shadowBlur ?? 0,
+          onChanged: (val) => updateDeviceShadowBlur?.call(
+            val,
+          ),
+        ),
+      ),
+      const SizedBox(height: 10),
+      BuildSidebarOption(
+        title: 'x offset',
+        rightWidget: BuildSliderWithValueBox(
+          controllerTag: 'deviceShadowXOffset-$uuid',
+          min: -40,
+          max: 40,
+          divisions: 80,
+          defaultValue: isSecondDevice == true
+              ? secondShadowOffsetX ?? 0
+              : shadowOffsetX ?? 0,
+          onChanged: (val) => updateDeviceShadowXOffset?.call(
+            val,
+          ),
+        ),
+      ),
+      const SizedBox(height: 10),
+      BuildSidebarOption(
+        title: 'y offset',
+        rightWidget: BuildSliderWithValueBox(
+          controllerTag: 'deviceShadowYOffset-$uuid',
+          min: -40,
+          max: 40,
+          divisions: 80,
+          defaultValue: isSecondDevice == true
+              ? secondShadowOffsetY ?? 0
+              : shadowOffsetY ?? 0,
+          onChanged: (val) => updateDeviceShadowYOffset?.call(
+            val,
+          ),
+        ),
+      ),
+
       const Divider(height: 50),
       const Text(
         'Position',
