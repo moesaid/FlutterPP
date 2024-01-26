@@ -85,12 +85,33 @@ class BuildCreateMockupSidebarSelectedState
     this.updateDeviceShadowYOffset,
     this.firstInitalDeviceFrame,
     this.secondInitalDeviceFrame,
-    this.showSecondFram,
-    this.showFram,
+    this.showSecondFrame,
+    this.showFrame,
     this.showSecondDevice,
     this.showDevice,
     this.updateShowDeviceFrame,
     this.updateShowDevice,
+    this.updateDeviceStrokeVisibility,
+    this.showStroke,
+    this.showSecondStroke,
+    this.strokeColor,
+    this.secondStrokeColor,
+    this.strokeWidth,
+    this.secondStrokeWidth,
+    this.shadowColor,
+    this.secondShadowColor,
+    this.shadowBlur,
+    this.secondShadowBlur,
+    this.shadowOffsetX,
+    this.secondShadowOffsetX,
+    this.shadowOffsetY,
+    this.secondShadowOffsetY,
+    this.firstDeviceVerticalPosition,
+    this.firstDeviceHorizontalPosition,
+    this.secondDeviceVerticalPosition,
+    this.secondDeviceHorizontalPosition,
+    this.secondRotate,
+    this.rotate,
   });
 
   final String? mockupId, firstInitalDeviceFrame, secondInitalDeviceFrame;
@@ -146,8 +167,31 @@ class BuildCreateMockupSidebarSelectedState
 
   final bool? showDevice;
   final bool? showSecondDevice;
-  final bool? showFram;
-  final bool? showSecondFram;
+  final bool? showFrame;
+  final bool? showSecondFrame;
+
+  final bool? showStroke;
+  final bool? showSecondStroke;
+  final Color? strokeColor;
+  final Color? secondStrokeColor;
+  final double? strokeWidth;
+  final double? secondStrokeWidth;
+  final Color? shadowColor;
+  final Color? secondShadowColor;
+  final double? shadowBlur;
+  final double? secondShadowBlur;
+  final double? shadowOffsetX;
+  final double? secondShadowOffsetX;
+  final double? shadowOffsetY;
+  final double? secondShadowOffsetY;
+  final double? firstDeviceVerticalPosition;
+  final double? firstDeviceHorizontalPosition;
+  final double? secondDeviceVerticalPosition;
+  final double? secondDeviceHorizontalPosition;
+  final double? secondRotate;
+  final double? rotate;
+  final void Function(bool value, {bool? isSecondDevice})?
+      updateDeviceStrokeVisibility;
 
   final void Function({
     double? horizontalPosition,
@@ -267,9 +311,30 @@ class BuildCreateMockupSidebarSelectedState
               updateDeviceShadowXOffset: updateDeviceShadowXOffset,
               updateDeviceShadowYOffset: updateDeviceShadowYOffset,
               showDevice: showDevice,
-              showFram: showFram,
+              showFrame: showFrame,
               updateShowDevice: updateShowDevice,
               updateShowDeviceFrame: updateShowDeviceFrame,
+              updateDeviceStrokeVisibility: updateDeviceStrokeVisibility,
+              showStroke: showStroke,
+              showSecondStroke: showSecondStroke,
+              strokeColor: strokeColor,
+              secondStrokeColor: secondStrokeColor,
+              strokeWidth: strokeWidth,
+              secondStrokeWidth: secondStrokeWidth,
+              shadowColor: shadowColor,
+              secondShadowColor: secondShadowColor,
+              shadowBlur: shadowBlur,
+              secondShadowBlur: secondShadowBlur,
+              shadowOffsetX: shadowOffsetX,
+              secondShadowOffsetX: secondShadowOffsetX,
+              shadowOffsetY: shadowOffsetY,
+              secondShadowOffsetY: secondShadowOffsetY,
+              firstDeviceVerticalPosition: firstDeviceVerticalPosition,
+              firstDeviceHorizontalPosition: firstDeviceHorizontalPosition,
+              secondDeviceVerticalPosition: secondDeviceVerticalPosition,
+              secondDeviceHorizontalPosition: secondDeviceHorizontalPosition,
+              secondRotate: secondRotate,
+              rotate: rotate,
             ),
             buildDeviceStep(
               title: 'Device Two',

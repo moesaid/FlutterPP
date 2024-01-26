@@ -7,6 +7,8 @@ class BuildSliderWithValueBox extends StatelessWidget {
   final double? min;
   final double? max;
   final int? divisions;
+  final String? blockedMessage;
+  final bool? isBlocked;
   final Function(double)? onChanged;
   const BuildSliderWithValueBox({
     super.key,
@@ -16,6 +18,8 @@ class BuildSliderWithValueBox extends StatelessWidget {
     this.min,
     this.max,
     this.divisions,
+    this.blockedMessage,
+    this.isBlocked,
   });
 
   @override
@@ -27,6 +31,8 @@ class BuildSliderWithValueBox extends StatelessWidget {
       onChanged: onChanged,
       defaultValue: defaultValue ?? 0,
       controllerTag: controllerTag,
+      blockedMessage: blockedMessage,
+      isBlocked: isBlocked,
     );
   }
 }

@@ -199,27 +199,7 @@ class MockupCreateController extends GetxController {
           jsonData: [
             TemplateConfigModel.fromJson(
               TemplateLayoutConfig().getLayoutConfig(
-                TemplateLayoutEnum.rightSideTitleUp,
-              ),
-            )..id = const Uuid().v4(),
-            TemplateConfigModel.fromJson(
-              TemplateLayoutConfig().getLayoutConfig(
-                TemplateLayoutEnum.leftSideTitleUp,
-              ),
-            )..id = const Uuid().v4(),
-            TemplateConfigModel.fromJson(
-              TemplateLayoutConfig().getLayoutConfig(
-                TemplateLayoutEnum.titleDown,
-              ),
-            )..id = const Uuid().v4(),
-            TemplateConfigModel.fromJson(
-              TemplateLayoutConfig().getLayoutConfig(
-                TemplateLayoutEnum.titleDown,
-              ),
-            )..id = const Uuid().v4(),
-            TemplateConfigModel.fromJson(
-              TemplateLayoutConfig().getLayoutConfig(
-                TemplateLayoutEnum.titleDown,
+                TemplateLayoutEnum.titleUp,
               ),
             )..id = const Uuid().v4(),
           ],

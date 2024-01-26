@@ -16,7 +16,28 @@ ExpansionTileBorderItem buildDeviceStep({
   String? initalFrame,
   bool? showFrame = true,
   bool? isSecondDevice = false,
-  double? rotateInitialValue,
+  double? rotate,
+  double? secondRotate,
+  bool? showStroke,
+  bool? showSecondStroke,
+  Color? strokeColor,
+  Color? secondStrokeColor,
+  double? strokeWidth,
+  double? secondStrokeWidth,
+  Color? shadowColor,
+  Color? secondShadowColor,
+  double? shadowBlur,
+  double? secondShadowBlur,
+  double? shadowOffsetX,
+  double? secondShadowOffsetX,
+  double? shadowOffsetY,
+  double? secondShadowOffsetY,
+  double? firstDeviceVerticalPosition,
+  double? firstDeviceHorizontalPosition,
+  double? secondDeviceVerticalPosition,
+  double? secondDeviceHorizontalPosition,
+  void Function(bool value, {bool? isSecondDevice})?
+      updateDeviceStrokeVisibility,
   void Function({
     double? horizontalPosition,
     double? verticalPosition,
@@ -38,9 +59,9 @@ ExpansionTileBorderItem buildDeviceStep({
   void Function(bool value, {bool? isSecondDevice})? updateShowDevice,
   void Function(bool value, {bool? isSecondDevice})? updateShowDeviceFrame,
   bool? showDevice,
-  bool? showFram,
 }) {
   String uuid = const Uuid().v4();
+  print('😀 ${(rotate ?? 0 * 100 / 180)}');
   return ExpansionTileBorderItem(
     title: Text(title ?? 'Device'),
     leading: leading ?? const Icon(Icons.devices),
@@ -59,7 +80,7 @@ ExpansionTileBorderItem buildDeviceStep({
       ),
       BuildSliderEnableOption(
         title: 'Frame',
-        initialValue: showDevice,
+        initialValue: showFrame,
         controllerTag: 'deviceFrame-bool-$uuid',
         onToggle: (val) => updateShowDeviceFrame?.call(val),
       ),
@@ -93,27 +114,43 @@ ExpansionTileBorderItem buildDeviceStep({
       //   ),
       // ),
       // const SizedBox(height: 10),
-      BuildSidebarOption(
-        title: 'Rotate',
-        rightWidget: BuildSliderWithValueBox(
-          controllerTag: 'deviceRotate-$uuid',
-          min: -180,
-          max: 180,
-          divisions: 360,
-          defaultValue: rotateInitialValue ?? 0,
-          onChanged: (val) => updateDeviceRotate?.call(
-            val / 180,
-          ),
-        ),
+
+      const Divider(height: 50),
+      const Text(
+        'Stroke',
+        style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
       ),
       const SizedBox(height: 20),
-      BuildSidebarOption(
-        title: 'Stroke',
-        rightWidget: BuildPickColor(
-          controllerTag: 'deviceStrokeColor-$uuid',
-        ),
+      BuildSliderEnableOption(
+        title: 'Enable',
+        initialValue: showStroke,
+        controllerTag: 'deviceStrokeEnable-bool-$uuid',
+        onToggle: (val) => updateDeviceStrokeVisibility?.call(val),
       ),
       const SizedBox(height: 10),
+      BuildSidebarOption(
+        title: 'Color',
+        rightWidget: BuildPickColor(
+          controllerTag: 'deviceStrokeColor-$uuid',
+          initialColor: strokeColor,
+          onColorChangedCallback: (val) => updateStrokeColor?.call(val),
+        ),
+      ),
+
+      const SizedBox(height: 10),
+      BuildSidebarOption(
+        title: 'Width',
+        rightWidget: BuildSliderWithValueBox(
+          controllerTag: 'deviceStrokeWidth-$uuid',
+          min: 8,
+          max: 20,
+          divisions: 12,
+          defaultValue: strokeWidth ?? 0,
+          onChanged: (val) => updateStrokeWidth?.call(val),
+        ),
+      ),
+
+      const Divider(height: 50),
       BuildSidebarOption(
         title: 'Shadow',
         rightWidget: BuildPickColor(
@@ -127,12 +164,31 @@ ExpansionTileBorderItem buildDeviceStep({
       ),
       const SizedBox(height: 20),
       BuildSidebarOption(
+        title: 'Rotate',
+        rightWidget: BuildSliderWithValueBox(
+          controllerTag: 'deviceRotate-$uuid',
+          min: -180,
+          max: 180,
+          divisions: 360,
+          defaultValue: isSecondDevice == true
+              ? (secondRotate ?? 0 * 180)
+              : (rotate ?? 0 * 180),
+          onChanged: (val) => updateDeviceRotate?.call(
+            val / 180,
+          ),
+        ),
+      ),
+      const SizedBox(height: 10),
+      BuildSidebarOption(
         title: 'horizontal',
         rightWidget: BuildSliderWithValueBox(
           controllerTag: 'DevicePositionRightLeft-$uuid',
           min: -300,
           max: 300,
           divisions: 600,
+          defaultValue: isSecondDevice == true
+              ? secondDeviceHorizontalPosition ?? 0
+              : firstDeviceHorizontalPosition ?? 0,
           onChanged: (val) => updateDevicePossition?.call(
             horizontalPosition: val,
           ),
@@ -146,6 +202,9 @@ ExpansionTileBorderItem buildDeviceStep({
           min: -300,
           max: 300,
           divisions: 600,
+          defaultValue: isSecondDevice == true
+              ? secondDeviceVerticalPosition ?? 0
+              : firstDeviceVerticalPosition ?? 0,
           onChanged: (val) => updateDevicePossition?.call(
             verticalPosition: val,
           ),

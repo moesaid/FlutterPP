@@ -7,6 +7,8 @@ class BuildSlider extends StatelessWidget {
   final double? min, max, defaultValue;
   final String? controllerTag;
   final int? divisions;
+  final String? blockedMessage;
+  final bool? isBlocked;
   final void Function(double)? onChanged;
   const BuildSlider({
     super.key,
@@ -16,6 +18,8 @@ class BuildSlider extends StatelessWidget {
     this.defaultValue,
     this.onChanged,
     this.divisions,
+    this.isBlocked,
+    this.blockedMessage,
   });
 
   @override
@@ -32,6 +36,11 @@ class BuildSlider extends StatelessWidget {
       builder: (_) {
         final double localMax = max ?? 100;
         final double localMin = min ?? 0;
+        final double localValue = _.sliderValue > localMax
+            ? localMax
+            : _.sliderValue < localMin
+                ? localMin
+                : _.sliderValue;
 
         return SliderTheme(
           data: SliderTheme.of(context).copyWith(
@@ -58,9 +67,19 @@ class BuildSlider extends StatelessWidget {
             activeColor: Get.theme.primaryColor,
             inactiveColor: Get.theme.colorScheme.onBackground.withOpacity(0.1),
             thumbColor: Get.theme.primaryColor,
-            value: _.sliderValue > localMax ? localMax : _.sliderValue,
-            label: _.sliderValue.toStringAsFixed(0),
+            value: localValue,
+            label: localValue.toStringAsFixed(0),
             onChanged: (double value) {
+              if (isBlocked == true) {
+                Get.snackbar(
+                  'Blocked',
+                  blockedMessage ?? 'This option is blocked',
+                  backgroundColor: Get.theme.colorScheme.error,
+                  colorText: Get.theme.colorScheme.onError,
+                );
+                return;
+              }
+
               _.onChange(
                 value: value,
                 callback: onChanged,

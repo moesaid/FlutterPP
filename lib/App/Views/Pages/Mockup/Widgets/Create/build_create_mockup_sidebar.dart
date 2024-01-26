@@ -58,8 +58,31 @@ class BuildCreateMockupSidebar extends StatelessWidget {
   // Device
   final bool? showDevice;
   final bool? showSecondDevice;
-  final bool? showFram;
-  final bool? showSecondFram;
+  final bool? showFrame;
+  final bool? showSecondFrame;
+  final bool? showStroke;
+  final bool? showSecondStroke;
+  final Color? strokeColor;
+  final Color? secondStrokeColor;
+  final double? strokeWidth;
+  final double? secondStrokeWidth;
+  final Color? shadowColor;
+  final Color? secondShadowColor;
+  final double? shadowBlur;
+  final double? secondShadowBlur;
+  final double? shadowOffsetX;
+  final double? secondShadowOffsetX;
+  final double? shadowOffsetY;
+  final double? secondShadowOffsetY;
+  final double? secondRotate;
+  final double? rotate;
+  final double? firstDeviceVerticalPosition;
+  final double? firstDeviceHorizontalPosition;
+  final double? secondDeviceVerticalPosition;
+  final double? secondDeviceHorizontalPosition;
+
+  final void Function(bool value, {bool? isSecondDevice})?
+      updateDeviceStrokeVisibility;
   final void Function({
     double? horizontalPosition,
     double? verticalPosition,
@@ -161,10 +184,31 @@ class BuildCreateMockupSidebar extends StatelessWidget {
     this.secondInitalDeviceFrame,
     this.showDevice,
     this.showSecondDevice,
-    this.showFram,
-    this.showSecondFram,
+    this.showFrame,
+    this.showSecondFrame,
     this.updateShowDevice,
     this.updateShowDeviceFrame,
+    this.showStroke,
+    this.showSecondStroke,
+    this.strokeColor,
+    this.secondStrokeColor,
+    this.strokeWidth,
+    this.secondStrokeWidth,
+    this.shadowColor,
+    this.secondShadowColor,
+    this.shadowBlur,
+    this.secondShadowBlur,
+    this.shadowOffsetX,
+    this.secondShadowOffsetX,
+    this.shadowOffsetY,
+    this.secondShadowOffsetY,
+    this.updateDeviceStrokeVisibility,
+    this.firstDeviceVerticalPosition,
+    this.firstDeviceHorizontalPosition,
+    this.secondDeviceVerticalPosition,
+    this.secondDeviceHorizontalPosition,
+    this.secondRotate,
+    this.rotate,
   });
 
   @override
@@ -268,10 +312,38 @@ class BuildCreateMockupSidebar extends StatelessWidget {
                   secondInitalDeviceFrame: secondInitalDeviceFrame,
                   showDevice: showDevice,
                   showSecondDevice: showSecondDevice,
-                  showFram: showFram,
-                  showSecondFram: showSecondFram,
+                  showFrame: showFrame,
+                  showSecondFrame: showSecondFrame,
                   updateShowDevice: updateShowDevice,
                   updateShowDeviceFrame: updateShowDeviceFrame,
+                  showStroke: showStroke,
+                  showSecondStroke: showSecondStroke,
+                  strokeColor: strokeColor,
+                  secondStrokeColor: secondStrokeColor,
+                  strokeWidth: strokeWidth,
+                  secondStrokeWidth: secondStrokeWidth,
+                  shadowColor: shadowColor,
+                  secondShadowColor: secondShadowColor,
+                  shadowBlur: shadowBlur,
+                  secondShadowBlur: secondShadowBlur,
+                  shadowOffsetX: shadowOffsetX,
+                  secondShadowOffsetX: secondShadowOffsetX,
+                  shadowOffsetY: shadowOffsetY,
+                  secondShadowOffsetY: secondShadowOffsetY,
+                  updateDeviceStrokeVisibility: updateDeviceStrokeVisibility,
+                  updateStrokeWidth: updateStrokeWidth,
+                  updateStrokeColor: updateStrokeColor,
+                  updateShadowColor: updateShadowColor,
+                  updateDeviceShadowBlur: updateDeviceShadowBlur,
+                  updateDeviceShadowXOffset: updateDeviceShadowXOffset,
+                  updateDeviceShadowYOffset: updateDeviceShadowYOffset,
+                  firstDeviceVerticalPosition: firstDeviceVerticalPosition,
+                  firstDeviceHorizontalPosition: firstDeviceHorizontalPosition,
+                  secondDeviceVerticalPosition: secondDeviceVerticalPosition,
+                  secondDeviceHorizontalPosition:
+                      secondDeviceHorizontalPosition,
+                  secondRotate: secondRotate,
+                  rotate: rotate,
                 ),
               ),
       ),

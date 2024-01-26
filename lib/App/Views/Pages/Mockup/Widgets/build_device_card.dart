@@ -125,13 +125,21 @@ class BuildDeviceBodyIphoneCase extends StatelessWidget {
             if (config.showDevice == true)
               Container(
                 decoration: BoxDecoration(
-                  // border: Border.all(color: Colors.black, width: 10),
+                  border: config.showStroke == true
+                      ? Border.all(
+                          color: config.strokeColor ?? Colors.black,
+                          width: config.strokeWidth ?? 10,
+                        )
+                      : null,
                   borderRadius: BorderRadius.circular(40),
                   boxShadow: [
                     BoxShadow(
-                      color: Colors.black.withOpacity(0.5),
-                      blurRadius: 20,
-                      offset: const Offset(0, 10),
+                      color: config.shadowColor ?? Colors.transparent,
+                      blurRadius: config.shadowBlur ?? 0,
+                      offset: Offset(
+                        config.shadowOffsetX ?? 0,
+                        config.shadowOffsetY ?? 10,
+                      ),
                     ),
                   ],
                 ),

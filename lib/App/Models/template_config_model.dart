@@ -32,13 +32,29 @@ class TemplateConfigModel {
       showDevice,
       showSecondDevice,
       showFrame,
-      showSecondFrame;
+      showSecondFrame,
+      showStroke,
+      showSecondStroke;
   String? title, subtitle;
   String? titleFontFamily, subtitleFontFamily;
   String? backgroundImage;
-  Color? backgroundColor, titleColor, subtitleColor;
+  Color? backgroundColor,
+      titleColor,
+      subtitleColor,
+      strokeColor,
+      secondStrokeColor,
+      shadowColor,
+      secondShadowColor;
   List<Color>? backgroundGradient;
-  double? gradientAngle;
+  double? gradientAngle,
+      strokeWidth,
+      secondStrokeWidth,
+      shadowBlur,
+      secondShadowBlur,
+      shadowOffsetX,
+      shadowOffsetY,
+      secondShadowOffsetX,
+      secondShadowOffsetY;
 
   TemplateConfigModel({
     this.id,
@@ -87,6 +103,10 @@ class TemplateConfigModel {
     this.subtitleFontFamily,
     this.titleFontFamily,
     this.subtitleColor,
+    this.strokeColor,
+    this.secondStrokeColor,
+    this.shadowColor,
+    this.secondShadowColor,
     this.deviceFullSize = false,
     this.secondDeviceFullSize = false,
     this.showLogo = false,
@@ -97,7 +117,17 @@ class TemplateConfigModel {
     this.showSecondDevice = false,
     this.showFrame = true,
     this.showSecondFrame = false,
+    this.showStroke = false,
+    this.showSecondStroke = false,
     this.gradientAngle = 0,
+    this.strokeWidth = 0,
+    this.secondStrokeWidth = 0,
+    this.shadowBlur = 0,
+    this.secondShadowBlur = 0,
+    this.shadowOffsetX = 0,
+    this.shadowOffsetY = 0,
+    this.secondShadowOffsetX = 0,
+    this.secondShadowOffsetY = 0,
   });
 
   TemplateConfigModel.fromJson(Map<String, dynamic> json) {
@@ -234,6 +264,8 @@ class TemplateConfigModel {
     showSecondDevice = json['showSecondDevice'];
     showFrame = json['showFrame'];
     showSecondFrame = json['showSecondFrame'];
+    showStroke = json['showStroke'];
+    showSecondStroke = json['showSecondStroke'];
     title = json['title'];
     subtitle = json['subtitle'];
 
@@ -250,6 +282,25 @@ class TemplateConfigModel {
         : null;
 
     gradientAngle = convertIntToDouble(json['gradientAngle']);
+    strokeWidth = convertIntToDouble(json['strokeWidth']);
+    secondStrokeWidth = convertIntToDouble(json['secondStrokeWidth']);
+
+    strokeColor = json['strokeColor'] != null
+        ? ColorHelper.hexToColor(json['strokeColor'])
+        : null;
+
+    secondStrokeColor = json['secondStrokeColor'] != null
+        ? ColorHelper.hexToColor(json['secondStrokeColor'])
+        : null;
+
+    shadowColor = json['shadowColor'] != null
+        ? ColorHelper.hexToColor(json['shadowColor'])
+        : null;
+
+    secondShadowColor = json['secondShadowColor'] != null
+        ? ColorHelper.hexToColor(json['secondShadowColor'])
+        : null;
+
     titleColor = json['titleColor'] != null
         ? ColorHelper.hexToColor(json['titleColor'])
         : null;
@@ -261,6 +312,12 @@ class TemplateConfigModel {
     titleLineHeight = convertIntToDouble(json['titleLineHeight']);
     subtitleFontSize = convertIntToDouble(json['subtitleFontSize']);
     subtitleLineHeight = convertIntToDouble(json['subtitleLineHeight']);
+    shadowBlur = convertIntToDouble(json['shadowBlur']);
+    secondShadowBlur = convertIntToDouble(json['secondShadowBlur']);
+    shadowOffsetX = convertIntToDouble(json['shadowOffsetX']);
+    shadowOffsetY = convertIntToDouble(json['shadowOffsetY']);
+    secondShadowOffsetX = convertIntToDouble(json['secondShadowOffsetX']);
+    secondShadowOffsetY = convertIntToDouble(json['secondShadowOffsetY']);
     titleFontFamily = json['titleFontFamily'];
     subtitleFontFamily = json['subtitleFontFamily'];
   }
@@ -399,6 +456,8 @@ class TemplateConfigModel {
     data['showSecondDevice'] = showSecondDevice;
     data['showFrame'] = showFrame;
     data['showSecondFrame'] = showSecondFrame;
+    data['showStroke'] = showStroke;
+    data['showSecondStroke'] = showSecondStroke;
     data['title'] = title;
     data['subtitle'] = subtitle;
 
@@ -416,6 +475,25 @@ class TemplateConfigModel {
             : null;
 
     data['gradientAngle'] = convertIntToDouble(gradientAngle);
+    data['strokeWidth'] = convertIntToDouble(strokeWidth);
+    data['secondStrokeWidth'] = convertIntToDouble(secondStrokeWidth);
+
+    data['strokeColor'] = strokeColor != null
+        ? ColorHelper.colorToHexWithoutHash(strokeColor!)
+        : null;
+
+    data['secondStrokeColor'] = secondStrokeColor != null
+        ? ColorHelper.colorToHexWithoutHash(secondStrokeColor!)
+        : null;
+
+    data['shadowColor'] = shadowColor != null
+        ? ColorHelper.colorToHexWithoutHash(shadowColor!)
+        : null;
+
+    data['secondShadowColor'] = secondShadowColor != null
+        ? ColorHelper.colorToHexWithoutHash(secondShadowColor!)
+        : null;
+
     data['titleColor'] = titleColor != null
         ? ColorHelper.colorToHexWithoutHash(titleColor!)
         : null;
@@ -428,6 +506,13 @@ class TemplateConfigModel {
     data['titleLineHeight'] = convertIntToDouble(titleLineHeight);
     data['subtitleFontSize'] = convertIntToDouble(subtitleFontSize);
     data['subtitleLineHeight'] = convertIntToDouble(subtitleLineHeight);
+    data['shadowBlur'] = convertIntToDouble(shadowBlur);
+    data['secondShadowBlur'] = convertIntToDouble(secondShadowBlur);
+    data['shadowOffsetX'] = convertIntToDouble(shadowOffsetX);
+    data['shadowOffsetY'] = convertIntToDouble(shadowOffsetY);
+    data['secondShadowOffsetX'] = convertIntToDouble(secondShadowOffsetX);
+    data['secondShadowOffsetY'] = convertIntToDouble(secondShadowOffsetY);
+
     data['titleFontFamily'] = titleFontFamily;
     data['subtitleFontFamily'] = subtitleFontFamily;
     return data;
@@ -492,19 +577,33 @@ class TemplateConfigModel {
     bool? showSecondDevice,
     bool? showFrame,
     bool? showSecondFrame,
+    bool? showStroke,
+    bool? showSecondStroke,
     String? title,
     String? subtitle,
     String? backgroundImage,
     Color? backgroundColor,
     List<Color>? backgroundGradient,
     double? gradientAngle,
+    double? strokeWidth,
+    double? secondStrokeWidth,
     double? titleFontSize,
     double? titleLineHeight,
     Color? titleColor,
     Color? titleStrokeColor,
+    Color? strokeColor,
+    Color? secondStrokeColor,
+    Color? shadowColor,
+    Color? secondShadowColor,
     String? titleFontFamily,
     double? subtitleFontSize,
     double? subtitleLineHeight,
+    double? shadowBlur,
+    double? secondShadowBlur,
+    double? shadowOffsetX,
+    double? shadowOffsetY,
+    double? secondShadowOffsetX,
+    double? secondShadowOffsetY,
     Color? subtitleColor,
     String? subtitleFontFamily,
   }) {
@@ -559,18 +658,32 @@ class TemplateConfigModel {
       showSecondDevice: showSecondDevice ?? this.showSecondDevice,
       showFrame: showFrame ?? this.showFrame,
       showSecondFrame: showSecondFrame ?? this.showSecondFrame,
+      showStroke: showStroke ?? this.showStroke,
+      showSecondStroke: showSecondStroke ?? this.showSecondStroke,
       title: title ?? this.title,
       subtitle: subtitle ?? this.subtitle,
       backgroundImage: backgroundImage ?? this.backgroundImage,
       backgroundColor: backgroundColor ?? this.backgroundColor,
       backgroundGradient: backgroundGradient ?? this.backgroundGradient,
       gradientAngle: gradientAngle ?? this.gradientAngle,
+      strokeWidth: strokeWidth ?? this.strokeWidth,
+      secondStrokeWidth: secondStrokeWidth ?? this.secondStrokeWidth,
+      strokeColor: strokeColor ?? this.strokeColor,
+      secondStrokeColor: secondStrokeColor ?? this.secondStrokeColor,
+      shadowColor: shadowColor ?? this.shadowColor,
+      secondShadowColor: secondShadowColor ?? this.secondShadowColor,
       titleFontSize: titleFontSize ?? this.titleFontSize,
       titleLineHeight: titleLineHeight ?? this.titleLineHeight,
       titleColor: titleColor ?? this.titleColor,
       subtitleColor: subtitleColor ?? this.subtitleColor,
       subtitleFontSize: subtitleFontSize ?? this.subtitleFontSize,
       subtitleLineHeight: subtitleLineHeight ?? this.subtitleLineHeight,
+      shadowBlur: shadowBlur ?? this.shadowBlur,
+      secondShadowBlur: secondShadowBlur ?? this.secondShadowBlur,
+      shadowOffsetX: shadowOffsetX ?? this.shadowOffsetX,
+      shadowOffsetY: shadowOffsetY ?? this.shadowOffsetY,
+      secondShadowOffsetX: secondShadowOffsetX ?? this.secondShadowOffsetX,
+      secondShadowOffsetY: secondShadowOffsetY ?? this.secondShadowOffsetY,
       titleFontFamily: titleFontFamily ?? this.titleFontFamily,
       subtitleFontFamily: subtitleFontFamily ?? this.subtitleFontFamily,
     );
