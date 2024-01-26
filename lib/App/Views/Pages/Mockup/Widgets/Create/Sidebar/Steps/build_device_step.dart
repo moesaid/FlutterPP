@@ -61,7 +61,7 @@ ExpansionTileBorderItem buildDeviceStep({
   bool? showDevice,
 }) {
   String uuid = const Uuid().v4();
-  print('😀 ${(rotate ?? 0 * 100 / 180)}');
+  print('😀 ${((rotate ?? 0) * 180)}');
   return ExpansionTileBorderItem(
     title: Text(title ?? 'Device'),
     leading: leading ?? const Icon(Icons.devices),
@@ -171,8 +171,8 @@ ExpansionTileBorderItem buildDeviceStep({
           max: 180,
           divisions: 360,
           defaultValue: isSecondDevice == true
-              ? (secondRotate ?? 0 * 180)
-              : (rotate ?? 0 * 180),
+              ? ((secondRotate ?? 0) * 180)
+              : ((rotate ?? 0) * 180),
           onChanged: (val) => updateDeviceRotate?.call(
             val / 180,
           ),
