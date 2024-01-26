@@ -120,21 +120,39 @@ class BuildDeviceBodyIphoneCase extends StatelessWidget {
       child: SizedBox(
         width: 250,
         height: 500,
-        child: DeviceFrame(
-          device: config.firstDeviceFrame == null
-              ? Devices.ios.iPhone12ProMax
-              : Devices.all.firstWhereOrNull(
-                    (el) => el.name == config.firstDeviceFrame!,
-                  ) ??
-                  Devices.ios.iPhone12ProMax,
-          isFrameVisible: true,
-          orientation: Orientation.portrait,
-          screen: Image(
-            fit: BoxFit.cover,
-            image: config.image == null
-                ? const AssetImage('assets/screenshots/screen_1.jpg')
-                : NetworkImage(config.image!) as ImageProvider,
-          ),
+        child: Stack(
+          children: [
+            if (config.showDevice == true)
+              Container(
+                decoration: BoxDecoration(
+                  // border: Border.all(color: Colors.black, width: 10),
+                  borderRadius: BorderRadius.circular(40),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black.withOpacity(0.5),
+                      blurRadius: 20,
+                      offset: const Offset(0, 10),
+                    ),
+                  ],
+                ),
+                child: DeviceFrame(
+                  device: config.firstDeviceFrame == null
+                      ? Devices.ios.iPhone12ProMax
+                      : Devices.all.firstWhereOrNull(
+                            (el) => el.name == config.firstDeviceFrame!,
+                          ) ??
+                          Devices.ios.iPhone12ProMax,
+                  isFrameVisible: config.showFrame ?? true,
+                  orientation: Orientation.portrait,
+                  screen: Image(
+                    fit: BoxFit.cover,
+                    image: config.image == null
+                        ? const AssetImage('assets/screenshots/screen_1.jpg')
+                        : NetworkImage(config.image!) as ImageProvider,
+                  ),
+                ),
+              ),
+          ],
         ),
       ),
     );

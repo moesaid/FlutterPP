@@ -5,11 +5,12 @@ import 'package:get/get.dart';
 
 class BuildSliderEnableOption extends GetView<BoolToggleController> {
   final void Function(bool)? onToggle;
-  final String? controllerTag;
+  final String? controllerTag, title;
   final bool? initialValue;
 
   const BuildSliderEnableOption({
     super.key,
+    this.title,
     this.onToggle,
     this.controllerTag,
     this.initialValue,
@@ -25,7 +26,7 @@ class BuildSliderEnableOption extends GetView<BoolToggleController> {
       },
       builder: (_) {
         return BuildSidebarOption(
-          title: 'Enable',
+          title: title ?? 'Enable',
           rightWidget: Obx(
             () => Switch(
               value: _.isOn,

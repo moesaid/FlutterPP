@@ -9,7 +9,7 @@ import 'package:sizer/sizer.dart';
 
 class BuildCreateMockupSidebar extends StatelessWidget {
   final bool? isScreenshotSelected;
-  final String? mockupId;
+  final String? mockupId, firstInitalDeviceFrame, secondInitalDeviceFrame;
   final Color? initialColor;
   final GradientModel? activeGradient;
   final bool? isIconToggled;
@@ -56,24 +56,36 @@ class BuildCreateMockupSidebar extends StatelessWidget {
       onIconPaddingChanged;
 
   // Device
+  final bool? showDevice;
+  final bool? showSecondDevice;
+  final bool? showFram;
+  final bool? showSecondFram;
   final void Function({
-    double? firstDevicePositionTopBottom,
-    double? firstDevicePositionRightLeft,
-    double? secondDevicePositionTopBottom,
-    double? secondDevicePositionRightLeft,
+    double? horizontalPosition,
+    double? verticalPosition,
+    double? secondHorizontalPosition,
+    double? secondVerticalPosition,
   })? onUpdateDevicePossition;
-  final void Function(double rotate)? onUpdateFirstDeviceRotate;
-  final void Function(bool value)? onUpdateFirstDeviceFullSize;
-  final void Function(Color color)? updateFirstStrokeColor;
-  final void Function(double width)? updateFirstStrokeWidth;
-  final void Function(Color color)? updateFirstShadowColor;
-  final void Function(double blur)? updateFirstDeviceShadowBlur;
-  final void Function(double offset)? updateFirstDeviceShadowXOffset;
-  final void Function(double offset)? updateFirstDeviceShadowYOffset;
-  final void Function(String frame)? onDeviceImageUpload;
-  final void Function(String frame)? onSecondDeviceImageUpload;
-  final void Function(DeviceInfo)? updateFirstDeviceFrame,
-      updateSecondDeviceFrame;
+  final void Function(double rotate, {bool? isSecondDevice})?
+      updateDeviceRotate;
+  final void Function(bool value, {bool? isSecondDevice})? updateDeviceFullSize;
+  final void Function(Color color, {bool? isSecondDevice})? updateStrokeColor;
+  final void Function(double width, {bool? isSecondDevice})? updateStrokeWidth;
+  final void Function(Color color, {bool? isSecondDevice})? updateShadowColor;
+  final void Function(double blur, {bool? isSecondDevice})?
+      updateDeviceShadowBlur;
+  final void Function(double offset, {bool? isSecondDevice})?
+      updateDeviceShadowXOffset;
+  final void Function(double offset, {bool? isSecondDevice})?
+      updateDeviceShadowYOffset;
+  final void Function(String frame, {bool? isSecondDevice})?
+      onDeviceImageUpload;
+  final void Function(DeviceInfo device, {bool? isSecondDevice})?
+      updateDeviceFrame;
+
+  final void Function(bool value, {bool? isSecondDevice})? updateShowDevice;
+  final void Function(bool value, {bool? isSecondDevice})?
+      updateShowDeviceFrame;
 
   const BuildCreateMockupSidebar({
     super.key,
@@ -135,18 +147,24 @@ class BuildCreateMockupSidebar extends StatelessWidget {
     this.onTitleFontFamilyChanged,
     this.onSubtitleFontFamilyChanged,
     this.onUpdateDevicePossition,
-    this.onUpdateFirstDeviceRotate,
-    this.onUpdateFirstDeviceFullSize,
-    this.updateFirstStrokeColor,
-    this.updateFirstStrokeWidth,
-    this.updateFirstDeviceFrame,
-    this.updateSecondDeviceFrame,
-    this.updateFirstShadowColor,
-    this.updateFirstDeviceShadowBlur,
-    this.updateFirstDeviceShadowXOffset,
-    this.updateFirstDeviceShadowYOffset,
+    this.updateDeviceRotate,
+    this.updateDeviceFullSize,
+    this.updateStrokeColor,
+    this.updateStrokeWidth,
+    this.updateDeviceFrame,
+    this.updateShadowColor,
+    this.updateDeviceShadowBlur,
+    this.updateDeviceShadowXOffset,
+    this.updateDeviceShadowYOffset,
     this.onDeviceImageUpload,
-    this.onSecondDeviceImageUpload,
+    this.firstInitalDeviceFrame,
+    this.secondInitalDeviceFrame,
+    this.showDevice,
+    this.showSecondDevice,
+    this.showFram,
+    this.showSecondFram,
+    this.updateShowDevice,
+    this.updateShowDeviceFrame,
   });
 
   @override
@@ -242,12 +260,18 @@ class BuildCreateMockupSidebar extends StatelessWidget {
                   onTitleFontFamilyChanged: onTitleFontFamilyChanged,
                   onSubtitleFontFamilyChanged: onSubtitleFontFamilyChanged,
                   onUpdateDevicePossition: onUpdateDevicePossition,
-                  onUpdateFirstDeviceRotate: onUpdateFirstDeviceRotate,
-                  onUpdateFirstDeviceFullSize: onUpdateFirstDeviceFullSize,
+                  updateDeviceRotate: updateDeviceRotate,
+                  updateDeviceFullSize: updateDeviceFullSize,
+                  updateDeviceFrame: updateDeviceFrame,
                   onDeviceImageUpload: onDeviceImageUpload,
-                  onSecondDeviceImageUpload: onSecondDeviceImageUpload,
-                  updateFirstDeviceFrame: updateFirstDeviceFrame,
-                  updateSecondDeviceFrame: updateSecondDeviceFrame,
+                  firstInitalDeviceFrame: firstInitalDeviceFrame,
+                  secondInitalDeviceFrame: secondInitalDeviceFrame,
+                  showDevice: showDevice,
+                  showSecondDevice: showSecondDevice,
+                  showFram: showFram,
+                  showSecondFram: showSecondFram,
+                  updateShowDevice: updateShowDevice,
+                  updateShowDeviceFrame: updateShowDeviceFrame,
                 ),
               ),
       ),

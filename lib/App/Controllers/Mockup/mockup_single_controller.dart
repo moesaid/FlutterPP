@@ -260,116 +260,157 @@ class MockupSingleController extends GetxController {
     );
   }
 
-  //# update first device #//
-  // update first device image
-  updateFirstDeviceImage(String image) {
-    _seletedItem.value = _seletedItem.value.copyWith(
-      image: image,
-    );
-  }
+  //# device methods #//
 
   // update first device frame
-  updateFirstDeviceFrame(DeviceInfo frame) {
-    print({'❌', frame.name});
+  void updateDeviceFrame(DeviceInfo frame, {bool? isSecondDevice}) {
+    if (isSecondDevice != null && isSecondDevice) {
+      _seletedItem.value = _seletedItem.value.copyWith(
+        secondDeviceFrame: frame.name,
+      );
+      return;
+    }
+
     _seletedItem.value = _seletedItem.value.copyWith(
       firstDeviceFrame: frame.name,
     );
   }
 
   // update first device possition
-  void onUpdateDevicePossition({
-    double? firstDevicePositionTopBottom,
-    double? firstDevicePositionRightLeft,
-    double? secondDevicePositionTopBottom,
-    double? secondDevicePositionRightLeft,
+  void updateDevicePossition({
+    double? horizontalPosition,
+    double? verticalPosition,
+    double? secondHorizontalPosition,
+    double? secondVerticalPosition,
   }) {
-    if (firstDevicePositionTopBottom != null) {
+    if (horizontalPosition != null) {
       _seletedItem.value = _seletedItem.value.copyWith(
-        firstDevicePositionTopBottom: firstDevicePositionTopBottom,
+        firstDevicePositionTopBottom: horizontalPosition,
       );
     }
-    if (firstDevicePositionRightLeft != null) {
+    if (verticalPosition != null) {
       _seletedItem.value = _seletedItem.value.copyWith(
-        firstDevicePositionRightLeft: firstDevicePositionRightLeft,
+        firstDevicePositionRightLeft: verticalPosition,
       );
     }
-    if (secondDevicePositionTopBottom != null) {
+    if (secondHorizontalPosition != null) {
       _seletedItem.value = _seletedItem.value.copyWith(
-        secondDevicePositionTopBottom: secondDevicePositionTopBottom,
+        secondDevicePositionTopBottom: secondHorizontalPosition,
       );
     }
-    if (secondDevicePositionRightLeft != null) {
+    if (secondVerticalPosition != null) {
       _seletedItem.value = _seletedItem.value.copyWith(
-        secondDevicePositionRightLeft: secondDevicePositionRightLeft,
+        secondDevicePositionRightLeft: secondVerticalPosition,
       );
     }
   }
 
   // update first device rotate
-  updateFirstDeviceRotate(double rotate) {
+  void updateDeviceRotate(double rotate, {bool? isSecondDevice}) {
+    if (isSecondDevice != null && isSecondDevice) {
+      _seletedItem.value = _seletedItem.value.copyWith(
+        secondRotate: rotate,
+      );
+      return;
+    }
+
     _seletedItem.value = _seletedItem.value.copyWith(
       rotate: rotate,
     );
   }
 
-  // update first device full size
-  updateFirstDeviceFullSize(bool value) {
+  // update device full size
+  void updateDeviceFullSize(bool value, {bool? isSecondDevice}) {
+    if (isSecondDevice != null && isSecondDevice) {
+      _seletedItem.value = _seletedItem.value.copyWith(
+        secondDeviceFullSize: value,
+      );
+      return;
+    }
+
     _seletedItem.value = _seletedItem.value.copyWith(
       deviceFullSize: value,
     );
   }
 
   // update first stroke color
-  updateFirstDeviceStrokeColor(Color color) {
+  void updateDeviceStrokeColor(Color color, {bool? isSecondDevice}) {
     _seletedItem.value = _seletedItem.value.copyWith(
         // strokeColor: color,
         );
   }
 
   // update first stroke width
-  updateFirstDeviceStrokeWidth(double width) {
+  void updateDeviceStrokeWidth(double width, {bool? isSecondDevice}) {
     _seletedItem.value = _seletedItem.value.copyWith(
         // strokeWidth: width,
         );
   }
 
   // update first shadow color
-  updateFirstDeviceShadowColor(Color color) {
+  void updateDeviceShadowColor(Color color, {bool? isSecondDevice}) {
     _seletedItem.value = _seletedItem.value.copyWith(
         // shadowColor: color,
         );
   }
 
   // update first shadow blur
-  updateFirstDeviceShadowBlur(double blur) {
+  void updateDeviceShadowBlur(double blur, {bool? isSecondDevice}) {
     _seletedItem.value = _seletedItem.value.copyWith(
         // shadowBlur: blur,
         );
   }
 
   // update first shadow x offset
-  updateFirstDeviceShadowXOffset(double offset) {
+  void updateDeviceShadowXOffset(double offset, {bool? isSecondDevice}) {
     _seletedItem.value = _seletedItem.value.copyWith(
         // shadowXOffset: offset,
         );
   }
 
   // update first shadow y offset
-  updateFirstDeviceShadowYOffset(double offset) {
+  void updateDeviceShadowYOffset(double offset, {bool? isSecondDevice}) {
     _seletedItem.value = _seletedItem.value.copyWith(
         // shadowYOffset: offset,
         );
   }
 
-  void onDeviceImageUpload(String image) {
+  void onDeviceImageUpload(String image, {bool? isSecondDevice}) {
+    if (isSecondDevice != null && isSecondDevice) {
+      _seletedItem.value = _seletedItem.value.copyWith(
+        secondImage: image,
+      );
+      return;
+    }
+
     _seletedItem.value = _seletedItem.value.copyWith(
       image: image,
     );
   }
 
-  void onSecondDeviceImageUpload(String image) {
+  void updateShowDevice(bool value, {bool? isSecondDevice}) {
+    if (isSecondDevice != null && isSecondDevice) {
+      _seletedItem.value = _seletedItem.value.copyWith(
+        showSecondDevice: value,
+      );
+      return;
+    }
+
     _seletedItem.value = _seletedItem.value.copyWith(
-      secondImage: image,
+      showDevice: value,
+    );
+  }
+
+  void updateShowDeviceFrame(bool value, {bool? isSecondDevice}) {
+    if (isSecondDevice != null && isSecondDevice) {
+      _seletedItem.value = _seletedItem.value.copyWith(
+        showSecondFrame: value,
+      );
+      return;
+    }
+
+    _seletedItem.value = _seletedItem.value.copyWith(
+      showFrame: value,
     );
   }
 }

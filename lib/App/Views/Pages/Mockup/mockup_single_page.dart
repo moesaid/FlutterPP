@@ -151,20 +151,24 @@ class BuildMockupSinglePageSidebar extends StatelessWidget {
         // end subtitle
 
         // start device
-        onUpdateDevicePossition: controller.onUpdateDevicePossition,
-        onUpdateFirstDeviceRotate: controller.updateFirstDeviceRotate,
-        onUpdateFirstDeviceFullSize: controller.updateFirstDeviceFullSize,
-        updateFirstStrokeColor: controller.updateFirstDeviceStrokeColor,
-        updateFirstStrokeWidth: controller.updateFirstDeviceStrokeWidth,
-        updateFirstDeviceFrame: controller.updateFirstDeviceFrame,
-        updateFirstShadowColor: controller.updateFirstDeviceShadowColor,
-        updateFirstDeviceShadowBlur: controller.updateFirstDeviceShadowBlur,
+        showDevice: controller.seletedItem.showDevice,
+        showSecondDevice: controller.seletedItem.showSecondDevice,
+        showFram: controller.seletedItem.showFrame,
+        showSecondFram: controller.seletedItem.showSecondFrame,
+        firstInitalDeviceFrame: controller.seletedItem.firstDeviceFrame,
+        updateShowDevice: controller.updateShowDevice,
+        updateShowDeviceFrame: controller.updateShowDeviceFrame,
+        onUpdateDevicePossition: controller.updateDevicePossition,
+        updateDeviceRotate: controller.updateDeviceRotate,
+        updateDeviceFullSize: controller.updateDeviceFullSize,
+        updateStrokeColor: controller.updateDeviceStrokeColor,
+        updateStrokeWidth: controller.updateDeviceStrokeWidth,
+        updateDeviceFrame: controller.updateDeviceFrame,
+        updateShadowColor: controller.updateDeviceShadowColor,
+        updateDeviceShadowBlur: controller.updateDeviceShadowBlur,
         onDeviceImageUpload: controller.onDeviceImageUpload,
-        onSecondDeviceImageUpload: controller.onSecondDeviceImageUpload,
-        updateFirstDeviceShadowXOffset:
-            controller.updateFirstDeviceShadowXOffset,
-        updateFirstDeviceShadowYOffset:
-            controller.updateFirstDeviceShadowYOffset,
+        updateDeviceShadowXOffset: controller.updateDeviceShadowXOffset,
+        updateDeviceShadowYOffset: controller.updateDeviceShadowYOffset,
         // end device
       ),
     );

@@ -74,19 +74,26 @@ class BuildCreateMockupSidebarSelectedState
     this.onTitleFontFamilyChanged,
     this.onSubtitleFontFamilyChanged,
     this.onUpdateDevicePossition,
-    this.onUpdateFirstDeviceRotate,
-    this.onUpdateFirstDeviceFullSize,
-    this.updateFirstStrokeColor,
-    this.updateFirstStrokeWidth,
-    this.updateFirstDeviceFrame,
-    this.updateSecondDeviceFrame,
-    this.updateFirstShadowColor,
-    this.updateFirstDeviceShadowBlur,
-    this.updateFirstDeviceShadowXOffset,
-    this.updateFirstDeviceShadowYOffset,
+    this.updateDeviceRotate,
+    this.updateDeviceFullSize,
+    this.updateStrokeColor,
+    this.updateStrokeWidth,
+    this.updateDeviceFrame,
+    this.updateShadowColor,
+    this.updateDeviceShadowBlur,
+    this.updateDeviceShadowXOffset,
+    this.updateDeviceShadowYOffset,
+    this.firstInitalDeviceFrame,
+    this.secondInitalDeviceFrame,
+    this.showSecondFram,
+    this.showFram,
+    this.showSecondDevice,
+    this.showDevice,
+    this.updateShowDeviceFrame,
+    this.updateShowDevice,
   });
 
-  final String? mockupId;
+  final String? mockupId, firstInitalDeviceFrame, secondInitalDeviceFrame;
   final Color? initialColor;
   final GradientModel? activeGradient;
   final bool? isIconToggled;
@@ -116,7 +123,6 @@ class BuildCreateMockupSidebarSelectedState
       onSubtitleChanged,
       onIconUpload,
       onImageUpload,
-      onDeviceImageUpload,
       onSecondDeviceImageUpload;
   final void Function(String)? onSubtitleFontFamilyChanged,
       onTitleFontFamilyChanged;
@@ -138,22 +144,36 @@ class BuildCreateMockupSidebarSelectedState
   final void Function(double padding, PaddingDestination destination)?
       onIconPaddingChanged;
 
+  final bool? showDevice;
+  final bool? showSecondDevice;
+  final bool? showFram;
+  final bool? showSecondFram;
+
   final void Function({
-    double? firstDevicePositionTopBottom,
-    double? firstDevicePositionRightLeft,
-    double? secondDevicePositionTopBottom,
-    double? secondDevicePositionRightLeft,
+    double? horizontalPosition,
+    double? verticalPosition,
+    double? secondHorizontalPosition,
+    double? secondVerticalPosition,
   })? onUpdateDevicePossition;
-  final void Function(double rotate)? onUpdateFirstDeviceRotate;
-  final void Function(bool value)? onUpdateFirstDeviceFullSize;
-  final void Function(Color color)? updateFirstStrokeColor;
-  final void Function(double width)? updateFirstStrokeWidth;
-  final void Function(DeviceInfo)? updateFirstDeviceFrame,
-      updateSecondDeviceFrame;
-  final void Function(Color color)? updateFirstShadowColor;
-  final void Function(double blur)? updateFirstDeviceShadowBlur;
-  final void Function(double offset)? updateFirstDeviceShadowXOffset;
-  final void Function(double offset)? updateFirstDeviceShadowYOffset;
+  final void Function(double rotate, {bool? isSecondDevice})?
+      updateDeviceRotate;
+  final void Function(bool value, {bool? isSecondDevice})? updateDeviceFullSize;
+  final void Function(Color color, {bool? isSecondDevice})? updateStrokeColor;
+  final void Function(double width, {bool? isSecondDevice})? updateStrokeWidth;
+  final void Function(Color color, {bool? isSecondDevice})? updateShadowColor;
+  final void Function(double blur, {bool? isSecondDevice})?
+      updateDeviceShadowBlur;
+  final void Function(double offset, {bool? isSecondDevice})?
+      updateDeviceShadowXOffset;
+  final void Function(double offset, {bool? isSecondDevice})?
+      updateDeviceShadowYOffset;
+  final void Function(String frame, {bool? isSecondDevice})?
+      onDeviceImageUpload;
+  final void Function(DeviceInfo device, {bool? isSecondDevice})?
+      updateDeviceFrame;
+  final void Function(bool value, {bool? isSecondDevice})? updateShowDevice;
+  final void Function(bool value, {bool? isSecondDevice})?
+      updateShowDeviceFrame;
 
   @override
   Widget build(BuildContext context) {
@@ -235,17 +255,21 @@ class BuildCreateMockupSidebarSelectedState
             buildDeviceStep(
               mockupId: mockupId,
               onDeviceImageUpload: onDeviceImageUpload,
-              onSecondDeviceImageUpload: onSecondDeviceImageUpload,
-              onUpdateDevicePossition: onUpdateDevicePossition,
-              onUpdateFirstDeviceRotate: onUpdateFirstDeviceRotate,
-              onUpdateFirstDeviceFullSize: onUpdateFirstDeviceFullSize,
-              updateFirstStrokeColor: updateFirstStrokeColor,
-              updateFirstStrokeWidth: updateFirstStrokeWidth,
-              updateDeviceFrame: updateFirstDeviceFrame,
-              updateFirstShadowColor: updateFirstShadowColor,
-              updateFirstDeviceShadowBlur: updateFirstDeviceShadowBlur,
-              updateFirstDeviceShadowXOffset: updateFirstDeviceShadowXOffset,
-              updateFirstDeviceShadowYOffset: updateFirstDeviceShadowYOffset,
+              updateDevicePossition: onUpdateDevicePossition,
+              updateDeviceRotate: updateDeviceRotate,
+              updateDeviceFullSize: updateDeviceFullSize,
+              updateStrokeColor: updateStrokeColor,
+              updateStrokeWidth: updateStrokeWidth,
+              updateDeviceFrame: updateDeviceFrame,
+              initalFrame: firstInitalDeviceFrame,
+              updateShadowColor: updateShadowColor,
+              updateDeviceShadowBlur: updateDeviceShadowBlur,
+              updateDeviceShadowXOffset: updateDeviceShadowXOffset,
+              updateDeviceShadowYOffset: updateDeviceShadowYOffset,
+              showDevice: showDevice,
+              showFram: showFram,
+              updateShowDevice: updateShowDevice,
+              updateShowDeviceFrame: updateShowDeviceFrame,
             ),
             buildDeviceStep(
               title: 'Device Two',

@@ -16,7 +16,7 @@ class TemplateConfigModel {
   double? secondDevicePositionRightLeft;
   double? bodyRunSpacing;
   double? bodySpacing;
-  double? rotate;
+  double? rotate, secondRotate;
   double? titlePaddingTop, subtitlePaddingTop;
   double? titlePaddingBottom, subtitlePaddingBottom;
   double? titlePaddingLeft, subtitlePaddingLeft;
@@ -26,8 +26,13 @@ class TemplateConfigModel {
   double? logoPaddingLeft;
   double? logoPaddingRight;
   double? titleFontSize, titleLineHeight, subtitleFontSize, subtitleLineHeight;
-  bool? showLogo, deviceFullSize;
-  bool? showTitle, showSubtitle;
+  bool? showLogo, showSecondLogo, deviceFullSize, secondDeviceFullSize;
+  bool? showTitle,
+      showSubtitle,
+      showDevice,
+      showSecondDevice,
+      showFrame,
+      showSecondFrame;
   String? title, subtitle;
   String? titleFontFamily, subtitleFontFamily;
   String? backgroundImage;
@@ -56,6 +61,7 @@ class TemplateConfigModel {
     this.bodyRunSpacing,
     this.bodySpacing,
     this.rotate,
+    this.secondRotate,
     this.titlePaddingTop,
     this.titlePaddingBottom,
     this.titlePaddingLeft,
@@ -82,9 +88,15 @@ class TemplateConfigModel {
     this.titleFontFamily,
     this.subtitleColor,
     this.deviceFullSize = false,
+    this.secondDeviceFullSize = false,
     this.showLogo = false,
+    this.showSecondLogo = false,
     this.showTitle = false,
     this.showSubtitle = false,
+    this.showDevice = true,
+    this.showSecondDevice = false,
+    this.showFrame = true,
+    this.showSecondFrame = false,
     this.gradientAngle = 0,
   });
 
@@ -189,6 +201,7 @@ class TemplateConfigModel {
     }
 
     deviceFullSize = json['deviceFullSize'];
+    secondDeviceFullSize = json['secondDeviceFullSize'];
     firstDevicePositionTopBottom =
         convertIntToDouble(json['firstDevicePositionTopBottom']);
     firstDevicePositionRightLeft = convertIntToDouble(
@@ -200,6 +213,7 @@ class TemplateConfigModel {
     bodyRunSpacing = convertIntToDouble(json['bodyRunSpacing']);
     bodySpacing = convertIntToDouble(json['bodySpacing']);
     rotate = convertIntToDouble(json['rotate']);
+    secondRotate = convertIntToDouble(json['secondRotate']);
     titlePaddingTop = convertIntToDouble(json['titlePaddingTop']);
     titlePaddingBottom = convertIntToDouble(json['titlePaddingBottom']);
     titlePaddingLeft = convertIntToDouble(json['titlePaddingLeft']);
@@ -213,8 +227,13 @@ class TemplateConfigModel {
     logoPaddingLeft = convertIntToDouble(json['logoPaddingLeft']);
     logoPaddingRight = convertIntToDouble(json['logoPaddingRight']);
     showLogo = json['showLogo'];
+    showSecondLogo = json['showSecondLogo'];
     showTitle = json['showTitle'];
     showSubtitle = json['showSubtitle'];
+    showDevice = json['showDevice'];
+    showSecondDevice = json['showSecondDevice'];
+    showFrame = json['showFrame'];
+    showSecondFrame = json['showSecondFrame'];
     title = json['title'];
     subtitle = json['subtitle'];
 
@@ -347,6 +366,7 @@ class TemplateConfigModel {
     }
 
     data['deviceFullSize'] = deviceFullSize;
+    data['secondDeviceFullSize'] = secondDeviceFullSize;
     data['firstDevicePositionTopBottom'] =
         convertIntToDouble(firstDevicePositionTopBottom);
     data['firstDevicePositionRightLeft'] =
@@ -358,6 +378,7 @@ class TemplateConfigModel {
     data['bodyRunSpacing'] = convertIntToDouble(bodyRunSpacing);
     data['bodySpacing'] = convertIntToDouble(bodySpacing);
     data['rotate'] = convertIntToDouble(rotate);
+    data['secondRotate'] = convertIntToDouble(secondRotate);
     data['titlePaddingTop'] = convertIntToDouble(titlePaddingTop);
     data['titlePaddingBottom'] = convertIntToDouble(titlePaddingBottom);
     data['titlePaddingLeft'] = convertIntToDouble(titlePaddingLeft);
@@ -371,8 +392,13 @@ class TemplateConfigModel {
     data['logoPaddingLeft'] = convertIntToDouble(logoPaddingLeft);
     data['logoPaddingRight'] = convertIntToDouble(logoPaddingRight);
     data['showLogo'] = showLogo;
+    data['showSecondLogo'] = showSecondLogo;
     data['showTitle'] = showTitle;
     data['showSubtitle'] = showSubtitle;
+    data['showDevice'] = showDevice;
+    data['showSecondDevice'] = showSecondDevice;
+    data['showFrame'] = showFrame;
+    data['showSecondFrame'] = showSecondFrame;
     data['title'] = title;
     data['subtitle'] = subtitle;
 
@@ -443,6 +469,7 @@ class TemplateConfigModel {
     double? bodyRunSpacing,
     double? bodySpacing,
     double? rotate,
+    double? secondRotate,
     double? titlePaddingTop,
     double? titlePaddingBottom,
     double? titlePaddingLeft,
@@ -455,10 +482,16 @@ class TemplateConfigModel {
     double? logoPaddingBottom,
     double? logoPaddingLeft,
     double? logoPaddingRight,
-    bool? showLogo,
     bool? deviceFullSize,
+    bool? secondDeviceFullSize,
+    bool? showLogo,
+    bool? showSecondLogo,
     bool? showTitle,
     bool? showSubtitle,
+    bool? showDevice,
+    bool? showSecondDevice,
+    bool? showFrame,
+    bool? showSecondFrame,
     String? title,
     String? subtitle,
     String? backgroundImage,
@@ -502,6 +535,7 @@ class TemplateConfigModel {
       bodyRunSpacing: bodyRunSpacing ?? this.bodyRunSpacing,
       bodySpacing: bodySpacing ?? this.bodySpacing,
       rotate: rotate ?? this.rotate,
+      secondRotate: secondRotate ?? this.secondRotate,
       titlePaddingTop: titlePaddingTop ?? this.titlePaddingTop,
       titlePaddingBottom: titlePaddingBottom ?? this.titlePaddingBottom,
       titlePaddingLeft: titlePaddingLeft ?? this.titlePaddingLeft,
@@ -515,10 +549,16 @@ class TemplateConfigModel {
       logoPaddingBottom: logoPaddingBottom ?? this.logoPaddingBottom,
       logoPaddingLeft: logoPaddingLeft ?? this.logoPaddingLeft,
       logoPaddingRight: logoPaddingRight ?? this.logoPaddingRight,
-      showLogo: showLogo ?? this.showLogo,
       deviceFullSize: deviceFullSize ?? this.deviceFullSize,
+      secondDeviceFullSize: secondDeviceFullSize ?? this.secondDeviceFullSize,
+      showLogo: showLogo ?? this.showLogo,
+      showSecondLogo: showSecondLogo ?? this.showSecondLogo,
       showTitle: showTitle ?? this.showTitle,
       showSubtitle: showSubtitle ?? this.showSubtitle,
+      showDevice: showDevice ?? this.showDevice,
+      showSecondDevice: showSecondDevice ?? this.showSecondDevice,
+      showFrame: showFrame ?? this.showFrame,
+      showSecondFrame: showSecondFrame ?? this.showSecondFrame,
       title: title ?? this.title,
       subtitle: subtitle ?? this.subtitle,
       backgroundImage: backgroundImage ?? this.backgroundImage,
