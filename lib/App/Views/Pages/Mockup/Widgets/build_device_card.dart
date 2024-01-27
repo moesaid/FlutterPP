@@ -91,15 +91,16 @@ class BuildDeviceBody extends StatelessWidget {
             BuildDeviceBodyHead(
               config: config,
             ),
-            Transform.rotate(
-              angle: (config.rotate ?? 0) * pi,
-              child: ScaleTransition(
-                scale: config.scale == null
-                    ? const AlwaysStoppedAnimation(1)
-                    : AlwaysStoppedAnimation(config.scale!),
-                child: BuildDeviceBodyIphoneCase(config: config),
-              ),
-            ),
+            // Transform.rotate(
+            //   angle: (config.rotate ?? 0) * pi,
+            //   child: ScaleTransition(
+            //     scale: config.scale == null
+            //         ? const AlwaysStoppedAnimation(1)
+            //         : AlwaysStoppedAnimation(config.scale!),
+            //     child: BuildDeviceBodyIphoneCase(config: config),
+            //   ),
+            // ),
+            BuildDeviceBodyIphoneCase(config: config),
           ],
         ),
       ),
@@ -116,58 +117,131 @@ class BuildDeviceBodyIphoneCase extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Transform(
-      transform: Matrix4.translationValues(
-        config.firstDevicePositionRightLeft ?? 0,
-        config.firstDevicePositionTopBottom ?? 0,
-        0.0,
-      ),
-      child: SizedBox(
-        width: 250,
-        height: 500,
-        child: Stack(
-          children: [
-            if (config.showDevice == true)
-              Container(
-                decoration: BoxDecoration(
-                  border: config.showStroke == true
-                      ? Border.all(
-                          color: config.strokeColor ?? Colors.black,
-                          width: config.strokeWidth ?? 10,
-                        )
-                      : null,
-                  borderRadius: BorderRadius.circular(40),
-                  boxShadow: [
-                    BoxShadow(
-                      color: config.shadowColor ?? Colors.transparent,
-                      blurRadius: config.shadowBlur ?? 0,
-                      offset: Offset(
-                        config.shadowOffsetX ?? 0,
-                        config.shadowOffsetY ?? 10,
+    return Stack(
+      children: [
+        (config.showDevice != true)
+            ? const SizedBox.shrink()
+            : Transform.rotate(
+                angle: (config.rotate ?? 0) * pi,
+                child: ScaleTransition(
+                  scale: config.scale == null
+                      ? const AlwaysStoppedAnimation(1)
+                      : AlwaysStoppedAnimation(config.scale!),
+                  child: Transform(
+                    transform: Matrix4.translationValues(
+                      config.firstDevicePositionRightLeft ?? 0,
+                      config.firstDevicePositionTopBottom ?? 0,
+                      0.0,
+                    ),
+                    child: SizedBox(
+                      width: 250,
+                      height: 500,
+                      child: Container(
+                        decoration: BoxDecoration(
+                          border: config.showStroke == true
+                              ? Border.all(
+                                  color: config.strokeColor ?? Colors.black,
+                                  width: config.strokeWidth ?? 10,
+                                )
+                              : null,
+                          borderRadius: BorderRadius.circular(40),
+                          boxShadow: [
+                            BoxShadow(
+                              color: config.shadowColor ?? Colors.transparent,
+                              blurRadius: config.shadowBlur ?? 0,
+                              offset: Offset(
+                                config.shadowOffsetX ?? 0,
+                                config.shadowOffsetY ?? 0,
+                              ),
+                            ),
+                          ],
+                        ),
+                        child: DeviceFrame(
+                          device: config.firstDeviceFrame == null
+                              ? Devices.ios.iPhone12ProMax
+                              : Devices.all.firstWhereOrNull(
+                                    (el) => el.name == config.firstDeviceFrame!,
+                                  ) ??
+                                  Devices.ios.iPhone12ProMax,
+                          isFrameVisible: config.showFrame ?? true,
+                          orientation: Orientation.portrait,
+                          screen: Image(
+                            fit: BoxFit.cover,
+                            image: config.image == null
+                                ? const AssetImage(
+                                    'assets/screenshots/screen_1.jpg')
+                                : NetworkImage(config.image!) as ImageProvider,
+                          ),
+                        ),
                       ),
                     ),
-                  ],
-                ),
-                child: DeviceFrame(
-                  device: config.firstDeviceFrame == null
-                      ? Devices.ios.iPhone12ProMax
-                      : Devices.all.firstWhereOrNull(
-                            (el) => el.name == config.firstDeviceFrame!,
-                          ) ??
-                          Devices.ios.iPhone12ProMax,
-                  isFrameVisible: config.showFrame ?? true,
-                  orientation: Orientation.portrait,
-                  screen: Image(
-                    fit: BoxFit.cover,
-                    image: config.image == null
-                        ? const AssetImage('assets/screenshots/screen_1.jpg')
-                        : NetworkImage(config.image!) as ImageProvider,
                   ),
                 ),
               ),
-          ],
-        ),
-      ),
+        (config.showSecondDevice != true)
+            ? const SizedBox.shrink()
+            : Transform.rotate(
+                angle: (config.secondRotate ?? 0) * pi,
+                child: ScaleTransition(
+                  scale: config.secondScale == null
+                      ? const AlwaysStoppedAnimation(1)
+                      : AlwaysStoppedAnimation(config.secondScale!),
+                  child: Transform(
+                    transform: Matrix4.translationValues(
+                      config.secondDevicePositionRightLeft ?? 0,
+                      config.secondDevicePositionTopBottom ?? 0,
+                      0.0,
+                    ),
+                    child: SizedBox(
+                      width: 250,
+                      height: 500,
+                      child: Container(
+                        decoration: BoxDecoration(
+                          border: config.showSecondStroke == true
+                              ? Border.all(
+                                  color:
+                                      config.secondStrokeColor ?? Colors.black,
+                                  width: config.secondStrokeWidth ?? 10,
+                                )
+                              : null,
+                          borderRadius: BorderRadius.circular(40),
+                          boxShadow: [
+                            BoxShadow(
+                              color: config.secondShadowColor ??
+                                  Colors.transparent,
+                              blurRadius: config.secondShadowBlur ?? 0,
+                              offset: Offset(
+                                config.secondShadowOffsetX ?? 0,
+                                config.secondShadowOffsetY ?? 0,
+                              ),
+                            ),
+                          ],
+                        ),
+                        child: DeviceFrame(
+                          device: config.secondDeviceFrame == null
+                              ? Devices.ios.iPhone12ProMax
+                              : Devices.all.firstWhereOrNull(
+                                    (el) =>
+                                        el.name == config.secondDeviceFrame!,
+                                  ) ??
+                                  Devices.ios.iPhone12ProMax,
+                          isFrameVisible: config.showSecondFrame ?? true,
+                          orientation: Orientation.portrait,
+                          screen: Image(
+                            fit: BoxFit.cover,
+                            image: config.secondImage == null
+                                ? const AssetImage(
+                                    'assets/screenshots/screen_1.jpg')
+                                : NetworkImage(config.secondImage!)
+                                    as ImageProvider,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+      ],
     );
   }
 }

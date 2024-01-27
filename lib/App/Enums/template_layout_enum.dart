@@ -1,14 +1,8 @@
 enum TemplateLayoutEnum {
-  defaultLayout,
   titleUp,
   titleDown,
-  rightSideTitleUp,
-  leftSideTitleUp,
-  rightSideTitleDown,
-  leftSideTitleDown,
-  deviceRotateRightTitleUp,
-  deviceAdvanceRotateRightTitleDown,
-  deviceAdvanceRotateLeftTitleDown;
+  rightSideTitleAbove,
+  leftSideTitleAbove;
 
   // get name
   String get name {

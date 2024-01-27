@@ -307,6 +307,7 @@ class MockupSingleController extends GetxController {
 
   // update first device rotate
   void updateDeviceRotate(double rotate, {bool? isSecondDevice}) {
+    print(isSecondDevice);
     if (isSecondDevice != null && isSecondDevice) {
       _seletedItem.value = _seletedItem.value.copyWith(
         secondRotate: rotate,
@@ -363,8 +364,6 @@ class MockupSingleController extends GetxController {
 
   // update first stroke width
   void updateDeviceStrokeWidth(double width, {bool? isSecondDevice}) {
-    print('❌width: $width');
-
     if (isSecondDevice != null && isSecondDevice) {
       _seletedItem.value = _seletedItem.value.copyWith(
         secondStrokeWidth: width,
@@ -393,9 +392,12 @@ class MockupSingleController extends GetxController {
 
   // update first shadow blur
   void updateDeviceShadowBlur(double blur, {bool? isSecondDevice}) {
-    _seletedItem.value = _seletedItem.value.copyWith(
-      secondShadowBlur: blur,
-    );
+    if (isSecondDevice != null && isSecondDevice) {
+      _seletedItem.value = _seletedItem.value.copyWith(
+        secondShadowBlur: blur,
+      );
+      return;
+    }
 
     _seletedItem.value = _seletedItem.value.copyWith(
       shadowBlur: blur,

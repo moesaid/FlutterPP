@@ -202,6 +202,11 @@ class MockupCreateController extends GetxController {
                 TemplateLayoutEnum.titleUp,
               ),
             )..id = const Uuid().v4(),
+            TemplateConfigModel.fromJson(
+              TemplateLayoutConfig().getLayoutConfig(
+                TemplateLayoutEnum.titleDown,
+              ),
+            )..id = const Uuid().v4(),
           ],
         ),
       ),

@@ -17,26 +17,15 @@ ExpansionTileBorderItem buildDeviceStep({
   bool? showFrame = true,
   bool? isSecondDevice = false,
   double? rotate,
-  double? secondRotate,
   bool? showStroke,
-  bool? showSecondStroke,
   Color? strokeColor,
-  Color? secondStrokeColor,
   double? strokeWidth,
-  double? secondStrokeWidth,
   Color? shadowColor,
-  Color? secondShadowColor,
   double? shadowBlur,
-  double? secondShadowBlur,
   double? shadowOffsetX,
-  double? secondShadowOffsetX,
   double? shadowOffsetY,
-  double? secondShadowOffsetY,
-  double? firstDeviceVerticalPosition,
-  double? firstDeviceHorizontalPosition,
-  double? secondDeviceVerticalPosition,
-  double? secondDeviceHorizontalPosition,
-  double? secondScale,
+  double? verticalPosition,
+  double? horizontalPosition,
   double? scale,
   void Function(double scale, {bool? isSecondDevice})? updateDeviceScale,
   void Function(bool value, {bool? isSecondDevice})?
@@ -64,7 +53,6 @@ ExpansionTileBorderItem buildDeviceStep({
   bool? showDevice,
 }) {
   String uuid = const Uuid().v4();
-  print('😀 ${((rotate ?? 0) * 180)}');
   return ExpansionTileBorderItem(
     title: Text(title ?? 'Device'),
     leading: leading ?? const Icon(Icons.devices),
@@ -79,13 +67,19 @@ ExpansionTileBorderItem buildDeviceStep({
         title: 'Enable',
         initialValue: showDevice,
         controllerTag: 'deviceEnable-bool-$uuid',
-        onToggle: (val) => updateShowDevice?.call(val),
+        onToggle: (val) => updateShowDevice?.call(
+          val,
+          isSecondDevice: isSecondDevice,
+        ),
       ),
       BuildSliderEnableOption(
         title: 'Frame',
         initialValue: showFrame,
         controllerTag: 'deviceFrame-bool-$uuid',
-        onToggle: (val) => updateShowDeviceFrame?.call(val),
+        onToggle: (val) => updateShowDeviceFrame?.call(
+          val,
+          isSecondDevice: isSecondDevice,
+        ),
       ),
       const SizedBox(height: 20),
       BuildSidebarOption(
@@ -94,7 +88,10 @@ ExpansionTileBorderItem buildDeviceStep({
           mockupId: mockupId,
           controllerTag: 'devideImage-$uuid',
           callback: (val) {
-            onDeviceImageUpload?.call(val);
+            onDeviceImageUpload?.call(
+              val,
+              isSecondDevice: isSecondDevice,
+            );
           },
         ),
       ),
@@ -104,7 +101,10 @@ ExpansionTileBorderItem buildDeviceStep({
         rightWidget: BuildEditFrame(
           controllerTag: 'deviceFrame-$uuid',
           initialValue: initalFrame,
-          callback: updateDeviceFrame,
+          callback: (val) => updateDeviceFrame?.call(
+            val,
+            isSecondDevice: isSecondDevice,
+          ),
         ),
       ),
       const SizedBox(height: 20),
@@ -116,8 +116,11 @@ ExpansionTileBorderItem buildDeviceStep({
           max: 1,
           divisions: 30,
           fractionDigits: 2,
-          defaultValue: isSecondDevice == true ? secondScale ?? 0 : scale ?? 0,
-          onChanged: (val) => updateDeviceScale?.call(val),
+          defaultValue: scale ?? 1,
+          onChanged: (val) => updateDeviceScale?.call(
+            val,
+            isSecondDevice: isSecondDevice,
+          ),
         ),
       ),
       const SizedBox(height: 10),
@@ -131,7 +134,10 @@ ExpansionTileBorderItem buildDeviceStep({
         title: 'Enable',
         initialValue: showStroke,
         controllerTag: 'deviceStrokeEnable-bool-$uuid',
-        onToggle: (val) => updateDeviceStrokeVisibility?.call(val),
+        onToggle: (val) => updateDeviceStrokeVisibility?.call(
+          val,
+          isSecondDevice: isSecondDevice,
+        ),
       ),
       const SizedBox(height: 10),
       BuildSidebarOption(
@@ -139,7 +145,10 @@ ExpansionTileBorderItem buildDeviceStep({
         rightWidget: BuildPickColor(
           controllerTag: 'deviceStrokeColor-$uuid',
           initialColor: strokeColor ?? Colors.black,
-          onColorChangedCallback: (val) => updateStrokeColor?.call(val),
+          onColorChangedCallback: (val) => updateStrokeColor?.call(
+            val,
+            isSecondDevice: isSecondDevice,
+          ),
         ),
       ),
       const SizedBox(height: 10),
@@ -151,7 +160,10 @@ ExpansionTileBorderItem buildDeviceStep({
           max: 20,
           divisions: 12,
           defaultValue: strokeWidth ?? 0,
-          onChanged: (val) => updateStrokeWidth?.call(val),
+          onChanged: (val) => updateStrokeWidth?.call(
+            val,
+            isSecondDevice: isSecondDevice,
+          ),
         ),
       ),
       const Divider(height: 50),
@@ -165,7 +177,10 @@ ExpansionTileBorderItem buildDeviceStep({
         rightWidget: BuildPickColor(
           initialColor: shadowColor ?? Colors.black,
           controllerTag: 'deviceShadowColor-$uuid',
-          onColorChangedCallback: (val) => updateShadowColor?.call(val),
+          onColorChangedCallback: (val) => updateShadowColor?.call(
+            val,
+            isSecondDevice: isSecondDevice,
+          ),
         ),
       ),
       const SizedBox(height: 10),
@@ -176,10 +191,10 @@ ExpansionTileBorderItem buildDeviceStep({
           min: 0,
           max: 40,
           divisions: 40,
-          defaultValue:
-              isSecondDevice == true ? secondShadowBlur ?? 0 : shadowBlur ?? 0,
+          defaultValue: shadowBlur ?? 0,
           onChanged: (val) => updateDeviceShadowBlur?.call(
             val,
+            isSecondDevice: isSecondDevice,
           ),
         ),
       ),
@@ -191,11 +206,10 @@ ExpansionTileBorderItem buildDeviceStep({
           min: -40,
           max: 40,
           divisions: 80,
-          defaultValue: isSecondDevice == true
-              ? secondShadowOffsetX ?? 0
-              : shadowOffsetX ?? 0,
+          defaultValue: shadowOffsetX ?? 0,
           onChanged: (val) => updateDeviceShadowXOffset?.call(
             val,
+            isSecondDevice: isSecondDevice,
           ),
         ),
       ),
@@ -207,11 +221,10 @@ ExpansionTileBorderItem buildDeviceStep({
           min: -40,
           max: 40,
           divisions: 80,
-          defaultValue: isSecondDevice == true
-              ? secondShadowOffsetY ?? 0
-              : shadowOffsetY ?? 0,
+          defaultValue: shadowOffsetY ?? 0,
           onChanged: (val) => updateDeviceShadowYOffset?.call(
             val,
+            isSecondDevice: isSecondDevice,
           ),
         ),
       ),
@@ -228,11 +241,10 @@ ExpansionTileBorderItem buildDeviceStep({
           min: -180,
           max: 180,
           divisions: 360,
-          defaultValue: isSecondDevice == true
-              ? ((secondRotate ?? 0) * 180)
-              : ((rotate ?? 0) * 180),
+          defaultValue: ((rotate ?? 0) * 180),
           onChanged: (val) => updateDeviceRotate?.call(
             val / 180,
+            isSecondDevice: isSecondDevice,
           ),
         ),
       ),
@@ -244,29 +256,40 @@ ExpansionTileBorderItem buildDeviceStep({
           min: -300,
           max: 300,
           divisions: 600,
-          defaultValue: isSecondDevice == true
-              ? secondDeviceHorizontalPosition ?? 0
-              : firstDeviceHorizontalPosition ?? 0,
-          onChanged: (val) => updateDevicePossition?.call(
-            horizontalPosition: val,
-          ),
+          defaultValue: horizontalPosition ?? 0,
+          onChanged: (val) {
+            if (isSecondDevice == true) {
+              updateDevicePossition?.call(
+                secondHorizontalPosition: val,
+              );
+            } else {
+              updateDevicePossition?.call(
+                horizontalPosition: val,
+              );
+            }
+          },
         ),
       ),
       const SizedBox(height: 10),
       BuildSidebarOption(
         title: 'vertical',
         rightWidget: BuildSliderWithValueBox(
-          controllerTag: 'DevicePositionTopBottom-$uuid',
-          min: -300,
-          max: 300,
-          divisions: 600,
-          defaultValue: isSecondDevice == true
-              ? secondDeviceVerticalPosition ?? 0
-              : firstDeviceVerticalPosition ?? 0,
-          onChanged: (val) => updateDevicePossition?.call(
-            verticalPosition: val,
-          ),
-        ),
+            controllerTag: 'DevicePositionTopBottom-$uuid',
+            min: -300,
+            max: 300,
+            divisions: 600,
+            defaultValue: verticalPosition ?? 0,
+            onChanged: (val) {
+              if (isSecondDevice == true) {
+                updateDevicePossition?.call(
+                  secondVerticalPosition: val,
+                );
+              } else {
+                updateDevicePossition?.call(
+                  verticalPosition: val,
+                );
+              }
+            }),
       ),
       const SizedBox(height: 20),
     ],

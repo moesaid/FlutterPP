@@ -119,7 +119,8 @@ ExpansionTileBorderItem buildTitleStep({
         title: 'Top',
         rightWidget: BuildSlider(
           min: 0,
-          max: 30,
+          max: 50,
+          defaultValue: titlePaddingTop ?? 0,
           controllerTag: '$widgetTitle-titlePadding-top-$uuid',
           onChanged: (val) => onTitlePaddingChanged?.call(
             val,
@@ -132,7 +133,8 @@ ExpansionTileBorderItem buildTitleStep({
         title: 'Bottom',
         rightWidget: BuildSlider(
           min: 0,
-          max: 30,
+          max: 50,
+          defaultValue: titlePaddingBottom ?? 0,
           controllerTag: '$widgetTitle-titlePadding-bottom-$uuid',
           onChanged: (val) => onTitlePaddingChanged?.call(
             val,
@@ -145,7 +147,8 @@ ExpansionTileBorderItem buildTitleStep({
         title: 'Left',
         rightWidget: BuildSlider(
           min: 0,
-          max: 30,
+          max: 50,
+          defaultValue: titlePaddingLeft ?? 0,
           controllerTag: '$widgetTitle-titlePadding-left-$uuid',
           onChanged: (val) => onTitlePaddingChanged?.call(
             val,
@@ -158,7 +161,8 @@ ExpansionTileBorderItem buildTitleStep({
         title: 'Right',
         rightWidget: BuildSlider(
           min: 0,
-          max: 30,
+          max: 50,
+          defaultValue: titlePaddingRight ?? 0,
           controllerTag: '$widgetTitle-titlePadding-right-$uuid',
           onChanged: (val) => onTitlePaddingChanged?.call(
             val,
