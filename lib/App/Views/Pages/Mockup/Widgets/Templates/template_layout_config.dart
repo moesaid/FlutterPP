@@ -11,6 +11,8 @@ import 'package:flutterpp/App/Views/Pages/Mockup/Widgets/Templates/Types/title_d
 import 'package:flutterpp/App/Views/Pages/Mockup/Widgets/Templates/Types/title_up.dart';
 import 'package:flutterpp/App/Views/Pages/Mockup/Widgets/Templates/Types/two_devices_title_above.dart';
 import 'package:flutterpp/App/Views/Pages/Mockup/Widgets/Templates/Types/two_devices_title_below.dart';
+import 'package:flutterpp/App/Views/Pages/Mockup/Widgets/Templates/Types/two_devices_top_left_bottom_right.dart';
+import 'package:flutterpp/App/Views/Pages/Mockup/Widgets/Templates/Types/two_devices_top_right_bottom_left.dart';
 
 class TemplateLayoutConfig {
   // swich case returns
@@ -40,6 +42,11 @@ class TemplateLayoutConfig {
         return twoDevicesTitleAbove();
       case TemplateLayoutEnum.twoDevicesTitleBelow:
         return twoDevicesTitleBelow();
+      case TemplateLayoutEnum.twoDevicesTopRightBottomLeft:
+        return twoDevicesTopRightBottomLeft();
+      case TemplateLayoutEnum.twoDevicesTopLeftBottomRight:
+        return twoDevicesTopLeftBottomRight();
+
       default:
         return titleUp();
     }
