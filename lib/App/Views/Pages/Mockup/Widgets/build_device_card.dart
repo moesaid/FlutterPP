@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:custom_pop_up_menu/custom_pop_up_menu.dart';
 import 'package:device_frame/device_frame.dart';
 import 'package:flutter/material.dart';
 import 'package:flutterpp/App/Models/template_config_model.dart';
@@ -8,12 +9,14 @@ import 'package:google_fonts/google_fonts.dart';
 
 class BuildDeviceCard extends StatelessWidget {
   final TemplateConfigModel config;
+  final void Function(TemplateConfigModel) onRemove;
   final bool isSeleted;
 
   const BuildDeviceCard({
     super.key,
     required this.config,
     required this.isSeleted,
+    required this.onRemove,
   });
 
   @override
@@ -32,7 +35,10 @@ class BuildDeviceCard extends StatelessWidget {
       ),
       child: Column(
         children: [
-          const BuildDeviceHead(),
+          BuildDeviceHead(
+            config: config,
+            onRemove: onRemove,
+          ),
           Expanded(
             child: BuildDeviceBody(config: config),
           ),
@@ -330,12 +336,17 @@ class BuildDeviceBodyHead extends StatelessWidget {
 }
 
 class BuildDeviceHead extends StatelessWidget {
+  final TemplateConfigModel config;
+  final void Function(TemplateConfigModel)? onRemove;
   const BuildDeviceHead({
     super.key,
+    required this.config,
+    this.onRemove,
   });
 
   @override
   Widget build(BuildContext context) {
+    CustomPopupMenuController menuController = CustomPopupMenuController();
     return Container(
       width: 350,
       height: 50,
@@ -353,9 +364,35 @@ class BuildDeviceHead extends StatelessWidget {
               fontWeight: FontWeight.w600,
             ),
           ),
-          IconButton(
-            onPressed: () {},
-            icon: const Icon(
+          CustomPopupMenu(
+            controller: menuController,
+            verticalMargin: -10,
+            arrowColor: Get.theme.colorScheme.primaryContainer,
+            menuBuilder: () {
+              return Container(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 10,
+                  vertical: 5,
+                ),
+                decoration: BoxDecoration(
+                  color: Get.theme.colorScheme.primaryContainer,
+                  borderRadius: BorderRadius.circular(5),
+                ),
+                child: Column(
+                  children: [
+                    InkWell(
+                      onTap: () {
+                        menuController.hideMenu();
+                        onRemove?.call(config);
+                      },
+                      child: const Text('remove'),
+                    ),
+                  ],
+                ),
+              );
+            },
+            pressType: PressType.singleClick,
+            child: const Icon(
               Icons.more_horiz,
               color: Colors.white,
             ),

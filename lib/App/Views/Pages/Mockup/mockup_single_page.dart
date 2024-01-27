@@ -250,6 +250,7 @@ class BuildMockupSinglePageBuddy extends StatelessWidget {
                               ),
                               child: BuildDeviceCard(
                                 config: config,
+                                onRemove: controller.deleteItem,
                                 isSeleted:
                                     controller.seletedItem.id == config.id,
                               ),

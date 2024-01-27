@@ -509,4 +509,18 @@ class MockupSingleController extends GetxController {
     _seletedItem.value = newItem;
     update();
   }
+
+  // delete item
+  void deleteItem(TemplateConfigModel item) {
+    // remove item from mockup
+    _mockup.value = _mockup.value.copyWith(
+      jsonData: [
+        ..._mockup.value.jsonData!..removeWhere((el) => el.id == item.id)
+      ],
+    );
+
+    // update selected item
+    _seletedItem.value = _mockup.value.jsonData!.first;
+    update();
+  }
 }
