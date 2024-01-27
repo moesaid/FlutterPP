@@ -5,9 +5,9 @@ import 'package:get/get.dart';
 class BuildSidebar extends StatelessWidget {
   final Widget? child;
   const BuildSidebar({
-    Key? key,
+    super.key,
     this.child,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
