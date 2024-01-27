@@ -201,6 +201,7 @@ class BuildMockupSinglePageSidebar extends StatelessWidget {
         updateDeviceShadowBlur: controller.updateDeviceShadowBlur,
         updateDeviceShadowXOffset: controller.updateDeviceShadowXOffset,
         updateDeviceShadowYOffset: controller.updateDeviceShadowYOffset,
+        updateDeviceShadowVisibility: controller.updateDeviceShadowVisibility,
         // end device
       ),
     );

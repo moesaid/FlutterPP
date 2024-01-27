@@ -115,6 +115,8 @@ class BuildCreateMockupSidebar extends StatelessWidget {
   final void Function(bool value, {bool? isSecondDevice})?
       updateShowDeviceFrame;
   final void Function(TemplateConfigModel layout)? updateLayout;
+  final void Function(bool value, {bool? isSecondDevice})?
+      updateDeviceShadowVisibility;
 
   const BuildCreateMockupSidebar({
     super.key,
@@ -220,6 +222,7 @@ class BuildCreateMockupSidebar extends StatelessWidget {
     this.scale,
     this.updateLayout,
     this.layoutName,
+    this.updateDeviceShadowVisibility,
   });
 
   @override
@@ -360,6 +363,7 @@ class BuildCreateMockupSidebar extends StatelessWidget {
                   scale: scale,
                   updateLayout: updateLayout,
                   layoutName: layoutName,
+                  updateDeviceShadowVisibility: updateDeviceShadowVisibility,
                 ),
               ),
       ),

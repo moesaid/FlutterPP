@@ -18,6 +18,7 @@ ExpansionTileBorderItem buildDeviceStep({
   bool? isSecondDevice = false,
   double? rotate,
   bool? showStroke,
+  bool? showShadow,
   Color? strokeColor,
   double? strokeWidth,
   Color? shadowColor,
@@ -50,6 +51,8 @@ ExpansionTileBorderItem buildDeviceStep({
   void Function(DeviceInfo device, {bool? isSecondDevice})? updateDeviceFrame,
   void Function(bool value, {bool? isSecondDevice})? updateShowDevice,
   void Function(bool value, {bool? isSecondDevice})? updateShowDeviceFrame,
+  void Function(bool value, {bool? isSecondDevice})?
+      updateDeviceShadowVisibility,
   bool? showDevice,
 }) {
   String uuid = const Uuid().v4();
@@ -172,6 +175,15 @@ ExpansionTileBorderItem buildDeviceStep({
         style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
       ),
       const SizedBox(height: 20),
+      BuildSliderEnableOption(
+        title: 'Enable',
+        initialValue: showShadow,
+        controllerTag: 'deviceShadowEnable-bool-$uuid',
+        onToggle: (val) => updateDeviceShadowVisibility?.call(
+          val,
+          isSecondDevice: isSecondDevice,
+        ),
+      ),
       BuildSidebarOption(
         title: 'color',
         rightWidget: BuildPickColor(

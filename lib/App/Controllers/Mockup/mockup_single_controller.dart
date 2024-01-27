@@ -393,6 +393,19 @@ class MockupSingleController extends GetxController {
     );
   }
 
+  void updateDeviceShadowVisibility(bool value, {bool? isSecondDevice}) {
+    if (isSecondDevice != null && isSecondDevice) {
+      _seletedItem.value = _seletedItem.value.copyWith(
+        showSecondShadow: value,
+      );
+      return;
+    }
+
+    _seletedItem.value = _seletedItem.value.copyWith(
+      showShadow: value,
+    );
+  }
+
   // update first shadow blur
   void updateDeviceShadowBlur(double blur, {bool? isSecondDevice}) {
     if (isSecondDevice != null && isSecondDevice) {

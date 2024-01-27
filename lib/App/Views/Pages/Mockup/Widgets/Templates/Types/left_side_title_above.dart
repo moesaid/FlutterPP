@@ -12,6 +12,8 @@ Map<String, dynamic> leftSideTitleAbove() {
     "subtitle": "your subtitle",
     "showFrame": true,
     "showTitle": true,
+    "showShadow": false,
+    "showSecondShadow": false,
     "shadowBlur": 0,
     "showDevice": true,
     "showStroke": false,

@@ -34,7 +34,9 @@ class TemplateConfigModel {
       showFrame,
       showSecondFrame,
       showStroke,
-      showSecondStroke;
+      showSecondStroke,
+      showShadow,
+      showSecondShadow;
   String? title, subtitle;
   String? titleFontFamily, subtitleFontFamily;
   String? backgroundImage;
@@ -121,6 +123,8 @@ class TemplateConfigModel {
     this.showSecondFrame = false,
     this.showStroke = false,
     this.showSecondStroke = false,
+    this.showShadow = false,
+    this.showSecondShadow = false,
     this.gradientAngle = 0,
     this.strokeWidth = 0,
     this.secondStrokeWidth = 0,
@@ -270,6 +274,8 @@ class TemplateConfigModel {
     showSecondFrame = json['showSecondFrame'];
     showStroke = json['showStroke'];
     showSecondStroke = json['showSecondStroke'];
+    showShadow = json['showShadow'];
+    showSecondShadow = json['showSecondShadow'];
     title = json['title'];
     subtitle = json['subtitle'];
 
@@ -464,6 +470,8 @@ class TemplateConfigModel {
     data['showSecondFrame'] = showSecondFrame;
     data['showStroke'] = showStroke;
     data['showSecondStroke'] = showSecondStroke;
+    data['showShadow'] = showShadow;
+    data['showSecondShadow'] = showSecondShadow;
     data['title'] = title;
     data['subtitle'] = subtitle;
 
@@ -587,6 +595,8 @@ class TemplateConfigModel {
     bool? showSecondFrame,
     bool? showStroke,
     bool? showSecondStroke,
+    bool? showShadow,
+    bool? showSecondShadow,
     String? title,
     String? subtitle,
     String? backgroundImage,
@@ -670,6 +680,8 @@ class TemplateConfigModel {
       showSecondFrame: showSecondFrame ?? this.showSecondFrame,
       showStroke: showStroke ?? this.showStroke,
       showSecondStroke: showSecondStroke ?? this.showSecondStroke,
+      showShadow: showShadow ?? this.showShadow,
+      showSecondShadow: showSecondShadow ?? this.showSecondShadow,
       title: title ?? this.title,
       subtitle: subtitle ?? this.subtitle,
       backgroundImage: backgroundImage ?? this.backgroundImage,

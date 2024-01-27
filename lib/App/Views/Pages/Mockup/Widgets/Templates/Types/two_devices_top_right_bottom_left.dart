@@ -11,6 +11,8 @@ Map<String, dynamic> twoDevicesTopRightBottomLeft() {
     "subtitle": "your subtitle",
     "showFrame": true,
     "showTitle": false,
+    "showShadow": false,
+    "showSecondShadow": false,
     "shadowBlur": 0,
     "showDevice": true,
     "showStroke": false,

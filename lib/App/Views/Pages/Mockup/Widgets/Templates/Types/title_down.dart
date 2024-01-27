@@ -44,6 +44,8 @@ Map<String, dynamic> titleDown() {
     "deviceFullSize": true,
     "secondDeviceFullSize": true,
     "showTitle": true,
+    "showShadow": false,
+    "showSecondShadow": false,
     "showSubtitle": true,
     "showDevice": true,
     "showSecondDevice": false,

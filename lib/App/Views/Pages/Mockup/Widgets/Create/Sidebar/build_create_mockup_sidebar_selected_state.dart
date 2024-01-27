@@ -118,6 +118,7 @@ class BuildCreateMockupSidebarSelectedState
     this.scale,
     this.updateLayout,
     this.layoutName,
+    this.updateDeviceShadowVisibility,
   });
 
   final void Function(TemplateConfigModel layout)? updateLayout;
@@ -233,6 +234,8 @@ class BuildCreateMockupSidebarSelectedState
   final void Function(bool value, {bool? isSecondDevice})? updateShowDevice;
   final void Function(bool value, {bool? isSecondDevice})?
       updateShowDeviceFrame;
+  final void Function(bool value, {bool? isSecondDevice})?
+      updateDeviceShadowVisibility;
 
   @override
   Widget build(BuildContext context) {
@@ -346,6 +349,7 @@ class BuildCreateMockupSidebarSelectedState
               scale: scale,
               verticalPosition: firstDeviceVerticalPosition,
               horizontalPosition: firstDeviceHorizontalPosition,
+              updateDeviceShadowVisibility: updateDeviceShadowVisibility,
             ),
             buildDeviceStep(
               title: 'Device Two',
@@ -380,6 +384,7 @@ class BuildCreateMockupSidebarSelectedState
               scale: secondScale,
               verticalPosition: secondDeviceVerticalPosition,
               horizontalPosition: secondDeviceHorizontalPosition,
+              updateDeviceShadowVisibility: updateDeviceShadowVisibility,
               leading: const Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [

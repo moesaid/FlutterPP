@@ -94,18 +94,7 @@ class BuildDeviceBody extends StatelessWidget {
           runSpacing: config.bodyRunSpacing!,
           spacing: config.bodySpacing!,
           children: [
-            BuildDeviceBodyHead(
-              config: config,
-            ),
-            // Transform.rotate(
-            //   angle: (config.rotate ?? 0) * pi,
-            //   child: ScaleTransition(
-            //     scale: config.scale == null
-            //         ? const AlwaysStoppedAnimation(1)
-            //         : AlwaysStoppedAnimation(config.scale!),
-            //     child: BuildDeviceBodyIphoneCase(config: config),
-            //   ),
-            // ),
+            BuildDeviceBodyHead(config: config),
             BuildDeviceBodyIphoneCase(config: config),
           ],
         ),
@@ -152,14 +141,15 @@ class BuildDeviceBodyIphoneCase extends StatelessWidget {
                               : null,
                           borderRadius: BorderRadius.circular(40),
                           boxShadow: [
-                            BoxShadow(
-                              color: config.shadowColor ?? Colors.transparent,
-                              blurRadius: config.shadowBlur ?? 0,
-                              offset: Offset(
-                                config.shadowOffsetX ?? 0,
-                                config.shadowOffsetY ?? 0,
+                            if (config.showShadow == true)
+                              BoxShadow(
+                                color: config.shadowColor ?? Colors.transparent,
+                                blurRadius: config.shadowBlur ?? 0,
+                                offset: Offset(
+                                  config.shadowOffsetX ?? 0,
+                                  config.shadowOffsetY ?? 0,
+                                ),
                               ),
-                            ),
                           ],
                         ),
                         child: DeviceFrame(
@@ -212,15 +202,16 @@ class BuildDeviceBodyIphoneCase extends StatelessWidget {
                               : null,
                           borderRadius: BorderRadius.circular(40),
                           boxShadow: [
-                            BoxShadow(
-                              color: config.secondShadowColor ??
-                                  Colors.transparent,
-                              blurRadius: config.secondShadowBlur ?? 0,
-                              offset: Offset(
-                                config.secondShadowOffsetX ?? 0,
-                                config.secondShadowOffsetY ?? 0,
+                            if (config.showSecondShadow == true)
+                              BoxShadow(
+                                color: config.secondShadowColor ??
+                                    Colors.transparent,
+                                blurRadius: config.secondShadowBlur ?? 0,
+                                offset: Offset(
+                                  config.secondShadowOffsetX ?? 0,
+                                  config.secondShadowOffsetY ?? 0,
+                                ),
                               ),
-                            ),
                           ],
                         ),
                         child: DeviceFrame(
