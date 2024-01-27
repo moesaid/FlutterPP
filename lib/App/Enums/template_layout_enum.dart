@@ -8,7 +8,9 @@ enum TemplateLayoutEnum {
   rotateRightOne,
   rotateRightTwo,
   rotateRightThree,
-  rotateRightFour;
+  rotateRightFour,
+  twoDevicesTitleAbove,
+  twoDevicesTitleBelow;
 
   // get name
   String get name {
