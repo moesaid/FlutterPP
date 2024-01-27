@@ -69,7 +69,7 @@ Map<String, dynamic> leftSideTitleBelow() {
     "bodyVerticalDirection": "up",
     "subtitlePaddingBottom": 22.5,
     "bodyCrossAxisAlignment": "center",
-    "firstDevicePositionRightLeft": 139.99999999999994,
+    "firstDevicePositionRightLeft": -150,
     "firstDevicePositionTopBottom": -18,
     "secondDevicePositionRightLeft": 0,
     "secondDevicePositionTopBottom": 0

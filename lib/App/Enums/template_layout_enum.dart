@@ -2,7 +2,9 @@ enum TemplateLayoutEnum {
   titleUp,
   titleDown,
   rightSideTitleAbove,
-  leftSideTitleAbove;
+  leftSideTitleAbove,
+  rightSideTitleBelow,
+  leftSideTitleBelow;
 
   // get name
   String get name {
@@ -12,5 +14,10 @@ enum TemplateLayoutEnum {
   // from string to enum
   static TemplateLayoutEnum fromString(String name) {
     return TemplateLayoutEnum.values.firstWhere((e) => e.name == name);
+  }
+
+  // return all enums
+  static List<TemplateLayoutEnum> get all {
+    return TemplateLayoutEnum.values;
   }
 }

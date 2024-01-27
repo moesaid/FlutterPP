@@ -1,8 +1,17 @@
+import 'package:awesome_side_sheet/Enums/sheet_position.dart';
+import 'package:awesome_side_sheet/side_sheet.dart';
 import 'package:expansion_tile_group/expansion_tile_group.dart';
 import 'package:flutter/material.dart';
+import 'package:flutterpp/App/Enums/template_layout_enum.dart';
+import 'package:flutterpp/App/Models/template_config_model.dart';
+import 'package:flutterpp/App/Views/Pages/Mockup/Widgets/Templates/template_layout_config.dart';
+import 'package:flutterpp/App/Views/Pages/Mockup/Widgets/build_device_card.dart';
 import 'package:get/get.dart';
+import 'package:sizer/sizer.dart';
 
-ExpansionTileBorderItem buildLayoutStep() {
+ExpansionTileBorderItem buildLayoutStep({
+  required BuildContext context,
+}) {
   return ExpansionTileBorderItem(
     title: const Text('Layout'),
     leading: const Icon(Icons.crop_free),
@@ -14,7 +23,33 @@ ExpansionTileBorderItem buildLayoutStep() {
     iconColor: Colors.white,
     children: [
       InkWell(
-        onTap: () => print('open layout dialog'),
+        onTap: () {
+          aweSideSheet(
+            context: context,
+            sheetPosition: SheetPosition.right,
+            footer: const SizedBox.shrink(),
+            header: Padding(
+              padding: EdgeInsets.all(4.sp),
+              child: const Row(
+                children: [
+                  Spacer(),
+                  Text(
+                    'Screen Layouts',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 16,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                  Spacer(),
+                  CloseButton(),
+                ],
+              ),
+            ),
+            sheetWidth: 100.h,
+            body: const BuildScreenLayoutsWidget(),
+          );
+        },
         child: Container(
           padding: const EdgeInsets.all(10),
           decoration: BoxDecoration(
@@ -38,4 +73,35 @@ ExpansionTileBorderItem buildLayoutStep() {
       ),
     ],
   );
+}
+
+class BuildScreenLayoutsWidget extends StatelessWidget {
+  const BuildScreenLayoutsWidget({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: EdgeInsets.all(5.sp),
+      child: GridView.builder(
+        gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
+          crossAxisSpacing: 3.sp,
+          mainAxisSpacing: 3.sp,
+          mainAxisExtent: 650,
+          maxCrossAxisExtent: 350,
+        ),
+        itemCount: TemplateLayoutEnum.all.length,
+        itemBuilder: (BuildContext context, int index) {
+          TemplateConfigModel config = TemplateConfigModel.fromJson(
+            TemplateLayoutConfig().getLayoutConfig(
+              TemplateLayoutEnum.all[index],
+            ),
+          );
+
+          return BuildDeviceBody(config: config);
+        },
+      ),
+    );
+  }
 }

@@ -236,7 +236,7 @@ class BuildCreateMockupSidebarSelectedState
         return ExpansionTileGroup(
           toggleType: ToggleType.expandOnlyCurrent,
           children: [
-            buildLayoutStep(),
+            buildLayoutStep(context: context),
             buildBackgroundStep(
               mockupId: mockupId,
               controller: controller,

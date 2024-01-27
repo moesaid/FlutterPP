@@ -8,7 +8,7 @@ Map<String, dynamic> titleDown() {
     "logo": null,
     "firstDeviceFrame": null,
     "secondDeviceFrame": null,
-    "type": "titleUp",
+    "type": "titleDown",
     "bodyDirection": "horizontal",
     "bodyVerticalDirection": "up",
     "bodyCrossAxisAlignment": "center",

@@ -70,7 +70,7 @@ Map<String, dynamic> rightSideTitleAbove() {
     "bodyVerticalDirection": "down",
     "subtitlePaddingBottom": 22.5,
     "bodyCrossAxisAlignment": "center",
-    "firstDevicePositionRightLeft": 140.0,
+    "firstDevicePositionRightLeft": 150.0,
     "firstDevicePositionTopBottom": 0,
     "secondDevicePositionRightLeft": 0,
     "secondDevicePositionTopBottom": 0
