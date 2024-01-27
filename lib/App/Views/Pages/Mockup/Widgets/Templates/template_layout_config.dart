@@ -9,6 +9,7 @@ import 'package:flutterpp/App/Views/Pages/Mockup/Widgets/Templates/Types/rotate_
 import 'package:flutterpp/App/Views/Pages/Mockup/Widgets/Templates/Types/rotate_right_two.dart';
 import 'package:flutterpp/App/Views/Pages/Mockup/Widgets/Templates/Types/title_down.dart';
 import 'package:flutterpp/App/Views/Pages/Mockup/Widgets/Templates/Types/title_up.dart';
+import 'package:flutterpp/App/Views/Pages/Mockup/Widgets/Templates/Types/two_devices_connected_left_title_above.dart';
 import 'package:flutterpp/App/Views/Pages/Mockup/Widgets/Templates/Types/two_devices_connected_right_title_above.dart';
 import 'package:flutterpp/App/Views/Pages/Mockup/Widgets/Templates/Types/two_devices_title_above.dart';
 import 'package:flutterpp/App/Views/Pages/Mockup/Widgets/Templates/Types/two_devices_title_below.dart';
@@ -49,6 +50,8 @@ class TemplateLayoutConfig {
         return twoDevicesTopLeftBottomRight();
       case TemplateLayoutEnum.twoDevicesConnectedRightTitleAbove:
         return twoDevicesConnectedRightTitleAbove();
+      case TemplateLayoutEnum.twoDevicesConnectedLeftTitleAbove:
+        return twoDevicesConnectedLeftTitleAbove();
 
       default:
         return titleUp();

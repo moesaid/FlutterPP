@@ -13,7 +13,8 @@ enum TemplateLayoutEnum {
   twoDevicesTitleBelow,
   twoDevicesTopLeftBottomRight,
   twoDevicesTopRightBottomLeft,
-  twoDevicesConnectedRightTitleAbove;
+  twoDevicesConnectedRightTitleAbove,
+  twoDevicesConnectedLeftTitleAbove;
 
   // get name
   String get name {

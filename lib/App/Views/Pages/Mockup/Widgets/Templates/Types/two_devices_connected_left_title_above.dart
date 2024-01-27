@@ -1,8 +1,8 @@
-Map<String, dynamic> twoDevicesConnectedRightTitleAbove() {
+Map<String, dynamic> twoDevicesConnectedLeftTitleAbove() {
   return {
     "id": null,
     "logo": null,
-    "type": "twoDevicesConnectedRightTitleAbove",
+    "type": "twoDevicesConnectedLeftTitleAbove",
     "image": null,
     "scale": 0.9875,
     "title": "your title",
@@ -71,7 +71,7 @@ Map<String, dynamic> twoDevicesConnectedRightTitleAbove() {
     "bodyCrossAxisAlignment": "center",
     "firstDevicePositionRightLeft": 23,
     "firstDevicePositionTopBottom": 0,
-    "secondDevicePositionRightLeft": 164,
+    "secondDevicePositionRightLeft": -168,
     "secondDevicePositionTopBottom": 128
   };
 }
