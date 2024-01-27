@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutterpp/App/Controllers/Mockup/build_create_mockup_sidebar_selected_state_controller.dart';
 import 'package:flutterpp/App/Enums/padding_destination_enum.dart';
 import 'package:flutterpp/App/Models/gradient_model.dart';
+import 'package:flutterpp/App/Models/template_config_model.dart';
 import 'package:flutterpp/App/Views/Pages/Mockup/Widgets/Create/Sidebar/Steps/build_background_step.dart';
 import 'package:flutterpp/App/Views/Pages/Mockup/Widgets/Create/Sidebar/Steps/build_device_step.dart';
 import 'package:flutterpp/App/Views/Pages/Mockup/Widgets/Create/Sidebar/Steps/build_icon_step.dart';
@@ -115,8 +116,10 @@ class BuildCreateMockupSidebarSelectedState
     this.updateDeviceScale,
     this.secondScale,
     this.scale,
+    this.updateLayout,
   });
 
+  final void Function(TemplateConfigModel layout)? updateLayout;
   final String? mockupId, firstInitalDeviceFrame, secondInitalDeviceFrame;
   final Color? initialColor;
   final GradientModel? activeGradient;
@@ -236,7 +239,10 @@ class BuildCreateMockupSidebarSelectedState
         return ExpansionTileGroup(
           toggleType: ToggleType.expandOnlyCurrent,
           children: [
-            buildLayoutStep(context: context),
+            buildLayoutStep(
+              context: context,
+              onLayoutChanged: updateLayout,
+            ),
             buildBackgroundStep(
               mockupId: mockupId,
               controller: controller,

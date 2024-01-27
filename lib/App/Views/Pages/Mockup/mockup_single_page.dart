@@ -63,6 +63,8 @@ class BuildMockupSinglePageSidebar extends StatelessWidget {
         mockupId: controller.mockup.id,
         isScreenshotSelected: controller.seletedItem.id != null,
 
+        updateLayout: controller.updateLayout,
+
         // start background
         initialColor: controller.seletedItem.backgroundColor,
         onColorChangedCallback: (color) {
@@ -223,34 +225,48 @@ class BuildMockupSinglePageBuddy extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Obx(
-                () => SizedBox(
-                  height: 700,
-                  child: ListView.separated(
-                    scrollDirection: Axis.horizontal,
-                    shrinkWrap: true,
-                    itemCount: controller.mockup.jsonData!.length,
-                    padding: EdgeInsets.only(
-                      right: 140.sp,
-                      left: 2.sp,
-                      top: 2.sp,
-                      bottom: 2.sp,
-                    ),
-                    itemBuilder: (_, int i) {
-                      TemplateConfigModel config =
-                          controller.mockup.jsonData![i];
-                      return InkWell(
-                        onTap: () => controller.updateSelectedItem(
-                          config,
+                () => SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: Row(
+                    children: [
+                      SizedBox(
+                        height: 700,
+                        child: ListView.separated(
+                          scrollDirection: Axis.horizontal,
+                          shrinkWrap: true,
+                          itemCount: controller.mockup.jsonData!.length,
+                          padding: EdgeInsets.only(
+                            right: 2.sp,
+                            left: 2.sp,
+                            top: 2.sp,
+                            bottom: 2.sp,
+                          ),
+                          itemBuilder: (_, int i) {
+                            TemplateConfigModel config =
+                                controller.mockup.jsonData![i];
+                            return InkWell(
+                              onTap: () => controller.updateSelectedItem(
+                                config,
+                              ),
+                              child: BuildDeviceCard(
+                                config: config,
+                                isSeleted:
+                                    controller.seletedItem.id == config.id,
+                              ),
+                            );
+                          },
+                          separatorBuilder: (_, __) => SizedBox(
+                            width: 1.sp,
+                          ),
                         ),
-                        child: BuildDeviceCard(
-                          config: config,
-                          isSeleted: controller.seletedItem.id == config.id,
-                        ),
-                      );
-                    },
-                    separatorBuilder: (_, __) => SizedBox(
-                      width: 3.sp,
-                    ),
+                      ),
+                      const SizedBox(width: 10),
+                      ElevatedButton(
+                        onPressed: () => controller.addNewItem(),
+                        child: Text('add new Screen'.capitalize!),
+                      ),
+                      SizedBox(width: 140.sp),
+                    ],
                   ),
                 ),
               ),

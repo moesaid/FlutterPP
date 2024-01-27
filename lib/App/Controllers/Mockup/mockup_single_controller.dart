@@ -1,13 +1,16 @@
 import 'package:device_frame/device_frame.dart';
 import 'package:flutter/material.dart';
 import 'package:flutterpp/App/Enums/padding_destination_enum.dart';
+import 'package:flutterpp/App/Enums/template_layout_enum.dart';
 import 'package:flutterpp/App/Models/gradient_model.dart';
 import 'package:flutterpp/App/Models/mockup_model.dart';
 import 'package:flutterpp/App/Models/template_config_model.dart';
 import 'package:flutterpp/App/Services/Mockups/mockup_services.dart';
 import 'package:flutterpp/App/Views/Global/build_overlay.dart';
+import 'package:flutterpp/App/Views/Pages/Mockup/Widgets/Templates/template_layout_config.dart';
 import 'package:flutterpp/Helpers/colors_helper.dart';
 import 'package:get/get.dart';
+import 'package:uuid/uuid.dart';
 
 class MockupSingleController extends GetxController {
   MockupServices mockupServices = MockupServices();
@@ -481,5 +484,29 @@ class MockupSingleController extends GetxController {
     _seletedItem.value = _seletedItem.value.copyWith(
       scale: scale,
     );
+  }
+
+  void updateLayout(TemplateConfigModel layout) {
+    // safe replcae and assign old uuid
+    layout = layout.copyWith(id: _seletedItem.value.id);
+
+    // update layout
+    _seletedItem.value = layout;
+  }
+
+  void addNewItem() {
+    // create new item
+    TemplateConfigModel newItem = TemplateConfigModel.fromJson(
+      TemplateLayoutConfig().getLayoutConfig(TemplateLayoutEnum.titleUp),
+    )..id = const Uuid().v4();
+
+    // add new item to mockup
+    _mockup.value = _mockup.value.copyWith(
+      jsonData: [..._mockup.value.jsonData!, newItem],
+    );
+
+    // update selected item
+    _seletedItem.value = newItem;
+    update();
   }
 }

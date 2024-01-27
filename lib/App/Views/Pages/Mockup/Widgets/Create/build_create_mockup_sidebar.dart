@@ -2,6 +2,7 @@ import 'package:device_frame/device_frame.dart';
 import 'package:flutter/material.dart';
 import 'package:flutterpp/App/Enums/padding_destination_enum.dart';
 import 'package:flutterpp/App/Models/gradient_model.dart';
+import 'package:flutterpp/App/Models/template_config_model.dart';
 import 'package:flutterpp/App/Views/Pages/Mockup/Widgets/Create/Sidebar/build_create_mockup_sidebar_empty.dart';
 import 'package:flutterpp/App/Views/Pages/Mockup/Widgets/Create/Sidebar/build_create_mockup_sidebar_selected_state.dart';
 import 'package:get/get.dart';
@@ -113,6 +114,7 @@ class BuildCreateMockupSidebar extends StatelessWidget {
   final void Function(bool value, {bool? isSecondDevice})? updateShowDevice;
   final void Function(bool value, {bool? isSecondDevice})?
       updateShowDeviceFrame;
+  final void Function(TemplateConfigModel layout)? updateLayout;
 
   const BuildCreateMockupSidebar({
     super.key,
@@ -216,6 +218,7 @@ class BuildCreateMockupSidebar extends StatelessWidget {
     this.updateDeviceScale,
     this.secondScale,
     this.scale,
+    this.updateLayout,
   });
 
   @override
@@ -354,6 +357,7 @@ class BuildCreateMockupSidebar extends StatelessWidget {
                   updateDeviceScale: updateDeviceScale,
                   secondScale: secondScale,
                   scale: scale,
+                  updateLayout: updateLayout,
                 ),
               ),
       ),
