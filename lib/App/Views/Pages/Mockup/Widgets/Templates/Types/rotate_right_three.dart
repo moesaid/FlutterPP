@@ -1,8 +1,8 @@
 Map<String, dynamic> rotateRightThree() {
   return {
-    "id": "7ac0d26c-bcca-4dd3-b899-c4c7519a8a56",
+    "id": null,
     "logo": null,
-    "type": "titleUp",
+    "type": "rotateRightThree",
     "image": null,
     "scale": 1,
     "title": "your title",

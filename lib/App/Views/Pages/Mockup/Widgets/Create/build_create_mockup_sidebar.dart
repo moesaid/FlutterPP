@@ -20,7 +20,7 @@ class BuildCreateMockupSidebar extends StatelessWidget {
   final double? initialIconBottomPadding;
   final double? initialIconTopPadding;
 
-  final String? titleText, subtitleText;
+  final String? titleText, subtitleText, layoutName;
   final String? titleFontFamily, subtitleFontFamily;
   final bool? showTitle, showSubtitle;
   final MainAxisAlignment? titleAlignment, subtitleAlignment;
@@ -219,6 +219,7 @@ class BuildCreateMockupSidebar extends StatelessWidget {
     this.secondScale,
     this.scale,
     this.updateLayout,
+    this.layoutName,
   });
 
   @override
@@ -358,6 +359,7 @@ class BuildCreateMockupSidebar extends StatelessWidget {
                   secondScale: secondScale,
                   scale: scale,
                   updateLayout: updateLayout,
+                  layoutName: layoutName,
                 ),
               ),
       ),

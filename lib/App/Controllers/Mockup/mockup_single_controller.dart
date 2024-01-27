@@ -519,8 +519,11 @@ class MockupSingleController extends GetxController {
       ],
     );
 
-    // update selected item
-    _seletedItem.value = _mockup.value.jsonData!.first;
+    // check if item is last item
+    if (_mockup.value.jsonData!.length.isGreaterThan(1)) {
+      _seletedItem.value = _mockup.value.jsonData!.first;
+    }
+
     update();
   }
 }

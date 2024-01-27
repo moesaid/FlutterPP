@@ -1,10 +1,10 @@
-Map<String, dynamic> twoDevicesTitleAbove() {
+Map<String, dynamic> twoDevicesConnectedRightTitleAbove() {
   return {
     "id": null,
     "logo": null,
-    "type": "twoDevicesTitleAbove",
+    "type": "twoDevicesConnectedRightTitleAbove",
     "image": null,
-    "scale": 0.9,
+    "scale": 0.9875,
     "title": "your title",
     "rotate": 0,
     "showLogo": false,
@@ -17,7 +17,7 @@ Map<String, dynamic> twoDevicesTitleAbove() {
     "titleColor": "000000",
     "bodySpacing": 0,
     "secondImage": null,
-    "secondScale": 0.8,
+    "secondScale": 1.025,
     "shadowColor": "000000",
     "strokeColor": "000000",
     "strokeWidth": 1,
@@ -61,7 +61,7 @@ Map<String, dynamic> twoDevicesTitleAbove() {
     "subtitleLineHeight": 1,
     "subtitlePaddingTop": 0,
     "titlePaddingBottom": 6,
-    "secondShadowOffsetX": 0,
+    "secondShadowOffsetX": 2,
     "secondShadowOffsetY": 0,
     "subtitlePaddingLeft": 12.5,
     "secondDeviceFullSize": true,
@@ -69,9 +69,9 @@ Map<String, dynamic> twoDevicesTitleAbove() {
     "bodyVerticalDirection": "down",
     "subtitlePaddingBottom": 17.5,
     "bodyCrossAxisAlignment": "center",
-    "firstDevicePositionRightLeft": -25,
-    "firstDevicePositionTopBottom": -1,
-    "secondDevicePositionRightLeft": 38,
-    "secondDevicePositionTopBottom": 51
+    "firstDevicePositionRightLeft": 23,
+    "firstDevicePositionTopBottom": 0,
+    "secondDevicePositionRightLeft": 147,
+    "secondDevicePositionTopBottom": 128
   };
 }

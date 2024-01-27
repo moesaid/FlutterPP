@@ -64,6 +64,7 @@ class BuildMockupSinglePageSidebar extends StatelessWidget {
         isScreenshotSelected: controller.seletedItem.id != null,
 
         updateLayout: controller.updateLayout,
+        layoutName: controller.seletedItem.type,
 
         // start background
         initialColor: controller.seletedItem.backgroundColor,

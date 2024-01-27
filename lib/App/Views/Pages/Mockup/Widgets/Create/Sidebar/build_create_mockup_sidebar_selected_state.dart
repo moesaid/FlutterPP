@@ -117,10 +117,14 @@ class BuildCreateMockupSidebarSelectedState
     this.secondScale,
     this.scale,
     this.updateLayout,
+    this.layoutName,
   });
 
   final void Function(TemplateConfigModel layout)? updateLayout;
-  final String? mockupId, firstInitalDeviceFrame, secondInitalDeviceFrame;
+  final String? mockupId,
+      firstInitalDeviceFrame,
+      secondInitalDeviceFrame,
+      layoutName;
   final Color? initialColor;
   final GradientModel? activeGradient;
   final bool? isIconToggled;
@@ -242,6 +246,7 @@ class BuildCreateMockupSidebarSelectedState
             buildLayoutStep(
               context: context,
               onLayoutChanged: updateLayout,
+              layoutName: layoutName,
             ),
             buildBackgroundStep(
               mockupId: mockupId,

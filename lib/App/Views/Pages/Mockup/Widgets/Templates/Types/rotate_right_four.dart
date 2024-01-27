@@ -1,8 +1,8 @@
 Map<String, dynamic> rotateRightFour() {
   return {
-    "id": "0eef60ff-e70d-49b6-8dc4-7e69f84db7de",
+    "id": null,
     "logo": null,
-    "type": "titleUp",
+    "type": "rotateRightFour",
     "image": null,
     "scale": 0.9875,
     "title": "your title",

@@ -74,10 +74,10 @@ ExpansionTileBorderItem buildLayoutStep({
                   width: 0.5,
                 ),
               ),
-              child: const Row(
+              child: Row(
                 children: [
-                  Expanded(child: Text('Screen name')),
-                  Icon(
+                  Expanded(child: Text(layoutName ?? 'Layout name')),
+                  const Icon(
                     Icons.arrow_drop_down_circle_outlined,
                     color: Colors.white,
                   ),

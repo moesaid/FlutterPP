@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:sizer/sizer.dart';
 
 class BuildSnackBar {
   final String title, message;
@@ -14,7 +15,8 @@ class BuildSnackBar {
     Get.snackbar(
       title,
       message,
-      snackPosition: SnackPosition.BOTTOM,
+      maxWidth: 50.w,
+      snackPosition: SnackPosition.TOP,
       margin: const EdgeInsets.all(20),
       backgroundColor: Colors.red.shade700,
       icon: const Icon(Icons.error, color: Colors.white),
@@ -26,7 +28,8 @@ class BuildSnackBar {
     Get.snackbar(
       title,
       message,
-      snackPosition: SnackPosition.BOTTOM,
+      maxWidth: 50.w,
+      snackPosition: SnackPosition.TOP,
       margin: const EdgeInsets.all(20),
       backgroundColor: Colors.green.shade700,
       icon: const Icon(Icons.check_circle, color: Colors.white),
