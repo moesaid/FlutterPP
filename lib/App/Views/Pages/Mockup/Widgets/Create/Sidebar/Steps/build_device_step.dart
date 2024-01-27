@@ -113,8 +113,8 @@ ExpansionTileBorderItem buildDeviceStep({
         rightWidget: BuildSliderWithValueBox(
           controllerTag: 'deviceSize-$uuid',
           min: 0.5,
-          max: 1,
-          divisions: 30,
+          max: 2,
+          divisions: 40,
           fractionDigits: 2,
           defaultValue: scale ?? 1,
           onChanged: (val) => updateDeviceScale?.call(

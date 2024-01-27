@@ -3,6 +3,10 @@ import 'package:flutterpp/App/Views/Pages/Mockup/Widgets/Templates/Types/left_si
 import 'package:flutterpp/App/Views/Pages/Mockup/Widgets/Templates/Types/left_side_title_below.dart';
 import 'package:flutterpp/App/Views/Pages/Mockup/Widgets/Templates/Types/right_side_title_above.dart';
 import 'package:flutterpp/App/Views/Pages/Mockup/Widgets/Templates/Types/right_side_title_below.dart';
+import 'package:flutterpp/App/Views/Pages/Mockup/Widgets/Templates/Types/rotate_right_four.dart';
+import 'package:flutterpp/App/Views/Pages/Mockup/Widgets/Templates/Types/rotate_right_one.dart';
+import 'package:flutterpp/App/Views/Pages/Mockup/Widgets/Templates/Types/rotate_right_three.dart';
+import 'package:flutterpp/App/Views/Pages/Mockup/Widgets/Templates/Types/rotate_right_two.dart';
 import 'package:flutterpp/App/Views/Pages/Mockup/Widgets/Templates/Types/title_down.dart';
 import 'package:flutterpp/App/Views/Pages/Mockup/Widgets/Templates/Types/title_up.dart';
 
@@ -22,6 +26,14 @@ class TemplateLayoutConfig {
         return rightSideTitleBelow();
       case TemplateLayoutEnum.leftSideTitleBelow:
         return leftSideTitleBelow();
+      case TemplateLayoutEnum.rotateRightOne:
+        return rotateRightOne();
+      case TemplateLayoutEnum.rotateRightTwo:
+        return rotateRightTwo();
+      case TemplateLayoutEnum.rotateRightThree:
+        return rotateRightThree();
+      case TemplateLayoutEnum.rotateRightFour:
+        return rotateRightFour();
       default:
         return titleUp();
     }

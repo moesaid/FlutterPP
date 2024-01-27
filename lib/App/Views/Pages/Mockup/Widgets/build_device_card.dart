@@ -19,7 +19,7 @@ class BuildDeviceCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AnimatedContainer(
-      width: 300,
+      width: 350,
       height: 700,
       duration: const Duration(milliseconds: 300),
       decoration: BoxDecoration(
@@ -53,7 +53,7 @@ class BuildDeviceBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 300,
+      width: 350,
       height: 650,
       decoration: BoxDecoration(
         color: config.backgroundColor ?? Colors.white,
@@ -337,7 +337,7 @@ class BuildDeviceHead extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 300,
+      width: 350,
       height: 50,
       color: Colors.grey.withOpacity(0.25),
       padding: const EdgeInsets.symmetric(horizontal: 10),
