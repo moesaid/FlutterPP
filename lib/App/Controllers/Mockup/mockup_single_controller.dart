@@ -24,6 +24,9 @@ class MockupSingleController extends GetxController {
   final _seletedItem = TemplateConfigModel().obs;
   TemplateConfigModel get seletedItem => _seletedItem.value;
 
+  final _copyedItem = TemplateConfigModel().obs;
+  TemplateConfigModel get copyedItem => _copyedItem.value;
+
   @override
   void onInit() {
     _getMockup();
@@ -537,6 +540,57 @@ class MockupSingleController extends GetxController {
       _seletedItem.value = _mockup.value.jsonData!.first;
     }
 
+    update();
+  }
+
+  // copy passed item config to all items
+  void copyItemToAll(TemplateConfigModel item) {
+    // get all items
+    List<TemplateConfigModel> localItems = _mockup.value.jsonData!;
+
+    // replace all items with passed item
+    for (int i = 0; i < localItems.length; i++) {
+      localItems[i] = item.copyWith(id: localItems[i].id);
+    }
+
+    // update mockup
+    _mockup.value = _mockup.value.copyWith(
+      jsonData: localItems,
+    );
+
+    // update selected item
+    _seletedItem.value = item;
+    update();
+  }
+
+  // copy item
+  void copyItem(TemplateConfigModel item) {
+    _copyedItem.value = item;
+  }
+
+  // paste item
+  pasteItem(TemplateConfigModel item) {
+    // find item from mockup
+    TemplateConfigModel? localItem = _mockup.value.jsonData!.firstWhereOrNull(
+      (el) => el.id == item.id,
+    );
+
+    // if item not found return
+    if (localItem == null) return;
+
+    // replace item with copyed item
+    localItem = _copyedItem.value.copyWith(id: localItem.id);
+
+    // update mockup
+    _mockup.value = _mockup.value.copyWith(
+      jsonData: [
+        ..._mockup.value.jsonData!..removeWhere((el) => el.id == item.id),
+        localItem,
+      ],
+    );
+
+    // update selected item
+    _seletedItem.value = localItem;
     update();
   }
 }

@@ -253,6 +253,9 @@ class BuildMockupSinglePageBuddy extends StatelessWidget {
                               child: BuildDeviceCard(
                                 config: config,
                                 onRemove: controller.deleteItem,
+                                copyItemToAll: controller.copyItemToAll,
+                                copyItem: controller.copyItem,
+                                pasteItem: controller.pasteItem,
                                 isSeleted:
                                     controller.seletedItem.id == config.id,
                               ),

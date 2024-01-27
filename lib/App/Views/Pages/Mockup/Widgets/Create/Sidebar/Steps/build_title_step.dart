@@ -87,7 +87,9 @@ ExpansionTileBorderItem buildTitleStep({
         rightWidget: BuildSliderWithValueBox(
           controllerTag: '$widgetTitle-titleFontSize-$uuid',
           defaultValue: titleFontSize ?? 20,
-          max: 30,
+          min: 0,
+          max: 70,
+          divisions: 70,
           onChanged: (val) => onTitleFontSizeChanged?.call(val),
         ),
       ),

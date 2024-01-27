@@ -1,15 +1,19 @@
 import 'dart:math';
 
-import 'package:custom_pop_up_menu/custom_pop_up_menu.dart';
 import 'package:device_frame/device_frame.dart';
 import 'package:flutter/material.dart';
 import 'package:flutterpp/App/Models/template_config_model.dart';
+import 'package:flutterpp/App/Views/Global/build_custom_dropdown.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class BuildDeviceCard extends StatelessWidget {
   final TemplateConfigModel config;
-  final void Function(TemplateConfigModel) onRemove;
+  final void Function(TemplateConfigModel) onRemove,
+      copyItemToAll,
+      pasteItem,
+      copyItem;
+
   final bool isSeleted;
 
   const BuildDeviceCard({
@@ -17,6 +21,9 @@ class BuildDeviceCard extends StatelessWidget {
     required this.config,
     required this.isSeleted,
     required this.onRemove,
+    required this.copyItemToAll,
+    required this.pasteItem,
+    required this.copyItem,
   });
 
   @override
@@ -38,6 +45,9 @@ class BuildDeviceCard extends StatelessWidget {
           BuildDeviceHead(
             config: config,
             onRemove: onRemove,
+            copyItemToAll: copyItemToAll,
+            copyItem: copyItem,
+            pasteItem: pasteItem,
           ),
           Expanded(
             child: BuildDeviceBody(config: config),
@@ -284,14 +294,16 @@ class BuildDeviceBodyHead extends StatelessWidget {
             child: Row(
               mainAxisAlignment: config.titleAlignment!,
               children: [
-                Text(
-                  config.title!,
-                  style: GoogleFonts.getFont(
-                    config.titleFontFamily ?? 'Roboto',
-                    fontSize: config.titleFontSize ?? 18,
-                    color: config.titleColor ?? Colors.black,
-                    height: config.titleLineHeight,
-                    fontWeight: FontWeight.bold,
+                Flexible(
+                  child: Text(
+                    config.title!,
+                    style: GoogleFonts.getFont(
+                      config.titleFontFamily ?? 'Roboto',
+                      fontSize: config.titleFontSize ?? 18,
+                      color: config.titleColor ?? Colors.black,
+                      height: config.titleLineHeight,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                 ),
               ],
@@ -308,14 +320,16 @@ class BuildDeviceBodyHead extends StatelessWidget {
             child: Row(
               mainAxisAlignment: config.subtitleAlignment!,
               children: [
-                Text(
-                  config.subtitle!,
-                  style: GoogleFonts.getFont(
-                    config.subtitleFontFamily ?? 'Roboto',
-                    fontSize: config.subtitleFontSize ?? 16,
-                    color: config.subtitleColor ?? Colors.black,
-                    height: config.subtitleLineHeight,
-                    fontWeight: FontWeight.bold,
+                Flexible(
+                  child: Text(
+                    config.subtitle!,
+                    style: GoogleFonts.getFont(
+                      config.subtitleFontFamily ?? 'Roboto',
+                      fontSize: config.subtitleFontSize ?? 16,
+                      color: config.subtitleColor ?? Colors.black,
+                      height: config.subtitleLineHeight,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                 ),
               ],
@@ -328,16 +342,22 @@ class BuildDeviceBodyHead extends StatelessWidget {
 
 class BuildDeviceHead extends StatelessWidget {
   final TemplateConfigModel config;
-  final void Function(TemplateConfigModel)? onRemove;
+  final void Function(TemplateConfigModel)? onRemove,
+      pasteItem,
+      copyItem,
+      copyItemToAll;
+
   const BuildDeviceHead({
     super.key,
     required this.config,
     this.onRemove,
+    this.copyItemToAll,
+    this.pasteItem,
+    this.copyItem,
   });
 
   @override
   Widget build(BuildContext context) {
-    CustomPopupMenuController menuController = CustomPopupMenuController();
     return Container(
       width: 350,
       height: 50,
@@ -355,38 +375,41 @@ class BuildDeviceHead extends StatelessWidget {
               fontWeight: FontWeight.w600,
             ),
           ),
-          CustomPopupMenu(
-            controller: menuController,
-            verticalMargin: -10,
-            arrowColor: Get.theme.colorScheme.primaryContainer,
-            menuBuilder: () {
-              return Container(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 10,
-                  vertical: 5,
+          BuildCustomDropdown(
+            items: [
+              PopupMenuItem<String>(
+                onTap: () => onRemove?.call(config),
+                child: ListTile(
+                  leading: const Icon(Icons.delete),
+                  title: Text('remove'.capitalize!),
+                  mouseCursor: SystemMouseCursors.click,
                 ),
-                decoration: BoxDecoration(
-                  color: Get.theme.colorScheme.primaryContainer,
-                  borderRadius: BorderRadius.circular(5),
+              ),
+              PopupMenuItem<String>(
+                onTap: () => copyItemToAll?.call(config),
+                child: ListTile(
+                  leading: const Icon(Icons.copy),
+                  title: Text('copy style to all'.capitalize!),
+                  mouseCursor: SystemMouseCursors.click,
                 ),
-                child: Column(
-                  children: [
-                    InkWell(
-                      onTap: () {
-                        menuController.hideMenu();
-                        onRemove?.call(config);
-                      },
-                      child: const Text('remove'),
-                    ),
-                  ],
+              ),
+              PopupMenuItem<String>(
+                onTap: () => pasteItem?.call(config),
+                child: ListTile(
+                  leading: const Icon(Icons.paste),
+                  title: Text('paste style'.capitalize!),
+                  mouseCursor: SystemMouseCursors.click,
                 ),
-              );
-            },
-            pressType: PressType.singleClick,
-            child: const Icon(
-              Icons.more_horiz,
-              color: Colors.white,
-            ),
+              ),
+              PopupMenuItem<String>(
+                onTap: () => copyItem?.call(config),
+                child: ListTile(
+                  leading: const Icon(Icons.copy),
+                  title: Text('copy style'.capitalize!),
+                  mouseCursor: SystemMouseCursors.click,
+                ),
+              ),
+            ],
           ),
         ],
       ),
