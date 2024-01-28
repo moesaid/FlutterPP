@@ -13,9 +13,9 @@ ExpansionTileBorderItem buildBackgroundStep({
   String? mockupId,
   Color? initialColor,
   GradientModel? activeGradient,
-  Function(String)? onImageUpload,
-  Function(Color)? onColorChangedCallback,
-  void Function(GradientModel)? onGradiantChangedCallback,
+  void Function(String, {bool? repeatForAll})? onImageUpload,
+  void Function(Color, {bool? repeatForAll})? onColorChangedCallback,
+  void Function(GradientModel, {bool? repeatForAll})? onGradiantChangedCallback,
   required BuildCreateMockupSidebarSelectedStateController controller,
 }) {
   return ExpansionTileBorderItem(
@@ -108,7 +108,10 @@ ExpansionTileBorderItem buildBackgroundStep({
                 : BuildSelectImageOption(
                     mockupId: mockupId,
                     controllerTag: 'backgroundImage',
-                    callback: (val) => onImageUpload?.call(val),
+                    askForRepeat: true,
+                    callbackForRepeat: (val, {repeatForAll}) {
+                      onImageUpload?.call(val, repeatForAll: repeatForAll);
+                    },
                   ),
       ),
     ],

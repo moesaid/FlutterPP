@@ -9,6 +9,8 @@ class SelectImageOptionController extends GetxController {
   getImage({
     String? mockupId,
     Function(String url)? callback,
+    final Function(String, {bool? repeatForAll})? callbackForRepeat,
+    bool? shouldRepeat,
   }) async {
     Get.showOverlay(
       asyncFunction: () async {
@@ -26,6 +28,8 @@ class SelectImageOptionController extends GetxController {
         );
 
         if (url == null) return;
+
+        callbackForRepeat?.call(url, repeatForAll: shouldRepeat);
 
         callback?.call(url);
       },

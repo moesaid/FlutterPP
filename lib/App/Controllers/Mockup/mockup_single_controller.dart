@@ -39,8 +39,17 @@ class MockupSingleController extends GetxController {
   }
 
   // get mockup
-  void _getMockup() {
-    _mockup.value = Get.arguments as MockupModel;
+  Future<void> _getMockup() async {
+    MockupModel local = Get.arguments as MockupModel;
+
+    MockupModel? item = await MockupServices().getMockupById(id: local.id!);
+
+    if (item == null) {
+      Get.back();
+      return;
+    }
+
+    _mockup.value = item;
     _isLoading.value = false;
     update();
   }
@@ -76,6 +85,7 @@ class MockupSingleController extends GetxController {
     Color? color,
     String? image,
     GradientModel? gradient,
+    bool? repeatForAll,
   }) {
     _seletedItem.value = _seletedItem.value.copyWith(
       backgroundColor: color,
@@ -90,6 +100,33 @@ class MockupSingleController extends GetxController {
             ],
       gradientAngle: gradient?.angle,
     );
+
+    // if repeat for all is true
+    // apply the same background to all items
+
+    if (repeatForAll != null && repeatForAll) {
+      List<TemplateConfigModel> localItems = _mockup.value.jsonData!;
+
+      for (int i = 0; i < localItems.length; i++) {
+        localItems[i] = localItems[i].copyWith(
+          backgroundColor: color,
+          backgroundImage: image,
+          backgroundGradient: gradient == null ||
+                  gradient.colors == null ||
+                  gradient.colors!.isEmpty
+              ? null
+              : [
+                  ColorHelper.hexToColor(gradient.colors!.first),
+                  ColorHelper.hexToColor(gradient.colors!.last),
+                ],
+          gradientAngle: gradient?.angle,
+        );
+      }
+
+      _mockup.value = _mockup.value.copyWith(
+        jsonData: localItems,
+      );
+    }
   }
 
   // update icon toggle
@@ -510,7 +547,7 @@ class MockupSingleController extends GetxController {
     _seletedItem.value = layout;
   }
 
-  void addNewItem() {
+  Future<void> addNewItem() async {
     // create new item
     TemplateConfigModel newItem = TemplateConfigModel.fromJson(
       TemplateLayoutConfig().getLayoutConfig(TemplateLayoutEnum.titleUp),
@@ -523,6 +560,7 @@ class MockupSingleController extends GetxController {
 
     // update selected item
     _seletedItem.value = newItem;
+    await updateMockup();
     update();
   }
 
@@ -593,4 +631,58 @@ class MockupSingleController extends GetxController {
     _seletedItem.value = localItem;
     update();
   }
+
+  // remove background
+  void removeBackground(TemplateConfigModel item) {
+    // return is null
+    if (item.id == null) return;
+
+    // find item from mockup
+    TemplateConfigModel? localItem = _mockup.value.jsonData!.firstWhereOrNull(
+      (el) => el.id == item.id,
+    );
+
+    // if item not found return
+    if (localItem == null) return;
+
+    // replace item with copyed item
+    localItem = localItem.copyWith(
+      backgroundColor: Colors.white,
+      backgroundImage: "",
+      backgroundGradient: [Colors.white, Colors.white],
+    );
+
+    // update mockup
+    _mockup.value = _mockup.value.copyWith(
+      jsonData: [
+        ..._mockup.value.jsonData!..removeWhere((el) => el.id == item.id),
+        localItem,
+      ],
+    );
+
+    update();
+  }
+
+  // // remove background from all items
+  // void removeBackgroundFromAll() {
+  //   // get all items
+  //   List<TemplateConfigModel> localItems = _mockup.value.jsonData!;
+
+  //   // replace all items with passed item
+  //   for (int i = 0; i < localItems.length; i++) {
+  //     localItems[i] = localItems[i].copyWith(
+  //       backgroundColor: Colors.white,
+  //       backgroundImage: "",
+  //       backgroundGradient: [Colors.white, Colors.white],
+  //     );
+  //   }
+
+  //   // update mockup
+  //   _mockup.value = _mockup.value.copyWith(
+  //     jsonData: localItems,
+  //   );
+
+  //   // update selected item
+  //   update();
+  // }
 }

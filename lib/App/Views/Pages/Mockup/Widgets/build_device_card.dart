@@ -13,6 +13,7 @@ class BuildDeviceCard extends StatelessWidget {
       copyItemToAll,
       pasteItem,
       copyItem;
+  // final VoidCallback removeBackgroundFromAll;
 
   final bool isSeleted;
 
@@ -24,6 +25,8 @@ class BuildDeviceCard extends StatelessWidget {
     required this.copyItemToAll,
     required this.pasteItem,
     required this.copyItem,
+    // required this.removeBackground,
+    // required this.removeBackgroundFromAll,
   });
 
   @override
@@ -48,6 +51,8 @@ class BuildDeviceCard extends StatelessWidget {
             copyItemToAll: copyItemToAll,
             copyItem: copyItem,
             pasteItem: pasteItem,
+            // removeBackground: removeBackground,
+            // removeBackgroundFromAll: removeBackgroundFromAll,
           ),
           Expanded(
             child: BuildDeviceBody(config: config),
@@ -73,12 +78,12 @@ class BuildDeviceBody extends StatelessWidget {
       height: 650,
       decoration: BoxDecoration(
         color: config.backgroundColor ?? Colors.white,
-        image: config.backgroundImage != null
-            ? DecorationImage(
-                image: NetworkImage(config.backgroundImage!),
+        image: config.backgroundImage == null || config.backgroundImage == ''
+            ? null
+            : DecorationImage(
+                image: NetworkImage(config.backgroundImage ?? ''),
                 fit: BoxFit.cover,
-              )
-            : null,
+              ),
         gradient: config.backgroundGradient == null
             ? null
             : LinearGradient(
@@ -173,7 +178,7 @@ class BuildDeviceBodyIphoneCase extends StatelessWidget {
                           orientation: Orientation.portrait,
                           screen: Image(
                             fit: BoxFit.cover,
-                            image: config.image == null
+                            image: config.image == null || config.image == ''
                                 ? const AssetImage(
                                     'assets/screenshots/screen_1.jpg')
                                 : NetworkImage(config.image!) as ImageProvider,
@@ -346,6 +351,7 @@ class BuildDeviceHead extends StatelessWidget {
       pasteItem,
       copyItem,
       copyItemToAll;
+  // final VoidCallback removeBackgroundFromAll;
 
   const BuildDeviceHead({
     super.key,
@@ -354,6 +360,8 @@ class BuildDeviceHead extends StatelessWidget {
     this.copyItemToAll,
     this.pasteItem,
     this.copyItem,
+    // this.removeBackground,
+    // required this.removeBackgroundFromAll,
   });
 
   @override
@@ -409,6 +417,22 @@ class BuildDeviceHead extends StatelessWidget {
                   mouseCursor: SystemMouseCursors.click,
                 ),
               ),
+              // PopupMenuItem<String>(
+              //   onTap: () => removeBackground?.call(config),
+              //   child: ListTile(
+              //     leading: const Icon(Icons.delete),
+              //     title: Text('remove background'.capitalize!),
+              //     mouseCursor: SystemMouseCursors.click,
+              //   ),
+              // ),
+              // PopupMenuItem<String>(
+              //   onTap: () => removeBackgroundFromAll.call(),
+              //   child: ListTile(
+              //     leading: const Icon(Icons.delete),
+              //     title: Text('remove background from all'.capitalize!),
+              //     mouseCursor: SystemMouseCursors.click,
+              //   ),
+              // ),
             ],
           ),
         ],

@@ -3,6 +3,7 @@ import 'package:flutterpp/App/Controllers/Mockup/mockup_single_controller.dart';
 import 'package:flutterpp/App/Models/gradient_model.dart';
 import 'package:flutterpp/App/Models/template_config_model.dart';
 import 'package:flutterpp/App/Views/Global/build_appbar.dart';
+import 'package:flutterpp/App/Views/Global/build_loading_switch.dart';
 import 'package:flutterpp/App/Views/Pages/Mockup/Widgets/Create/build_create_mockup_sidebar.dart';
 import 'package:flutterpp/App/Views/Pages/Mockup/Widgets/build_device_card.dart';
 import 'package:flutterpp/Helpers/colors_helper.dart';
@@ -25,19 +26,22 @@ class MockupSinglePage extends GetView<MockupSingleController> {
             onBack: () => Get.back(),
           ),
           body: SafeArea(
-            child: Stack(
-              children: [
-                BuildMockupSinglePageBuddy(controller: controller),
-                BuildMockupSinglePageSidebar(controller: controller),
-                Positioned(
-                  bottom: 10,
-                  left: 10,
-                  child: ElevatedButton(
-                    onPressed: () => controller.updateMockup(),
-                    child: const Text('save'),
-                  ),
-                )
-              ],
+            child: BuildLoadingSwitch(
+              isLoading: controller.isLoading,
+              child: Stack(
+                children: [
+                  BuildMockupSinglePageBuddy(controller: controller),
+                  BuildMockupSinglePageSidebar(controller: controller),
+                  Positioned(
+                    bottom: 10,
+                    left: 10,
+                    child: ElevatedButton(
+                      onPressed: () => controller.updateMockup(),
+                      child: const Text('save'),
+                    ),
+                  )
+                ],
+              ),
             ),
           ),
         );
@@ -68,14 +72,20 @@ class BuildMockupSinglePageSidebar extends StatelessWidget {
 
         // start background
         initialColor: controller.seletedItem.backgroundColor,
-        onColorChangedCallback: (color) {
-          controller.updateBackground(color: color);
+        onColorChangedCallback: (color, {bool? repeatForAll}) {
+          controller.updateBackground(
+            color: color,
+            repeatForAll: repeatForAll,
+          );
         },
-        onGradiantChangedCallback: (gradient) {
-          controller.updateBackground(gradient: gradient);
+        onGradiantChangedCallback: (gradient, {bool? repeatForAll}) {
+          controller.updateBackground(
+            gradient: gradient,
+            repeatForAll: repeatForAll,
+          );
         },
-        onImageUpload: (image) {
-          controller.updateBackground(image: image);
+        onImageUpload: (image, {bool? repeatForAll}) {
+          controller.updateBackground(image: image, repeatForAll: repeatForAll);
         },
         activeGradient: GradientModel(
           colors: controller.seletedItem.backgroundGradient == null
@@ -256,6 +266,9 @@ class BuildMockupSinglePageBuddy extends StatelessWidget {
                                 copyItemToAll: controller.copyItemToAll,
                                 copyItem: controller.copyItem,
                                 pasteItem: controller.pasteItem,
+                                // removeBackground: controller.removeBackground,
+                                // removeBackgroundFromAll:
+                                //     controller.removeBackgroundFromAll,
                                 isSeleted:
                                     controller.seletedItem.id == config.id,
                               ),

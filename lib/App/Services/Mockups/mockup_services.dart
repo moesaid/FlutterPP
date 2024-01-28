@@ -47,4 +47,11 @@ class MockupServices {
 
     return item;
   }
+
+  // get mockup by id
+  Future<MockupModel?> getMockupById({required String id}) async {
+    MockupModel? item = await mockupProvider.getMockupById(mockupId: id);
+
+    return item;
+  }
 }

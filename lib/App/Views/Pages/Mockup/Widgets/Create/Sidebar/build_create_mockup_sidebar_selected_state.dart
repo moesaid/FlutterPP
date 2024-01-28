@@ -154,8 +154,8 @@ class BuildCreateMockupSidebarSelectedState
   final void Function(String)? onTitleChanged,
       onSubtitleChanged,
       onIconUpload,
-      onImageUpload,
       onSecondDeviceImageUpload;
+  final void Function(String, {bool? repeatForAll})? onImageUpload;
   final void Function(String)? onSubtitleFontFamilyChanged,
       onTitleFontFamilyChanged;
 
@@ -166,13 +166,13 @@ class BuildCreateMockupSidebarSelectedState
       onSubtitleFontSizeChanged,
       onTitleLineHeightChanged,
       onSubtitleLineHeightChanged;
-  final void Function(Color)? onTitleColorChanged,
-      onSubtitleColorChanged,
-      onColorChangedCallback;
+  final void Function(Color)? onTitleColorChanged, onSubtitleColorChanged;
+  final void Function(Color, {bool? repeatForAll})? onColorChangedCallback;
   final void Function(double, PaddingDestination)? onTitlePaddingChanged,
       onSubtitlePaddingChanged;
 
-  final void Function(GradientModel)? onGradiantChangedCallback;
+  final void Function(GradientModel, {bool? repeatForAll})?
+      onGradiantChangedCallback;
   final void Function(double padding, PaddingDestination destination)?
       onIconPaddingChanged;
 

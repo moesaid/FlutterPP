@@ -47,9 +47,10 @@ class BuildCreateMockupSidebar extends StatelessWidget {
 
   final void Function(double, PaddingDestination)? onTitlePaddingChanged,
       onSubtitlePaddingChanged;
-  final void Function(String)? onImageUpload;
-  final void Function(Color)? onColorChangedCallback;
-  final void Function(GradientModel)? onGradiantChangedCallback;
+  final void Function(String, {bool? repeatForAll})? onImageUpload;
+  final void Function(Color, {bool? repeatForAll})? onColorChangedCallback;
+  final void Function(GradientModel, {bool? repeatForAll})?
+      onGradiantChangedCallback;
   final void Function(bool)? onIconToggle;
   final void Function(String)? onIconUpload;
   final void Function(MainAxisAlignment alignment)? onIconAlignmentChanged;

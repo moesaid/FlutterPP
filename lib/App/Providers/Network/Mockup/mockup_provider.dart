@@ -8,6 +8,17 @@ class MockupProvider {
   final CallPipeline _callPipeline = CallPipeline();
   final supabase = Supabase.instance.client;
 
+  // get mockup by id
+  Future<MockupModel?> getMockupById({required String mockupId}) async {
+    List<Map> data =
+        await supabase.from('mockups').select('*').eq('id', mockupId).select();
+
+    if (data.isEmpty) return null;
+
+    var localJson = json.encode(data[0]);
+    return MockupModel.fromJson(json.decode(localJson));
+  }
+
   // get all mockups by project id
   Future<List<MockupModel>?> getByProjectId({required String projectId}) async {
     List<Map> data = await supabase
