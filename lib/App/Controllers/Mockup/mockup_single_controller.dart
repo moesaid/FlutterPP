@@ -27,12 +27,19 @@ class MockupSingleController extends GetxController {
   final _copyedItem = TemplateConfigModel().obs;
   TemplateConfigModel get copyedItem => _copyedItem.value;
 
+  final _needToSave = false.obs;
+  bool get needToSave => _needToSave.value;
+
   @override
   void onInit() {
     _getMockup();
 
     ever(_seletedItem, (_) {
       _updateMockupData();
+
+      if (!_needToSave.value) {
+        _needToSave.value = true;
+      }
     });
 
     super.onInit();
@@ -67,6 +74,7 @@ class MockupSingleController extends GetxController {
     await Get.showOverlay(
       asyncFunction: () async {
         await mockupServices.updateMockup(mockup: _mockup.value);
+        _needToSave.value = false;
       },
       loadingWidget: const BuildOverlay(),
     );
@@ -87,13 +95,6 @@ class MockupSingleController extends GetxController {
     GradientModel? gradient,
     bool? repeatForAll,
   }) {
-    print({
-      'color': color,
-      'image': image,
-      'gradient': gradient,
-      'repeatForAll': repeatForAll,
-    });
-
     // if repeat for all is true
     // apply the same background to all items
 

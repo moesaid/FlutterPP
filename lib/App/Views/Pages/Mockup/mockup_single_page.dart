@@ -32,12 +32,41 @@ class MockupSinglePage extends GetView<MockupSingleController> {
                 children: [
                   BuildMockupSinglePageBuddy(controller: controller),
                   BuildMockupSinglePageSidebar(controller: controller),
-                  Positioned(
-                    bottom: 10,
-                    left: 10,
-                    child: ElevatedButton(
-                      onPressed: () => controller.updateMockup(),
-                      child: const Text('save'),
+                  Obx(
+                    () => Positioned(
+                      bottom: 0,
+                      right: 0,
+                      child: Container(
+                        padding: EdgeInsets.all(10.sp),
+                        width: 300,
+                        decoration: BoxDecoration(
+                          gradient: !controller.needToSave
+                              ? null
+                              : LinearGradient(
+                                  colors: [
+                                    Get.theme.colorScheme.secondary
+                                        .withOpacity(0.1),
+                                    Get.theme.colorScheme.secondary,
+                                  ],
+                                  begin: Alignment.topCenter,
+                                  end: Alignment.bottomCenter,
+                                ),
+                          color: Get.theme.colorScheme.primaryContainer
+                              .withOpacity(controller.needToSave ? 0.3 : 1),
+                          border: Border(
+                            top: BorderSide(
+                              width: 1,
+                              color: Get.theme.colorScheme.secondaryContainer,
+                            ),
+                          ),
+                        ),
+                        child: ElevatedButton(
+                          onPressed: !controller.needToSave
+                              ? null
+                              : () => controller.updateMockup(),
+                          child: Text('save'.capitalize!),
+                        ),
+                      ),
                     ),
                   )
                 ],

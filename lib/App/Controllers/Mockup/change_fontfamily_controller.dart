@@ -22,7 +22,11 @@ class ChangeFontfamilyController extends GetxController {
   }) {
     _preActiveFontFamily.value = GoogleFonts.getFont(key!);
     _fontKey.value = key;
-    update();
+
+    // make sure widegt is built first
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      update();
+    });
   }
 
   // save font family
