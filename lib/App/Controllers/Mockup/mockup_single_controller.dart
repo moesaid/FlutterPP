@@ -87,19 +87,12 @@ class MockupSingleController extends GetxController {
     GradientModel? gradient,
     bool? repeatForAll,
   }) {
-    _seletedItem.value = _seletedItem.value.copyWith(
-      backgroundColor: color,
-      backgroundImage: image,
-      backgroundGradient: gradient == null ||
-              gradient.colors == null ||
-              gradient.colors!.isEmpty
-          ? null
-          : [
-              ColorHelper.hexToColor(gradient.colors!.first),
-              ColorHelper.hexToColor(gradient.colors!.last),
-            ],
-      gradientAngle: gradient?.angle,
-    );
+    print({
+      'color': color,
+      'image': image,
+      'gradient': gradient,
+      'repeatForAll': repeatForAll,
+    });
 
     // if repeat for all is true
     // apply the same background to all items
@@ -126,7 +119,26 @@ class MockupSingleController extends GetxController {
       _mockup.value = _mockup.value.copyWith(
         jsonData: localItems,
       );
+
+      return;
     }
+
+    // if repeat for all is false or null
+    _seletedItem.value = _seletedItem.value.copyWith(
+      backgroundColor: color,
+      backgroundImage: image,
+      backgroundGradient: gradient == null ||
+              gradient.colors == null ||
+              gradient.colors!.isEmpty
+          ? null
+          : [
+              ColorHelper.hexToColor(gradient.colors!.first),
+              ColorHelper.hexToColor(gradient.colors!.last),
+            ],
+      gradientAngle: gradient?.angle,
+    );
+
+    print(_seletedItem.value.backgroundImage);
   }
 
   // update icon toggle

@@ -29,7 +29,10 @@ class SelectImageOptionController extends GetxController {
 
         if (url == null) return;
 
-        callbackForRepeat?.call(url, repeatForAll: shouldRepeat);
+        if (shouldRepeat != null) {
+          callbackForRepeat?.call(url, repeatForAll: shouldRepeat);
+          return;
+        }
 
         callback?.call(url);
       },
