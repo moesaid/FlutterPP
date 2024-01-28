@@ -280,9 +280,23 @@ class BuildMockupSinglePageBuddy extends StatelessWidget {
                         ),
                       ),
                       const SizedBox(width: 10),
-                      ElevatedButton(
-                        onPressed: () => controller.addNewItem(),
-                        child: Text('add new Screen'.capitalize!),
+                      Container(
+                        height: 694,
+                        width: 350,
+                        decoration: BoxDecoration(
+                          color: Get.theme.colorScheme.primaryContainer
+                              .withOpacity(0.3),
+                          border: Border.all(
+                            color: Get.theme.colorScheme.secondaryContainer,
+                            width: 1,
+                          ),
+                        ),
+                        child: Center(
+                          child: ElevatedButton(
+                            onPressed: () => controller.addNewItem(),
+                            child: Text('add new Screen'.capitalize!),
+                          ),
+                        ),
                       ),
                       SizedBox(width: 140.sp),
                     ],

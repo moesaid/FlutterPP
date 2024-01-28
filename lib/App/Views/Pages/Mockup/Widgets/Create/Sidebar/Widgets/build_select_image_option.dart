@@ -54,7 +54,6 @@ class BuildSelectImageOption extends StatelessWidget {
                 );
               }
             } else {
-              print('no thanks');
               _.getImage(
                 mockupId: mockupId,
                 callback: callback,
