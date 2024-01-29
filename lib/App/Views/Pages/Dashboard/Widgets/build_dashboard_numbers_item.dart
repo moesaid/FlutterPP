@@ -1,15 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:flutterpp/App/Controllers/dashboard_controller.dart';
 import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
 
 class BuildDashboardNumbersItem extends StatelessWidget {
   const BuildDashboardNumbersItem({
     super.key,
-    required this.controller,
+    this.numbers,
+    this.title,
+    this.onTap,
+    this.icon,
   });
 
-  final DashboardController controller;
+  final int? numbers;
+  final String? title;
+  final VoidCallback? onTap;
+  final IconData? icon;
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +42,7 @@ class BuildDashboardNumbersItem extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'team members'.capitalize!,
+                        title?.capitalize ?? 'Title',
                         style: TextStyle(
                           fontSize: 4.sp,
                           fontWeight: FontWeight.w400,
@@ -47,7 +52,7 @@ class BuildDashboardNumbersItem extends StatelessWidget {
                         ),
                       ),
                       Text(
-                        controller.teamMembers.length.toString(),
+                        numbers?.toString() ?? '0',
                         style: TextStyle(
                           fontSize: 10.sp,
                           fontWeight: FontWeight.w800,
@@ -62,7 +67,7 @@ class BuildDashboardNumbersItem extends StatelessWidget {
                       color: Colors.indigo,
                     ),
                     child: Icon(
-                      Icons.supervised_user_circle_rounded,
+                      icon ?? Icons.supervised_user_circle_rounded,
                       size: 10.sp,
                     ),
                   ),
@@ -74,7 +79,7 @@ class BuildDashboardNumbersItem extends StatelessWidget {
           Padding(
             padding: EdgeInsets.all(1.sp),
             child: TextButton(
-              onPressed: () => print('object'),
+              onPressed: onTap,
               child: Text(
                 'view all'.capitalize!,
                 style: TextStyle(
