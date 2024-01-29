@@ -4,6 +4,7 @@ import 'package:flutterpp/App/Services/Team/team_services.dart';
 import 'package:flutterpp/App/Views/Pages/Dashboard/dashboard_page.dart';
 import 'package:flutterpp/App/Views/Pages/Mockup/mockup_index_page.dart';
 import 'package:flutterpp/App/Views/Pages/Project/Pages/project_index_page.dart';
+import 'package:flutterpp/App/Views/Pages/Test/test_page.dart';
 import 'package:get/get.dart';
 import 'package:heroicons/heroicons.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
@@ -56,7 +57,7 @@ class HomeController extends GetxController {
       'title': 'witeboard',
       'icon': HeroIcons.paintBrush,
       'isActive': false,
-      'tab': const Text('witeboard'),
+      'tab': const TestPage(),
     },
     {
       'title': 'mockups',

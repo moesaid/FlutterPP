@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:device_frame/device_frame.dart';
 import 'package:flutter/material.dart';
 import 'package:flutterpp/App/Enums/padding_destination_enum.dart';
@@ -8,6 +10,7 @@ import 'package:flutterpp/App/Models/template_config_model.dart';
 import 'package:flutterpp/App/Services/Mockups/mockup_export_services.dart';
 import 'package:flutterpp/App/Services/Mockups/mockup_services.dart';
 import 'package:flutterpp/App/Views/Global/build_overlay.dart';
+import 'package:flutterpp/App/Views/Global/build_time_overlay.dart';
 import 'package:flutterpp/App/Views/Pages/Mockup/Widgets/Templates/template_layout_config.dart';
 import 'package:flutterpp/Helpers/colors_helper.dart';
 import 'package:get/get.dart';
@@ -678,40 +681,13 @@ class MockupSingleController extends GetxController {
   }
 
   export() async {
-    try {
-      print('exporting');
-      await Get.showOverlay(
-        asyncFunction: () async {
-          await MockupExportServices().export(items: _mockup.value.jsonData!);
-        },
-        loadingWidget: const BuildOverlay(),
-      );
-      print('exported');
-    } catch (e) {
-      print(e);
-    }
+    Get.showOverlay(
+      asyncFunction: () async {
+        await MockupExportServices().export(items: _mockup.value.jsonData!);
+      },
+      loadingWidget: const BuildTimeOverlay(),
+      opacity: 0.8,
+      opacityColor: Get.theme.colorScheme.background,
+    );
   }
-
-  // // remove background from all items
-  // void removeBackgroundFromAll() {
-  //   // get all items
-  //   List<TemplateConfigModel> localItems = _mockup.value.jsonData!;
-
-  //   // replace all items with passed item
-  //   for (int i = 0; i < localItems.length; i++) {
-  //     localItems[i] = localItems[i].copyWith(
-  //       backgroundColor: Colors.white,
-  //       backgroundImage: "",
-  //       backgroundGradient: [Colors.white, Colors.white],
-  //     );
-  //   }
-
-  //   // update mockup
-  //   _mockup.value = _mockup.value.copyWith(
-  //     jsonData: localItems,
-  //   );
-
-  //   // update selected item
-  //   update();
-  // }
 }

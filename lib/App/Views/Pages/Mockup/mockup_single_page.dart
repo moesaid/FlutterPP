@@ -40,19 +40,16 @@ class MockupSinglePage extends GetView<MockupSingleController> {
                         padding: EdgeInsets.all(10.sp),
                         width: 300,
                         decoration: BoxDecoration(
-                          gradient: !controller.needToSave
-                              ? null
-                              : LinearGradient(
-                                  colors: [
-                                    Get.theme.colorScheme.secondary
-                                        .withOpacity(0.1),
-                                    Get.theme.colorScheme.secondary,
-                                  ],
-                                  begin: Alignment.topCenter,
-                                  end: Alignment.bottomCenter,
-                                ),
+                          gradient: LinearGradient(
+                            colors: [
+                              Get.theme.colorScheme.secondary.withOpacity(0.1),
+                              Get.theme.colorScheme.secondary,
+                            ],
+                            begin: Alignment.topCenter,
+                            end: Alignment.bottomCenter,
+                          ),
                           color: Get.theme.colorScheme.primaryContainer
-                              .withOpacity(controller.needToSave ? 0.3 : 1),
+                              .withOpacity(0.3),
                           border: Border(
                             top: BorderSide(
                               width: 1,

@@ -4,8 +4,8 @@ import 'package:loading_animation_widget/loading_animation_widget.dart';
 
 class BuildOverlay extends StatelessWidget {
   const BuildOverlay({
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
