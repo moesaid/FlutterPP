@@ -29,7 +29,6 @@ class DashboardPage extends GetView<DashboardController> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    // const BuildTimeOverlay(),
                     Text(
                       'Hey ${controller.profile.fullName} 🖐️'.capitalize!,
                       style: TextStyle(
