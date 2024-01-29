@@ -23,8 +23,6 @@ class FileManegerProvider {
       name: 'get directory path',
     );
 
-    print('📁path: $path');
-
     return path;
   }
 
@@ -68,7 +66,8 @@ class FileManegerProvider {
   Future<void> saveFileWithoutLocation({
     required String fileName,
     required String fileExtension,
-    required String data,
+    String? data,
+    Uint8List? bytes,
   }) async {
     await callPipeline.futurePipeline(
       future: () async {
@@ -82,7 +81,13 @@ class FileManegerProvider {
         }
 
         // Write to the file
-        final Uint8List fileData = Uint8List.fromList(data.codeUnits);
+        final Uint8List fileData;
+        if (bytes != null) {
+          fileData = bytes;
+        } else {
+          fileData = Uint8List.fromList(data!.codeUnits);
+        }
+
         final XFile textFile = XFile.fromData(
           fileData,
           mimeType: fileExtension,
@@ -98,8 +103,9 @@ class FileManegerProvider {
   Future<void> saveFile({
     required String fileName,
     required String fileExtension,
-    required String data,
     required String location,
+    String? data,
+    Uint8List? bytes,
     String? mimeType,
   }) async {
     await callPipeline.futurePipeline(
@@ -111,7 +117,13 @@ class FileManegerProvider {
         }
 
         // Write to the file
-        final Uint8List fileData = Uint8List.fromList(data.codeUnits);
+        final Uint8List fileData;
+        if (bytes != null) {
+          fileData = bytes;
+        } else {
+          fileData = Uint8List.fromList(data!.codeUnits);
+        }
+
         final XFile textFile = XFile.fromData(
           fileData,
           mimeType: mimeType,
@@ -126,18 +138,17 @@ class FileManegerProvider {
   }
 
   // create folder
-  Future<Directory?> createFolder({
+  Future<void> createFolder({
     required String folderName,
     required String location,
   }) async {
-    await callPipeline.futurePipeline(
+    return await callPipeline.futurePipeline(
       future: () async {
         // Create a folder on the desktop
-        return await Directory('$location/$folderName').create(recursive: true);
+        return Directory('$location/$folderName').createSync();
       },
       name: 'create folder',
     );
-    return null;
   }
 
   // delete file

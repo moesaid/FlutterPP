@@ -9,6 +9,7 @@ import 'package:google_fonts/google_fonts.dart';
 
 class BuildDeviceCard extends StatelessWidget {
   final TemplateConfigModel config;
+  final double? height, width;
   final void Function(TemplateConfigModel) onRemove,
       copyItemToAll,
       pasteItem,
@@ -25,6 +26,8 @@ class BuildDeviceCard extends StatelessWidget {
     required this.copyItemToAll,
     required this.pasteItem,
     required this.copyItem,
+    this.height,
+    this.width,
     // required this.removeBackground,
     // required this.removeBackgroundFromAll,
   });
@@ -32,8 +35,8 @@ class BuildDeviceCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AnimatedContainer(
-      width: 350,
-      height: 700,
+      width: width ?? 350,
+      height: height ?? 700,
       duration: const Duration(milliseconds: 300),
       decoration: BoxDecoration(
         border: Border.all(
@@ -51,11 +54,14 @@ class BuildDeviceCard extends StatelessWidget {
             copyItemToAll: copyItemToAll,
             copyItem: copyItem,
             pasteItem: pasteItem,
-            // removeBackground: removeBackground,
-            // removeBackgroundFromAll: removeBackgroundFromAll,
+            width: width,
           ),
           Expanded(
-            child: BuildDeviceBody(config: config),
+            child: BuildDeviceBody(
+              config: config,
+              height: height,
+              width: width,
+            ),
           ),
         ],
       ),
@@ -65,17 +71,22 @@ class BuildDeviceCard extends StatelessWidget {
 
 class BuildDeviceBody extends StatelessWidget {
   final TemplateConfigModel config;
+  final DeviceInfo? device;
+  final double? height, width;
 
   const BuildDeviceBody({
     super.key,
     required this.config,
+    this.device,
+    this.height,
+    this.width,
   });
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 350,
-      height: 650,
+      width: width ?? 350,
+      height: height ?? 650,
       decoration: BoxDecoration(
         color: config.backgroundColor ?? Colors.white,
         image: config.backgroundImage == null || config.backgroundImage == ''
@@ -110,7 +121,12 @@ class BuildDeviceBody extends StatelessWidget {
           spacing: config.bodySpacing!,
           children: [
             BuildDeviceBodyHead(config: config),
-            BuildDeviceBodyIphoneCase(config: config),
+            BuildDeviceBodyIphoneCase(
+              config: config,
+              device: device,
+              height: height,
+              width: width,
+            ),
           ],
         ),
       ),
@@ -120,9 +136,14 @@ class BuildDeviceBody extends StatelessWidget {
 
 class BuildDeviceBodyIphoneCase extends StatelessWidget {
   final TemplateConfigModel config;
+  final DeviceInfo? device;
+  final double? height, width;
   const BuildDeviceBodyIphoneCase({
     super.key,
     required this.config,
+    this.device,
+    this.height,
+    this.width,
   });
 
   @override
@@ -144,8 +165,8 @@ class BuildDeviceBodyIphoneCase extends StatelessWidget {
                       0.0,
                     ),
                     child: SizedBox(
-                      width: 250,
-                      height: 500,
+                      width: width != null ? (width! - 100) : 250,
+                      height: height != null ? (height! - 100) : 500,
                       child: Container(
                         decoration: BoxDecoration(
                           border: config.showStroke == true
@@ -168,12 +189,14 @@ class BuildDeviceBodyIphoneCase extends StatelessWidget {
                           ],
                         ),
                         child: DeviceFrame(
-                          device: config.firstDeviceFrame == null
-                              ? Devices.ios.iPhone12ProMax
-                              : Devices.all.firstWhereOrNull(
-                                    (el) => el.name == config.firstDeviceFrame!,
-                                  ) ??
-                                  Devices.ios.iPhone12ProMax,
+                          device: device ??
+                              (config.firstDeviceFrame == null
+                                  ? Devices.ios.iPhone12ProMax
+                                  : Devices.all.firstWhereOrNull(
+                                        (el) =>
+                                            el.name == config.firstDeviceFrame!,
+                                      ) ??
+                                      Devices.ios.iPhone12ProMax),
                           isFrameVisible: config.showFrame ?? true,
                           orientation: Orientation.portrait,
                           screen: Image(
@@ -204,8 +227,8 @@ class BuildDeviceBodyIphoneCase extends StatelessWidget {
                       0.0,
                     ),
                     child: SizedBox(
-                      width: 250,
-                      height: 500,
+                      width: width != null ? (width! - 100) : 250,
+                      height: width != null ? (height! - 100) : 500,
                       child: Container(
                         decoration: BoxDecoration(
                           border: config.showSecondStroke == true
@@ -230,13 +253,15 @@ class BuildDeviceBodyIphoneCase extends StatelessWidget {
                           ],
                         ),
                         child: DeviceFrame(
-                          device: config.secondDeviceFrame == null
-                              ? Devices.ios.iPhone12ProMax
-                              : Devices.all.firstWhereOrNull(
-                                    (el) =>
-                                        el.name == config.secondDeviceFrame!,
-                                  ) ??
-                                  Devices.ios.iPhone12ProMax,
+                          device: device ??
+                              (config.secondDeviceFrame == null
+                                  ? Devices.ios.iPhone12ProMax
+                                  : Devices.all.firstWhereOrNull(
+                                        (el) =>
+                                            el.name ==
+                                            config.secondDeviceFrame!,
+                                      ) ??
+                                      Devices.ios.iPhone12ProMax),
                           isFrameVisible: config.showSecondFrame ?? true,
                           orientation: Orientation.portrait,
                           screen: Image(
@@ -351,7 +376,8 @@ class BuildDeviceHead extends StatelessWidget {
       pasteItem,
       copyItem,
       copyItemToAll;
-  // final VoidCallback removeBackgroundFromAll;
+
+  final double? height, width;
 
   const BuildDeviceHead({
     super.key,
@@ -360,15 +386,15 @@ class BuildDeviceHead extends StatelessWidget {
     this.copyItemToAll,
     this.pasteItem,
     this.copyItem,
-    // this.removeBackground,
-    // required this.removeBackgroundFromAll,
+    this.height,
+    this.width,
   });
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 350,
-      height: 50,
+      width: width ?? 350,
+      height: height ?? 50,
       color: Colors.grey.withOpacity(0.25),
       padding: const EdgeInsets.symmetric(horizontal: 10),
       child: Row(

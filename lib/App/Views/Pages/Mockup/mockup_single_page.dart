@@ -60,11 +60,26 @@ class MockupSinglePage extends GetView<MockupSingleController> {
                             ),
                           ),
                         ),
-                        child: ElevatedButton(
-                          onPressed: !controller.needToSave
-                              ? null
-                              : () => controller.updateMockup(),
-                          child: Text('save'.capitalize!),
+                        child: Row(
+                          children: [
+                            ElevatedButton(
+                              onPressed: !controller.needToSave
+                                  ? null
+                                  : () => controller.updateMockup(),
+                              child: Text('save'.capitalize!),
+                            ),
+                            const SizedBox(width: 10),
+                            Expanded(
+                              child: ElevatedButton(
+                                style: ElevatedButton.styleFrom(
+                                  backgroundColor:
+                                      Get.theme.colorScheme.background,
+                                ),
+                                onPressed: () => controller.export(),
+                                child: Text('export'.capitalize!),
+                              ),
+                            ),
+                          ],
                         ),
                       ),
                     ),
@@ -271,7 +286,7 @@ class BuildMockupSinglePageBuddy extends StatelessWidget {
                   child: Row(
                     children: [
                       SizedBox(
-                        height: 700,
+                        height: 699,
                         child: ListView.separated(
                           scrollDirection: Axis.horizontal,
                           shrinkWrap: true,
@@ -295,9 +310,8 @@ class BuildMockupSinglePageBuddy extends StatelessWidget {
                                 copyItemToAll: controller.copyItemToAll,
                                 copyItem: controller.copyItem,
                                 pasteItem: controller.pasteItem,
-                                // removeBackground: controller.removeBackground,
-                                // removeBackgroundFromAll:
-                                //     controller.removeBackgroundFromAll,
+                                width: 322.5,
+                                height: 699,
                                 isSeleted:
                                     controller.seletedItem.id == config.id,
                               ),
@@ -310,8 +324,8 @@ class BuildMockupSinglePageBuddy extends StatelessWidget {
                       ),
                       const SizedBox(width: 10),
                       Container(
-                        height: 694,
-                        width: 350,
+                        height: 699,
+                        width: 322.5,
                         decoration: BoxDecoration(
                           color: Get.theme.colorScheme.primaryContainer
                               .withOpacity(0.3),

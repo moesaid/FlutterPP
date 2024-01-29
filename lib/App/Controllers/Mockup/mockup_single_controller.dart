@@ -5,6 +5,7 @@ import 'package:flutterpp/App/Enums/template_layout_enum.dart';
 import 'package:flutterpp/App/Models/gradient_model.dart';
 import 'package:flutterpp/App/Models/mockup_model.dart';
 import 'package:flutterpp/App/Models/template_config_model.dart';
+import 'package:flutterpp/App/Services/Mockups/mockup_export_services.dart';
 import 'package:flutterpp/App/Services/Mockups/mockup_services.dart';
 import 'package:flutterpp/App/Views/Global/build_overlay.dart';
 import 'package:flutterpp/App/Views/Pages/Mockup/Widgets/Templates/template_layout_config.dart';
@@ -674,6 +675,21 @@ class MockupSingleController extends GetxController {
     );
 
     update();
+  }
+
+  export() async {
+    try {
+      print('exporting');
+      await Get.showOverlay(
+        asyncFunction: () async {
+          await MockupExportServices().export(items: _mockup.value.jsonData!);
+        },
+        loadingWidget: const BuildOverlay(),
+      );
+      print('exported');
+    } catch (e) {
+      print(e);
+    }
   }
 
   // // remove background from all items

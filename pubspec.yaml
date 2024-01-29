@@ -27,10 +27,12 @@ dependencies:
   google_fonts: ^6.1.0
   flex_color_picker: ^3.2.2
   sizer: ^2.0.15
-  file_selector: ^1.0.1
+  file_selector: ^1.0.2
   awesome_side_sheet: ^0.0.3
   device_frame: ^1.1.0
   flutter_platform_alert: ^0.5.1
+  screenshot: ^2.1.0
+  image: ^4.1.4
 
 # dev_dependencies
 dev_dependencies:
