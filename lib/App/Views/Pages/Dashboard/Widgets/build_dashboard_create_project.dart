@@ -1,7 +1,7 @@
 import 'package:awesome_side_sheet/Enums/sheet_position.dart';
 import 'package:awesome_side_sheet/side_sheet.dart';
 import 'package:flutter/material.dart';
-import 'package:flutterpp/App/Controllers/dashboard_controller.dart';
+import 'package:flutterpp/App/Controllers/Dashboard/dashboard_controller.dart';
 import 'package:flutterpp/App/Views/Pages/Project/Pages/project_create_page.dart';
 import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';

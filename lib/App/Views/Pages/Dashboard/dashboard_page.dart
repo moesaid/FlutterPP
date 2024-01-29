@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutterpp/App/Controllers/dashboard_controller.dart';
+import 'package:flutterpp/App/Controllers/Dashboard/dashboard_controller.dart';
 import 'package:flutterpp/App/Views/Global/build_loading_switch.dart';
 import 'package:flutterpp/App/Views/Pages/Dashboard/Sections/build_dashboard_project_section.dart';
 import 'package:flutterpp/App/Views/Pages/Dashboard/Widgets/build_dashboard_env_check.dart';

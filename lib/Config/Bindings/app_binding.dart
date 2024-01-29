@@ -2,6 +2,7 @@ import 'package:flutterpp/App/Controllers/Auth/login_controller.dart';
 import 'package:flutterpp/App/Controllers/Auth/signup_controller.dart';
 import 'package:flutterpp/App/Controllers/Auth/splash_controller.dart';
 import 'package:flutterpp/App/Controllers/Auth/verify_otp_controller.dart';
+import 'package:flutterpp/App/Controllers/Dashboard/dashboard_controller.dart';
 import 'package:flutterpp/App/Controllers/Home/home_controller.dart';
 import 'package:flutterpp/App/Controllers/Mockup/Micro/alignment_option_controller.dart';
 import 'package:flutterpp/App/Controllers/Mockup/Micro/bool_toggle_controller.dart';
@@ -17,7 +18,6 @@ import 'package:flutterpp/App/Controllers/Mockup/mockup_single_controller.dart';
 import 'package:flutterpp/App/Controllers/Mockup/pickup_color_controller.dart';
 import 'package:flutterpp/App/Controllers/Project/project_single_controller.dart';
 import 'package:flutterpp/App/Controllers/Team/no_team_controller.dart';
-import 'package:flutterpp/App/Controllers/dashboard_controller.dart';
 import 'package:get/get.dart';
 
 class AppBinding implements Bindings {

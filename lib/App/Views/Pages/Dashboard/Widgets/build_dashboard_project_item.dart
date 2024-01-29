@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutterpp/App/Controllers/dashboard_controller.dart';
+import 'package:flutterpp/App/Controllers/Dashboard/dashboard_controller.dart';
 import 'package:flutterpp/App/Models/project_model.dart';
 import 'package:flutterpp/App/Views/Pages/Project/Widgets/build_project_avatar.dart';
 import 'package:flutterpp/Helpers/colors_helper.dart';
