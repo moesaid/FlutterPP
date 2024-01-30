@@ -24,14 +24,14 @@ import 'package:get/get.dart';
 class AppBinding implements Bindings {
   @override
   void dependencies() {
+    // permanent
+    Get.put(HomeController(), permanent: true);
+
     // Auth
     Get.lazyPut<SplashController>(() => SplashController());
     Get.lazyPut<SignupController>(() => SignupController());
     Get.lazyPut<LoginController>(() => LoginController());
     Get.lazyPut<VerifyOtpController>(() => VerifyOtpController());
-
-    // Home
-    Get.lazyPut<HomeController>(() => HomeController());
 
     // Dashboard
     Get.lazyPut<DashboardController>(() => DashboardController());

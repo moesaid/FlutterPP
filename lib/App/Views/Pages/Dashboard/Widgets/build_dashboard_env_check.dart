@@ -235,6 +235,7 @@ class BuildEnvCheckDataState extends StatelessWidget {
                 return ListTile(
                   dense: true,
                   contentPadding: EdgeInsets.zero,
+                  visualDensity: VisualDensity.compact,
                   title: Text(
                     controller.checkEnvModel.flutterDoctor![index].body!.trim(),
                     maxLines: 1,
@@ -243,7 +244,7 @@ class BuildEnvCheckDataState extends StatelessWidget {
                       fontSize: 5.sp,
                       color:
                           controller.checkEnvModel.flutterDoctor![index].head!
-                              ? Colors.green
+                              ? Colors.green.withOpacity(0.5)
                               : Colors.red,
                     ),
                   ),
@@ -253,7 +254,7 @@ class BuildEnvCheckDataState extends StatelessWidget {
                         ? Icons.check_circle
                         : Icons.cancel,
                     color: controller.checkEnvModel.flutterDoctor![index].head!
-                        ? Colors.green
+                        ? Colors.green.withOpacity(0.5)
                         : Colors.red,
                   ),
                 );

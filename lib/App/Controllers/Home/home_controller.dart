@@ -87,6 +87,8 @@ class HomeController extends GetxController {
 
   // change tab
   void changeTab(int index) {
+    print(index);
+
     for (var element in _tabs) {
       element['isActive'] = false;
     }
