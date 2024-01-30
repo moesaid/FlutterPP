@@ -12,8 +12,11 @@ class CmdEnvServices {
     bool? isFlutter = await cmdEnvProvider.checkFlutterInstallation();
     String? flutterVersion = await cmdEnvProvider.checkFlutterVersion();
     String? dartVersion = await cmdEnvProvider.checkDartVersion();
-    List<Map<String, dynamic>>? resDoc =
-        await cmdEnvProvider.runFlutterDoctor();
+
+    List<Map<String, dynamic>>? resDoc = [];
+    if (isDart == true && isFlutter == true) {
+      resDoc = await cmdEnvProvider.runFlutterDoctor();
+    }
 
     Map<String, dynamic> res = {
       'dart_installed': isDart,

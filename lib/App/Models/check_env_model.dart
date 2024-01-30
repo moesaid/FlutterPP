@@ -31,7 +31,7 @@ class CheckEnvModel {
     data['flutter_installed'] = flutterInstalled;
     data['flutter_version'] = flutterVersion;
     data['dart_version'] = dartVersion;
-    if (flutterDoctor != null) {
+    if (flutterDoctor != null && flutterDoctor!.isNotEmpty) {
       data['flutter_doctor'] = flutterDoctor!.map((v) => v.toJson()).toList();
     }
     return data;
