@@ -7,6 +7,20 @@ class ProjectProvider {
   // supabase
   final supabase = Supabase.instance.client;
 
+  // get project by id
+  Future<ProjectModel?> getProjectById({required String projectId}) async {
+    List<Map> data = await supabase
+        .from('projects')
+        .select('*')
+        .eq('id', projectId)
+        .select();
+
+    if (data.isEmpty) return null;
+
+    var localJson = json.encode(data[0]);
+    return ProjectModel.fromJson(json.decode(localJson));
+  }
+
   // get all projects by team id
   Future<List<ProjectModel>> getProjects({required String teamId}) async {
     List<Map> data = await supabase

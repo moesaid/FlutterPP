@@ -6,6 +6,14 @@ class ProjectServices {
   final CallPipeline _callPipeline = CallPipeline();
   final ProjectProvider _projectProvider = ProjectProvider();
 
+  // get project by id
+  Future<ProjectModel?> getProjectById({required String projectId}) async {
+    return await _callPipeline.futurePipeline(
+      future: () => _projectProvider.getProjectById(projectId: projectId),
+      name: 'getProjectById',
+    );
+  }
+
   // get all projects by team id
   Future<List<ProjectModel>?> getProjects({required String teamId}) async {
     List<ProjectModel>? projects = await _callPipeline.futurePipeline(
