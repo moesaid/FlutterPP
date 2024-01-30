@@ -1,6 +1,8 @@
 PODS:
   - app_links (1.0.0):
     - FlutterMacOS
+  - device_info_plus (0.0.1):
+    - FlutterMacOS
   - file_selector_macos (0.0.1):
     - FlutterMacOS
   - flutter_platform_alert (0.0.1):
@@ -21,6 +23,7 @@ PODS:
 
 DEPENDENCIES:
   - app_links (from `Flutter/ephemeral/.symlinks/plugins/app_links/macos`)
+  - device_info_plus (from `Flutter/ephemeral/.symlinks/plugins/device_info_plus/macos`)
   - file_selector_macos (from `Flutter/ephemeral/.symlinks/plugins/file_selector_macos/macos`)
   - flutter_platform_alert (from `Flutter/ephemeral/.symlinks/plugins/flutter_platform_alert/macos`)
   - FlutterMacOS (from `Flutter/ephemeral`)
@@ -33,6 +36,8 @@ DEPENDENCIES:
 EXTERNAL SOURCES:
   app_links:
     :path: Flutter/ephemeral/.symlinks/plugins/app_links/macos
+  device_info_plus:
+    :path: Flutter/ephemeral/.symlinks/plugins/device_info_plus/macos
   file_selector_macos:
     :path: Flutter/ephemeral/.symlinks/plugins/file_selector_macos/macos
   flutter_platform_alert:
@@ -52,6 +57,7 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   app_links: 4481ed4d71f384b0c3ae5016f4633aa73d32ff67
+  device_info_plus: 5401765fde0b8d062a2f8eb65510fb17e77cf07f
   file_selector_macos: 468fb6b81fac7c0e88d71317f3eec34c3b008ff9
   flutter_platform_alert: b21b2b7d801e71c12ce9ffab618ff114ca9fc903
   FlutterMacOS: 8f6f14fa908a6fb3fba0cd85dbd81ec4b251fb24
