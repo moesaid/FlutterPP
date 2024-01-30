@@ -244,7 +244,7 @@ class BuildEnvCheckDataState extends StatelessWidget {
                       fontSize: 5.sp,
                       color:
                           controller.checkEnvModel.flutterDoctor![index].head!
-                              ? Colors.green.withOpacity(0.5)
+                              ? Colors.green.withOpacity(0.8)
                               : Colors.red,
                     ),
                   ),
@@ -254,7 +254,7 @@ class BuildEnvCheckDataState extends StatelessWidget {
                         ? Icons.check_circle
                         : Icons.cancel,
                     color: controller.checkEnvModel.flutterDoctor![index].head!
-                        ? Colors.green.withOpacity(0.5)
+                        ? Colors.green
                         : Colors.red,
                   ),
                 );

@@ -69,4 +69,41 @@ class ProjectModel {
     data['admin_id'] = adminId;
     return data;
   }
+
+  // copy with
+  ProjectModel copyWith({
+    String? id,
+    String? teamId,
+    String? clientId,
+    String? createdAt,
+    String? title,
+    String? description,
+    String? status,
+    String? startDate,
+    String? endDate,
+    String? budget,
+    String? color1,
+    String? icon,
+    String? color2,
+    String? updatedAt,
+    String? adminId,
+  }) {
+    return ProjectModel(
+      id: id ?? this.id,
+      teamId: teamId ?? this.teamId,
+      clientId: clientId ?? this.clientId,
+      createdAt: createdAt ?? this.createdAt,
+      title: title ?? this.title,
+      description: description ?? this.description,
+      status: status ?? this.status,
+      startDate: startDate ?? this.startDate,
+      endDate: endDate ?? this.endDate,
+      budget: budget ?? this.budget,
+      color1: color1 ?? this.color1,
+      icon: icon ?? this.icon,
+      color2: color2 ?? this.color2,
+      updatedAt: updatedAt ?? this.updatedAt,
+      adminId: adminId ?? this.adminId,
+    );
+  }
 }
