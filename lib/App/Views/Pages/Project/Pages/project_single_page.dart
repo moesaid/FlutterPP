@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutterpp/App/Controllers/Project/project_single_controller.dart';
+import 'package:flutterpp/App/Views/Global/build_appbar.dart';
 import 'package:flutterpp/App/Views/Global/build_loading_switch.dart';
-import 'package:flutterpp/App/Views/Global/build_page_layout.dart';
 import 'package:get/get.dart';
 
 class ProjectSinglePage extends GetView<ProjectSingleController> {
@@ -13,13 +13,25 @@ class ProjectSinglePage extends GetView<ProjectSingleController> {
       init: ProjectSingleController(),
       initState: (_) {},
       builder: (_) {
-        return BuildPageLayout(
+        return Material(
           child: BuildLoadingSwitch(
             isLoading: controller.isLoading,
-            child:
-                controller.project.id == null || controller.project.id!.isEmpty
-                    ? const BuildProjectSingleEmptyState()
-                    : const BuildProjectSinglePage(),
+            child: Scaffold(
+              appBar: BuildAppBar(
+                title: controller.project.title ?? '',
+                hasBackButton: true,
+                onBack: () => Get.back(),
+              ),
+              body: BuildLoadingSwitch(
+                isLoading: controller.isLoading,
+                child: SafeArea(
+                  child: controller.project.id == null ||
+                          controller.project.id!.isEmpty
+                      ? const BuildProjectSingleEmptyState()
+                      : const BuildProjectSinglePage(),
+                ),
+              ),
+            ),
           ),
         );
       },

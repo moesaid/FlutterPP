@@ -15,6 +15,7 @@ import 'package:flutterpp/App/Views/Global/build_overlay.dart';
 import 'package:flutterpp/App/Views/Global/build_snackbar.dart';
 import 'package:flutterpp/Config/app_gradients.dart';
 import 'package:flutterpp/Helpers/colors_helper.dart';
+import 'package:flutterpp/Routes/app_pages.dart';
 import 'package:flutterpp/Storage/active_project_storage.dart';
 import 'package:get/get.dart';
 
@@ -221,13 +222,23 @@ class DashboardController extends GetxController {
   }
 
   // navigate to project
-  void navigateToProject() {
-    HomeController homeController = Get.find();
+  void navigateToProject(ProjectModel project) {
+    // if project is active project
+    if (project.id == activeProject.id) {
+      HomeController homeController = Get.find();
 
-    int index = homeController.tabs.indexWhere(
-      (el) => el['title'] == 'projects',
-    );
+      int index = homeController.tabs.indexWhere(
+        (el) => el['title'] == 'projects',
+      );
 
-    homeController.changeTab(index);
+      homeController.changeTab(index);
+
+      return;
+    }
+
+    // got to single project page
+    Get.toNamed(AppRoutes.PROJECT_SINGLE, parameters: {
+      'projectId': project.id!,
+    });
   }
 }

@@ -38,7 +38,7 @@ class BuildDashboardProjectSection extends StatelessWidget {
                     ProjectModel item = controller.projects[index];
                     return BuildDashboardProjectItem(
                       item: item,
-                      onTap: () => controller.navigateToProject(),
+                      onTap: () => controller.navigateToProject(item),
                       controller: controller,
                     );
                   },
