@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutterpp/App/Controllers/Project/project_single_controller.dart';
-import 'package:flutterpp/App/Services/Cmd/cmd_read_create_dir_services.dart';
 import 'package:flutterpp/App/Views/Global/build_appbar.dart';
 import 'package:flutterpp/App/Views/Global/build_loading_or_empty_layout.dart';
 import 'package:flutterpp/App/Views/Pages/Project/Widgets/build_single_project_header.dart';
 import 'package:flutterpp/App/Views/Pages/Project/Widgets/build_single_project_no_path_state.dart';
 import 'package:flutterpp/App/Views/Pages/Project/Widgets/build_single_project_start_config.dart';
 import 'package:flutterpp/App/Views/Pages/Project/Widgets/build_single_project_tab_view.dart';
+import 'package:flutterpp/App/Views/Pages/Project/Widgets/build_single_project_tap_header.dart';
 import 'package:get/get.dart';
 
 class ProjectSinglePage extends GetView<ProjectSingleController> {
@@ -85,53 +85,6 @@ class BuildProjectSinglePage extends StatelessWidget {
           ),
         ),
       ],
-    );
-  }
-}
-
-class BuildSingleProjectTapHeader extends StatelessWidget {
-  const BuildSingleProjectTapHeader({
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return TabBar(
-      dividerColor: Get.theme.colorScheme.secondaryContainer,
-      indicatorColor: Get.theme.primaryColorLight,
-      labelColor: Get.theme.primaryColorLight,
-      unselectedLabelColor: Get.theme.colorScheme.onBackground,
-      indicatorSize: TabBarIndicatorSize.label,
-      isScrollable: true,
-      enableFeedback: true,
-      tabs: [
-        Tab(text: 'Code Gen'.capitalize!),
-        Tab(text: 'docs'.capitalize!),
-        Tab(text: 'ci / cd'.capitalize!),
-      ],
-    );
-  }
-}
-
-class BuildSingleProjectCodeGen extends StatelessWidget {
-  final String? localPath;
-  const BuildSingleProjectCodeGen({
-    super.key,
-    this.localPath,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Center(
-      child: GestureDetector(
-        onTap: () async {
-          var res = await CmdReadCreateDirServices().isFlutterPPProject(
-            localPath!,
-          );
-          print(res);
-        },
-        child: const Text('Tasks'),
-      ),
     );
   }
 }
