@@ -2,10 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutterpp/App/Controllers/Project/project_single_controller.dart';
 import 'package:flutterpp/App/Views/Global/build_appbar.dart';
 import 'package:flutterpp/App/Views/Global/build_loading_or_empty_layout.dart';
-import 'package:flutterpp/App/Views/Pages/Project/Widgets/build_project_avatar.dart';
-import 'package:flutterpp/Helpers/colors_helper.dart';
+import 'package:flutterpp/App/Views/Pages/Project/Widgets/build_single_project_header.dart';
 import 'package:get/get.dart';
-import 'package:sizer/sizer.dart';
 
 class ProjectSinglePage extends GetView<ProjectSingleController> {
   const ProjectSinglePage({super.key});
@@ -49,58 +47,7 @@ class BuildProjectSinglePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Container(
-          width: context.width,
-          padding: EdgeInsets.all(10.sp),
-          decoration: BoxDecoration(
-            gradient: LinearGradient(
-              colors: [
-                ColorHelper.hexToColor(controller.project.color1 ?? '#000000')
-                    .withOpacity(0.1),
-                ColorHelper.hexToColor(controller.project.color2 ?? '#000000')
-                    .withOpacity(0.06),
-              ],
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
-            ),
-            color: Get.theme.colorScheme.secondaryContainer,
-            border: Border(
-              bottom: BorderSide(
-                color: Get.theme.colorScheme.secondaryContainer,
-                width: 1,
-              ),
-            ),
-          ),
-          child: Row(
-            children: [
-              BuildProjectAvatar(
-                icon: controller.project.icon ?? '',
-                colors: [
-                  ColorHelper.hexToColor(
-                      controller.project.color1 ?? '#000000'),
-                  ColorHelper.hexToColor(
-                      controller.project.color2 ?? '#000000'),
-                ],
-              ),
-              SizedBox(width: 6.sp),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    controller.project.title ?? '',
-                    style: Get.textTheme.titleLarge,
-                  ),
-                  SizedBox(height: 1.sp),
-                  Text(
-                    controller.project.description ?? '',
-                    style: Get.textTheme.bodyMedium,
-                  ),
-                  SizedBox(height: 1.sp),
-                ],
-              ),
-            ],
-          ),
-        ),
+        BuildSingleProjectHeader(controller: controller),
         Expanded(
           child: DefaultTabController(
             length: 3,
@@ -114,16 +61,16 @@ class BuildProjectSinglePage extends StatelessWidget {
                   indicatorSize: TabBarIndicatorSize.label,
                   // labelPadding: EdgeInsets.zero,
                   isScrollable: true,
-                  tabs: const [
-                    Tab(text: 'Board'),
-                    Tab(text: 'Tasks'),
-                    Tab(text: 'Members'),
+                  tabs: [
+                    Tab(text: 'Code Gen'.capitalize!),
+                    Tab(text: 'docs'.capitalize!),
+                    Tab(text: 'ci / cd'.capitalize!),
                   ],
                 ),
                 const Expanded(
                   child: TabBarView(
                     children: [
-                      Center(child: Text('Board')),
+                      Center(child: Text('code gen')),
                       Center(child: Text('Tasks')),
                       Center(child: Text('Members')),
                     ],
