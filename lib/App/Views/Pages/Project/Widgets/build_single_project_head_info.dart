@@ -9,9 +9,11 @@ class BuildSingleProjectHeadInfo extends StatelessWidget {
   const BuildSingleProjectHeadInfo({
     super.key,
     required this.controller,
+    this.onEdit,
   });
 
   final ProjectSingleController controller;
+  final VoidCallback? onEdit;
 
   @override
   Widget build(BuildContext context) {
@@ -34,8 +36,9 @@ class BuildSingleProjectHeadInfo extends StatelessWidget {
                   controller.project.title ?? '',
                   style: Get.textTheme.titleLarge,
                 ),
+                SizedBox(width: 2.sp),
                 IconButton.filledTonal(
-                  onPressed: () => print('object'),
+                  onPressed: onEdit,
                   style: ButtonStyle(
                     visualDensity: VisualDensity.compact,
                     iconColor: MaterialStateProperty.all(
@@ -47,7 +50,7 @@ class BuildSingleProjectHeadInfo extends StatelessWidget {
                     ),
                   ),
                   icon: const Icon(
-                    Icons.edit,
+                    Icons.settings,
                   ),
                 ),
               ],

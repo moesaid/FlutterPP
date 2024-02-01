@@ -6,6 +6,7 @@ import 'package:flutterpp/App/Views/Pages/Dashboard/dashboard_page.dart';
 import 'package:flutterpp/App/Views/Pages/Mockup/mockup_index_page.dart';
 import 'package:flutterpp/App/Views/Pages/Project/Pages/project_single_page.dart';
 import 'package:flutterpp/App/Views/Pages/Test/test_page.dart';
+import 'package:flutterpp/Storage/active_project_storage.dart';
 import 'package:get/get.dart';
 import 'package:heroicons/heroicons.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
@@ -93,14 +94,23 @@ class HomeController extends GetxController {
       element['isActive'] = false;
     }
     _tabs[index]['isActive'] = true;
+
+    // if project tab is selected
+    if (_tabs[index]['type'] == 'project') {
+      changeProjectValues();
+    }
+
     _selectedTab.value = index;
     update();
   }
 
   // change project values
-  void changeProjectValues({
-    required ProjectModel activeProject,
-  }) {
+  void changeProjectValues() {
+    // get active project
+    ProjectModel? activeProject = ActiveProjectStorage().read();
+
+    if (activeProject == null) return;
+
     // find project tab
     Map item = _tabs.firstWhere((el) => el['type'] == 'project');
     item['title'] = activeProject.title;

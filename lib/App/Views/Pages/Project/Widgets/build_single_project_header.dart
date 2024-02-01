@@ -46,7 +46,10 @@ class BuildSingleProjectHeader extends StatelessWidget {
           if (controller.projectLocalPath.isNotEmpty)
             BuildSingleProjectParkedAt(path: controller.projectLocalPath),
           if (controller.projectLocalPath.isEmpty)
-            const BuildCreateOrLoadProjectPath(),
+            BuildCreateOrLoadProjectPath(
+              onLoad: controller.loadProjectPath,
+              onCreate: controller.createProjectPath,
+            ),
         ],
       ),
     );

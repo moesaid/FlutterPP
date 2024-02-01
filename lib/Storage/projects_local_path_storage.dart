@@ -41,6 +41,15 @@ class ProjectsLocalPathStorage {
     return project;
   }
 
+  // remove by id
+  Future<void> removeById({required String projectId}) async {
+    List<ProjectLocalPathModel> projects = readAll();
+    projects.removeWhere((element) => element.id == projectId);
+
+    //  write as json
+    await _box.write(_key, projects.map((e) => e.toJson()).toList());
+  }
+
   // remove all
   Future<void> remove() async {
     await _box.remove(_key);

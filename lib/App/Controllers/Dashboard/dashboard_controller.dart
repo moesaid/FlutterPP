@@ -227,7 +227,6 @@ class DashboardController extends GetxController {
     if (project.id == activeProject.id) {
       HomeController homeController = Get.find();
 
-      homeController.changeProjectValues(activeProject: project);
       int index = homeController.tabs.indexWhere(
         (el) => el['type'] == 'project',
       );

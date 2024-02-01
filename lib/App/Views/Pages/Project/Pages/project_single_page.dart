@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutterpp/App/Controllers/Project/project_single_controller.dart';
+import 'package:flutterpp/App/Services/Cmd/cmd_read_create_dir_services.dart';
 import 'package:flutterpp/App/Views/Global/build_appbar.dart';
 import 'package:flutterpp/App/Views/Global/build_loading_or_empty_layout.dart';
 import 'package:flutterpp/App/Views/Pages/Project/Widgets/build_single_project_header.dart';
+import 'package:flutterpp/App/Views/Pages/Project/Widgets/build_single_project_tab_view.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 import 'package:sizer/sizer.dart';
@@ -67,39 +69,109 @@ class BuildProjectSinglePage extends StatelessWidget {
             length: 3,
             child: Column(
               children: [
-                controller.projectLocalPath.isEmpty
+                controller.projectLocalPath.isEmpty ||
+                        !controller.isFlutterPPProject
                     ? const SizedBox.shrink()
-                    : TabBar(
-                        dividerColor: Get.theme.colorScheme.secondaryContainer,
-                        indicatorColor: Get.theme.primaryColorLight,
-                        labelColor: Get.theme.primaryColorLight,
-                        unselectedLabelColor:
-                            Get.theme.colorScheme.onBackground,
-                        indicatorSize: TabBarIndicatorSize.label,
-                        isScrollable: true,
-                        enableFeedback: true,
-                        tabs: [
-                          Tab(text: 'Code Gen'.capitalize!),
-                          Tab(text: 'docs'.capitalize!),
-                          Tab(text: 'ci / cd'.capitalize!),
-                        ],
-                      ),
+                    : const BuildSingleProjectTapHeader(),
                 Expanded(
                   child: controller.projectLocalPath.isEmpty
                       ? const BuildSingleProjectNoPathState()
-                      : const TabBarView(
-                          children: [
-                            Center(child: Text('Tasks')),
-                            Center(child: Text('Tasks')),
-                            Center(child: Text('Members')),
-                          ],
-                        ),
+                      : !controller.isFlutterPPProject
+                          ? const BuildSingleProjectStartConfig()
+                          : BuildSingleProjectTabView(controller: controller),
                 ),
               ],
             ),
           ),
         ),
       ],
+    );
+  }
+}
+
+class BuildSingleProjectStartConfig extends StatelessWidget {
+  const BuildSingleProjectStartConfig({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        Lottie.asset(
+          'assets/lottie/gears.json',
+          height: 200,
+          width: 200,
+        ),
+        Text(
+          'This project is not a FlutterPP project.',
+          style: Get.textTheme.titleLarge,
+        ),
+        SizedBox(height: 3.sp),
+        const Text(
+          'Code confusion alert! Our project seems lost in the tech wilderness. \n Ready to play detective and configure its identity?',
+          textAlign: TextAlign.center,
+        ),
+        SizedBox(height: 8.sp),
+        ElevatedButton(
+          onPressed: () {},
+          child: Text(
+            'start configuration'.capitalize!,
+            style: Get.textTheme.titleMedium!.copyWith(
+              fontWeight: FontWeight.w600,
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class BuildSingleProjectTapHeader extends StatelessWidget {
+  const BuildSingleProjectTapHeader({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return TabBar(
+      dividerColor: Get.theme.colorScheme.secondaryContainer,
+      indicatorColor: Get.theme.primaryColorLight,
+      labelColor: Get.theme.primaryColorLight,
+      unselectedLabelColor: Get.theme.colorScheme.onBackground,
+      indicatorSize: TabBarIndicatorSize.label,
+      isScrollable: true,
+      enableFeedback: true,
+      tabs: [
+        Tab(text: 'Code Gen'.capitalize!),
+        Tab(text: 'docs'.capitalize!),
+        Tab(text: 'ci / cd'.capitalize!),
+      ],
+    );
+  }
+}
+
+class BuildSingleProjectCodeGen extends StatelessWidget {
+  final String? localPath;
+  const BuildSingleProjectCodeGen({
+    super.key,
+    this.localPath,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: GestureDetector(
+        onTap: () async {
+          var res = await CmdReadCreateDirServices().isFlutterPPProject(
+            localPath!,
+          );
+          print(res);
+        },
+        child: const Text('Tasks'),
+      ),
     );
   }
 }
