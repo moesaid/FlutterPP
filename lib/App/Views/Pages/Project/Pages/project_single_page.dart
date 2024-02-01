@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutterpp/App/Controllers/Project/project_single_controller.dart';
-import 'package:flutterpp/App/Models/project_local_path_model.dart';
 import 'package:flutterpp/App/Views/Global/build_appbar.dart';
 import 'package:flutterpp/App/Views/Global/build_loading_or_empty_layout.dart';
 import 'package:flutterpp/App/Views/Pages/Project/Widgets/build_single_project_header.dart';
-import 'package:flutterpp/Storage/projects_local_path_storage.dart';
 import 'package:get/get.dart';
+import 'package:lottie/lottie.dart';
+import 'package:sizer/sizer.dart';
 
 class ProjectSinglePage extends GetView<ProjectSingleController> {
   const ProjectSinglePage({super.key});
@@ -55,59 +55,70 @@ class BuildProjectSinglePage extends StatelessWidget {
             length: 3,
             child: Column(
               children: [
-                TabBar(
-                  dividerColor: Get.theme.colorScheme.secondaryContainer,
-                  indicatorColor: Get.theme.primaryColorLight,
-                  labelColor: Get.theme.primaryColorLight,
-                  unselectedLabelColor: Get.theme.colorScheme.onBackground,
-                  indicatorSize: TabBarIndicatorSize.label,
-                  // labelPadding: EdgeInsets.zero,
-                  isScrollable: true,
-                  tabs: [
-                    Tab(text: 'Code Gen'.capitalize!),
-                    Tab(text: 'docs'.capitalize!),
-                    Tab(text: 'ci / cd'.capitalize!),
-                  ],
-                ),
-                Expanded(
-                  child: TabBarView(
-                    children: [
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(ProjectsLocalPathStorage()
-                                  .readById(
-                                      projectId:
-                                          '17509425-7d58-45ea-ae43-88ac449fa10f')!
-                                  .path ??
-                              ''),
-                          Expanded(
-                            child: ListView.builder(
-                              itemCount:
-                                  ProjectsLocalPathStorage().readAll().length,
-                              itemBuilder: (BuildContext context, int index) {
-                                ProjectLocalPathModel item =
-                                    ProjectsLocalPathStorage().readAll()[index];
-                                return Text(item.id!);
-                              },
-                            ),
-                          ),
-                          const SizedBox(height: 20),
-                          // ElevatedButton(
-                          //   onPressed: () => controller.addLocalPath(),
-                          //   child: const Text('Add Local Path'),
-                          // ),
+                controller.projectLocalPath.isEmpty
+                    ? const SizedBox.shrink()
+                    : TabBar(
+                        dividerColor: Get.theme.colorScheme.secondaryContainer,
+                        indicatorColor: Get.theme.primaryColorLight,
+                        labelColor: Get.theme.primaryColorLight,
+                        unselectedLabelColor:
+                            Get.theme.colorScheme.onBackground,
+                        indicatorSize: TabBarIndicatorSize.label,
+                        isScrollable: true,
+                        enableFeedback: true,
+                        tabs: [
+                          Tab(text: 'Code Gen'.capitalize!),
+                          Tab(text: 'docs'.capitalize!),
+                          Tab(text: 'ci / cd'.capitalize!),
                         ],
                       ),
-                      const Center(child: Text('Tasks')),
-                      const Center(child: Text('Members')),
-                    ],
-                  ),
+                Expanded(
+                  child: controller.projectLocalPath.isEmpty
+                      ? const BuildSingleProjectNoPathState()
+                      : const TabBarView(
+                          children: [
+                            Center(child: Text('Tasks')),
+                            Center(child: Text('Tasks')),
+                            Center(child: Text('Members')),
+                          ],
+                        ),
                 ),
               ],
             ),
           ),
+        ),
+      ],
+    );
+  }
+}
+
+class BuildSingleProjectNoPathState extends StatelessWidget {
+  const BuildSingleProjectNoPathState({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        Lottie.asset(
+          'assets/lottie/empty_box.json',
+          height: 200,
+          width: 200,
+        ),
+        SizedBox(height: 2.sp),
+        Text(
+          'No local path found - your code\'s gone on a cosmic vacation! 🚀🤷',
+          style: Get.textTheme.titleMedium!.copyWith(
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        SizedBox(height: 1.sp),
+        Text(
+          'create a new project or load an existing one',
+          style: Get.textTheme.bodyMedium,
         ),
       ],
     );

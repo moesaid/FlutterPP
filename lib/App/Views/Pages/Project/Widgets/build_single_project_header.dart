@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutterpp/App/Controllers/Project/project_single_controller.dart';
+import 'package:flutterpp/App/Views/Pages/Project/Widgets/build_create_or_load_project_path.dart';
 import 'package:flutterpp/App/Views/Pages/Project/Widgets/build_single_project_head_info.dart';
 import 'package:flutterpp/App/Views/Pages/Project/Widgets/build_single_project_parked_at.dart';
 import 'package:flutterpp/Helpers/colors_helper.dart';
@@ -48,49 +49,6 @@ class BuildSingleProjectHeader extends StatelessWidget {
             const BuildCreateOrLoadProjectPath(),
         ],
       ),
-    );
-  }
-}
-
-class BuildCreateOrLoadProjectPath extends StatelessWidget {
-  const BuildCreateOrLoadProjectPath({
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      children: [
-        TextButton.icon(
-          onPressed: () {},
-          icon: Icon(
-            Icons.add_circle_sharp,
-            size: 6.sp,
-          ),
-          label: const Text('Create'),
-          style: TextButton.styleFrom(
-            foregroundColor: Get.theme.colorScheme.onBackground,
-            backgroundColor: Get.theme.colorScheme.secondaryContainer,
-            visualDensity: VisualDensity.compact,
-          ),
-        ),
-        SizedBox(width: 4.sp),
-        const Text(' - or - '),
-        SizedBox(width: 4.sp),
-        TextButton.icon(
-          onPressed: () {},
-          icon: Icon(
-            Icons.folder,
-            size: 6.sp,
-          ),
-          label: const Text('Load'),
-          style: TextButton.styleFrom(
-            foregroundColor: Get.theme.colorScheme.onBackground,
-            backgroundColor: Get.theme.colorScheme.secondaryContainer,
-            visualDensity: VisualDensity.compact,
-          ),
-        ),
-      ],
     );
   }
 }
