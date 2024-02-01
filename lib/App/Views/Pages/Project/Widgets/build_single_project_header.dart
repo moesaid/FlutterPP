@@ -83,44 +83,55 @@ class BuildSingleProjectHeader extends StatelessWidget {
             ],
           ),
           const Spacer(),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+          const BuildSingleProjectParkedAt(),
+        ],
+      ),
+    );
+  }
+}
+
+class BuildSingleProjectParkedAt extends StatelessWidget {
+  const BuildSingleProjectParkedAt({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          'parked at'.capitalize!,
+          style: Get.textTheme.labelSmall,
+        ),
+        SizedBox(height: 1.sp),
+        Container(
+          padding: EdgeInsets.all(2.sp),
+          decoration: BoxDecoration(
+            color: Get.theme.colorScheme.secondaryContainer,
+            borderRadius: BorderRadius.circular(2.sp),
+          ),
+          child: Row(
             children: [
-              Text(
-                'parked at'.capitalize!,
-                style: Get.textTheme.labelSmall,
+              Icon(
+                Icons.folder,
+                size: 4.sp,
+                color: Get.theme.colorScheme.onPrimaryContainer,
               ),
-              SizedBox(height: 1.sp),
-              Container(
-                padding: EdgeInsets.all(2.sp),
-                decoration: BoxDecoration(
-                  color: Get.theme.colorScheme.secondaryContainer,
-                  borderRadius: BorderRadius.circular(2.sp),
-                ),
-                child: Row(
-                  children: [
-                    Icon(
-                      Icons.folder,
-                      size: 4.sp,
-                      color: Get.theme.colorScheme.onPrimaryContainer,
-                    ),
-                    const Text(' :: '),
-                    SizedBox(width: 1.sp),
-                    Text(
-                      '/Users/mohamedsaid/development/flutter_workshop/Apps/flutterpp',
-                      style: Get.textTheme.bodySmall!.copyWith(
-                        color: Get.theme.colorScheme.onPrimaryContainer
-                            .withOpacity(0.7),
-                        fontStyle: FontStyle.italic,
-                      ),
-                    ),
-                  ],
+              const Text(' :: '),
+              SizedBox(width: 1.sp),
+              Text(
+                '/Users/mohamedsaid/development/flutter_workshop/Apps/flutterpp',
+                style: Get.textTheme.bodySmall!.copyWith(
+                  color:
+                      Get.theme.colorScheme.onPrimaryContainer.withOpacity(0.7),
+                  fontStyle: FontStyle.italic,
                 ),
               ),
             ],
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }
