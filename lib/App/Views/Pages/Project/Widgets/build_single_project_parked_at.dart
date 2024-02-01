@@ -3,8 +3,10 @@ import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
 
 class BuildSingleProjectParkedAt extends StatelessWidget {
+  final String? path;
   const BuildSingleProjectParkedAt({
     super.key,
+    this.path,
   });
 
   @override
@@ -33,7 +35,7 @@ class BuildSingleProjectParkedAt extends StatelessWidget {
               const Text(' :: '),
               SizedBox(width: 1.sp),
               Text(
-                '/Users/mohamedsaid/development/flutter_workshop/Apps/flutterpp',
+                path ?? 'No path',
                 style: Get.textTheme.bodySmall!.copyWith(
                   color:
                       Get.theme.colorScheme.onPrimaryContainer.withOpacity(0.7),

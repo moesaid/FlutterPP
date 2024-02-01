@@ -42,9 +42,55 @@ class BuildSingleProjectHeader extends StatelessWidget {
         children: [
           BuildSingleProjectHeadInfo(controller: controller),
           const Spacer(),
-          const BuildSingleProjectParkedAt(),
+          if (controller.projectLocalPath.isNotEmpty)
+            BuildSingleProjectParkedAt(path: controller.projectLocalPath),
+          if (controller.projectLocalPath.isEmpty)
+            const BuildCreateOrLoadProjectPath(),
         ],
       ),
+    );
+  }
+}
+
+class BuildCreateOrLoadProjectPath extends StatelessWidget {
+  const BuildCreateOrLoadProjectPath({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        TextButton.icon(
+          onPressed: () {},
+          icon: Icon(
+            Icons.add_circle_sharp,
+            size: 6.sp,
+          ),
+          label: const Text('Create'),
+          style: TextButton.styleFrom(
+            foregroundColor: Get.theme.colorScheme.onBackground,
+            backgroundColor: Get.theme.colorScheme.secondaryContainer,
+            visualDensity: VisualDensity.compact,
+          ),
+        ),
+        SizedBox(width: 4.sp),
+        const Text(' - or - '),
+        SizedBox(width: 4.sp),
+        TextButton.icon(
+          onPressed: () {},
+          icon: Icon(
+            Icons.folder,
+            size: 6.sp,
+          ),
+          label: const Text('Load'),
+          style: TextButton.styleFrom(
+            foregroundColor: Get.theme.colorScheme.onBackground,
+            backgroundColor: Get.theme.colorScheme.secondaryContainer,
+            visualDensity: VisualDensity.compact,
+          ),
+        ),
+      ],
     );
   }
 }

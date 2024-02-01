@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutterpp/App/Controllers/Project/project_single_controller.dart';
+import 'package:flutterpp/App/Models/project_local_path_model.dart';
 import 'package:flutterpp/App/Views/Global/build_appbar.dart';
 import 'package:flutterpp/App/Views/Global/build_loading_or_empty_layout.dart';
 import 'package:flutterpp/App/Views/Pages/Project/Widgets/build_single_project_header.dart';
+import 'package:flutterpp/Storage/projects_local_path_storage.dart';
 import 'package:get/get.dart';
 
 class ProjectSinglePage extends GetView<ProjectSingleController> {
@@ -67,12 +69,39 @@ class BuildProjectSinglePage extends StatelessWidget {
                     Tab(text: 'ci / cd'.capitalize!),
                   ],
                 ),
-                const Expanded(
+                Expanded(
                   child: TabBarView(
                     children: [
-                      Center(child: Text('code gen')),
-                      Center(child: Text('Tasks')),
-                      Center(child: Text('Members')),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(ProjectsLocalPathStorage()
+                                  .readById(
+                                      projectId:
+                                          '17509425-7d58-45ea-ae43-88ac449fa10f')!
+                                  .path ??
+                              ''),
+                          Expanded(
+                            child: ListView.builder(
+                              itemCount:
+                                  ProjectsLocalPathStorage().readAll().length,
+                              itemBuilder: (BuildContext context, int index) {
+                                ProjectLocalPathModel item =
+                                    ProjectsLocalPathStorage().readAll()[index];
+                                return Text(item.id!);
+                              },
+                            ),
+                          ),
+                          const SizedBox(height: 20),
+                          // ElevatedButton(
+                          //   onPressed: () => controller.addLocalPath(),
+                          //   child: const Text('Add Local Path'),
+                          // ),
+                        ],
+                      ),
+                      const Center(child: Text('Tasks')),
+                      const Center(child: Text('Members')),
                     ],
                   ),
                 ),
