@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutterpp/App/Controllers/Project/project_single_controller.dart';
+import 'package:flutterpp/App/Controllers/Project/Single/project_single_controller.dart';
 import 'package:flutterpp/App/Views/Pages/Project/Widgets/build_single_project_code_gen.dart';
 
 class BuildSingleProjectTabView extends StatelessWidget {

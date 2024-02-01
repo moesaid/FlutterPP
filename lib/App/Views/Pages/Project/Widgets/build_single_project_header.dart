@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutterpp/App/Controllers/Project/project_single_controller.dart';
+import 'package:flutterpp/App/Controllers/Project/Single/project_single_controller.dart';
 import 'package:flutterpp/App/Views/Pages/Project/Widgets/build_create_or_load_project_path.dart';
 import 'package:flutterpp/App/Views/Pages/Project/Widgets/build_single_project_head_info.dart';
 import 'package:flutterpp/App/Views/Pages/Project/Widgets/build_single_project_parked_at.dart';

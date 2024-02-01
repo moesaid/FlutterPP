@@ -1,6 +1,6 @@
 // import 'package:appflowy_board/appflowy_board.dart';
 import 'package:flutter/material.dart';
-import 'package:flutterpp/App/Controllers/Project/project_single_board_controller.dart';
+import 'package:flutterpp/App/Controllers/Project/Single/project_single_board_controller.dart';
 import 'package:get/get.dart';
 
 class ProjectSingleBoardPage extends GetView<ProjectSingleBoardController> {
