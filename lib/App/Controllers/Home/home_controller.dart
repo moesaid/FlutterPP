@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutterpp/App/Models/project_model.dart';
 import 'package:flutterpp/App/Services/Auth/auth_services.dart';
 import 'package:flutterpp/App/Services/Team/team_services.dart';
 import 'package:flutterpp/App/Views/Pages/Dashboard/dashboard_page.dart';
 import 'package:flutterpp/App/Views/Pages/Mockup/mockup_index_page.dart';
-import 'package:flutterpp/App/Views/Pages/Project/Pages/project_index_page.dart';
+import 'package:flutterpp/App/Views/Pages/Project/Pages/project_single_page.dart';
 import 'package:flutterpp/App/Views/Pages/Test/test_page.dart';
 import 'package:get/get.dart';
 import 'package:heroicons/heroicons.dart';
@@ -27,7 +28,8 @@ class HomeController extends GetxController {
       'title': 'projects',
       'icon': HeroIcons.squaresPlus,
       'isActive': false,
-      'tab': const ProjectIndexPage(),
+      'tab': const ProjectSinglePage(),
+      'type': 'project',
     },
     {
       'title': 'chat',
@@ -93,6 +95,19 @@ class HomeController extends GetxController {
     _tabs[index]['isActive'] = true;
     _selectedTab.value = index;
     update();
+  }
+
+  // change project values
+  void changeProjectValues({
+    required ProjectModel activeProject,
+  }) {
+    // find project tab
+    Map item = _tabs.firstWhere((el) => el['type'] == 'project');
+    item['title'] = activeProject.title;
+    item['tab'] = ProjectSinglePage(
+      projectId: activeProject.id,
+      hasAppBar: false,
+    );
   }
 
   // check if user is in team

@@ -8,12 +8,22 @@ import 'package:lottie/lottie.dart';
 import 'package:sizer/sizer.dart';
 
 class ProjectSinglePage extends GetView<ProjectSingleController> {
-  const ProjectSinglePage({super.key});
+  final String? projectId;
+  final bool? hasAppBar;
+  const ProjectSinglePage({
+    super.key,
+    this.projectId,
+    this.hasAppBar = true,
+  });
 
   @override
   Widget build(BuildContext context) {
     return GetBuilder<ProjectSingleController>(
       init: ProjectSingleController(),
+      didChangeDependencies: (state) {
+        String? id = projectId ?? Get.parameters['projectId'];
+        state.controller?.fetchApi(projectId: id);
+      },
       initState: (_) {},
       builder: (_) {
         return Material(
@@ -22,11 +32,13 @@ class ProjectSinglePage extends GetView<ProjectSingleController> {
             isEmpty: controller.project.id == null,
             hasButton: false,
             child: Scaffold(
-              appBar: BuildAppBar(
-                title: controller.project.title ?? '',
-                hasBackButton: true,
-                onBack: () => Get.back(),
-              ),
+              appBar: hasAppBar == true
+                  ? BuildAppBar(
+                      title: controller.project.title ?? '',
+                      hasBackButton: true,
+                      onBack: () => Get.back(),
+                    )
+                  : null,
               body: SafeArea(
                 child: BuildProjectSinglePage(controller: controller),
               ),
