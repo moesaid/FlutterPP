@@ -35,7 +35,7 @@ class MyApp extends StatelessWidget {
           darkTheme: AppTheme().darkThemeData(),
           themeMode: Get.isDarkMode ? ThemeMode.dark : ThemeMode.light,
           initialBinding: AppBinding(),
-          getPages: AppPages.routes,
+          getPages: AppPages.pages,
           defaultTransition: Transition.native,
           localizationsDelegates: const [
             // AppFlowyEditorLocalizations.delegate,

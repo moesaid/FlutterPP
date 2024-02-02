@@ -12,7 +12,7 @@ import 'package:get/get.dart';
 part 'app_routes.dart';
 
 class AppPages {
-  static final routes = [
+  static final pages = [
     // auth
     GetPage(name: AppRoutes.SPLASH, page: () => const SplashPage()),
     GetPage(name: AppRoutes.SIGNUP, page: () => const SignupPage()),

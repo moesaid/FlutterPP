@@ -38,6 +38,7 @@ dependencies:
   device_info_plus: ^9.1.1
   lottie: ^3.0.0
   json2yaml: ^3.0.1
+  yaml: ^3.1.2
 
 # dev_dependencies
 dev_dependencies:
