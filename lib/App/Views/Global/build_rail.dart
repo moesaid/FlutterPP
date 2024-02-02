@@ -8,11 +8,11 @@ class BuildRail extends StatelessWidget {
   final int selectedIndex;
   final Function(int) onDestinationSelected;
   const BuildRail({
-    Key? key,
+    super.key,
     required this.tabs,
     required this.selectedIndex,
     required this.onDestinationSelected,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

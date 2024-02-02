@@ -6,12 +6,12 @@ class BuildDialog extends StatelessWidget {
   final double? height, width;
   final Widget? child;
   const BuildDialog({
-    Key? key,
+    super.key,
     this.backgroundColor,
     this.height,
     this.width,
     this.child,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

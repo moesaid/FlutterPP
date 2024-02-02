@@ -126,7 +126,6 @@ class _BuildDeviceList extends StatelessWidget {
   final DeviceInfo? selectedDevice;
 
   const _BuildDeviceList({
-    super.key,
     required this.items,
     this.onEnter,
     this.onExit,

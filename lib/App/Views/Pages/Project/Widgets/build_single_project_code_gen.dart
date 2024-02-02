@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutterpp/App/Services/Cmd/cmd_read_create_dir_services.dart';
+import 'package:flutterpp/App/Controllers/Project/Single/project_single_config_controller.dart';
+import 'package:get/get.dart';
 
-class BuildSingleProjectCodeGen extends StatelessWidget {
+class BuildSingleProjectCodeGen extends GetView<ProjectSingleConfigController> {
   final String? localPath;
   const BuildSingleProjectCodeGen({
     super.key,
@@ -10,16 +11,17 @@ class BuildSingleProjectCodeGen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: GestureDetector(
-        onTap: () async {
-          var res = await CmdReadCreateDirServices().isFlutterPPProject(
-            localPath!,
-          );
-          print(res);
-        },
-        child: const Text('Tasks'),
-      ),
+    return GetBuilder<ProjectSingleConfigController>(
+      init: ProjectSingleConfigController(),
+      initState: (_) {},
+      builder: (_) {
+        return Center(
+          child: GestureDetector(
+            // onTap: () => controller.getPath(),
+            child: const Text('Tasks'),
+          ),
+        );
+      },
     );
   }
 }

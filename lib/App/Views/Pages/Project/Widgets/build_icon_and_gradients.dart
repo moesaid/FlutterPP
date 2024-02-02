@@ -112,7 +112,6 @@ class BuildIconAndGradients extends StatelessWidget {
 
 class _BuildColorsSection extends StatelessWidget {
   const _BuildColorsSection({
-    super.key,
     required this.colors,
     required this.onColorChange,
     this.crossAxisCount,
@@ -175,7 +174,6 @@ class _BuildColorsSection extends StatelessWidget {
 
 class _BuildIconSection extends StatelessWidget {
   const _BuildIconSection({
-    super.key,
     required this.svgs,
     required this.onSvgChange,
     required this.colors,

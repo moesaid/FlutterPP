@@ -37,6 +37,7 @@ dependencies:
   glowy_borders: ^1.0.2
   device_info_plus: ^9.1.1
   lottie: ^3.0.0
+  json2yaml: ^3.0.1
 
 # dev_dependencies
 dev_dependencies:

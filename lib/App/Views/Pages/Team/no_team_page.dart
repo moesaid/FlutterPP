@@ -59,9 +59,8 @@ class NoTeamPage extends GetView<NoTeamController> {
 class _BuildJoinTeamForm extends StatelessWidget {
   final NoTeamController controller;
   const _BuildJoinTeamForm({
-    Key? key,
     required this.controller,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -106,9 +105,8 @@ class _BuildJoinTeamForm extends StatelessWidget {
 class _BuildCreateTeamForm extends StatelessWidget {
   final NoTeamController controller;
   const _BuildCreateTeamForm({
-    Key? key,
     required this.controller,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -164,9 +162,7 @@ class _BuildCreateTeamForm extends StatelessWidget {
 }
 
 class _BuildTabs extends StatelessWidget {
-  const _BuildTabs({
-    Key? key,
-  }) : super(key: key);
+  const _BuildTabs();
 
   @override
   Widget build(BuildContext context) {
