@@ -2,17 +2,14 @@ import 'dart:io';
 
 import 'package:flutterpp/Helpers/text_helper.dart';
 
-class FileGenGexBinding {
-  updateBindingFile(
+class FileGenGexBindingProvider {
+  Future<void> updateBindingFile(
     String nameSpace,
     String path,
     String caseName,
-  ) {
-    // Define the path to your binding file
-    String filePath = path;
-
+  ) async {
     // Read the existing content of the file
-    File bindingFile = File(filePath);
+    File bindingFile = File(path);
     String existingContent = bindingFile.readAsStringSync();
 
     // new imports
