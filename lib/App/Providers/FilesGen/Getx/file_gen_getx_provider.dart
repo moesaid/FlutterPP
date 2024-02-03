@@ -218,13 +218,14 @@ class FileGenGetxProvider {
     class AppTheme {
       ThemeData lightThemeData() {
         return ThemeData(
-          primarySwatch: Colors.blue,
+          colorScheme: const ColorScheme.light(),
           visualDensity: VisualDensity.adaptivePlatformDensity,
         );
       }
+
       ThemeData darkThemeData() {
         return ThemeData(
-          primarySwatch: Colors.blue,
+          colorScheme: const ColorScheme.dark(),
           visualDensity: VisualDensity.adaptivePlatformDensity,
         );
       }

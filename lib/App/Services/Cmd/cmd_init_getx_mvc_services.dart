@@ -1,8 +1,10 @@
 import 'package:flutterpp/App/Providers/Cmd/cmd_flutter_provider.dart';
-import 'package:flutterpp/App/Providers/FilesGen/file_gen_getx_provider.dart';
+import 'package:flutterpp/App/Providers/FilesGen/Getx/file_gen_getx_counter_case.dart';
+import 'package:flutterpp/App/Providers/FilesGen/Getx/file_gen_getx_provider.dart';
 import 'package:flutterpp/App/Providers/FilesGen/vs_code_provider.dart';
 import 'package:flutterpp/App/Providers/Yaml/yaml_provider.dart';
 import 'package:flutterpp/App/Services/Cmd/cmd_read_create_dir_services.dart';
+import 'package:flutterpp/Helpers/text_helper.dart';
 
 class CmdInitGetxMvcServices {
   final VsCodeProvider _vsCode = VsCodeProvider();
@@ -10,6 +12,7 @@ class CmdInitGetxMvcServices {
   final CmdFlutterProvider _cmdF = CmdFlutterProvider();
   final YamlProvider _ymal = YamlProvider();
   final FileGenGetxProvider _fileGen = FileGenGetxProvider();
+  final FileGenGetxCounterCase _fileGenCase = FileGenGetxCounterCase();
 
   // init
   Future<void> init(String path) async {
@@ -37,8 +40,8 @@ class CmdInitGetxMvcServices {
     // create default files
     await createProjectStructure(path);
 
-    // generate Counter case
-    await createCounterCase(nameSpace, path);
+    // generate initial case
+    await createInitCase(nameSpace, path);
 
     // dart fix
     await _cmdF.runDartCommand(path, ['fix', '--apply']);
@@ -66,7 +69,7 @@ class CmdInitGetxMvcServices {
   }
 
   // create counter case
-  createCounterCase(String nameSpace, String path) async {
+  createInitCase(String nameSpace, String path) async {
     String controllerPath = '$path/lib/App/Controllers';
     String pagePath = '$path/lib/App/Views/Pages';
 
@@ -98,14 +101,38 @@ class CmdInitGetxMvcServices {
     await _cmdRCD.createDirectory('$pagePath/Auth');
 
     // create controller
-    await _fileGen.controllerGen('counter', '$controllerPath/Counter');
-    await _fileGen.controllerGen('home', '$controllerPath/Home');
-    await _fileGen.controllerGen('splash', '$controllerPath/Auth');
+    await _fileGenCase.counterControllerGen(
+      'counter',
+      '$controllerPath/Counter',
+    );
+    await _fileGenCase.homeControllerGen('home', '$controllerPath/Home');
+    await _fileGenCase.splashControllerGen('splash', '$controllerPath/Auth');
 
     // create page
-    await _fileGen.pageGen(nameSpace, 'counter', '$pagePath/Counter');
-    await _fileGen.pageGen(nameSpace, 'home', '$pagePath/Home');
-    await _fileGen.pageGen(nameSpace, 'splash', '$pagePath/Auth',
-        custom: 'auth');
+    await _fileGenCase.pageGenCounter(
+        nameSpace, 'counter', '$pagePath/Counter');
+    await _fileGenCase.pageGenHome(nameSpace, 'home', '$pagePath/Home');
+    await _fileGenCase.pageGenSplash(
+      nameSpace,
+      'splash',
+      '$pagePath/Auth',
+      custom: 'auth',
+    );
+  }
+
+  // create Case for GetX MVC
+  createCase(String nameSpace, String path, String caseName) async {
+    String controllerPath = '$path/lib/App/Controllers';
+    String pagePath = '$path/lib/App/Views/Pages';
+
+    // create directories
+    await _cmdRCD.createDirectory('$controllerPath/${caseName.toFolderName()}');
+    await _cmdRCD.createDirectory('$pagePath/${caseName.toFolderName()}');
+
+    // create controller
+    await _fileGen.controllerGen(
+      caseName,
+      '$controllerPath/${caseName.toFolderName()}',
+    );
   }
 }

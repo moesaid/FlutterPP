@@ -28,4 +28,11 @@ extension TextHelpers on String {
       return match.group(0)!.toUpperCase();
     });
   }
+
+  // to file name
+  String toFolderName() {
+    // if more than one word take the first word
+    // captlize the first letter
+    return split(' ').first.toPascalCase();
+  }
 }
