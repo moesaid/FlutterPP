@@ -3,6 +3,7 @@ import 'package:flutterpp/App/Providers/FilesGen/Getx/file_gen_getx_counter_case
 import 'package:flutterpp/App/Providers/FilesGen/Getx/file_gen_getx_provider.dart';
 import 'package:flutterpp/App/Providers/FilesGen/Getx/file_gen_gex_binding_provider.dart';
 import 'package:flutterpp/App/Providers/FilesGen/Getx/file_gen_gex_router_provider.dart';
+import 'package:flutterpp/App/Providers/FilesGen/build_runner_provider.dart';
 import 'package:flutterpp/App/Providers/FilesGen/vs_code_provider.dart';
 import 'package:flutterpp/App/Providers/Yaml/yaml_provider.dart';
 import 'package:flutterpp/App/Services/Cmd/cmd_read_create_dir_services.dart';
@@ -17,6 +18,7 @@ class CmdInitGetxMvcServices {
   final FileGenGetxCounterCase _fileGenCase = FileGenGetxCounterCase();
   final FileGenGexBindingProvider _binding = FileGenGexBindingProvider();
   final FileGenGetxRouterProvider _router = FileGenGetxRouterProvider();
+  final BuildRunnerProvider _build = BuildRunnerProvider();
 
   // init
   Future<void> init(String path) async {
@@ -25,6 +27,7 @@ class CmdInitGetxMvcServices {
 
     // create vs code settings
     await _vsCode.vsCodeSettingsGen(path);
+    await _build.createBuildYaml(path);
 
     // create configration files
     await _cmdRCD.configDefaultAnalysisOptions(path);
@@ -55,6 +58,7 @@ class CmdInitGetxMvcServices {
   // create project structure
   Future<void> createProjectStructure(String path) async {
     await _cmdRCD.createDirectory('$path/lib/App/Controllers');
+    await _cmdRCD.createDirectory('$path/lib/App/Models');
     await _cmdRCD.createDirectory('$path/lib/App/Enums');
     await _cmdRCD.createDirectory('$path/lib/App/Providers');
     await _cmdRCD.createDirectory('$path/lib/App/Services');
@@ -125,9 +129,8 @@ class CmdInitGetxMvcServices {
   }
 
   // create Case for GetX MVC
-  createCase(String path, String caseName, {bool? isCrud}) async {
+  Future<void> createCase(String path, String caseName, {bool? isCrud}) async {
     String nameSpace = await _ymal.getNameSpace('$path/pubspec.yaml');
-
     String controllerPath = '$path/lib/App/Controllers';
     String pagePath = '$path/lib/App/Views/Pages';
     String bindingPath = '$path/lib/Config/Bindings/app_binding.dart';
