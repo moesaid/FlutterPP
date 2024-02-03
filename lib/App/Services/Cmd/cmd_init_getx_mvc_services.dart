@@ -1,6 +1,7 @@
 import 'package:flutterpp/App/Providers/Cmd/cmd_flutter_provider.dart';
 import 'package:flutterpp/App/Providers/FilesGen/Getx/file_gen_getx_counter_case.dart';
 import 'package:flutterpp/App/Providers/FilesGen/Getx/file_gen_getx_provider.dart';
+import 'package:flutterpp/App/Providers/FilesGen/Getx/file_gen_gex_binding.dart';
 import 'package:flutterpp/App/Providers/FilesGen/vs_code_provider.dart';
 import 'package:flutterpp/App/Providers/Yaml/yaml_provider.dart';
 import 'package:flutterpp/App/Services/Cmd/cmd_read_create_dir_services.dart';
@@ -13,6 +14,7 @@ class CmdInitGetxMvcServices {
   final YamlProvider _ymal = YamlProvider();
   final FileGenGetxProvider _fileGen = FileGenGetxProvider();
   final FileGenGetxCounterCase _fileGenCase = FileGenGetxCounterCase();
+  final FileGenGexBinding _binding = FileGenGexBinding();
 
   // init
   Future<void> init(String path) async {
@@ -27,15 +29,15 @@ class CmdInitGetxMvcServices {
     await _cmdRCD.createDefultFlutterppYaml(path);
 
     // install dependencies
-    // await _cmdF.runFlutterPubCommand(path, ['add', 'get']);
-    // await _cmdF.runFlutterPubCommand(path, ['add', 'get_storage']);
-    // await _cmdF.runFlutterPubCommand(path, ['add', 'freezed_annotation']);
-    // await _cmdF.runFlutterPubCommand(path, ['add', 'json_annotation']);
+    await _cmdF.runFlutterPubCommand(path, ['add', 'get']);
+    await _cmdF.runFlutterPubCommand(path, ['add', 'get_storage']);
+    await _cmdF.runFlutterPubCommand(path, ['add', 'freezed_annotation']);
+    await _cmdF.runFlutterPubCommand(path, ['add', 'json_annotation']);
 
     // dev dependencies
-    // await _cmdF.runFlutterPubCommand(path, ['add', 'dev:build_runner']);
-    // await _cmdF.runFlutterPubCommand(path, ['add', 'dev:freezed']);
-    // await _cmdF.runFlutterPubCommand(path, ['add', 'dev:json_serializable']);
+    await _cmdF.runFlutterPubCommand(path, ['add', 'dev:build_runner']);
+    await _cmdF.runFlutterPubCommand(path, ['add', 'dev:freezed']);
+    await _cmdF.runFlutterPubCommand(path, ['add', 'dev:json_serializable']);
 
     // create default files
     await createProjectStructure(path);
@@ -68,7 +70,7 @@ class CmdInitGetxMvcServices {
     await _cmdRCD.createDirectory('$path/lib/Storage');
   }
 
-  // create counter case
+  // create init case
   createInitCase(String nameSpace, String path) async {
     String controllerPath = '$path/lib/App/Controllers';
     String pagePath = '$path/lib/App/Views/Pages';
@@ -121,9 +123,16 @@ class CmdInitGetxMvcServices {
   }
 
   // create Case for GetX MVC
-  createCase(String nameSpace, String path, String caseName) async {
+  createCase(String path, String caseName) async {
+    String nameSpace = await _ymal.getNameSpace('$path/pubspec.yaml');
+
     String controllerPath = '$path/lib/App/Controllers';
     String pagePath = '$path/lib/App/Views/Pages';
+    String bindingPath = '$path/lib/Config/Bindings/app_binding.dart';
+
+    // format and fix files
+    await _cmdF.runDartCommand(path, ['fix', '--apply']);
+    await _cmdF.runDartCommand(path, ['format', '.']);
 
     // create directories
     await _cmdRCD.createDirectory('$controllerPath/${caseName.toFolderName()}');
@@ -134,5 +143,19 @@ class CmdInitGetxMvcServices {
       caseName,
       '$controllerPath/${caseName.toFolderName()}',
     );
+
+    // create page
+    await _fileGen.pageGen(
+      nameSpace,
+      caseName,
+      '$pagePath/${caseName.toFolderName()}',
+    );
+
+    // add binding
+    await _binding.updateBindingFile(nameSpace, bindingPath, caseName);
+
+    // format and fix files
+    await _cmdF.runDartCommand(path, ['fix', '--apply']);
+    await _cmdF.runDartCommand(path, ['format', '.']);
   }
 }

@@ -25,7 +25,7 @@ class ProjectSingleConfigController extends GetxController {
     if (useController.projectLocalPath.isEmpty) return;
     await Get.showOverlay(
       asyncFunction: () async {
-        await _cmd.init(useController.projectLocalPath);
+        await _cmd.createCase(useController.projectLocalPath, 'profile');
       },
       loadingWidget: const BuildOverlay(),
     );
