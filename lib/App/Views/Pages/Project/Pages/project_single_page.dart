@@ -67,20 +67,22 @@ class BuildProjectSinglePage extends StatelessWidget {
         Expanded(
           child: DefaultTabController(
             length: 3,
-            child: Column(
-              children: [
-                controller.projectLocalPath.isEmpty ||
-                        !controller.isFlutterPPProject
-                    ? const SizedBox.shrink()
-                    : const BuildSingleProjectTapHeader(),
-                Expanded(
-                  child: controller.projectLocalPath.isEmpty
-                      ? const BuildSingleProjectNoPathState()
-                      : !controller.isFlutterPPProject
-                          ? const BuildSingleProjectStartConfig()
-                          : BuildSingleProjectTabView(controller: controller),
-                ),
-              ],
+            child: Obx(
+              () => Column(
+                children: [
+                  controller.projectLocalPath.isEmpty ||
+                          !controller.isFlutterPPProject
+                      ? const SizedBox.shrink()
+                      : const BuildSingleProjectTapHeader(),
+                  Expanded(
+                    child: controller.projectLocalPath.isEmpty
+                        ? const BuildSingleProjectNoPathState()
+                        : !controller.isFlutterPPProject
+                            ? const BuildSingleProjectStartConfig()
+                            : BuildSingleProjectTabView(controller: controller),
+                  ),
+                ],
+              ),
             ),
           ),
         ),

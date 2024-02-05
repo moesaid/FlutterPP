@@ -38,13 +38,17 @@ class BuildEmptyPage extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           SizedBox(
-            width: 30.h,
-            height: 30.h,
-            child: Lottie.asset('assets/lottie/empty.json'),
+            width: 22.h,
+            height: 22.h,
+            child: Lottie.asset('assets/lottie/empty_box.json'),
           ),
-          Text(
-            title ?? list![Random().nextInt(list!.length)],
-            style: Get.theme.textTheme.titleMedium,
+          SizedBox(
+            width: context.width * 0.5,
+            child: Text(
+              title ?? list![Random().nextInt(list!.length)],
+              textAlign: TextAlign.center,
+              style: Get.theme.textTheme.titleMedium,
+            ),
           ),
           const SizedBox(height: 20),
           if (hasButton == true)

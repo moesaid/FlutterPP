@@ -49,6 +49,7 @@ class ProjectSingleController extends GetxController {
     _project.value = project;
 
     await _fetchLocalPath();
+    await checkIfFlutterPPProject();
 
     _isLoading.value = false;
     update();
@@ -75,10 +76,12 @@ class ProjectSingleController extends GetxController {
   }
 
   // check if project is flutterpp project
-  checkIfFlutterPPProject() async {
-    if (project.id == null || project.id!.isEmpty) return;
+  Future<bool> checkIfFlutterPPProject() async {
+    if (project.id == null || project.id!.isEmpty) return false;
     _isFlutterPPProject.value = await _cmd.isFlutterPPProject(projectLocalPath);
     update();
+
+    return isFlutterPPProject;
   }
 
   // create project path

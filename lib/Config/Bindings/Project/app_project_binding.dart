@@ -1,4 +1,5 @@
 import 'package:flutterpp/App/Controllers/Project/Single/project_single_board_controller.dart';
+import 'package:flutterpp/App/Controllers/Project/Single/project_single_code_gen_controller.dart';
 import 'package:flutterpp/App/Controllers/Project/Single/project_single_config_controller.dart';
 import 'package:flutterpp/App/Controllers/Project/Single/project_single_controller.dart';
 import 'package:flutterpp/App/Controllers/Project/Single/project_single_wiki_controller.dart';
@@ -14,5 +15,7 @@ class AppProjectBinding {
         () => ProjectSingleBoardController());
     Get.lazyPut<ProjectSingleConfigController>(
         () => ProjectSingleConfigController());
+    Get.lazyPut<ProjectSingleCodeGenController>(
+        () => ProjectSingleCodeGenController());
   }
 }

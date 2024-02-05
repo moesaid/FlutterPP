@@ -22,7 +22,6 @@ dependencies:
   flutter_svg: ^2.0.6
   # appflowy_editor: ^0.1.12
   # appflowy_board: ^0.1.0
-  zoom_widget: ^2.0.1
   expansion_tile_group: ^1.2.4
   google_fonts: ^6.1.0
   flex_color_picker: ^3.2.2
@@ -39,6 +38,8 @@ dependencies:
   lottie: ^3.0.0
   json2yaml: ^3.0.1
   yaml: ^3.1.2
+  widget_arrows: ^0.6.0
+  graphite: ^1.1.2
 
 # dev_dependencies
 dev_dependencies:

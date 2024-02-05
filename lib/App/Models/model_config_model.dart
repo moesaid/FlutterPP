@@ -1,27 +1,18 @@
 class ModelConfigModel {
   String? modelName;
-  List<String>? additionals;
-  String? style;
+
   List<Relations>? relations;
   List<Properties>? properties;
 
-  ModelConfigModel(
-      {this.modelName,
-      this.additionals,
-      this.style,
-      this.relations,
-      this.properties});
+  ModelConfigModel({
+    this.modelName,
+    this.relations,
+    this.properties,
+  });
 
   ModelConfigModel.fromJson(Map<String, dynamic> json) {
     modelName = json['model_name'];
-    if (json['additionals'] != null) {
-      additionals = <String>[];
-      json['additionals'].forEach((v) {
-        additionals!.add(v);
-      });
-    }
 
-    style = json['style'];
     if (json['relations'] != null) {
       relations = <Relations>[];
       json['relations'].forEach((v) {
@@ -39,11 +30,6 @@ class ModelConfigModel {
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['model_name'] = modelName;
-    data['style'] = style;
-
-    if (additionals != null) {
-      data['additionals'] = additionals;
-    }
 
     if (relations != null) {
       data['relations'] = relations!.map((v) => v.toJson()).toList();

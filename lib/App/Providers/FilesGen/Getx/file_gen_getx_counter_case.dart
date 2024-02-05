@@ -276,7 +276,7 @@ class FileGenGetxCounterCase {
           initState: (_) {},
           builder: (_) {
             return Scaffold(
-              appBar: AppBar(title: const Text('Home Page')),
+              appBar: AppBar(title: const Text('Counter Page')),
               body: SafeArea(
                 child: SizedBox.expand(
                   child: Column(

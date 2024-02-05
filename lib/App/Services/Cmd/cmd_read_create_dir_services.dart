@@ -10,7 +10,7 @@ class CmdReadCreateDirServices {
 
     // check if theres a .flutterpp file
     if (res != null) {
-      return res.contains('.flutterpp');
+      return res.contains('flutterpp.yaml');
     }
 
     return false;

@@ -13,6 +13,7 @@ class BuildSingleProjectTabView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TabBarView(
+      physics: const NeverScrollableScrollPhysics(),
       children: [
         BuildSingleProjectCodeGen(
           localPath: controller.projectLocalPath,

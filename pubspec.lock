@@ -25,6 +25,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.4.2"
+  arrow_path:
+    dependency: transitive
+    description:
+      name: arrow_path
+      sha256: "07194a2f165242543e81b7fb16d86d433b52ee31adb0dc9afe9273c0a45e2d9e"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.0.0"
   async:
     dependency: transitive
     description:
@@ -365,6 +373,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.4.1"
+  graphite:
+    dependency: "direct main"
+    description:
+      name: graphite
+      sha256: "0887a93e53734e497f27e2ae0522e01037ed905c90a3568b51d1a6b26d52994c"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.1.2"
   gtk:
     dependency: transitive
     description:
@@ -834,6 +850,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.6.1"
+  touchable:
+    dependency: transitive
+    description:
+      name: touchable
+      sha256: "50040b39778bb1adc8a480625de8681253bd2134785395cf16abd66bb13d3ed0"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.2"
   typed_data:
     dependency: transitive
     description:
@@ -970,6 +994,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.4.0"
+  widget_arrows:
+    dependency: "direct main"
+    description:
+      name: widget_arrows
+      sha256: bbac0e0a309ed75d195747e7f932c43bce55f645f6a657a9e70b2fe8f9f80926
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.6.0"
   win32:
     dependency: transitive
     description:
@@ -1026,14 +1058,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.0.0"
-  zoom_widget:
-    dependency: "direct main"
-    description:
-      name: zoom_widget
-      sha256: "50fbaa460ffc938ca14c0077f8c9e5968c437897242d7f552dacff1bf3270225"
-      url: "https://pub.dev"
-    source: hosted
-    version: "2.0.1"
 sdks:
   dart: ">=3.2.3 <4.0.0"
   flutter: ">=3.16.0"
