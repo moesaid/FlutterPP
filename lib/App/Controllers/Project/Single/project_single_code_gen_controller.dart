@@ -18,6 +18,9 @@ class ProjectSingleCodeGenController extends GetxController {
   final _nodes = <NodeInput>[].obs;
   List<NodeInput> get nodes => _nodes;
 
+  final _tempModel = ModelConfigModel().obs;
+  ModelConfigModel get tempModel => _tempModel.value;
+
   @override
   Future<void> onInit() async {
     await _findControllers();
@@ -59,6 +62,20 @@ class ProjectSingleCodeGenController extends GetxController {
       // add to nodes
       _nodes.add(NodeInput(id: item.id!, next: nextItems));
     }
+
+    update();
+  }
+
+  // update temp model
+  void updateTempModel(ModelConfigModel model) {
+    _tempModel.value = _tempModel.value.copyWith(
+      id: model.id,
+      modelName: model.modelName,
+      color: model.color,
+      isCrud: model.isCrud,
+      relations: model.relations,
+      properties: model.properties,
+    );
 
     update();
   }

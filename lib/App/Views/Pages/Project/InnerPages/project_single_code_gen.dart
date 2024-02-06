@@ -39,8 +39,11 @@ class ProjectSingleCodeGen extends GetView<ProjectSingleCodeGenController> {
               isEmpty: controller.models.isEmpty,
               hasButton: true,
               buttonText: 'create your first model'.capitalize!,
-              onButtonPressed: () => controller.fetchApi(),
-              // onButtonPressed: () => openCreateOrEditModel(context: context),
+              onButtonPressed: () => openCreateOrEditSheet(
+                context: context,
+                sheetWidth: context.width * 0.4,
+                controller: controller,
+              ),
               child: InteractiveViewer(
                 constrained: false,
                 child: Row(

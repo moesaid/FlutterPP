@@ -51,6 +51,25 @@ class ModelConfigModel {
     }
     return data;
   }
+
+  // copy with new values
+  ModelConfigModel copyWith({
+    String? id,
+    String? modelName,
+    String? color,
+    bool? isCrud,
+    List<Relations>? relations,
+    List<Properties>? properties,
+  }) {
+    return ModelConfigModel(
+      id: id ?? this.id,
+      modelName: modelName ?? this.modelName,
+      color: color ?? this.color,
+      isCrud: isCrud ?? this.isCrud,
+      relations: relations ?? this.relations,
+      properties: properties ?? this.properties,
+    );
+  }
 }
 
 class Relations {
