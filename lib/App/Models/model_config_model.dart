@@ -1,17 +1,26 @@
+import 'package:flutter/material.dart';
+
 class ModelConfigModel {
-  String? modelName;
+  String? id, modelName, color;
+  bool? isCrud;
 
   List<Relations>? relations;
   List<Properties>? properties;
 
   ModelConfigModel({
+    this.id,
     this.modelName,
+    this.color,
+    this.isCrud,
     this.relations,
     this.properties,
   });
 
   ModelConfigModel.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
     modelName = json['model_name'];
+    color = json['color'];
+    isCrud = json['is_crud'];
 
     if (json['relations'] != null) {
       relations = <Relations>[];
@@ -29,7 +38,10 @@ class ModelConfigModel {
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
     data['model_name'] = modelName;
+    data['color'] = color;
+    data['is_crud'] = isCrud;
 
     if (relations != null) {
       data['relations'] = relations!.map((v) => v.toJson()).toList();
@@ -157,5 +169,37 @@ enum PropertieType {
         return PropertieType.hasMany;
     }
     return null;
+  }
+
+  // color for each type
+  Color get color {
+    switch (this) {
+      case PropertieType.string:
+        return Colors.blue;
+      case PropertieType.int:
+        return Colors.green;
+      case PropertieType.double:
+        return Colors.cyan;
+      case PropertieType.bool:
+        return Colors.red;
+      case PropertieType.list:
+        return Colors.orange;
+      case PropertieType.listOfString:
+        return Colors.orange;
+      case PropertieType.listOfInt:
+        return Colors.orange;
+      case PropertieType.listOfDouble:
+        return Colors.orange;
+      case PropertieType.listOfBool:
+        return Colors.orange;
+      case PropertieType.map:
+        return Colors.yellow;
+      case PropertieType.dynamic:
+        return Colors.grey;
+      case PropertieType.hasOne:
+        return Colors.purple;
+      case PropertieType.hasMany:
+        return Colors.pink;
+    }
   }
 }

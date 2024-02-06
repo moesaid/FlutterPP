@@ -39,6 +39,27 @@ class ProjectSingleCodeGenController extends GetxController {
       projectId: useController.project.id,
     );
 
-    print(res);
+    // check if res is null
+    if (res == null) return;
+
+    _models.assignAll(res);
+    for (var item in _models) {
+      List<EdgeInput> nextItems = [];
+
+      if (item.relations != null && item.relations!.isNotEmpty) {
+        for (var relation in item.relations!) {
+          // get relation model id
+          String? relationModelId =
+              _models.firstWhere((el) => el.modelName == relation.name).id;
+
+          nextItems.add(EdgeInput(outcome: relationModelId!));
+        }
+      }
+
+      // add to nodes
+      _nodes.add(NodeInput(id: item.id!, next: nextItems));
+    }
+
+    update();
   }
 }

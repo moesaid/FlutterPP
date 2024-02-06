@@ -10,6 +10,8 @@ class ProjectModelProvider {
 
   // get project by id
   Future<List<ModelConfigModel>?> getProjectById({String? projectId}) async {
+    print('❌projectId: $projectId');
+
     if (projectId == null || projectId.isEmpty) return null;
 
     return await _callPipeline.futurePipeline(
@@ -17,7 +19,7 @@ class ProjectModelProvider {
         List<Map> data = await supabase
             .from('project_models')
             .select('*')
-            .eq('id', projectId)
+            // .eq('project_id', projectId)
             .select();
 
         if (data.isEmpty) return null;

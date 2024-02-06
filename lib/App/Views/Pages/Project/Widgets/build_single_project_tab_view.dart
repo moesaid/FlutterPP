@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutterpp/App/Controllers/Project/Single/project_single_controller.dart';
-import 'package:flutterpp/App/Views/Pages/Project/Widgets/build_single_project_code_gen.dart';
+import 'package:flutterpp/App/Views/Pages/Project/InnerPages/project_single_code_gen.dart';
 
 class BuildSingleProjectTabView extends StatelessWidget {
   const BuildSingleProjectTabView({
@@ -15,9 +15,7 @@ class BuildSingleProjectTabView extends StatelessWidget {
     return TabBarView(
       physics: const NeverScrollableScrollPhysics(),
       children: [
-        BuildSingleProjectCodeGen(
-          localPath: controller.projectLocalPath,
-        ),
+        ProjectSingleCodeGen(localPath: controller.projectLocalPath),
         const Center(child: Text('Tasks')),
         const Center(child: Text('Members')),
       ],
