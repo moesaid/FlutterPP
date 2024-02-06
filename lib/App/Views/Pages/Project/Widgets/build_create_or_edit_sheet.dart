@@ -116,6 +116,7 @@ class BuildCreateOrEditSheet extends StatelessWidget {
                             builder: (BuildContext context) {
                               return BuildAddPropertyDialog(
                                 types: PropertieType.names,
+                                relations: controller.models,
                               );
                             },
                           );
@@ -149,7 +150,7 @@ class BuildCreateOrEditSheet extends StatelessWidget {
 
 class BuildAddPropertyDialog extends StatelessWidget {
   final List<String> types;
-  final List<Relations>? relations;
+  final List<ModelConfigModel>? relations;
   const BuildAddPropertyDialog({
     super.key,
     required this.types,
@@ -161,9 +162,11 @@ class BuildAddPropertyDialog extends StatelessWidget {
     final formKey = GlobalKey<FormBuilderState>();
 
     return BuildDefultDialog(
+      height: 300,
       child: FormBuilder(
         key: formKey,
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
               'Add Property',
@@ -199,13 +202,14 @@ class BuildAddPropertyDialog extends StatelessWidget {
                   FormBuilderDropdown(
                     name: 'relation_name',
                     decoration: const InputDecoration(
-                      labelText: 'link to a model',
+                      labelText:
+                          'link to a model (applicable for hasOne and hasMany)',
                     ),
                     items: relations!
                         .map(
                           (e) => DropdownMenuItem(
-                            value: e,
-                            child: Text(e.name!.capitalize!),
+                            value: e.modelName,
+                            child: Text(e.modelName!.capitalize!),
                           ),
                         )
                         .toList(),
@@ -220,15 +224,15 @@ class BuildAddPropertyDialog extends StatelessWidget {
                           if (formKey.currentState!.saveAndValidate()) {
                             // value
                             String? propertyName =
-                                formKey.currentState!.fields['name']!.value;
+                                formKey.currentState!.fields['name']?.value;
 
                             // type
                             String? type =
-                                formKey.currentState!.fields['type']!.value;
+                                formKey.currentState!.fields['type']?.value;
 
                             // relation
                             String? relationName = formKey
-                                .currentState!.fields['relation_name']!.value;
+                                .currentState!.fields['relation_name']?.value;
 
                             if ((type == 'hasOne' || type == 'hasMany') &&
                                 (relations == null || relations!.isEmpty)) {
