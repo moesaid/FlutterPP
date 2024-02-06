@@ -322,7 +322,7 @@ class AppTheme {
             left: 22,
             right: 22,
             top: 16,
-            bottom: 11 + 8,
+            bottom: 16,
           ),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(5),

@@ -1,3 +1,4 @@
+import 'package:flutter_platform_alert/flutter_platform_alert.dart';
 import 'package:flutterpp/App/Controllers/Project/Single/project_single_controller.dart';
 import 'package:flutterpp/App/Models/model_config_model.dart';
 import 'package:flutterpp/App/Services/Project/project_model_services.dart';
@@ -73,10 +74,34 @@ class ProjectSingleCodeGenController extends GetxController {
       modelName: model.modelName,
       color: model.color,
       isCrud: model.isCrud,
-      relations: model.relations,
-      properties: model.properties,
     );
 
+    update();
+  }
+
+  // add relation to temp model
+  Future<void> addRelationToTempModel(Relations relation) async {
+    _tempModel.value.relations ??= [];
+
+    // check if relation already exists
+    if (_tempModel.value.relations!.any((el) => el.name == relation.name)) {
+      await FlutterPlatformAlert.playAlertSound();
+
+      await FlutterPlatformAlert.showAlert(
+        windowTitle: 'Oops!',
+        text: 'Relation already exists!, cannot add again.',
+        alertStyle: AlertButtonStyle.ok,
+        iconStyle: IconStyle.error,
+      );
+      return;
+    }
+
+    _tempModel.value = _tempModel.value.copyWith(
+      relations: [
+        ..._tempModel.value.relations!,
+        relation,
+      ],
+    );
     update();
   }
 }

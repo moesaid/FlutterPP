@@ -1,11 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class BuiuldDialog extends StatelessWidget {
+class BuildDefultDialog extends StatelessWidget {
   final Widget? child;
-  const BuiuldDialog({
+  final double? height, width;
+  final EdgeInsetsGeometry? padding;
+  const BuildDefultDialog({
     super.key,
     this.child,
+    this.height,
+    this.width,
+    this.padding,
   });
 
   @override
@@ -14,8 +19,9 @@ class BuiuldDialog extends StatelessWidget {
       backgroundColor: Colors.transparent,
       elevation: 0,
       child: Container(
-        height: 500,
-        width: 500,
+        height: height ?? 500,
+        width: width ?? 500,
+        padding: padding ?? const EdgeInsets.all(20),
         decoration: BoxDecoration(
           color: Get.theme.colorScheme.primaryContainer,
           borderRadius: BorderRadius.circular(10),

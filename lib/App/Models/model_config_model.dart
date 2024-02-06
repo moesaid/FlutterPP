@@ -121,7 +121,6 @@ enum PropertieType {
   listOfBool,
   list,
   map,
-  dynamic,
   hasOne,
   hasMany;
 
@@ -148,8 +147,6 @@ enum PropertieType {
         return 'List<bool>';
       case PropertieType.map:
         return 'Map';
-      case PropertieType.dynamic:
-        return 'dynamic';
       case PropertieType.hasOne:
         return 'hasOne';
       case PropertieType.hasMany:
@@ -180,8 +177,7 @@ enum PropertieType {
         return PropertieType.listOfBool;
       case 'Map':
         return PropertieType.map;
-      case 'dynamic':
-        return PropertieType.dynamic;
+
       case 'hasOne':
         return PropertieType.hasOne;
       case 'hasMany':
@@ -213,12 +209,18 @@ enum PropertieType {
         return Colors.orange;
       case PropertieType.map:
         return Colors.yellow;
-      case PropertieType.dynamic:
-        return Colors.grey;
+
       case PropertieType.hasOne:
         return Colors.purple;
       case PropertieType.hasMany:
         return Colors.pink;
     }
+  }
+
+  // list of names
+  static List<String> get names {
+    return PropertieType.values
+        .map((e) => e.toString().split('.').last)
+        .toList();
   }
 }
