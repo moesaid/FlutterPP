@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutterpp/App/Controllers/Project/Single/project_single_code_gen_controller.dart';
 import 'package:flutterpp/App/Views/Global/build_loading_or_empty_layout.dart';
 import 'package:flutterpp/App/Views/Pages/Project/Widgets/build_code_gen_node.dart';
+import 'package:flutterpp/App/Views/Pages/Project/Widgets/build_create_or_edit_sheet.dart';
 import 'package:get/get.dart';
 import 'package:graphite/graphite.dart';
 
@@ -76,23 +77,6 @@ class ProjectSingleCodeGen extends GetView<ProjectSingleCodeGenController> {
   }
 }
 
-class BuildCreateOrEditModel extends StatelessWidget {
-  const BuildCreateOrEditModel({
-    super.key,
-    required this.controller,
-  });
-
-  final ProjectSingleCodeGenController controller;
-
-  @override
-  Widget build(BuildContext context) {
-    return SizedBox(
-      width: context.width,
-      child: Text(controller.isLoading.toString()),
-    );
-  }
-}
-
 class BuildCodeGenFloatingButton extends StatelessWidget {
   final BuildContext sharedContext;
   final ProjectSingleCodeGenController controller;
@@ -109,7 +93,7 @@ class BuildCodeGenFloatingButton extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       children: [
         FilledButton(
-          onPressed: () => openCreateOrEditModel(
+          onPressed: () => openCreateOrEditSheet(
             context: sharedContext,
             controller: controller,
           ),
@@ -121,7 +105,7 @@ class BuildCodeGenFloatingButton extends StatelessWidget {
 }
 
 // open create or edit model
-void openCreateOrEditModel({
+void openCreateOrEditSheet({
   required BuildContext context,
   required ProjectSingleCodeGenController controller,
 }) {
@@ -131,6 +115,6 @@ void openCreateOrEditModel({
     header: const SizedBox.shrink(),
     footer: const SizedBox.shrink(),
     sheetWidth: context.width * 0.4,
-    body: BuildCreateOrEditModel(controller: controller),
+    body: BuildCreateOrEditSheet(controller: controller),
   );
 }
