@@ -104,4 +104,36 @@ class ProjectSingleCodeGenController extends GetxController {
     );
     update();
   }
+
+  void addPropertiesToTempModel(Properties val) {
+    _tempModel.value.properties ??= [];
+
+    // if same property already exists
+    if (_tempModel.value.properties!
+        .any((el) => el.name == val.name?.toLowerCase().replaceAll(' ', ''))) {
+      FlutterPlatformAlert.playAlertSound();
+      FlutterPlatformAlert.showAlert(
+        windowTitle: 'Oops!',
+        text: 'Property already exists!, cannot add again.',
+        alertStyle: AlertButtonStyle.ok,
+        iconStyle: IconStyle.error,
+      );
+      return;
+    }
+
+    _tempModel.value = _tempModel.value.copyWith(
+      properties: [
+        ..._tempModel.value.properties!,
+        val,
+      ],
+    );
+
+    update();
+  }
+
+  // remove relation from temp model
+  void removePropertiesFromTempModel(int index) {
+    _tempModel.value.properties!.removeAt(index);
+    update();
+  }
 }
