@@ -1,10 +1,8 @@
-import 'package:awesome_side_sheet/Enums/sheet_position.dart';
-import 'package:awesome_side_sheet/side_sheet.dart';
 import 'package:flutter/material.dart';
 import 'package:flutterpp/App/Controllers/Project/Single/project_single_code_gen_controller.dart';
 import 'package:flutterpp/App/Views/Global/build_loading_or_empty_layout.dart';
+import 'package:flutterpp/App/Views/Pages/Project/Widgets/build_code_gen_floating_button.dart';
 import 'package:flutterpp/App/Views/Pages/Project/Widgets/build_code_gen_node.dart';
-import 'package:flutterpp/App/Views/Pages/Project/Widgets/build_create_or_edit_sheet.dart';
 import 'package:get/get.dart';
 import 'package:graphite/graphite.dart';
 
@@ -24,8 +22,9 @@ class ProjectSingleCodeGen extends GetView<ProjectSingleCodeGenController> {
       builder: (_) {
         return Scaffold(
           floatingActionButton: BuildCodeGenFloatingButton(
-            sharedContext: context,
             controller: controller,
+            sharedContext: context,
+            sheetWidth: context.width * 0.4,
           ),
           body: Container(
             decoration: const BoxDecoration(
@@ -75,46 +74,4 @@ class ProjectSingleCodeGen extends GetView<ProjectSingleCodeGenController> {
       },
     );
   }
-}
-
-class BuildCodeGenFloatingButton extends StatelessWidget {
-  final BuildContext sharedContext;
-  final ProjectSingleCodeGenController controller;
-
-  const BuildCodeGenFloatingButton({
-    super.key,
-    required this.sharedContext,
-    required this.controller,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        FilledButton(
-          onPressed: () => openCreateOrEditSheet(
-            context: sharedContext,
-            controller: controller,
-          ),
-          child: const Text('Create Model'),
-        ),
-      ],
-    );
-  }
-}
-
-// open create or edit model
-void openCreateOrEditSheet({
-  required BuildContext context,
-  required ProjectSingleCodeGenController controller,
-}) {
-  aweSideSheet(
-    context: context,
-    sheetPosition: SheetPosition.right,
-    header: const SizedBox.shrink(),
-    footer: const SizedBox.shrink(),
-    sheetWidth: context.width * 0.4,
-    body: BuildCreateOrEditSheet(controller: controller),
-  );
 }
