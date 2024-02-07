@@ -10,8 +10,6 @@ class ProjectModelProvider {
 
   // get project by id
   Future<List<ModelConfigModel>?> getProjectById({String? projectId}) async {
-    print('❌projectId: $projectId');
-
     if (projectId == null || projectId.isEmpty) return null;
 
     return await _callPipeline.futurePipeline(
@@ -35,6 +33,65 @@ class ProjectModelProvider {
         return models;
       },
       name: 'getProjectById',
+    );
+  }
+
+  // create project model
+  Future<ModelConfigModel?> createProjectModel({
+    required ModelConfigModel model,
+  }) async {
+    return await _callPipeline.futurePipeline(
+      future: () async {
+        var data = await supabase.from('project_models').insert({
+          'model_name': model.modelName,
+          'color': model.color,
+          'is_crud': model.isCrud ?? false,
+          'project_id': model.projectId,
+          'properties': model.properties,
+          'relations': model.relations,
+        }).select();
+
+        if (data.isEmpty) return null;
+
+        var localJson = json.encode(data[0]);
+        return ModelConfigModel.fromJson(json.decode(localJson));
+      },
+      name: 'createProjectModel',
+    );
+  }
+
+  // update project model
+  Future<ModelConfigModel?> updateProjectModel({
+    required ModelConfigModel model,
+  }) async {
+    return await _callPipeline.futurePipeline(
+      future: () async {
+        var data = await supabase
+            .from('project_models')
+            .update(model.toJson())
+            .eq('id', model.id!)
+            .select();
+
+        if (data.isEmpty) return null;
+
+        var localJson = json.encode(data[0]);
+        return ModelConfigModel.fromJson(json.decode(localJson));
+      },
+      name: 'updateProjectModel',
+    );
+  }
+
+  // delete project model
+  Future<void> deleteProjectModel({required String modelId}) async {
+    print({'❌modelId': modelId});
+
+    await _callPipeline.futurePipeline(
+      future: () async {
+        var err =
+            await supabase.from('project_models').delete().eq('id', modelId);
+        print(err);
+      },
+      name: 'deleteProjectModel',
     );
   }
 }

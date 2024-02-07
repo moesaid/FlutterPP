@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class ModelConfigModel {
-  String? id, modelName, color;
+  String? id, projectId, modelName, color;
   bool? isCrud;
 
   List<Relations>? relations;
@@ -9,6 +9,7 @@ class ModelConfigModel {
 
   ModelConfigModel({
     this.id,
+    this.projectId,
     this.modelName,
     this.color,
     this.isCrud,
@@ -18,6 +19,7 @@ class ModelConfigModel {
 
   ModelConfigModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];
+    projectId = json['project_id'];
     modelName = json['model_name'];
     color = json['color'];
     isCrud = json['is_crud'];
@@ -39,6 +41,7 @@ class ModelConfigModel {
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['id'] = id;
+    data['project_id'] = projectId;
     data['model_name'] = modelName;
     data['color'] = color;
     data['is_crud'] = isCrud;
@@ -55,6 +58,7 @@ class ModelConfigModel {
   // copy with new values
   ModelConfigModel copyWith({
     String? id,
+    String? projectId,
     String? modelName,
     String? color,
     bool? isCrud,
@@ -63,6 +67,7 @@ class ModelConfigModel {
   }) {
     return ModelConfigModel(
       id: id ?? this.id,
+      projectId: projectId ?? this.projectId,
       modelName: modelName ?? this.modelName,
       color: color ?? this.color,
       isCrud: isCrud ?? this.isCrud,
@@ -104,7 +109,7 @@ class Properties {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['name'] = name;
     data['relation_name'] = relationName;
-    data['type'] = type;
+    data['type'] = type.toString().split('.').last;
 
     return data;
   }
@@ -157,7 +162,7 @@ enum PropertieType {
   // return enum from string
   static PropertieType? fromString(String? type) {
     switch (type) {
-      case 'String':
+      case 'string':
         return PropertieType.string;
       case 'int':
         return PropertieType.int;
@@ -165,19 +170,18 @@ enum PropertieType {
         return PropertieType.double;
       case 'bool':
         return PropertieType.bool;
-      case 'List':
+      case 'list':
         return PropertieType.list;
-      case 'List<String>':
+      case 'listOfString':
         return PropertieType.listOfString;
-      case 'List<int>':
+      case 'listOfInt':
         return PropertieType.listOfInt;
-      case 'List<double>':
+      case 'listOfDouble':
         return PropertieType.listOfDouble;
-      case 'List<bool>':
+      case 'listOfBool':
         return PropertieType.listOfBool;
-      case 'Map':
+      case 'map':
         return PropertieType.map;
-
       case 'hasOne':
         return PropertieType.hasOne;
       case 'hasMany':

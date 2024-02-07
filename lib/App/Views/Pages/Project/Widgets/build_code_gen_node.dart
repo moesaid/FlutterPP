@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutterpp/App/Models/model_config_model.dart';
+import 'package:flutterpp/Helpers/colors_helper.dart';
 import 'package:flutterpp/Helpers/text_helper.dart';
 import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
@@ -7,10 +8,12 @@ import 'package:sizer/sizer.dart';
 class BuildCodeGenNode extends StatelessWidget {
   final String? uuid;
   final List<ModelConfigModel> items;
+  final void Function() onEditPressed;
   const BuildCodeGenNode({
     super.key,
     this.uuid,
     required this.items,
+    required this.onEditPressed,
   });
 
   @override
@@ -45,7 +48,9 @@ class BuildCodeGenNode extends StatelessWidget {
               left: 5,
             ),
             decoration: BoxDecoration(
-              color: Get.theme.colorScheme.secondary,
+              color: item.color != null
+                  ? ColorHelper.hexToColor(item.color!)
+                  : Get.theme.colorScheme.secondary,
               borderRadius: BorderRadius.circular(5),
             ),
           ),
@@ -66,7 +71,7 @@ class BuildCodeGenNode extends StatelessWidget {
                     : 'Model'),
                 const Spacer(),
                 IconButton.filled(
-                  onPressed: () => print('edit'),
+                  onPressed: onEditPressed,
                   icon: const Icon(Icons.edit),
                   iconSize: 5.sp,
                   padding: EdgeInsets.zero,
@@ -98,13 +103,14 @@ class BuildCodeGenNode extends StatelessWidget {
                             const Divider(height: 0, thickness: 0.2),
                         itemBuilder: (_, int index) {
                           Properties property = propertiesNoRelation[index];
+                          // print(property.type);
                           return ListTile(
                             title: Text(
                               property.name ?? 'Property',
                               style: TextStyle(fontSize: 4.sp),
                             ),
                             trailing: Badge(
-                              label: Text(property.type?.type ?? 'Type'),
+                              label: Text(property.type?.type ?? 'Type11'),
                               backgroundColor:
                                   property.type?.color.withOpacity(0.1),
                               textColor: property.type?.color,

@@ -46,6 +46,7 @@ class ProjectSingleCodeGenController extends GetxController {
     // check if res is null
     if (res == null) return;
 
+    _nodes.clear();
     _models.assignAll(res);
     for (var item in _models) {
       List<EdgeInput> nextItems = [];
@@ -134,6 +135,121 @@ class ProjectSingleCodeGenController extends GetxController {
   // remove relation from temp model
   void removePropertiesFromTempModel(int index) {
     _tempModel.value.properties!.removeAt(index);
+    update();
+  }
+
+  // create project model
+  Future<void> createProjectModel() async {
+    // name should not be empty
+    if (_tempModel.value.modelName == null ||
+        _tempModel.value.modelName!.isEmpty) {
+      FlutterPlatformAlert.playAlertSound();
+      FlutterPlatformAlert.showAlert(
+        windowTitle: 'Oops!',
+        text: 'Model name cannot be empty!',
+        alertStyle: AlertButtonStyle.ok,
+        iconStyle: IconStyle.error,
+      );
+      return;
+    }
+
+    // must have at least one property
+    if (_tempModel.value.properties == null ||
+        _tempModel.value.properties!.isEmpty) {
+      FlutterPlatformAlert.playAlertSound();
+      FlutterPlatformAlert.showAlert(
+        windowTitle: 'Oops!',
+        text: 'Model must have at least one property!',
+        alertStyle: AlertButtonStyle.ok,
+        iconStyle: IconStyle.error,
+      );
+      return;
+    }
+
+    Get.back();
+
+    _isLoading.value = true;
+    update();
+
+    if (_tempModel.value.id == null) {
+      // add project id
+      _tempModel.value = _tempModel.value.copyWith(
+        projectId: useController.project.id,
+      );
+
+      // create model
+      await _projectModelServices.createProjectModel(
+        model: _tempModel.value,
+      );
+    } else if (_tempModel.value.id != null) {
+      // update model
+      await _projectModelServices.updateProjectModel(
+        model: _tempModel.value,
+      );
+    }
+
+    await fetchApi();
+    await resetTempModel();
+
+    _isLoading.value = false;
+    update();
+  }
+
+  // reset temp model
+  resetTempModel() {
+    _tempModel.value = ModelConfigModel();
+    update();
+  }
+
+  // replace temp model
+  replaceTempModel(ModelConfigModel model) {
+    _tempModel.value = model;
+    update();
+
+    print({'🔥': _tempModel.value.id});
+  }
+
+  // delete model
+  Future<void> deleteModel(String id) async {
+    _isLoading.value = true;
+    update();
+
+    Get.back();
+    resetTempModel();
+
+    // get model by id
+    ModelConfigModel activeModel = _models.firstWhere(
+        (element) => element.id == id,
+        orElse: () => ModelConfigModel());
+
+    // get rest of the models
+    List<ModelConfigModel> restModels =
+        _models.where((element) => element.id != id).toList();
+
+    for (var item in restModels) {
+      item.relations?.where(
+        (el) => el.name == activeModel.modelName,
+      );
+
+      // remove relation
+      item.relations?.removeWhere(
+        (el) => el.name == activeModel.modelName,
+      );
+
+      // remove properties
+      item.properties?.removeWhere(
+        (el) => el.relationName == activeModel.modelName,
+      );
+
+      // update rest models
+      await _projectModelServices.updateProjectModel(model: item);
+    }
+
+    await _projectModelServices.deleteProjectModel(modelId: id);
+
+    await fetchApi();
+
+    _isLoading.value = false;
     update();
   }
 }

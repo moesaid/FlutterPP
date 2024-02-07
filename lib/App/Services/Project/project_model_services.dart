@@ -8,4 +8,23 @@ class ProjectModelServices {
   Future<List<ModelConfigModel>?> getProjectById({String? projectId}) async {
     return await provider.getProjectById(projectId: projectId);
   }
+
+  // create project model
+  Future<ModelConfigModel?> createProjectModel({
+    required ModelConfigModel model,
+  }) async {
+    return await provider.createProjectModel(model: model);
+  }
+
+  // update project model
+  Future<ModelConfigModel?> updateProjectModel({
+    required ModelConfigModel model,
+  }) async {
+    return await provider.updateProjectModel(model: model);
+  }
+
+  // delete project model
+  Future<void> deleteProjectModel({required String modelId}) async {
+    return await provider.deleteProjectModel(modelId: modelId);
+  }
 }

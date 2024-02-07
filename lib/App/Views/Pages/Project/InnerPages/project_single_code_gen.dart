@@ -56,6 +56,17 @@ class ProjectSingleCodeGen extends GetView<ProjectSingleCodeGenController> {
                       nodeBuilder: (context, node) => BuildCodeGenNode(
                         uuid: node.id,
                         items: controller.models,
+                        onEditPressed: () {
+                          controller.replaceTempModel(
+                            controller.models
+                                .firstWhere((e) => e.id == node.id),
+                          );
+                          openCreateOrEditSheet(
+                            context: context,
+                            sheetWidth: context.width * 0.4,
+                            controller: controller,
+                          );
+                        },
                       ),
                       paintBuilder: (edge) {
                         var p = Paint()

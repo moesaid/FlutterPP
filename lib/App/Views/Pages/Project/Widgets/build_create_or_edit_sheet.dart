@@ -46,17 +46,25 @@ class BuildCreateOrEditSheet extends StatelessWidget {
                   ),
                   const Spacer(),
                   FilledButton(
-                    onPressed: () {},
+                    onPressed: () => controller.tempModel.id != null
+                        ? controller.deleteModel(controller.tempModel.id ?? '')
+                        : controller.resetTempModel(),
                     style: ButtonStyle(
                       backgroundColor: MaterialStateProperty.all(
-                        Get.theme.colorScheme.errorContainer,
+                        controller.tempModel.id == null
+                            ? Get.theme.colorScheme.background
+                            : Get.theme.colorScheme.errorContainer,
                       ),
                     ),
-                    child: const Text('delete'),
+                    child: Text(
+                      controller.tempModel.id == null
+                          ? 'reset'.capitalize!
+                          : 'delete'.capitalize!,
+                    ),
                   ),
                   SizedBox(width: 5.sp),
                   FilledButton(
-                    onPressed: () {},
+                    onPressed: () => controller.createProjectModel(),
                     child: Text(
                       'Save'.toUpperCase(),
                     ),
@@ -477,9 +485,13 @@ class BuildAddRelationshipSection extends StatelessWidget {
                   showDialog(
                     context: context,
                     builder: (BuildContext context) {
+                      debugPrint(controller.tempModel.modelName);
                       return BuildAddRelationshipModel(
-                        models:
-                            controller.models.map((e) => e.modelName!).toList(),
+                        models: controller.models
+                            .where((el) =>
+                                el.modelName != controller.tempModel.modelName)
+                            .map((e) => e.modelName!)
+                            .toList(),
                         onAdd: (val) {
                           controller.addRelationToTempModel(
                             Relations(name: val),
