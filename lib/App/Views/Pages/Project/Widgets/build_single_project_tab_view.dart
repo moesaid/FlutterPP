@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutterpp/App/Controllers/Project/Single/project_single_controller.dart';
 import 'package:flutterpp/App/Views/Pages/Project/InnerPages/project_single_code_gen.dart';
+import 'package:flutterpp/App/Views/Pages/Project/InnerPages/project_single_wiki_page.dart';
 
 class BuildSingleProjectTabView extends StatelessWidget {
   const BuildSingleProjectTabView({
@@ -16,7 +17,7 @@ class BuildSingleProjectTabView extends StatelessWidget {
       physics: const NeverScrollableScrollPhysics(),
       children: [
         ProjectSingleCodeGen(localPath: controller.projectLocalPath),
-        const Center(child: Text('Tasks')),
+        const ProjectSingleWikiPage(),
         const Center(child: Text('Members')),
       ],
     );

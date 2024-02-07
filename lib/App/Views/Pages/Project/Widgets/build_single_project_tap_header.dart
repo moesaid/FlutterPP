@@ -18,7 +18,7 @@ class BuildSingleProjectTapHeader extends StatelessWidget {
       enableFeedback: true,
       tabs: [
         Tab(text: 'Code Gen'.capitalize!),
-        Tab(text: 'docs'.capitalize!),
+        Tab(text: 'wiki'.capitalize!),
         Tab(text: 'ci / cd'.capitalize!),
       ],
     );
