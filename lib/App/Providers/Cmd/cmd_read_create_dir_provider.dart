@@ -14,6 +14,7 @@ class CmdReadCreateDirProvider {
 
       List<String> res = [];
       for (var item in result.outLines) {
+        if (item == '$path:') continue;
         res.add(item);
       }
 

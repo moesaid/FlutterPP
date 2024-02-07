@@ -1,3 +1,4 @@
+import 'package:flutterpp/App/Models/build_option_model.dart';
 import 'package:flutterpp/App/Providers/Cmd/cmd_flutter_provider.dart';
 import 'package:flutterpp/App/Providers/FilesGen/Getx/file_gen_getx_counter_case.dart';
 import 'package:flutterpp/App/Providers/FilesGen/Getx/file_gen_getx_provider.dart';
@@ -129,7 +130,12 @@ class CmdInitGetxMvcServices {
   }
 
   // create Case for GetX MVC
-  Future<void> createCase(String path, String caseName, {bool? isCrud}) async {
+  Future<void> createCase(
+    String path,
+    String caseName, {
+    bool? isCrud,
+    required BuildOptionModel option,
+  }) async {
     String nameSpace = await _ymal.getNameSpace('$path/pubspec.yaml');
     String controllerPath = '$path/lib/App/Controllers';
     String pagePath = '$path/lib/App/Views/Pages';
@@ -140,11 +146,18 @@ class CmdInitGetxMvcServices {
     await _cmdF.runDartCommand(path, ['format', '.']);
 
     // create directories
-    await _cmdRCD.createDirectory('$controllerPath/${caseName.toFolderName()}');
-    await _cmdRCD.createDirectory('$pagePath/${caseName.toFolderName()}');
+    if (option.controllers == true) {
+      await _cmdRCD.createDirectory(
+        '$controllerPath/${caseName.toFolderName()}',
+      );
+    }
+
+    if (option.pages == true) {
+      await _cmdRCD.createDirectory('$pagePath/${caseName.toFolderName()}');
+    }
 
     // create controller
-    if (isCrud == true) {
+    if (isCrud == true && option.controllers == true) {
       await _fileGen.controllerGen(
         '${caseName}Index',
         '$controllerPath/${caseName.toFolderName()}',
@@ -161,7 +174,7 @@ class CmdInitGetxMvcServices {
         '${caseName}Edit',
         '$controllerPath/${caseName.toFolderName()}',
       );
-    } else {
+    } else if (isCrud == false && option.controllers == true) {
       await _fileGen.controllerGen(
         caseName,
         '$controllerPath/${caseName.toFolderName()}',
@@ -169,7 +182,7 @@ class CmdInitGetxMvcServices {
     }
 
     // create page
-    if (isCrud == true) {
+    if (isCrud == true && option.pages == true) {
       await _fileGen.pageGen(
         nameSpace,
         '${caseName}Index',
@@ -194,7 +207,7 @@ class CmdInitGetxMvcServices {
         '$pagePath/${caseName.toFolderName()}',
         custom: caseName,
       );
-    } else {
+    } else if (isCrud == false && option.pages == true) {
       await _fileGen.pageGen(
         nameSpace,
         caseName,
@@ -203,21 +216,30 @@ class CmdInitGetxMvcServices {
     }
 
     // add binding
-    await _binding.updateBindingFile(nameSpace, bindingPath, caseName);
+    if (option.bindings == true) {
+      await _binding.updateBindingFile(
+        nameSpace,
+        bindingPath,
+        caseName,
+        isCrud ?? false,
+      );
+    }
 
     // router
-    await _router.updateAppRoutes(
-      nameSpace,
-      '$path/lib/Routes/app_routes.dart',
-      caseName,
-      isCrud: isCrud,
-    );
-    await _router.updateAppPages(
-      nameSpace,
-      '$path/lib/Routes/app_pages.dart',
-      caseName,
-      isCrud: isCrud,
-    );
+    if (option.routes == true) {
+      await _router.updateAppRoutes(
+        nameSpace,
+        '$path/lib/Routes/app_routes.dart',
+        caseName,
+        isCrud: isCrud,
+      );
+      await _router.updateAppPages(
+        nameSpace,
+        '$path/lib/Routes/app_pages.dart',
+        caseName,
+        isCrud: isCrud,
+      );
+    }
 
     // format and fix files
     await _cmdF.runDartCommand(path, ['fix', '--apply']);

@@ -21,7 +21,7 @@ class FileGenGetxRouterProvider {
     if (isCrud == true) {
       content = '''
       // start ${caseName.toPascalCase()} routes
-      static const ${caseName.toUpperCase()} = '/$caseName';
+      static const ${caseName.toUpperCase()}_INDEX = '/$caseName';
       static const ${caseName.toUpperCase()}_SINGLE = '/$caseName/single';
       static const ${caseName.toUpperCase()}_CREATE = '/$caseName/create';
       static const ${caseName.toUpperCase()}_EDIT = '/$caseName/edit';
@@ -58,14 +58,14 @@ class FileGenGetxRouterProvider {
 
     if (isCrud == true) {
       imports = '''
-        import 'package:$nameSpace/App/Views/Pages/${caseName.toFolderName()}/${caseName.toPascalCase()}_page.dart';
-        import 'package:$nameSpace/App/Views/Pages/${caseName.toFolderName()}/${caseName.toPascalCase()}_single_page.dart';
-        import 'package:$nameSpace/App/Views/Pages/${caseName.toFolderName()}/${caseName.toPascalCase()}_create_page.dart';
-        import 'package:$nameSpace/App/Views/Pages/${caseName.toFolderName()}/${caseName.toPascalCase()}_edit_page.dart';
+        import 'package:$nameSpace/App/Views/Pages/${caseName.toFolderName()}/${caseName.toSnakeCase()}_index_page.dart';
+        import 'package:$nameSpace/App/Views/Pages/${caseName.toFolderName()}/${caseName.toSnakeCase()}_single_page.dart';
+        import 'package:$nameSpace/App/Views/Pages/${caseName.toFolderName()}/${caseName.toSnakeCase()}_create_page.dart';
+        import 'package:$nameSpace/App/Views/Pages/${caseName.toFolderName()}/${caseName.toSnakeCase()}_edit_page.dart';
       ''';
     } else {
       imports = '''
-        import 'package:$nameSpace/App/Views/Pages/${caseName.toFolderName()}/${caseName.toPascalCase()}_page.dart';
+        import 'package:$nameSpace/App/Views/Pages/${caseName.toFolderName()}/${caseName.toSnakeCase()}_page.dart';
       ''';
     }
 
@@ -77,8 +77,8 @@ class FileGenGetxRouterProvider {
       content = '''
       // start ${caseName.toPascalCase()} pages
       GetPage(
-        name: AppRoutes.${caseName.toUpperCase()},
-        page: () => const ${'${caseName.toPascalCase()}Page'}(),
+        name: AppRoutes.${caseName.toUpperCase()}_INDEX,
+        page: () => const ${'${caseName.toPascalCase()}IndexPage'}(),
       ),
       GetPage(
         name: AppRoutes.${caseName.toUpperCase()}_SINGLE,

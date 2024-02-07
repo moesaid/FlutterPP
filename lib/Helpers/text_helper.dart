@@ -29,7 +29,7 @@ extension TextHelpers on String {
     });
   }
 
-  // to file name
+  // to folder name
   String toFolderName() {
     // if more than one word take the first word
     // captlize the first letter

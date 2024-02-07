@@ -4,6 +4,7 @@ class BuildSidebarOption extends StatelessWidget {
   final Widget? leftWidget, rightWidget;
   final int? flexLeft, flexRight;
   final String? title;
+  final FontWeight? fontWeight;
 
   const BuildSidebarOption({
     super.key,
@@ -12,6 +13,7 @@ class BuildSidebarOption extends StatelessWidget {
     this.flexLeft,
     this.flexRight,
     this.title,
+    this.fontWeight,
   });
 
   @override
@@ -23,8 +25,8 @@ class BuildSidebarOption extends StatelessWidget {
           child: leftWidget ??
               Text(
                 title ?? 'Type',
-                style: const TextStyle(
-                  fontWeight: FontWeight.bold,
+                style: TextStyle(
+                  fontWeight: fontWeight ?? FontWeight.bold,
                 ),
               ),
         ),

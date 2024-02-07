@@ -3,6 +3,11 @@ import 'dart:io';
 class BuildRunnerProvider {
   // create build yaml file
   Future<void> createBuildYaml(String path) async {
+    // check if file exists
+    if (File('$path/build.yaml').existsSync()) {
+      return;
+    }
+
     String content = '''
     targets:
       \$default:

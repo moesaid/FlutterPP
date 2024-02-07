@@ -7,6 +7,8 @@ class BuildSliderEnableOption extends GetView<BoolToggleController> {
   final void Function(bool)? onToggle;
   final String? controllerTag, title;
   final bool? initialValue;
+  final int? flexLeft, flexRight;
+  final FontWeight? fontWeight;
 
   const BuildSliderEnableOption({
     super.key,
@@ -14,6 +16,9 @@ class BuildSliderEnableOption extends GetView<BoolToggleController> {
     this.onToggle,
     this.controllerTag,
     this.initialValue,
+    this.flexLeft,
+    this.flexRight,
+    this.fontWeight,
   });
 
   @override
@@ -27,6 +32,9 @@ class BuildSliderEnableOption extends GetView<BoolToggleController> {
       builder: (_) {
         return BuildSidebarOption(
           title: title ?? 'Enable',
+          flexLeft: flexLeft,
+          flexRight: flexRight,
+          fontWeight: fontWeight,
           rightWidget: Obx(
             () => Switch(
               value: _.isOn,

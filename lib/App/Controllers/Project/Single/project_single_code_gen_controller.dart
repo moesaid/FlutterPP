@@ -1,7 +1,14 @@
 import 'package:flutter_platform_alert/flutter_platform_alert.dart';
 import 'package:flutterpp/App/Controllers/Project/Single/project_single_controller.dart';
+import 'package:flutterpp/App/Models/build_option_model.dart';
 import 'package:flutterpp/App/Models/model_config_model.dart';
+import 'package:flutterpp/App/Providers/Cmd/cmd_flutter_provider.dart';
+import 'package:flutterpp/App/Providers/FilesGen/Json/json_to_freezed_class_provider.dart';
+import 'package:flutterpp/App/Providers/FilesGen/build_runner_provider.dart';
+import 'package:flutterpp/App/Services/Cmd/cmd_init_getx_mvc_services.dart';
+import 'package:flutterpp/App/Services/Cmd/cmd_read_create_dir_services.dart';
 import 'package:flutterpp/App/Services/Project/project_model_services.dart';
+import 'package:flutterpp/App/Views/Global/build_time_overlay.dart';
 import 'package:get/get.dart';
 import 'package:graphite/graphite.dart';
 
@@ -9,9 +16,25 @@ class ProjectSingleCodeGenController extends GetxController {
   late ProjectSingleController useController;
 
   final ProjectModelServices _projectModelServices = ProjectModelServices();
+  final CmdReadCreateDirServices _cmdReadCreateDirServices =
+      CmdReadCreateDirServices();
+  final CmdInitGetxMvcServices _cmdInitGetxMvcServices =
+      CmdInitGetxMvcServices();
+
+  final JsonToFreezedClassProvider _jsonToFreezedClassProvider =
+      JsonToFreezedClassProvider();
+  final CmdFlutterProvider _cmdF = CmdFlutterProvider();
+
+  final BuildRunnerProvider _cmdBuild = BuildRunnerProvider();
 
   final _isLoading = true.obs;
   bool get isLoading => _isLoading.value;
+
+  final _canGenerate = false.obs;
+  bool get canGenerate => _canGenerate.value;
+
+  final _diffCount = 0.obs;
+  int get diffCount => _diffCount.value;
 
   final _models = <ModelConfigModel>[].obs;
   List<ModelConfigModel> get models => _models;
@@ -66,6 +89,8 @@ class ProjectSingleCodeGenController extends GetxController {
     }
 
     update();
+
+    await checkModelDiff();
   }
 
   // update temp model
@@ -205,8 +230,6 @@ class ProjectSingleCodeGenController extends GetxController {
   replaceTempModel(ModelConfigModel model) {
     _tempModel.value = model;
     update();
-
-    print({'🔥': _tempModel.value.id});
   }
 
   // delete model
@@ -251,5 +274,61 @@ class ProjectSingleCodeGenController extends GetxController {
 
     _isLoading.value = false;
     update();
+  }
+
+  // check model diff
+  checkModelDiff() async {
+    List<String>? res = await _cmdReadCreateDirServices.readDirectory(
+      '${useController.projectLocalPath}/lib/App/Models',
+    );
+
+    if (res == null) return;
+
+    _diffCount.value = (_models.length - res.length).isNegative
+        ? 0
+        : _models.length - res.length;
+    _canGenerate.value = _diffCount.value.isGreaterThan(0);
+    update();
+  }
+
+  // generate code
+  Future<void> generateCode(BuildOptionModel option) async {
+    FlutterPlatformAlert.playAlertSound();
+    CustomButton res = await FlutterPlatformAlert.showCustomAlert(
+      windowTitle: 'note!'.toUpperCase(),
+      text: 'make sure you can roolback the changes if something goes wrong.',
+      positiveButtonTitle: 'continue with caution!',
+      negativeButtonTitle: 'cancel',
+    );
+
+    if (res == CustomButton.negativeButton) return;
+
+    Get.showOverlay(
+      asyncFunction: () async {
+        for (var item in _models) {
+          if (option.models == true) {
+            await _jsonToFreezedClassProvider.generateFreezedClass(
+              useController.projectLocalPath,
+              item,
+            );
+          }
+
+          await _cmdInitGetxMvcServices.createCase(
+            useController.projectLocalPath,
+            item.modelName!,
+            isCrud: item.isCrud,
+            option: option,
+          );
+        }
+
+        // run build runner
+        await _cmdBuild.createBuildYaml(useController.projectLocalPath);
+        await _cmdF.runDartCommand(useController.projectLocalPath,
+            ['run', 'build_runner', 'build', '--delete-conflicting-outputs']);
+
+        await checkModelDiff();
+      },
+      loadingWidget: const BuildTimeOverlay(),
+    );
   }
 }
