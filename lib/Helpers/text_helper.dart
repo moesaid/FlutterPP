@@ -24,7 +24,8 @@ extension TextHelpers on String {
 
   // to pascal case
   String toPascalCase() {
-    return toCamelCase().replaceFirstMapped(RegExp(r'\w'), (match) {
+    return replaceAll(' ', '_').toCamelCase().replaceFirstMapped(RegExp(r'\w'),
+        (match) {
       return match.group(0)!.toUpperCase();
     });
   }
