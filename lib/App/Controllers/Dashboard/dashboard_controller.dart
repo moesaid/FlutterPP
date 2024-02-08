@@ -86,6 +86,7 @@ class DashboardController extends GetxController {
     if (projects == null || projects.isEmpty) return;
 
     _projects.value = projects;
+    reorderProjectList();
   }
 
   // fetch active project
@@ -96,6 +97,8 @@ class DashboardController extends GetxController {
     item ??= await _activeProjectStorage.write(_projects.first);
 
     _activeProject.value = item;
+
+    reorderProjectList();
   }
 
   // update active project
@@ -142,6 +145,8 @@ class DashboardController extends GetxController {
         update();
       },
     );
+
+    reorderProjectList();
 
     Get.back();
   }
@@ -239,6 +244,36 @@ class DashboardController extends GetxController {
     // got to single project page
     Get.toNamed(AppRoutes.PROJECT_SINGLE, parameters: {
       'projectId': project.id!,
+    });
+  }
+
+  // update project list
+  void updateProjectList(ProjectModel project) {
+    // remove item
+    _projects.removeWhere((el) => el.id == project.id);
+
+    // add item
+    _projects.add(project);
+
+    reorderProjectList();
+
+    update();
+  }
+
+  // reorder project list
+  void reorderProjectList() {
+    String? id = _activeProject.value.id;
+    if (id == null) return;
+
+    // make active project first
+    _projects.sort((a, b) {
+      if (a.id == id) {
+        return -1;
+      } else if (b.id == id) {
+        return 1;
+      } else {
+        return 0;
+      }
     });
   }
 }

@@ -38,7 +38,7 @@ class ProjectSinglePage extends GetView<ProjectSingleController> {
                   ? BuildAppBar(
                       title: controller.project.title ?? '',
                       hasBackButton: true,
-                      onBack: () => Get.back(),
+                      onBack: () => Get.back(result: ['❌refresh']),
                     )
                   : null,
               body: SafeArea(

@@ -6,8 +6,8 @@ class ProjectModel {
   String? title;
   String? description;
   String? status;
-  String? startDate;
-  String? endDate;
+
+  String? dueDate;
   String? budget;
   String? color1;
   String? icon;
@@ -15,22 +15,22 @@ class ProjectModel {
   String? updatedAt;
   String? adminId;
 
-  ProjectModel(
-      {this.id,
-      this.teamId,
-      this.clientId,
-      this.createdAt,
-      this.title,
-      this.description,
-      this.status,
-      this.startDate,
-      this.endDate,
-      this.budget,
-      this.color1,
-      this.icon,
-      this.color2,
-      this.updatedAt,
-      this.adminId});
+  ProjectModel({
+    this.id,
+    this.teamId,
+    this.clientId,
+    this.createdAt,
+    this.title,
+    this.description,
+    this.status,
+    this.dueDate,
+    this.budget,
+    this.color1,
+    this.icon,
+    this.color2,
+    this.updatedAt,
+    this.adminId,
+  });
 
   ProjectModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -40,8 +40,8 @@ class ProjectModel {
     title = json['title'];
     description = json['description'];
     status = json['status'];
-    startDate = json['start_date'];
-    endDate = json['end_date'];
+
+    dueDate = json['due_date'];
     budget = json['budget'];
     color1 = json['color_1'];
     icon = json['icon'];
@@ -59,8 +59,8 @@ class ProjectModel {
     data['title'] = title;
     data['description'] = description;
     data['status'] = status;
-    data['start_date'] = startDate;
-    data['end_date'] = endDate;
+
+    data['due_date'] = dueDate;
     data['budget'] = budget;
     data['color_1'] = color1;
     data['icon'] = icon;
@@ -79,8 +79,7 @@ class ProjectModel {
     String? title,
     String? description,
     String? status,
-    String? startDate,
-    String? endDate,
+    String? dueDate,
     String? budget,
     String? color1,
     String? icon,
@@ -96,8 +95,7 @@ class ProjectModel {
       title: title ?? this.title,
       description: description ?? this.description,
       status: status ?? this.status,
-      startDate: startDate ?? this.startDate,
-      endDate: endDate ?? this.endDate,
+      dueDate: dueDate ?? this.dueDate,
       budget: budget ?? this.budget,
       color1: color1 ?? this.color1,
       icon: icon ?? this.icon,

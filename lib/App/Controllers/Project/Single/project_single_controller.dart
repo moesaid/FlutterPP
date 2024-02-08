@@ -1,3 +1,4 @@
+import 'package:flutterpp/App/Controllers/Dashboard/dashboard_controller.dart';
 import 'package:flutterpp/App/Models/project_local_path_model.dart';
 import 'package:flutterpp/App/Models/project_model.dart';
 import 'package:flutterpp/App/Services/Cmd/cmd_read_create_dir_services.dart';
@@ -93,5 +94,15 @@ class ProjectSingleController extends GetxController {
     _projectLocalPathStorage.removeById(projectId: project.id!);
     _projectLocalPath.value = '';
     update();
+  }
+
+  void updateProject(ProjectModel item) {
+    _project.value = item;
+    update();
+
+    // check if dashboard controller is available
+    if (Get.isRegistered<DashboardController>()) {
+      Get.find<DashboardController>().updateProjectList(item);
+    }
   }
 }

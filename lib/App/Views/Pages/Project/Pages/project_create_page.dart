@@ -15,6 +15,7 @@ class ProjectCreatePage extends StatelessWidget {
   final Function(String) onSvgChange;
   final Function(Map) createProject;
   final List<List<Color>> colors;
+
   const ProjectCreatePage({
     super.key,
     required this.onColorChange,
