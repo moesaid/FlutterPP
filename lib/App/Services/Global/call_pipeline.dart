@@ -8,7 +8,7 @@ class CallPipeline {
       T? res = await future();
       return res;
     } catch (e) {
-      print('❌Error: $e');
+      print({'❌Error: $name': e});
       // rethrow;
       return null;
     }

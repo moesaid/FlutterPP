@@ -103,7 +103,7 @@ class ProjectSingleController extends GetxController {
   }
 
   // create project path
-  createProjectPath() async {
+  Future<void> createProjectPath() async {
     // if project id is empty
     if (project.id == null || project.id!.isEmpty) return;
 

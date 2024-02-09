@@ -193,6 +193,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.4.1"
+  emojis:
+    dependency: "direct main"
+    description:
+      name: emojis
+      sha256: "2e4d847c3f1e2670f30dc355909ce6fa7808b4e626c34a4dd503a360995a38bf"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.9.9"
   expansion_tile_group:
     dependency: "direct main"
     description:

@@ -6,6 +6,16 @@ class WikiServices {
   final WikiProvider _wikiProvider = WikiProvider();
   final CallPipeline _callPipeline = CallPipeline();
 
+  // get all wikis by project id
+  Future<List<WikiModel>?> getWikis({required String projectId}) async {
+    List<WikiModel>? wikis = await _callPipeline.futurePipeline(
+      future: () => _wikiProvider.getWikis(projectId: projectId),
+      name: 'getWikis',
+    );
+
+    return wikis;
+  }
+
   // get wiki by project id
   Future<WikiModel?> getWiki({required int projectId}) async {
     WikiModel? wiki = await _callPipeline.futurePipeline(
@@ -18,11 +28,13 @@ class WikiServices {
 
   // create wiki
   Future<WikiModel?> createWiki({
-    required String document,
-    required int projectId,
+    required Map document,
+    required String projectId,
+    required String title,
   }) async {
     WikiModel? wiki = await _callPipeline.futurePipeline(
       future: () => _wikiProvider.createWiki(
+        title: title,
         document: document,
         projectId: projectId,
       ),
@@ -41,4 +53,7 @@ class WikiServices {
 
     return updatedWiki;
   }
+
+  // defult document
+  get getDefultDocument => _wikiProvider.getDefultDocument;
 }

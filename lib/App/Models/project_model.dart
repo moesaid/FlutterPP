@@ -6,7 +6,6 @@ class ProjectModel {
   String? title;
   String? description;
   String? status;
-
   String? dueDate;
   String? budget;
   String? color1;
@@ -40,7 +39,6 @@ class ProjectModel {
     title = json['title'];
     description = json['description'];
     status = json['status'];
-
     dueDate = json['due_date'];
     budget = json['budget'];
     color1 = json['color_1'];
@@ -59,7 +57,6 @@ class ProjectModel {
     data['title'] = title;
     data['description'] = description;
     data['status'] = status;
-
     data['due_date'] = dueDate;
     data['budget'] = budget;
     data['color_1'] = color1;

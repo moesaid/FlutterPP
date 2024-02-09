@@ -1,8 +1,14 @@
 import 'dart:convert';
 
 import 'package:appflowy_editor/appflowy_editor.dart';
+import 'package:emojis/emoji.dart';
+import 'package:emojis/emojis.dart';
 import 'package:flutter/material.dart';
+import 'package:flutterpp/App/Controllers/Global/emoji_dialog_controller.dart';
 import 'package:flutterpp/App/Controllers/Project/Single/project_single_wiki_controller.dart';
+import 'package:flutterpp/App/Models/wiki_model.dart';
+import 'package:flutterpp/App/Views/Global/build_loading_or_empty_layout.dart';
+import 'package:flutterpp/App/Views/Global/buiuld_dialog.dart';
 import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
 
@@ -15,157 +21,255 @@ class ProjectSingleWikiPage extends GetView<ProjectSingleWikiController> {
       init: ProjectSingleWikiController(),
       initState: (_) {},
       builder: (_) {
-        EditorState editorState = EditorState(
-          document: Document.fromJson(
-            {
-              "document": {
-                "type": "page",
-                "children": [
-                  {
-                    "type": "heading",
-                    "data": {
-                      "level": 2,
-                      "delta": [
-                        {
-                          "insert": "Welcome to",
-                          "attributes": {"bold": true}
+        return Scaffold(
+          body: BuildLoadingOrEmptyLayout(
+            isLoading: controller.isLoading,
+            isEmpty: controller.wikis.isEmpty,
+            child: Container(
+              alignment: Alignment.topCenter,
+              child: FloatingToolbar(
+                items: [
+                  paragraphItem,
+                  ...headingItems,
+                  ...markdownFormatItems,
+                  quoteItem,
+                  bulletedListItem,
+                  numberedListItem,
+                  linkItem,
+                  buildTextColorItem(),
+                  buildHighlightColorItem(),
+                  ...textDirectionItems,
+                  ...alignmentItems,
+                ],
+                editorState: controller.editorState,
+                textDirection: TextDirection.ltr,
+                editorScrollController: controller.editorScrollController,
+                child: Stack(
+                  alignment: Alignment.topRight,
+                  children: [
+                    Row(
+                      children: [
+                        BuildProjectSingleWikiSidebar(controller: controller),
+                        Expanded(
+                          child: AppFlowyEditor(
+                            autoFocus: true,
+                            editorState: controller.editorState,
+                            editorStyle: customizeEditorStyle(),
+                            blockComponentBuilders: customBuilder(),
+                            commandShortcutEvents: [
+                              ...standardCommandShortcutEvents,
+                              CommandShortcutEvent(
+                                key: 'ctrl+s',
+                                command:
+                                    GetPlatform.isWindows ? 'ctrl+s' : 'cmd+s',
+                                handler: (EditorState editorState) {
+                                  print(jsonEncode(
+                                      editorState.document.toJson()));
+                                  return KeyEventResult.handled;
+                                },
+                                getDescription: () {
+                                  return 'Save';
+                                },
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                    Positioned(
+                      top: 10,
+                      right: 10,
+                      child: FilledButton(
+                        onPressed: () {
+                          print(controller.editorState.document.toJson());
                         },
-                        {"insert": " your wiki 🖐️"}
-                      ],
-                      "align": "left"
-                    }
-                  },
-                  {
-                    "type": "paragraph",
-                    "data": {
-                      "delta": [
-                        {
-                          "insert":
-                              "Here, you can find the project overview and all the outlines you need to reference periodically."
-                        }
-                      ]
-                    }
-                  },
-                  {
-                    "type": "paragraph",
-                    "data": {
-                      "delta": [
-                        {"insert": "you can always you "},
-                        {
-                          "insert": "\" cmd+s or ctrl+s \"",
-                          "attributes": {
-                            "bold": true,
-                            "font_color": "0xff2196f3"
-                          }
-                        },
-                        {"insert": " for quick save!!!"}
-                      ]
-                    }
-                  },
-                  {"type": "divider"},
-                  {
-                    "type": "todo_list",
-                    "data": {
-                      "delta": [
-                        {"insert": "drink some water and take a break"},
-                      ],
-                      "checked": false
-                    }
-                  },
-                  {
-                    "type": "todo_list",
-                    "data": {
-                      "delta": [
-                        {"insert": "crash some code and have fun!"},
-                      ],
-                      "checked": false
-                    }
-                  },
-                  {
-                    "type": "todo_list",
-                    "data": {
-                      "delta": [
-                        {"insert": "write to us we love feedback!"},
-                      ],
-                      "checked": false
-                    }
-                  },
-                  {
-                    "type": "todo_list",
-                    "data": {
-                      "delta": [
-                        {
-                          "insert":
-                              "we won't say no to 5 stars! on the store 😁"
-                        },
-                      ],
-                      "checked": false
-                    }
-                  }
-                ]
-              }
-            },
+                        child: const Text('Save'),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
           ),
         );
-        EditorScrollController editorScrollController =
-            EditorScrollController(editorState: editorState);
+      },
+    );
+  }
+}
 
-        return Scaffold(
-          body: Container(
-            alignment: Alignment.topCenter,
-            child: FloatingToolbar(
-              items: [
-                paragraphItem,
-                ...headingItems,
-                ...markdownFormatItems,
-                quoteItem,
-                bulletedListItem,
-                numberedListItem,
-                linkItem,
-                buildTextColorItem(),
-                buildHighlightColorItem(),
-                ...textDirectionItems,
-                ...alignmentItems,
-              ],
-              editorState: editorState,
-              textDirection: TextDirection.ltr,
-              editorScrollController: editorScrollController,
-              child: Stack(
-                alignment: Alignment.topRight,
-                children: [
-                  AppFlowyEditor(
-                    autoFocus: true,
-                    editorState: editorState,
-                    editorStyle: customizeEditorStyle(),
-                    blockComponentBuilders: customBuilder(),
-                    commandShortcutEvents: [
-                      ...standardCommandShortcutEvents,
-                      CommandShortcutEvent(
-                        key: 'ctrl+s',
-                        command: GetPlatform.isWindows ? 'ctrl+s' : 'cmd+s',
-                        handler: (EditorState editorState) {
-                          print(jsonEncode(editorState.document.toJson()));
-                          return KeyEventResult.handled;
-                        },
-                        getDescription: () {
-                          return 'Save';
-                        },
-                      ),
-                    ],
-                  ),
-                  Positioned(
-                    top: 10,
-                    right: 10,
-                    child: FilledButton(
-                      onPressed: () {
-                        print(editorState.document.toJson());
-                      },
-                      child: const Text('Save'),
+class BuildProjectSingleWikiSidebar extends StatelessWidget {
+  const BuildProjectSingleWikiSidebar({
+    super.key,
+    required this.controller,
+  });
+
+  final ProjectSingleWikiController controller;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: context.width * 0.15,
+      decoration: BoxDecoration(
+        color: Get.theme.colorScheme.primaryContainer,
+        border: Border(
+          right: BorderSide(
+            color: Get.theme.colorScheme.secondaryContainer,
+          ),
+        ),
+      ),
+      child: Column(
+        children: [
+          Expanded(
+            child: ListView.builder(
+              itemCount: controller.wikis.length,
+              itemBuilder: (context, index) {
+                final WikiModel wiki = controller.wikis[index];
+                return InkWell(
+                  onTap: () => print('object'),
+                  child: AnimatedContainer(
+                    duration: const Duration(milliseconds: 300),
+                    padding: const EdgeInsets.all(10),
+                    color: controller.activeWiki.id == wiki.id
+                        ? Get.theme.colorScheme.secondaryContainer
+                        : Get.theme.colorScheme.primaryContainer,
+                    child: Row(
+                      children: [
+                        InkWell(
+                          onTap: () => showDialog(
+                            context: context,
+                            builder: (_) => BuildEmojiDialog(
+                              onEmojiSelected: (val) => print(val),
+                            ),
+                          ),
+                          child: Text(wiki.icon ?? '📄'),
+                        ),
+                        const SizedBox(width: 5),
+                        Text(
+                          wiki.title?.capitalize! ?? '',
+                          style: Get.theme.textTheme.labelMedium,
+                        ),
+                      ],
                     ),
                   ),
+                );
+              },
+            ),
+          ),
+          const Divider(height: 0, thickness: 0.5),
+          Container(
+            width: double.infinity,
+            padding: const EdgeInsets.all(10),
+            child: TextButton(
+              onPressed: () {},
+              style: TextButton.styleFrom(
+                textStyle: Get.theme.textTheme.labelMedium,
+                foregroundColor: Get.theme.colorScheme.onBackground,
+              ),
+              child: Row(
+                children: [
+                  const Icon(Icons.add_rounded, size: 18),
+                  const SizedBox(width: 5),
+                  Text('new page'.capitalize!),
                 ],
               ),
             ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class BuildEmojiDialog extends StatelessWidget {
+  final String? controllerTag;
+  final Function(String)? onEmojiSelected;
+
+  const BuildEmojiDialog({
+    super.key,
+    this.controllerTag,
+    this.onEmojiSelected,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    // get all emojis groups
+    List<EmojiGroup> groups = EmojiGroup.values;
+
+    return GetBuilder<EmojiDialogController>(
+      init: EmojiDialogController(),
+      tag: controllerTag,
+      initState: (_) {},
+      builder: (_) {
+        return BuildDefultDialog(
+          child: Column(
+            children: [
+              SizedBox(
+                height: 35,
+                child: ListView.separated(
+                  itemCount: groups.length,
+                  scrollDirection: Axis.horizontal,
+                  separatorBuilder: (BuildContext context, int index) {
+                    return const SizedBox(width: 10);
+                  },
+                  itemBuilder: (BuildContext context, int index) {
+                    final group = groups[index];
+
+                    return InkWell(
+                      onTap: () => _.changeActiveGroup(group),
+                      child: Container(
+                        height: 35,
+                        width: 35,
+                        decoration: BoxDecoration(
+                          color: _.activeGroup.name == group.name
+                              ? Get.theme.colorScheme.primary
+                              : Get.theme.colorScheme.secondaryContainer,
+                          borderRadius: BorderRadius.circular(50),
+                        ),
+                        child: Center(
+                          child: Text(
+                            group.name != 'flags'
+                                ? Emoji.byGroup(group).first.char
+                                : Emojis.flagPalestinianTerritories,
+                            style: Get.theme.textTheme.titleLarge,
+                          ),
+                        ),
+                      ),
+                    );
+                  },
+                ),
+              ),
+              Divider(height: 20.sp, thickness: 0.5),
+              Expanded(
+                child: GridView.builder(
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 10,
+                    crossAxisSpacing: 10,
+                    mainAxisSpacing: 10,
+                  ),
+                  itemCount: _.emojiList.length,
+                  itemBuilder: (context, index) {
+                    final emoji = _.emojiList[index];
+                    return InkWell(
+                      onTap: () {
+                        onEmojiSelected?.call(emoji.char);
+                      },
+                      child: Container(
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: Get.theme.colorScheme.secondaryContainer,
+                        ),
+                        child: Center(
+                          child: Text(
+                            emoji.char,
+                            style: Get.theme.textTheme.titleLarge,
+                          ),
+                        ),
+                      ),
+                    );
+                  },
+                ),
+              )
+            ],
           ),
         );
       },

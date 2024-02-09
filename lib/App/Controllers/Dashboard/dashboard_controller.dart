@@ -9,6 +9,7 @@ import 'package:flutterpp/App/Models/team_member_model.dart';
 import 'package:flutterpp/App/Models/team_model.dart';
 import 'package:flutterpp/App/Services/Auth/profile_services.dart';
 import 'package:flutterpp/App/Services/Project/project_services.dart';
+import 'package:flutterpp/App/Services/Project/wiki_services.dart';
 import 'package:flutterpp/App/Services/Team/team_member_services.dart';
 import 'package:flutterpp/App/Services/Team/team_services.dart';
 import 'package:flutterpp/App/Views/Global/build_overlay.dart';
@@ -26,6 +27,7 @@ class DashboardController extends GetxController {
   final _activeProjectStorage = ActiveProjectStorage();
   final _teamMemberServices = TeamMemberServices();
   final _profileServices = ProfileServices();
+  final _wikiServices = WikiServices();
 
   final _isLoading = true.obs;
   bool get isLoading => _isLoading.value;
@@ -145,8 +147,17 @@ class DashboardController extends GetxController {
           description: description,
         );
 
-        _projects.add(project!);
+        if (project == null) return;
+
+        _projects.add(project);
         update();
+
+        if (project.id == null) return;
+        await _wikiServices.createWiki(
+          title: 'default',
+          projectId: project.id!,
+          document: _wikiServices.getDefultDocument,
+        );
       },
     );
 

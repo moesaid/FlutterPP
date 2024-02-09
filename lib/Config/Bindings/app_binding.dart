@@ -4,6 +4,7 @@ import 'package:flutterpp/App/Controllers/Auth/splash_controller.dart';
 import 'package:flutterpp/App/Controllers/Auth/verify_otp_controller.dart';
 import 'package:flutterpp/App/Controllers/Dashboard/dashboard_controller.dart';
 import 'package:flutterpp/App/Controllers/Dashboard/dashboard_env_check_controller.dart';
+import 'package:flutterpp/App/Controllers/Global/emoji_dialog_controller.dart';
 import 'package:flutterpp/App/Controllers/Home/home_controller.dart';
 import 'package:flutterpp/App/Controllers/Mockup/Micro/alignment_option_controller.dart';
 import 'package:flutterpp/App/Controllers/Mockup/Micro/bool_toggle_controller.dart';
@@ -62,6 +63,7 @@ class AppBinding implements Bindings {
     Get.lazyPut<BuildLayoutOptionController>(
       () => BuildLayoutOptionController(),
     );
+    Get.lazyPut<EmojiDialogController>(() => EmojiDialogController());
 
     Get.lazyPut<SliderOptionController>(() => SliderOptionController());
     Get.lazyPut<SelectImageOptionController>(
