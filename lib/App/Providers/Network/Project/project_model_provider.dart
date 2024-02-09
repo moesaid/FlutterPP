@@ -17,12 +17,10 @@ class ProjectModelProvider {
         List<Map> data = await supabase
             .from('project_models')
             .select('*')
-            // .eq('project_id', projectId)
+            .eq('project_id', projectId)
             .select();
 
         if (data.isEmpty) return null;
-
-        // var localJson = json.encode(data[0]);
 
         final List<ModelConfigModel> models = [];
         for (var item in data) {

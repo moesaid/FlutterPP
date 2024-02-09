@@ -36,4 +36,11 @@ extension TextHelpers on String {
     // captlize the first letter
     return split(' ').first.toPascalCase();
   }
+
+  // flutter file name
+  String toFlutterFileName() {
+    return toPascalCase().replaceAllMapped(RegExp(r'([A-Z])'), (match) {
+      return '_${match.group(0)!.toLowerCase()}';
+    }).replaceAll(RegExp(r'^_'), '');
+  }
 }

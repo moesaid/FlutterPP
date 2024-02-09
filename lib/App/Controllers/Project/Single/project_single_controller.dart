@@ -1,9 +1,13 @@
+import 'dart:math';
+
 import 'package:flutterpp/App/Controllers/Dashboard/dashboard_controller.dart';
 import 'package:flutterpp/App/Models/project_local_path_model.dart';
 import 'package:flutterpp/App/Models/project_model.dart';
+import 'package:flutterpp/App/Services/Cmd/cmd_init_getx_mvc_services.dart';
 import 'package:flutterpp/App/Services/Cmd/cmd_read_create_dir_services.dart';
 import 'package:flutterpp/App/Services/Project/create_load_project_path.dart';
 import 'package:flutterpp/App/Services/Project/project_services.dart';
+import 'package:flutterpp/App/Views/Global/build_overlay.dart';
 import 'package:flutterpp/Storage/projects_local_path_storage.dart';
 import 'package:get/get.dart';
 
@@ -14,6 +18,9 @@ class ProjectSingleController extends GetxController {
       CreateLoadProjectPathServices();
   final ProjectsLocalPathStorage _projectLocalPathStorage =
       ProjectsLocalPathStorage();
+
+  final CmdInitGetxMvcServices _cmdInitGetxMvcServices =
+      CmdInitGetxMvcServices();
 
   final _isLoading = true.obs;
   bool get isLoading => _isLoading.value;
@@ -86,7 +93,35 @@ class ProjectSingleController extends GetxController {
   }
 
   // create project path
-  createProjectPath() {}
+  createProjectPath() async {
+    // if project id is empty
+    if (project.id == null || project.id!.isEmpty) return;
+
+    Get.showOverlay(
+      asyncFunction: () async {
+        String? path = await _cmdInitGetxMvcServices.createProject(
+          _project.value.title ?? 'NewFlutterPP${Random().nextInt(100)}',
+        );
+
+        if (path == null) return;
+
+        // save project path
+        await _projectLocalPathStorage.write(
+          project: ProjectLocalPathModel(
+            id: project.id,
+            path: path,
+          ),
+        );
+
+        // fetch local path
+        await _fetchLocalPath();
+
+        // check if project is flutterpp project
+        await checkIfFlutterPPProject();
+      },
+      loadingWidget: const BuildOverlay(),
+    );
+  }
 
   // remove project path
   removeProjectPath() {

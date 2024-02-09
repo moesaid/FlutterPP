@@ -62,9 +62,12 @@ class ProjectSingleCodeGenController extends GetxController {
   }
 
   Future<void> fetchApi() async {
+    print('❌fetching api: ${useController.project.id}');
     List<ModelConfigModel>? res = await _projectModelServices.getProjectById(
       projectId: useController.project.id,
     );
+
+    print('❌res: $res');
 
     // check if res is null
     if (res == null) return;

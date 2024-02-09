@@ -4,12 +4,16 @@ import 'package:flutterpp/Helpers/text_helper.dart';
 
 class FileGenGetxCounterCase {
   // create splash controller
-  Future<void> splashControllerGen(String name, String path) async {
+  Future<void> splashControllerGen(
+    String nameSpace,
+    String name,
+    String path,
+  ) async {
     String content = '''
       import 'dart:async';
 
       import 'package:get/get.dart';
-      import 'package:new_examble/Routes/app_pages.dart';
+      import 'package:$nameSpace/Routes/app_pages.dart';
       class ${name.toPascalCase()}Controller extends GetxController {
         final _count = 0.obs;
         int get count => _count.value;

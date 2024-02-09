@@ -1,5 +1,6 @@
 import 'package:flutterpp/App/Models/build_option_model.dart';
 import 'package:flutterpp/App/Providers/Cmd/cmd_flutter_provider.dart';
+import 'package:flutterpp/App/Providers/Device/file_maneger_provider.dart';
 import 'package:flutterpp/App/Providers/FilesGen/Getx/file_gen_getx_counter_case.dart';
 import 'package:flutterpp/App/Providers/FilesGen/Getx/file_gen_getx_provider.dart';
 import 'package:flutterpp/App/Providers/FilesGen/Getx/file_gen_gex_binding_provider.dart';
@@ -7,6 +8,7 @@ import 'package:flutterpp/App/Providers/FilesGen/Getx/file_gen_gex_router_provid
 import 'package:flutterpp/App/Providers/FilesGen/build_runner_provider.dart';
 import 'package:flutterpp/App/Providers/FilesGen/vs_code_provider.dart';
 import 'package:flutterpp/App/Providers/Yaml/yaml_provider.dart';
+import 'package:flutterpp/App/Services/Cmd/cmd_flutter_create.dart';
 import 'package:flutterpp/App/Services/Cmd/cmd_read_create_dir_services.dart';
 import 'package:flutterpp/Helpers/text_helper.dart';
 
@@ -20,6 +22,20 @@ class CmdInitGetxMvcServices {
   final FileGenGexBindingProvider _binding = FileGenGexBindingProvider();
   final FileGenGetxRouterProvider _router = FileGenGetxRouterProvider();
   final BuildRunnerProvider _build = BuildRunnerProvider();
+  final FileManegerProvider _fileManeger = FileManegerProvider();
+
+  // create project
+  Future<String?> createProject(String name) async {
+    String? path = await _fileManeger.userPickFileLocation();
+    if (path == null) return null;
+
+    await CmdFlutterCreate(path, name.toFlutterFileName()).run();
+    String projectPath = '$path/${name.toFlutterFileName()}';
+
+    await init(projectPath);
+
+    return projectPath;
+  }
 
   // init
   Future<void> init(String path) async {
@@ -115,7 +131,8 @@ class CmdInitGetxMvcServices {
       '$controllerPath/Counter',
     );
     await _fileGenCase.homeControllerGen('home', '$controllerPath/Home');
-    await _fileGenCase.splashControllerGen('splash', '$controllerPath/Auth');
+    await _fileGenCase.splashControllerGen(
+        nameSpace, 'splash', '$controllerPath/Auth');
 
     // create page
     await _fileGenCase.pageGenCounter(

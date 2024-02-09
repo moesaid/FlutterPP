@@ -1,13 +1,15 @@
+import 'dart:io';
+
 import 'package:process_run/process_run.dart';
 
 class CmdFlutterProvider {
   // run flutter command
-  Future<void> runFlutterCommand(
+  Future<ProcessResult?> runFlutterCommand(
     String path,
     List<String> arguments,
   ) async {
     try {
-      await runExecutableArguments(
+      return await runExecutableArguments(
         'flutter',
         [...arguments],
         workingDirectory: path,
@@ -15,6 +17,7 @@ class CmdFlutterProvider {
     } catch (e) {
       print('Error running Flutter command: $e');
     }
+    return null;
   }
 
   // run flutter pub command
