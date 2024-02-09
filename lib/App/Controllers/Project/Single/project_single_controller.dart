@@ -34,6 +34,15 @@ class ProjectSingleController extends GetxController {
   final _isFlutterPPProject = false.obs;
   bool get isFlutterPPProject => _isFlutterPPProject.value;
 
+  @override
+  void onClose() {
+    _project.value = ProjectModel();
+    _projectLocalPath.value = '';
+    _isFlutterPPProject.value = false;
+
+    super.onClose();
+  }
+
   // fetch api
   fetchApi({String? projectId}) async {
     // if project id is empty
@@ -80,6 +89,7 @@ class ProjectSingleController extends GetxController {
   loadProjectPath() async {
     if (project.id == null || project.id!.isEmpty) return;
     await _createLoadServices.loadProjectPath(id: project.id!);
+    await _fetchLocalPath();
     await checkIfFlutterPPProject();
   }
 

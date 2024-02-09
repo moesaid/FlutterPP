@@ -27,4 +27,10 @@ class ActiveProjectStorage {
     // return project
     return read()!;
   }
+
+  // remove
+  Future<void> remove() async {
+    // remove json from box
+    await box.remove(key);
+  }
 }

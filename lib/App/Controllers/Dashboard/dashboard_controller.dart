@@ -17,6 +17,7 @@ import 'package:flutterpp/Config/app_gradients.dart';
 import 'package:flutterpp/Helpers/colors_helper.dart';
 import 'package:flutterpp/Routes/app_pages.dart';
 import 'package:flutterpp/Storage/active_project_storage.dart';
+import 'package:flutterpp/Storage/projects_local_path_storage.dart';
 import 'package:get/get.dart';
 
 class DashboardController extends GetxController {
@@ -91,6 +92,9 @@ class DashboardController extends GetxController {
 
   // fetch active project
   Future<void> _fetchActiveProject() async {
+    // if no projects return
+    if (_projects.isEmpty) return;
+
     ProjectModel? item = _activeProjectStorage.read();
 
     //  if null add first project to active project
@@ -275,5 +279,30 @@ class DashboardController extends GetxController {
         return 0;
       }
     });
+  }
+
+  // delete project
+  deleteProject(ProjectModel item) async {
+    if (item.id == null) return;
+
+    await Get.showOverlay(
+      loadingWidget: const BuildOverlay(),
+      asyncFunction: () async {
+        await _projectServices.deleteProject(projectId: item.id!);
+        _projects.removeWhere((el) => el.id == item.id);
+        reorderProjectList();
+
+        // remove active project if it's the same
+        if (activeProject.id == item.id) {
+          await _activeProjectStorage.remove();
+          _activeProject.value = ProjectModel();
+        }
+
+        // remove project path
+        ProjectsLocalPathStorage().removeById(projectId: item.id!);
+
+        update();
+      },
+    );
   }
 }

@@ -55,4 +55,12 @@ class ProjectServices {
       name: 'updateProject',
     );
   }
+
+  // delete project
+  Future<void> deleteProject({required String projectId}) async {
+    return await _callPipeline.futurePipeline(
+      future: () => _projectProvider.deleteProject(projectId: projectId),
+      name: 'deleteProject',
+    );
+  }
 }

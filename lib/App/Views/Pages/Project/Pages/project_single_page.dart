@@ -36,7 +36,7 @@ class ProjectSinglePage extends GetView<ProjectSingleController> {
             child: Scaffold(
               appBar: hasAppBar == true
                   ? BuildAppBar(
-                      title: controller.project.title ?? '',
+                      title: _.project.title ?? '',
                       hasBackButton: true,
                       onBack: () => Get.back(),
                     )

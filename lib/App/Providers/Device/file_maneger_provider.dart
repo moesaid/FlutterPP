@@ -247,4 +247,21 @@ class FileManegerProvider {
       name: 'rename file',
     );
   }
+
+  // open folder
+  Future<void> openFolder({required String location}) async {
+    await callPipeline.futurePipeline(
+      future: () async {
+        // check if folder exist
+        if (!await Directory(location).exists()) {
+          print('❌folder not exist');
+          return;
+        }
+
+        // open folder
+        await Process.run('open', [location]);
+      },
+      name: 'open folder',
+    );
+  }
 }

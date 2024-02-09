@@ -101,6 +101,12 @@ class BuildDashboardProjectItem extends StatelessWidget {
                     'set active'.capitalize!,
                   ),
                 ),
+                PopupMenuItem(
+                  onTap: () => controller.deleteProject(item),
+                  child: Text(
+                    'delete'.capitalize!,
+                  ),
+                ),
               ],
             );
           },

@@ -81,4 +81,9 @@ class ProjectProvider {
     var localJson = json.encode(data[0]);
     return ProjectModel.fromJson(json.decode(localJson));
   }
+
+  // delete project
+  Future<void> deleteProject({required String projectId}) async {
+    await supabase.from('projects').delete().eq('id', projectId);
+  }
 }
