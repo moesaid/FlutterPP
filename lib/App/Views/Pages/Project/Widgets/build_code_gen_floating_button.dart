@@ -39,12 +39,14 @@ class BuildCodeGenFloatingButton extends StatelessWidget {
         ),
         SizedBox(width: 4.sp),
         FilledButton(
-          onPressed: () => showDialog(
-            context: context,
-            builder: (context) => BuildCodeGenBuildOption(
-              onBuild: controller.generateCode,
-            ),
-          ),
+          onPressed: controller.models.isEmpty
+              ? null
+              : () => showDialog(
+                    context: context,
+                    builder: (context) => BuildCodeGenBuildOption(
+                      onBuild: controller.generateCode,
+                    ),
+                  ),
           style: FilledButton.styleFrom(
             backgroundColor: Colors.black.withOpacity(0.5),
           ),
