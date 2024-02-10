@@ -11,6 +11,7 @@ class AppWindowConfig {
       title: 'Flutter++',
       backgroundColor: Colors.black,
       titleBarStyle: TitleBarStyle.hidden,
+      alwaysOnTop: false,
       center: true,
       fullScreen: false,
       skipTaskbar: true,
@@ -22,5 +23,7 @@ class AppWindowConfig {
       await windowManager.show();
       await windowManager.focus();
     });
+
+    // native menu
   }
 }

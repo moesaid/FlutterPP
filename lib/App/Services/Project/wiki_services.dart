@@ -31,12 +31,14 @@ class WikiServices {
     required Map document,
     required String projectId,
     required String title,
+    String? icon,
   }) async {
     WikiModel? wiki = await _callPipeline.futurePipeline(
       future: () => _wikiProvider.createWiki(
         title: title,
         document: document,
         projectId: projectId,
+        icon: icon,
       ),
       name: 'createWiki',
     );
@@ -52,6 +54,14 @@ class WikiServices {
     );
 
     return updatedWiki;
+  }
+
+  // delete wiki
+  Future<void> deleteWiki({required String wikiId}) async {
+    await _callPipeline.futurePipeline(
+      future: () => _wikiProvider.deleteWiki(wikiId: wikiId),
+      name: 'deleteWiki',
+    );
   }
 
   // defult document

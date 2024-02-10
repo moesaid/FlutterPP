@@ -13,6 +13,7 @@ class WikiProvider {
         .from('wikis')
         .select('*')
         .eq('project_id', projectId)
+        .order('created_at', ascending: true)
         .select();
 
     if (data.isEmpty) return null;
@@ -44,12 +45,14 @@ class WikiProvider {
     required Map document,
     required String projectId,
     required String title,
+    String? icon,
   }) async {
     List<Map> data = await supabase.from('wikis').insert([
       {
         'title': title,
         'document': document,
         'project_id': projectId,
+        'icon': icon,
       }
     ]).select();
 
@@ -65,16 +68,18 @@ class WikiProvider {
   Future<WikiModel?> updateWiki({required WikiModel wiki}) async {
     List<Map> data = await supabase
         .from('wikis')
-        .update({
-          'document': _defultDocument,
-          'updated_at': DateTime.now().toIso8601String(),
-        })
+        .update(wiki.toJson())
         .eq('id', wiki.id!)
         .select();
 
     if (data.isEmpty) return null;
     var localJson = json.encode(data[0]);
     return WikiModel.fromJson(json.decode(localJson));
+  }
+
+  // delete wiki
+  Future<void> deleteWiki({required String wikiId}) async {
+    await supabase.from('wikis').delete().eq('id', wikiId);
   }
 
   // defult document

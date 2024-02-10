@@ -32,4 +32,24 @@ class WikiModel {
     data['updated_at'] = updatedAt;
     return data;
   }
+
+  WikiModel copyWith({
+    String? id,
+    String? projectId,
+    String? title,
+    String? icon,
+    Map<String, dynamic>? document,
+    String? createdAt,
+    String? updatedAt,
+  }) {
+    return WikiModel(
+      id: id ?? this.id,
+      projectId: projectId ?? this.projectId,
+      title: title ?? this.title,
+      icon: icon ?? this.icon,
+      document: document ?? this.document,
+      createdAt: createdAt ?? this.createdAt,
+      updatedAt: updatedAt ?? this.updatedAt,
+    );
+  }
 }

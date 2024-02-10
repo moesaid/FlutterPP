@@ -1,12 +1,12 @@
-import 'dart:convert';
-
 import 'package:appflowy_editor/appflowy_editor.dart';
 import 'package:emojis/emoji.dart';
 import 'package:emojis/emojis.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutterpp/App/Controllers/Global/emoji_dialog_controller.dart';
 import 'package:flutterpp/App/Controllers/Project/Single/project_single_wiki_controller.dart';
 import 'package:flutterpp/App/Models/wiki_model.dart';
+import 'package:flutterpp/App/Views/Global/build_custom_dropdown.dart';
 import 'package:flutterpp/App/Views/Global/build_loading_or_empty_layout.dart';
 import 'package:flutterpp/App/Views/Global/buiuld_dialog.dart';
 import 'package:get/get.dart';
@@ -63,8 +63,7 @@ class ProjectSingleWikiPage extends GetView<ProjectSingleWikiController> {
                                 command:
                                     GetPlatform.isWindows ? 'ctrl+s' : 'cmd+s',
                                 handler: (EditorState editorState) {
-                                  print(jsonEncode(
-                                      editorState.document.toJson()));
+                                  controller.updateWikiDoc();
                                   return KeyEventResult.handled;
                                 },
                                 getDescription: () {
@@ -80,9 +79,7 @@ class ProjectSingleWikiPage extends GetView<ProjectSingleWikiController> {
                       top: 10,
                       right: 10,
                       child: FilledButton(
-                        onPressed: () {
-                          print(controller.editorState.document.toJson());
-                        },
+                        onPressed: () => controller.updateWikiDoc(),
                         child: const Text('Save'),
                       ),
                     ),
@@ -107,6 +104,7 @@ class BuildProjectSingleWikiSidebar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final renameKey = GlobalKey<FormBuilderState>();
     return Container(
       width: context.width * 0.15,
       decoration: BoxDecoration(
@@ -125,7 +123,7 @@ class BuildProjectSingleWikiSidebar extends StatelessWidget {
               itemBuilder: (context, index) {
                 final WikiModel wiki = controller.wikis[index];
                 return InkWell(
-                  onTap: () => print('object'),
+                  onTap: () => controller.changeActiveWiki(wiki),
                   child: AnimatedContainer(
                     duration: const Duration(milliseconds: 300),
                     padding: const EdgeInsets.all(10),
@@ -137,8 +135,14 @@ class BuildProjectSingleWikiSidebar extends StatelessWidget {
                         InkWell(
                           onTap: () => showDialog(
                             context: context,
-                            builder: (_) => BuildEmojiDialog(
-                              onEmojiSelected: (val) => print(val),
+                            builder: (__) => BuildEmojiDialog(
+                              onEmojiSelected: (val) async {
+                                await controller.updateWikiIconOrTitle(
+                                  wiki: wiki,
+                                  icon: val,
+                                );
+                                Get.back();
+                              },
                             ),
                           ),
                           child: Text(wiki.icon ?? '📄'),
@@ -147,6 +151,68 @@ class BuildProjectSingleWikiSidebar extends StatelessWidget {
                         Text(
                           wiki.title?.capitalize! ?? '',
                           style: Get.theme.textTheme.labelMedium,
+                        ),
+                        const Spacer(),
+                        BuildCustomDropdown(
+                          items: [
+                            PopupMenuItem<String>(
+                              value: 'rename',
+                              onTap: () => showDialog(
+                                context: context,
+                                builder: (_) => BuildDefultDialog(
+                                  height: 130,
+                                  child: FormBuilder(
+                                    key: renameKey,
+                                    child: Column(
+                                      children: [
+                                        FormBuilderTextField(
+                                          name: 'title',
+                                          initialValue: wiki.title,
+                                        ),
+                                        const Spacer(),
+                                        SizedBox(
+                                          width: context.width,
+                                          child: FilledButton(
+                                            onPressed: () {
+                                              if (renameKey.currentState!
+                                                  .saveAndValidate()) {
+                                                controller
+                                                    .updateWikiIconOrTitle(
+                                                  wiki: wiki,
+                                                  title: renameKey.currentState!
+                                                      .fields['title']!.value,
+                                                );
+                                                Get.back();
+                                              }
+                                            },
+                                            child: Text('update'.capitalize!),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              mouseCursor: SystemMouseCursors.click,
+                              child: const Text('Rename'),
+                            ),
+                            PopupMenuItem<String>(
+                              value: 'duplicate',
+                              onTap: () => controller.duplicateWiki(wiki),
+                              mouseCursor: SystemMouseCursors.click,
+                              child: const Text('Duplicate'),
+                            ),
+                            PopupMenuItem<String>(
+                              value: 'delete',
+                              onTap: () => controller.deleteWiki(wiki),
+                              mouseCursor: SystemMouseCursors.click,
+                              child: const Text('Delete'),
+                            ),
+                          ],
+                          child: Icon(
+                            Icons.more_vert_sharp,
+                            size: 6.sp,
+                          ),
                         ),
                       ],
                     ),
@@ -160,7 +226,7 @@ class BuildProjectSingleWikiSidebar extends StatelessWidget {
             width: double.infinity,
             padding: const EdgeInsets.all(10),
             child: TextButton(
-              onPressed: () {},
+              onPressed: () => controller.createNewPage(),
               style: TextButton.styleFrom(
                 textStyle: Get.theme.textTheme.labelMedium,
                 foregroundColor: Get.theme.colorScheme.onBackground,

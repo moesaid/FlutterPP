@@ -1,6 +1,10 @@
+import 'dart:io';
+
 import 'package:flutterpp/App/Providers/Local/app_mode.dart';
 import 'package:flutterpp/Config/app_config.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:launch_at_startup/launch_at_startup.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:window_manager/window_manager.dart';
 
@@ -16,5 +20,22 @@ class AppInitializer {
 
     // app mode
     await AppMode().init();
+
+    // lunch app on startup
+    _lunchAppOnStartup();
+  }
+
+  static Future<void> _lunchAppOnStartup() async {
+    PackageInfo packageInfo = await PackageInfo.fromPlatform();
+
+    launchAtStartup.setup(
+      appName: packageInfo.appName,
+      appPath: Platform.resolvedExecutable,
+    );
+
+    bool isEnabled = await launchAtStartup.isEnabled();
+    if (!isEnabled) {
+      launchAtStartup.enable();
+    }
   }
 }
