@@ -1,4 +1,5 @@
 import 'package:file_selector/file_selector.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutterpp/App/Models/media_model.dart';
 import 'package:flutterpp/App/Providers/Device/file_maneger_provider.dart';
 import 'package:flutterpp/App/Services/Media/media_upload_services.dart';
@@ -112,7 +113,7 @@ class ProjectSingleFilesController extends GetxController {
   Future<void> _getTeamFiles() async {
     List<MediaModel>? items = await _mediaUploadServices.getMediaByTeamId();
 
-    if (items == null || items.isEmpty) return;
+    if (items == null) return;
 
     _files.assignAll(items);
 
@@ -191,5 +192,68 @@ class ProjectSingleFilesController extends GetxController {
     _searchKey.value = '';
     _searchResults.clear();
     update();
+  }
+
+  // rename media
+  Future<void> renameMedia(String? id, String? value) async {
+    if (id == null || value == null) return;
+
+    await Get.showOverlay(
+      asyncFunction: () async {
+        await _mediaUploadServices.renameMedia(
+          mediaId: id,
+          newName: value,
+        );
+
+        await _getTeamFiles();
+        updateLoading(false);
+      },
+      loadingWidget: const BuildOverlay(),
+    );
+  }
+
+  // remove media
+  Future<void> removeMedia(String? id, String? path) async {
+    if (id == null || path == null) return;
+
+    await Get.showOverlay(
+      asyncFunction: () async {
+        await _mediaUploadServices.removeMedia(
+          mediaId: id,
+          path: path,
+        );
+
+        await _getTeamFiles();
+        calculateSidebarNumbers();
+        update();
+      },
+      loadingWidget: const BuildOverlay(),
+    );
+  }
+
+  // download file
+  Future<void> downloadFile(MediaModel item) async {
+    if (item.path == null || item.type == null) return;
+
+    Uint8List? bytes = await Get.showOverlay(
+      asyncFunction: () async {
+        // get downloaded file
+        return await _mediaUploadServices.downloadFile(
+          from: 'teams',
+          path: item.path!,
+        );
+      },
+      loadingWidget: const BuildOverlay(),
+    );
+
+    if (bytes == null) return;
+
+    print(item.type);
+
+    await _fileManegerProvider.saveFileWithoutLocation(
+      fileName: item.fileName!,
+      fileExtension: item.type!,
+      bytes: bytes,
+    );
   }
 }

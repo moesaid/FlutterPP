@@ -1,4 +1,5 @@
 import 'package:file_selector/file_selector.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutterpp/App/Models/media_model.dart';
 import 'package:flutterpp/App/Models/team_model.dart';
 import 'package:flutterpp/App/Providers/Network/Media/media_upload_provider.dart';
@@ -77,5 +78,52 @@ class MediaUploadServices {
     return await _provider.getMediaRecordsByTeamId(
       teamId: team.id!,
     );
+  }
+
+  // rename media
+  Future<void> renameMedia({
+    required String mediaId,
+    required String newName,
+  }) async {
+    await _provider.renameRecord(
+      id: mediaId,
+      fileName: newName,
+    );
+  }
+
+  // remove media
+  Future<bool> removeMedia({
+    required String mediaId,
+    required String path,
+  }) async {
+    // get team
+    final TeamModel? team = await _teamServices.getTeamForAuthUser();
+
+    if (team == null || team.id == null) return false;
+
+    try {
+      // remove media
+      await _provider.removeRecord(id: mediaId);
+
+      String newPath = path.split('/').sublist(1).join('/');
+
+      await _provider.removeFile(
+        from: 'teams',
+        path: newPath,
+      );
+    } catch (e) {
+      return false;
+    }
+
+    return true;
+  }
+
+  // download file
+  Future<Uint8List?> downloadFile({
+    required String from,
+    required String path,
+  }) async {
+    String newPath = path.split('/').sublist(1).join('/');
+    return await _provider.downloadFile(from: from, path: newPath);
   }
 }

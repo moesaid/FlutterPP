@@ -71,8 +71,15 @@ class FileManegerProvider {
   }) async {
     await callPipeline.futurePipeline(
       future: () async {
+        String fileNameWithExtension;
+        if (fileName.contains('.')) {
+          fileNameWithExtension = fileName;
+        } else {
+          fileNameWithExtension = '$fileName.$fileExtension';
+        }
+
         final FileSaveLocation? result = await getSaveLocation(
-          suggestedName: fileName,
+          suggestedName: fileNameWithExtension,
         );
         if (result == null) {
           // Operation was canceled by the user.

@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:file_selector/file_selector.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutterpp/App/Models/media_model.dart';
 import 'package:flutterpp/App/Services/Global/call_pipeline.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
@@ -130,20 +131,71 @@ class MediaUploadProvider {
 
         if (data.isEmpty) return null;
 
-        print({
-          'id': data.first.id,
-          'name': data.first.name,
-          'bucketId': data.first.bucketId,
-          'buckets': data.first.buckets,
-          'metadata': data.first.metadata,
-          'owner': data.first.owner,
-          'lastAccessedAt': data.first.lastAccessedAt,
-          'createdAt': data.first.createdAt,
-        });
-
         return null;
       },
       name: 'list files',
+    );
+  }
+
+  // rename record
+  Future<MediaModel?> renameRecord({
+    required String id,
+    required String fileName,
+  }) async {
+    return await callPipeline.futurePipeline(
+      future: () async {
+        List<Map> data = await supabase
+            .from('media')
+            .update({'file_name': fileName})
+            .eq('id', id)
+            .select();
+
+        if (data.isEmpty) return null;
+
+        var localJson = json.encode(data[0]);
+        return MediaModel.fromJson(json.decode(localJson));
+      },
+      name: 'rename record',
+    );
+  }
+
+  // remove record
+  Future<void> removeRecord({required String id}) async {
+    await callPipeline.futurePipeline(
+      future: () async {
+        await supabase.from('media').delete().eq('id', id);
+      },
+      name: 'remove record',
+    );
+  }
+
+  // remove file
+  Future<void> removeFile({
+    required String from,
+    required String path,
+  }) async {
+    await callPipeline.futurePipeline(
+      future: () async {
+        await supabase.storage.from(from).remove([
+          path,
+        ]);
+      },
+      name: 'remove file',
+    );
+  }
+
+  // download file
+  Future<Uint8List?> downloadFile({
+    required String from,
+    required String path,
+  }) async {
+    return await callPipeline.futurePipeline(
+      future: () async {
+        Uint8List? res = await supabase.storage.from(from).download(path);
+
+        return res;
+      },
+      name: 'download file',
     );
   }
 }

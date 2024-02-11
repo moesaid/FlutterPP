@@ -5,6 +5,7 @@ import 'package:flutterpp/App/Controllers/Project/Single/project_single_files_co
 import 'package:flutterpp/App/Models/media_model.dart';
 import 'package:flutterpp/App/Views/Global/build_custom_dropdown.dart';
 import 'package:flutterpp/App/Views/Global/build_loading_or_empty_layout.dart';
+import 'package:flutterpp/App/Views/Global/build_rename_dialog.dart';
 import 'package:flutterpp/Helpers/int_helper.dart';
 import 'package:flutterpp/Helpers/text_helper.dart';
 import 'package:get/get.dart';
@@ -181,15 +182,25 @@ class BuildProjectSingleFilesList extends StatelessWidget {
                 items: [
                   PopupMenuItem(
                     child: const Text('Download'),
-                    onTap: () => print('object'),
+                    onTap: () => controller.downloadFile(file),
                   ),
                   PopupMenuItem(
                     child: const Text('rename'),
-                    onTap: () => print('object'),
+                    onTap: () => showDialog(
+                      context: context,
+                      builder: (_) {
+                        return BuildRenameDialog(
+                          title: file.fileName ?? '',
+                          callback: (value) {
+                            controller.renameMedia(file.id, value);
+                          },
+                        );
+                      },
+                    ),
                   ),
                   PopupMenuItem(
                     child: const Text('Delete'),
-                    onTap: () => print('object'),
+                    onTap: () => controller.removeMedia(file.id, file.path),
                   ),
                 ],
               )
