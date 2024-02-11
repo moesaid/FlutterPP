@@ -75,7 +75,7 @@ class BuildProjectSingleFilesList extends StatelessWidget {
                         return BuildRenameDialog(
                           title: file.fileName ?? '',
                           callback: (value) {
-                            controller.renameMedia(file.id, value);
+                            controller.renameMedia(file, value);
                           },
                         );
                       },

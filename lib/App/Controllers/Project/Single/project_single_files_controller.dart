@@ -195,14 +195,14 @@ class ProjectSingleFilesController extends GetxController {
   }
 
   // rename media
-  Future<void> renameMedia(String? id, String? value) async {
-    if (id == null || value == null) return;
+  Future<void> renameMedia(MediaModel? item, String? value) async {
+    if (item == null || value == null) return;
 
     await Get.showOverlay(
       asyncFunction: () async {
         await _mediaUploadServices.renameMedia(
-          mediaId: id,
-          newName: value,
+          mediaId: item.id!,
+          newName: '$value.${item.type!}',
         );
 
         await _getTeamFiles();

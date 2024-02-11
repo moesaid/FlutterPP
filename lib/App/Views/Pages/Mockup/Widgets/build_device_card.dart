@@ -95,7 +95,8 @@ class BuildDeviceBody extends StatelessWidget {
                 image: NetworkImage(config.backgroundImage ?? ''),
                 fit: BoxFit.cover,
               ),
-        gradient: config.backgroundGradient == null
+        gradient: (config.backgroundGradient == null ||
+                config.backgroundGradient!.isEmpty)
             ? null
             : LinearGradient(
                 colors: config.backgroundGradient!,
@@ -166,7 +167,7 @@ class BuildDeviceBodyIphoneCase extends StatelessWidget {
                     ),
                     child: SizedBox(
                       width: width != null ? (width! - 100) : 250,
-                      height: height != null ? (height! - 100) : 500,
+                      // height: height != null ? (height! - 100) : 500,
                       child: Container(
                         decoration: BoxDecoration(
                           border: config.showStroke == true
@@ -228,7 +229,7 @@ class BuildDeviceBodyIphoneCase extends StatelessWidget {
                     ),
                     child: SizedBox(
                       width: width != null ? (width! - 100) : 250,
-                      height: width != null ? (height! - 100) : 500,
+                      // height: width != null ? (height! - 100) : 500,
                       child: Container(
                         decoration: BoxDecoration(
                           border: config.showSecondStroke == true

@@ -29,9 +29,9 @@ class MockupIndexPage extends GetView<MockupIndexController> {
             buttonText: 'Create a new mockup',
             onButtonPressed: () => aweSideSheet(
               context: context,
+              sheetWidth: context.width * 0.8,
               sheetPosition: SheetPosition.right,
               body: const MockupCreatePage(),
-              sheetWidth: 50.h,
               title: 'Create a new mockup',
               footer: const SizedBox(),
             ),
@@ -48,9 +48,9 @@ class MockupIndexPage extends GetView<MockupIndexController> {
                     IconButton(
                       onPressed: () => aweSideSheet(
                         context: context,
+                        sheetWidth: context.width * 0.8,
                         sheetPosition: SheetPosition.right,
                         body: const MockupCreatePage(),
-                        sheetWidth: 50.h,
                         title: 'Create a new mockup',
                         footer: const SizedBox(),
                       ),

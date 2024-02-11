@@ -35,7 +35,7 @@ ExpansionTileBorderItem buildTitleStep({
   Function(Color)? onTitleColorChanged,
   Function(double, PaddingDestination)? onTitlePaddingChanged,
 }) {
-  String uuid = const Uuid().v1();
+  String uuid = const Uuid().v4();
   return ExpansionTileBorderItem(
     title: Text(widgetTitle!),
     leading: const Icon(Icons.text_fields),
@@ -70,6 +70,7 @@ ExpansionTileBorderItem buildTitleStep({
       BuildSidebarOption(
         title: 'Font family',
         rightWidget: BuildChangeFontFamily(
+          controllerTag: '-$widgetTitle-fontFamily-$uuid',
           sheetContext: titleSheetContext,
           fontFamily: titleFontFamily,
           callback: (val) => onTitleFontFamilyChanged?.call(val),

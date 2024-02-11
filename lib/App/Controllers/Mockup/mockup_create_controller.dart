@@ -1,4 +1,6 @@
-import 'package:flutter/material.dart';
+import 'dart:convert';
+
+import 'package:flutter/services.dart';
 import 'package:flutterpp/App/Controllers/Mockup/mockup_index_controller.dart';
 import 'package:flutterpp/App/Enums/template_layout_enum.dart';
 import 'package:flutterpp/App/Models/mockup_model.dart';
@@ -71,7 +73,7 @@ class MockupCreateController extends GetxController {
   }
 
   // next step
-  void onStepContinue() {
+  Future<void> onStepContinue() async {
     // if going to step 1 make sure title & description & category is not empty
     if (_currentStep.value == 0) {
       if (_title.value.isEmpty ||
@@ -105,7 +107,9 @@ class MockupCreateController extends GetxController {
 
     // if last step return
     if (_currentStep.value >= 2) {
-      _createMockup();
+      List<TemplateConfigModel>? jsonData = await _readLocalJsonConfig();
+
+      await _createMockup(jsonData: jsonData);
       return;
     }
 
@@ -183,7 +187,7 @@ class MockupCreateController extends GetxController {
   }
 
   // create mockup
-  Future<void> _createMockup() async {
+  Future<void> _createMockup({List<TemplateConfigModel>? jsonData}) async {
     MockupModel? item = await Get.showOverlay(
       asyncFunction: () => _mockupServices.createMockup(
         mockup: MockupModel(
@@ -196,18 +200,19 @@ class MockupCreateController extends GetxController {
           icon: _activeIcon.value,
           color1: _activeHexColor.first,
           color2: _activeHexColor.last,
-          jsonData: [
-            TemplateConfigModel.fromJson(
-              TemplateLayoutConfig().getLayoutConfig(
-                TemplateLayoutEnum.titleUp,
-              ),
-            )..id = const Uuid().v4(),
-            TemplateConfigModel.fromJson(
-              TemplateLayoutConfig().getLayoutConfig(
-                TemplateLayoutEnum.titleDown,
-              ),
-            )..id = const Uuid().v4(),
-          ],
+          jsonData: jsonData ??
+              [
+                TemplateConfigModel.fromJson(
+                  TemplateLayoutConfig().getLayoutConfig(
+                    TemplateLayoutEnum.titleUp,
+                  ),
+                )..id = const Uuid().v4(),
+                TemplateConfigModel.fromJson(
+                  TemplateLayoutConfig().getLayoutConfig(
+                    TemplateLayoutEnum.titleDown,
+                  ),
+                )..id = const Uuid().v4(),
+              ],
         ),
       ),
       loadingWidget: const BuildOverlay(),
@@ -223,5 +228,31 @@ class MockupCreateController extends GetxController {
       AppRoutes.MOCKUP_SINGLE,
       arguments: item,
     );
+  }
+
+  // read local json config
+  Future<List<TemplateConfigModel>?> _readLocalJsonConfig() async {
+    // Path to the local JSON file
+    String filePath = 'assets/jsons/$templateId.json';
+    // Read the JSON file
+    String jsonContent = await rootBundle.loadString(filePath);
+
+    // Parse the JSON data
+    var jsonData = await json.decode(jsonContent);
+
+    print(jsonData);
+
+    // convert json to list of gradient model
+    List<TemplateConfigModel> templateConfigModel = [];
+    for (var item in jsonData) {
+      TemplateConfigModel local = TemplateConfigModel.fromJson(item);
+      // add id
+      local.id = const Uuid().v4();
+      templateConfigModel.add(local);
+    }
+
+    if (templateConfigModel.isEmpty) return null;
+
+    return templateConfigModel;
   }
 }

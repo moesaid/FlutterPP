@@ -9,11 +9,12 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class BuildChangeFontFamily extends GetView<ChangeFontfamilyController> {
-  final String? fontFamily;
+  final String? fontFamily, controllerTag;
   final BuildContext sheetContext;
   final void Function(String)? callback;
 
   const BuildChangeFontFamily({
+    this.controllerTag,
     this.callback,
     this.fontFamily,
     required this.sheetContext,
@@ -24,11 +25,12 @@ class BuildChangeFontFamily extends GetView<ChangeFontfamilyController> {
   Widget build(BuildContext context) {
     return GetBuilder<ChangeFontfamilyController>(
       init: ChangeFontfamilyController(),
+      tag: controllerTag,
       didChangeDependencies: (state) {
         if (fontFamily == null) return;
         state.controller?.changeFontFamily(key: fontFamily!);
       },
-      builder: (context) {
+      builder: (_) {
         return InkWell(
           onTap: () => aweSideSheet(
             sheetWidth: sheetContext.width,
@@ -37,7 +39,7 @@ class BuildChangeFontFamily extends GetView<ChangeFontfamilyController> {
             footer: const SizedBox.shrink(),
             header: const SizedBox.shrink(),
             body: BuildChangeFontBottomSheet(
-              controller: controller,
+              controller: _,
               callback: callback,
             ),
           ),
@@ -54,9 +56,11 @@ class BuildChangeFontFamily extends GetView<ChangeFontfamilyController> {
             child: Row(
               children: [
                 Expanded(
-                  child: Text(
-                    '${controller.fontKey} ',
-                    maxLines: 1,
+                  child: Obx(
+                    () => Text(
+                      '${_.fontKey} ',
+                      maxLines: 1,
+                    ),
                   ),
                 ),
                 const Icon(

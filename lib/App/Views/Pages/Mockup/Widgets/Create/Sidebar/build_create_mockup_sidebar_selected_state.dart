@@ -275,6 +275,7 @@ class BuildCreateMockupSidebarSelectedState
             ),
             buildTitleStep(
               titleSheetContext: context,
+              widgetTitle: 'Title',
               titleText: titleText,
               titleFontFamily: titleFontFamily,
               showTitle: showTitle,

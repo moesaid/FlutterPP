@@ -87,8 +87,6 @@ class BuildCreateMockupChooseTemplate extends StatelessWidget {
 var array = <String>[
   'airbnb',
   'spotify',
-  'cricut',
   'googleone',
-  'tandem',
   'medium',
 ];

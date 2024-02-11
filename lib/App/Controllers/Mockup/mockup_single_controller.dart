@@ -99,6 +99,13 @@ class MockupSingleController extends GetxController {
     GradientModel? gradient,
     bool? repeatForAll,
   }) {
+    print({
+      'color': color,
+      'image': image,
+      'gradient': gradient,
+      'repeatForAll': repeatForAll,
+    });
+
     // if repeat for all is true
     // apply the same background to all items
 
@@ -128,22 +135,38 @@ class MockupSingleController extends GetxController {
       return;
     }
 
-    // if repeat for all is false or null
-    _seletedItem.value = _seletedItem.value.copyWith(
-      backgroundColor: color,
-      backgroundImage: image,
-      backgroundGradient: gradient == null ||
-              gradient.colors == null ||
-              gradient.colors!.isEmpty
-          ? null
-          : [
-              ColorHelper.hexToColor(gradient.colors!.first),
-              ColorHelper.hexToColor(gradient.colors!.last),
-            ],
-      gradientAngle: gradient?.angle,
-    );
+    // update color ether the type but reset the other types
+    if (color != null) {
+      _seletedItem.value = _seletedItem.value.copyWith(
+        backgroundColor: color,
+        backgroundImage: "",
+        backgroundGradient: [],
+      );
+    }
 
-    print(_seletedItem.value.backgroundImage);
+    // update image ether the type but reset the other types
+    if (image != null) {
+      _seletedItem.value = _seletedItem.value.copyWith(
+        backgroundColor: null,
+        backgroundImage: image,
+        backgroundGradient: [],
+      );
+    }
+
+    // update gradient ether the type but reset the other types
+    if (gradient != null) {
+      _seletedItem.value = _seletedItem.value.copyWith(
+        backgroundColor: null,
+        backgroundImage: "",
+        backgroundGradient: gradient.colors == null || gradient.colors!.isEmpty
+            ? null
+            : [
+                ColorHelper.hexToColor(gradient.colors!.first),
+                ColorHelper.hexToColor(gradient.colors!.last),
+              ],
+        gradientAngle: gradient.angle,
+      );
+    }
   }
 
   // update icon toggle

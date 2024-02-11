@@ -104,8 +104,8 @@ class MockupExportServices {
 
       Uint8List localGalaxyImages = await takeScreenshot(
         item,
-        width: 270 * 2,
-        height: 480 * 2,
+        width: 270,
+        height: 480,
         device: Devices.android.samsungGalaxyS20,
       );
       preGalaxyImages.add(localGalaxyImages);
