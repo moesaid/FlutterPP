@@ -8,6 +8,7 @@ import 'package:flutterpp/App/Controllers/Project/Single/project_single_wiki_con
 import 'package:flutterpp/App/Models/wiki_model.dart';
 import 'package:flutterpp/App/Views/Global/build_custom_dropdown.dart';
 import 'package:flutterpp/App/Views/Global/build_loading_or_empty_layout.dart';
+import 'package:flutterpp/App/Views/Global/build_rename_dialog.dart';
 import 'package:flutterpp/App/Views/Global/buiuld_dialog.dart';
 import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
@@ -159,38 +160,14 @@ class BuildProjectSingleWikiSidebar extends StatelessWidget {
                               value: 'rename',
                               onTap: () => showDialog(
                                 context: context,
-                                builder: (_) => BuildDefultDialog(
-                                  height: 130,
-                                  child: FormBuilder(
-                                    key: renameKey,
-                                    child: Column(
-                                      children: [
-                                        FormBuilderTextField(
-                                          name: 'title',
-                                          initialValue: wiki.title,
-                                        ),
-                                        const Spacer(),
-                                        SizedBox(
-                                          width: context.width,
-                                          child: FilledButton(
-                                            onPressed: () {
-                                              if (renameKey.currentState!
-                                                  .saveAndValidate()) {
-                                                controller
-                                                    .updateWikiIconOrTitle(
-                                                  wiki: wiki,
-                                                  title: renameKey.currentState!
-                                                      .fields['title']!.value,
-                                                );
-                                                Get.back();
-                                              }
-                                            },
-                                            child: Text('update'.capitalize!),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
+                                builder: (_) => BuildRenameDialog(
+                                  title: wiki.title ?? '',
+                                  callback: (val) {
+                                    controller.updateWikiIconOrTitle(
+                                      wiki: wiki,
+                                      title: val,
+                                    );
+                                  },
                                 ),
                               ),
                               mouseCursor: SystemMouseCursors.click,
