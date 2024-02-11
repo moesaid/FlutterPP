@@ -3,37 +3,10 @@ import 'package:flutterpp/App/Controllers/Project/Single/project_single_files_co
 import 'package:flutterpp/App/Models/media_model.dart';
 import 'package:flutterpp/App/Views/Global/build_custom_dropdown.dart';
 import 'package:flutterpp/App/Views/Global/build_rename_dialog.dart';
-import 'package:flutterpp/App/Views/Pages/Project/Widgets/Files/build_project_single_files_body.dart';
-import 'package:flutterpp/App/Views/Pages/Project/Widgets/Files/build_project_single_files_sidebar.dart';
 import 'package:flutterpp/Helpers/int_helper.dart';
 import 'package:flutterpp/Helpers/text_helper.dart';
 import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
-
-class ProjectSingleFilesPage extends GetView<ProjectSingleFilesController> {
-  const ProjectSingleFilesPage({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return GetBuilder<ProjectSingleFilesController>(
-      init: ProjectSingleFilesController(),
-      initState: (_) {},
-      builder: (_) {
-        return Scaffold(
-          body: SafeArea(
-            child: Flex(
-              direction: Axis.horizontal,
-              children: [
-                BuildProjectSingleFilesBody(controller: controller),
-                BuildProjectSingleFilesSidebar(controller: controller),
-              ],
-            ),
-          ),
-        );
-      },
-    );
-  }
-}
 
 class BuildProjectSingleFilesList extends StatelessWidget {
   const BuildProjectSingleFilesList({
