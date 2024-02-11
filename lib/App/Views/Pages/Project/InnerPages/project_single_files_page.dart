@@ -1,11 +1,11 @@
 import 'package:dashed_circular_progress_bar/dashed_circular_progress_bar.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutterpp/App/Controllers/Project/Single/project_single_files_controller.dart';
 import 'package:flutterpp/App/Models/media_model.dart';
 import 'package:flutterpp/App/Views/Global/build_custom_dropdown.dart';
 import 'package:flutterpp/App/Views/Global/build_loading_or_empty_layout.dart';
 import 'package:flutterpp/App/Views/Global/build_rename_dialog.dart';
+import 'package:flutterpp/App/Views/Global/build_search_form.dart';
 import 'package:flutterpp/Helpers/int_helper.dart';
 import 'package:flutterpp/Helpers/text_helper.dart';
 import 'package:get/get.dart';
@@ -208,93 +208,6 @@ class BuildProjectSingleFilesList extends StatelessWidget {
           ),
         );
       },
-    );
-  }
-}
-
-class BuildSearchForm extends StatelessWidget {
-  final void Function(String)? onSearch;
-  final void Function()? onClear;
-  final String? searchKey;
-  const BuildSearchForm({
-    super.key,
-    this.onSearch,
-    this.searchKey,
-    this.onClear,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    final formKey = GlobalKey<FormBuilderState>();
-    return FormBuilder(
-      key: formKey,
-      child: Container(
-        width: context.width * 0.2,
-        clipBehavior: Clip.antiAlias,
-        padding: EdgeInsets.symmetric(
-          horizontal: 4.sp,
-          vertical: 2.sp,
-        ),
-        decoration: BoxDecoration(
-          color: Get.theme.colorScheme.primaryContainer,
-          borderRadius: BorderRadius.circular(10),
-        ),
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Expanded(
-              child: FormBuilderTextField(
-                name: 'name',
-                initialValue: searchKey,
-                scrollPadding: EdgeInsets.zero,
-                cursorHeight: 15,
-                decoration: InputDecoration(
-                  hintText: 'Search',
-                  border: InputBorder.none,
-                  contentPadding: EdgeInsets.symmetric(
-                    vertical: 2.sp,
-                    horizontal: 0,
-                  ),
-                  isDense: true,
-                  focusedBorder: const OutlineInputBorder(
-                    borderSide: BorderSide(
-                      color: Colors.transparent,
-                    ),
-                  ),
-                  enabledBorder: const OutlineInputBorder(
-                    borderSide: BorderSide(
-                      color: Colors.transparent,
-                    ),
-                  ),
-                  hintStyle: Get.textTheme.bodyMedium?.copyWith(
-                    color: Get.theme.colorScheme.onBackground.withOpacity(0.4),
-                  ),
-                ),
-              ),
-            ),
-            SizedBox(width: 2.sp),
-            InkWell(
-              onTap: () {
-                if (searchKey != null && searchKey!.isNotEmpty) {
-                  onClear?.call();
-                  return;
-                }
-
-                if (formKey.currentState?.saveAndValidate() == true) {
-                  onSearch?.call(formKey.currentState?.value['name']);
-                }
-              },
-              child: Icon(
-                (searchKey != null && searchKey!.isNotEmpty)
-                    ? Icons.close
-                    : Icons.search_rounded,
-                size: 6.sp,
-              ),
-            ),
-          ],
-        ),
-      ),
     );
   }
 }
