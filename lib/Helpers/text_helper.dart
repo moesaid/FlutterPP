@@ -85,7 +85,6 @@ extension TextHelpers on String {
       case 'flv':
       case 'wmv':
         return Icons.movie;
-
       default:
         return Icons.insert_drive_file;
     }

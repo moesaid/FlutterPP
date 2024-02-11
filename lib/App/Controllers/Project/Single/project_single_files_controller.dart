@@ -57,6 +57,12 @@ class ProjectSingleFilesController extends GetxController {
   final _files = <MediaModel>[].obs;
   List<MediaModel> get files => _files;
 
+  final _searchResults = <MediaModel>[].obs;
+  List<MediaModel> get searchResults => _searchResults;
+
+  final _searchKey = ''.obs;
+  String get searchKey => _searchKey.value;
+
   final _isLoading = true.obs;
   bool get isLoading => _isLoading.value;
 
@@ -159,6 +165,31 @@ class ProjectSingleFilesController extends GetxController {
   // update loading
   void updateLoading(bool value) {
     _isLoading.value = value;
+    update();
+  }
+
+  // search files
+  void searchFiles(String value) {
+    _searchKey.value = value;
+
+    if (value.isEmpty) {
+      _searchResults.clear();
+      return;
+    }
+
+    _searchResults.assignAll(
+      _files.where(
+        (item) => item.fileName!.toLowerCase().contains(value.toLowerCase()),
+      ),
+    );
+
+    update();
+  }
+
+  // clear search
+  void clearSearch() {
+    _searchKey.value = '';
+    _searchResults.clear();
     update();
   }
 }

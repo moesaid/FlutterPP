@@ -93,7 +93,11 @@ class BuildProjectSingleFilesHeader extends StatelessWidget {
             style: Get.textTheme.titleLarge,
           ),
           const Spacer(),
-          const BuildSearchForm(),
+          BuildSearchForm(
+            searchKey: controller.searchKey,
+            onSearch: controller.searchFiles,
+            onClear: controller.clearSearch,
+          ),
           SizedBox(width: 5.sp),
           FilledButton.icon(
             onPressed: () => controller.uploadFile(),
@@ -131,11 +135,15 @@ class BuildProjectSingleFilesList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView.separated(
-      itemCount: controller.files.length,
+      itemCount: controller.searchResults.isNotEmpty
+          ? controller.searchResults.length
+          : controller.files.length,
       padding: EdgeInsets.all(5.sp),
       separatorBuilder: (_, __) => SizedBox(height: 2.sp),
       itemBuilder: (_, int index) {
-        MediaModel file = controller.files[index];
+        MediaModel file = controller.searchResults.isNotEmpty
+            ? controller.searchResults[index]
+            : controller.files[index];
         return Container(
           padding: EdgeInsets.symmetric(
             vertical: 4.sp,
@@ -194,13 +202,21 @@ class BuildProjectSingleFilesList extends StatelessWidget {
 }
 
 class BuildSearchForm extends StatelessWidget {
+  final void Function(String)? onSearch;
+  final void Function()? onClear;
+  final String? searchKey;
   const BuildSearchForm({
     super.key,
+    this.onSearch,
+    this.searchKey,
+    this.onClear,
   });
 
   @override
   Widget build(BuildContext context) {
+    final formKey = GlobalKey<FormBuilderState>();
     return FormBuilder(
+      key: formKey,
       child: Container(
         width: context.width * 0.2,
         clipBehavior: Clip.antiAlias,
@@ -219,7 +235,7 @@ class BuildSearchForm extends StatelessWidget {
             Expanded(
               child: FormBuilderTextField(
                 name: 'name',
-                initialValue: '',
+                initialValue: searchKey,
                 scrollPadding: EdgeInsets.zero,
                 cursorHeight: 15,
                 decoration: InputDecoration(
@@ -248,9 +264,20 @@ class BuildSearchForm extends StatelessWidget {
             ),
             SizedBox(width: 2.sp),
             InkWell(
-              onTap: () {},
+              onTap: () {
+                if (searchKey != null && searchKey!.isNotEmpty) {
+                  onClear?.call();
+                  return;
+                }
+
+                if (formKey.currentState?.saveAndValidate() == true) {
+                  onSearch?.call(formKey.currentState?.value['name']);
+                }
+              },
               child: Icon(
-                Icons.search_rounded,
+                (searchKey != null && searchKey!.isNotEmpty)
+                    ? Icons.close
+                    : Icons.search_rounded,
                 size: 6.sp,
               ),
             ),
