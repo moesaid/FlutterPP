@@ -3,6 +3,7 @@ import 'package:flutterpp/App/Views/Pages/Auth/signup_page.dart';
 import 'package:flutterpp/App/Views/Pages/Auth/splash_page.dart';
 import 'package:flutterpp/App/Views/Pages/Auth/verify_otp_page.dart';
 import 'package:flutterpp/App/Views/Pages/Home/home_page.dart';
+import 'package:flutterpp/App/Views/Pages/Invoice/invoice_single_page.dart';
 import 'package:flutterpp/App/Views/Pages/Mockup/mockup_create_page.dart';
 import 'package:flutterpp/App/Views/Pages/Mockup/mockup_index_page.dart';
 import 'package:flutterpp/App/Views/Pages/Mockup/mockup_single_page.dart';
@@ -37,6 +38,12 @@ class AppPages {
     GetPage(
       name: AppRoutes.PROJECT_SINGLE,
       page: () => const ProjectSinglePage(),
+    ),
+
+    // invoice
+    GetPage(
+      name: AppRoutes.INVOICE_SINGLE,
+      page: () => const InvoiceSinglePage(),
     ),
   ];
 }

@@ -3,9 +3,9 @@ import 'package:flutterpp/App/Models/project_model.dart';
 import 'package:flutterpp/App/Services/Auth/auth_services.dart';
 import 'package:flutterpp/App/Services/Team/team_services.dart';
 import 'package:flutterpp/App/Views/Pages/Dashboard/dashboard_page.dart';
+import 'package:flutterpp/App/Views/Pages/Invoice/invoice_index_page.dart';
 import 'package:flutterpp/App/Views/Pages/Mockup/mockup_index_page.dart';
 import 'package:flutterpp/App/Views/Pages/Project/Pages/project_single_page.dart';
-import 'package:flutterpp/App/Views/Pages/Test/test_page.dart';
 import 'package:flutterpp/Storage/active_project_storage.dart';
 import 'package:get/get.dart';
 import 'package:heroicons/heroicons.dart';
@@ -32,17 +32,17 @@ class HomeController extends GetxController {
       'tab': const ProjectSinglePage(),
       'type': 'project',
     },
-    {
-      'title': 'chat',
-      'icon': HeroIcons.chatBubbleOvalLeftEllipsis,
-      'isActive': false,
-      'tab': const Text('chat'),
-    },
+    // {
+    //   'title': 'chat',
+    //   'icon': HeroIcons.chatBubbleOvalLeftEllipsis,
+    //   'isActive': false,
+    //   'tab': const Text('chat'),
+    // },
     {
       'title': 'invoices',
       'icon': HeroIcons.banknotes,
       'isActive': false,
-      'tab': const Text('invoices'),
+      'tab': const InvoiceIndexPage(),
     },
     {
       'title': 'time tracking',
@@ -50,18 +50,18 @@ class HomeController extends GetxController {
       'isActive': false,
       'tab': const Text('time tracking'),
     },
-    {
-      'title': 'scrum',
-      'icon': HeroIcons.rectangleStack,
-      'isActive': false,
-      'tab': const Text('scrum'),
-    },
-    {
-      'title': 'witeboard',
-      'icon': HeroIcons.paintBrush,
-      'isActive': false,
-      'tab': const TestPage(),
-    },
+    // {
+    //   'title': 'scrum',
+    //   'icon': HeroIcons.rectangleStack,
+    //   'isActive': false,
+    //   'tab': const Text('scrum'),
+    // },
+    // {
+    //   'title': 'witeboard',
+    //   'icon': HeroIcons.paintBrush,
+    //   'isActive': false,
+    //   'tab': const TestPage(),
+    // },
     {
       'title': 'mockups',
       'icon': HeroIcons.deviceTablet,

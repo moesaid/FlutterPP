@@ -6,6 +6,8 @@ import 'package:flutterpp/App/Controllers/Dashboard/dashboard_controller.dart';
 import 'package:flutterpp/App/Controllers/Dashboard/dashboard_env_check_controller.dart';
 import 'package:flutterpp/App/Controllers/Global/emoji_dialog_controller.dart';
 import 'package:flutterpp/App/Controllers/Home/home_controller.dart';
+import 'package:flutterpp/App/Controllers/Invoice/invoice_index_controller.dart';
+import 'package:flutterpp/App/Controllers/Invoice/invoice_single_controller.dart';
 import 'package:flutterpp/App/Controllers/Mockup/Micro/alignment_option_controller.dart';
 import 'package:flutterpp/App/Controllers/Mockup/Micro/bool_toggle_controller.dart';
 import 'package:flutterpp/App/Controllers/Mockup/Micro/build_layout_option_controller.dart';
@@ -69,5 +71,9 @@ class AppBinding implements Bindings {
     Get.lazyPut<SelectImageOptionController>(
       () => SelectImageOptionController(),
     );
+
+    // invoice
+    Get.lazyPut<InvoiceIndexController>(() => InvoiceIndexController());
+    Get.lazyPut<InvoiceSingleController>(() => InvoiceSingleController());
   }
 }

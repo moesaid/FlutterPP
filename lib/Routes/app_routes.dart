@@ -18,4 +18,7 @@ abstract class AppRoutes {
 
   // project
   static const PROJECT_SINGLE = '/project-single';
+
+  // invoice
+  static const INVOICE_SINGLE = '/invoice-single';
 }
