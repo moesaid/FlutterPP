@@ -1,6 +1,8 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:file_selector/file_selector.dart';
+import 'package:flutterpp/App/Models/media_model.dart';
 import 'package:flutterpp/App/Services/Global/call_pipeline.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:uuid/uuid.dart';
@@ -51,12 +53,13 @@ class MediaUploadProvider {
   }
 
   // create record
-  Future<List<Map>?> createRecord({
+  Future<MediaModel?> createRecord({
     required String teamId,
     required String bucketId,
     required String path,
     required String fileName,
     required String publicUrl,
+    required String type,
     required int size,
     String? mockupId,
   }) async {
@@ -70,14 +73,77 @@ class MediaUploadProvider {
             'public_url': publicUrl,
             'size': size,
             'team_id': teamId,
+            'type': type,
             if (mockupId != null) 'mockup_id': mockupId,
           }
         ]).select();
 
         if (data.isEmpty) return null;
-        return data;
+
+        var localJson = json.encode(data[0]);
+        return MediaModel.fromJson(json.decode(localJson));
       },
       name: 'create record',
+    );
+  }
+
+  // get media records by team id
+  Future<List<MediaModel>?> getMediaRecordsByTeamId({
+    required String teamId,
+  }) async {
+    return await callPipeline.futurePipeline(
+      future: () async {
+        List<Map> data = await supabase
+            .from('media')
+            .select('*')
+            .eq('team_id', teamId)
+            .select();
+
+        if (data.isEmpty) return null;
+
+        List<MediaModel> items = data.map((e) {
+          var localJson = json.encode(e);
+          return MediaModel.fromJson(json.decode(localJson));
+        }).toList();
+
+        return items;
+      },
+      name: 'get media records by team id',
+    );
+  }
+
+  // list files
+  Future<List<Map>?> listFiles({required String bucketId}) async {
+    return await callPipeline.futurePipeline(
+      future: () async {
+        List<FileObject> data = await supabase.storage.from('teams').list(
+              path: bucketId,
+              searchOptions: const SearchOptions(
+                limit: 100,
+                offset: 0,
+                sortBy: SortBy(
+                  column: 'name',
+                  order: 'asc',
+                ),
+              ),
+            );
+
+        if (data.isEmpty) return null;
+
+        print({
+          'id': data.first.id,
+          'name': data.first.name,
+          'bucketId': data.first.bucketId,
+          'buckets': data.first.buckets,
+          'metadata': data.first.metadata,
+          'owner': data.first.owner,
+          'lastAccessedAt': data.first.lastAccessedAt,
+          'createdAt': data.first.createdAt,
+        });
+
+        return null;
+      },
+      name: 'list files',
     );
   }
 }

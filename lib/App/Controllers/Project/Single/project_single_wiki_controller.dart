@@ -117,8 +117,6 @@ class ProjectSingleWikiController extends GetxController {
   Future<void> updateWikiDoc() async {
     if (_activeWiki.value.id == null) return;
 
-    print(_editorState.value.document.toJson());
-
     Get.showOverlay(
       asyncFunction: () async {
         WikiModel? local = await _wikiServices.updateWiki(

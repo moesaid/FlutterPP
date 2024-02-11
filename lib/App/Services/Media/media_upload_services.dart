@@ -1,14 +1,16 @@
 import 'package:file_selector/file_selector.dart';
+import 'package:flutterpp/App/Models/media_model.dart';
 import 'package:flutterpp/App/Models/team_model.dart';
 import 'package:flutterpp/App/Providers/Network/Media/media_upload_provider.dart';
 import 'package:flutterpp/App/Services/Team/team_services.dart';
+import 'package:flutterpp/App/Views/Global/build_snackbar.dart';
 
 class MediaUploadServices {
   final MediaUploadProvider _provider = MediaUploadProvider();
   final TeamServices _teamServices = TeamServices();
 
   // upload file
-  Future<String?> uploadFile({
+  Future<MediaModel?> uploadFile({
     String? mockupId,
     required String bucketId,
     required XFile file,
@@ -18,6 +20,21 @@ class MediaUploadServices {
 
     // get file name
     String fileName = _provider.getFileName(file: file);
+
+    // file size in kb
+    int size = (await file.length()) ~/ 1024 + 1;
+
+    // original file name
+    String originalFileName = file.name;
+
+    // if size is greater than 10mb
+    if (size > 10240) {
+      BuildSnackBar(
+        title: 'Oops!',
+        message: 'File size should be less than 10mb',
+      ).error();
+      return null;
+    }
 
     // upload
     String? path = await _provider.uploadFile(
@@ -37,20 +54,28 @@ class MediaUploadServices {
 
     if (url == null) return null;
 
-    // file size in megabytes
-    int size = (await file.length()) ~/ 1000000;
-
     // create record
-    await _provider.createRecord(
+    return await _provider.createRecord(
       teamId: team.id!,
       path: path,
       publicUrl: url,
-      fileName: fileName,
+      fileName: originalFileName,
       size: size,
       bucketId: bucketId,
       mockupId: mockupId,
+      type: file.name.split('.').last,
     );
+  }
 
-    return url;
+  // get media by team id
+  Future<List<MediaModel>?> getMediaByTeamId() async {
+    // get team
+    final TeamModel? team = await _teamServices.getTeamForAuthUser();
+
+    if (team == null || team.id == null) return null;
+
+    return await _provider.getMediaRecordsByTeamId(
+      teamId: team.id!,
+    );
   }
 }

@@ -1,4 +1,5 @@
 import 'package:file_selector/file_selector.dart';
+import 'package:flutterpp/App/Models/media_model.dart';
 import 'package:flutterpp/App/Providers/Device/file_maneger_provider.dart';
 import 'package:flutterpp/App/Services/Media/media_upload_services.dart';
 import 'package:flutterpp/App/Views/Global/build_overlay.dart';
@@ -21,20 +22,20 @@ class SelectImageOptionController extends GetxController {
 
         if (res == null) return;
 
-        String? url = await MediaUploadServices().uploadFile(
+        MediaModel? item = await MediaUploadServices().uploadFile(
           file: res,
           bucketId: 'images',
           mockupId: mockupId,
         );
 
-        if (url == null) return;
+        if (item == null || item.publicUrl == null) return;
 
         if (shouldRepeat != null) {
-          callbackForRepeat?.call(url, repeatForAll: shouldRepeat);
+          callbackForRepeat?.call(item.publicUrl!, repeatForAll: shouldRepeat);
           return;
         }
 
-        callback?.call(url);
+        callback?.call(item.publicUrl!);
       },
       loadingWidget: const BuildOverlay(),
     );
