@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutterpp/App/Controllers/Project/Single/project_single_code_gen_controller.dart';
 import 'package:flutterpp/App/Views/Global/build_loading_or_empty_layout.dart';
-import 'package:flutterpp/App/Views/Pages/Project/Widgets/build_code_gen_floating_button.dart';
-import 'package:flutterpp/App/Views/Pages/Project/Widgets/build_code_gen_node.dart';
+import 'package:flutterpp/App/Views/Pages/Project/Widgets/CodeGen/build_code_gen_floating_button.dart';
+import 'package:flutterpp/App/Views/Pages/Project/Widgets/CodeGen/build_code_gen_node.dart';
 import 'package:get/get.dart';
 import 'package:graphite/graphite.dart';
 
