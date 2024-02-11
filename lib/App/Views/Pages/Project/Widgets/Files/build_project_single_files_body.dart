@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutterpp/App/Controllers/Project/Single/project_single_files_controller.dart';
 import 'package:flutterpp/App/Views/Global/build_loading_or_empty_layout.dart';
-import 'package:flutterpp/App/Views/Pages/Project/InnerPages/project_single_files_page.dart';
 import 'package:flutterpp/App/Views/Pages/Project/Widgets/Files/build_project_single_files_header.dart';
+import 'package:flutterpp/App/Views/Pages/Project/Widgets/Files/build_project_single_files_list.dart';
 import 'package:get/get.dart';
 
 class BuildProjectSingleFilesBody extends StatelessWidget {

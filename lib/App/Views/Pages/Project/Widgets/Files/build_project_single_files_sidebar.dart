@@ -1,6 +1,7 @@
 import 'package:dashed_circular_progress_bar/dashed_circular_progress_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutterpp/App/Controllers/Project/Single/project_single_files_controller.dart';
+import 'package:flutterpp/App/Views/Pages/Project/Widgets/Files/build_project_single_files_type_with_size.dart';
 import 'package:flutterpp/Helpers/int_helper.dart';
 import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
