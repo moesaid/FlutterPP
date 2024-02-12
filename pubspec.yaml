@@ -46,6 +46,7 @@ dependencies:
   package_info_plus: ^5.0.1
   dashed_circular_progress_bar: ^0.0.6
   animated_flip_counter: ^0.2.6
+  pdf: ^3.10.7
 
 # dev_dependencies
 dev_dependencies:
