@@ -2,10 +2,12 @@ import 'package:flutterpp/App/Models/client_model.dart';
 import 'package:flutterpp/App/Models/invoice_model.dart';
 import 'package:flutterpp/App/Models/team_model.dart';
 import 'package:flutterpp/App/Services/Client/client_services.dart';
+import 'package:flutterpp/App/Services/Invoice/invoice_services.dart';
 import 'package:flutterpp/App/Services/Team/team_services.dart';
 import 'package:get/get.dart';
 
 class InvoiceSingleController extends GetxController {
+  final InvoiceServices _invoiceServices = InvoiceServices();
   final TeamServices _teamServices = TeamServices();
   final ClientServices _clientServices = ClientServices();
 
@@ -66,7 +68,11 @@ class InvoiceSingleController extends GetxController {
 
   // download
   onDownload() {
-    print('download');
+    _invoiceServices.downloadInvoice(
+      invoice: invoice,
+      team: team,
+      client: client,
+    );
   }
 
   // edit

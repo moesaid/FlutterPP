@@ -1,12 +1,26 @@
+import 'package:flutter/foundation.dart';
+import 'package:flutter/widgets.dart';
+import 'package:flutterpp/App/Models/client_model.dart';
 import 'package:flutterpp/App/Models/invoice_model.dart';
+import 'package:flutterpp/App/Models/team_model.dart';
+import 'package:flutterpp/App/Providers/Device/file_maneger_provider.dart';
 import 'package:flutterpp/App/Providers/Network/Invoice/invoice_provider.dart';
+import 'package:flutterpp/App/Services/Client/client_services.dart';
 import 'package:flutterpp/App/Services/Global/call_pipeline.dart';
 import 'package:flutterpp/App/Services/Team/team_services.dart';
+import 'package:flutterpp/App/Views/Pages/Invoice/Widgets/build_invoice_printable_body.dart';
+import 'package:get/get.dart';
+import 'package:pdf/pdf.dart';
+import 'package:pdf/widgets.dart' as pw;
+import 'package:screenshot/screenshot.dart';
 
 class InvoiceServices {
   final InvoiceProvider _provider = InvoiceProvider();
   final CallPipeline _callPipeline = CallPipeline();
   final TeamServices _teamServices = TeamServices();
+  final ClientServices _clientServices = ClientServices();
+  final FileManegerProvider _fileManegerProvider = FileManegerProvider();
+  final ScreenshotController _screenshotController = ScreenshotController();
 
   // get invoices by team id
   Future<List<InvoiceModel>?> getInvoicesByTeamId({int? limit}) async {
@@ -67,5 +81,72 @@ class InvoiceServices {
     );
 
     return data ?? false;
+  }
+
+  // download invoice
+  Future<void> downloadInvoice({
+    required InvoiceModel invoice,
+    TeamModel? team,
+    ClientModel? client,
+  }) async {
+    print('❌download invoice');
+
+    TeamModel? localTeam = team;
+    ClientModel? localClient = client;
+
+    _callPipeline.futurePipeline(
+      future: () async {
+        if (localTeam?.id == null) {
+          localTeam = await _teamServices.getTeamForAuthUser();
+        }
+
+        if (localClient?.id == null) {
+          localClient = await _clientServices.getClientById(
+            clientId: invoice.clientId!,
+          );
+        }
+
+        // // take screenshot
+        Uint8List image = await _screenshotController.captureFromWidget(
+          BuildInvoicePrintableBody(
+            invoice: invoice,
+            team: localTeam!,
+            client: localClient!,
+            hasScroll: false,
+            width: double.infinity,
+            height: double.infinity,
+          ),
+          delay: const Duration(milliseconds: 500),
+          context: Get.context,
+          targetSize: const Size(816, 1056),
+          pixelRatio: 3,
+        );
+
+        final pdf = pw.Document();
+        pw.Image pwImage = pw.Image(pw.MemoryImage(image));
+        pdf.addPage(
+          pw.Page(
+            pageFormat: PdfPageFormat.a4,
+            margin: pw.EdgeInsets.zero,
+            build: (pw.Context context) {
+              return pw.Container(
+                // width: double.infinity,
+                // height: 20,
+                // color: const PdfColor.fromInt(0xff000000),
+                child: pwImage,
+              );
+            },
+          ),
+        );
+
+        // save pdf
+        await _fileManegerProvider.saveFileWithoutLocation(
+          fileName: 'flutterPP_invoice_${invoice.number}.pdf',
+          fileExtension: 'pdf',
+          bytes: await pdf.save(),
+        );
+      },
+      name: 'downloadInvoice',
+    );
   }
 }
