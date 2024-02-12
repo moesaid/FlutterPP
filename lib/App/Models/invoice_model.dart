@@ -57,6 +57,33 @@ class InvoiceModel {
     data['created_at'] = createdAt;
     return data;
   }
+
+  // copy with new values
+  InvoiceModel copyWith({
+    String? id,
+    String? teamId,
+    String? clientId,
+    int? number,
+    String? dueDate,
+    String? status,
+    int? discount,
+    int? tax,
+    List<InvoiceItems>? items,
+    String? createdAt,
+  }) {
+    return InvoiceModel(
+      id: id ?? this.id,
+      teamId: teamId ?? this.teamId,
+      clientId: clientId ?? this.clientId,
+      number: number ?? this.number,
+      dueDate: dueDate ?? this.dueDate,
+      status: status ?? this.status,
+      discount: discount ?? this.discount,
+      tax: tax ?? this.tax,
+      items: items ?? this.items,
+      createdAt: createdAt ?? this.createdAt,
+    );
+  }
 }
 
 class InvoiceItems {
@@ -78,5 +105,18 @@ class InvoiceItems {
     data['title'] = title;
     data['quantity'] = quantity;
     return data;
+  }
+
+  // copy with new values
+  InvoiceItems copyWith({
+    int? price,
+    String? title,
+    int? quantity,
+  }) {
+    return InvoiceItems(
+      price: price ?? this.price,
+      title: title ?? this.title,
+      quantity: quantity ?? this.quantity,
+    );
   }
 }
