@@ -240,7 +240,7 @@ class BuildInvoiceFinalInfoItem extends StatelessWidget {
                           'tax:'.capitalize!,
                           style: TextStyle(
                             fontSize: 5.sp,
-                            color: Colors.redAccent,
+                            color: Colors.red,
                           ),
                         ),
                       ),
@@ -257,7 +257,7 @@ class BuildInvoiceFinalInfoItem extends StatelessWidget {
                           taxValue ?? '',
                           style: TextStyle(
                             fontSize: 5.sp,
-                            color: Colors.redAccent,
+                            color: Colors.red,
                           ),
                         ),
                       ),
