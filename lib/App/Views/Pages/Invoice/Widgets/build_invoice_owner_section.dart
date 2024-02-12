@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutterpp/App/Models/team_model.dart';
-import 'package:flutterpp/App/Views/Pages/Invoice/invoice_single_page.dart';
+import 'package:flutterpp/App/Views/Pages/Invoice/Widgets/build_invoice_company_info.dart';
 import 'package:sizer/sizer.dart';
 
 class BuildInvoiceOwnerSection extends StatelessWidget {

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutterpp/App/Models/client_model.dart';
 import 'package:flutterpp/App/Models/invoice_model.dart';
+import 'package:flutterpp/App/Views/Pages/Invoice/Widgets/build_invoice_company_info.dart';
 import 'package:flutterpp/App/Views/Pages/Invoice/Widgets/build_invoice_highlights_item.dart';
-import 'package:flutterpp/App/Views/Pages/Invoice/invoice_single_page.dart';
 import 'package:flutterpp/Helpers/invoice_helper.dart';
 import 'package:sizer/sizer.dart';
 
