@@ -7,7 +7,7 @@ import 'package:sizer/sizer.dart';
 
 class BuildInvoiceBody extends StatelessWidget {
   final InvoiceModel invoice;
-  final void Function(String)? onView,
+  final void Function(InvoiceModel)? onView,
       onEdit,
       onDelete,
       onDuplicate,
@@ -79,7 +79,7 @@ class BuildInvoiceBody extends StatelessWidget {
               BuildCustomDropdown(
                 items: [
                   PopupMenuItem(
-                    onTap: onView != null ? () => onView?.call('view') : null,
+                    onTap: onView != null ? () => onView?.call(invoice) : null,
                     child: Row(
                       children: [
                         Icon(Icons.remove_red_eye, size: 6.sp),
@@ -89,7 +89,7 @@ class BuildInvoiceBody extends StatelessWidget {
                     ),
                   ),
                   PopupMenuItem(
-                    onTap: onEdit != null ? () => onEdit?.call('edit') : null,
+                    onTap: onEdit != null ? () => onEdit?.call(invoice) : null,
                     child: Row(
                       children: [
                         Icon(Icons.edit, size: 6.sp),
@@ -99,9 +99,8 @@ class BuildInvoiceBody extends StatelessWidget {
                     ),
                   ),
                   PopupMenuItem(
-                    onTap: onDelete != null
-                        ? () => onDelete?.call('delete')
-                        : null,
+                    onTap:
+                        onDelete != null ? () => onDelete?.call(invoice) : null,
                     child: Row(
                       children: [
                         Icon(Icons.delete, size: 6.sp),
@@ -112,7 +111,7 @@ class BuildInvoiceBody extends StatelessWidget {
                   ),
                   PopupMenuItem(
                     onTap: onDuplicate != null
-                        ? () => onDuplicate?.call('duplicate')
+                        ? () => onDuplicate?.call(invoice)
                         : null,
                     child: Row(
                       children: [
@@ -124,7 +123,7 @@ class BuildInvoiceBody extends StatelessWidget {
                   ),
                   PopupMenuItem(
                     onTap: onExportAsPdf != null
-                        ? () => onExportAsPdf?.call('export as pdf')
+                        ? () => onExportAsPdf?.call(invoice)
                         : null,
                     child: Row(
                       children: [
@@ -136,7 +135,7 @@ class BuildInvoiceBody extends StatelessWidget {
                   ),
                   PopupMenuItem(
                     onTap: onDownloadPdf != null
-                        ? () => onDownloadPdf?.call('download pdf')
+                        ? () => onDownloadPdf?.call(invoice)
                         : null,
                     child: Row(
                       children: [

@@ -83,33 +83,60 @@ class InvoiceIndexController extends GetxController {
   }
 
   // view single invoice
-  void viewInvoice(String id) {
-    Get.toNamed(AppRoutes.INVOICE_SINGLE, arguments: id);
+  void viewInvoice(InvoiceModel item) {
+    Get.toNamed(AppRoutes.INVOICE_SINGLE, arguments: item);
   }
 
   // delete single invoice
-  void deleteInvoice(String id) {
-    print(id);
+  Future<void> deleteInvoice(InvoiceModel item) async {
+    await Get.showOverlay(
+      asyncFunction: () async {
+        await _invoiceServices.deleteInvoice(invoiceId: item.id!);
+        _invoices.removeWhere((el) => el.id == item.id);
+        _filteredInvoices.removeWhere((el) => el.id == item.id);
+        _calculateOutstanding();
+      },
+      loadingWidget: const BuildOverlay(),
+    );
+    update();
   }
 
   // edit single invoice
-  void editInvoice(String id) {
-    print(id);
+  void editInvoice(InvoiceModel item) {
+    print(item.id);
   }
 
   // duplicate single invoice
-  void duplicateInvoice(String id) {
-    print(id);
+  Future<void> duplicateInvoice(InvoiceModel item) async {
+    item.id = null;
+    item.status = 'draft';
+    item.createdAt = null;
+    item.updatedAt = null;
+
+    InvoiceModel? res = await Get.showOverlay(
+      asyncFunction: () async {
+        return await _invoiceServices.createInvoice(invoice: item);
+      },
+      loadingWidget: const BuildOverlay(),
+    );
+
+    if (res == null) return;
+
+    _invoices.add(res);
+    _filteredInvoices.add(res);
+    _calculateOutstanding();
+
+    update();
   }
 
   // export as pdf
-  void exportAsPdf(String id) {
-    print(id);
+  void exportAsPdf(InvoiceModel item) {
+    print(item.id);
   }
 
   // print invoice
-  void printInvoice(String id) {
-    print(id);
+  void printInvoice(InvoiceModel item) {
+    print(item.id);
   }
 
   // get clients
@@ -129,8 +156,16 @@ class InvoiceIndexController extends GetxController {
 
     if (res == null) return;
 
+    _invoices.assignAll(res);
+    _filteredInvoices.assignAll(res);
+
+    _calculateOutstanding();
+  }
+
+  // calculate outstanding and overdue
+  void _calculateOutstanding() {
     // get outstanding items
-    List<InvoiceModel>? outstandingItems = res.where((el) {
+    List<InvoiceModel>? outstandingItems = _invoices.where((el) {
       if (el.dueDate == null) return false;
       DateTime dueDate = DateTime.parse(el.dueDate!);
       return dueDate.isAfter(DateTime.now());
@@ -142,7 +177,7 @@ class InvoiceIndexController extends GetxController {
     }
 
     // get overdue items
-    List<InvoiceModel>? overdueItems = res.where((el) {
+    List<InvoiceModel>? overdueItems = _invoices.where((el) {
       if (el.dueDate == null) return false;
       DateTime dueDate = DateTime.parse(el.dueDate!);
       return dueDate.isBefore(DateTime.now());
@@ -153,8 +188,6 @@ class InvoiceIndexController extends GetxController {
       totalOverdue += InvoiceHelper.calculateInvoiceTotal(item);
     }
 
-    _invoices.assignAll(res);
-    _filteredInvoices.assignAll(res);
     _outstanding.value = totalOutstanding;
     _overdue.value = totalOverdue;
   }

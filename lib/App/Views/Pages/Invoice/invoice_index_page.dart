@@ -69,7 +69,7 @@ class InvoiceIndexPage extends GetView<InvoiceIndexController> {
                             controller.filteredInvoices[index];
 
                         return InkWell(
-                          onTap: () => controller.viewInvoice('view invoice'),
+                          onTap: () => controller.viewInvoice(invoice),
                           child: Container(
                             decoration: BoxDecoration(
                               color: Get.theme.colorScheme.primaryContainer,
