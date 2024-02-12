@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutterpp/App/Controllers/Invoice/invoice_single_controller.dart';
+import 'package:flutterpp/App/Models/client_model.dart';
 import 'package:flutterpp/App/Models/invoice_model.dart';
 import 'package:flutterpp/App/Models/team_model.dart';
 import 'package:flutterpp/App/Views/Global/build_appbar.dart';
 import 'package:flutterpp/App/Views/Global/build_loading_or_empty_layout.dart';
+import 'package:flutterpp/Helpers/invoice_helper.dart';
+import 'package:flutterpp/Helpers/text_helper.dart';
 import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
 
@@ -33,6 +36,7 @@ class InvoiceSinglePage extends GetView<InvoiceSingleController> {
                     child: BuildInvoicePrintableBody(
                       invoice: controller.invoice,
                       team: controller.team,
+                      client: controller.client,
                     ),
                   ),
                   const VerticalDivider(width: 0, thickness: 0.3),
@@ -54,10 +58,12 @@ class InvoiceSinglePage extends GetView<InvoiceSingleController> {
 class BuildInvoicePrintableBody extends StatelessWidget {
   final InvoiceModel invoice;
   final TeamModel team;
+  final ClientModel client;
   const BuildInvoicePrintableBody({
     super.key,
     required this.invoice,
     required this.team,
+    required this.client,
   });
 
   @override
@@ -70,12 +76,12 @@ class BuildInvoicePrintableBody extends StatelessWidget {
         child: SingleChildScrollView(
           child: Column(
             children: [
-              const BuildInvoiceOwnerSection(),
+              BuildInvoiceOwnerSection(team: team),
               Divider(thickness: 2, height: 4.sp, color: Colors.black12),
-              const BuildInvoiceBillToSection(),
-              const BuildInvoiceItemsSection(),
+              BuildInvoiceBillToSection(client: client, invoice: invoice),
+              BuildInvoiceItemsSection(invoice: invoice),
               Divider(thickness: 2, height: 4.sp, color: Colors.black12),
-              const BuildInvoiceFinalInfo(),
+              BuildInvoiceFinalInfo(invoice: invoice),
               SizedBox(height: 30.sp),
             ],
           ),
@@ -86,31 +92,37 @@ class BuildInvoicePrintableBody extends StatelessWidget {
 }
 
 class BuildInvoiceFinalInfo extends StatelessWidget {
+  final InvoiceModel invoice;
   const BuildInvoiceFinalInfo({
     super.key,
+    required this.invoice,
   });
 
   @override
   Widget build(BuildContext context) {
-    return const Row(
+    double subTotal = InvoiceHelper.calculateSubtotal(invoice);
+    double total = InvoiceHelper.calculateInvoiceTotal(invoice);
+
+    return Row(
       mainAxisAlignment: MainAxisAlignment.end,
       children: [
         Column(
           children: [
             BuildInvoiceFinalInfoItem(
               title: 'subtotal',
-              value: '\$1234',
-              discountValue: '10%',
-              taxValue: '\$123',
+              value: subTotal.toString().toPriceFormat(),
+              discountValue: invoice.discount.toString().toPriceFormat(),
+              taxValue: '${invoice.tax.toString().toPriceFormat()}%',
             ),
             BuildInvoiceFinalInfoItem(
               title: 'total',
-              value: '\$1234',
+              value: total.toString().toPriceFormat(),
               borderWidht: 2,
             ),
             BuildInvoiceFinalInfoItem(
               title: 'total due (USD)',
-              value: '10%',
+              value:
+                  '${total.toString().toPriceFormat()} ${invoice.currency?.toUpperCase() ?? ''}',
               hasBorder: false,
               isAmount: true,
             ),
@@ -144,7 +156,7 @@ class BuildInvoiceFinalInfoItem extends StatelessWidget {
         top: 5.sp,
         bottom: 5.sp,
       ),
-      width: context.width * 0.3,
+      width: context.width * 0.35,
       decoration: BoxDecoration(
         border: hasBorder == false
             ? null
@@ -287,8 +299,10 @@ class BuildInvoiceFinalInfoItem extends StatelessWidget {
 }
 
 class BuildInvoiceItemsSection extends StatelessWidget {
+  final InvoiceModel invoice;
   const BuildInvoiceItemsSection({
     super.key,
+    required this.invoice,
   });
 
   @override
@@ -296,21 +310,22 @@ class BuildInvoiceItemsSection extends StatelessWidget {
     return Column(
       children: [
         const BuildInvoiceItem(isHeader: true),
-        ListView.separated(
-          itemCount: 2,
-          shrinkWrap: true,
-          physics: const NeverScrollableScrollPhysics(),
-          separatorBuilder: (_, __) {
-            return Divider(
-              thickness: 0.5,
-              height: 0.5.sp,
-              color: Colors.black12,
-            );
-          },
-          itemBuilder: (_, int index) {
-            return const BuildInvoiceItem();
-          },
-        ),
+        if (invoice.items != null && invoice.items!.isNotEmpty)
+          ListView.separated(
+            itemCount: invoice.items!.length,
+            shrinkWrap: true,
+            physics: const NeverScrollableScrollPhysics(),
+            separatorBuilder: (_, __) {
+              return Divider(
+                thickness: 0.5,
+                height: 0.5.sp,
+                color: Colors.black12,
+              );
+            },
+            itemBuilder: (_, int index) {
+              return BuildInvoiceItem(item: invoice.items![index]);
+            },
+          ),
       ],
     );
   }
@@ -318,9 +333,11 @@ class BuildInvoiceItemsSection extends StatelessWidget {
 
 class BuildInvoiceItem extends StatelessWidget {
   final bool? isHeader;
+  final InvoiceItem? item;
   const BuildInvoiceItem({
     super.key,
     this.isHeader = false,
+    this.item,
   });
 
   @override
@@ -336,9 +353,9 @@ class BuildInvoiceItem extends StatelessWidget {
           Expanded(
             flex: 1,
             child: Text(
-              'items'.capitalize!,
+              isHeader == true ? 'items'.capitalize! : item?.title ?? '',
               style: TextStyle(
-                fontSize: 6.sp,
+                fontSize: isHeader == true ? 6.sp : 4.5.sp,
                 color: isHeader == true ? Colors.white : Colors.black,
                 fontWeight: FontWeight.bold,
               ),
@@ -350,9 +367,11 @@ class BuildInvoiceItem extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 Text(
-                  'quantity'.capitalize!,
+                  isHeader == true
+                      ? 'qty'.capitalize!
+                      : item?.quantity.toString() ?? '',
                   style: TextStyle(
-                    fontSize: 6.sp,
+                    fontSize: isHeader == true ? 6.sp : 4.5.sp,
                     color: isHeader == true ? Colors.white : Colors.black,
                     fontWeight: isHeader == true ? FontWeight.bold : null,
                   ),
@@ -366,9 +385,11 @@ class BuildInvoiceItem extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 Text(
-                  'price'.capitalize!,
+                  isHeader == true
+                      ? 'price'.capitalize!
+                      : item?.price.toString() ?? '',
                   style: TextStyle(
-                    fontSize: 6.sp,
+                    fontSize: isHeader == true ? 6.sp : 4.5.sp,
                     color: isHeader == true ? Colors.white : Colors.black,
                     fontWeight: isHeader == true ? FontWeight.bold : null,
                   ),
@@ -382,9 +403,13 @@ class BuildInvoiceItem extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 Text(
-                  'total'.capitalize!,
+                  isHeader == true
+                      ? 'total'.capitalize!
+                      : ((item?.price ?? 0) * (item?.quantity ?? 0))
+                          .toString()
+                          .toPriceFormat(),
                   style: TextStyle(
-                    fontSize: 6.sp,
+                    fontSize: isHeader == true ? 6.sp : 4.5.sp,
                     color: isHeader == true ? Colors.white : Colors.black,
                     fontWeight: isHeader == true ? FontWeight.bold : null,
                   ),
@@ -399,8 +424,13 @@ class BuildInvoiceItem extends StatelessWidget {
 }
 
 class BuildInvoiceBillToSection extends StatelessWidget {
+  final ClientModel client;
+  final InvoiceModel invoice;
+
   const BuildInvoiceBillToSection({
     super.key,
+    required this.client,
+    required this.invoice,
   });
 
   @override
@@ -423,16 +453,16 @@ class BuildInvoiceBillToSection extends StatelessWidget {
                   ),
                 ),
                 SizedBox(height: 2.sp),
-                const BuildInvoiceCompanyInfo(
-                  companyName: 'Apple',
-                  ownerName: 'Steve Jobs',
-                  address: '1234 Main Street',
-                  city: 'Los Angeles',
-                  state: 'CA',
-                  zip: '90001',
-                  country: 'United States',
-                  phone: '123-456-7890',
-                  email: 'steve@apple.com',
+                BuildInvoiceCompanyInfo(
+                  companyName: client.name,
+                  ownerName: client.contactName,
+                  address: client.address,
+                  city: client.city,
+                  state: client.state,
+                  zip: client.zip.toString(),
+                  country: client.country,
+                  phone: client.phone,
+                  email: client.email,
                 ),
               ],
             ),
@@ -441,28 +471,30 @@ class BuildInvoiceBillToSection extends StatelessWidget {
             flex: 3,
             child: Column(
               children: [
-                const BuildInvoiceHighlightsItem(
+                BuildInvoiceHighlightsItem(
                   title: 'invoice number:',
-                  value: '1234',
+                  value: invoice.number.toString(),
                 ),
                 SizedBox(height: 2.sp),
-                const BuildInvoiceHighlightsItem(
+                BuildInvoiceHighlightsItem(
                   title: 'invoice date:',
-                  value: '12/12/2021',
+                  value: InvoiceHelper.fromDateToYMD(invoice.createdAt),
                 ),
                 SizedBox(height: 2.sp),
-                const BuildInvoiceHighlightsItem(
+                BuildInvoiceHighlightsItem(
                   title: 'due date:',
-                  value: '12/12/2021',
+                  value: invoice.dueDate,
                 ),
                 SizedBox(height: 2.sp),
                 Container(
                   padding: EdgeInsets.all(1.0.sp),
                   color: Colors.black12,
-                  child: const BuildInvoiceHighlightsItem(
+                  child: BuildInvoiceHighlightsItem(
                     isAmount: true,
-                    value: '\$1234',
                     title: 'amount due (USD):',
+                    value: InvoiceHelper.calculateInvoiceTotal(
+                      invoice,
+                    ).toString(),
                   ),
                 ),
               ],
@@ -538,8 +570,10 @@ class BuildInvoiceHighlightsItem extends StatelessWidget {
 }
 
 class BuildInvoiceOwnerSection extends StatelessWidget {
+  final TeamModel team;
   const BuildInvoiceOwnerSection({
     super.key,
+    required this.team,
   });
 
   @override
@@ -559,17 +593,17 @@ class BuildInvoiceOwnerSection extends StatelessWidget {
             ),
           ),
           SizedBox(height: 2.sp),
-          const BuildInvoiceCompanyInfo(
+          BuildInvoiceCompanyInfo(
             crossAxisAlignment: CrossAxisAlignment.end,
-            companyName: 'tesla',
-            ownerName: 'elon musk',
-            address: '1234 Main Street',
-            city: 'Los Angeles',
-            state: 'CA',
-            zip: '90001',
-            country: 'United States',
-            phone: '123-456-7890',
-            email: 'elon@tesla.com',
+            companyName: team.name,
+            ownerName: team.ownerName,
+            address: team.address,
+            city: team.city,
+            state: team.state,
+            zip: team.zip.toString(),
+            country: team.country,
+            phone: team.phone,
+            email: team.email,
           ),
         ],
       ),

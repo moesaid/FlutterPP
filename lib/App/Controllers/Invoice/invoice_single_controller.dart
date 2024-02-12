@@ -1,10 +1,13 @@
+import 'package:flutterpp/App/Models/client_model.dart';
 import 'package:flutterpp/App/Models/invoice_model.dart';
 import 'package:flutterpp/App/Models/team_model.dart';
+import 'package:flutterpp/App/Services/Client/client_services.dart';
 import 'package:flutterpp/App/Services/Team/team_services.dart';
 import 'package:get/get.dart';
 
 class InvoiceSingleController extends GetxController {
   final TeamServices _teamServices = TeamServices();
+  final ClientServices _clientServices = ClientServices();
 
   final _isLoading = true.obs;
   bool get isLoading => _isLoading.value;
@@ -14,6 +17,9 @@ class InvoiceSingleController extends GetxController {
 
   final _team = TeamModel().obs;
   TeamModel get team => _team.value;
+
+  final _client = ClientModel().obs;
+  ClientModel get client => _client.value;
 
   @override
   Future<void> onInit() async {
@@ -26,6 +32,7 @@ class InvoiceSingleController extends GetxController {
   Future<void> _fetchApi() async {
     await _getInvoice();
     await _getTeam();
+    await _getClient();
     updateLoading(false);
   }
 
@@ -37,6 +44,13 @@ class InvoiceSingleController extends GetxController {
   // get team
   Future<void> _getTeam() async {
     _team.value = (await _teamServices.getTeamForAuthUser())!;
+  }
+
+  // get client
+  Future<void> _getClient() async {
+    if (_invoice.value.clientId == null) return;
+    _client.value = (await _clientServices.getClientById(
+        clientId: _invoice.value.clientId!))!;
   }
 
   // update loading

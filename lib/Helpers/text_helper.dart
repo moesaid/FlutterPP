@@ -1,6 +1,14 @@
 import 'package:flutter/material.dart';
 
 extension TextHelpers on String {
+  // price format
+  String toPriceFormat() {
+    return replaceAllMapped(RegExp(r'(\d{1,3})(?=(\d{3})+(?!\d))'),
+        (Match match) {
+      return '${match[1]},';
+    });
+  }
+
   // text length limit
   String limitLength(int maxLength) {
     if (length <= maxLength) {
