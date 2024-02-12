@@ -58,10 +58,12 @@ class ClientServices {
   }
 
   // delete client
-  Future<void> deleteClient({required String clientId}) async {
-    return _callPipeline.futurePipeline(
+  Future<bool> deleteClient({required String clientId}) async {
+    bool? data = await _callPipeline.futurePipeline(
       future: () => _provider.deleteClient(clientId: clientId),
       name: 'deleteClient',
     );
+
+    return data ?? false;
   }
 }

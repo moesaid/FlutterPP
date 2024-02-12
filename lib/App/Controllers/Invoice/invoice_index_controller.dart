@@ -1,4 +1,3 @@
-import 'package:flutterpp/App/Providers/Network/Invoice/invoice_provider.dart';
 import 'package:flutterpp/Routes/app_pages.dart';
 import 'package:get/get.dart';
 
@@ -26,9 +25,9 @@ class InvoiceIndexController extends GetxController {
 
   // on filter change
   Future<void> onFilterChange(String value) async {
-    var data = await InvoiceProvider().getInvoicesByTeamId();
+    // var data = await InvoiceProvider().getInvoicesByTeamId();
 
-    print(data);
+    // print(data);
 
     _filter.value = value;
     update();

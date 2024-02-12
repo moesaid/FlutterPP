@@ -89,7 +89,18 @@ class ClientProvider {
   }
 
   // delete client
-  Future<void> deleteClient({required String clientId}) async {
-    await supabase.from('clients').delete().eq('id', clientId);
+  Future<bool> deleteClient({required String clientId}) async {
+    List<Map> data = await supabase
+        .from('clients')
+        .delete()
+        .eq(
+          'id',
+          clientId,
+        )
+        .select();
+
+    print(data);
+
+    return data.isNotEmpty;
   }
 }
