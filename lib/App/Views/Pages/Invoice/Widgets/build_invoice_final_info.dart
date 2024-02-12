@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutterpp/App/Models/invoice_model.dart';
-import 'package:flutterpp/App/Views/Pages/Invoice/invoice_single_page.dart';
+import 'package:flutterpp/App/Views/Pages/Invoice/Widgets/build_invoice_final_info_item.dart';
 import 'package:flutterpp/Helpers/invoice_helper.dart';
 import 'package:flutterpp/Helpers/text_helper.dart';
 
