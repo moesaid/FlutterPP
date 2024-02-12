@@ -17,8 +17,21 @@ class InvoiceIndexPage extends GetView<InvoiceIndexController> {
           body: SafeArea(
             child: Column(
               children: [
-                const BuildInvoiceAnalyticsSection(),
-                const BuildInvoiceFilterSection(),
+                BuildInvoiceAnalyticsSection(
+                  clients: controller.clients,
+                  invoices: controller.invoices,
+                  outstanding: controller.outstanding,
+                  overdue: controller.overdue,
+                ),
+                BuildInvoiceFilterSection(
+                  filter: controller.filter,
+                  length: controller.length,
+                  onCreate: () {
+                    print('create');
+                  },
+                  onLengthChanged: controller.onLengthChange,
+                  onFilterChanged: controller.onFilterChange,
+                ),
                 Expanded(
                   child: ListView.separated(
                     padding: EdgeInsets.all(10.sp),
@@ -33,7 +46,14 @@ class InvoiceIndexPage extends GetView<InvoiceIndexController> {
                           borderRadius: BorderRadius.circular(10),
                         ),
                         padding: EdgeInsets.all(5.sp),
-                        child: const BuildInvoiceBody(),
+                        child: BuildInvoiceBody(
+                          onView: controller.viewInvoice,
+                          onEdit: controller.editInvoice,
+                          onDelete: controller.deleteInvoice,
+                          onDuplicate: controller.duplicateInvoice,
+                          onExportAsPdf: controller.exportAsPdf,
+                          onDownloadPdf: controller.exportAsPdf,
+                        ),
                       );
                     },
                   ),
@@ -49,6 +69,12 @@ class InvoiceIndexPage extends GetView<InvoiceIndexController> {
 
 class BuildInvoiceBody extends StatelessWidget {
   final String? status, date, clientName, amount, invoiceNumber, currency;
+  final void Function(String)? onView,
+      onEdit,
+      onDelete,
+      onDuplicate,
+      onExportAsPdf,
+      onDownloadPdf;
 
   const BuildInvoiceBody({
     super.key,
@@ -58,6 +84,12 @@ class BuildInvoiceBody extends StatelessWidget {
     this.amount = 'amount due',
     this.invoiceNumber = 'invoice number',
     this.currency = 'currency',
+    this.onView,
+    this.onEdit,
+    this.onDelete,
+    this.onDuplicate,
+    this.onExportAsPdf,
+    this.onDownloadPdf,
   });
 
   @override
@@ -75,6 +107,74 @@ class BuildInvoiceBody extends StatelessWidget {
         Text('${amount?.capitalize}  ${currency?.capitalize}'),
         const Spacer(),
         BuildCustomDropdown(
+          items: [
+            PopupMenuItem(
+              onTap: onView != null ? () => onView?.call('view') : null,
+              child: Row(
+                children: [
+                  Icon(Icons.remove_red_eye, size: 6.sp),
+                  SizedBox(width: 2.sp),
+                  Text('view'.capitalize!),
+                ],
+              ),
+            ),
+            PopupMenuItem(
+              onTap: onEdit != null ? () => onEdit?.call('edit') : null,
+              child: Row(
+                children: [
+                  Icon(Icons.edit, size: 6.sp),
+                  SizedBox(width: 2.sp),
+                  Text('edit'.capitalize!),
+                ],
+              ),
+            ),
+            PopupMenuItem(
+              onTap: onDelete != null ? () => onDelete?.call('delete') : null,
+              child: Row(
+                children: [
+                  Icon(Icons.delete, size: 6.sp),
+                  SizedBox(width: 2.sp),
+                  Text('delete'.capitalize!),
+                ],
+              ),
+            ),
+            PopupMenuItem(
+              onTap: onDuplicate != null
+                  ? () => onDuplicate?.call('duplicate')
+                  : null,
+              child: Row(
+                children: [
+                  Icon(Icons.copy, size: 6.sp),
+                  SizedBox(width: 2.sp),
+                  Text('duplicate'.capitalize!),
+                ],
+              ),
+            ),
+            PopupMenuItem(
+              onTap: onExportAsPdf != null
+                  ? () => onExportAsPdf?.call('export as pdf')
+                  : null,
+              child: Row(
+                children: [
+                  Icon(Icons.picture_as_pdf, size: 6.sp),
+                  SizedBox(width: 2.sp),
+                  Text('export as pdf'.capitalize!),
+                ],
+              ),
+            ),
+            PopupMenuItem(
+              onTap: onDownloadPdf != null
+                  ? () => onDownloadPdf?.call('download pdf')
+                  : null,
+              child: Row(
+                children: [
+                  Icon(Icons.download, size: 6.sp),
+                  SizedBox(width: 2.sp),
+                  Text('download pdf'.capitalize!),
+                ],
+              ),
+            ),
+          ],
           child: Row(
             children: [
               Text('actions'.capitalize!),
@@ -88,8 +188,19 @@ class BuildInvoiceBody extends StatelessWidget {
 }
 
 class BuildInvoiceFilterSection extends StatelessWidget {
+  final Function(int)? onLengthChanged;
+  final VoidCallback? onCreate;
+  final Function(String)? onFilterChanged;
+  final String filter;
+  final int length;
+
   const BuildInvoiceFilterSection({
     super.key,
+    this.onLengthChanged,
+    this.onCreate,
+    this.onFilterChanged,
+    required this.filter,
+    required this.length,
   });
 
   @override
@@ -102,25 +213,42 @@ class BuildInvoiceFilterSection extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             FilledButton(
-              onPressed: () {},
+              onPressed: onFilterChanged != null
+                  ? () => onFilterChanged?.call('draft')
+                  : null,
+              style: ButtonStyle(
+                backgroundColor: MaterialStateProperty.all(
+                  filter == 'draft'
+                      ? Get.theme.colorScheme.primary
+                      : Get.theme.colorScheme.primaryContainer,
+                ),
+              ),
               child: Text('draft'.capitalize!),
             ),
             SizedBox(width: 3.sp),
             FilledButton(
-              onPressed: () {},
+              onPressed: onFilterChanged != null
+                  ? () => onFilterChanged?.call('unpaid')
+                  : null,
               style: ButtonStyle(
                 backgroundColor: MaterialStateProperty.all(
-                  Get.theme.colorScheme.primaryContainer,
+                  filter == 'unpaid'
+                      ? Get.theme.colorScheme.primary
+                      : Get.theme.colorScheme.primaryContainer,
                 ),
               ),
               child: Text('unpaid'.capitalize!),
             ),
             SizedBox(width: 3.sp),
             FilledButton(
-              onPressed: () {},
+              onPressed: onFilterChanged != null
+                  ? () => onFilterChanged?.call('paid')
+                  : null,
               style: ButtonStyle(
                 backgroundColor: MaterialStateProperty.all(
-                  Get.theme.colorScheme.primaryContainer,
+                  filter == 'paid'
+                      ? Get.theme.colorScheme.primary
+                      : Get.theme.colorScheme.primaryContainer,
                 ),
               ),
               child: Text('paid'.capitalize!),
@@ -130,7 +258,7 @@ class BuildInvoiceFilterSection extends StatelessWidget {
         Positioned(
           left: 10.sp,
           child: FilledButton(
-            onPressed: () {},
+            onPressed: onCreate,
             style: ButtonStyle(
               backgroundColor: MaterialStateProperty.all(
                 Get.theme.colorScheme.primaryContainer,
@@ -142,6 +270,32 @@ class BuildInvoiceFilterSection extends StatelessWidget {
         Positioned(
           right: 10.sp,
           child: BuildCustomDropdown(
+            items: [
+              PopupMenuItem(
+                onTap: onLengthChanged != null
+                    ? () => onLengthChanged?.call(10)
+                    : null,
+                child: const Text('10'),
+              ),
+              PopupMenuItem(
+                onTap: onLengthChanged != null
+                    ? () => onLengthChanged?.call(40)
+                    : null,
+                child: const Text('40'),
+              ),
+              PopupMenuItem(
+                onTap: onLengthChanged != null
+                    ? () => onLengthChanged?.call(100)
+                    : null,
+                child: const Text('100'),
+              ),
+              PopupMenuItem(
+                onTap: onLengthChanged != null
+                    ? () => onLengthChanged?.call(1000)
+                    : null,
+                child: const Text('all'),
+              ),
+            ],
             child: Container(
               padding: EdgeInsets.symmetric(
                 horizontal: 3.sp,
@@ -153,7 +307,7 @@ class BuildInvoiceFilterSection extends StatelessWidget {
               ),
               child: Row(
                 children: [
-                  Text('10'.capitalize!),
+                  Text(length.toString().capitalize!),
                   Icon(Icons.arrow_drop_down, size: 6.sp),
                 ],
               ),
@@ -166,8 +320,13 @@ class BuildInvoiceFilterSection extends StatelessWidget {
 }
 
 class BuildInvoiceAnalyticsSection extends StatelessWidget {
+  final int? clients, invoices, outstanding, overdue;
   const BuildInvoiceAnalyticsSection({
     super.key,
+    this.clients,
+    this.invoices,
+    this.outstanding,
+    this.overdue,
   });
 
   @override
@@ -176,34 +335,34 @@ class BuildInvoiceAnalyticsSection extends StatelessWidget {
       padding: EdgeInsets.all(8.0.sp),
       child: Row(
         children: [
-          const Expanded(
+          Expanded(
             child: BuildInvoiceAnalyticsItem(
               title: 'clients',
-              value: '10',
+              value: clients?.toString() ?? '0',
               unit: '',
             ),
           ),
           SizedBox(width: 6.sp),
-          const Expanded(
+          Expanded(
             child: BuildInvoiceAnalyticsItem(
               title: 'invoices',
-              value: '10',
+              value: invoices?.toString() ?? '0',
               unit: '',
             ),
           ),
           SizedBox(width: 6.sp),
-          const Expanded(
+          Expanded(
             child: BuildInvoiceAnalyticsItem(
               title: 'outstanding',
-              value: '10',
+              value: outstanding?.toString() ?? '0',
               unit: 'USD',
             ),
           ),
           SizedBox(width: 6.sp),
-          const Expanded(
+          Expanded(
             child: BuildInvoiceAnalyticsItem(
               title: 'overdue',
-              value: '10',
+              value: overdue?.toString() ?? '0',
               unit: 'USD',
             ),
           ),
