@@ -1,3 +1,4 @@
+import 'package:flutterpp/Routes/app_pages.dart';
 import 'package:get/get.dart';
 
 class InvoiceIndexController extends GetxController {
@@ -36,7 +37,7 @@ class InvoiceIndexController extends GetxController {
 
   // view single invoice
   void viewInvoice(String id) {
-    print(id);
+    Get.toNamed(AppRoutes.INVOICE_SINGLE, arguments: id);
   }
 
   // delete single invoice
