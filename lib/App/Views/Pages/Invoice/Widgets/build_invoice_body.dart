@@ -12,7 +12,7 @@ class BuildInvoiceBody extends StatelessWidget {
       onDelete,
       onDuplicate,
       onExportAsPdf,
-      onDownloadPdf;
+      printInvoice;
 
   const BuildInvoiceBody({
     super.key,
@@ -21,7 +21,7 @@ class BuildInvoiceBody extends StatelessWidget {
     this.onDelete,
     this.onDuplicate,
     this.onExportAsPdf,
-    this.onDownloadPdf,
+    this.printInvoice,
     required this.invoice,
   });
 
@@ -134,14 +134,14 @@ class BuildInvoiceBody extends StatelessWidget {
                     ),
                   ),
                   PopupMenuItem(
-                    onTap: onDownloadPdf != null
-                        ? () => onDownloadPdf?.call(invoice)
+                    onTap: printInvoice != null
+                        ? () => printInvoice?.call(invoice)
                         : null,
                     child: Row(
                       children: [
-                        Icon(Icons.download, size: 6.sp),
+                        Icon(Icons.print, size: 6.sp),
                         SizedBox(width: 2.sp),
-                        Text('download pdf'.capitalize!),
+                        Text('print invoice'.capitalize!),
                       ],
                     ),
                   ),

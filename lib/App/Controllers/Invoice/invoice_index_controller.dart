@@ -92,9 +92,7 @@ class InvoiceIndexController extends GetxController {
     await Get.showOverlay(
       asyncFunction: () async {
         await _invoiceServices.deleteInvoice(invoiceId: item.id!);
-        _invoices.removeWhere((el) => el.id == item.id);
-        _filteredInvoices.removeWhere((el) => el.id == item.id);
-        _calculateOutstanding();
+        await _getInvoices();
       },
       loadingWidget: const BuildOverlay(),
     );
@@ -113,30 +111,31 @@ class InvoiceIndexController extends GetxController {
     item.createdAt = null;
     item.updatedAt = null;
 
-    InvoiceModel? res = await Get.showOverlay(
+    await Get.showOverlay(
       asyncFunction: () async {
-        return await _invoiceServices.createInvoice(invoice: item);
+        InvoiceModel? res = await _invoiceServices.createInvoice(invoice: item);
+        if (res == null) return;
+        await _getInvoices();
       },
       loadingWidget: const BuildOverlay(),
     );
-
-    if (res == null) return;
-
-    _invoices.add(res);
-    _filteredInvoices.add(res);
-    _calculateOutstanding();
 
     update();
   }
 
   // export as pdf
-  void exportAsPdf(InvoiceModel item) {
-    print(item.id);
+  Future<void> exportAsPdf(InvoiceModel item) async {
+    await _invoiceServices.downloadOrPrintInvoice(
+      invoice: item,
+    );
   }
 
   // print invoice
-  void printInvoice(InvoiceModel item) {
-    print(item.id);
+  Future<void> printInvoice(InvoiceModel item) async {
+    await _invoiceServices.downloadOrPrintInvoice(
+      invoice: item,
+      isPrint: true,
+    );
   }
 
   // get clients

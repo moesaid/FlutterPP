@@ -82,7 +82,7 @@ class InvoiceIndexPage extends GetView<InvoiceIndexController> {
                               onDelete: controller.deleteInvoice,
                               onDuplicate: controller.duplicateInvoice,
                               onExportAsPdf: controller.exportAsPdf,
-                              onDownloadPdf: controller.exportAsPdf,
+                              printInvoice: controller.printInvoice,
                               invoice: invoice,
                             ),
                           ),

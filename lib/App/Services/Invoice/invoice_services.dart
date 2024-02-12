@@ -8,10 +8,12 @@ import 'package:flutterpp/App/Providers/Network/Invoice/invoice_provider.dart';
 import 'package:flutterpp/App/Services/Client/client_services.dart';
 import 'package:flutterpp/App/Services/Global/call_pipeline.dart';
 import 'package:flutterpp/App/Services/Team/team_services.dart';
+import 'package:flutterpp/App/Views/Global/build_overlay.dart';
 import 'package:flutterpp/App/Views/Pages/Invoice/Widgets/build_invoice_printable_body.dart';
 import 'package:get/get.dart';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
+import 'package:printing/printing.dart';
 import 'package:screenshot/screenshot.dart';
 
 class InvoiceServices {
@@ -84,25 +86,31 @@ class InvoiceServices {
   }
 
   // download invoice
-  Future<void> downloadInvoice({
+  Future<void> downloadOrPrintInvoice({
     required InvoiceModel invoice,
     TeamModel? team,
     ClientModel? client,
+    bool? isPrint,
   }) async {
-    print('❌download invoice');
-
     TeamModel? localTeam = team;
     ClientModel? localClient = client;
 
-    _callPipeline.futurePipeline(
+    await _callPipeline.futurePipeline(
       future: () async {
-        if (localTeam?.id == null) {
-          localTeam = await _teamServices.getTeamForAuthUser();
-        }
+        if (localTeam?.id == null || localClient?.id == null) {
+          await Get.showOverlay(
+            asyncFunction: () async {
+              if (localTeam?.id == null) {
+                localTeam = await _teamServices.getTeamForAuthUser();
+              }
 
-        if (localClient?.id == null) {
-          localClient = await _clientServices.getClientById(
-            clientId: invoice.clientId!,
+              if (localClient?.id == null) {
+                localClient = await _clientServices.getClientById(
+                  clientId: invoice.clientId!,
+                );
+              }
+            },
+            loadingWidget: const BuildOverlay(),
           );
         }
 
@@ -130,18 +138,22 @@ class InvoiceServices {
             margin: pw.EdgeInsets.zero,
             build: (pw.Context context) {
               return pw.Container(
-                // width: double.infinity,
-                // height: 20,
-                // color: const PdfColor.fromInt(0xff000000),
                 child: pwImage,
               );
             },
           ),
         );
 
-        // save pdf
+        if (isPrint == true) {
+          await Printing.layoutPdf(
+            onLayout: (format) async => pdf.save(),
+          );
+          return;
+        }
+
         await _fileManegerProvider.saveFileWithoutLocation(
-          fileName: 'flutterPP_invoice_${invoice.number}.pdf',
+          fileName:
+              'FlutterPP_${localTeam?.name}_invoice_${invoice.number}.pdf',
           fileExtension: 'pdf',
           bytes: await pdf.save(),
         );

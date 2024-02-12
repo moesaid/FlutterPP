@@ -63,12 +63,17 @@ class InvoiceSingleController extends GetxController {
 
   // print
   onPrint() {
-    print('print');
+    _invoiceServices.downloadOrPrintInvoice(
+      invoice: invoice,
+      team: team,
+      client: client,
+      isPrint: true,
+    );
   }
 
   // download
   onDownload() {
-    _invoiceServices.downloadInvoice(
+    _invoiceServices.downloadOrPrintInvoice(
       invoice: invoice,
       team: team,
       client: client,
