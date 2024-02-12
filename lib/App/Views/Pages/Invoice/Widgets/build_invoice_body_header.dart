@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
 
 class BuildInvoiceBodyHeader extends StatelessWidget {
@@ -10,27 +11,54 @@ class BuildInvoiceBodyHeader extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        const Expanded(
+        Expanded(
           child: Row(
-            children: [Text('Status')],
+            children: [
+              Text(
+                'Status',
+                style: TextStyle(
+                  color: Get.theme.colorScheme.onBackground.withOpacity(0.5),
+                ),
+              )
+            ],
           ),
         ),
-        const Expanded(
+        Expanded(
           flex: 2,
-          child: Text('Due Date'),
+          child: Text(
+            'Due Date',
+            style: TextStyle(
+              color: Get.theme.colorScheme.onBackground.withOpacity(0.5),
+            ),
+          ),
         ),
-        const Expanded(
-          child: Text('#'),
+        Expanded(
+          child: Text(
+            '#',
+            style: TextStyle(
+              color: Get.theme.colorScheme.onBackground.withOpacity(0.5),
+            ),
+          ),
         ),
-        const Expanded(
+        Expanded(
           flex: 2,
-          child: Text('Client'),
+          child: Text(
+            'Client',
+            style: TextStyle(
+              color: Get.theme.colorScheme.onBackground.withOpacity(0.5),
+            ),
+          ),
         ),
-        const Expanded(
+        Expanded(
           child: Row(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              Text('Amount'),
+              Text(
+                'Amount',
+                style: TextStyle(
+                  color: Get.theme.colorScheme.onBackground.withOpacity(0.5),
+                ),
+              ),
             ],
           ),
         ),
@@ -41,7 +69,12 @@ class BuildInvoiceBodyHeader extends StatelessWidget {
             children: [
               Padding(
                 padding: EdgeInsets.only(right: 6.sp),
-                child: const Text('Actions'),
+                child: Text(
+                  'Actions',
+                  style: TextStyle(
+                    color: Get.theme.colorScheme.onBackground.withOpacity(0.5),
+                  ),
+                ),
               ),
             ],
           ),

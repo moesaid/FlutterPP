@@ -3,6 +3,7 @@ import 'package:flutterpp/App/Models/invoice_model.dart';
 import 'package:flutterpp/App/Services/Client/client_services.dart';
 import 'package:flutterpp/App/Services/Invoice/invoice_services.dart';
 import 'package:flutterpp/App/Views/Global/build_overlay.dart';
+import 'package:flutterpp/App/Views/Global/build_snackbar.dart';
 import 'package:flutterpp/Helpers/invoice_helper.dart';
 import 'package:flutterpp/Routes/app_pages.dart';
 import 'package:get/get.dart';
@@ -156,5 +157,19 @@ class InvoiceIndexController extends GetxController {
     _filteredInvoices.assignAll(res);
     _outstanding.value = totalOutstanding;
     _overdue.value = totalOverdue;
+  }
+
+  // create invoice
+  void createInvoice() {
+    if (_clients.isEmpty) {
+      BuildSnackBar(
+        title: 'Oops!',
+        message: 'Please create a client first',
+      ).error();
+
+      return;
+    }
+
+    print('create invoice');
   }
 }

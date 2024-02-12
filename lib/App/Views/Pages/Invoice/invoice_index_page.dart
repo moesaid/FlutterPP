@@ -31,9 +31,7 @@ class InvoiceIndexPage extends GetView<InvoiceIndexController> {
                 BuildInvoiceFilterSection(
                   filter: controller.filter,
                   length: controller.length,
-                  onCreate: () {
-                    print('create');
-                  },
+                  onCreate: controller.createInvoice,
                   onLengthChanged: controller.onLengthChange,
                   onFilterChanged: controller.onFilterChange,
                 ),
