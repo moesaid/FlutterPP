@@ -40,19 +40,22 @@ class InvoiceIndexPage extends GetView<InvoiceIndexController> {
                       return SizedBox(height: 5.sp);
                     },
                     itemBuilder: (_, int index) {
-                      return Container(
-                        decoration: BoxDecoration(
-                          color: Get.theme.colorScheme.primaryContainer,
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        padding: EdgeInsets.all(5.sp),
-                        child: BuildInvoiceBody(
-                          onView: controller.viewInvoice,
-                          onEdit: controller.editInvoice,
-                          onDelete: controller.deleteInvoice,
-                          onDuplicate: controller.duplicateInvoice,
-                          onExportAsPdf: controller.exportAsPdf,
-                          onDownloadPdf: controller.exportAsPdf,
+                      return InkWell(
+                        onTap: () => controller.viewInvoice('view invoice'),
+                        child: Container(
+                          decoration: BoxDecoration(
+                            color: Get.theme.colorScheme.primaryContainer,
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          padding: EdgeInsets.all(5.sp),
+                          child: BuildInvoiceBody(
+                            onView: controller.viewInvoice,
+                            onEdit: controller.editInvoice,
+                            onDelete: controller.deleteInvoice,
+                            onDuplicate: controller.duplicateInvoice,
+                            onExportAsPdf: controller.exportAsPdf,
+                            onDownloadPdf: controller.exportAsPdf,
+                          ),
                         ),
                       );
                     },
