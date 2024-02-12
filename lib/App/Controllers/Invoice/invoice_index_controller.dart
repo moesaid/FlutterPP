@@ -30,7 +30,7 @@ class InvoiceIndexController extends GetxController {
   final _overdue = 0.0.obs;
   double get overdue => _overdue.value;
 
-  final _filter = 'draft'.obs;
+  final _filter = 'all'.obs;
   String get filter => _filter.value;
 
   final _length = 10.obs;

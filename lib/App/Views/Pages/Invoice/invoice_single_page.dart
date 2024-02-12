@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutterpp/App/Controllers/Invoice/invoice_single_controller.dart';
+import 'package:flutterpp/App/Models/invoice_model.dart';
+import 'package:flutterpp/App/Models/team_model.dart';
 import 'package:flutterpp/App/Views/Global/build_appbar.dart';
+import 'package:flutterpp/App/Views/Global/build_loading_or_empty_layout.dart';
 import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
 
@@ -19,20 +22,27 @@ class InvoiceSinglePage extends GetView<InvoiceSingleController> {
             hasBackButton: true,
           ),
           body: SafeArea(
-            child: Flex(
-              direction: Axis.horizontal,
-              children: [
-                const Flexible(
-                  flex: 3,
-                  child: BuildInvoiceBody(),
-                ),
-                const VerticalDivider(width: 0, thickness: 0.3),
-                BuildInvoiceSingleSidebar(
-                  onDownload: controller.onDownload,
-                  onEdit: controller.onEdit,
-                  onPrint: controller.onPrint,
-                ),
-              ],
+            child: BuildLoadingOrEmptyLayout(
+              isLoading: controller.isLoading,
+              isEmpty: controller.invoice.id == null,
+              child: Flex(
+                direction: Axis.horizontal,
+                children: [
+                  Flexible(
+                    flex: 3,
+                    child: BuildInvoicePrintableBody(
+                      invoice: controller.invoice,
+                      team: controller.team,
+                    ),
+                  ),
+                  const VerticalDivider(width: 0, thickness: 0.3),
+                  BuildInvoiceSingleSidebar(
+                    onDownload: controller.onDownload,
+                    onEdit: controller.onEdit,
+                    onPrint: controller.onPrint,
+                  ),
+                ],
+              ),
             ),
           ),
         );
@@ -41,9 +51,13 @@ class InvoiceSinglePage extends GetView<InvoiceSingleController> {
   }
 }
 
-class BuildInvoiceBody extends StatelessWidget {
-  const BuildInvoiceBody({
+class BuildInvoicePrintableBody extends StatelessWidget {
+  final InvoiceModel invoice;
+  final TeamModel team;
+  const BuildInvoicePrintableBody({
     super.key,
+    required this.invoice,
+    required this.team,
   });
 
   @override
