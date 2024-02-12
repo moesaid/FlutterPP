@@ -24,7 +24,7 @@ class InvoiceIndexController extends GetxController {
   int get length => _length.value;
 
   // on filter change
-  void onFilterChange(String value) {
+  Future<void> onFilterChange(String value) async {
     _filter.value = value;
     update();
   }
