@@ -9,11 +9,13 @@ class InvoiceProvider {
   // get invoices by team id
   Future<List<InvoiceModel>?> getInvoicesByTeamId({
     required String teamId,
+    int? limit,
   }) async {
     List<Map> data = await supabase
         .from('invoices')
         .select('*')
         .eq('team_id', teamId)
+        .limit(limit ?? 10)
         .select();
 
     if (data.isEmpty) return [];
@@ -73,6 +75,9 @@ class InvoiceProvider {
 
     // remove created_at
     dataItem.remove('created_at');
+
+    // remove with null values
+    dataItem.removeWhere((key, value) => value == null);
 
     List<Map> data = await supabase
         .from('invoices')

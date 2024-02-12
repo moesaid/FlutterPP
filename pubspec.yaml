@@ -45,6 +45,7 @@ dependencies:
   launch_at_startup: ^0.2.2
   package_info_plus: ^5.0.1
   dashed_circular_progress_bar: ^0.0.6
+  animated_flip_counter: ^0.2.6
 
 # dev_dependencies
 dev_dependencies:

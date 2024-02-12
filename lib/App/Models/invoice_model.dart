@@ -1,19 +1,21 @@
 class InvoiceModel {
   String? id;
   String? teamId;
-  String? clientId;
+  String? clientId, clientName, currency;
   int? number;
   String? dueDate;
   String? status;
   int? discount;
   int? tax;
-  List<InvoiceItems>? items;
-  String? createdAt;
+  List<InvoiceItem>? items;
+  String? createdAt, updatedAt;
 
   InvoiceModel({
     this.id,
     this.teamId,
     this.clientId,
+    this.clientName,
+    this.currency,
     this.number,
     this.dueDate,
     this.status,
@@ -21,24 +23,28 @@ class InvoiceModel {
     this.tax,
     this.items,
     this.createdAt,
+    this.updatedAt,
   });
 
   InvoiceModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     teamId = json['team_id'];
     clientId = json['client_id'];
+    clientName = json['client_name'];
+    currency = json['currency'];
     number = json['number'];
     dueDate = json['due_date'];
     status = json['status'];
     discount = json['discount'];
     tax = json['tax'];
     if (json['items'] != null) {
-      items = <InvoiceItems>[];
+      items = <InvoiceItem>[];
       json['items'].forEach((v) {
-        items!.add(InvoiceItems.fromJson(v));
+        items!.add(InvoiceItem.fromJson(v));
       });
     }
     createdAt = json['created_at'];
+    updatedAt = json['updated_at'];
   }
 
   Map<String, dynamic> toJson() {
@@ -46,6 +52,8 @@ class InvoiceModel {
     data['id'] = id;
     data['team_id'] = teamId;
     data['client_id'] = clientId;
+    data['client_name'] = clientName;
+    data['currency'] = currency;
     data['number'] = number;
     data['due_date'] = dueDate;
     data['status'] = status;
@@ -55,6 +63,7 @@ class InvoiceModel {
       data['items'] = items!.map((v) => v.toJson()).toList();
     }
     data['created_at'] = createdAt;
+    data['updated_at'] = updatedAt;
     return data;
   }
 
@@ -63,18 +72,23 @@ class InvoiceModel {
     String? id,
     String? teamId,
     String? clientId,
+    String? clientName,
+    String? currency,
     int? number,
     String? dueDate,
     String? status,
     int? discount,
     int? tax,
-    List<InvoiceItems>? items,
+    List<InvoiceItem>? items,
     String? createdAt,
+    String? updatedAt,
   }) {
     return InvoiceModel(
       id: id ?? this.id,
       teamId: teamId ?? this.teamId,
       clientId: clientId ?? this.clientId,
+      clientName: clientName ?? this.clientName,
+      currency: currency ?? this.currency,
       number: number ?? this.number,
       dueDate: dueDate ?? this.dueDate,
       status: status ?? this.status,
@@ -82,18 +96,19 @@ class InvoiceModel {
       tax: tax ?? this.tax,
       items: items ?? this.items,
       createdAt: createdAt ?? this.createdAt,
+      updatedAt: updatedAt ?? this.updatedAt,
     );
   }
 }
 
-class InvoiceItems {
+class InvoiceItem {
   int? price;
   String? title;
   int? quantity;
 
-  InvoiceItems({this.price, this.title, this.quantity});
+  InvoiceItem({this.price, this.title, this.quantity});
 
-  InvoiceItems.fromJson(Map<String, dynamic> json) {
+  InvoiceItem.fromJson(Map<String, dynamic> json) {
     price = json['price'];
     title = json['title'];
     quantity = json['quantity'];
@@ -108,12 +123,12 @@ class InvoiceItems {
   }
 
   // copy with new values
-  InvoiceItems copyWith({
+  InvoiceItem copyWith({
     int? price,
     String? title,
     int? quantity,
   }) {
-    return InvoiceItems(
+    return InvoiceItem(
       price: price ?? this.price,
       title: title ?? this.title,
       quantity: quantity ?? this.quantity,

@@ -9,14 +9,17 @@ class InvoiceServices {
   final TeamServices _teamServices = TeamServices();
 
   // get invoices by team id
-  Future<List<InvoiceModel>?> getInvoicesByTeamId() async {
+  Future<List<InvoiceModel>?> getInvoicesByTeamId({int? limit}) async {
     // get team
     final team = await _teamServices.getTeamForAuthUser();
 
     if (team == null || team.id == null) return null;
 
     return _callPipeline.futurePipeline(
-      future: () => _provider.getInvoicesByTeamId(teamId: team.id!),
+      future: () => _provider.getInvoicesByTeamId(
+        teamId: team.id!,
+        limit: limit,
+      ),
       name: 'getInvoicesByTeamId',
     );
   }
