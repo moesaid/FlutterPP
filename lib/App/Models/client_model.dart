@@ -1,4 +1,5 @@
 class ClientModel {
+  String? id;
   String? teamId;
   String? createdAt;
   String? updatedAt;
@@ -12,10 +13,10 @@ class ClientModel {
   String? country;
   String? zip;
   String? logo;
-  String? id;
-  String? currency;
+  String? currency, currencySymbol, website, internalNotes;
 
   ClientModel({
+    this.id,
     this.teamId,
     this.createdAt,
     this.updatedAt,
@@ -29,11 +30,14 @@ class ClientModel {
     this.country,
     this.zip,
     this.logo,
-    this.id,
     this.currency,
+    this.currencySymbol,
+    this.website,
+    this.internalNotes,
   });
 
   ClientModel.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
     teamId = json['team_id'];
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
@@ -47,12 +51,15 @@ class ClientModel {
     country = json['country'];
     zip = json['zip'];
     logo = json['logo'];
-    id = json['id'];
     currency = json['currency'];
+    currencySymbol = json['currency_symbol'];
+    website = json['website'];
+    internalNotes = json['internal_notes'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
     data['team_id'] = teamId;
     data['created_at'] = createdAt;
     data['updated_at'] = updatedAt;
@@ -66,8 +73,10 @@ class ClientModel {
     data['country'] = country;
     data['zip'] = zip;
     data['logo'] = logo;
-    data['id'] = id;
     data['currency'] = currency;
+    data['currency_symbol'] = currencySymbol;
+    data['website'] = website;
+    data['internal_notes'] = internalNotes;
     return data;
   }
 
@@ -87,6 +96,9 @@ class ClientModel {
     String? logo,
     String? id,
     String? currency,
+    String? currencySymbol,
+    String? website,
+    String? internalNotes,
   }) {
     return ClientModel(
       teamId: teamId ?? this.teamId,
@@ -104,6 +116,9 @@ class ClientModel {
       logo: logo ?? this.logo,
       id: id ?? this.id,
       currency: currency ?? this.currency,
+      currencySymbol: currencySymbol ?? this.currencySymbol,
+      website: website ?? this.website,
+      internalNotes: internalNotes ?? this.internalNotes,
     );
   }
 }
