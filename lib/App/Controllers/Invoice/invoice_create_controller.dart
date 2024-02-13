@@ -4,7 +4,7 @@ import 'package:flutterpp/App/Models/team_model.dart';
 import 'package:flutterpp/App/Services/Team/team_services.dart';
 import 'package:get/get.dart';
 
-class InvoiceCreateController extends GetxController {
+class InvoiceCreateOrEditController extends GetxController {
   final TeamServices _teamServices = TeamServices();
 
   final _clients = <ClientModel>[].obs;

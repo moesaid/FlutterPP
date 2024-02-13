@@ -8,12 +8,12 @@ import 'package:flutterpp/App/Views/Pages/Invoice/Widgets/build_add_customer_but
 import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
 
-class InvoiceCreatePage extends GetView<InvoiceCreateController> {
+class InvoiceCreateOrEditPage extends GetView<InvoiceCreateOrEditController> {
   final VoidCallback? onInvoiceCreate;
   final List<ClientModel> clients;
   final InvoiceModel? invoice;
 
-  const InvoiceCreatePage({
+  const InvoiceCreateOrEditPage({
     super.key,
     this.onInvoiceCreate,
     this.invoice,
@@ -22,8 +22,8 @@ class InvoiceCreatePage extends GetView<InvoiceCreateController> {
 
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<InvoiceCreateController>(
-      init: InvoiceCreateController(),
+    return GetBuilder<InvoiceCreateOrEditController>(
+      init: InvoiceCreateOrEditController(),
       didChangeDependencies: ((state) {
         if (state.controller == null) return;
 

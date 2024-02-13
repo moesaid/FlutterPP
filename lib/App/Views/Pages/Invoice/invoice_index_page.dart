@@ -7,7 +7,7 @@ import 'package:flutterpp/App/Views/Pages/Invoice/Widgets/build_invoice_analytic
 import 'package:flutterpp/App/Views/Pages/Invoice/Widgets/build_invoice_body.dart';
 import 'package:flutterpp/App/Views/Pages/Invoice/Widgets/build_invoice_body_header.dart';
 import 'package:flutterpp/App/Views/Pages/Invoice/Widgets/build_invoice_filter_section.dart';
-import 'package:flutterpp/App/Views/Pages/Invoice/invoice_create_page.dart';
+import 'package:flutterpp/App/Views/Pages/Invoice/invoice_create_or_edit_page.dart';
 import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
 
@@ -40,7 +40,7 @@ class InvoiceIndexPage extends GetView<InvoiceIndexController> {
                         width: context.width * 0.9,
                         height: context.height * 0.9,
                         padding: EdgeInsets.zero,
-                        child: InvoiceCreatePage(
+                        child: InvoiceCreateOrEditPage(
                           clients: controller.clients,
                           onInvoiceCreate: () async =>
                               await controller.fetchApi(),

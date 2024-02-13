@@ -80,6 +80,7 @@ class AppBinding implements Bindings {
     // invoice
     Get.lazyPut<InvoiceIndexController>(() => InvoiceIndexController());
     Get.lazyPut<InvoiceSingleController>(() => InvoiceSingleController());
-    Get.lazyPut<InvoiceCreateController>(() => InvoiceCreateController());
+    Get.lazyPut<InvoiceCreateOrEditController>(
+        () => InvoiceCreateOrEditController());
   }
 }
