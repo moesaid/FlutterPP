@@ -25,11 +25,14 @@ class ClientIndexPage extends GetView<ClientIndexController> {
               hasButton: true,
               buttonText: 'create your first client'.capitalize!,
               onButtonPressed: () {
+                _.clearFormState(formKey);
                 showDialog(
                   context: context,
-                  builder: (_) => BuildClientCreateOrEditDialog(
-                    formKey: formKey,
-                  ),
+                  builder: (_) {
+                    return BuildClientCreateOrEditDialog(
+                      formKey: formKey,
+                    );
+                  },
                 );
               },
               child: Column(

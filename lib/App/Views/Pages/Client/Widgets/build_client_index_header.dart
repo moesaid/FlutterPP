@@ -36,6 +36,7 @@ class BuildClientIndexHeader extends StatelessWidget {
           const Spacer(),
           FilledButton(
             onPressed: () {
+              controller.clearFormState(formKey);
               showDialog(
                 context: context,
                 builder: (_) => BuildClientCreateOrEditDialog(

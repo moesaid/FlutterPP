@@ -18,71 +18,82 @@ class BuildClientIndexGrid extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GridView.builder(
-      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 4,
-        crossAxisSpacing: 1.0,
-        mainAxisSpacing: 1.0,
-        childAspectRatio: 1.5,
-      ),
+    return ListView.builder(
       itemCount: controller.clients.length,
       padding: EdgeInsets.all(3.sp),
       itemBuilder: (_, int index) {
         ClientModel item = controller.clients[index];
-        return InkWell(
-          onTap: () {
-            controller.updateActiveClient(
-              controller.clients[index],
-            );
-
-            showDialog(
-              context: context,
-              builder: (_) => BuildClientCreateOrEditDialog(
-                formKey: formKey,
-              ),
-            );
-          },
-          child: Card(
-            elevation: 0,
-            color: Get.theme.colorScheme.primaryContainer,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+        return Card(
+          elevation: 0,
+          color: Get.theme.colorScheme.primaryContainer,
+          child: Padding(
+            padding: EdgeInsets.symmetric(
+              horizontal: 3.sp,
+              vertical: 0.sp,
+            ),
+            child: Row(
               children: [
-                ListTile(
-                  dense: true,
-                  contentPadding: EdgeInsets.symmetric(
-                    horizontal: 3.sp,
-                    vertical: 1.sp,
-                  ),
-                  title: Text(
-                    controller.clients[index].name ?? '',
-                    style: Get.textTheme.titleSmall!,
-                  ),
-                  subtitle: Text(
-                    controller.clients[index].email ?? '',
-                    style: Get.textTheme.labelSmall,
-                  ),
-                  leading: CircleAvatar(
-                    backgroundColor: controller.clients[index].logo == null
-                        ? Get.theme.colorScheme.secondary
-                        : Get.theme.colorScheme.secondaryContainer,
-                    foregroundImage: controller.clients[index].logo == null
-                        ? null
-                        : NetworkImage(controller.clients[index].logo!),
-                    child: controller.clients[index].logo == null
-                        ? Text(controller.clients[index].name?[0] ?? '')
-                        : null,
+                Expanded(
+                  child: ListTile(
+                    dense: true,
+                    contentPadding: EdgeInsets.zero,
+                    minVerticalPadding: 0,
+                    title: Text(
+                      controller.clients[index].name ?? '',
+                      style: Get.textTheme.titleSmall!,
+                    ),
+                    subtitle: Text(
+                      controller.clients[index].email ?? '',
+                      style: Get.textTheme.labelSmall,
+                    ),
+                    leading: CircleAvatar(
+                      backgroundColor: controller.clients[index].logo == null
+                          ? Get.theme.colorScheme.secondary
+                          : Get.theme.colorScheme.secondaryContainer,
+                      foregroundImage: controller.clients[index].logo == null
+                          ? null
+                          : NetworkImage(controller.clients[index].logo!),
+                      child: controller.clients[index].logo == null
+                          ? Text(controller.clients[index].name?[0] ?? '')
+                          : null,
+                    ),
                   ),
                 ),
-                const Spacer(),
-                Padding(
-                  padding: EdgeInsets.all(6.sp),
-                  child: Text(
-                    '${item.address ?? ''}, \n${item.city ?? ''}, ${item.state ?? ''}, ${item.zip ?? ''}, \n${item.country ?? ''}',
-                    overflow: TextOverflow.ellipsis,
-                    style: Get.textTheme.bodySmall,
+                Text(
+                  item.country ?? '',
+                  style: Get.textTheme.bodyMedium,
+                ),
+                SizedBox(width: 5.sp),
+                Badge(
+                  label: Text(
+                    item.currency?.toUpperCase() ?? 'usd'.toUpperCase(),
                   ),
-                )
+                ),
+                SizedBox(
+                  height: 10.sp,
+                  width: 20.sp,
+                  child: const VerticalDivider(),
+                ),
+                FilledButton(
+                  style: ButtonStyle(
+                    backgroundColor: MaterialStateProperty.all(
+                      Get.theme.colorScheme.secondaryContainer,
+                    ),
+                  ),
+                  onPressed: () {
+                    controller.updateActiveClient(
+                      controller.clients[index],
+                    );
+
+                    showDialog(
+                      context: context,
+                      builder: (_) => BuildClientCreateOrEditDialog(
+                        formKey: formKey,
+                      ),
+                    );
+                  },
+                  child: const Text('Edit'),
+                ),
               ],
             ),
           ),

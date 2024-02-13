@@ -83,10 +83,7 @@ class ClientIndexController extends GetxController {
             await _getClients();
             update();
 
-            _currentStep.value = 0;
-            formKey.currentState!.reset();
-            _activeClient.value = ClientModel();
-            update();
+            clearFormState(formKey);
 
             Get.back();
           },
@@ -99,6 +96,14 @@ class ClientIndexController extends GetxController {
         ).error();
       }
     }
+  }
+
+  // clear form state
+  Future<void> clearFormState(GlobalKey<FormBuilderState> formKey) async {
+    _currentStep.value = 0;
+    formKey.currentState?.reset();
+    _activeClient.value = ClientModel();
+    update();
   }
 
   // on step tapped
