@@ -2,6 +2,7 @@ import 'package:flutterpp/App/Controllers/Auth/login_controller.dart';
 import 'package:flutterpp/App/Controllers/Auth/signup_controller.dart';
 import 'package:flutterpp/App/Controllers/Auth/splash_controller.dart';
 import 'package:flutterpp/App/Controllers/Auth/verify_otp_controller.dart';
+import 'package:flutterpp/App/Controllers/Clients/client_list_controller.dart';
 import 'package:flutterpp/App/Controllers/Dashboard/dashboard_controller.dart';
 import 'package:flutterpp/App/Controllers/Dashboard/dashboard_env_check_controller.dart';
 import 'package:flutterpp/App/Controllers/Global/emoji_dialog_controller.dart';
@@ -42,6 +43,9 @@ class AppBinding implements Bindings {
     Get.lazyPut<DashboardEnvCheckController>(
       () => DashboardEnvCheckController(),
     );
+
+    // client
+    Get.lazyPut<ClientListController>(() => ClientListController());
 
     // team
     Get.lazyPut<NoTeamController>(() => NoTeamController());

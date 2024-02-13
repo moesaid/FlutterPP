@@ -22,6 +22,7 @@ class BuildDefultDialog extends StatelessWidget {
         height: height ?? 500,
         width: width ?? 500,
         padding: padding ?? const EdgeInsets.all(20),
+        clipBehavior: Clip.hardEdge,
         decoration: BoxDecoration(
           color: Get.theme.colorScheme.primaryContainer,
           borderRadius: BorderRadius.circular(10),

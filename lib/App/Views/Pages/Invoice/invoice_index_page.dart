@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutterpp/App/Controllers/Invoice/invoice_index_controller.dart';
 import 'package:flutterpp/App/Models/invoice_model.dart';
 import 'package:flutterpp/App/Views/Global/build_loading_or_empty_layout.dart';
+import 'package:flutterpp/App/Views/Global/buiuld_dialog.dart';
 import 'package:flutterpp/App/Views/Pages/Invoice/Widgets/build_invoice_analytics_section.dart';
 import 'package:flutterpp/App/Views/Pages/Invoice/Widgets/build_invoice_body.dart';
 import 'package:flutterpp/App/Views/Pages/Invoice/Widgets/build_invoice_body_header.dart';
 import 'package:flutterpp/App/Views/Pages/Invoice/Widgets/build_invoice_filter_section.dart';
+import 'package:flutterpp/App/Views/Pages/Invoice/invoice_create_page.dart';
 import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
 
@@ -31,7 +33,21 @@ class InvoiceIndexPage extends GetView<InvoiceIndexController> {
                 BuildInvoiceFilterSection(
                   filter: controller.filter,
                   length: controller.length,
-                  onCreate: controller.createInvoice,
+                  onCreate: () async {
+                    await showDialog(
+                      context: context,
+                      builder: (_) => BuildDefultDialog(
+                        width: context.width * 0.9,
+                        height: context.height * 0.9,
+                        padding: EdgeInsets.zero,
+                        child: InvoiceCreatePage(
+                          clients: controller.clients,
+                          onInvoiceCreate: () async =>
+                              await controller.fetchApi(),
+                        ),
+                      ),
+                    );
+                  },
                   onLengthChanged: controller.onLengthChange,
                   onFilterChanged: controller.onFilterChange,
                 ),

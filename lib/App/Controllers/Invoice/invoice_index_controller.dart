@@ -38,12 +38,12 @@ class InvoiceIndexController extends GetxController {
 
   @override
   Future<void> onInit() async {
-    await _fetchApi();
+    await fetchApi();
     super.onInit();
   }
 
   // fetch api
-  Future<void> _fetchApi() async {
+  Future<void> fetchApi() async {
     await _getClients();
     await _getInvoices();
     updateLoading(false);
