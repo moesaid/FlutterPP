@@ -32,12 +32,12 @@ class HomeController extends GetxController {
       'tab': const ProjectSinglePage(),
       'type': 'project',
     },
-    // {
-    //   'title': 'chat',
-    //   'icon': HeroIcons.chatBubbleOvalLeftEllipsis,
-    //   'isActive': false,
-    //   'tab': const Text('chat'),
-    // },
+    {
+      'title': 'clients',
+      'icon': HeroIcons.users,
+      'isActive': false,
+      'tab': const Text('clients'),
+    },
     {
       'title': 'invoices',
       'icon': HeroIcons.banknotes,
