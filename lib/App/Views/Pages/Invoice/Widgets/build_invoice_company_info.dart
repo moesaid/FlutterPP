@@ -4,6 +4,7 @@ import 'package:sizer/sizer.dart';
 
 class BuildInvoiceCompanyInfo extends StatelessWidget {
   final CrossAxisAlignment? crossAxisAlignment;
+  final bool? inVerseColor;
   final String? companyName,
       ownerName,
       address,
@@ -25,6 +26,7 @@ class BuildInvoiceCompanyInfo extends StatelessWidget {
     this.email,
     this.state,
     this.zip,
+    this.inVerseColor = false,
   });
 
   @override
@@ -38,7 +40,7 @@ class BuildInvoiceCompanyInfo extends StatelessWidget {
             style: TextStyle(
               fontSize: 6.sp,
               fontWeight: FontWeight.bold,
-              color: Colors.black,
+              color: inVerseColor == true ? Colors.white : Colors.black,
             ),
           ),
         if (ownerName != null)
@@ -46,7 +48,9 @@ class BuildInvoiceCompanyInfo extends StatelessWidget {
             ownerName!.capitalize!,
             style: TextStyle(
               fontSize: 5.sp,
-              color: Colors.black87,
+              color: inVerseColor == true
+                  ? Colors.white.withOpacity(0.7)
+                  : Colors.black87,
             ),
           ),
         if (address != null)
@@ -55,7 +59,9 @@ class BuildInvoiceCompanyInfo extends StatelessWidget {
             textAlign: TextAlign.end,
             style: TextStyle(
               fontSize: 5.sp,
-              color: Colors.black87,
+              color: inVerseColor == true
+                  ? Colors.white.withOpacity(0.7)
+                  : Colors.black87,
             ),
           ),
         if (city != null)
@@ -64,7 +70,9 @@ class BuildInvoiceCompanyInfo extends StatelessWidget {
             textAlign: TextAlign.end,
             style: TextStyle(
               fontSize: 5.sp,
-              color: Colors.black87,
+              color: inVerseColor == true
+                  ? Colors.white.withOpacity(0.7)
+                  : Colors.black87,
             ),
           ),
         if (country != null)
@@ -73,7 +81,9 @@ class BuildInvoiceCompanyInfo extends StatelessWidget {
             textAlign: TextAlign.end,
             style: TextStyle(
               fontSize: 5.sp,
-              color: Colors.black87,
+              color: inVerseColor == true
+                  ? Colors.white.withOpacity(0.7)
+                  : Colors.black87,
             ),
           ),
         if (phone != null || email != null) SizedBox(height: 6.sp),
@@ -83,7 +93,9 @@ class BuildInvoiceCompanyInfo extends StatelessWidget {
             textAlign: TextAlign.end,
             style: TextStyle(
               fontSize: 6.sp,
-              color: Colors.black87,
+              color: inVerseColor == true
+                  ? Colors.white.withOpacity(0.7)
+                  : Colors.black87,
             ),
           ),
         if (email != null)
@@ -92,7 +104,9 @@ class BuildInvoiceCompanyInfo extends StatelessWidget {
             textAlign: TextAlign.end,
             style: TextStyle(
               fontSize: 6.sp,
-              color: Colors.black87,
+              color: inVerseColor == true
+                  ? Colors.white.withOpacity(0.7)
+                  : Colors.black87,
             ),
           ),
       ],

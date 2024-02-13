@@ -55,4 +55,12 @@ class InvoiceCreateController extends GetxController {
   _getTeam() async {
     _team.value = (await _teamServices.getTeamForAuthUser())!;
   }
+
+  // on client selected
+  void onClientSelected(ClientModel val) {
+    _activeClient.value = val;
+    update();
+
+    Get.back();
+  }
 }
