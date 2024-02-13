@@ -94,12 +94,27 @@ class InvoiceIndexPage extends GetView<InvoiceIndexController> {
                             padding: EdgeInsets.all(5.sp),
                             child: BuildInvoiceBody(
                               onView: controller.viewInvoice,
-                              onEdit: controller.editInvoice,
                               onDelete: controller.deleteInvoice,
                               onDuplicate: controller.duplicateInvoice,
                               onExportAsPdf: controller.exportAsPdf,
                               printInvoice: controller.printInvoice,
                               invoice: invoice,
+                              onEdit: (item) async {
+                                await showDialog(
+                                  context: context,
+                                  builder: (_) => BuildDefultDialog(
+                                    width: context.width * 0.9,
+                                    height: context.height * 0.9,
+                                    padding: EdgeInsets.zero,
+                                    child: InvoiceCreateOrEditPage(
+                                      invoice: item,
+                                      clients: controller.clients,
+                                      onInvoiceCreate: () async =>
+                                          await controller.fetchApi(),
+                                    ),
+                                  ),
+                                );
+                              },
                             ),
                           ),
                         );

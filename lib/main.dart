@@ -6,6 +6,7 @@ import 'package:flutterpp/Config/app_initializer.dart';
 import 'package:flutterpp/Config/app_theme.dart';
 import 'package:flutterpp/Config/app_window_config.dart';
 import 'package:flutterpp/Routes/app_pages.dart';
+import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
 
@@ -40,6 +41,8 @@ class MyApp extends StatelessWidget {
           defaultTransition: Transition.native,
           localizationsDelegates: const [
             AppFlowyEditorLocalizations.delegate,
+            FormBuilderLocalizations.delegate,
+            FormBuilderLocalizationsImpl.delegate,
           ],
           supportedLocales:
               AppFlowyEditorLocalizations.delegate.supportedLocales,

@@ -48,6 +48,7 @@ dependencies:
   animated_flip_counter: ^0.2.6
   pdf: ^3.10.7
   printing: ^5.11.1
+  currency_picker: ^2.0.20
 
 # dev_dependencies
 dev_dependencies:

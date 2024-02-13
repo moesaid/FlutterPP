@@ -45,6 +45,7 @@ class InvoiceProvider {
   // create invoice
   Future<InvoiceModel?> createInvoice({
     required InvoiceModel invoice,
+    bool? customCreatedAt,
   }) async {
     Map<String, dynamic> dataItem = invoice.toJson().map(
           (key, value) => MapEntry(key, value),
@@ -52,7 +53,10 @@ class InvoiceProvider {
 
     // remove id and created_at
     dataItem.remove('id');
-    dataItem.remove('created_at');
+
+    if (customCreatedAt == null || customCreatedAt == false) {
+      dataItem.remove('created_at');
+    }
 
     List<Map> data =
         await supabase.from('invoices').insert([dataItem]).select();

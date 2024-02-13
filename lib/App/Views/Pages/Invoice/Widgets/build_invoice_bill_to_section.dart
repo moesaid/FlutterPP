@@ -74,10 +74,11 @@ class BuildInvoiceBillToSection extends StatelessWidget {
                   color: Colors.black12,
                   child: BuildInvoiceHighlightsItem(
                     isAmount: true,
-                    title: 'amount due (USD):',
-                    value: InvoiceHelper.calculateInvoiceTotal(
-                      invoice,
-                    ).toString(),
+                    title: 'amount due (${invoice.currency ?? 'USD'}):',
+                    value: (invoice.currencySymbol ?? '\$') +
+                        InvoiceHelper.calculateInvoiceTotal(
+                          invoice,
+                        ).toString(),
                   ),
                 ),
               ],

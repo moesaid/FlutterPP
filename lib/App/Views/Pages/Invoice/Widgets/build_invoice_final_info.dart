@@ -23,19 +23,25 @@ class BuildInvoiceFinalInfo extends StatelessWidget {
           children: [
             BuildInvoiceFinalInfoItem(
               title: 'subtotal',
-              value: subTotal.toString().toPriceFormat(),
-              discountValue: invoice.discount.toString().toPriceFormat(),
-              taxValue: '${invoice.tax.toString().toPriceFormat()}%',
+              value: (invoice.currencySymbol ?? '\$') +
+                  subTotal.toString().toPriceFormat(),
+              discountValue: invoice.discount != null
+                  ? invoice.discount.toString().toPriceFormat()
+                  : '',
+              taxValue: invoice.tax != null
+                  ? '${invoice.tax.toString().toPriceFormat()}%'
+                  : null,
             ),
             BuildInvoiceFinalInfoItem(
               title: 'total',
-              value: total.toString().toPriceFormat(),
+              value: (invoice.currencySymbol ?? '\$') +
+                  total.toString().toPriceFormat(),
               borderWidht: 2,
             ),
             BuildInvoiceFinalInfoItem(
-              title: 'total due (USD)',
+              title: 'total due (${(invoice.currency ?? 'USD')})',
               value:
-                  '${total.toString().toPriceFormat()} ${invoice.currency?.toUpperCase() ?? ''}',
+                  '${invoice.currencySymbol ?? '\$'}${total.toString().toPriceFormat()} ',
               hasBorder: false,
               isAmount: true,
             ),

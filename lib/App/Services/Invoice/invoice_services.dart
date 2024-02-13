@@ -51,6 +51,7 @@ class InvoiceServices {
   // create invoice
   Future<InvoiceModel?> createInvoice({
     required InvoiceModel invoice,
+    bool? customCreatedAt,
   }) async {
     // get team
     final team = await _teamServices.getTeamForAuthUser();
@@ -60,6 +61,7 @@ class InvoiceServices {
     return _callPipeline.futurePipeline(
       future: () => _provider.createInvoice(
         invoice: invoice.copyWith(teamId: team.id!),
+        customCreatedAt: customCreatedAt,
       ),
       name: 'createInvoice',
     );

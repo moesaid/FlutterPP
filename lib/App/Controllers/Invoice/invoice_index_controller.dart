@@ -33,7 +33,7 @@ class InvoiceIndexController extends GetxController {
   final _filter = 'all'.obs;
   String get filter => _filter.value;
 
-  final _length = 10.obs;
+  final _length = 1000.obs;
   int get length => _length.value;
 
   @override
@@ -71,13 +71,11 @@ class InvoiceIndexController extends GetxController {
   }
 
   // on length change
-  void onLengthChange(int value) {
+  Future<void> onLengthChange(int value) async {
     _length.value = value;
 
-    Get.showOverlay(
-      asyncFunction: () => _getInvoices(limit: value),
-      loadingWidget: const BuildOverlay(),
-    );
+    // limit invoices list
+    _filteredInvoices.assignAll(_invoices.take(value).toList());
 
     update();
   }
@@ -97,11 +95,6 @@ class InvoiceIndexController extends GetxController {
       loadingWidget: const BuildOverlay(),
     );
     update();
-  }
-
-  // edit single invoice
-  void editInvoice(InvoiceModel item) {
-    print(item.id);
   }
 
   // duplicate single invoice
@@ -148,7 +141,7 @@ class InvoiceIndexController extends GetxController {
   }
 
   // get invoices
-  _getInvoices({int? limit = 10}) async {
+  _getInvoices({int? limit = 1000}) async {
     List<InvoiceModel>? res = await _invoiceServices.getInvoicesByTeamId(
       limit: limit,
     );

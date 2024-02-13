@@ -1,7 +1,7 @@
 class InvoiceModel {
   String? id;
   String? teamId;
-  String? clientId, clientName, currency;
+  String? clientId, clientName, currency, currencySymbol;
   int? number;
   String? dueDate;
   String? status;
@@ -16,6 +16,7 @@ class InvoiceModel {
     this.clientId,
     this.clientName,
     this.currency,
+    this.currencySymbol,
     this.number,
     this.dueDate,
     this.status,
@@ -32,6 +33,7 @@ class InvoiceModel {
     clientId = json['client_id'];
     clientName = json['client_name'];
     currency = json['currency'];
+    currencySymbol = json['currency_symbol'];
     number = json['number'];
     dueDate = json['due_date'];
     status = json['status'];
@@ -54,6 +56,7 @@ class InvoiceModel {
     data['client_id'] = clientId;
     data['client_name'] = clientName;
     data['currency'] = currency;
+    data['currency_symbol'] = currencySymbol;
     data['number'] = number;
     data['due_date'] = dueDate;
     data['status'] = status;
@@ -74,6 +77,7 @@ class InvoiceModel {
     String? clientId,
     String? clientName,
     String? currency,
+    String? currencySymbol,
     int? number,
     String? dueDate,
     String? status,
@@ -89,6 +93,7 @@ class InvoiceModel {
       clientId: clientId ?? this.clientId,
       clientName: clientName ?? this.clientName,
       currency: currency ?? this.currency,
+      currencySymbol: currencySymbol ?? this.currencySymbol,
       number: number ?? this.number,
       dueDate: dueDate ?? this.dueDate,
       status: status ?? this.status,
@@ -102,8 +107,8 @@ class InvoiceModel {
 }
 
 class InvoiceItem {
-  int? price;
   String? title;
+  int? price;
   int? quantity;
 
   InvoiceItem({this.price, this.title, this.quantity});
