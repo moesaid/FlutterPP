@@ -197,4 +197,23 @@ class InvoiceIndexController extends GetxController {
 
     print('create invoice');
   }
+
+  // update status
+  Future<void> onStatusChanged({
+    required InvoiceModel item,
+    required String status,
+  }) async {
+    await Get.showOverlay(
+      asyncFunction: () async {
+        await _invoiceServices.updateInvoice(
+          invoice: item.copyWith(status: status),
+        );
+        await _getInvoices();
+      },
+      loadingWidget: const BuildOverlay(),
+    );
+    update();
+
+    Get.back();
+  }
 }

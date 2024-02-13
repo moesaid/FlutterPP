@@ -42,8 +42,8 @@ class InvoiceHelper {
     switch (status) {
       case 'paid':
         return Colors.green;
-      case 'pending':
-        return Colors.orange;
+      case 'unpaid':
+        return Colors.tealAccent;
       case 'draft':
         return Colors.blue;
       case 'sent':
@@ -52,6 +52,9 @@ class InvoiceHelper {
         return Colors.pink;
       case 'overdue':
         return Colors.red;
+      case 'padding':
+        return Colors.lime;
+
       default:
         return Colors.grey;
     }

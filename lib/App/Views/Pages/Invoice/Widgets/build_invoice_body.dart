@@ -12,7 +12,8 @@ class BuildInvoiceBody extends StatelessWidget {
       onDelete,
       onDuplicate,
       onExportAsPdf,
-      printInvoice;
+      printInvoice,
+      onStatusPressed;
 
   const BuildInvoiceBody({
     super.key,
@@ -22,6 +23,7 @@ class BuildInvoiceBody extends StatelessWidget {
     this.onDuplicate,
     this.onExportAsPdf,
     this.printInvoice,
+    this.onStatusPressed,
     required this.invoice,
   });
 
@@ -33,12 +35,15 @@ class BuildInvoiceBody extends StatelessWidget {
         Expanded(
           child: Row(
             children: [
-              Badge(
-                label: Text(invoice.status?.capitalize ?? ''),
-                padding: EdgeInsets.symmetric(horizontal: 3.sp),
-                textColor: InvoiceHelper.getStatusColor(invoice.status),
-                backgroundColor: InvoiceHelper.getStatusColor(invoice.status)
-                    .withOpacity(0.1),
+              InkWell(
+                onTap: () => onStatusPressed?.call(invoice),
+                child: Badge(
+                  label: Text(invoice.status?.capitalize ?? ''),
+                  padding: EdgeInsets.symmetric(horizontal: 3.sp),
+                  textColor: InvoiceHelper.getStatusColor(invoice.status),
+                  backgroundColor: InvoiceHelper.getStatusColor(invoice.status)
+                      .withOpacity(0.1),
+                ),
               ),
             ],
           ),

@@ -16,6 +16,7 @@ class InvoiceProvider {
         .select('*')
         .eq('team_id', teamId)
         .limit(limit ?? 10)
+        .order('created_at', ascending: false)
         .select();
 
     if (data.isEmpty) return [];
