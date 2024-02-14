@@ -3,8 +3,10 @@
 # Fail this script if any subcommand fails.
 set -e
 
-# The default execution directory of this script is the ci_scripts directory.
-cd $CI_PRIMARY_REPOSITORY_PATH # change working directory to the root of your cloned repo.
+# by default, the execution directory of this script is the ci_scripts directory
+# CI_WORKSPACE is the directory of your cloned repo
+echo "🟩 Navigate from ($PWD) to ($CI_WORKSPACE)"
+cd $CI_WORKSPACE
 
 # Install Flutter using git.
 git clone https://github.com/flutter/flutter.git --depth 1 -b stable $HOME/flutter
