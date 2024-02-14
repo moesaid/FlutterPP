@@ -1,10 +1,6 @@
 icons_launcher:
   image_path: "assets/ic_logo_border.png"
   platforms:
-    android:
-      enable: false
-    ios:
-      enable: false
     macos:
       enable: false
     windows:
