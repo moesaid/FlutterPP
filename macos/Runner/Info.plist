@@ -47,5 +47,8 @@
 	<true/>
 	<key>com.apple.security.files.user-selected.read-write</key>
   	<true/>
+
+	<key>LSApplicationCategoryType</key>
+	<string>public.app-category.developer-tools</string>
 </dict>
 </plist>
