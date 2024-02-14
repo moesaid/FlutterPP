@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutterpp/App/Views/Global/build_logo.dart';
 import 'package:flutterpp/Config/app_config.dart';
 import 'package:get/get.dart';
 import 'package:heroicons/heroicons.dart';
@@ -40,7 +41,7 @@ class BuildRail extends StatelessWidget {
                 ),
               ),
             ),
-            child: const FlutterLogo(),
+            child: const BuildLogo(),
           ),
           Expanded(
             child: NavigationRail(
