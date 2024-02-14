@@ -1,7 +1,0 @@
-icons_launcher:
-  image_path: "assets/ic_logo_border.png"
-  platforms:
-    macos:
-      enable: false
-    windows:
-      enable: true

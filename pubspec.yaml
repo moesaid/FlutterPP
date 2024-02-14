@@ -49,7 +49,7 @@ dependencies:
   pdf: ^3.10.7
   printing: ^5.11.1
   currency_picker: ^2.0.20
-  icons_launcher: ^2.1.7
+  flutter_launcher_icons: ^0.13.1
 
 # dev_dependencies
 dev_dependencies:
@@ -66,3 +66,12 @@ flutter:
     - assets/templates/
     - assets/jsons/
     - assets/lottie/
+
+flutter_launcher_icons:
+  image_path: "assets/images/app_icon.png"
+  windows:
+    generate: true
+    # image_path: "assets/images/icon-1024x1024.png"
+  macos:
+    generate: true
+    # image_path: "assets/images/icon-1024x1024.png"
