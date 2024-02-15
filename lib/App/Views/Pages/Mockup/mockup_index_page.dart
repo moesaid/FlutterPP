@@ -3,6 +3,7 @@ import 'package:awesome_side_sheet/side_sheet.dart';
 import 'package:flutter/material.dart';
 import 'package:flutterpp/App/Controllers/Mockup/mockup_index_controller.dart';
 import 'package:flutterpp/App/Models/mockup_model.dart';
+import 'package:flutterpp/App/Views/Global/build_custom_dropdown.dart';
 import 'package:flutterpp/App/Views/Global/build_loading_or_empty_layout.dart';
 import 'package:flutterpp/App/Views/Global/build_page_layout.dart';
 import 'package:flutterpp/App/Views/Pages/Mockup/mockup_create_page.dart';
@@ -128,19 +129,15 @@ class BuildMockupIndexItem extends StatelessWidget {
           children: [
             Row(
               crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 BuildProjectAvatar(
                   colors: [
-                    ColorHelper.hexToColor(
-                      item.color1 ?? '#000000',
-                    ),
-                    ColorHelper.hexToColor(
-                      item.color2 ?? '#000000',
-                    ),
+                    ColorHelper.hexToColor(item.color1 ?? '#000000'),
+                    ColorHelper.hexToColor(item.color2 ?? '#000000'),
                   ],
                   icon: item.icon!,
                 ),
+                const Spacer(),
                 Badge(
                   label: Text(
                     item.category!.capitalize!,
@@ -148,7 +145,8 @@ class BuildMockupIndexItem extends StatelessWidget {
                         Get.textTheme.labelSmall?.copyWith(letterSpacing: 0.3),
                   ),
                   backgroundColor: Get.theme.colorScheme.secondaryContainer,
-                )
+                ),
+                const BuildCustomDropdown(),
               ],
             ),
             Column(
