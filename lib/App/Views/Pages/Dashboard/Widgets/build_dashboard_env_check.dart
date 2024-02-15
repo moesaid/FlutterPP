@@ -168,12 +168,14 @@ class BuildEnvCheckDataState extends StatelessWidget {
                         ),
                       ],
                     ),
-                    SizedBox(height: 2.sp),
-                    Text(
-                      'flutter version: ${controller.checkEnvModel.flutterVersion}'
-                          .capitalize!,
-                      style: Get.textTheme.bodySmall,
-                    ),
+                    if (controller.checkEnvModel.flutterVersion != null)
+                      SizedBox(height: 2.sp),
+                    if (controller.checkEnvModel.flutterVersion != null)
+                      Text(
+                        'flutter version: ${controller.checkEnvModel.flutterVersion}'
+                            .capitalize!,
+                        style: Get.textTheme.bodySmall,
+                      ),
                   ],
                 ),
               ),
@@ -213,12 +215,14 @@ class BuildEnvCheckDataState extends StatelessWidget {
                         ),
                       ],
                     ),
-                    SizedBox(height: 2.sp),
-                    Text(
-                      'dart version: ${controller.checkEnvModel.dartVersion}'
-                          .capitalize!,
-                      style: Get.textTheme.bodySmall,
-                    ),
+                    if (controller.checkEnvModel.dartVersion != null)
+                      SizedBox(height: 2.sp),
+                    if (controller.checkEnvModel.dartVersion != null)
+                      Text(
+                        'dart version: ${controller.checkEnvModel.dartVersion}'
+                            .capitalize!,
+                        style: Get.textTheme.bodySmall,
+                      ),
                   ],
                 ),
               ),

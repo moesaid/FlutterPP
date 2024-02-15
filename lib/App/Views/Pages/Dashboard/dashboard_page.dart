@@ -27,7 +27,8 @@ class DashboardPage extends GetView<DashboardController> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'Hey ${controller.profile.fullName} 🖐️'.capitalize!,
+                      'Hey ${controller.profile.fullName ?? ''} 🖐️'
+                          .capitalize!,
                       style: TextStyle(
                         fontSize: 6.sp,
                         fontWeight: FontWeight.w600,

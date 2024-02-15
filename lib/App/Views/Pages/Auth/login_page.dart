@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutterpp/App/Controllers/Auth/login_controller.dart';
+import 'package:flutterpp/App/Views/Global/build_logo.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:get/get.dart';
+import 'package:sizer/sizer.dart';
 
 class LoginPage extends GetView<LoginController> {
   const LoginPage({super.key});
@@ -23,16 +25,15 @@ class LoginPage extends GetView<LoginController> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      Text(
-                        'Login',
-                        style: Get.theme.textTheme.headlineSmall,
-                      ),
-                      const SizedBox(height: 10),
+                      BuildLogo(size: 12.sp),
+                      SizedBox(height: 4.sp),
+                      Text('Login', style: Get.theme.textTheme.headlineSmall),
+                      SizedBox(height: 4.sp),
                       Text(
                         'welcome back to flutter++ ',
                         style: Get.theme.textTheme.bodySmall,
                       ),
-                      const SizedBox(height: 20),
+                      SizedBox(height: 16.sp),
                       SizedBox(
                         width: 300,
                         child: Column(
@@ -49,7 +50,7 @@ class LoginPage extends GetView<LoginController> {
                                 FormBuilderValidators.email(),
                               ]),
                             ),
-                            const SizedBox(height: 10),
+                            SizedBox(height: 3.sp),
                             SizedBox(
                               width: Get.width,
                               child: ElevatedButton(
@@ -62,14 +63,12 @@ class LoginPage extends GetView<LoginController> {
                                 child: const Text('login'),
                               ),
                             ),
-                            const SizedBox(height: 30),
+                            SizedBox(height: 10.sp),
                             const Text(
                               'Don\'t have an account?',
-                              style: TextStyle(
-                                color: Colors.grey,
-                              ),
+                              style: TextStyle(color: Colors.grey),
                             ),
-                            const SizedBox(height: 10),
+                            SizedBox(height: 4.sp),
                             Row(
                               children: [
                                 Icon(

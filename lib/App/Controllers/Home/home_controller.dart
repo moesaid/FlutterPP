@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:flutterpp/App/Models/project_model.dart';
 import 'package:flutterpp/App/Services/Auth/auth_services.dart';
 import 'package:flutterpp/App/Services/Team/team_services.dart';
@@ -10,14 +9,10 @@ import 'package:flutterpp/App/Views/Pages/Project/Pages/project_single_page.dart
 import 'package:flutterpp/Storage/active_project_storage.dart';
 import 'package:get/get.dart';
 import 'package:heroicons/heroicons.dart';
-import 'package:supabase_flutter/supabase_flutter.dart';
 
 class HomeController extends GetxController {
   final AuthServices _authServices = AuthServices();
   final TeamServices _teamServices = TeamServices();
-
-  final _isInTeam = true.obs;
-  bool get isInTeam => _isInTeam.value;
 
   final _tabs = [
     {
@@ -45,12 +40,12 @@ class HomeController extends GetxController {
       'isActive': false,
       'tab': const InvoiceIndexPage(),
     },
-    {
-      'title': 'time tracking',
-      'icon': HeroIcons.clock,
-      'isActive': false,
-      'tab': const Text('time tracking'),
-    },
+    // {
+    //   'title': 'time tracking',
+    //   'icon': HeroIcons.clock,
+    //   'isActive': false,
+    //   'tab': const Text('time tracking'),
+    // },
     // {
     //   'title': 'scrum',
     //   'icon': HeroIcons.rectangleStack,
@@ -81,8 +76,6 @@ class HomeController extends GetxController {
 
   @override
   Future<void> onReady() async {
-    await _checkIfUserIsInTeam();
-
     _isLoading.value = false;
     update();
 
@@ -121,11 +114,8 @@ class HomeController extends GetxController {
     );
   }
 
-  // check if user is in team
-  Future<void> _checkIfUserIsInTeam() async {
-    User? user = _authServices.currentUser();
-
-    _isInTeam.value = await _teamServices.isUserInTeam(user!.id);
-    update();
+  // logout
+  Future<void> logout() async {
+    await _authServices.signOut();
   }
 }

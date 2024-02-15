@@ -108,6 +108,7 @@ class MockupCreateController extends GetxController {
     // if last step return
     if (_currentStep.value >= 2) {
       List<TemplateConfigModel>? jsonData = await _readLocalJsonConfig();
+      if (jsonData == null) return;
 
       await _createMockup(jsonData: jsonData);
       return;
@@ -191,9 +192,9 @@ class MockupCreateController extends GetxController {
     MockupModel? item = await Get.showOverlay(
       asyncFunction: () => _mockupServices.createMockup(
         mockup: MockupModel(
-          projectId: _selectedProject.value.id!,
+          projectId: _selectedProject.value.id,
           templateId: _templateId.value,
-          teamId: _team.value.id!,
+          teamId: _team.value.id,
           title: _title.value,
           description: _description.value,
           category: _category.value,

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutterpp/App/Controllers/Auth/splash_controller.dart';
+import 'package:flutterpp/App/Views/Global/build_logo.dart';
 import 'package:get/get.dart';
+import 'package:sizer/sizer.dart';
 
 class SplashPage extends GetView<SplashController> {
   const SplashPage({super.key});
@@ -10,25 +12,36 @@ class SplashPage extends GetView<SplashController> {
     return GetBuilder<SplashController>(
       init: SplashController(),
       initState: (_) {},
-      builder: (context) {
+      builder: (_) {
         return Scaffold(
-          body: Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                const FlutterLogo(size: 100),
-                const SizedBox(height: 10),
-                const Text('Flutter ++'),
-                const Text('v0.0.1'),
-                const SizedBox(height: 20),
-                SizedBox(
-                  width: Get.width * 0.02,
-                  height: Get.width * 0.02,
-                  child: const CircularProgressIndicator(strokeWidth: 2),
+          body: Stack(
+            alignment: Alignment.center,
+            children: [
+              Positioned.fill(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    BuildLogo(size: 30.sp),
+                  ],
                 ),
-              ],
-            ),
+              ),
+              if (controller.version.isNotEmpty)
+                Positioned(
+                  bottom: 10.sp,
+                  child: Column(
+                    children: [
+                      SizedBox(
+                        width: context.width * 0.015,
+                        height: context.width * 0.015,
+                        child: const CircularProgressIndicator(strokeWidth: 2),
+                      ),
+                      SizedBox(height: 5.sp),
+                      Text(controller.version),
+                    ],
+                  ),
+                ),
+            ],
           ),
         );
       },

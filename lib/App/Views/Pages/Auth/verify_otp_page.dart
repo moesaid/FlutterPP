@@ -3,6 +3,7 @@ import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutterpp/App/Controllers/Auth/verify_otp_controller.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:get/get.dart';
+import 'package:sizer/sizer.dart';
 
 class VerifyOtpPage extends GetView<VerifyOtpController> {
   const VerifyOtpPage({super.key});
@@ -69,20 +70,56 @@ class VerifyOtpPage extends GetView<VerifyOtpController> {
                                   child: const Text('verify'),
                                 ),
                               ),
-                              const SizedBox(height: 50),
-                              AnimatedOpacity(
-                                duration: const Duration(milliseconds: 500),
-                                opacity: controller.needToResendOtp ? 1 : 0,
-                                child: TextButton(
-                                  onPressed: () {
-                                    controller.resendOtp();
-                                  },
-                                  child: Text(
-                                    'resend otp'.toUpperCase(),
-                                    style: const TextStyle(color: Colors.white),
+                              SizedBox(height: 10.sp),
+                              Row(
+                                children: [
+                                  TextButton(
+                                    onPressed: controller.needToResendOtp
+                                        ? () => controller.resendOtp()
+                                        : null,
+                                    child: AnimatedDefaultTextStyle(
+                                      style: TextStyle(
+                                        color: controller.needToResendOtp
+                                            ? Colors.white
+                                            : Colors.grey,
+                                      ),
+                                      duration: const Duration(
+                                        milliseconds: 300,
+                                      ),
+                                      child: Text(
+                                        'resend otp'.toUpperCase(),
+                                      ),
+                                    ),
+                                  ),
+                                  if (controller.sentCount.isGreaterThan(0))
+                                    Obx(
+                                      () => Container(
+                                        padding: const EdgeInsets.all(5),
+                                        decoration: BoxDecoration(
+                                          color: Get.theme.colorScheme.primary,
+                                          shape: BoxShape.circle,
+                                        ),
+                                        child: Text(
+                                          controller.sentCount.toString(),
+                                          style: TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 4.sp,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                ],
+                              ),
+                              SizedBox(height: 10.sp),
+                              TextButton(
+                                onPressed: () => Get.back(),
+                                child: Text(
+                                  'go back to login page',
+                                  style: TextStyle(
+                                    color: Get.theme.colorScheme.onBackground,
                                   ),
                                 ),
-                              ),
+                              )
                             ],
                           ),
                         ),

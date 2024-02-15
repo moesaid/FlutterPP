@@ -4,6 +4,7 @@ import 'package:flutterpp/App/Controllers/Team/no_team_controller.dart';
 import 'package:flutterpp/App/Views/Global/build_page_layout.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:get/get.dart';
+import 'package:sizer/sizer.dart';
 
 class NoTeamPage extends GetView<NoTeamController> {
   const NoTeamPage({super.key});
@@ -30,7 +31,7 @@ class NoTeamPage extends GetView<NoTeamController> {
                       'kick off your journey with Flutter++ !',
                       style: Get.theme.textTheme.bodyLarge,
                     ),
-                    const SizedBox(height: 10),
+                    SizedBox(height: 1.sp),
                     Text(
                       'by creating a team or joining one !',
                       style: Get.theme.textTheme.bodyMedium,
@@ -114,7 +115,6 @@ class _BuildCreateTeamForm extends StatelessWidget {
     return FormBuilder(
       key: formKey,
       autovalidateMode: AutovalidateMode.onUserInteraction,
-      // autoFocusOnValidationFailure: true,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
@@ -166,28 +166,21 @@ class _BuildTabs extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.start,
-      children: [
-        TabBar(
-          indicator: UnderlineTabIndicator(
-            insets: const EdgeInsets.only(left: 0, right: 80),
-            borderSide: BorderSide(
-              width: 2,
-              color: Get.theme.colorScheme.secondary,
-            ),
-          ),
-          indicatorWeight: 0,
-          isScrollable: true,
-          labelPadding: const EdgeInsets.only(right: 20),
-          labelColor: Get.theme.colorScheme.secondary,
-          unselectedLabelColor:
-              Get.theme.colorScheme.secondary.withOpacity(0.5),
-          tabs: const [
-            Tab(text: 'Create Team'),
-            Tab(text: 'Join Team'),
-          ],
+    return TabBar(
+      indicator: UnderlineTabIndicator(
+        borderSide: BorderSide(
+          width: 2,
+          color: Get.theme.colorScheme.secondary,
         ),
+      ),
+      indicatorWeight: 0,
+      automaticIndicatorColorAdjustment: true,
+      dividerColor: Colors.transparent,
+      labelColor: Get.theme.colorScheme.secondary,
+      unselectedLabelColor: Get.theme.colorScheme.secondary.withOpacity(0.5),
+      tabs: const [
+        Tab(text: 'Create Team'),
+        Tab(text: 'Join Team'),
       ],
     );
   }

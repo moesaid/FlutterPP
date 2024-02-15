@@ -83,6 +83,6 @@ class AuthProvider {
   }
 
   User? currentUser() {
-    return supabase.auth.currentUser!;
+    return supabase.auth.currentUser;
   }
 }

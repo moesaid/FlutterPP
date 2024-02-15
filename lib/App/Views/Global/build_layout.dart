@@ -6,12 +6,14 @@ class BuildLayout extends StatelessWidget {
   final List<Map<String, dynamic>> tabs;
   final int selectedIndex;
   final Function(int) onDestinationSelected;
+  final VoidCallback onLogout;
 
   const BuildLayout({
     super.key,
     required this.tabs,
     required this.selectedIndex,
     required this.onDestinationSelected,
+    required this.onLogout,
   });
 
   @override
@@ -26,6 +28,7 @@ class BuildLayout extends StatelessWidget {
                 BuildRail(
                   tabs: tabs,
                   selectedIndex: selectedIndex,
+                  onLogout: onLogout,
                   onDestinationSelected: (index) =>
                       onDestinationSelected(index),
                 ),

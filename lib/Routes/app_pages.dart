@@ -8,6 +8,7 @@ import 'package:flutterpp/App/Views/Pages/Mockup/mockup_create_page.dart';
 import 'package:flutterpp/App/Views/Pages/Mockup/mockup_index_page.dart';
 import 'package:flutterpp/App/Views/Pages/Mockup/mockup_single_page.dart';
 import 'package:flutterpp/App/Views/Pages/Project/Pages/project_single_page.dart';
+import 'package:flutterpp/App/Views/Pages/Team/no_team_page.dart';
 import 'package:get/get.dart';
 
 part 'app_routes.dart';
@@ -22,6 +23,9 @@ class AppPages {
 
     // home
     GetPage(name: AppRoutes.HOME, page: () => const HomePage()),
+
+    // teams
+    GetPage(name: AppRoutes.No_TEAM, page: () => const NoTeamPage()),
 
     // mockup
     GetPage(name: AppRoutes.MOCKUP_INDEX, page: () => const MockupIndexPage()),

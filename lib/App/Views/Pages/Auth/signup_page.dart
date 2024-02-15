@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutterpp/App/Controllers/Auth/signup_controller.dart';
+import 'package:flutterpp/App/Views/Global/build_logo.dart';
 import 'package:flutterpp/Routes/app_pages.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:get/get.dart';
+import 'package:sizer/sizer.dart';
 
 class SignupPage extends GetView<SignupController> {
   const SignupPage({super.key});
@@ -12,128 +14,131 @@ class SignupPage extends GetView<SignupController> {
   Widget build(BuildContext context) {
     final formKey = GlobalKey<FormBuilderState>();
     return GetBuilder<SignupController>(
-        init: SignupController(),
-        initState: (_) {},
-        builder: (context) {
-          return Scaffold(
-            body: SafeArea(
-              child: Center(
-                child: FormBuilder(
-                  key: formKey,
-                  // autovalidateMode: AutovalidateMode.onUserInteraction,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Text(
-                        'Sign up for Flutter++',
-                        style: Get.theme.textTheme.headlineSmall,
-                      ),
-                      const SizedBox(height: 10),
-                      Text(
-                        'to start creating and sharing your projects.',
-                        style: Get.theme.textTheme.bodySmall,
-                      ),
-                      const SizedBox(height: 20),
-                      SizedBox(
-                        width: 300,
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            FormBuilderTextField(
-                              name: 'name',
-                              decoration: const InputDecoration(
-                                border: OutlineInputBorder(),
-                                labelText: 'Name',
-                              ),
-                              validator: FormBuilderValidators.compose([
-                                FormBuilderValidators.required(),
-                                FormBuilderValidators.maxLength(10),
-                                FormBuilderValidators.minLength(3),
-                              ]),
-                              maxLines: 1,
+      init: SignupController(),
+      initState: (_) {},
+      builder: (_) {
+        return Scaffold(
+          body: SafeArea(
+            child: Center(
+              child: FormBuilder(
+                key: formKey,
+                // autovalidateMode: AutovalidateMode.onUserInteraction,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    BuildLogo(size: 22.sp),
+                    SizedBox(height: 4.sp),
+                    Text(
+                      'Sign up for Flutter++',
+                      style: Get.theme.textTheme.headlineSmall,
+                    ),
+                    const SizedBox(height: 10),
+                    Text(
+                      'to start creating and sharing your projects.',
+                      style: Get.theme.textTheme.bodySmall,
+                    ),
+                    SizedBox(height: 14.sp),
+                    SizedBox(
+                      width: 300,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          FormBuilderTextField(
+                            name: 'name',
+                            decoration: const InputDecoration(
+                              border: OutlineInputBorder(),
+                              labelText: 'Name',
                             ),
-                            const SizedBox(height: 10),
-                            FormBuilderTextField(
-                              name: 'email',
-                              decoration: const InputDecoration(
-                                border: OutlineInputBorder(),
-                                labelText: 'Email',
-                              ),
-                              validator: FormBuilderValidators.compose([
-                                FormBuilderValidators.required(),
-                                FormBuilderValidators.email(),
-                              ]),
+                            validator: FormBuilderValidators.compose([
+                              FormBuilderValidators.required(),
+                              FormBuilderValidators.maxLength(10),
+                              FormBuilderValidators.minLength(3),
+                            ]),
+                            maxLines: 1,
+                          ),
+                          SizedBox(height: 4.sp),
+                          FormBuilderTextField(
+                            name: 'email',
+                            decoration: const InputDecoration(
+                              border: OutlineInputBorder(),
+                              labelText: 'Email',
                             ),
-                            const SizedBox(height: 10),
-                            FormBuilderTextField(
-                              name: 'password',
-                              obscureText: true,
-                              decoration: const InputDecoration(
-                                border: OutlineInputBorder(),
-                                labelText: 'Password',
-                              ),
-                              validator: FormBuilderValidators.compose([
-                                FormBuilderValidators.required(),
-                                FormBuilderValidators.minLength(8),
-                              ]),
+                            validator: FormBuilderValidators.compose([
+                              FormBuilderValidators.required(),
+                              FormBuilderValidators.email(),
+                            ]),
+                          ),
+                          SizedBox(height: 4.sp),
+                          FormBuilderTextField(
+                            name: 'password',
+                            obscureText: true,
+                            decoration: const InputDecoration(
+                              border: OutlineInputBorder(),
+                              labelText: 'Password',
                             ),
-                            const SizedBox(height: 20),
-                            SizedBox(
-                              width: Get.width,
-                              child: ElevatedButton(
-                                onPressed: () {
-                                  if (formKey.currentState!.saveAndValidate()) {
-                                    controller
-                                        .signup(formKey.currentState!.value);
-                                  }
-                                },
-                                child: const Text('sign up'),
-                              ),
+                            validator: FormBuilderValidators.compose([
+                              FormBuilderValidators.required(),
+                              FormBuilderValidators.minLength(8),
+                            ]),
+                          ),
+                          SizedBox(height: 8.sp),
+                          SizedBox(
+                            width: Get.width,
+                            child: ElevatedButton(
+                              onPressed: () {
+                                if (formKey.currentState!.saveAndValidate()) {
+                                  controller
+                                      .signup(formKey.currentState!.value);
+                                }
+                              },
+                              child: const Text('sign up'),
                             ),
-                            const SizedBox(height: 30),
-                            const Text(
-                              'do you have an account?',
-                              style: TextStyle(
-                                color: Colors.grey,
-                              ),
+                          ),
+                          SizedBox(height: 10.sp),
+                          const Text(
+                            'do you have an account?',
+                            style: TextStyle(
+                              color: Colors.grey,
                             ),
-                            const SizedBox(height: 10),
-                            Row(
-                              children: [
-                                TextButton(
-                                  onPressed: () => Get.toNamed(AppRoutes.LOGIN),
-                                  style: TextButton.styleFrom(
-                                    padding: const EdgeInsets.all(0),
-                                    minimumSize: Size.zero,
-                                  ),
-                                  child: Text(
-                                    'login'.toUpperCase(),
-                                    style: TextStyle(
-                                      color: Get.isDarkMode
-                                          ? Colors.white
-                                          : Colors.black,
-                                    ),
+                          ),
+                          SizedBox(height: 2.sp),
+                          Row(
+                            children: [
+                              TextButton(
+                                onPressed: () => Get.toNamed(AppRoutes.LOGIN),
+                                style: TextButton.styleFrom(
+                                  padding: const EdgeInsets.all(0),
+                                  minimumSize: Size.zero,
+                                ),
+                                child: Text(
+                                  'login'.toUpperCase(),
+                                  style: TextStyle(
+                                    color: Get.isDarkMode
+                                        ? Colors.white
+                                        : Colors.black,
                                   ),
                                 ),
-                                Icon(
-                                  Icons.arrow_forward,
-                                  size: 14,
-                                  color: Get.isDarkMode
-                                      ? Colors.white
-                                      : Colors.black,
-                                ),
-                              ],
-                            ),
-                          ],
-                        ),
+                              ),
+                              Icon(
+                                Icons.arrow_forward,
+                                size: 14,
+                                color: Get.isDarkMode
+                                    ? Colors.white
+                                    : Colors.black,
+                              ),
+                            ],
+                          ),
+                        ],
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
               ),
             ),
-          );
-        });
+          ),
+        );
+      },
+    );
   }
 }

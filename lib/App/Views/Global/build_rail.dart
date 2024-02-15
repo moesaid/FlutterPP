@@ -8,9 +8,11 @@ class BuildRail extends StatelessWidget {
   final List<Map<String, dynamic>> tabs;
   final int selectedIndex;
   final Function(int) onDestinationSelected;
+  final VoidCallback onLogout;
   const BuildRail({
     super.key,
     required this.tabs,
+    required this.onLogout,
     required this.selectedIndex,
     required this.onDestinationSelected,
   });
@@ -68,14 +70,23 @@ class BuildRail extends StatelessWidget {
             color: Get.theme.colorScheme.secondaryContainer,
           ),
           IconButton(
-            onPressed: () => debugPrint('object'),
+            onPressed: onLogout,
             icon: const HeroIcon(
-              HeroIcons.cog,
+              HeroIcons.arrowLeftOnRectangle,
               style: HeroIconStyle.mini,
             ),
             color: Get.theme.colorScheme.secondaryContainer,
           ),
           const SizedBox(height: 20),
+          // IconButton(
+          //   onPressed: () => debugPrint('object'),
+          //   icon: const HeroIcon(
+          //     HeroIcons.cog,
+          //     style: HeroIconStyle.mini,
+          //   ),
+          //   color: Get.theme.colorScheme.secondaryContainer,
+          // ),
+          // const SizedBox(height: 20),
         ],
       ),
     );

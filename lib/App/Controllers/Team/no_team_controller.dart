@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart';
-import 'package:flutterpp/App/Controllers/Home/home_controller.dart';
 import 'package:flutterpp/App/Services/Team/team_services.dart';
 import 'package:flutterpp/App/Views/Global/build_overlay.dart';
+import 'package:flutterpp/Routes/app_pages.dart';
 import 'package:get/get.dart';
 
 class NoTeamController extends GetxController {
@@ -9,8 +9,6 @@ class NoTeamController extends GetxController {
   int get activeIndex => _activeIndex.value;
 
   final TeamServices _teamServices = TeamServices();
-
-  HomeController homeController = Get.find();
 
   Future<void> createTeam(Map<String, dynamic> value) async {
     // name
@@ -28,7 +26,7 @@ class NoTeamController extends GetxController {
     );
 
     if (isCreated) {
-      await homeController.onReady();
+      Get.offAllNamed(AppRoutes.SPLASH);
     }
   }
 

@@ -1,7 +1,9 @@
 import 'package:flutterpp/App/Providers/Network/Auth/auth_provider.dart';
 import 'package:flutterpp/App/Services/Global/call_pipeline.dart';
+import 'package:flutterpp/App/Views/Global/build_overlay.dart';
 import 'package:flutterpp/Routes/app_pages.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 class AuthServices {
@@ -68,9 +70,15 @@ class AuthServices {
 
   // signOut
   Future<void> signOut() async {
-    await _callPipeline.futurePipeline(
-      future: () => _authProvider.signOut(),
-      name: 'signOut',
+    await Get.showOverlay(
+      asyncFunction: () async {
+        await _callPipeline.futurePipeline(
+          future: () => _authProvider.signOut(),
+          name: 'signOut',
+        );
+        await GetStorage().erase();
+      },
+      loadingWidget: const BuildOverlay(),
     );
 
     Get.offAllNamed(AppRoutes.SPLASH);

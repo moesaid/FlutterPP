@@ -32,6 +32,7 @@ class ProjectSinglePage extends GetView<ProjectSingleController> {
           child: BuildLoadingOrEmptyLayout(
             isLoading: controller.isLoading,
             isEmpty: controller.project.id == null,
+            title: 'no active project found',
             hasButton: false,
             child: Scaffold(
               appBar: hasAppBar == true

@@ -20,8 +20,6 @@ dependencies:
   loading_animation_widget: ^1.2.0+4
   uuid: ^4.3.3
   flutter_svg: ^2.0.6
-  # appflowy_editor: ^0.1.12
-  # appflowy_board: ^0.1.0
   expansion_tile_group: ^1.2.4
   google_fonts: ^6.1.0
   flex_color_picker: ^3.2.2
@@ -71,7 +69,5 @@ flutter_launcher_icons:
   image_path: "assets/images/app_icon.png"
   windows:
     generate: true
-    # image_path: "assets/images/icon-1024x1024.png"
   macos:
     generate: true
-    # image_path: "assets/images/icon-1024x1024.png"

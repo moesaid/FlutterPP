@@ -5,12 +5,13 @@ class CheckEnvModel {
   String? dartVersion;
   List<FlutterDoctor>? flutterDoctor;
 
-  CheckEnvModel(
-      {this.dartInstalled,
-      this.flutterInstalled,
-      this.flutterVersion,
-      this.dartVersion,
-      this.flutterDoctor});
+  CheckEnvModel({
+    this.dartInstalled,
+    this.flutterInstalled,
+    this.flutterVersion,
+    this.dartVersion,
+    this.flutterDoctor,
+  });
 
   CheckEnvModel.fromJson(Map<String, dynamic> json) {
     dartInstalled = json['dart_installed'];

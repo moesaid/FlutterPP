@@ -10,8 +10,17 @@ class VerifyOtpController extends GetxController {
 
   final AuthServices _authServices = AuthServices();
 
-  final _needToResendOtp = false.obs;
+  final _needToResendOtp = true.obs;
   bool get needToResendOtp => _needToResendOtp.value;
+
+  final _sentCount = 0.obs;
+  int get sentCount => _sentCount.value;
+
+  @override
+  Future<void> onInit() async {
+    await _updateSentStatus();
+    super.onInit();
+  }
 
   Future<void> verifyOtp(Map<String, dynamic> value) async {
     try {
@@ -31,15 +40,10 @@ class VerifyOtpController extends GetxController {
       }
 
       if (res.session != null) {
-        Get.offAllNamed(AppRoutes.HOME);
+        Get.offAllNamed(AppRoutes.SPLASH);
         return;
       }
     } on AuthException catch (e) {
-      if (e.statusCode == '401') {
-        _needToResendOtp.value = true;
-        update();
-      }
-
       BuildSnackBar(
         title: 'Error',
         message: e.message,
@@ -64,6 +68,23 @@ class VerifyOtpController extends GetxController {
         title: 'Success',
         message: 'OTP sent successfully, please check your email',
       ).success();
+      await _updateSentStatus();
     }
+  }
+
+  Future<void> _updateSentStatus() async {
+    _needToResendOtp.value = false;
+    update();
+
+    // count 60 seconds and update the value
+    for (var i = 0; i < 60; i++) {
+      await Future.delayed(const Duration(seconds: 1));
+      _sentCount.value = i;
+      update();
+    }
+
+    _needToResendOtp.value = true;
+    _sentCount.value = 0;
+    update();
   }
 }

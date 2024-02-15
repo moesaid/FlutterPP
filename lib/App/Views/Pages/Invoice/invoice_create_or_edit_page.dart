@@ -45,6 +45,7 @@ class InvoiceCreateOrEditPage extends GetView<InvoiceCreateOrEditController> {
             child: BuildLoadingOrEmptyLayout(
               isLoading: controller.isLoading,
               isEmpty: clients.isEmpty,
+              title: 'No clients found',
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
