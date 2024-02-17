@@ -159,12 +159,13 @@ class BuildEnvCheckDataState extends StatelessWidget {
                         SizedBox(width: 2.sp),
                         Icon(
                           size: 7.sp,
-                          controller.checkEnvModel.flutterInstalled!
+                          controller.checkEnvModel.flutterInstalled == true
                               ? Icons.check_circle
                               : Icons.cancel,
-                          color: controller.checkEnvModel.flutterInstalled!
-                              ? Colors.green
-                              : Colors.red,
+                          color:
+                              controller.checkEnvModel.flutterInstalled == true
+                                  ? Colors.green
+                                  : Colors.red,
                         ),
                       ],
                     ),

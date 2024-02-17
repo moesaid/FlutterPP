@@ -7,6 +7,7 @@ import 'package:intl/date_symbol_data_local.dart';
 import 'package:launch_at_startup/launch_at_startup.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
+import 'package:syntax_highlight/syntax_highlight.dart';
 import 'package:window_manager/window_manager.dart';
 
 class AppInitializer {
@@ -27,6 +28,8 @@ class AppInitializer {
 
     // init local date
     await _initLocalDate();
+
+    await Highlighter.initialize(['dart', 'yaml', 'sql']);
   }
 
   static Future<void> _lunchAppOnStartup() async {

@@ -1,19 +1,35 @@
 import 'dart:io';
 
-import 'package:process_run/process_run.dart';
+import 'package:flutterpp/Storage/local_flutter_path.dart';
+import 'package:process_run/cmd_run.dart';
 
 class CmdFlutterProvider {
+  // get flutter local path
+  Future<String?> getFlutterLocalPath() async {
+    try {
+      return LocalFlutterPath().read();
+    } catch (e) {
+      print('Error getting Flutter local path: $e');
+      return null;
+    }
+  }
+
   // run flutter command
   Future<ProcessResult?> runFlutterCommand(
-    String path,
+    String? path,
     List<String> arguments,
   ) async {
     try {
-      return await runExecutableArguments(
-        'flutter',
+      String? flutter = await getFlutterLocalPath();
+      if (flutter == null) return null;
+
+      ProcessCmd cmd = ProcessCmd(
+        '$flutter/flutter',
         [...arguments],
         workingDirectory: path,
+        runInShell: true,
       );
+      return await runCmd(cmd);
     } catch (e) {
       print('Error running Flutter command: $e');
     }
@@ -21,41 +37,46 @@ class CmdFlutterProvider {
   }
 
   // run flutter pub command
-  Future<void> runFlutterPubCommand(
-    String path,
+  Future<ProcessResult?> runFlutterPubCommand(
+    String? path,
     List<String> arguments,
   ) async {
     try {
-      // output arrguments with out comma
+      String? flutter = await getFlutterLocalPath();
+      if (flutter == null) return null;
 
-      var res = await runExecutableArguments(
-        'flutter',
+      ProcessCmd cmd = ProcessCmd(
+        '$flutter/flutter',
         ['pub', ...arguments],
         workingDirectory: path,
+        runInShell: true,
       );
-      print(res.outLines);
-      print(res.errText);
+      return await runCmd(cmd);
     } catch (e) {
       print('Error running Flutter pub command: $e');
+      return null;
     }
   }
 
   // dart command
-  Future<void> runDartCommand(
-    String path,
+  Future<ProcessResult?> runDartCommand(
+    String? path,
     List<String> arguments,
   ) async {
     try {
-      var res = await runExecutableArguments(
-        'dart',
+      String? flutter = await getFlutterLocalPath();
+      if (flutter == null) return null;
+
+      ProcessCmd cmd = ProcessCmd(
+        '$flutter/dart',
         [...arguments],
         workingDirectory: path,
+        runInShell: true,
       );
-
-      print(res.outLines);
-      print(res.errText);
+      return await runCmd(cmd);
     } catch (e) {
       print('Error running Dart command: $e');
+      return null;
     }
   }
 }
