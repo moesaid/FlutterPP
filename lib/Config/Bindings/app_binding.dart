@@ -1,4 +1,5 @@
 import 'package:flutterpp/App/Controllers/Auth/login_controller.dart';
+import 'package:flutterpp/App/Controllers/Auth/setup_local_flutter_path_controller.dart';
 import 'package:flutterpp/App/Controllers/Auth/signup_controller.dart';
 import 'package:flutterpp/App/Controllers/Auth/splash_controller.dart';
 import 'package:flutterpp/App/Controllers/Auth/verify_otp_controller.dart';
@@ -38,6 +39,8 @@ class AppBinding implements Bindings {
     Get.lazyPut<SignupController>(() => SignupController());
     Get.lazyPut<LoginController>(() => LoginController());
     Get.lazyPut<VerifyOtpController>(() => VerifyOtpController());
+    Get.lazyPut<SetupLocalFlutterPathController>(
+        () => SetupLocalFlutterPathController());
 
     // Dashboard
     Get.lazyPut<DashboardController>(() => DashboardController());

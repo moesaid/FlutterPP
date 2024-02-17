@@ -2,19 +2,26 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:process_run/cmd_run.dart';
-import 'package:process_run/process_run.dart';
+import 'package:flutterpp/App/Providers/Cmd/cmd_flutter_provider.dart';
+import 'package:flutterpp/App/Views/Global/build_snackbar.dart';
 
 class CmdEnvProvider {
+  final CmdFlutterProvider cmd = CmdFlutterProvider();
+
   // check dart installation
   Future<bool> checkDartInstallation() async {
     try {
-      String? res = await which('dart');
+      // which dart
+      ProcessResult? res = await cmd.runDartCommand(null, ['--version']);
 
-      if (res == null) return false;
-
-      return res.isNotEmpty;
-    } catch (_) {
+      // Dart SDK version: 3.2.6 (stable) (Wed Jan 24 13:41:58 2024 +0000) on "macos_x64"
+      // if res is not null, and return contains 'version' then dart is installed
+      return res?.stdout.toString().contains('version') == true;
+    } catch (e) {
+      BuildSnackBar(
+        title: 'Error checking Flutter version',
+        message: e.toString(),
+      ).error();
       return false;
     }
   }
@@ -22,11 +29,17 @@ class CmdEnvProvider {
   // check flutter installation
   Future<bool> checkFlutterInstallation() async {
     try {
-      String? res = await which('flutter');
-      if (res == null) return false;
+      // which flutter
+      ProcessResult? res = await cmd.runFlutterCommand(null, ['--version']);
 
-      return res.isNotEmpty;
-    } catch (_) {
+      // flutter 3.16.9 • channel stable •
+      // if res is not null, and return contains 'Flutter' then flutter is installed
+      return res?.stdout.toString().contains('flutter') == true;
+    } catch (e) {
+      BuildSnackBar(
+        title: 'Error checking Flutter version',
+        message: e.toString(),
+      ).error();
       return false;
     }
   }
@@ -34,13 +47,27 @@ class CmdEnvProvider {
   // check flutter version
   Future<String?> checkFlutterVersion() async {
     try {
-      var flutterVersion = await getFlutterBinVersion();
+      ProcessResult? res = await cmd.runFlutterCommand(
+        null,
+        ['--version'],
+      );
 
-      if (flutterVersion == null) return null;
+      if (res == null) return null;
 
-      return flutterVersion.toString();
+      // Flutter 3.16.9 • channel stable • https://github.com/flutter/flutter.git
+      // get numbers after 'Flutter'
+      String? version = res.stdout.toString().split('Flutter')[1].trim();
+
+      // remove after the number
+      version = version.split(' ')[0];
+
+      return version;
     } catch (e) {
       debugPrint('Error checking Flutter version: $e');
+      BuildSnackBar(
+        title: 'Error checking Flutter version',
+        message: e.toString(),
+      ).error();
       return null;
     }
   }
@@ -48,13 +75,32 @@ class CmdEnvProvider {
   // check dart version
   Future<String?> checkDartVersion() async {
     try {
-      var dartVersion = await getDartBinVersion();
+      // String? dart = await which('dart');
+      // ProcessCmd cmd = ProcessCmd(
+      //   dart,
+      //   ['--version'],
+      //   runInShell: true,
+      // );
+      ProcessResult? res = await cmd.runDartCommand(
+        null,
+        ['--version'],
+      );
 
-      if (dartVersion == null) return null;
+      if (res == null) return null;
 
-      return dartVersion.toString();
+      // Dart SDK version: 3.2.6 (stable) (Wed Jan 24 13:41:58 2024 +0000) on "macos_x64"
+      // get numbers after 'version:'
+      String? version = res.stdout.toString().split('version:')[1].trim();
+
+      // remove after the number
+      version = version.split(' ')[0];
+
+      return version;
     } catch (e) {
-      debugPrint('Error checking Dart version: $e');
+      BuildSnackBar(
+        title: 'Error checking Flutter version',
+        message: e.toString(),
+      ).error();
       return null;
     }
   }
@@ -62,7 +108,18 @@ class CmdEnvProvider {
   // run flutter doctor
   Future<List<Map<String, dynamic>>?> runFlutterDoctor() async {
     try {
-      ProcessResult? res = await runExecutableArguments('flutter', ['doctor']);
+      // String? path = await which('flutter');
+      // ProcessCmd cmd = ProcessCmd(
+      //   '$path flutter',
+      //   ['doctor'],
+      //   runInShell: true,
+      // );
+      ProcessResult? res = await cmd.runFlutterCommand(
+        null,
+        ['doctor'],
+      );
+
+      if (res == null) return null;
 
       List<Map<String, dynamic>>? resItems = [];
 
@@ -77,6 +134,10 @@ class CmdEnvProvider {
       return resItems;
     } catch (e) {
       debugPrint('Error: $e');
+      BuildSnackBar(
+        title: 'Error checking Flutter version',
+        message: e.toString(),
+      ).error();
       return null;
     }
   }

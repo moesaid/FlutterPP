@@ -8,6 +8,7 @@ abstract class AppRoutes {
   static const SIGNUP = '/signup';
   static const LOGIN = '/login';
   static const VERIFY_OTP = '/verify-otp';
+  static const SETUP_LOCAL_FLUTTER_PATH = '/setup-local-flutter-path';
 
   // home
   static const HOME = '/home';

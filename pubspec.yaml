@@ -48,6 +48,7 @@ dependencies:
   printing: ^5.11.1
   currency_picker: ^2.0.20
   flutter_launcher_icons: ^0.13.1
+  tab_container: ^2.0.0
 
 # dev_dependencies
 dev_dependencies:
