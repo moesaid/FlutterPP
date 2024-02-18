@@ -152,6 +152,8 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
+          body_path: build/macos/Build/Products/Release/FlutterPP.dmg
+          body: "Release ${{ steps.versions.outputs.version }}"
           tag_name: ${{ steps.versions.outputs.version }}
           release_name: Release ${{ steps.versions.outputs.version }}
           repo: FlutterPP_Public
