@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutterpp/Config/Bindings/app_binding.dart';
 import 'package:flutterpp/Config/app_initializer.dart';
 import 'package:flutterpp/Config/app_theme.dart';
-import 'package:flutterpp/Config/app_window_config.dart';
 import 'package:flutterpp/Routes/app_pages.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:get/get.dart';
@@ -15,9 +14,6 @@ Future<void> main() async {
 
   // initialize services
   await AppInitializer.initialize();
-
-  // config window
-  AppWindowConfig().config();
 
   // runApp
   runApp(const MyApp());

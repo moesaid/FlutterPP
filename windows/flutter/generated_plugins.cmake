@@ -8,6 +8,7 @@ list(APPEND FLUTTER_PLUGIN_LIST
   flutter_platform_alert
   printing
   screen_retriever
+  system_tray
   url_launcher_windows
   window_manager
 )
