@@ -132,7 +132,6 @@ jobs:
 
       - name: Create dmg
         run: |
-          cd $MACOS_APP_RELEASE_PATH
           ./scripts/create_mac_dmg.sh
 
       - name: Compress artifacts
