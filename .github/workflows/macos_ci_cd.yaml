@@ -11,6 +11,7 @@ jobs:
     timeout-minutes: 30
     env:
       GITHUB_TOKEN: ${{ secrets.GIT_TOKEN }}
+      MACOS_APP_RELEASE_PATH: build/macos/Build/Products/Release
 
     steps:
       - uses: actions/checkout@v2.4.0
@@ -94,7 +95,7 @@ jobs:
 
           # We finally codesign our app bundle, specifying the Hardened runtime option
 
-          /usr/bin/codesign --force -s "$MACOS_CERTIFICATE_NAME" --options runtime build/macos/Build/Products/Release/FlutterPP.app -v
+          /usr/bin/codesign --force -s "$MACOS_CERTIFICATE_NAME" --options runtime $MACOS_APP_RELEASE_PATH/FlutterPP.app -v
 
       - name: "Notarize app bundle"
         # Extract the secrets we defined earlier as environment variables
@@ -114,7 +115,7 @@ jobs:
           # notarization service
 
           echo "Creating temp notarization archive"
-          ditto -c -k --keepParent "build/macos/Build/Products/Release/FlutterPP.app" "notarization.zip"
+          ditto -c -k --keepParent "$MACOS_APP_RELEASE_PATH/FlutterPP.app" "notarization.zip"
 
           # Here we send the notarization request to the Apple's Notarization service, waiting for the result.
           # This typically takes a few seconds inside a CI environment, but it might take more depending on the App
@@ -127,14 +128,15 @@ jobs:
           # Finally, we need to "attach the staple" to our executable, which will allow our app to be
           # validated by macOS even when an internet connection is not available.
           echo "Attach staple"
-          xcrun stapler staple "build/macos/Build/Products/Release/FlutterPP.app"
+          xcrun stapler staple "$MACOS_APP_RELEASE_PATH/FlutterPP.app"
 
       - name: Create dmg
         run: |
+          cd $MACOS_APP_RELEASE_PATH
           ./scripts/create_mac_dmg.sh
 
       - name: Compress artifacts
-        run: zip -r macos-${{ github.event.release.tag_name }}.zip build/macos/Build/Products/Release
+        run: zip -r macos-${{ github.event.release.tag_name }}.zip $MACOS_APP_RELEASE_PATH
 
       - name: Upload artifacts to release
         uses: svenstaro/upload-release-action@2.2.1
@@ -152,7 +154,7 @@ jobs:
           # GitHub token.
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           # Local file to upload.
-          file: build/macos/Build/Products/Release/FlutterPP.dmg
+          file: $MACOS_APP_RELEASE_PATH/FlutterPP.dmg
           asset_name: FlutterPP-macos-${{ github.event.release.tag_name }}.dmg
           # Tag to use as a release.
           tag: ${{ github.ref }}
