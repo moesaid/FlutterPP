@@ -147,19 +147,28 @@ jobs:
           tag: ${{ steps.versions.outputs.version }}
           release_name: Release ${{ steps.versions.outputs.version }}
 
-      - name: Upload Release to public
-        uses: ncipollo/release-action@v1
+      - name: Release to the public
+        uses: surmon-china/create-release@v1.0.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag: ${{ steps.versions.outputs.version }}
-          name: Release ${{ steps.versions.outputs.version }}
-          artifacts: build/macos/Build/Products/Release/FlutterPP.dmg
-          token: ${{ secrets.GIT_TOKEN }}
-          repo: moesaid/FlutterPP_Public
+          tag_name: ${{ steps.versions.outputs.version }}
+          release_name: Release ${{ steps.versions.outputs.version }}
+          repo: FlutterPP_Public
           owner: moesaid
           draft: true
 
-          # repo_token: ${{ secrets.GIT_TOKEN }}
-          # file: build/macos/Build/Products/Release/FlutterPP.dmg
-          # asset_name: FlutterPP-macos-${{ steps.versions.outputs.version }}.dmg
-          # release_name: Release ${{ steps.versions.outputs.version }}
-          # repo_name: moesaid/FlutterPP_Public
+        # with:
+        #   tag: ${{ steps.versions.outputs.version }}
+        #   name: Release ${{ steps.versions.outputs.version }}
+        #   artifacts: build/macos/Build/Products/Release/FlutterPP.dmg
+        #   token: ${{ secrets.GIT_TOKEN }}
+        #   repo: FlutterPP_Public
+        #   owner: moesaid
+        #   draft: true
+
+        # repo_token: ${{ secrets.GIT_TOKEN }}
+        # file: build/macos/Build/Products/Release/FlutterPP.dmg
+        # asset_name: FlutterPP-macos-${{ steps.versions.outputs.version }}.dmg
+        # release_name: Release ${{ steps.versions.outputs.version }}
+        # repo_name: moesaid/FlutterPP_Public
