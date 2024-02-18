@@ -81,7 +81,9 @@ class BuildDashboardChartSection extends StatelessWidget {
                 mainAxisExtent: 60.sp,
               ),
               children: const [
-                BuildDashboardNumbersItem(),
+                BuildDashboardNumbersItem(
+                  title: '0.0.2',
+                ),
               ],
             ),
           ),
