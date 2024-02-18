@@ -41,113 +41,34 @@ jobs:
       - name: Flutter get packages
         run: flutter pub get
 
-      - name: Setup Codesign
-        # Extract the secrets we defined earlier as environment variables
+      - name: Install the Apple certificate and provisioning profile
         env:
-          MACOS_CERTIFICATE: ${{ secrets.PROD_MACOS_CERTIFICATE }}
-          MACOS_CERTIFICATE_PWD: ${{ secrets.PROD_MACOS_CERTIFICATE_PWD }}
-          MACOS_CERTIFICATE_NAME: ${{ secrets.PROD_MACOS_CERTIFICATE_NAME }}
-          MACOS_CI_KEYCHAIN_PWD: ${{ secrets.PROD_MACOS_CI_KEYCHAIN_PWD }}
-          PROD_MACOS_PEOVISION_PROFILE: ${{ secrets.PROD_MACOS_PEOVISION_PROFILE }}
+          BUILD_CERTIFICATE_BASE64: ${{ secrets.PROD_MACOS_CERTIFICATE }}
+          P12_PASSWORD: ${{ secrets.PROD_MACOS_CERTIFICATE_PWD }}
+          BUILD_PROVISION_PROFILE_BASE64: ${{ secrets.PROD_MACOS_PEOVISION_PROFILE }}
+          KEYCHAIN_PASSWORD: ${{ secrets.PROD_MACOS_CI_KEYCHAIN_PWD }}
         run: |
-          # Variables
-          PP_PATH=$RUNNER_TEMP/build_pp.provisionprofile
+          # create variables
+          CERTIFICATE_PATH=$RUNNER_TEMP/build_certificate.p12
+          PP_PATH=$RUNNER_TEMP/build_pp.mobileprovision
+          KEYCHAIN_PATH=$RUNNER_TEMP/app-signing.keychain-db
 
-          # Turn our base64-encoded certificate back to a regular .p12 file
-          echo $MACOS_CERTIFICATE | base64 --decode > certificate.p12
-          echo -n "$PROD_MACOS_PEOVISION_PROFILE" | base64 --decode -o $PP_PATH
+          # import certificate and provisioning profile from secrets
+          echo -n "$BUILD_CERTIFICATE_BASE64" | base64 --decode -o $CERTIFICATE_PATH
+          echo -n "$BUILD_PROVISION_PROFILE_BASE64" | base64 --decode -o $PP_PATH
 
+          # create temporary keychain
+          security create-keychain -p "$KEYCHAIN_PASSWORD" $KEYCHAIN_PATH
+          security set-keychain-settings -lut 21600 $KEYCHAIN_PATH
+          security unlock-keychain -p "$KEYCHAIN_PASSWORD" $KEYCHAIN_PATH
 
-          # We need to create a new keychain, otherwise using the certificate will prompt
-          # with a UI dialog asking for the certificate password, which we can't
-          # use in a headless CI environment
-
-          security create-keychain -p "$MACOS_CI_KEYCHAIN_PWD" build.keychain
-          security default-keychain -s build.keychain
-          security unlock-keychain -p "$MACOS_CI_KEYCHAIN_PWD" build.keychain
-          security import certificate.p12 -k build.keychain -P "$MACOS_CERTIFICATE_PWD" -T /usr/bin/codesign
-          security set-key-partition-list -S apple-tool:,apple:,codesign: -s -k "$MACOS_CI_KEYCHAIN_PWD" build.keychain
+          # import certificate to keychain
+          security import $CERTIFICATE_PATH -P "$P12_PASSWORD" -A -t cert -f pkcs12 -k $KEYCHAIN_PATH
+          security list-keychain -d user -s $KEYCHAIN_PATH
 
           # apply provisioning profile
           mkdir -p ~/Library/MobileDevice/Provisioning\ Profiles
           cp $PP_PATH ~/Library/MobileDevice/Provisioning\ Profiles
 
-      - name: Flutter build app
+      - name: Build MacOS
         run: flutter build macos --release
-
-      - name: Codesign app
-        env:
-          MACOS_CERTIFICATE: ${{ secrets.PROD_MACOS_CERTIFICATE }}
-          MACOS_CERTIFICATE_PWD: ${{ secrets.PROD_MACOS_CERTIFICATE_PWD }}
-          MACOS_CERTIFICATE_NAME: ${{ secrets.PROD_MACOS_CERTIFICATE_NAME }}
-          MACOS_CI_KEYCHAIN_PWD: ${{ secrets.PROD_MACOS_CI_KEYCHAIN_PWD }}
-        run: |
-          # We finally codesign our app bundle, specifying the Hardened runtime option
-          /usr/bin/codesign --force -s "$MACOS_CERTIFICATE_NAME" --options runtime build/macos/Build/Products/Release/FlutterPP.app -v
-
-      - name: "Notarize app bundle"
-        # Extract the secrets we defined earlier as environment variables
-        env:
-          PROD_MACOS_NOTARIZATION_APPLE_ID: ${{ secrets.PROD_MACOS_NOTARIZATION_APPLE_ID }}
-          PROD_MACOS_NOTARIZATION_TEAM_ID: ${{ secrets.PROD_MACOS_NOTARIZATION_TEAM_ID }}
-          PROD_MACOS_NOTARIZATION_PWD: ${{ secrets.PROD_MACOS_NOTARIZATION_PWD }}
-        run: |
-          # Store the notarization credentials so that we can prevent a UI password dialog
-          # from blocking the CI
-
-          echo "Create keychain profile"
-          xcrun notarytool store-credentials "notarytool-profile" --apple-id "$PROD_MACOS_NOTARIZATION_APPLE_ID" --team-id "$PROD_MACOS_NOTARIZATION_TEAM_ID" --password "$PROD_MACOS_NOTARIZATION_PWD"
-
-          # We can't notarize an app bundle directly, but we need to compress it as an archive.
-          # Therefore, we create a zip file containing our app bundle, so that we can send it to the
-          # notarization service
-
-          echo "Creating temp notarization archive"
-          ditto -c -k --keepParent "build/macos/Build/Products/Release/FlutterPP.app" "notarization.zip"
-
-          # Here we send the notarization request to the Apple's Notarization service, waiting for the result.
-          # This typically takes a few seconds inside a CI environment, but it might take more depending on the App
-          # characteristics. Visit the Notarization docs for more information and strategies on how to optimize it if
-          # you're curious
-
-          echo "Notarize app"
-          xcrun notarytool submit "notarization.zip" --keychain-profile "notarytool-profile" --wait
-
-          # Finally, we need to "attach the staple" to our executable, which will allow our app to be
-          # validated by macOS even when an internet connection is not available.
-          echo "Attach staple"
-          xcrun stapler staple "build/macos/Build/Products/Release/FlutterPP.app"
-
-      - name: Clean up keychain and provisioning profile
-        if: ${{ always() }}
-        run: |
-          security delete-keychain $RUNNER_TEMP/app-signing.keychain-db
-          rm ~/Library/MobileDevice/Provisioning\ Profiles/build_pp.provisionprofile
-
-      - name: Create dmg
-        run: |
-          ./scripts/create_mac_dmg.sh
-
-      - name: Compress artifacts
-        run: zip -r macos-${{ github.event.release.tag_name }}.zip build/macos/Build/Products/Release
-
-      - name: Upload artifacts to release
-        uses: svenstaro/upload-release-action@2.2.1
-        with:
-          # GitHub token.
-          repo_token: ${{ secrets.GIT_TOKEN }}
-          # Local file to upload.
-          file: macos-${{ github.event.release.tag_name }}.zip
-          # Tag to use as a release.
-          tag: ${{ github.ref }}
-
-      - name: Upload DMG to release
-        uses: svenstaro/upload-release-action@2.2.1
-        with:
-          # GitHub token.
-          repo_token: ${{ secrets.GIT_TOKEN }}
-          # Local file to upload.
-          file: build/macos/Build/Products/Release/FlutterPP.dmg
-          asset_name: FlutterPP-macos-${{ github.event.release.tag_name }}.dmg
-          # Tag to use as a release.
-          tag: ${{ github.ref }}
