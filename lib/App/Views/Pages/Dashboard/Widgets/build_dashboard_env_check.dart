@@ -152,9 +152,13 @@ class BuildEnvCheckDataState extends StatelessWidget {
                   children: [
                     Row(
                       children: [
-                        Text(
-                          'flutter installed'.capitalize!,
-                          style: Get.textTheme.titleSmall,
+                        Flexible(
+                          child: Text(
+                            'flutter installed'.capitalize!,
+                            style: Get.textTheme.titleSmall?.copyWith(
+                              fontSize: 5.sp,
+                            ),
+                          ),
                         ),
                         SizedBox(width: 2.sp),
                         Icon(
@@ -175,7 +179,9 @@ class BuildEnvCheckDataState extends StatelessWidget {
                       Text(
                         'flutter version: ${controller.checkEnvModel.flutterVersion}'
                             .capitalize!,
-                        style: Get.textTheme.bodySmall,
+                        style: Get.textTheme.bodySmall?.copyWith(
+                          fontSize: 4.sp,
+                        ),
                       ),
                   ],
                 ),
@@ -200,9 +206,13 @@ class BuildEnvCheckDataState extends StatelessWidget {
                   children: [
                     Row(
                       children: [
-                        Text(
-                          'dart installed'.capitalize!,
-                          style: Get.textTheme.titleSmall,
+                        Flexible(
+                          child: Text(
+                            'dart installed'.capitalize!,
+                            style: Get.textTheme.titleSmall?.copyWith(
+                              fontSize: 5.sp,
+                            ),
+                          ),
                         ),
                         SizedBox(width: 2.sp),
                         Icon(
@@ -222,7 +232,9 @@ class BuildEnvCheckDataState extends StatelessWidget {
                       Text(
                         'dart version: ${controller.checkEnvModel.dartVersion}'
                             .capitalize!,
-                        style: Get.textTheme.bodySmall,
+                        style: Get.textTheme.bodySmall?.copyWith(
+                          fontSize: 4.sp,
+                        ),
                       ),
                   ],
                 ),
