@@ -52,7 +52,7 @@ class MyApp extends StatelessWidget {
               getLatestVersion: () async {
                 final data = await http.get(
                   Uri.parse(
-                    "https://api.github.com/repos/moesaid/flutterpp/releases/latest",
+                    "https://api.github.com/repos/moesaid/FlutterPP_Public/releases/latest",
                   ),
                 );
                 return jsonDecode(data.body)["tag_name"];
@@ -77,7 +77,7 @@ class MyApp extends StatelessWidget {
 
                 // Make sure that this link includes the platform extension with which to save your binary.
                 // If you use https://exapmle.com/latest/macos for instance then you need to create your own file using `getDownloadFileLocation`
-                return "https://github.com/moesaid/flutterpp/releases/download/$version/updat-$operatingSystem-$version.$platformExt";
+                return "https://github.com/moesaid/FlutterPP_Public/releases/download/$version/FlutterPP-$operatingSystem-$version.$platformExt";
               },
               // Lastly, enter your app name so we know what to call your files.
               appName: "FlutterPP",
