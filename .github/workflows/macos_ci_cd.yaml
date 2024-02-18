@@ -134,7 +134,7 @@ jobs:
             git rev-list --count origin/main
           } #4
           MAIN_COUNT=$(parse_git_hash) #5
-          APP_VERSION="$VERSION_WITHOUT_SUFFIX+$MAIN_COUNT" #6
+          APP_VERSION="$VERSION_WITHOUT_SUFFIX" #6
           echo "::set-output name=version::$(echo $APP_VERSION)" #7
 
       - name: Upload Release Asset
@@ -146,31 +146,3 @@ jobs:
           asset_name: FlutterPP-macos-${{ steps.versions.outputs.version }}.dmg
           tag: ${{ steps.versions.outputs.version }}
           release_name: Release ${{ steps.versions.outputs.version }}
-
-      - name: Release to the public
-        uses: surmon-china/create-release@v1.0.0
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          body_path: build/macos/Build/Products/Release/FlutterPP.dmg
-          body: "Release ${{ steps.versions.outputs.version }}"
-          tag_name: ${{ steps.versions.outputs.version }}
-          release_name: Release ${{ steps.versions.outputs.version }}
-          repo: FlutterPP_Public
-          owner: moesaid
-          draft: true
-
-        # with:
-        #   tag: ${{ steps.versions.outputs.version }}
-        #   name: Release ${{ steps.versions.outputs.version }}
-        #   artifacts: build/macos/Build/Products/Release/FlutterPP.dmg
-        #   token: ${{ secrets.GIT_TOKEN }}
-        #   repo: FlutterPP_Public
-        #   owner: moesaid
-        #   draft: true
-
-        # repo_token: ${{ secrets.GIT_TOKEN }}
-        # file: build/macos/Build/Products/Release/FlutterPP.dmg
-        # asset_name: FlutterPP-macos-${{ steps.versions.outputs.version }}.dmg
-        # release_name: Release ${{ steps.versions.outputs.version }}
-        # repo_name: moesaid/FlutterPP_Public
