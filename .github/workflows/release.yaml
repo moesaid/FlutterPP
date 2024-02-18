@@ -64,7 +64,7 @@ jobs:
           security set-key-partition-list -S apple-tool:,apple:,codesign: -s -k "$MACOS_CI_KEYCHAIN_PWD" build.keychain
 
       - name: Flutter build app
-        run: flutter build macos --release --allowProvisioningUpdates --no-codesign
+        run: flutter build macos --release
 
       - name: Codesign app
         env:
