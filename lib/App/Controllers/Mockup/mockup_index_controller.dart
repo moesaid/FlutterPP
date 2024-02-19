@@ -2,6 +2,7 @@ import 'package:flutterpp/App/Models/mockup_model.dart';
 import 'package:flutterpp/App/Models/team_model.dart';
 import 'package:flutterpp/App/Services/Mockups/mockup_services.dart';
 import 'package:flutterpp/App/Services/Team/team_services.dart';
+import 'package:flutterpp/App/Views/Global/build_overlay.dart';
 import 'package:get/get.dart';
 
 class MockupIndexController extends GetxController {
@@ -55,5 +56,19 @@ class MockupIndexController extends GetxController {
     }
 
     update();
+  }
+
+  deleteItem(String id) async {
+    bool isDeleted = await Get.showOverlay(
+      asyncFunction: () async {
+        return await _mockupServices.deleteMockup(id: id);
+      },
+      loadingWidget: const BuildOverlay(),
+    );
+
+    if (isDeleted) {
+      items.removeWhere((element) => element.id == id);
+      update();
+    }
   }
 }

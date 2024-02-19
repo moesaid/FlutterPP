@@ -54,4 +54,11 @@ class MockupServices {
 
     return item;
   }
+
+  // delete mockup
+  Future<bool> deleteMockup({required String id}) async {
+    bool isDeleted = await mockupProvider.deleteMockup(mockupId: id);
+
+    return isDeleted;
+  }
 }

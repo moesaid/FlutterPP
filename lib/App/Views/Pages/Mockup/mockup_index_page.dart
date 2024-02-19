@@ -146,7 +146,16 @@ class BuildMockupIndexItem extends StatelessWidget {
                   ),
                   backgroundColor: Get.theme.colorScheme.secondaryContainer,
                 ),
-                const BuildCustomDropdown(),
+                BuildCustomDropdown(
+                  items: [
+                    PopupMenuItem<String>(
+                      onTap: () => controller.deleteItem(item.id!),
+                      child: const ListTile(
+                        title: Text('delete'),
+                      ),
+                    ),
+                  ],
+                ),
               ],
             ),
             Column(

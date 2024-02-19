@@ -117,9 +117,13 @@ class MockupProvider {
 
   // delete mockup
   Future<bool> deleteMockup({required String mockupId}) async {
-    List<Map> data = await supabase.from('mockups').delete().eq('id', mockupId);
+    try {
+      await supabase.from('mockups').delete().eq('id', mockupId);
+    } catch (e) {
+      print(e);
+      return false;
+    }
 
-    if (data.isEmpty) return false;
     return true;
   }
 }
