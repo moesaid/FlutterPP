@@ -156,13 +156,17 @@ class BuildMockupIndexItem extends StatelessWidget {
                   item.title!.capitalize!,
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
-                  style: Get.theme.textTheme.titleMedium,
+                  style: Get.theme.textTheme.titleMedium?.copyWith(
+                    fontSize: 6.sp,
+                  ),
                 ),
                 Text(
                   item.description!,
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
-                  style: Get.theme.textTheme.bodySmall,
+                  style: Get.theme.textTheme.bodySmall?.copyWith(
+                    fontSize: 4.sp,
+                  ),
                 ),
               ],
             )
