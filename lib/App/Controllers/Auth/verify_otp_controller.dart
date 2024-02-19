@@ -1,4 +1,5 @@
 import 'package:flutterpp/App/Services/Auth/auth_services.dart';
+import 'package:flutterpp/App/Views/Global/build_overlay.dart';
 import 'package:flutterpp/App/Views/Global/build_snackbar.dart';
 import 'package:flutterpp/Routes/app_pages.dart';
 import 'package:get/get.dart';
@@ -24,10 +25,15 @@ class VerifyOtpController extends GetxController {
 
   Future<void> verifyOtp(Map<String, dynamic> value) async {
     try {
-      AuthResponse? res = await _authServices.verifyOtp(
-        type: otpType,
-        otp: value['otp'],
-        email: email,
+      AuthResponse? res = await Get.showOverlay(
+        asyncFunction: () async {
+          return await _authServices.verifyOtp(
+            type: otpType,
+            otp: value['otp'],
+            email: email,
+          );
+        },
+        loadingWidget: const BuildOverlay(),
       );
 
       if (res == null) {
@@ -62,7 +68,13 @@ class VerifyOtpController extends GetxController {
 
   // Resend OTP
   Future<void> resendOtp() async {
-    bool isSent = await _authServices.signInWithOtp(email: email);
+    bool isSent = await Get.showOverlay(
+      asyncFunction: () async {
+        return await _authServices.signInWithOtp(email: email);
+      },
+      loadingWidget: const BuildOverlay(),
+    );
+
     if (isSent) {
       BuildSnackBar(
         title: 'Success',

@@ -194,8 +194,6 @@ class InvoiceIndexController extends GetxController {
 
       return;
     }
-
-    print('create invoice');
   }
 
   // update status
