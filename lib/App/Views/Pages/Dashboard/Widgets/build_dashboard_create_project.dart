@@ -24,7 +24,7 @@ class BuildDashboardCreateProject extends StatelessWidget {
           title: 'Create new project'.capitalize!,
           sheetWidth: context.width * 0.8,
           body: Obx(() {
-            debugPrint(controller.selectedColors.first.toString());
+            debugPrint("❌${controller.selectedColors}");
             return ProjectCreatePage(
               createProject: (data) => controller.createProject(formData: data),
               onColorChange: (data) => controller.onColorChange(data),

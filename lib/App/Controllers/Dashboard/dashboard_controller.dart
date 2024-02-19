@@ -150,6 +150,12 @@ class DashboardController extends GetxController {
         if (project == null) return;
 
         _projects.add(project);
+
+        // if no active project set active project
+        if (activeProject.id == null) {
+          await updateActiveProject(project);
+        }
+
         update();
 
         if (project.id == null) return;
