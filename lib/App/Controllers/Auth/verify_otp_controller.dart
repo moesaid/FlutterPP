@@ -86,6 +86,7 @@ class VerifyOtpController extends GetxController {
 
   Future<void> _updateSentStatus() async {
     _needToResendOtp.value = false;
+
     update();
 
     // count 60 seconds and update the value
