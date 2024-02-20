@@ -36,6 +36,9 @@ class BuildClientCreateOrEditDialog extends StatelessWidget {
               'zip': _.activeClient.zip,
               'country': _.activeClient.country,
               'website': _.activeClient.website,
+              'internal_notes': _.activeClient.internalNotes,
+              'currency': _.activeClient.currency,
+              'currency_symbol': _.activeClient.currencySymbol,
             },
             child: Stepper(
               type: StepperType.vertical,

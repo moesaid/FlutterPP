@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:clipboard/clipboard.dart';
+import 'package:flutterpp/App/Views/Global/build_overlay.dart';
 import 'package:flutterpp/App/Views/Global/build_snackbar.dart';
 import 'package:flutterpp/Routes/app_pages.dart';
 import 'package:flutterpp/Storage/local_flutter_path.dart';
@@ -73,10 +74,18 @@ class SetupLocalFlutterPathController extends GetxController {
       path = path.substring(0, path.length - 1);
     }
 
-    // check if is excutable
-    ProcessCmd cmd =
-        ProcessCmd('$path/flutter', ['--version'], runInShell: true);
-    ProcessResult result = await runCmd(cmd);
+    ProcessResult result = await Get.showOverlay(
+      asyncFunction: () async {
+        // check if is excutable
+        ProcessCmd cmd = ProcessCmd(
+          '$path/flutter',
+          ['--version'],
+          runInShell: true,
+        );
+        return await runCmd(cmd);
+      },
+      loadingWidget: const BuildOverlay(),
+    );
 
     // if error
     if (result.exitCode != 0) {

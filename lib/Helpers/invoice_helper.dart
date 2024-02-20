@@ -43,17 +43,9 @@ class InvoiceHelper {
       case 'paid':
         return Colors.green;
       case 'unpaid':
-        return Colors.tealAccent;
+        return Colors.red;
       case 'draft':
         return Colors.blue;
-      case 'sent':
-        return Colors.purple;
-      case 'viewed':
-        return Colors.pink;
-      case 'overdue':
-        return Colors.red;
-      case 'padding':
-        return Colors.lime;
 
       default:
         return Colors.grey;

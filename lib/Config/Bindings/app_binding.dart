@@ -7,6 +7,7 @@ import 'package:flutterpp/App/Controllers/Clients/client_index_controller.dart';
 import 'package:flutterpp/App/Controllers/Clients/client_list_controller.dart';
 import 'package:flutterpp/App/Controllers/Dashboard/dashboard_controller.dart';
 import 'package:flutterpp/App/Controllers/Dashboard/dashboard_env_check_controller.dart';
+import 'package:flutterpp/App/Controllers/Global/app_update_controller.dart';
 import 'package:flutterpp/App/Controllers/Global/emoji_dialog_controller.dart';
 import 'package:flutterpp/App/Controllers/Home/home_controller.dart';
 import 'package:flutterpp/App/Controllers/Invoice/invoice_create_controller.dart';
@@ -87,5 +88,8 @@ class AppBinding implements Bindings {
     Get.lazyPut<InvoiceSingleController>(() => InvoiceSingleController());
     Get.lazyPut<InvoiceCreateOrEditController>(
         () => InvoiceCreateOrEditController());
+
+    // app update
+    Get.lazyPut<AppUpdateController>(() => AppUpdateController());
   }
 }

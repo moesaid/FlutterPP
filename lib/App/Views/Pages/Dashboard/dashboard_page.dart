@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutterpp/App/Controllers/Dashboard/dashboard_controller.dart';
+import 'package:flutterpp/App/Models/invoice_model.dart';
 import 'package:flutterpp/App/Views/Global/build_loading_switch.dart';
 import 'package:flutterpp/App/Views/Pages/Dashboard/Sections/build_dashboard_project_section.dart';
+import 'package:flutterpp/App/Views/Pages/Dashboard/Widgets/build_dashboard_chart.dart';
 import 'package:flutterpp/App/Views/Pages/Dashboard/Widgets/build_dashboard_env_check.dart';
 import 'package:flutterpp/App/Views/Pages/Dashboard/Widgets/build_dashboard_numbers_item.dart';
+import 'package:flutterpp/App/Views/Pages/Dashboard/Widgets/build_dashboard_version_display.dart';
 import 'package:get/get.dart';
+import 'package:heroicons/heroicons.dart';
 import 'package:sizer/sizer.dart';
 
 class DashboardPage extends GetView<DashboardController> {
@@ -43,7 +47,13 @@ class DashboardPage extends GetView<DashboardController> {
                       ),
                     ),
                     SizedBox(height: 10.sp),
-                    const BuildDashboardChartSection(),
+                    BuildDashboardChartSection(
+                      projectsCount: controller.projects.length,
+                      teamsCount: controller.teamMembers.length,
+                      clientsCount: controller.clients.length,
+                      invoicesCount: controller.invoices.length,
+                      invoices: controller.invoices,
+                    ),
                     SizedBox(height: 10.sp),
                     BuildDashboardProjectSection(controller: controller),
                   ],
@@ -58,8 +68,15 @@ class DashboardPage extends GetView<DashboardController> {
 }
 
 class BuildDashboardChartSection extends StatelessWidget {
+  final int? projectsCount, clientsCount, invoicesCount, teamsCount;
+  final List<InvoiceModel> invoices;
   const BuildDashboardChartSection({
+    this.projectsCount,
+    this.clientsCount,
+    this.invoicesCount,
+    this.teamsCount,
     super.key,
+    required this.invoices,
   });
 
   @override
@@ -69,23 +86,62 @@ class BuildDashboardChartSection extends StatelessWidget {
         const BuildDashboardEnvCheck(),
         SizedBox(width: 5.sp),
         Expanded(
-          child: SizedBox(
-            height: 60.sp,
-            child: GridView(
-              scrollDirection: Axis.vertical,
-              physics: const NeverScrollableScrollPhysics(),
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 4,
-                crossAxisSpacing: 5.sp,
-                mainAxisSpacing: 5.sp,
-                mainAxisExtent: 60.sp,
+          child: Column(
+            children: [
+              Row(
+                children: [
+                  const BuildDashboardVersionDisplay(),
+                  SizedBox(width: 5.sp),
+                  Expanded(
+                    child: BuildDashboardChart(invoices: invoices),
+                  ),
+                ],
               ),
-              children: const [
-                BuildDashboardNumbersItem(
-                  title: '0.0.2',
+              SizedBox(height: 5.sp),
+              SizedBox(
+                height: context.height * 0.15,
+                child: GridView(
+                  scrollDirection: Axis.vertical,
+                  physics: const NeverScrollableScrollPhysics(),
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 4,
+                    crossAxisSpacing: 5.sp,
+                    mainAxisSpacing: 5.sp,
+                    mainAxisExtent: context.height * 0.15,
+                  ),
+                  children: [
+                    BuildDashboardNumbersItem(
+                      title: 'count',
+                      subtitle: 'Projects',
+                      numbers: projectsCount,
+                      icon: HeroIcons.bolt,
+                      bgColor: Colors.indigo,
+                    ),
+                    BuildDashboardNumbersItem(
+                      title: 'count',
+                      subtitle: 'team members',
+                      numbers: teamsCount,
+                      icon: HeroIcons.users,
+                      bgColor: Colors.purple,
+                    ),
+                    BuildDashboardNumbersItem(
+                      title: 'count',
+                      subtitle: 'clients',
+                      numbers: clientsCount,
+                      icon: HeroIcons.briefcase,
+                      bgColor: Colors.green,
+                    ),
+                    BuildDashboardNumbersItem(
+                      title: 'count',
+                      subtitle: 'invoices',
+                      numbers: invoicesCount,
+                      icon: HeroIcons.currencyDollar,
+                      bgColor: Colors.orange,
+                    ),
+                  ],
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
       ],

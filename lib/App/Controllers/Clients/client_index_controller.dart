@@ -70,6 +70,11 @@ class ClientIndexController extends GetxController {
           currencySymbol: formKey.currentState?.fields['currencySymbol']?.value,
           website: formKey.currentState?.fields['website']?.value,
           internalNotes: formKey.currentState?.fields['internalNotes']?.value,
+          contactName: formKey.currentState?.fields['contact_name']?.value,
+          city: formKey.currentState?.fields['city']?.value,
+          state: formKey.currentState?.fields['state']?.value,
+          country: formKey.currentState?.fields['country']?.value,
+          zip: formKey.currentState?.fields['zip']?.value,
         );
 
         await Get.showOverlay(

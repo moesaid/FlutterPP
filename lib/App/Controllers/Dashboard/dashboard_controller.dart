@@ -3,11 +3,15 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutterpp/App/Controllers/Home/home_controller.dart';
+import 'package:flutterpp/App/Models/client_model.dart';
+import 'package:flutterpp/App/Models/invoice_model.dart';
 import 'package:flutterpp/App/Models/profile_model.dart';
 import 'package:flutterpp/App/Models/project_model.dart';
 import 'package:flutterpp/App/Models/team_member_model.dart';
 import 'package:flutterpp/App/Models/team_model.dart';
 import 'package:flutterpp/App/Services/Auth/profile_services.dart';
+import 'package:flutterpp/App/Services/Client/client_services.dart';
+import 'package:flutterpp/App/Services/Invoice/invoice_services.dart';
 import 'package:flutterpp/App/Services/Project/project_services.dart';
 import 'package:flutterpp/App/Services/Project/wiki_services.dart';
 import 'package:flutterpp/App/Services/Team/team_member_services.dart';
@@ -28,6 +32,8 @@ class DashboardController extends GetxController {
   final _teamMemberServices = TeamMemberServices();
   final _profileServices = ProfileServices();
   final _wikiServices = WikiServices();
+  final _clientServices = ClientServices();
+  final _invoiceServices = InvoiceServices();
 
   final _isLoading = true.obs;
   bool get isLoading => _isLoading.value;
@@ -43,6 +49,12 @@ class DashboardController extends GetxController {
 
   final _teamMembers = <TeamMemberModel>[].obs;
   List<TeamMemberModel> get teamMembers => _teamMembers;
+
+  final _clients = <ClientModel>[].obs;
+  List<ClientModel> get clients => _clients;
+
+  final _invoices = <InvoiceModel>[].obs;
+  List<InvoiceModel> get invoices => _invoices;
 
   final _profile = ProfileModel().obs;
   ProfileModel get profile => _profile.value;
@@ -66,10 +78,12 @@ class DashboardController extends GetxController {
   Future<void> onInit() async {
     _listOfColors();
     _listOFSVGs();
-    await _getAuthProfile();
+    _getAuthProfile();
     await _fetchTeamAndProjects();
     await _fetchActiveProject();
     await _getTeamMembers();
+    await getClients();
+    await getInvoices();
     _updateLoading(false);
     super.onInit();
   }
@@ -150,6 +164,12 @@ class DashboardController extends GetxController {
         if (project == null) return;
 
         _projects.add(project);
+
+        // if no active project set active project
+        if (activeProject.id == null) {
+          await updateActiveProject(project);
+        }
+
         update();
 
         if (project.id == null) return;
@@ -176,7 +196,7 @@ class DashboardController extends GetxController {
   }
 
   // list of svg
-  _listOFSVGs() async {
+  void _listOFSVGs() async {
     final manifestJson = await DefaultAssetBundle.of(Get.context!)
         .loadString('AssetManifest.json');
     final allFiles = json
@@ -224,7 +244,7 @@ class DashboardController extends GetxController {
   }
 
   // get team members
-  _getTeamMembers() async {
+  Future<void> _getTeamMembers() async {
     if (team.id == null) return;
 
     List<TeamMemberModel>? items = await _teamMemberServices.getTeamMembers(
@@ -237,7 +257,7 @@ class DashboardController extends GetxController {
   }
 
   // get auth user
-  _getAuthProfile() async {
+  void _getAuthProfile() async {
     _profile.value = (await _profileServices.getAuthProfile())!;
   }
 
@@ -293,7 +313,7 @@ class DashboardController extends GetxController {
   }
 
   // delete project
-  deleteProject(ProjectModel item) async {
+  void deleteProject(ProjectModel item) async {
     if (item.id == null) return;
 
     await Get.showOverlay(
@@ -315,5 +335,25 @@ class DashboardController extends GetxController {
         update();
       },
     );
+  }
+
+  // get clients
+  Future<void> getClients() async {
+    if (team.id == null) return;
+
+    List<ClientModel>? items = await _clientServices.getClientsByTeamId();
+
+    if (items == null || items.isEmpty) return;
+    _clients.assignAll(items);
+  }
+
+  // get invoices
+  Future<void> getInvoices() async {
+    if (team.id == null) return;
+
+    List<InvoiceModel>? items = await _invoiceServices.getInvoicesByTeamId();
+
+    if (items == null || items.isEmpty) return;
+    _invoices.assignAll(items);
   }
 }

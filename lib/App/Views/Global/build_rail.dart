@@ -61,14 +61,14 @@ class BuildRail extends StatelessWidget {
               }).toList(),
             ),
           ),
-          IconButton(
-            onPressed: () => debugPrint('object'),
-            icon: const HeroIcon(
-              HeroIcons.informationCircle,
-              style: HeroIconStyle.mini,
-            ),
-            color: Get.theme.colorScheme.secondaryContainer,
-          ),
+          // IconButton(
+          //   onPressed: () => debugPrint('object'),
+          //   icon: const HeroIcon(
+          //     HeroIcons.informationCircle,
+          //     style: HeroIconStyle.mini,
+          //   ),
+          //   color: Get.theme.colorScheme.secondaryContainer,
+          // ),
           IconButton(
             onPressed: onLogout,
             icon: const HeroIcon(
@@ -79,6 +79,7 @@ class BuildRail extends StatelessWidget {
           ),
 
           const SizedBox(height: 20),
+
           // IconButton(
           //   onPressed: () => debugPrint('object'),
           //   icon: const HeroIcon(
