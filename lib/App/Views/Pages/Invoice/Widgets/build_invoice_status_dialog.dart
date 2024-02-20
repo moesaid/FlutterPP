@@ -13,7 +13,7 @@ class BuildInvoiceStatusDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BuildDefultDialog(
-      height: 100,
+      height: 40.sp,
       width: 200,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,

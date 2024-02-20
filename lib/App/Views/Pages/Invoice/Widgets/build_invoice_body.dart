@@ -7,6 +7,7 @@ import 'package:sizer/sizer.dart';
 
 class BuildInvoiceBody extends StatelessWidget {
   final InvoiceModel invoice;
+  final bool? hasActions, hasGrey;
   final void Function(InvoiceModel)? onView,
       onEdit,
       onDelete,
@@ -24,6 +25,8 @@ class BuildInvoiceBody extends StatelessWidget {
     this.onExportAsPdf,
     this.printInvoice,
     this.onStatusPressed,
+    this.hasActions = true,
+    this.hasGrey = false,
     required this.invoice,
   });
 
@@ -50,14 +53,32 @@ class BuildInvoiceBody extends StatelessWidget {
         ),
         Expanded(
           flex: 2,
-          child: Text(invoice.dueDate?.capitalize ?? ''),
+          child: Text(
+            invoice.dueDate?.capitalize ?? '',
+            style: TextStyle(
+              color: Get.theme.colorScheme.onBackground
+                  .withOpacity(hasGrey == true ? 0.5 : 1),
+            ),
+          ),
         ),
         Expanded(
-          child: Text(invoice.number.toString()),
+          child: Text(
+            invoice.number.toString(),
+            style: TextStyle(
+              color: Get.theme.colorScheme.onBackground
+                  .withOpacity(hasGrey == true ? 0.5 : 1),
+            ),
+          ),
         ),
         Expanded(
           flex: 2,
-          child: Text(invoice.clientName?.capitalize ?? ''),
+          child: Text(
+            invoice.clientName?.capitalize ?? '',
+            style: TextStyle(
+              color: Get.theme.colorScheme.onBackground
+                  .withOpacity(hasGrey == true ? 0.5 : 1),
+            ),
+          ),
         ),
         Expanded(
           child: RichText(
@@ -65,102 +86,111 @@ class BuildInvoiceBody extends StatelessWidget {
               children: [
                 TextSpan(
                   text: totalAmount.toString(),
+                  style: TextStyle(
+                    color: Get.theme.colorScheme.onBackground
+                        .withOpacity(hasGrey == true ? 0.5 : 1),
+                  ),
                 ),
                 TextSpan(
                   text: '  ${(invoice.currency?.toUpperCase() ?? '')}',
                   style: TextStyle(
-                    color: Get.theme.colorScheme.onBackground.withOpacity(0.5),
+                    color: Get.theme.colorScheme.onBackground
+                        .withOpacity(hasGrey == true ? 0.1 : 0.5),
                   ),
                 ),
               ],
             ),
           ),
         ),
-        const Spacer(),
-        Expanded(
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              BuildCustomDropdown(
-                items: [
-                  PopupMenuItem(
-                    onTap: onView != null ? () => onView?.call(invoice) : null,
-                    child: Row(
-                      children: [
-                        Icon(Icons.remove_red_eye, size: 6.sp),
-                        SizedBox(width: 2.sp),
-                        Text('view'.capitalize!),
-                      ],
+        if (hasActions == true) const Spacer(),
+        if (hasActions == true)
+          Expanded(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                BuildCustomDropdown(
+                  items: [
+                    PopupMenuItem(
+                      onTap:
+                          onView != null ? () => onView?.call(invoice) : null,
+                      child: Row(
+                        children: [
+                          Icon(Icons.remove_red_eye, size: 6.sp),
+                          SizedBox(width: 2.sp),
+                          Text('view'.capitalize!),
+                        ],
+                      ),
                     ),
-                  ),
-                  PopupMenuItem(
-                    onTap: onEdit != null ? () => onEdit?.call(invoice) : null,
-                    child: Row(
-                      children: [
-                        Icon(Icons.edit, size: 6.sp),
-                        SizedBox(width: 2.sp),
-                        Text('edit'.capitalize!),
-                      ],
+                    PopupMenuItem(
+                      onTap:
+                          onEdit != null ? () => onEdit?.call(invoice) : null,
+                      child: Row(
+                        children: [
+                          Icon(Icons.edit, size: 6.sp),
+                          SizedBox(width: 2.sp),
+                          Text('edit'.capitalize!),
+                        ],
+                      ),
                     ),
-                  ),
-                  PopupMenuItem(
-                    onTap:
-                        onDelete != null ? () => onDelete?.call(invoice) : null,
-                    child: Row(
-                      children: [
-                        Icon(Icons.delete, size: 6.sp),
-                        SizedBox(width: 2.sp),
-                        Text('delete'.capitalize!),
-                      ],
+                    PopupMenuItem(
+                      onTap: onDelete != null
+                          ? () => onDelete?.call(invoice)
+                          : null,
+                      child: Row(
+                        children: [
+                          Icon(Icons.delete, size: 6.sp),
+                          SizedBox(width: 2.sp),
+                          Text('delete'.capitalize!),
+                        ],
+                      ),
                     ),
-                  ),
-                  PopupMenuItem(
-                    onTap: onDuplicate != null
-                        ? () => onDuplicate?.call(invoice)
-                        : null,
-                    child: Row(
-                      children: [
-                        Icon(Icons.copy, size: 6.sp),
-                        SizedBox(width: 2.sp),
-                        Text('duplicate'.capitalize!),
-                      ],
+                    PopupMenuItem(
+                      onTap: onDuplicate != null
+                          ? () => onDuplicate?.call(invoice)
+                          : null,
+                      child: Row(
+                        children: [
+                          Icon(Icons.copy, size: 6.sp),
+                          SizedBox(width: 2.sp),
+                          Text('duplicate'.capitalize!),
+                        ],
+                      ),
                     ),
-                  ),
-                  PopupMenuItem(
-                    onTap: onExportAsPdf != null
-                        ? () => onExportAsPdf?.call(invoice)
-                        : null,
-                    child: Row(
-                      children: [
-                        Icon(Icons.picture_as_pdf, size: 6.sp),
-                        SizedBox(width: 2.sp),
-                        Text('export as pdf'.capitalize!),
-                      ],
+                    PopupMenuItem(
+                      onTap: onExportAsPdf != null
+                          ? () => onExportAsPdf?.call(invoice)
+                          : null,
+                      child: Row(
+                        children: [
+                          Icon(Icons.picture_as_pdf, size: 6.sp),
+                          SizedBox(width: 2.sp),
+                          Text('export as pdf'.capitalize!),
+                        ],
+                      ),
                     ),
-                  ),
-                  PopupMenuItem(
-                    onTap: printInvoice != null
-                        ? () => printInvoice?.call(invoice)
-                        : null,
-                    child: Row(
-                      children: [
-                        Icon(Icons.print, size: 6.sp),
-                        SizedBox(width: 2.sp),
-                        Text('print invoice'.capitalize!),
-                      ],
+                    PopupMenuItem(
+                      onTap: printInvoice != null
+                          ? () => printInvoice?.call(invoice)
+                          : null,
+                      child: Row(
+                        children: [
+                          Icon(Icons.print, size: 6.sp),
+                          SizedBox(width: 2.sp),
+                          Text('print invoice'.capitalize!),
+                        ],
+                      ),
                     ),
-                  ),
-                ],
-                child: Row(
-                  children: [
-                    Text('actions'.capitalize!),
-                    const Icon(Icons.arrow_drop_down),
                   ],
+                  child: Row(
+                    children: [
+                      Text('actions'.capitalize!),
+                      const Icon(Icons.arrow_drop_down),
+                    ],
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
-        ),
       ],
     );
   }

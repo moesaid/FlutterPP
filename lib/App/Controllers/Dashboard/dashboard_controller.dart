@@ -4,6 +4,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutterpp/App/Controllers/Home/home_controller.dart';
 import 'package:flutterpp/App/Models/client_model.dart';
+import 'package:flutterpp/App/Models/invoice_model.dart';
 import 'package:flutterpp/App/Models/profile_model.dart';
 import 'package:flutterpp/App/Models/project_model.dart';
 import 'package:flutterpp/App/Models/team_member_model.dart';
@@ -52,8 +53,8 @@ class DashboardController extends GetxController {
   final _clients = <ClientModel>[].obs;
   List<ClientModel> get clients => _clients;
 
-  final _invoices = <ClientModel>[].obs;
-  List<ClientModel> get invoices => _invoices;
+  final _invoices = <InvoiceModel>[].obs;
+  List<InvoiceModel> get invoices => _invoices;
 
   final _profile = ProfileModel().obs;
   ProfileModel get profile => _profile.value;
@@ -350,7 +351,7 @@ class DashboardController extends GetxController {
   Future<void> getInvoices() async {
     if (team.id == null) return;
 
-    List<ClientModel>? items = await _clientServices.getClientsByTeamId();
+    List<InvoiceModel>? items = await _invoiceServices.getInvoicesByTeamId();
 
     if (items == null || items.isEmpty) return;
     _invoices.assignAll(items);
