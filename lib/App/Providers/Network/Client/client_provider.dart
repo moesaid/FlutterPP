@@ -70,8 +70,8 @@ class ClientProvider {
 
     Map dataItem = client.toJson().map((key, value) => MapEntry(key, value));
 
-    // remove id
-    dataItem.remove('id');
+    // update updated_at
+    dataItem['updated_at'] = DateTime.now().toIso8601String();
 
     // remove where null
     dataItem.removeWhere((key, value) => value == null);
