@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:heroicons/heroicons.dart';
 import 'package:sizer/sizer.dart';
 
 class BuildDashboardNumbersItem extends StatelessWidget {
@@ -7,18 +8,22 @@ class BuildDashboardNumbersItem extends StatelessWidget {
     super.key,
     this.numbers,
     this.title,
+    this.subtitle,
     this.onTap,
     this.icon,
+    this.bgColor,
   });
 
   final int? numbers;
-  final String? title;
+  final String? title, subtitle;
   final VoidCallback? onTap;
-  final IconData? icon;
+  final HeroIcons? icon;
+  final Color? bgColor;
 
   @override
   Widget build(BuildContext context) {
     return Container(
+      padding: EdgeInsets.all(4.sp),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(2.sp),
         color: Get.theme.colorScheme.primaryContainer,
@@ -28,20 +33,39 @@ class BuildDashboardNumbersItem extends StatelessWidget {
         ),
       ),
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Expanded(
-            child: Padding(
-              padding: EdgeInsets.all(10.sp),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Container(
+                  padding: EdgeInsets.all(2.5.sp),
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    gradient: LinearGradient(
+                      begin: Alignment.topLeft,
+                      end: Alignment.bottomRight,
+                      colors: [
+                        bgColor ?? Colors.indigo,
+                        bgColor?.withOpacity(0.5) ??
+                            Colors.indigo.withOpacity(0.5),
+                      ],
+                    ),
+                  ),
+                  child: HeroIcon(
+                    size: 7.sp,
+                    icon ?? HeroIcons.commandLine,
+                    style: HeroIconStyle.solid,
+                  ),
+                ),
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Flexible(
+                      child: Text(
                         title?.capitalize ?? 'Title',
                         style: TextStyle(
                           fontSize: 4.sp,
@@ -51,45 +75,23 @@ class BuildDashboardNumbersItem extends StatelessWidget {
                           ),
                         ),
                       ),
-                      Text(
+                    ),
+                    Flexible(
+                      child: Text(
                         numbers?.toString() ?? '0',
                         style: TextStyle(
-                          fontSize: 10.sp,
+                          fontSize: 6.sp,
                           fontWeight: FontWeight.w800,
                         ),
                       ),
-                    ],
-                  ),
-                  Container(
-                    padding: EdgeInsets.all(1.sp),
-                    decoration: const BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: Colors.indigo,
                     ),
-                    child: Icon(
-                      icon ?? Icons.supervised_user_circle_rounded,
-                      size: 10.sp,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
-          const Divider(thickness: 0.5, height: 0),
-          Padding(
-            padding: EdgeInsets.all(1.sp),
-            child: TextButton(
-              onPressed: onTap,
-              child: Text(
-                'view all'.capitalize!,
-                style: TextStyle(
-                  fontSize: 3.6.sp,
-                  color: Get.theme.colorScheme.onBackground,
-                  fontWeight: FontWeight.w400,
+                  ],
                 ),
-              ),
+              ],
             ),
           ),
+          const Spacer(),
+          Text(subtitle?.capitalize ?? ''),
         ],
       ),
     );

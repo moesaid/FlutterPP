@@ -6,7 +6,6 @@ import 'package:flutterpp/Config/app_theme.dart';
 import 'package:flutterpp/Routes/app_pages.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:get/get.dart';
-import 'package:package_info_plus/package_info_plus.dart';
 import 'package:sizer/sizer.dart';
 
 Future<void> main() async {
@@ -15,18 +14,12 @@ Future<void> main() async {
   // initialize services
   await AppInitializer.initialize();
 
-  PackageInfo packageInfo = await PackageInfo.fromPlatform();
-
-  String version = packageInfo.version;
-
   // runApp
-  runApp(MyApp(version: version));
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  final String version;
-
-  const MyApp({super.key, required this.version});
+  const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {

@@ -8,14 +8,14 @@ class AppWindowConfig {
   Future<void> config() async {
     // app icon
     String iconPath = GetPlatform.isWindows
-        ? 'assets/images/app_icon.ico'
-        : 'assets/images/app_icon.png';
+        ? 'assets/images/fav_logo.ico'
+        : 'assets/images/fav_logo.png';
 
     final SystemTray systemTray = SystemTray();
 
     // We first init the systray menu
     await systemTray.initSystemTray(
-      title: "FlutterPP",
+      title: "",
       toolTip: "FlutterPP",
       iconPath: iconPath,
     );
