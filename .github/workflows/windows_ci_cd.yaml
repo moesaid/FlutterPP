@@ -49,7 +49,7 @@ jobs:
           contents: |
             msix_config:
               display_name: FlutterPP
-              publisher_display_name: waqtollcapps.
+              publisher_display_name: waqtollcapps
               identity_name: waqtollcapps.FlutterPP
               publisher: CN=52C80A4B-6F71-430C-88F2-0AFF0C54D249
               msix_version: ${{steps.msixver.outputs.value }}.0
