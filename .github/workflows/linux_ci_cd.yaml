@@ -58,9 +58,6 @@ jobs:
           contents: 'version: "${{ steps.versions.outputs.version }}"'
           write-mode: append
 
-      - name: Set release changelog
-        run: cider release
-
       - name: Flutter get packages
         run: flutter pub get
 
