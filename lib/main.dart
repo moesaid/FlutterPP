@@ -6,6 +6,7 @@ import 'package:flutterpp/Config/app_theme.dart';
 import 'package:flutterpp/Routes/app_pages.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:get/get.dart';
+import 'package:sentry_flutter/sentry_flutter.dart';
 import 'package:sizer/sizer.dart';
 
 Future<void> main() async {
@@ -16,7 +17,10 @@ Future<void> main() async {
 
   // runApp
   await AppInitializer.initSentry(() async {
-    runApp(const MyApp());
+    runApp(DefaultAssetBundle(
+      bundle: SentryAssetBundle(),
+      child: const MyApp(),
+    ));
   });
 }
 
@@ -36,6 +40,7 @@ class MyApp extends StatelessWidget {
           initialBinding: AppBinding(),
           getPages: AppPages.pages,
           defaultTransition: Transition.native,
+          navigatorObservers: [SentryNavigatorObserver()],
           localizationsDelegates: const [
             AppFlowyEditorLocalizations.delegate,
             FormBuilderLocalizations.delegate,

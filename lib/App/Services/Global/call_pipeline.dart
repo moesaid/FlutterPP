@@ -11,18 +11,21 @@ class CallPipeline {
       T? res = await future();
       return res;
     } catch (exception, stackTrace) {
+      // print({'❌exception': exception, 'stackTrace': stackTrace});
+
       User? user = Supabase.instance.client.auth.currentUser;
 
       await Sentry.captureException(
         exception,
         stackTrace: stackTrace,
-        hint: Hint.withMap(
-          {
-            'name': name,
-            'user id': user?.id,
-            'user email': user?.email,
-          },
-        ),
+        withScope: (scope) {
+          scope.setUser(
+            SentryUser(
+              id: user?.id,
+              email: user?.email,
+            ),
+          );
+        },
       );
 
       return null;
