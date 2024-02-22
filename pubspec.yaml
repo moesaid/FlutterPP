@@ -54,6 +54,7 @@ dependencies:
   system_tray: ^0.1.1
   updat: ^1.3.2
   sentry_flutter: ^7.16.1
+  feedback: ^3.0.0
 
 # dev_dependencies
 dev_dependencies:

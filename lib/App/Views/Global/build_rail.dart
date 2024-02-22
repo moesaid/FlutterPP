@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutterpp/App/Services/Error/sentry_services.dart';
 import 'package:flutterpp/App/Views/Global/build_logo.dart';
 import 'package:flutterpp/Config/app_config.dart';
 import 'package:get/get.dart';
@@ -61,14 +62,16 @@ class BuildRail extends StatelessWidget {
               }).toList(),
             ),
           ),
-          // IconButton(
-          //   onPressed: () => debugPrint('object'),
-          //   icon: const HeroIcon(
-          //     HeroIcons.informationCircle,
-          //     style: HeroIconStyle.mini,
-          //   ),
-          //   color: Get.theme.colorScheme.secondaryContainer,
-          // ),
+          IconButton(
+            onPressed: () async {
+              await SentryServices().captureUserFeedback(context: context);
+            },
+            icon: const HeroIcon(
+              HeroIcons.informationCircle,
+              style: HeroIconStyle.mini,
+            ),
+            color: Get.theme.colorScheme.secondaryContainer,
+          ),
           IconButton(
             onPressed: onLogout,
             icon: const HeroIcon(

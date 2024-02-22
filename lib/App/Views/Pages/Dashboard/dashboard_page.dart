@@ -26,7 +26,11 @@ class DashboardPage extends GetView<DashboardController> {
               isLoading: controller.isLoading,
               child: Container(
                 width: double.infinity,
-                padding: EdgeInsets.all(5.sp),
+                padding: EdgeInsets.only(
+                  left: 5.sp,
+                  right: 7.sp,
+                  top: 5.sp,
+                ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
