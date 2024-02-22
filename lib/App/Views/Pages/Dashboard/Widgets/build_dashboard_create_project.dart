@@ -3,6 +3,7 @@ import 'package:awesome_side_sheet/side_sheet.dart';
 import 'package:flutter/material.dart';
 import 'package:flutterpp/App/Controllers/Dashboard/dashboard_controller.dart';
 import 'package:flutterpp/App/Views/Pages/Project/Pages/project_create_page.dart';
+import 'package:flutterpp/Config/app_print.dart';
 import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
 
@@ -24,7 +25,7 @@ class BuildDashboardCreateProject extends StatelessWidget {
           title: 'Create new project'.capitalize!,
           sheetWidth: context.width * 0.8,
           body: Obx(() {
-            debugPrint("❌${controller.selectedColors}");
+            AppPrint.print("❌${controller.selectedColors}");
             return ProjectCreatePage(
               createProject: (data) => controller.createProject(formData: data),
               onColorChange: (data) => controller.onColorChange(data),

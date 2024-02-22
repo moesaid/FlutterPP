@@ -1,5 +1,4 @@
 import 'package:appflowy_editor/appflowy_editor.dart';
-import 'package:feedback/feedback.dart';
 import 'package:flutter/material.dart';
 import 'package:flutterpp/Config/Bindings/app_binding.dart';
 import 'package:flutterpp/Config/app_initializer.dart';
@@ -20,10 +19,7 @@ Future<void> main() async {
   await AppInitializer.initSentry(() async {
     runApp(DefaultAssetBundle(
       bundle: SentryAssetBundle(),
-      child: const BetterFeedback(
-        themeMode: ThemeMode.dark,
-        child: MyApp(),
-      ),
+      child: const MyApp(),
     ));
   });
 }
@@ -40,7 +36,7 @@ class MyApp extends StatelessWidget {
           debugShowCheckedModeBanner: false,
           theme: AppTheme().lightThemeData(),
           darkTheme: AppTheme().darkThemeData(),
-          themeMode: Get.isDarkMode ? ThemeMode.dark : ThemeMode.light,
+          themeMode: ThemeMode.dark,
           initialBinding: AppBinding(),
           getPages: AppPages.pages,
           defaultTransition: Transition.native,

@@ -12,6 +12,7 @@ import 'package:flutterpp/App/Services/Mockups/mockup_services.dart';
 import 'package:flutterpp/App/Views/Global/build_overlay.dart';
 import 'package:flutterpp/App/Views/Global/build_time_overlay.dart';
 import 'package:flutterpp/App/Views/Pages/Mockup/Widgets/Templates/template_layout_config.dart';
+import 'package:flutterpp/Config/app_print.dart';
 import 'package:flutterpp/Helpers/colors_helper.dart';
 import 'package:get/get.dart';
 import 'package:uuid/uuid.dart';
@@ -99,7 +100,7 @@ class MockupSingleController extends GetxController {
     GradientModel? gradient,
     bool? repeatForAll,
   }) {
-    print({
+    AppPrint.print({
       'color': color,
       'image': image,
       'gradient': gradient,
@@ -390,7 +391,7 @@ class MockupSingleController extends GetxController {
 
   // update first device rotate
   void updateDeviceRotate(double rotate, {bool? isSecondDevice}) {
-    print(isSecondDevice);
+    AppPrint.print(isSecondDevice);
     if (isSecondDevice != null && isSecondDevice) {
       _seletedItem.value = _seletedItem.value.copyWith(
         secondRotate: rotate,

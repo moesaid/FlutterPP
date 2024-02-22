@@ -9,6 +9,7 @@ import 'package:flutterpp/App/Services/Cmd/cmd_init_getx_mvc_services.dart';
 import 'package:flutterpp/App/Services/Cmd/cmd_read_create_dir_services.dart';
 import 'package:flutterpp/App/Services/Project/project_model_services.dart';
 import 'package:flutterpp/App/Views/Global/build_time_overlay.dart';
+import 'package:flutterpp/Config/app_print.dart';
 import 'package:get/get.dart';
 import 'package:graphite/graphite.dart';
 
@@ -62,12 +63,12 @@ class ProjectSingleCodeGenController extends GetxController {
   }
 
   Future<void> fetchApi() async {
-    print('❌fetching api: ${useController.project.id}');
+    AppPrint.print('❌fetching api: ${useController.project.id}');
     List<ModelConfigModel>? res = await _projectModelServices.getProjectById(
       projectId: useController.project.id,
     );
 
-    print('❌res: $res');
+    AppPrint.print('❌res: $res');
 
     // check if res is null
     if (res == null) return;

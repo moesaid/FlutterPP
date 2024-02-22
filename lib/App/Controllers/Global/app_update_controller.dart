@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:flutterpp/Config/app_print.dart';
 import 'package:get/get.dart';
 // ignore: depend_on_referenced_packages
 import 'package:http/http.dart' as http;
@@ -24,7 +25,7 @@ class AppUpdateController extends GetxController {
     await _fetchApi();
     _updateLoading(false);
 
-    print({
+    AppPrint.print({
       "❌ currentVersion": currentVersion,
       "lastVersion": lastVersion,
     });

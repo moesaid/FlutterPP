@@ -3,6 +3,7 @@ import 'dart:typed_data';
 
 import 'package:file_selector/file_selector.dart';
 import 'package:flutterpp/App/Services/Global/call_pipeline.dart';
+import 'package:flutterpp/Config/app_print.dart';
 
 class FileManegerProvider {
   CallPipeline callPipeline = CallPipeline();
@@ -14,7 +15,7 @@ class FileManegerProvider {
         final List<String?> locations = await getDirectoryPaths();
         if (locations.isEmpty) {
           // Operation was canceled by the user.
-          print('❌canceled by user');
+          AppPrint.print('❌canceled by user');
           return null;
         }
 
@@ -33,7 +34,7 @@ class FileManegerProvider {
         final FileSaveLocation? result = await getSaveLocation();
         if (result == null) {
           // Operation was canceled by the user.
-          print('❌canceled by user');
+          AppPrint.print('❌canceled by user');
           return null;
         }
         return result;
@@ -83,7 +84,7 @@ class FileManegerProvider {
         );
         if (result == null) {
           // Operation was canceled by the user.
-          print('❌canceled by user');
+          AppPrint.print('❌canceled by user');
           return;
         }
 
@@ -119,7 +120,7 @@ class FileManegerProvider {
       future: () async {
         // check if folder exist
         if (!await Directory(location).exists()) {
-          print('❌folder not exist');
+          AppPrint.print('❌folder not exist');
           return;
         }
 
@@ -168,13 +169,13 @@ class FileManegerProvider {
       future: () async {
         // check if folder exist
         if (!await Directory(location).exists()) {
-          print('❌folder not exist');
+          AppPrint.print('❌folder not exist');
           return;
         }
 
         // check if file exist
         if (!await File('$location/$fileName.$fileExtension').exists()) {
-          print('❌file not exist');
+          AppPrint.print('❌file not exist');
           return;
         }
 
@@ -194,7 +195,7 @@ class FileManegerProvider {
       future: () async {
         // check if folder exist
         if (!await Directory('$location/$folderName').exists()) {
-          print('❌folder not exist');
+          AppPrint.print('❌folder not exist');
           return;
         }
 
@@ -215,7 +216,7 @@ class FileManegerProvider {
       future: () async {
         // check if folder exist
         if (!await Directory('$location/$folderName').exists()) {
-          print('❌folder not exist');
+          AppPrint.print('❌folder not exist');
           return;
         }
 
@@ -237,13 +238,13 @@ class FileManegerProvider {
       future: () async {
         // check if folder exist
         if (!await Directory(location).exists()) {
-          print('❌folder not exist');
+          AppPrint.print('❌folder not exist');
           return;
         }
 
         // check if file exist
         if (!await File('$location/$fileName.$fileExtension').exists()) {
-          print('❌file not exist');
+          AppPrint.print('❌file not exist');
           return;
         }
 
@@ -261,7 +262,7 @@ class FileManegerProvider {
       future: () async {
         // check if folder exist
         if (!await Directory(location).exists()) {
-          print('❌folder not exist');
+          AppPrint.print('❌folder not exist');
           return;
         }
 

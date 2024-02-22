@@ -5,6 +5,7 @@ import 'package:flutterpp/App/Providers/Device/file_maneger_provider.dart';
 import 'package:flutterpp/App/Services/Media/media_upload_services.dart';
 import 'package:flutterpp/App/Views/Global/build_overlay.dart';
 import 'package:flutterpp/App/Views/Global/build_snackbar.dart';
+import 'package:flutterpp/Config/app_print.dart';
 import 'package:get/get.dart';
 
 class ProjectSingleFilesController extends GetxController {
@@ -248,7 +249,7 @@ class ProjectSingleFilesController extends GetxController {
 
     if (bytes == null) return;
 
-    print(item.type);
+    AppPrint.print(item.type);
 
     await _fileManegerProvider.saveFileWithoutLocation(
       fileName: item.fileName!,

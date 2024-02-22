@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutterpp/App/Providers/Cmd/cmd_flutter_provider.dart';
+import 'package:flutterpp/Config/app_print.dart';
 
 class CmdFlutterCreate {
   final String _projectPath;
@@ -15,7 +16,7 @@ class CmdFlutterCreate {
       ['create', _projectName],
     );
 
-    print({
+    AppPrint.print({
       'stdout': res?.stdout,
       'stderr': res?.stderr,
       'exitCode': res?.exitCode,
