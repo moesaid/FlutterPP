@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:flutterpp/App/Controllers/Global/app_update_controller.dart';
 import 'package:flutterpp/App/Views/Global/build_loading_switch.dart';
+import 'package:flutterpp/App/Views/Global/buiuld_dialog.dart';
 import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
 
@@ -73,11 +75,37 @@ class BuildDashboardVersionDisplay extends StatelessWidget {
                         ),
                       ),
                       SizedBox(height: 1.sp),
-                      Text(
-                        _.lastVersion,
-                        style: TextStyle(
-                          fontSize: 5.sp,
-                          fontWeight: FontWeight.w500,
+                      InkWell(
+                        onTap: () {
+                          showDialog(
+                            context: context,
+                            builder: (__) {
+                              return BuildDefultDialog(
+                                child: Markdown(data: _.body),
+                              );
+                            },
+                          );
+                        },
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              _.lastVersion,
+                              style: TextStyle(
+                                fontSize: 5.sp,
+                                fontWeight: FontWeight.w500,
+                              ),
+                            ),
+                            SizedBox(width: 2.sp),
+                            Icon(
+                              Icons.info_rounded,
+                              size: 5.sp,
+                              color:
+                                  Get.theme.colorScheme.onPrimary.withOpacity(
+                                0.5,
+                              ),
+                            ),
+                          ],
                         ),
                       ),
                     ],

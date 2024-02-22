@@ -444,13 +444,13 @@ packages:
     source: sdk
     version: "0.0.0"
   flutter_markdown:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: flutter_markdown
-      sha256: "5b24061317f850af858ef7151dadbb6eb77c1c449c954c7bb064e8a5e0e7d81f"
+      sha256: a64c5323ac83ed2b7940d2b6288d160aa1753ff271ba9d9b2a86770414aa3eab
       url: "https://pub.dev"
     source: hosted
-    version: "0.6.20"
+    version: "0.6.20+1"
   flutter_platform_alert:
     dependency: "direct main"
     description:
@@ -1555,5 +1555,5 @@ packages:
     source: hosted
     version: "2.0.0"
 sdks:
-  dart: ">=3.3.0-279.1.beta <4.0.0"
-  flutter: ">=3.16.0"
+  dart: ">=3.3.0 <4.0.0"
+  flutter: ">=3.19.0"

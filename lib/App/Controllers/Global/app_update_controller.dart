@@ -14,6 +14,9 @@ class AppUpdateController extends GetxController {
   final _lastVersion = ''.obs;
   String get lastVersion => _lastVersion.value;
 
+  final _body = ''.obs;
+  String get body => _body.value;
+
   @override
   Future<void> onInit() async {
     await _fetchCurrentVersion();
@@ -37,6 +40,7 @@ class AppUpdateController extends GetxController {
 
     if (data.statusCode == 200) {
       _lastVersion.value = jsonDecode(data.body)["tag_name"];
+      _body.value = jsonDecode(data.body)["body"];
     }
   }
 
