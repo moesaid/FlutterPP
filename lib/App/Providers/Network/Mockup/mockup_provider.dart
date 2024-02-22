@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutterpp/App/Models/mockup_model.dart';
 import 'package:flutterpp/App/Services/Global/call_pipeline.dart';
+import 'package:flutterpp/Config/app_print.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 class MockupProvider {
@@ -85,7 +86,7 @@ class MockupProvider {
   Future<MockupModel?> createMockup({
     required MockupModel item,
   }) async {
-    print(item.toMap());
+    AppPrint.print(item.toMap());
 
     List<Map>? data = await _callPipeline.futurePipeline(
       future: () => supabase.from('mockups').insert([
@@ -97,7 +98,7 @@ class MockupProvider {
     if (data == null || data.isEmpty) return null;
     var localJson = json.encode(data[0]);
 
-    print(localJson);
+    AppPrint.print(localJson);
 
     return MockupModel.fromJson(json.decode(localJson));
   }
@@ -120,7 +121,7 @@ class MockupProvider {
     try {
       await supabase.from('mockups').delete().eq('id', mockupId);
     } catch (e) {
-      print(e);
+      AppPrint.print(e);
       return false;
     }
 

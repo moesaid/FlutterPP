@@ -4,6 +4,7 @@ import 'package:flutterpp/App/Models/team_model.dart';
 import 'package:flutterpp/App/Services/Client/client_services.dart';
 import 'package:flutterpp/App/Services/Invoice/invoice_services.dart';
 import 'package:flutterpp/App/Services/Team/team_services.dart';
+import 'package:flutterpp/Config/app_print.dart';
 import 'package:get/get.dart';
 
 class InvoiceSingleController extends GetxController {
@@ -82,6 +83,6 @@ class InvoiceSingleController extends GetxController {
 
   // edit
   onEdit() {
-    print('edit');
+    AppPrint.print('edit');
   }
 }

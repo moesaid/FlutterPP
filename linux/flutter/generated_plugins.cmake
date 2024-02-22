@@ -9,6 +9,7 @@ list(APPEND FLUTTER_PLUGIN_LIST
   printing
   rich_clipboard_linux
   screen_retriever
+  sentry_flutter
   system_tray
   url_launcher_linux
   window_manager

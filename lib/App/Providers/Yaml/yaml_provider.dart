@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutterpp/App/Models/pubspec_model.dart';
+import 'package:flutterpp/Config/app_print.dart';
 import 'package:yaml/yaml.dart';
 
 class YamlProvider {
@@ -13,7 +14,7 @@ class YamlProvider {
       var doc = loadYaml(yamlString);
       return PubspecModel.fromJson(json.decode(json.encode(doc)));
     } catch (e) {
-      print('Error reading yaml file: $e');
+      AppPrint.print('Error reading yaml file: $e');
       return null;
     }
   }
@@ -24,7 +25,7 @@ class YamlProvider {
       var yaml = await readYaml(path);
       return yaml?.name ?? '';
     } catch (e) {
-      print('Error getting app name from yaml: $e');
+      AppPrint.print('Error getting app name from yaml: $e');
       return '';
     }
   }

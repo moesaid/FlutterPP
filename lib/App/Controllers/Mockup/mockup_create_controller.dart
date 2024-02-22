@@ -13,6 +13,7 @@ import 'package:flutterpp/App/Services/Team/team_services.dart';
 import 'package:flutterpp/App/Views/Global/build_overlay.dart';
 import 'package:flutterpp/App/Views/Global/build_snackbar.dart';
 import 'package:flutterpp/App/Views/Pages/Mockup/Widgets/Templates/template_layout_config.dart';
+import 'package:flutterpp/Config/app_print.dart';
 import 'package:flutterpp/Helpers/colors_helper.dart';
 import 'package:flutterpp/Routes/app_pages.dart';
 import 'package:get/get.dart';
@@ -89,7 +90,7 @@ class MockupCreateController extends GetxController {
 
     // if going to step 2 and user has no has no projects
     if (_currentStep.value == 0 && _projects.isEmpty) {
-      print('no projects');
+      AppPrint.print('no projects');
       _currentStep.value = 2;
       update();
       return;
@@ -241,7 +242,7 @@ class MockupCreateController extends GetxController {
     // Parse the JSON data
     var jsonData = await json.decode(jsonContent);
 
-    print(jsonData);
+    AppPrint.print(jsonData);
 
     // convert json to list of gradient model
     List<TemplateConfigModel> templateConfigModel = [];

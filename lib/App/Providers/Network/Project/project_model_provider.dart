@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutterpp/App/Models/model_config_model.dart';
 import 'package:flutterpp/App/Services/Global/call_pipeline.dart';
+import 'package:flutterpp/Config/app_print.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 class ProjectModelProvider {
@@ -81,13 +82,13 @@ class ProjectModelProvider {
 
   // delete project model
   Future<void> deleteProjectModel({required String modelId}) async {
-    print({'❌modelId': modelId});
+    AppPrint.print({'❌modelId': modelId});
 
     await _callPipeline.futurePipeline(
       future: () async {
         var err =
             await supabase.from('project_models').delete().eq('id', modelId);
-        print(err);
+        AppPrint.print(err);
       },
       name: 'deleteProjectModel',
     );

@@ -1,6 +1,5 @@
 import 'package:flutterpp/App/Models/project_model.dart';
 import 'package:flutterpp/App/Services/Auth/auth_services.dart';
-import 'package:flutterpp/App/Services/Team/team_services.dart';
 import 'package:flutterpp/App/Views/Pages/Client/client_index_page.dart';
 import 'package:flutterpp/App/Views/Pages/Dashboard/dashboard_page.dart';
 import 'package:flutterpp/App/Views/Pages/Invoice/invoice_index_page.dart';
@@ -12,7 +11,6 @@ import 'package:heroicons/heroicons.dart';
 
 class HomeController extends GetxController {
   final AuthServices _authServices = AuthServices();
-  final TeamServices _teamServices = TeamServices();
 
   final _tabs = [
     {

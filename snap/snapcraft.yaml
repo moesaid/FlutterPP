@@ -1,0 +1,26 @@
+# This is a development snapcraft file, no version is specified. Uncomment the line below to build a snap.
+#version: "0.1.0"
+name: FlutterPP
+summary: FlutterPP
+description: |
+  FlutterPP is designed to be your ultimate developer companion, automating code generation and significantly reducing development time.
+
+confinement: strict
+base: core18
+grade: stable
+icon: snap/gui/FlutterPP.png
+
+apps:
+  FlutterPP:
+    command: desktop-launch FlutterPP
+    extensions: [flutter-beta]
+    plugs:
+      - network
+      - desktop
+      - home
+
+parts:
+  FlutterPP:
+    source: https://github.com/moesaid/flutterpp.git
+    plugin: flutter
+    flutter-target: lib/main.dart

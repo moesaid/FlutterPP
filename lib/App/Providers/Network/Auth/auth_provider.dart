@@ -12,7 +12,7 @@ class AuthProvider {
       future: () async {
         await supabase.auth.signInWithOtp(
           email: email,
-          emailRedirectTo: AppConfig().supabaseCallback,
+          emailRedirectTo: AppConfig.supabaseCallback,
         );
       },
       name: 'sign in with otp',
@@ -49,7 +49,7 @@ class AuthProvider {
           data: {'full_name': name},
           email: email,
           password: password,
-          emailRedirectTo: AppConfig().supabaseCallback,
+          emailRedirectTo: AppConfig.supabaseCallback,
         );
       },
       name: 'sign up',

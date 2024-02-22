@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutterpp/App/Models/client_model.dart';
+import 'package:flutterpp/Config/app_print.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 class ClientProvider {
@@ -99,7 +100,7 @@ class ClientProvider {
         )
         .select();
 
-    print(data);
+    AppPrint.print(data);
 
     return data.isNotEmpty;
   }

@@ -62,7 +62,9 @@ class BuildRail extends StatelessWidget {
             ),
           ),
           // IconButton(
-          //   onPressed: () => debugPrint('object'),
+          //   onPressed: () async {
+          //     await SentryServices().captureUserFeedback(context: context);
+          //   },
           //   icon: const HeroIcon(
           //     HeroIcons.informationCircle,
           //     style: HeroIconStyle.mini,

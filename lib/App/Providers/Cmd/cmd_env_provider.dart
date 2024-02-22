@@ -122,7 +122,6 @@ class CmdEnvProvider {
       if (res == null) return null;
 
       List<Map<String, dynamic>>? resItems = [];
-
       for (var item in res.stdout.toString().split('\n')) {
         if (item.contains('✓') || item.contains('No issues found!')) {
           resItems.add({'head': true, 'body': item});
@@ -130,6 +129,9 @@ class CmdEnvProvider {
           resItems.add({'head': false, 'body': item});
         }
       }
+
+      // remove the item when thers 'pod' in the string
+      resItems.removeWhere((element) => element['body'].contains('pod'));
 
       return resItems;
     } catch (e) {

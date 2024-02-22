@@ -1,6 +1,8 @@
 import 'dart:convert';
 
+import 'package:flutterpp/Config/app_print.dart';
 import 'package:get/get.dart';
+// ignore: depend_on_referenced_packages
 import 'package:http/http.dart' as http;
 import 'package:package_info_plus/package_info_plus.dart';
 
@@ -14,13 +16,16 @@ class AppUpdateController extends GetxController {
   final _lastVersion = ''.obs;
   String get lastVersion => _lastVersion.value;
 
+  final _body = ''.obs;
+  String get body => _body.value;
+
   @override
   Future<void> onInit() async {
     await _fetchCurrentVersion();
     await _fetchApi();
     _updateLoading(false);
 
-    print({
+    AppPrint.print({
       "❌ currentVersion": currentVersion,
       "lastVersion": lastVersion,
     });
@@ -37,6 +42,7 @@ class AppUpdateController extends GetxController {
 
     if (data.statusCode == 200) {
       _lastVersion.value = jsonDecode(data.body)["tag_name"];
+      _body.value = jsonDecode(data.body)["body"];
     }
   }
 

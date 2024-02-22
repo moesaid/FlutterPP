@@ -67,7 +67,7 @@ class SetupLocalFlutterPathPage
                     ),
                     Divider(height: 20.sp, thickness: 0.5),
                     Expanded(
-                      child: _BuildListView(controller: controller),
+                      child: BuildListView(controller: controller),
                     ),
                   ],
                 ),
@@ -150,8 +150,8 @@ class SetupLocalFlutterPathDialog extends StatelessWidget {
   }
 }
 
-class _BuildListView extends StatelessWidget {
-  const _BuildListView({
+class BuildListView extends StatelessWidget {
+  const BuildListView({
     super.key,
     required this.controller,
   });

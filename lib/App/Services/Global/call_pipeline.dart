@@ -1,3 +1,6 @@
+import 'package:sentry_flutter/sentry_flutter.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
+
 class CallPipeline {
   // futurePipeline is a function that takes a future and a name and returns a future
   Future<T?> futurePipeline<T>({
@@ -7,9 +10,24 @@ class CallPipeline {
     try {
       T? res = await future();
       return res;
-    } catch (e) {
-      print({'Pipeline Error: $name': e});
-      // rethrow;
+    } catch (exception, stackTrace) {
+      // print({'❌exception': exception, 'stackTrace': stackTrace});
+
+      User? user = Supabase.instance.client.auth.currentUser;
+
+      await Sentry.captureException(
+        exception,
+        stackTrace: stackTrace,
+        withScope: (scope) {
+          scope.setUser(
+            SentryUser(
+              id: user?.id,
+              email: user?.email,
+            ),
+          );
+        },
+      );
+
       return null;
     }
   }

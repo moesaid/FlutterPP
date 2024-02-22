@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutterpp/Config/app_print.dart';
 
 class BuildCustomDropdown extends StatelessWidget {
   final Widget? child;
@@ -62,7 +63,7 @@ class BuildCustomDropdown extends StatelessWidget {
 
     // Handle the selected value
     if (result != null) {
-      print('Selected value: $result');
+      AppPrint.print('Selected value: $result');
     }
   }
 }

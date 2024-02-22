@@ -5,6 +5,7 @@ import 'package:flutterpp/App/Models/template_config_model.dart';
 import 'package:flutterpp/App/Providers/Device/file_maneger_provider.dart';
 import 'package:flutterpp/App/Views/Pages/Mockup/Widgets/build_device_card.dart';
 import 'package:get/get.dart';
+// ignore: library_prefixes
 import 'package:image/image.dart' as IMG;
 import 'package:image/image.dart';
 import 'package:screenshot/screenshot.dart';

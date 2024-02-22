@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:io';
 
+import 'package:flutterpp/Config/app_print.dart';
 import 'package:process_run/process_run.dart';
 
 class CmdReadCreateDirProvider {
@@ -20,7 +21,7 @@ class CmdReadCreateDirProvider {
 
       return res;
     } catch (e) {
-      print('Error listing directory: $e');
+      AppPrint.print('Error listing directory: $e');
       return null;
     }
   }
@@ -29,7 +30,7 @@ class CmdReadCreateDirProvider {
     try {
       await runExecutableArguments('mkdir', ['-p', path]);
     } catch (e) {
-      print('Error creating directory: $e');
+      AppPrint.print('Error creating directory: $e');
     }
   }
 
@@ -38,7 +39,7 @@ class CmdReadCreateDirProvider {
     try {
       await runExecutableArguments('touch', [path]);
     } catch (e) {
-      print('Error creating file: $e');
+      AppPrint.print('Error creating file: $e');
     }
   }
 
@@ -47,7 +48,7 @@ class CmdReadCreateDirProvider {
     try {
       await File(path).writeAsString(content);
     } catch (e) {
-      print('Error creating file: $e');
+      AppPrint.print('Error creating file: $e');
     }
   }
 
@@ -74,7 +75,7 @@ class CmdReadCreateDirProvider {
 
       await file.writeAsString(lines.join('\n').trim());
     } catch (e) {
-      print('Error appending to file: $e');
+      AppPrint.print('Error appending to file: $e');
     }
   }
 
@@ -83,14 +84,14 @@ class CmdReadCreateDirProvider {
     try {
       // check if file exist
       if (!await File(path).exists()) {
-        print('❌file not exist');
+        AppPrint.print('❌file not exist');
         return;
       }
 
       // delete file
       await File(path).delete();
     } catch (e) {
-      print('Error deleting file: $e');
+      AppPrint.print('Error deleting file: $e');
     }
   }
 }

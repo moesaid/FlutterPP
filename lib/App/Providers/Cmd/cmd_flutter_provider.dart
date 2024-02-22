@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:flutterpp/Config/app_print.dart';
 import 'package:flutterpp/Storage/local_flutter_path.dart';
 import 'package:process_run/cmd_run.dart';
 
@@ -9,7 +10,7 @@ class CmdFlutterProvider {
     try {
       return LocalFlutterPath().read();
     } catch (e) {
-      print('Error getting Flutter local path: $e');
+      AppPrint.print('Error getting Flutter local path: $e');
       return null;
     }
   }
@@ -31,7 +32,7 @@ class CmdFlutterProvider {
       );
       return await runCmd(cmd);
     } catch (e) {
-      print('Error running Flutter command: $e');
+      AppPrint.print('Error running Flutter command: $e');
     }
     return null;
   }
@@ -53,7 +54,7 @@ class CmdFlutterProvider {
       );
       return await runCmd(cmd);
     } catch (e) {
-      print('Error running Flutter pub command: $e');
+      AppPrint.print('Error running Flutter pub command: $e');
       return null;
     }
   }
@@ -75,7 +76,7 @@ class CmdFlutterProvider {
       );
       return await runCmd(cmd);
     } catch (e) {
-      print('Error running Dart command: $e');
+      AppPrint.print('Error running Dart command: $e');
       return null;
     }
   }

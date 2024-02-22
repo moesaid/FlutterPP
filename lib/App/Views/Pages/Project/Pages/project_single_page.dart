@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutterpp/App/Controllers/Project/Single/project_single_controller.dart';
 import 'package:flutterpp/App/Views/Global/build_appbar.dart';
-import 'package:flutterpp/App/Views/Global/build_loading_or_empty_layout.dart';
+import 'package:flutterpp/App/Views/Global/build_loading_switch.dart';
 import 'package:flutterpp/App/Views/Pages/Project/Widgets/build_single_project_header.dart';
 import 'package:flutterpp/App/Views/Pages/Project/Widgets/build_single_project_no_path_state.dart';
 import 'package:flutterpp/App/Views/Pages/Project/Widgets/build_single_project_start_config.dart';
@@ -29,11 +29,11 @@ class ProjectSinglePage extends GetView<ProjectSingleController> {
       initState: (_) {},
       builder: (_) {
         return Material(
-          child: BuildLoadingOrEmptyLayout(
+          child: BuildLoadingSwitch(
             isLoading: controller.isLoading,
-            isEmpty: controller.project.id == null,
-            title: 'no active project found',
-            hasButton: false,
+            // isEmpty: controller.project.id == null,
+            // title: 'no active project found',
+            // hasButton: false,
             child: Scaffold(
               appBar: hasAppBar == true
                   ? BuildAppBar(
