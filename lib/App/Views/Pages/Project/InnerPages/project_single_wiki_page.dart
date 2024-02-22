@@ -2,7 +2,6 @@ import 'package:appflowy_editor/appflowy_editor.dart';
 import 'package:emojis/emoji.dart';
 import 'package:emojis/emojis.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutterpp/App/Controllers/Global/emoji_dialog_controller.dart';
 import 'package:flutterpp/App/Controllers/Project/Single/project_single_wiki_controller.dart';
 import 'package:flutterpp/App/Models/wiki_model.dart';
@@ -105,7 +104,6 @@ class BuildProjectSingleWikiSidebar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final renameKey = GlobalKey<FormBuilderState>();
     return Container(
       width: context.width * 0.15,
       decoration: BoxDecoration(
