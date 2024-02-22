@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:io';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutterpp/App/Providers/Local/app_mode.dart';
 import 'package:flutterpp/Config/app_config.dart';
 import 'package:flutterpp/Config/app_window_config.dart';
@@ -60,6 +61,12 @@ class AppInitializer {
 
   // init sentry
   static initSentry(FutureOr<void> Function()? appRunner) async {
+    // if debug mode return
+    if (kDebugMode) {
+      appRunner?.call();
+      return;
+    }
+
     await SentryFlutter.init(
       (options) {
         options.dsn = AppConfig.sentryDNS;
