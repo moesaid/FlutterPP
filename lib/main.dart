@@ -15,7 +15,9 @@ Future<void> main() async {
   await AppInitializer.initialize();
 
   // runApp
-  runApp(const MyApp());
+  await AppInitializer.initSentry(() async {
+    runApp(const MyApp());
+  });
 }
 
 class MyApp extends StatelessWidget {
