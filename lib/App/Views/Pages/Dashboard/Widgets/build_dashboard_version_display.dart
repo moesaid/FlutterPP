@@ -42,7 +42,7 @@ class BuildDashboardVersionDisplay extends StatelessWidget {
                       Text(
                         'current version'.capitalize!,
                         style: TextStyle(
-                          fontSize: 4.sp,
+                          fontSize: context.width * 0.01,
                           color: Get.theme.colorScheme.onPrimary.withOpacity(
                             0.5,
                           ),
@@ -52,7 +52,7 @@ class BuildDashboardVersionDisplay extends StatelessWidget {
                       Text(
                         _.currentVersion,
                         style: TextStyle(
-                          fontSize: 5.sp,
+                          fontSize: context.width * 0.013,
                           fontWeight: FontWeight.w500,
                         ),
                       ),
@@ -68,44 +68,47 @@ class BuildDashboardVersionDisplay extends StatelessWidget {
                       Text(
                         'latest version'.capitalize!,
                         style: TextStyle(
-                          fontSize: 4.sp,
+                          fontSize: context.width * 0.01,
                           color: Get.theme.colorScheme.onPrimary.withOpacity(
                             0.5,
                           ),
                         ),
                       ),
                       SizedBox(height: 1.sp),
-                      InkWell(
-                        onTap: () {
-                          showDialog(
-                            context: context,
-                            builder: (__) {
-                              return BuildDefultDialog(
-                                child: Markdown(data: _.body),
-                              );
-                            },
-                          );
-                        },
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(
-                              _.lastVersion,
-                              style: TextStyle(
-                                fontSize: 5.sp,
-                                fontWeight: FontWeight.w500,
+                      Tooltip(
+                        message: 'view changelog',
+                        child: InkWell(
+                          onTap: () {
+                            showDialog(
+                              context: context,
+                              builder: (__) {
+                                return BuildDefultDialog(
+                                  child: Markdown(data: _.body),
+                                );
+                              },
+                            );
+                          },
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(
+                                _.lastVersion,
+                                style: TextStyle(
+                                  fontSize: context.width * 0.013,
+                                  fontWeight: FontWeight.w500,
+                                ),
                               ),
-                            ),
-                            SizedBox(width: 2.sp),
-                            Icon(
-                              Icons.info_rounded,
-                              size: 5.sp,
-                              color:
-                                  Get.theme.colorScheme.onPrimary.withOpacity(
-                                0.5,
+                              SizedBox(width: 2.sp),
+                              Icon(
+                                Icons.info_rounded,
+                                size: context.width * 0.013,
+                                color:
+                                    Get.theme.colorScheme.onPrimary.withOpacity(
+                                  0.5,
+                                ),
                               ),
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
                       ),
                     ],

@@ -73,6 +73,7 @@ class BuildRail extends StatelessWidget {
           // ),
           IconButton(
             onPressed: onLogout,
+            tooltip: 'Logout',
             icon: const HeroIcon(
               HeroIcons.arrowLeftOnRectangle,
               style: HeroIconStyle.mini,

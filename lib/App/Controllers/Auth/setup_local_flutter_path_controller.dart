@@ -19,6 +19,10 @@ class SetupLocalFlutterPathController extends GetxController {
   // codes
   final List<Map<String, String>> codes = [
     {
+      'mac': 'flutter',
+      'windows': 'flutter',
+    },
+    {
       'mac': 'echo \$PATH | tr \':\' \'\\n\'',
       'windows': 'for %A in ("%PATH:;=" "%") do @echo %~A',
     },

@@ -38,7 +38,7 @@ class DashboardPage extends GetView<DashboardController> {
                       'Hey ${controller.profile.fullName ?? ''} 🖐️'
                           .capitalize!,
                       style: TextStyle(
-                        fontSize: 6.sp,
+                        fontSize: context.width * 0.015,
                         fontWeight: FontWeight.w600,
                       ),
                     ),
@@ -46,7 +46,7 @@ class DashboardPage extends GetView<DashboardController> {
                     Text(
                       'welcome to the mysterious realm of limitless potential, where blank pages eagerly await your unique imprint. 🚀',
                       style: TextStyle(
-                        fontSize: 5.sp,
+                        fontSize: context.width * 0.013,
                         fontWeight: FontWeight.w300,
                       ),
                     ),
@@ -57,6 +57,7 @@ class DashboardPage extends GetView<DashboardController> {
                       clientsCount: controller.clients.length,
                       invoicesCount: controller.invoices.length,
                       invoices: controller.invoices,
+                      onMorePressed: controller.navigateToInvoiceIndex,
                     ),
                     SizedBox(height: 10.sp),
                     BuildDashboardProjectSection(controller: controller),
@@ -74,13 +75,15 @@ class DashboardPage extends GetView<DashboardController> {
 class BuildDashboardChartSection extends StatelessWidget {
   final int? projectsCount, clientsCount, invoicesCount, teamsCount;
   final List<InvoiceModel> invoices;
+  final VoidCallback onMorePressed;
   const BuildDashboardChartSection({
     this.projectsCount,
     this.clientsCount,
     this.invoicesCount,
     this.teamsCount,
-    super.key,
     required this.invoices,
+    required this.onMorePressed,
+    super.key,
   });
 
   @override
@@ -97,7 +100,10 @@ class BuildDashboardChartSection extends StatelessWidget {
                   const BuildDashboardVersionDisplay(),
                   SizedBox(width: 5.sp),
                   Expanded(
-                    child: BuildDashboardChart(invoices: invoices),
+                    child: BuildDashboardChart(
+                      invoices: invoices,
+                      onMorePressed: onMorePressed,
+                    ),
                   ),
                 ],
               ),

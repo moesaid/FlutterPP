@@ -1,3 +1,4 @@
+import 'package:flutterpp/Config/app_print.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
@@ -11,7 +12,7 @@ class CallPipeline {
       T? res = await future();
       return res;
     } catch (exception, stackTrace) {
-      // print({'❌exception': exception, 'stackTrace': stackTrace});
+      AppPrint.printError('Error: $exception');
 
       User? user = Supabase.instance.client.auth.currentUser;
 

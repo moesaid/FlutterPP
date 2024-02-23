@@ -9,6 +9,7 @@ import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
 import 'package:syntax_highlight/syntax_highlight.dart';
 import 'package:tab_container/tab_container.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class SetupLocalFlutterPathPage
     extends GetView<SetupLocalFlutterPathController> {
@@ -29,10 +30,15 @@ class SetupLocalFlutterPathPage
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
+                    const CloseButton(),
+                    SizedBox(height: 10.sp),
                     Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         BuildLogo(size: 20.sp),
+
+                        const Spacer(),
+
+                        // add path
                         FilledButton(
                           onPressed: () {
                             showDialog(
@@ -115,6 +121,24 @@ class SetupLocalFlutterPathDialog extends StatelessWidget {
                 fontWeight: FontWeight.w300,
               ),
             ),
+            SizedBox(height: 1.sp),
+            RichText(
+              text: TextSpan(
+                text: 'the end of the path should be'.capitalize!,
+                style: TextStyle(
+                  fontSize: 5.sp,
+                  fontWeight: FontWeight.w300,
+                ),
+                children: [
+                  TextSpan(
+                    text: ' " flutter/bin " ',
+                    style: TextStyle(
+                      color: Get.theme.colorScheme.error,
+                    ),
+                  ),
+                ],
+              ),
+            ),
             SizedBox(height: 10.sp),
             FormBuilderTextField(
               name: 'path',
@@ -162,6 +186,61 @@ class BuildListView extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListView(
       children: [
+        // make sure you have flutter installed
+        Text(
+          'make sure you have flutter installed on your machine before adding the path.'
+              .capitalize!,
+        ),
+        Text(
+          'check your flutter installation by running the following command in your terminal or command prompt:'
+              .capitalize!,
+        ),
+        SizedBox(height: 10.sp),
+        BuildCodeBlock(
+          height: 130,
+          theme: controller.theme,
+          onCopy: controller.onCopy,
+          code: controller.codes[0],
+        ),
+        SizedBox(height: 2.sp),
+
+        Text(
+          'if you get a sucsessful response, then you have flutter installed on your machine. continue to the next step.'
+              .capitalize!,
+          style: const TextStyle(
+            color: Colors.greenAccent,
+          ),
+        ),
+        Text(
+          'else you need to install Flutter on your machine before you continue, you can install flutter by following the instructions on the official flutter website.'
+              .capitalize!,
+          style: TextStyle(
+            color: Get.theme.colorScheme.error,
+          ),
+        ),
+        SizedBox(height: 6.sp),
+        Row(
+          children: [
+            Text('if needed: '.toUpperCase()),
+            FilledButton.tonal(
+              onPressed: () async {
+                final Uri url = Uri.parse(
+                  'https://docs.flutter.dev/get-started/install',
+                );
+                if (!await launchUrl(url)) {
+                  Get.snackbar(
+                    'Error',
+                    'could not launch the url',
+                    snackPosition: SnackPosition.BOTTOM,
+                  );
+                }
+              },
+              child: Text('install flutter'.toUpperCase()),
+            ),
+          ],
+        ),
+
+        SizedBox(height: 10.sp),
         Text(
           'if you don\'t know the path to your local flutter sdk installation,'
                   '\nyou can find it by running the following command in your terminal or command prompt:'
@@ -173,14 +252,28 @@ class BuildListView extends StatelessWidget {
             height: 130,
             theme: controller.theme,
             onCopy: controller.onCopy,
-            code: controller.codes[0],
+            code: controller.codes[1],
           ),
         SizedBox(height: 10.sp),
         Text(
           'after running the command, you will see all the paths in your terminal or command prompt.'
-                  '\nfind the path that contains the word "flutter/bin" and copy it.'
-                  '\nhere is an example of what you will see:'
               .capitalize!,
+        ),
+        RichText(
+          text: TextSpan(
+            text: 'find the path that ends with'.capitalize!,
+            children: [
+              TextSpan(
+                text: ' " flutter/bin " ',
+                style: TextStyle(
+                  color: Get.theme.colorScheme.error,
+                ),
+              ),
+              const TextSpan(
+                text: 'and copy it.',
+              ),
+            ],
+          ),
         ),
         SizedBox(height: 10.sp),
         Container(

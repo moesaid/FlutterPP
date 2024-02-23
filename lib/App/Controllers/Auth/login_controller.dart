@@ -8,14 +8,14 @@ class LoginController extends GetxController {
   final supabase = Supabase.instance.client;
 
   Future<void> login(Map<String, dynamic> value) async {
-    bool isSend = await Get.showOverlay(
+    bool? isSend = await Get.showOverlay(
       asyncFunction: () async {
         return await AuthServices().signInWithOtp(email: value['email']);
       },
       loadingWidget: const BuildOverlay(),
     );
 
-    if (isSend) {
+    if (isSend == true) {
       Get.toNamed(AppRoutes.VERIFY_OTP, arguments: {
         'email': value['email'],
         'otpType': OtpType.magiclink,

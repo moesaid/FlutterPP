@@ -2,20 +2,23 @@ import 'package:flutter/material.dart';
 import 'package:flutterpp/App/Models/invoice_model.dart';
 import 'package:flutterpp/App/Views/Pages/Invoice/Widgets/build_invoice_body.dart';
 import 'package:get/get.dart';
+import 'package:heroicons/heroicons.dart';
 import 'package:sizer/sizer.dart';
 
 class BuildDashboardChart extends StatelessWidget {
   final List<InvoiceModel> invoices;
+  final VoidCallback onMorePressed;
 
   const BuildDashboardChart({
     super.key,
     required this.invoices,
+    required this.onMorePressed,
   });
 
   // limit invoices
   List<InvoiceModel> get _invoices {
-    if (invoices.length > 20) {
-      return invoices.sublist(0, 20);
+    if (invoices.length > 5) {
+      return invoices.sublist(0, 5);
     }
     return invoices;
   }
@@ -46,6 +49,15 @@ class BuildDashboardChart extends StatelessWidget {
                   fontWeight: FontWeight.w500,
                 ),
               ),
+              const Spacer(),
+              InkWell(
+                onTap: onMorePressed,
+                child: HeroIcon(
+                  HeroIcons.chevronDoubleRight,
+                  size: 4.sp,
+                  color: Get.theme.colorScheme.onBackground,
+                ),
+              ),
             ],
           ),
           SizedBox(height: 5.sp),
@@ -63,6 +75,7 @@ class BuildDashboardChart extends StatelessWidget {
                     invoice: item,
                     hasActions: false,
                     hasGrey: true,
+                    hasDate: false,
                   );
                 },
               ),

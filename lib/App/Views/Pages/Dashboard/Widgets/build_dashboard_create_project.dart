@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutterpp/App/Controllers/Dashboard/dashboard_controller.dart';
 import 'package:flutterpp/App/Views/Pages/Project/Pages/project_create_page.dart';
 import 'package:flutterpp/Config/app_print.dart';
+import 'package:flutterpp/Routes/app_pages.dart';
 import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
 
@@ -18,6 +19,12 @@ class BuildDashboardCreateProject extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
+        bool hasPath = controller.checkFlutterPath();
+
+        if (!hasPath) {
+          Get.toNamed(AppRoutes.SETUP_LOCAL_FLUTTER_PATH);
+          return;
+        }
         aweSideSheet(
           context: context,
           sheetPosition: SheetPosition.right,

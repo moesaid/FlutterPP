@@ -68,14 +68,14 @@ class VerifyOtpController extends GetxController {
 
   // Resend OTP
   Future<void> resendOtp() async {
-    bool isSent = await Get.showOverlay(
+    bool? isSent = await Get.showOverlay(
       asyncFunction: () async {
         return await _authServices.signInWithOtp(email: email);
       },
       loadingWidget: const BuildOverlay(),
     );
 
-    if (isSent) {
+    if (isSent == true) {
       BuildSnackBar(
         title: 'Success',
         message: 'OTP sent successfully, please check your email',

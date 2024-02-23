@@ -7,13 +7,18 @@ class AuthProvider {
   final supabase = Supabase.instance.client;
 
   // signInWithOtp
-  Future<void> signInWithOtp({required String email}) async {
-    callPipeline.futurePipeline(
+  Future<bool?> signInWithOtp({required String email}) async {
+    return callPipeline.futurePipeline(
       future: () async {
-        await supabase.auth.signInWithOtp(
-          email: email,
-          emailRedirectTo: AppConfig.supabaseCallback,
-        );
+        try {
+          await supabase.auth.signInWithOtp(
+            email: email,
+            emailRedirectTo: AppConfig.supabaseCallback,
+          );
+          return true;
+        } catch (e) {
+          return false;
+        }
       },
       name: 'sign in with otp',
     );
