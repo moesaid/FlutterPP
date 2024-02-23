@@ -54,14 +54,8 @@ class BuildRail extends StatelessWidget {
               destinations: tabs.map((e) {
                 return NavigationRailDestination(
                   padding: const EdgeInsets.all(0),
-                  icon: Tooltip(
-                    message: e['title'],
-                    child: HeroIcon(e['icon'], style: HeroIconStyle.outline),
-                  ),
-                  selectedIcon: Tooltip(
-                    message: e['title'],
-                    child: HeroIcon(e['icon'], style: HeroIconStyle.solid),
-                  ),
+                  icon: HeroIcon(e['icon'], style: HeroIconStyle.outline),
+                  selectedIcon: HeroIcon(e['icon'], style: HeroIconStyle.solid),
                   label: Text(e['title']),
                 );
               }).toList(),
