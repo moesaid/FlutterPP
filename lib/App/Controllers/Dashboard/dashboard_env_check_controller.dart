@@ -1,12 +1,15 @@
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutterpp/App/Models/check_env_model.dart';
 import 'package:flutterpp/App/Services/Cmd/cmd_env_services.dart';
+import 'package:flutterpp/Routes/app_pages.dart';
 import 'package:flutterpp/Storage/device_env_state_storage.dart';
+import 'package:flutterpp/Storage/local_flutter_path.dart';
 import 'package:get/get.dart';
 
 class DashboardEnvCheckController extends GetxController {
   final CmdEnvServices cmdEnvServices = CmdEnvServices();
   final DeviceEnvStateStorage deviceEnvStateStorage = DeviceEnvStateStorage();
+  final LocalFlutterPath _localFlutterPath = LocalFlutterPath();
 
   final _isHovring = false.obs;
   bool get isHovring => _isHovring.value;
@@ -51,6 +54,14 @@ class DashboardEnvCheckController extends GetxController {
 
   // recheck env
   Future<void> recheckEnv() async {
+    // get local path
+    String? localPath = _localFlutterPath.read();
+
+    if (localPath == null || localPath.isEmpty) {
+      Get.toNamed(AppRoutes.SETUP_LOCAL_FLUTTER_PATH);
+      return;
+    }
+
     updateLoading(true);
 
     await _checkEnv();

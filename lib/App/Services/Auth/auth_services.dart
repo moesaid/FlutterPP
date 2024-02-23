@@ -11,16 +11,8 @@ class AuthServices {
   final CallPipeline _callPipeline = CallPipeline();
 
   // signInWithOtp
-  Future<bool> signInWithOtp({required String email}) async {
-    try {
-      await _callPipeline.futurePipeline(
-        future: () => _authProvider.signInWithOtp(email: email),
-        name: 'signInWithOtp',
-      );
-      return true;
-    } catch (e) {
-      return false;
-    }
+  Future<bool?> signInWithOtp({required String email}) async {
+    return _authProvider.signInWithOtp(email: email);
   }
 
   // verifyOtp

@@ -22,6 +22,7 @@ import 'package:flutterpp/Config/app_gradients.dart';
 import 'package:flutterpp/Helpers/colors_helper.dart';
 import 'package:flutterpp/Routes/app_pages.dart';
 import 'package:flutterpp/Storage/active_project_storage.dart';
+import 'package:flutterpp/Storage/local_flutter_path.dart';
 import 'package:flutterpp/Storage/projects_local_path_storage.dart';
 import 'package:get/get.dart';
 
@@ -355,5 +356,17 @@ class DashboardController extends GetxController {
 
     if (items == null || items.isEmpty) return;
     _invoices.assignAll(items);
+  }
+
+  // check flutter path
+  bool checkFlutterPath() {
+    // get local path
+    String? localPath = LocalFlutterPath().read();
+
+    if (localPath == null || localPath.isEmpty) {
+      return false;
+    }
+
+    return true;
   }
 }
