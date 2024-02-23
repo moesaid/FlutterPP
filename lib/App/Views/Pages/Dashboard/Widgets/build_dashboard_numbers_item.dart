@@ -68,7 +68,7 @@ class BuildDashboardNumbersItem extends StatelessWidget {
                       child: Text(
                         title?.capitalize ?? 'Title',
                         style: TextStyle(
-                          fontSize: 4.sp,
+                          fontSize: context.width * 0.01,
                           fontWeight: FontWeight.w400,
                           color: Get.theme.colorScheme.onBackground.withOpacity(
                             0.3,
@@ -80,7 +80,7 @@ class BuildDashboardNumbersItem extends StatelessWidget {
                       child: Text(
                         numbers?.toString() ?? '0',
                         style: TextStyle(
-                          fontSize: 6.sp,
+                          fontSize: context.width * 0.012,
                           fontWeight: FontWeight.w800,
                         ),
                       ),
@@ -91,7 +91,12 @@ class BuildDashboardNumbersItem extends StatelessWidget {
             ),
           ),
           const Spacer(),
-          Text(subtitle?.capitalize ?? ''),
+          Text(
+            subtitle?.capitalize ?? '',
+            style: TextStyle(
+              fontSize: context.width * 0.012,
+            ),
+          ),
         ],
       ),
     );

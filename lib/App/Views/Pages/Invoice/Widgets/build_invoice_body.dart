@@ -7,7 +7,7 @@ import 'package:sizer/sizer.dart';
 
 class BuildInvoiceBody extends StatelessWidget {
   final InvoiceModel invoice;
-  final bool? hasActions, hasGrey;
+  final bool? hasActions, hasGrey, hasDate;
   final void Function(InvoiceModel)? onView,
       onEdit,
       onDelete,
@@ -27,6 +27,7 @@ class BuildInvoiceBody extends StatelessWidget {
     this.onStatusPressed,
     this.hasActions = true,
     this.hasGrey = false,
+    this.hasDate = true,
     required this.invoice,
   });
 
@@ -51,16 +52,17 @@ class BuildInvoiceBody extends StatelessWidget {
             ],
           ),
         ),
-        Expanded(
-          flex: 2,
-          child: Text(
-            invoice.dueDate?.capitalize ?? '',
-            style: TextStyle(
-              color: Get.theme.colorScheme.onBackground
-                  .withOpacity(hasGrey == true ? 0.5 : 1),
+        if (hasDate == true)
+          Expanded(
+            flex: 2,
+            child: Text(
+              invoice.dueDate?.capitalize ?? '',
+              style: TextStyle(
+                color: Get.theme.colorScheme.onBackground
+                    .withOpacity(hasGrey == true ? 0.5 : 1),
+              ),
             ),
           ),
-        ),
         Expanded(
           child: Text(
             invoice.number.toString(),

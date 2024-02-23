@@ -283,6 +283,15 @@ class DashboardController extends GetxController {
     });
   }
 
+  // navigate to invoice
+  void navigateToInvoiceIndex() {
+    if (!Get.isRegistered<HomeController>()) return;
+
+    HomeController homeController = Get.find();
+
+    homeController.changeTab(3);
+  }
+
   // update project list
   void updateProjectList(ProjectModel project) {
     // remove item

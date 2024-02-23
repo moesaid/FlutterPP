@@ -121,6 +121,24 @@ class SetupLocalFlutterPathDialog extends StatelessWidget {
                 fontWeight: FontWeight.w300,
               ),
             ),
+            SizedBox(height: 1.sp),
+            RichText(
+              text: TextSpan(
+                text: 'the end of the path should be'.capitalize!,
+                style: TextStyle(
+                  fontSize: 5.sp,
+                  fontWeight: FontWeight.w300,
+                ),
+                children: [
+                  TextSpan(
+                    text: ' " flutter/bin " ',
+                    style: TextStyle(
+                      color: Get.theme.colorScheme.error,
+                    ),
+                  ),
+                ],
+              ),
+            ),
             SizedBox(height: 10.sp),
             FormBuilderTextField(
               name: 'path',
