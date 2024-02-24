@@ -28,8 +28,8 @@ class AppWindowConfig {
         onClicked: (menuItem) async => await windowManager.show(),
       ),
       MenuItemLabel(
-        label: 'Hide'.capitalize!,
-        onClicked: (menuItem) async => await windowManager.hide(),
+        label: 'minimize'.capitalize!,
+        onClicked: (menuItem) async => await windowManager.minimize(),
       ),
       MenuSeparator(),
       MenuItemLabel(
