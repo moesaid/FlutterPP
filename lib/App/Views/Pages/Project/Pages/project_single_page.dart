@@ -67,7 +67,7 @@ class BuildProjectSinglePage extends StatelessWidget {
         BuildSingleProjectHeader(controller: controller),
         Expanded(
           child: DefaultTabController(
-            length: 3,
+            length: 4,
             child: Obx(
               () => Column(
                 children: [
