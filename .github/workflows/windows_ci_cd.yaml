@@ -42,6 +42,17 @@ jobs:
           regex: (\-\w+)|(\+\w+)
           replacement: ""
 
+      - name: Create PFX certificate
+        id: createPfx
+        shell: pwsh
+        env:
+          PFX_CONTENT: ${{ secrets.PROD_WIN_CERTIFICATE }}
+        run: |
+          $pfxPath = Join-Path -Path $env:RUNNER_TEMP -ChildPath "cert.pfx";
+          $encodedBytes = [System.Convert]::FromBase64String($env:PFX_CONTENT);
+          Set-Content $pfxPath -Value $encodedBytes -AsByteStream;
+          Write-Output "::set-output name=PFX_PATH::$pfxPath";
+
       - name: Write MSIX
         uses: DamianReeves/write-file-action@v1.0
         with:
@@ -58,6 +69,8 @@ jobs:
               capabilities: "internetClient,removableStorage"
               store: true
               build_windows: false
+              certificate_path: ${{ steps.createPfx.outputs.PFX_PATH }}
+              certificate_password: ${{ secrets.PROD_WIN_CERTIFICATE_PWD }}
           write-mode: append
 
       - name: Flutter get packages
@@ -68,6 +81,13 @@ jobs:
 
       - name: Create MSIX
         run: flutter pub run msix:create
+
+      - name: Delete PFX certificate
+        shell: pwsh
+        env:
+          PFX_PATH: ${{ steps.createPfx.outputs.PFX_PATH }}
+        run: |
+          Remove-Item -Path $env:PFX_PATH;
 
       - name: Upload MSIX to release
         uses: svenstaro/upload-release-action@2.2.1
