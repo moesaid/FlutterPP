@@ -585,10 +585,10 @@ packages:
     dependency: "direct main"
     description:
       name: heroicons
-      sha256: "43320f7412a495f2f6dabe29ae543d167a1355a425f8a824b2d6b8b0f3abf335"
+      sha256: "762f907af146105a3956e61e16e0a2cafadd39317e88cc4e4d0ed32846a0452e"
       url: "https://pub.dev"
     source: hosted
-    version: "0.9.0"
+    version: "0.10.0"
   html:
     dependency: transitive
     description:
@@ -1286,10 +1286,10 @@ packages:
     dependency: "direct main"
     description:
       name: system_tray
-      sha256: "1bcc11bc230033be20d7443c29f65f68d67169715a838a1122f20fbff5dd2d19"
+      sha256: "40444e5de8ed907822a98694fd031b8accc3cb3c0baa547634ce76189cf3d9cf"
       url: "https://pub.dev"
     source: hosted
-    version: "0.1.1"
+    version: "2.0.3"
   tab_container:
     dependency: "direct main"
     description:

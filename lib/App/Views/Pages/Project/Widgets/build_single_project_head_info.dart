@@ -22,6 +22,7 @@ class BuildSingleProjectHeadInfo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         BuildProjectAvatar(
           icon: controller.project.icon ?? '',
@@ -35,6 +36,7 @@ class BuildSingleProjectHeadInfo extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Text(
                   controller.project.title ?? '',
@@ -62,9 +64,14 @@ class BuildSingleProjectHeadInfo extends StatelessWidget {
               ],
             ),
             SizedBox(height: 1.sp),
-            Text(
-              controller.project.description ?? '',
-              style: Get.textTheme.bodyMedium,
+            SizedBox(
+              width: context.width * 0.3,
+              child: Text(
+                controller.project.description ?? '',
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+                style: Get.textTheme.bodySmall,
+              ),
             ),
             SizedBox(height: 1.sp),
           ],

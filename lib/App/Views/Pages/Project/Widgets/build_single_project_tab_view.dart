@@ -18,6 +18,7 @@ class BuildSingleProjectTabView extends StatelessWidget {
       physics: const NeverScrollableScrollPhysics(),
       children: [
         ProjectSingleCodeGen(localPath: controller.projectLocalPath),
+        // const ProjectSingleApiGenPage(),
         const ProjectSingleWikiPage(),
         const ProjectSingleFilesPage(),
       ],

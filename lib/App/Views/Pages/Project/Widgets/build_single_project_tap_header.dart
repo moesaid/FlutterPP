@@ -17,7 +17,8 @@ class BuildSingleProjectTapHeader extends StatelessWidget {
       isScrollable: true,
       enableFeedback: true,
       tabs: [
-        Tab(text: 'Code Gen'.capitalize!),
+        Tab(text: 'Code generator'.capitalize!),
+        // Tab(text: 'api generator'.capitalize!),
         Tab(text: 'wiki'.capitalize!),
         Tab(text: 'files'.capitalize!),
       ],

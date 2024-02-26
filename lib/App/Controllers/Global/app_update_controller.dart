@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 // ignore: depend_on_referenced_packages
 import 'package:http/http.dart' as http;
 import 'package:package_info_plus/package_info_plus.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class AppUpdateController extends GetxController {
   final _isLoading = false.obs;
@@ -18,6 +19,9 @@ class AppUpdateController extends GetxController {
 
   final _body = ''.obs;
   String get body => _body.value;
+
+  final _url = ''.obs;
+  String get url => _url.value;
 
   @override
   Future<void> onInit() async {
@@ -43,6 +47,7 @@ class AppUpdateController extends GetxController {
     if (data.statusCode == 200) {
       _lastVersion.value = jsonDecode(data.body)["tag_name"];
       _body.value = jsonDecode(data.body)["body"];
+      _url.value = jsonDecode(data.body)["html_url"];
     }
   }
 
@@ -84,5 +89,15 @@ class AppUpdateController extends GetxController {
 
     // https://github.com/moesaid/FlutterPP_Public/releases/download/0.0.4/FlutterPP-macos-0.0.4.dmg
     return "https://github.com/moesaid/FlutterPP_Public/releases/download/$val/FlutterPP-$operatingSystem-$val.$platformExt";
+  }
+
+  // open url
+  Future<void> openUrl(String href) async {
+    AppPrint.print({"❌ href": href});
+
+    Uri url = Uri.parse(href);
+    if (await canLaunchUrl(url)) {
+      launchUrl(url);
+    }
   }
 }

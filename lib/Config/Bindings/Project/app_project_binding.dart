@@ -1,3 +1,5 @@
+import 'package:flutterpp/App/Controllers/Global/build_api_gen_node_controller.dart';
+import 'package:flutterpp/App/Controllers/Project/Single/project_single_api_gen_controller.dart';
 import 'package:flutterpp/App/Controllers/Project/Single/project_single_board_controller.dart';
 import 'package:flutterpp/App/Controllers/Project/Single/project_single_code_gen_controller.dart';
 import 'package:flutterpp/App/Controllers/Project/Single/project_single_config_controller.dart';
@@ -25,5 +27,10 @@ class AppProjectBinding {
 
     Get.lazyPut<ProjectSingleFilesController>(
         () => ProjectSingleFilesController());
+
+    Get.lazyPut<ProjectSingleApiGenController>(
+        () => ProjectSingleApiGenController());
+
+    Get.lazyPut<BuildApiGenNodeController>(() => BuildApiGenNodeController());
   }
 }

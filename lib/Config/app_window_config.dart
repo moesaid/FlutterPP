@@ -20,27 +20,41 @@ class AppWindowConfig {
       iconPath: iconPath,
     );
 
-    systemTray.setContextMenu([
-      MenuItem(
-        label: 'Show',
-        onClicked: () async {
-          await windowManager.show();
-          await windowManager.focus();
+    // create context menu
+    final Menu menu = Menu();
+    await menu.buildFrom([
+      MenuItemLabel(
+        label: 'Show'.capitalize!,
+        onClicked: (menuItem) async => await windowManager.show(),
+      ),
+      MenuItemLabel(
+        label: 'minimize'.capitalize!,
+        onClicked: (menuItem) async => await windowManager.minimize(),
+      ),
+      MenuSeparator(),
+      MenuItemLabel(
+        label: 'bring To Front'.capitalize!,
+        onClicked: (menuItem) async {
+          await windowManager.setAlwaysOnTop(true);
         },
       ),
-      MenuItem(
-        label: 'center',
-        onClicked: () async {
-          await windowManager.center();
+      MenuItemLabel(
+        label: 'bring To Back'.capitalize!,
+        onClicked: (menuItem) async {
+          await windowManager.setAlwaysOnTop(false);
         },
       ),
-      MenuItem(
-        label: 'Exit',
-        onClicked: () async {
+      MenuSeparator(),
+      MenuItemLabel(
+        label: 'Exit'.capitalize!,
+        onClicked: (menuItem) async {
           await windowManager.close();
+          await systemTray.destroy();
         },
       ),
     ]);
+
+    systemTray.setContextMenu(menu);
 
     // handle system tray event
     systemTray.registerSystemTrayEventHandler((eventName) async {
