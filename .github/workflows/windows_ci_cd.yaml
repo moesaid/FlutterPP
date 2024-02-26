@@ -56,8 +56,6 @@ jobs:
               logo_path: assets\windwos.png
               architecture: x64
               capabilities: "internetClient,removableStorage"
-              store: true
-              build_windows: false
               certificate_path: windows/CERTIFICATE.pfx
               certificate_password: ${{ secrets.PROD_WIN_CERTIFICATE_PWD }}
           write-mode: append
