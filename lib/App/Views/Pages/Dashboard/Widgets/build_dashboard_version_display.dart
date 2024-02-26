@@ -4,6 +4,7 @@ import 'package:flutterpp/App/Controllers/Global/app_update_controller.dart';
 import 'package:flutterpp/App/Views/Global/build_loading_switch.dart';
 import 'package:flutterpp/App/Views/Global/buiuld_dialog.dart';
 import 'package:get/get.dart';
+import 'package:heroicons/heroicons.dart';
 import 'package:sizer/sizer.dart';
 
 class BuildDashboardVersionDisplay extends StatelessWidget {
@@ -82,8 +83,8 @@ class BuildDashboardVersionDisplay extends StatelessWidget {
                             showDialog(
                               context: context,
                               builder: (__) {
-                                return BuildDefultDialog(
-                                  child: Markdown(data: _.body),
+                                return BuildDashboardVersionDisplayDialog(
+                                  controller: _,
                                 );
                               },
                             );
@@ -119,6 +120,60 @@ class BuildDashboardVersionDisplay extends StatelessWidget {
           ),
         );
       },
+    );
+  }
+}
+
+class BuildDashboardVersionDisplayDialog extends StatelessWidget {
+  final AppUpdateController controller;
+  const BuildDashboardVersionDisplayDialog({
+    super.key,
+    required this.controller,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return BuildDefultDialog(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Expanded(
+            child: Markdown(
+              data: controller.body,
+              styleSheet: MarkdownStyleSheet(
+                p: TextStyle(
+                  fontSize: context.width * 0.01,
+                  color: Get.theme.colorScheme.onPrimary.withOpacity(0.5),
+                ),
+                h1: TextStyle(
+                  fontSize: context.width * 0.013,
+                  fontWeight: FontWeight.w500,
+                ),
+                h2: TextStyle(
+                  fontSize: context.width * 0.013,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+              onTapLink: (text, href, title) async {
+                if (href == null) return;
+                controller.openUrl(href);
+              },
+            ),
+          ),
+          SizedBox(height: context.height * 0.02),
+          ElevatedButton.icon(
+            onPressed: () {
+              if (controller.url.isEmpty) return;
+              controller.openUrl(controller.url);
+            },
+            icon: HeroIcon(
+              HeroIcons.link,
+              size: 6.sp,
+            ),
+            label: const Text('open release page'),
+          ),
+        ],
+      ),
     );
   }
 }
