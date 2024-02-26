@@ -97,5 +97,3 @@ jobs:
           asset_name: FlutterPP-windows-${{ steps.versions.outputs.version }}-MS-NS.msix
           tag: ${{ steps.versions.outputs.version }}
           release_name: Release ${{ steps.versions.outputs.version }}
-
-      # TODO: Upload automatically to MS Store. MSFT is having some issues with their Azure AD so cannot be done yet.
