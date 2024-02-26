@@ -37,54 +37,12 @@ class BuildApiGenNode extends GetView<BuildApiGenNodeController> {
                           : Get.theme.colorScheme.secondaryContainer,
                     ),
                   ),
-                  child: Column(
+                  child: const Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Padding(
-                        padding: EdgeInsets.symmetric(
-                          vertical: context.width * 0.007,
-                          horizontal: context.width * 0.01,
-                        ),
-                        child: Row(
-                          children: [
-                            Icon(Icons.api, size: context.width * 0.011),
-                            SizedBox(width: context.width * 0.005),
-                            Text(
-                              'rest api call'.capitalize!,
-                              style: TextStyle(fontSize: context.width * 0.01),
-                            ),
-                            const Spacer(),
-                            InkWell(
-                              onTap: () => AppPrint.print('data'),
-                              child:
-                                  Icon(Icons.link, size: context.width * 0.012),
-                            ),
-                          ],
-                        ),
-                      ),
-                      const Divider(height: 0, thickness: 0.5),
-                      Padding(
-                        padding: EdgeInsets.symmetric(
-                          vertical: context.width * 0.007,
-                          horizontal: context.width * 0.01,
-                        ),
-                        child: FormBuilder(
-                          child: Column(
-                            children: [
-                              const BuildApiGenFormTextItem(
-                                title: 'path',
-                                value: '/api/v1/users',
-                              ),
-                              SizedBox(height: context.width * 0.005),
-                              const BuildApiGenFormDropdownItem(
-                                title: 'Method',
-                                value: 'post',
-                              ),
-                              SizedBox(height: context.width * 0.005),
-                            ],
-                          ),
-                        ),
-                      ),
+                      BuildApiGenNodeHeader(),
+                      Divider(height: 0, thickness: 0.5),
+                      BuildApiGenNodeBody(),
                     ],
                   ),
                 ),
@@ -117,6 +75,69 @@ class BuildApiGenNode extends GetView<BuildApiGenNodeController> {
           ),
         );
       },
+    );
+  }
+}
+
+class BuildApiGenNodeBody extends StatelessWidget {
+  const BuildApiGenNodeBody({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: EdgeInsets.symmetric(
+        vertical: context.width * 0.007,
+        horizontal: context.width * 0.01,
+      ),
+      child: FormBuilder(
+        child: Column(
+          children: [
+            const BuildApiGenFormTextItem(
+              title: 'path',
+              value: '/api/v1/users',
+            ),
+            SizedBox(height: context.width * 0.005),
+            const BuildApiGenFormDropdownItem(
+              title: 'Method',
+              value: 'post',
+            ),
+            SizedBox(height: context.width * 0.005),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class BuildApiGenNodeHeader extends StatelessWidget {
+  const BuildApiGenNodeHeader({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: EdgeInsets.symmetric(
+        vertical: context.width * 0.007,
+        horizontal: context.width * 0.01,
+      ),
+      child: Row(
+        children: [
+          Icon(Icons.api, size: context.width * 0.011),
+          SizedBox(width: context.width * 0.005),
+          Text(
+            'rest api call'.capitalize!,
+            style: TextStyle(fontSize: context.width * 0.01),
+          ),
+          const Spacer(),
+          InkWell(
+            onTap: () => AppPrint.print('data'),
+            child: Icon(Icons.link, size: context.width * 0.012),
+          ),
+        ],
+      ),
     );
   }
 }
