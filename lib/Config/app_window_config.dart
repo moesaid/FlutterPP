@@ -75,8 +75,9 @@ class AppWindowConfig {
       skipTaskbar: false,
     );
 
-    // show window
+    // show window\
     await windowManager.ensureInitialized();
+
     windowManager.waitUntilReadyToShow(windowOptions, () async {
       await windowManager.show();
       await windowManager.focus();
