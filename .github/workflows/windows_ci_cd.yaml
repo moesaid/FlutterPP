@@ -58,6 +58,7 @@ jobs:
               capabilities: "internetClient,removableStorage"
               certificate_path: windows/CERTIFICATE.pfx
               certificate_password: ${{ secrets.PROD_WIN_CERTIFICATE_PWD }}
+              install_certificate: true
           write-mode: append
 
       - name: Flutter get packages
@@ -67,7 +68,7 @@ jobs:
         run: flutter build windows
 
       - name: Create MSIX
-        run: flutter pub run msix:create
+        run: flutter pub run msix:create --install-certificate
 
       - name: Upload MSIX to release
         uses: svenstaro/upload-release-action@2.2.1
