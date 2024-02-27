@@ -24,7 +24,9 @@ class AppInitializer {
     await GetStorage.init();
 
     // init lets cert encrypt
-    await _initLetsEncrypt();
+    if (Platform.isWindows) {
+      await _initLetsEncrypt();
+    }
 
     // supabase
     await Supabase.initialize(
