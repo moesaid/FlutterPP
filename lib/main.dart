@@ -8,6 +8,7 @@ import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:get/get.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
 import 'package:sizer/sizer.dart';
+import 'package:window_manager/window_manager.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -19,7 +20,9 @@ Future<void> main() async {
   await AppInitializer.initSentry(() async {
     runApp(DefaultAssetBundle(
       bundle: SentryAssetBundle(),
-      child: const MyApp(),
+      child: const DragToMoveArea(
+        child: MyApp(),
+      ),
     ));
   });
 }

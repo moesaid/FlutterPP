@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:flutter/foundation.dart';
+import 'package:flutter/services.dart';
 import 'package:flutterpp/App/Providers/Local/app_mode.dart';
 import 'package:flutterpp/Config/app_config.dart';
 import 'package:flutterpp/Config/app_window_config.dart';
@@ -21,6 +22,11 @@ class AppInitializer {
 
     // get storage
     await GetStorage.init();
+
+    // init lets cert encrypt
+    if (Platform.isWindows) {
+      await _initLetsEncrypt();
+    }
 
     // supabase
     await Supabase.initialize(
@@ -74,6 +80,16 @@ class AppInitializer {
         options.tracesSampleRate = 1.0;
       },
       appRunner: appRunner,
+    );
+  }
+
+  // init lets encrypt
+  static _initLetsEncrypt() async {
+    ByteData data = await PlatformAssetBundle().load(
+      'assets/cers/lets-encrypt-r3.pem',
+    );
+    SecurityContext.defaultContext.setTrustedCertificatesBytes(
+      data.buffer.asUint8List(),
     );
   }
 }

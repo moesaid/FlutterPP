@@ -13,7 +13,7 @@ dependencies:
   get: ^4.6.5
   window_manager: ^0.3.8
   get_storage: ^2.1.1
-  supabase_flutter: ^2.3.0
+  supabase_flutter: ^2.3.4
   flutter_form_builder: ^9.0.0
   form_builder_validators: ^9.0.0
   heroicons: ^0.10.0
@@ -78,6 +78,7 @@ flutter:
     - assets/templates/
     - assets/jsons/
     - assets/lottie/
+    - assets/cers/
 
 flutter_launcher_icons:
   image_path: "assets/images/app_icon.png"
