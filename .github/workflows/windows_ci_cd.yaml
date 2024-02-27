@@ -69,7 +69,7 @@ jobs:
         run: flutter build windows
 
       - name: Create MSIX
-        run: flutter pub run msix:publish
+        run: flutter pub run msix:create
 
       - name: Upload MSIX to release
         uses: svenstaro/upload-release-action@2.2.1
