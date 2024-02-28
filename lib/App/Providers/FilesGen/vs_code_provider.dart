@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutterpp/App/Services/Cmd/cmd_read_create_dir_services.dart';
+import 'package:flutterpp/Config/app_print.dart';
 
 class VsCodeProvider {
   final CmdReadCreateDirServices _cmdRCD = CmdReadCreateDirServices();
@@ -11,8 +12,12 @@ class VsCodeProvider {
     await _cmdRCD.createDirectory('$path/.vscode');
 
     // remove settings.json file if exists
-    if (await File('$path/.vscode/settings.json').exists()) {
-      File('$path/.vscode/settings.json').deleteSync();
+    try {
+      if (await File('$path/.vscode/settings.json').exists()) {
+        File('$path/.vscode/settings.json').deleteSync();
+      }
+    } catch (e) {
+      AppPrint.printError('Error deleting file: $e');
     }
 
     // content
