@@ -31,7 +31,8 @@ class CmdReadCreateDirProvider {
 
   Future<void> createDirectory(String path) async {
     try {
-      await runExecutableArguments('mkdir', ['-p', path]);
+      ProcessResult res = await runExecutableArguments('mkdir', ['-p', path]);
+      AppPrint.print('mkdir: ${res.stdout}');
     } catch (e) {
       AppPrint.print('Error creating directory: $e');
     }

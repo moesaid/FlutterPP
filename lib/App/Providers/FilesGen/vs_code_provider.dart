@@ -11,15 +11,6 @@ class VsCodeProvider {
     // create .vscode directory
     await _cmdRCD.createDirectory('$path/.vscode');
 
-    // remove settings.json file if exists
-    try {
-      if (await File('$path/.vscode/settings.json').exists()) {
-        File('$path/.vscode/settings.json').deleteSync();
-      }
-    } catch (e) {
-      AppPrint.printError('Error deleting file: $e');
-    }
-
     // content
     String content = '''{
       "editor.codeActionsOnSave": {
@@ -28,6 +19,15 @@ class VsCodeProvider {
       },
       "editor.formatOnSave": true
     }''';
+
+    // remove settings.json file if exists
+    try {
+      if (await File('$path/.vscode/settings.json').exists()) {
+        File('$path/.vscode/settings.json').deleteSync();
+      }
+    } catch (e) {
+      AppPrint.printError('Error deleting file: $e');
+    }
 
     // create file
     File file = File('$path/.vscode/settings.json');
