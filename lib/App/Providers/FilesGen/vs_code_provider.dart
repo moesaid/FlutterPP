@@ -11,7 +11,7 @@ class VsCodeProvider {
     await _cmdRCD.createDirectory('$path/.vscode');
 
     // remove settings.json file if exists
-    if (File('$path/.vscode/settings.json').existsSync()) {
+    if (await File('$path/.vscode/settings.json').exists()) {
       File('$path/.vscode/settings.json').deleteSync();
     }
 
