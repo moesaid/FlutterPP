@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:flutterpp/Config/app_print.dart';
+import 'package:get/get.dart';
 import 'package:process_run/process_run.dart';
 
 class CmdReadCreateDirProvider {
@@ -11,7 +12,9 @@ class CmdReadCreateDirProvider {
     String? option,
   }) async {
     try {
-      var result = await runExecutableArguments('ls', [option ?? '', path]);
+      String command = GetPlatform.isWindows ? 'dir' : 'ls';
+
+      var result = await runExecutableArguments(command, [option ?? '', path]);
 
       List<String> res = [];
       for (var item in result.outLines) {
@@ -28,7 +31,8 @@ class CmdReadCreateDirProvider {
 
   Future<void> createDirectory(String path) async {
     try {
-      await runExecutableArguments('mkdir', ['-p', path]);
+      ProcessResult res = await runExecutableArguments('mkdir', ['-p', path]);
+      AppPrint.print('mkdir: ${res.stdout}');
     } catch (e) {
       AppPrint.print('Error creating directory: $e');
     }
@@ -36,6 +40,8 @@ class CmdReadCreateDirProvider {
 
   // create file
   Future<void> createFile(String path) async {
+    String command = GetPlatform.isWindows ? 'type nul' : 'touch';
+
     try {
       await runExecutableArguments('touch', [path]);
     } catch (e) {

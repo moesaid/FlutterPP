@@ -17,14 +17,18 @@ Future<void> main() async {
   await AppInitializer.initialize();
 
   // runApp
-  await AppInitializer.initSentry(() async {
-    runApp(DefaultAssetBundle(
-      bundle: SentryAssetBundle(),
-      child: const DragToMoveArea(
-        child: MyApp(),
-      ),
-    ));
-  });
+  await AppInitializer.initSentry(
+    () async {
+      runApp(
+        DefaultAssetBundle(
+          bundle: SentryAssetBundle(),
+          child: GetPlatform.isWindows
+              ? const DragToMoveArea(child: MyApp())
+              : const MyApp(),
+        ),
+      );
+    },
+  );
 }
 
 class MyApp extends StatelessWidget {

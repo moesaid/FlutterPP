@@ -127,6 +127,8 @@ class CmdEnvProvider {
           resItems.add({'head': true, 'body': item});
         } else if (item.contains('✗')) {
           resItems.add({'head': false, 'body': item});
+        } else if (item.contains('!')) {
+          resItems.add({'head': null, 'body': item});
         }
       }
 
