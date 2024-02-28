@@ -261,6 +261,8 @@ class FileManegerProvider {
   Future<void> openFolder({required String location}) async {
     String command = GetPlatform.isWindows ? 'start' : 'open';
 
+    AppPrint.print({'❌command': command, '❌location': location});
+
     await callPipeline.futurePipeline(
       future: () async {
         // check if folder exist
@@ -271,7 +273,9 @@ class FileManegerProvider {
 
         // open folder
 
-        await Process.run(command, [location]);
+        ProcessResult res = await Process.run(command, [location]);
+
+        AppPrint.print(res.stdout);
       },
       name: 'open folder',
     );
