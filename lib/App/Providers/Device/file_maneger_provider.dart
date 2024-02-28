@@ -4,6 +4,7 @@ import 'dart:typed_data';
 import 'package:file_selector/file_selector.dart';
 import 'package:flutterpp/App/Services/Global/call_pipeline.dart';
 import 'package:flutterpp/Config/app_print.dart';
+import 'package:get/get_utils/src/platform/platform.dart';
 
 class FileManegerProvider {
   CallPipeline callPipeline = CallPipeline();
@@ -258,6 +259,8 @@ class FileManegerProvider {
 
   // open folder
   Future<void> openFolder({required String location}) async {
+    String command = GetPlatform.isWindows ? 'start' : 'open';
+
     await callPipeline.futurePipeline(
       future: () async {
         // check if folder exist
@@ -267,7 +270,8 @@ class FileManegerProvider {
         }
 
         // open folder
-        await Process.run('open', [location]);
+
+        await Process.run(command, [location]);
       },
       name: 'open folder',
     );
