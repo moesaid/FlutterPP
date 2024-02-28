@@ -259,23 +259,31 @@ class BuildEnvCheckDataState extends StatelessWidget {
                     overflow: TextOverflow.ellipsis,
                     style: Get.textTheme.titleSmall!.copyWith(
                       fontSize: 4.9.sp,
-                      color: controller
-                                  .checkEnvModel.flutterDoctor![index].head ==
-                              null
-                          ? Colors.yellow.withOpacity(0.8)
-                          : controller.checkEnvModel.flutterDoctor![index].head!
-                              ? Colors.green.withOpacity(0.8)
-                              : Colors.red,
+                      color:
+                          controller.checkEnvModel.flutterDoctor![index].head ==
+                                  null
+                              ? Colors.yellow.withOpacity(0.8)
+                              : controller.checkEnvModel.flutterDoctor![index]
+                                          .head ==
+                                      true
+                                  ? Colors.green.withOpacity(0.8)
+                                  : Colors.red,
                     ),
                   ),
                   trailing: Icon(
                     size: 7.sp,
-                    controller.checkEnvModel.flutterDoctor![index].head!
-                        ? Icons.check_circle
-                        : Icons.cancel,
-                    color: controller.checkEnvModel.flutterDoctor![index].head!
-                        ? Colors.green
-                        : Colors.red,
+                    controller.checkEnvModel.flutterDoctor![index].head == null
+                        ? Icons.warning_amber_rounded
+                        : controller.checkEnvModel.flutterDoctor![index].head!
+                            ? Icons.check_circle
+                            : Icons.cancel,
+                    color: controller
+                                .checkEnvModel.flutterDoctor![index].head ==
+                            null
+                        ? Colors.yellow
+                        : controller.checkEnvModel.flutterDoctor![index].head!
+                            ? Colors.green
+                            : Colors.red,
                   ),
                 );
               },
