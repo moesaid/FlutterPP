@@ -259,8 +259,11 @@ class BuildEnvCheckDataState extends StatelessWidget {
                     overflow: TextOverflow.ellipsis,
                     style: Get.textTheme.titleSmall!.copyWith(
                       fontSize: 5.sp,
-                      color:
-                          controller.checkEnvModel.flutterDoctor![index].head!
+                      color: controller
+                                  .checkEnvModel.flutterDoctor![index].head ==
+                              null
+                          ? Colors.yellow.withOpacity(0.8)
+                          : controller.checkEnvModel.flutterDoctor![index].head!
                               ? Colors.green.withOpacity(0.8)
                               : Colors.red,
                     ),
