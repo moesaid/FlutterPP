@@ -24,7 +24,7 @@ class SetupLocalFlutterPathController extends GetxController {
     },
     {
       'mac': 'echo \$PATH | tr \':\' \'\\n\'',
-      'windows': 'for %A in ("%PATH:;=" "%") do @echo %~A',
+      'windows': '\$Env:flutter',
     },
   ];
 
