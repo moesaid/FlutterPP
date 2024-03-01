@@ -79,12 +79,17 @@ class ProjectSingleCodeGenController extends GetxController {
       List<EdgeInput> nextItems = [];
 
       if (item.relations != null && item.relations!.isNotEmpty) {
+        if (item.relations == null || item.relations!.isEmpty) continue;
+
         for (var relation in item.relations!) {
           // get relation model id
-          String? relationModelId =
-              _models.firstWhere((el) => el.modelName == relation.name).id;
+          String? relationModelId = _models
+              .firstWhereOrNull((el) => el.modelName == relation.name)
+              ?.id;
 
-          nextItems.add(EdgeInput(outcome: relationModelId!));
+          if (relationModelId == null) continue;
+
+          nextItems.add(EdgeInput(outcome: relationModelId));
         }
       }
 
