@@ -13,7 +13,7 @@ class CmdReadCreateDirProvider {
     String? option,
   }) async {
     try {
-      String command = GetPlatform.isWindows ? 'dir /d' : 'ls';
+      String command = GetPlatform.isWindows ? 'dir /d /a-d' : 'ls';
 
       // var result = await runExecutableArguments(command, [option ?? '', path]);
 
@@ -25,7 +25,8 @@ class CmdReadCreateDirProvider {
 
       ProcessResult result = await runCmd(cmd);
 
-      AppPrint.print('listDirectory: ${result.stdout}');
+      AppPrint.print('errors: ${result.errLines}');
+      AppPrint.print('listDirectory: ${result.outLines}');
 
       List<String> res = [];
       for (var item in result.outLines) {
