@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:window_manager/window_manager.dart';
 
 class BuildAppBar extends StatelessWidget implements PreferredSizeWidget {
   final bool? hasBackButton;
@@ -15,6 +16,42 @@ class BuildAppBar extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Size get preferredSize => const Size.fromHeight(30);
+
+  @override
+  Widget build(BuildContext context) {
+    if (GetPlatform.isWindows) {
+      return DragToMoveArea(
+        child: _BuildAppBar(
+          preferredSize: preferredSize,
+          hasBackButton: hasBackButton,
+          onBack: onBack,
+          title: title,
+        ),
+      );
+    }
+
+    return _BuildAppBar(
+      preferredSize: preferredSize,
+      hasBackButton: hasBackButton,
+      onBack: onBack,
+      title: title,
+    );
+  }
+}
+
+class _BuildAppBar extends StatelessWidget {
+  const _BuildAppBar({
+    super.key,
+    required this.preferredSize,
+    required this.hasBackButton,
+    required this.onBack,
+    required this.title,
+  });
+
+  final Size preferredSize;
+  final bool? hasBackButton;
+  final VoidCallback? onBack;
+  final String? title;
 
   @override
   Widget build(BuildContext context) {
