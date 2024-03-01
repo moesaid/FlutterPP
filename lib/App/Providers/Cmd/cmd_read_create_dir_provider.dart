@@ -25,6 +25,8 @@ class CmdReadCreateDirProvider {
 
       ProcessResult result = await runCmd(cmd);
 
+      AppPrint.print('listDirectory: ${result.stdout}');
+
       List<String> res = [];
       for (var item in result.outLines) {
         if (item == '$path:') continue;
