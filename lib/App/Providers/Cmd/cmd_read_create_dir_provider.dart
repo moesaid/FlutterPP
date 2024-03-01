@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:flutterpp/Config/app_print.dart';
 import 'package:get/get.dart';
+import 'package:process_run/cmd_run.dart';
 import 'package:process_run/process_run.dart';
 
 class CmdReadCreateDirProvider {
@@ -14,7 +15,16 @@ class CmdReadCreateDirProvider {
     try {
       String command = GetPlatform.isWindows ? 'dir' : 'ls';
 
-      var result = await runExecutableArguments(command, [option ?? '', path]);
+      // var result = await runExecutableArguments(command, [option ?? '', path]);
+
+      ProcessCmd cmd = ProcessCmd(
+        command,
+        [option ?? '', path],
+        workingDirectory: path,
+        runInShell: true,
+      );
+
+      ProcessResult result = await runCmd(cmd);
 
       List<String> res = [];
       for (var item in result.outLines) {
@@ -31,7 +41,15 @@ class CmdReadCreateDirProvider {
 
   Future<void> createDirectory(String path) async {
     try {
-      ProcessResult res = await runExecutableArguments('mkdir', ['-p', path]);
+      //ProcessResult res =  = await runExecutableArguments('mkdir', ['-p', path]);
+      ProcessCmd cmd = ProcessCmd(
+        'mkdir',
+        ['-p', path],
+        workingDirectory: path,
+        runInShell: true,
+      );
+      ProcessResult res = await runCmd(cmd);
+
       AppPrint.print('mkdir: ${res.stdout}');
     } catch (e) {
       AppPrint.print('Error creating directory: $e');
@@ -43,7 +61,18 @@ class CmdReadCreateDirProvider {
     String command = GetPlatform.isWindows ? 'type nul' : 'touch';
 
     try {
-      await runExecutableArguments('touch', [path]);
+      // await runExecutableArguments('touch', [path]);
+
+      ProcessCmd cmd = ProcessCmd(
+        command,
+        [path],
+        workingDirectory: path,
+        runInShell: true,
+      );
+
+      ProcessResult res = await runCmd(cmd);
+
+      AppPrint.print('touch: ${res.stdout}');
     } catch (e) {
       AppPrint.print('Error creating file: $e');
     }
