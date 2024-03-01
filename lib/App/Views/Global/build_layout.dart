@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
 import 'package:updat/theme/chips/floating_with_silent_download.dart';
 import 'package:updat/updat.dart';
+import 'package:window_manager/window_manager.dart';
 
 class BuildLayout extends StatelessWidget {
   final List<Map<String, dynamic>> tabs;
@@ -28,7 +29,9 @@ class BuildLayout extends StatelessWidget {
         children: [
           Column(
             children: [
-              BuildLayoutAppbar(tabs: tabs),
+              if (GetPlatform.isWindows)
+                DragToMoveArea(child: BuildLayoutAppbar(tabs: tabs)),
+              if (GetPlatform.isMacOS) BuildLayoutAppbar(tabs: tabs),
               Expanded(
                 child: Row(
                   children: [
