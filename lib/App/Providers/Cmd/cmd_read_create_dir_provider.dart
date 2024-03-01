@@ -12,9 +12,6 @@ class CmdReadCreateDirProvider {
     String? option,
   }) async {
     try {
-      // String command = GetPlatform.isWindows ? 'dir /d /a-d' : 'ls';
-
-      // var result = await runExecutableArguments(command, [option ?? '', path]);
       Directory directory = Directory(path);
 
       // check if directory exist
