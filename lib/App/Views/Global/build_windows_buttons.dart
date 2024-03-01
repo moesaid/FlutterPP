@@ -18,18 +18,18 @@ class BuildWindowsButtons extends StatelessWidget {
     return BuildHoverWidget(
       child: (hover) => Row(
         children: [
-          BuildAppbarPlatformButton(
-            size: 12,
-            hover: hover,
-            icon: HeroIcons.arrowsPointingOut,
-            onTap: () async {
-              await win.setFullScreen(true);
-            },
-            afterHoverColor: Colors.green,
-            beforeHoverColor:
-                Get.theme.colorScheme.onBackground.withOpacity(0.4),
-          ),
-          const SizedBox(width: 6),
+          // BuildAppbarPlatformButton(
+          //   size: 12,
+          //   hover: hover,
+          //   icon: HeroIcons.arrowsPointingOut,
+          //   onTap: () async {
+          //     await win.setFullScreen(true);
+          //   },
+          //   afterHoverColor: Colors.green,
+          //   beforeHoverColor:
+          //       Get.theme.colorScheme.onBackground.withOpacity(0.4),
+          // ),
+          // const SizedBox(width: 6),
           BuildAppbarPlatformButton(
             size: 12,
             hover: hover,
