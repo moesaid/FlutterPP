@@ -4,14 +4,20 @@ import 'package:system_tray/system_tray.dart';
 import 'package:window_manager/window_manager.dart';
 
 class AppWindowConfig {
+  // window manager
+  final WindowManager windowManager = WindowManager.instance;
+  WindowManager get getWindowManager => windowManager;
+
+  // system tray
+  final SystemTray systemTray = SystemTray();
+  SystemTray get getSystemTray => systemTray;
+
   // config
   Future<void> config() async {
     // app icon
     String iconPath = GetPlatform.isWindows
         ? 'assets/images/fav_logo.ico'
         : 'assets/images/fav_logo.png';
-
-    final SystemTray systemTray = SystemTray();
 
     // We first init the systray menu
     await systemTray.initSystemTray(
