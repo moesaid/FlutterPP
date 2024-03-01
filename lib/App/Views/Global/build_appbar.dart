@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutterpp/App/Views/Global/build_windows_buttons.dart';
 import 'package:get/get.dart';
 import 'package:window_manager/window_manager.dart';
 
@@ -85,6 +86,7 @@ class _BuildAppBar extends StatelessWidget {
                 fontStyle: FontStyle.normal,
               ),
             ),
+            const Positioned(right: 0, child: BuildWindowsButtons())
           ],
         ),
       ),
