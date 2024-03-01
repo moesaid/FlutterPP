@@ -9,7 +9,13 @@ class CmdReadCreateDirServices {
   Future<bool> isFlutterPPProject(String path) async {
     List<String>? res = await _dirProvider.listDirectory(path);
 
-    for (var item in res!) {
+    // if res is null
+    if (res == null) {
+      AppPrint.print('res is null');
+      return false;
+    }
+
+    for (var item in res) {
       AppPrint.print('item: $item');
     }
 
