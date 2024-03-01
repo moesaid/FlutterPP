@@ -27,7 +27,15 @@ class CmdReadCreateDirProvider {
 
       List<String> res = [];
       for (var item in list) {
-        res.add(item.path.split('/').last);
+        String name = '';
+        // if windows
+        if (GetPlatform.isWindows) {
+          name = item.path.split('\\').last;
+        } else {
+          name = item.path.split('/').last;
+        }
+
+        res.add(name);
       }
 
       return res;
