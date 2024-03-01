@@ -7,6 +7,7 @@ import 'package:flutterpp/App/Views/Pages/Project/Widgets/build_single_project_n
 import 'package:flutterpp/App/Views/Pages/Project/Widgets/build_single_project_start_config.dart';
 import 'package:flutterpp/App/Views/Pages/Project/Widgets/build_single_project_tab_view.dart';
 import 'package:flutterpp/App/Views/Pages/Project/Widgets/build_single_project_tap_header.dart';
+import 'package:flutterpp/Config/app_print.dart';
 import 'package:get/get.dart';
 
 class ProjectSinglePage extends GetView<ProjectSingleController> {
@@ -62,6 +63,7 @@ class BuildProjectSinglePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    AppPrint.printDebug('project local path: ${controller.projectLocalPath}');
     return Column(
       children: [
         BuildSingleProjectHeader(controller: controller),
