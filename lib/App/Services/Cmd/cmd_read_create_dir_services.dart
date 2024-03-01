@@ -1,4 +1,5 @@
 import 'package:flutterpp/App/Providers/Cmd/cmd_read_create_dir_provider.dart';
+import 'package:flutterpp/Config/app_print.dart';
 import 'package:json2yaml/json2yaml.dart';
 
 class CmdReadCreateDirServices {
@@ -8,12 +9,12 @@ class CmdReadCreateDirServices {
   Future<bool> isFlutterPPProject(String path) async {
     List<String>? res = await _dirProvider.listDirectory(path);
 
-    // check if theres a .flutterpp file
-    if (res != null) {
-      return res.contains('flutterpp.yaml');
+    for (var item in res!) {
+      AppPrint.print('item: $item');
     }
 
-    return false;
+    // check if theres a .flutterpp file
+    return res.contains('flutterpp.yaml');
   }
 
   // read all files in a directory
