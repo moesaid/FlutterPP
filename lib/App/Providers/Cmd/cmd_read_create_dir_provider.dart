@@ -20,7 +20,6 @@ class CmdReadCreateDirProvider {
       ProcessCmd cmd = ProcessCmd(
         command,
         [option ?? '', path],
-        workingDirectory: path,
         runInShell: true,
       );
 
@@ -42,10 +41,13 @@ class CmdReadCreateDirProvider {
   Future<void> createDirectory(String path) async {
     try {
       //ProcessResult res =  = await runExecutableArguments('mkdir', ['-p', path]);
+
       ProcessCmd cmd = ProcessCmd(
         'mkdir',
-        ['-p', path],
-        workingDirectory: path,
+        [
+          GetPlatform.isWindows ? '' : '-p',
+          path,
+        ],
         runInShell: true,
       );
       ProcessResult res = await runCmd(cmd);
@@ -66,7 +68,6 @@ class CmdReadCreateDirProvider {
       ProcessCmd cmd = ProcessCmd(
         command,
         [path],
-        workingDirectory: path,
         runInShell: true,
       );
 
