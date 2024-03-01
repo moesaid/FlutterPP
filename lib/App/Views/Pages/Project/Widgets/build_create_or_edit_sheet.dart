@@ -7,6 +7,7 @@ import 'package:flutterpp/App/Views/Global/buiuld_dialog.dart';
 import 'package:flutterpp/App/Views/Pages/Mockup/Widgets/Create/Sidebar/build_pick_color.dart';
 import 'package:flutterpp/Helpers/colors_helper.dart';
 import 'package:flutterpp/Helpers/text_helper.dart';
+import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
 
@@ -20,8 +21,10 @@ class BuildCreateOrEditSheet extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var formKey = GlobalKey<FormBuilderState>();
     return SizedBox.expand(
       child: FormBuilder(
+        key: formKey,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.start,
@@ -64,7 +67,12 @@ class BuildCreateOrEditSheet extends StatelessWidget {
                   ),
                   SizedBox(width: 5.sp),
                   FilledButton(
-                    onPressed: () => controller.createProjectModel(),
+                    onPressed: () {
+                      // validate the form
+                      if (formKey.currentState!.saveAndValidate()) {
+                        controller.createProjectModel();
+                      }
+                    },
                     child: Text(
                       'Save'.toUpperCase(),
                     ),
@@ -90,6 +98,10 @@ class BuildCreateOrEditSheet extends StatelessWidget {
                                 labelText: 'Model Name',
                                 hintText: 'Enter model name',
                               ),
+                              validator: FormBuilderValidators.compose([
+                                FormBuilderValidators.required(),
+                                FormBuilderValidators.maxWordsCount(1)
+                              ]),
                               onChanged: (value) {
                                 controller.updateTempModel(
                                   ModelConfigModel(modelName: value),
