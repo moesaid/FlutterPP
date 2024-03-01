@@ -27,7 +27,7 @@ class CmdReadCreateDirProvider {
 
       List<String> res = [];
       for (var item in list) {
-        res.add(item.path);
+        res.add(item.path.split('/').last);
       }
 
       return res;
