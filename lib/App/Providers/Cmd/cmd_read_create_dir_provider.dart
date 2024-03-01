@@ -4,7 +4,6 @@ import 'dart:io';
 import 'package:flutterpp/Config/app_print.dart';
 import 'package:get/get.dart';
 import 'package:process_run/cmd_run.dart';
-import 'package:process_run/process_run.dart';
 
 class CmdReadCreateDirProvider {
   // list directory
@@ -13,29 +12,22 @@ class CmdReadCreateDirProvider {
     String? option,
   }) async {
     try {
-      String command = GetPlatform.isWindows ? 'dir /d /a-d' : 'ls';
+      // String command = GetPlatform.isWindows ? 'dir /d /a-d' : 'ls';
 
       // var result = await runExecutableArguments(command, [option ?? '', path]);
+      Directory directory = Directory(path);
 
-      ProcessCmd cmd = ProcessCmd(
-        command,
-        [option ?? '', path],
-        runInShell: true,
-      );
+      // check if directory exist
+      if (!await directory.exists()) {
+        AppPrint.print('❌directory not exist');
+        return null;
+      }
 
-      ProcessResult result = await runCmd(cmd);
-
-      AppPrint.print({
-        '❌result.exitCode': result.exitCode,
-        '❌result.errText': result.errText,
-        '❌result.stderr': result.stderr,
-        '❌result.stdout': result.stdout,
-      });
+      List<FileSystemEntity> list = directory.listSync();
 
       List<String> res = [];
-      for (var item in result.outLines) {
-        if (item == '$path:') continue;
-        res.add(item);
+      for (var item in list) {
+        res.add(item.path);
       }
 
       return res;
