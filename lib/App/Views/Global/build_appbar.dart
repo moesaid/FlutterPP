@@ -57,59 +57,88 @@ class _BuildAppBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return AppBar(
       toolbarHeight: preferredSize.height,
-      title: SizedBox(
+      title: const SizedBox(
         width: double.infinity,
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            if (hasBackButton != null && hasBackButton!)
-              SizedBox(
-                height: preferredSize.height,
-                width: 0,
-                child: VerticalDivider(color: Colors.grey.withOpacity(0.35)),
-              ),
-            if (hasBackButton != null && hasBackButton!)
-              InkWell(
-                onTap: onBack ?? () => Get.back(),
-                child: Container(
-                  height: preferredSize.height,
-                  width: preferredSize.height,
-                  decoration: BoxDecoration(
-                    color: Colors.grey.withOpacity(0.1),
-                  ),
-                  child: Icon(
-                    Icons.arrow_back,
-                    color: Get.theme.colorScheme.secondary,
-                    size: 15,
-                  ),
-                ),
-              ),
-            SizedBox(
-              height: preferredSize.height,
-              width: 0,
-              child: VerticalDivider(color: Colors.grey.withOpacity(0.35)),
-            ),
-            Expanded(
-              child: Center(
-                child: Text(
-                  title ?? 'title',
-                  style: Get.textTheme.bodySmall?.copyWith(
-                    fontStyle: FontStyle.normal,
-                  ),
-                ),
-              ),
-            ),
-          ],
-        ),
       ),
       leading: const SizedBox.shrink(),
       flexibleSpace: Container(
+        height: preferredSize.height,
         decoration: const BoxDecoration(
           border: Border(
             bottom: BorderSide(color: Colors.grey, width: 0.2),
           ),
         ),
+        child: Stack(
+          alignment: Alignment.center,
+          children: [
+            Positioned(
+              left: GetPlatform.isWindows ? 0 : 70,
+              child: BuildLeading(
+                hasBackButton: hasBackButton,
+                preferredSize: preferredSize,
+                onBack: onBack,
+              ),
+            ),
+            Text(
+              title ?? 'title',
+              style: Get.textTheme.bodySmall?.copyWith(
+                fontStyle: FontStyle.normal,
+              ),
+            ),
+          ],
+        ),
       ),
+    );
+  }
+}
+
+class BuildLeading extends StatelessWidget {
+  const BuildLeading({
+    super.key,
+    required this.hasBackButton,
+    required this.preferredSize,
+    required this.onBack,
+  });
+
+  final bool? hasBackButton;
+  final Size preferredSize;
+  final VoidCallback? onBack;
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        if (hasBackButton != null && hasBackButton! & GetPlatform.isMacOS)
+          SizedBox(
+            height: preferredSize.height,
+            width: 0,
+            child: VerticalDivider(color: Colors.grey.withOpacity(0.35)),
+          ),
+        if (hasBackButton != null && hasBackButton!)
+          InkWell(
+            onTap: onBack ?? () => Get.back(),
+            child: Container(
+              height: preferredSize.height,
+              width: preferredSize.height,
+              decoration: BoxDecoration(
+                color: Colors.grey.withOpacity(0.1),
+              ),
+              child: Icon(
+                Icons.arrow_back,
+                color: Get.theme.colorScheme.secondary,
+                size: 15,
+              ),
+            ),
+          ),
+        SizedBox(
+          height: preferredSize.height,
+          width: 0,
+          child: VerticalDivider(
+            color: Colors.grey.withOpacity(0.35),
+          ),
+        ),
+      ],
     );
   }
 }
