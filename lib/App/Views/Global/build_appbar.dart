@@ -86,7 +86,8 @@ class _BuildAppBar extends StatelessWidget {
                 fontStyle: FontStyle.normal,
               ),
             ),
-            const Positioned(right: 0, child: BuildWindowsButtons())
+            if (GetPlatform.isWindows)
+              const Positioned(right: 0, child: BuildWindowsButtons())
           ],
         ),
       ),
