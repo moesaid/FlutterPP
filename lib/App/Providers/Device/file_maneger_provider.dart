@@ -271,9 +271,13 @@ class FileManegerProvider {
           return;
         }
 
-        // open folder
-
-        ProcessResult res = await Process.run(command, [location]);
+        // open directory
+        ProcessResult res = await Process.run(
+          command,
+          [location],
+          workingDirectory: location,
+          runInShell: true,
+        );
 
         AppPrint.print(res.stdout);
       },

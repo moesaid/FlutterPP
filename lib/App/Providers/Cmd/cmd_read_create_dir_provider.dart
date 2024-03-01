@@ -3,7 +3,7 @@ import 'dart:io';
 
 import 'package:flutterpp/Config/app_print.dart';
 import 'package:get/get.dart';
-import 'package:process_run/process_run.dart';
+import 'package:process_run/cmd_run.dart';
 
 class CmdReadCreateDirProvider {
   // list directory
@@ -12,14 +12,28 @@ class CmdReadCreateDirProvider {
     String? option,
   }) async {
     try {
-      String command = GetPlatform.isWindows ? 'dir' : 'ls';
+      Directory directory = Directory(path);
 
-      var result = await runExecutableArguments(command, [option ?? '', path]);
+      // check if directory exist
+      if (!await directory.exists()) {
+        AppPrint.print('❌directory not exist');
+        return null;
+      }
+
+      List<FileSystemEntity> list = directory.listSync(recursive: false);
 
       List<String> res = [];
-      for (var item in result.outLines) {
-        if (item == '$path:') continue;
-        res.add(item);
+      for (var item in list) {
+        String name = '';
+
+        // get the last part of the path
+        if (GetPlatform.isWindows) {
+          name = item.path.split(r'\').last;
+        } else {
+          name = item.path.split('/').last;
+        }
+
+        res.add(name);
       }
 
       return res;
@@ -31,7 +45,18 @@ class CmdReadCreateDirProvider {
 
   Future<void> createDirectory(String path) async {
     try {
-      ProcessResult res = await runExecutableArguments('mkdir', ['-p', path]);
+      //ProcessResult res =  = await runExecutableArguments('mkdir', ['-p', path]);
+
+      ProcessCmd cmd = ProcessCmd(
+        'mkdir',
+        [
+          GetPlatform.isWindows ? '' : '-p',
+          path,
+        ],
+        runInShell: true,
+      );
+      ProcessResult res = await runCmd(cmd);
+
       AppPrint.print('mkdir: ${res.stdout}');
     } catch (e) {
       AppPrint.print('Error creating directory: $e');
@@ -43,7 +68,17 @@ class CmdReadCreateDirProvider {
     String command = GetPlatform.isWindows ? 'type nul' : 'touch';
 
     try {
-      await runExecutableArguments('touch', [path]);
+      // await runExecutableArguments('touch', [path]);
+
+      ProcessCmd cmd = ProcessCmd(
+        command,
+        [path],
+        runInShell: true,
+      );
+
+      ProcessResult res = await runCmd(cmd);
+
+      AppPrint.print('touch: ${res.stdout}');
     } catch (e) {
       AppPrint.print('Error creating file: $e');
     }
