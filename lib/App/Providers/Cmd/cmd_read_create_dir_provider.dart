@@ -23,14 +23,15 @@ class CmdReadCreateDirProvider {
         return null;
       }
 
-      List<FileSystemEntity> list = directory.listSync();
+      List<FileSystemEntity> list = directory.listSync(recursive: false);
 
       List<String> res = [];
       for (var item in list) {
         String name = '';
-        // if windows
+
+        // get the last part of the path
         if (GetPlatform.isWindows) {
-          name = item.path.split('\\').last;
+          name = item.path.split(r'\').last;
         } else {
           name = item.path.split('/').last;
         }
