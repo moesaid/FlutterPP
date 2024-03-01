@@ -25,8 +25,12 @@ class CmdReadCreateDirProvider {
 
       ProcessResult result = await runCmd(cmd);
 
-      AppPrint.print('errors: ${result.errLines}');
-      AppPrint.print('listDirectory: ${result.outLines}');
+      AppPrint.print({
+        '❌result.exitCode': result.exitCode,
+        '❌result.errText': result.errText,
+        '❌result.stderr': result.stderr,
+        '❌result.stdout': result.stdout,
+      });
 
       List<String> res = [];
       for (var item in result.outLines) {
