@@ -272,7 +272,6 @@ class FileManegerProvider {
         }
 
         // open directory
-
         ProcessResult res = await Process.run(
           command,
           [location],
