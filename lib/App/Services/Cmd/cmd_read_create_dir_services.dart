@@ -10,7 +10,7 @@ class CmdReadCreateDirServices {
     List<String>? res = await _dirProvider.listDirectory(path);
 
     for (var item in res!) {
-      AppPrint.print('item: $item');
+      AppPrint.print('❌ ❌item: $item');
     }
 
     // check if theres a .flutterpp file
