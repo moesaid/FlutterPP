@@ -13,7 +13,7 @@ class CmdReadCreateDirProvider {
     String? option,
   }) async {
     try {
-      String command = GetPlatform.isWindows ? 'tree' : 'ls';
+      String command = GetPlatform.isWindows ? 'dir /d' : 'ls';
 
       // var result = await runExecutableArguments(command, [option ?? '', path]);
 
