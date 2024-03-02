@@ -115,11 +115,17 @@ class DashboardController extends GetxController {
     ProjectModel? item = _activeProjectStorage.read();
 
     //  if null add first project to active project
-    item ??= await _activeProjectStorage.write(_projects.first);
+    if (item == null) {
+      await _activeProjectStorage.write(_projects.first);
 
-    _activeProject.value = item;
+      item = _activeProjectStorage.read();
+    }
+
+    _activeProject.value = item ?? ProjectModel();
 
     reorderProjectList();
+
+    update();
   }
 
   // update active project
