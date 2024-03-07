@@ -102,7 +102,7 @@ class ProjectSingleApiGenPageSidebar extends StatelessWidget {
                   ),
                 ),
                 InkWell(
-                  onTap: () => print('add workflow'),
+                  onTap: () => AppPrint.print('add workflow'),
                   child: Icon(Icons.add, size: 6.sp),
                 ),
               ],
@@ -118,7 +118,7 @@ class ProjectSingleApiGenPageSidebar extends StatelessWidget {
               },
               itemBuilder: (context, index) {
                 return InkWell(
-                  onTap: () => print('open workflow'),
+                  onTap: () => AppPrint.print('open workflow'),
                   child: Container(
                     padding: EdgeInsets.symmetric(
                       vertical: 1.5.sp,
@@ -174,7 +174,7 @@ class ProjectSingleApiGenEmptyState extends StatelessWidget {
         title: 'no api classes found for this project'.capitalize!,
         hasButton: true,
         buttonTitle: 'create a Workflow'.capitalize!,
-        onTap: () => print('add api class'),
+        onTap: () => AppPrint.print('add api class'),
       ),
     );
   }

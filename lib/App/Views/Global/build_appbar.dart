@@ -42,7 +42,6 @@ class BuildAppBar extends StatelessWidget implements PreferredSizeWidget {
 
 class _BuildAppBar extends StatelessWidget {
   const _BuildAppBar({
-    super.key,
     required this.preferredSize,
     required this.hasBackButton,
     required this.onBack,
