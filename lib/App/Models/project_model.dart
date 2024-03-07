@@ -13,6 +13,7 @@ class ProjectModel {
   String? color2;
   String? updatedAt;
   String? adminId;
+  String? stateManagement;
 
   ProjectModel({
     this.id,
@@ -29,6 +30,7 @@ class ProjectModel {
     this.color2,
     this.updatedAt,
     this.adminId,
+    this.stateManagement,
   });
 
   ProjectModel.fromJson(Map<String, dynamic> json) {
@@ -46,6 +48,7 @@ class ProjectModel {
     color2 = json['color_2'];
     updatedAt = json['updated_at'];
     adminId = json['admin_id'];
+    stateManagement = json['state_management'];
   }
 
   Map<String, dynamic> toJson() {
@@ -64,6 +67,7 @@ class ProjectModel {
     data['color_2'] = color2;
     data['updated_at'] = updatedAt;
     data['admin_id'] = adminId;
+    data['state_management'] = stateManagement;
     return data;
   }
 
@@ -83,6 +87,7 @@ class ProjectModel {
     String? color2,
     String? updatedAt,
     String? adminId,
+    String? stateManagement,
   }) {
     return ProjectModel(
       id: id ?? this.id,
@@ -99,6 +104,7 @@ class ProjectModel {
       color2: color2 ?? this.color2,
       updatedAt: updatedAt ?? this.updatedAt,
       adminId: adminId ?? this.adminId,
+      stateManagement: stateManagement ?? this.stateManagement,
     );
   }
 }

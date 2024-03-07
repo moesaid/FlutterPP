@@ -96,7 +96,56 @@ class ProjectCreatePage extends GetView<ProjectCreateController> {
                       FormBuilderValidators.maxLength(90),
                     ]),
                   ),
+                  const SizedBox(height: 15),
+                  Text(
+                    'State Management'.capitalize!,
+                    style: const TextStyle(
+                      color: Colors.grey,
+                      fontSize: 12,
+                    ),
+                  ),
                   const SizedBox(height: 10),
+                  // check box
+                  FormBuilderChoiceChip(
+                    name: 'stateManagement',
+                    spacing: 10,
+                    runSpacing: 10,
+                    validator: FormBuilderValidators.required(),
+                    initialValue: 'getx',
+                    decoration: const InputDecoration(
+                      border: InputBorder.none,
+                      errorBorder: InputBorder.none,
+                      focusedBorder: InputBorder.none,
+                      enabledBorder: InputBorder.none,
+                      disabledBorder: InputBorder.none,
+                      contentPadding: EdgeInsets.zero,
+                      filled: false,
+                    ),
+                    options: const [
+                      FormBuilderChipOption(
+                        value: 'getx',
+                        avatar: CircleAvatar(
+                          backgroundColor: Colors.transparent,
+                          child: Image(
+                            image: AssetImage('assets/images/getx_logo.png'),
+                          ),
+                        ),
+                        child: Text('GetX'),
+                      ),
+                      FormBuilderChipOption(
+                        value: 'bloc',
+                        avatar: CircleAvatar(
+                          backgroundColor: Colors.transparent,
+                          child: Image(
+                            image: AssetImage('assets/images/bloc_logo.png'),
+                          ),
+                        ),
+                        child: Text('Bloc'),
+                      ),
+                    ],
+                  ),
+
+                  const SizedBox(height: 20),
                   SizedBox(
                     width: Get.width,
                     child: ElevatedButton(

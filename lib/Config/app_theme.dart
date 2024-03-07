@@ -418,6 +418,13 @@ class AppTheme {
           fontWeight: FontWeight.w300,
         ),
       ),
+      chipTheme: ChipThemeData(
+        backgroundColor: darkColors['primaryContainer']!,
+        selectedColor: darkColors['primary']!,
+        side: const BorderSide(color: Colors.white10),
+        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
+      ),
       textTheme: TextTheme(
         displayLarge: const TextStyle(
           color: Colors.white,
