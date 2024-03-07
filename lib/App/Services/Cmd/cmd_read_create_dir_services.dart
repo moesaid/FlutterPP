@@ -15,10 +15,6 @@ class CmdReadCreateDirServices {
       return false;
     }
 
-    for (var item in res) {
-      AppPrint.print('item: $item');
-    }
-
     // check if theres a .flutterpp file
     return res.contains('flutterpp.yaml');
   }

@@ -8,6 +8,7 @@ import 'package:flutterpp/App/Views/Global/build_loading_page.dart';
 import 'package:flutterpp/Config/app_gradients.dart';
 import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
+import 'package:uuid/uuid.dart';
 
 class BuildIconAndGradients extends StatelessWidget {
   final Function(List<Color>) onColorChange;
@@ -28,8 +29,11 @@ class BuildIconAndGradients extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    String controllerTag =
+        'BuildIconAndGradientsController-${const Uuid().v4()}';
     return GetBuilder<BuildIconAndGradientsController>(
       init: BuildIconAndGradientsController(),
+      tag: controllerTag,
       initState: (_) {},
       builder: (_) {
         return Stack(

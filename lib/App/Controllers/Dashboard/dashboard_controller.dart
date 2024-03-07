@@ -17,7 +17,6 @@ import 'package:flutterpp/App/Services/Project/wiki_services.dart';
 import 'package:flutterpp/App/Services/Team/team_member_services.dart';
 import 'package:flutterpp/App/Services/Team/team_services.dart';
 import 'package:flutterpp/App/Views/Global/build_overlay.dart';
-import 'package:flutterpp/App/Views/Global/build_snackbar.dart';
 import 'package:flutterpp/Config/app_gradients.dart';
 import 'package:flutterpp/Helpers/colors_helper.dart';
 import 'package:flutterpp/Routes/app_pages.dart';
@@ -142,51 +141,15 @@ class DashboardController extends GetxController {
   }
 
   // create project
-  Future<void> createProject({required Map formData}) async {
-    // make sure icon and colors are selected
-    if (_selectedSVG.value.isEmpty || _selectedColors.isEmpty) {
-      BuildSnackBar(
-        title: 'Error',
-        message: 'Please select icon and colors',
-      ).error();
-      return;
+  Future<void> onCreateProject({required ProjectModel project}) async {
+    _projects.add(project);
+
+    // if no active project set active project
+    if (activeProject.id == null) {
+      await updateActiveProject(project);
     }
 
-    // form data
-    String title = formData['title'];
-    String description = formData['description'];
-
-    await Get.showOverlay(
-      loadingWidget: const BuildOverlay(),
-      asyncFunction: () async {
-        ProjectModel? project = await _projectServices.createProject(
-          teamId: team.id!,
-          color1: ColorHelper.colorToHex(_selectedColors.first),
-          color2: ColorHelper.colorToHex(_selectedColors.last),
-          icon: _selectedSVG.value,
-          title: title,
-          description: description,
-        );
-
-        if (project == null) return;
-
-        _projects.add(project);
-
-        // if no active project set active project
-        if (activeProject.id == null) {
-          await updateActiveProject(project);
-        }
-
-        update();
-
-        if (project.id == null) return;
-        await _wikiServices.createWiki(
-          title: 'default',
-          projectId: project.id!,
-          document: _wikiServices.getDefultDocument,
-        );
-      },
-    );
+    update();
 
     reorderProjectList();
 
