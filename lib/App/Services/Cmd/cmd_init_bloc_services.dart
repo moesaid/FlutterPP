@@ -13,7 +13,7 @@ import 'package:flutterpp/App/Services/Cmd/cmd_flutter_create.dart';
 import 'package:flutterpp/App/Services/Cmd/cmd_read_create_dir_services.dart';
 import 'package:flutterpp/Helpers/text_helper.dart';
 
-class CmdInitGetxMvcServices {
+class CmdInitBlocServices {
   final VsCodeProvider _vsCode = VsCodeProvider();
   final CmdReadCreateDirServices _cmdRCD = CmdReadCreateDirServices();
   final CmdFlutterProvider _cmdF = CmdFlutterProvider();
@@ -51,11 +51,11 @@ class CmdInitGetxMvcServices {
     await _cmdRCD.configDefaultAnalysisOptions(path);
     await _cmdRCD.createDefultFlutterppYaml(
       path,
-      state: StateManegmentEnum.getx,
+      state: StateManegmentEnum.bloc,
     );
 
     // install dependencies
-    await _cmdF.runFlutterPubCommand(path, ['add', 'get']);
+    await _cmdF.runFlutterPubCommand(path, ['add', 'flutter_bloc']);
     await _cmdF.runFlutterPubCommand(path, ['add', 'get_storage']);
     await _cmdF.runFlutterPubCommand(path, ['add', 'freezed_annotation']);
     await _cmdF.runFlutterPubCommand(path, ['add', 'json_annotation']);
@@ -78,7 +78,8 @@ class CmdInitGetxMvcServices {
 
   // create project structure
   Future<void> createProjectStructure(String path) async {
-    await _cmdRCD.createDirectory('$path/lib/App/Controllers');
+    await _cmdRCD.createDirectory('$path/lib/App/Blocs');
+    await _cmdRCD.createDirectory('$path/lib/App/Cubits');
     await _cmdRCD.createDirectory('$path/lib/App/Models');
     await _cmdRCD.createDirectory('$path/lib/App/Enums');
     await _cmdRCD.createDirectory('$path/lib/App/Providers');
@@ -87,19 +88,18 @@ class CmdInitGetxMvcServices {
     await _cmdRCD.createDirectory('$path/lib/App/Views/Global/Molecules');
     await _cmdRCD.createDirectory('$path/lib/App/Views/Global/Organisms');
     await _cmdRCD.createDirectory('$path/lib/App/Views/Global/Layouts');
-    await _cmdRCD.createDirectory('$path/lib/App/Views/Pages/Counter/Widgets');
+    await _cmdRCD.createDirectory('$path/lib/App/Views/Pages');
     await _cmdRCD.createDirectory('$path/lib/Config/Bindings');
     await _cmdRCD.createDirectory('$path/lib/Config/Exernal');
     await _cmdRCD.createDirectory('$path/lib/Config/Theme');
     await _cmdRCD.createDirectory('$path/lib/Helpers');
-    await _cmdRCD.createDirectory('$path/lib/Middlewares');
     await _cmdRCD.createDirectory('$path/lib/Routes');
     await _cmdRCD.createDirectory('$path/lib/Storage');
   }
 
   // create init case
   createInitCase(String nameSpace, String path) async {
-    String controllerPath = '$path/lib/App/Controllers';
+    String blocPath = '$path/lib/App/Blocs';
     String pagePath = '$path/lib/App/Views/Pages';
 
     // main
@@ -122,9 +122,9 @@ class CmdInitGetxMvcServices {
     await _fileGen.appThemeGen('$path/lib/Config/Theme');
 
     // create directories
-    await _cmdRCD.createDirectory('$controllerPath/Counter');
-    await _cmdRCD.createDirectory('$controllerPath/Home');
-    await _cmdRCD.createDirectory('$controllerPath/Auth');
+    await _cmdRCD.createDirectory('$blocPath/Counter');
+    await _cmdRCD.createDirectory('$blocPath/Home');
+    await _cmdRCD.createDirectory('$blocPath/Auth');
     await _cmdRCD.createDirectory('$pagePath/Counter');
     await _cmdRCD.createDirectory('$pagePath/Home');
     await _cmdRCD.createDirectory('$pagePath/Auth');
@@ -132,11 +132,11 @@ class CmdInitGetxMvcServices {
     // create controller
     await _fileGenCase.counterControllerGen(
       'counter',
-      '$controllerPath/Counter',
+      '$blocPath/Counter',
     );
-    await _fileGenCase.homeControllerGen('home', '$controllerPath/Home');
+    await _fileGenCase.homeControllerGen('home', '$blocPath/Home');
     await _fileGenCase.splashControllerGen(
-        nameSpace, 'splash', '$controllerPath/Auth');
+        nameSpace, 'splash', '$blocPath/Auth');
 
     // create page
     await _fileGenCase.pageGenCounter(
@@ -158,7 +158,7 @@ class CmdInitGetxMvcServices {
     required BuildOptionModel option,
   }) async {
     String nameSpace = await _ymal.getNameSpace('$path/pubspec.yaml');
-    String controllerPath = '$path/lib/App/Controllers';
+    String blocPath = '$path/lib/App/Controllers';
     String pagePath = '$path/lib/App/Views/Pages';
     String bindingPath = '$path/lib/Config/Bindings/app_binding.dart';
 
@@ -169,7 +169,7 @@ class CmdInitGetxMvcServices {
     // create directories
     if (option.controllers == true) {
       await _cmdRCD.createDirectory(
-        '$controllerPath/${caseName.toFolderName()}',
+        '$blocPath/${caseName.toFolderName()}',
       );
     }
 
@@ -181,24 +181,24 @@ class CmdInitGetxMvcServices {
     if (isCrud == true && option.controllers == true) {
       await _fileGen.controllerGen(
         '${caseName}Index',
-        '$controllerPath/${caseName.toFolderName()}',
+        '$blocPath/${caseName.toFolderName()}',
       );
       await _fileGen.controllerGen(
         '${caseName}Single',
-        '$controllerPath/${caseName.toFolderName()}',
+        '$blocPath/${caseName.toFolderName()}',
       );
       await _fileGen.controllerGen(
         '${caseName}Create',
-        '$controllerPath/${caseName.toFolderName()}',
+        '$blocPath/${caseName.toFolderName()}',
       );
       await _fileGen.controllerGen(
         '${caseName}Edit',
-        '$controllerPath/${caseName.toFolderName()}',
+        '$blocPath/${caseName.toFolderName()}',
       );
     } else if (isCrud == false && option.controllers == true) {
       await _fileGen.controllerGen(
         caseName,
-        '$controllerPath/${caseName.toFolderName()}',
+        '$blocPath/${caseName.toFolderName()}',
       );
     }
 

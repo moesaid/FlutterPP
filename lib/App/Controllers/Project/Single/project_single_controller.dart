@@ -1,8 +1,10 @@
 import 'dart:math';
 
 import 'package:flutterpp/App/Controllers/Dashboard/dashboard_controller.dart';
+import 'package:flutterpp/App/Enums/state_manegment_enum.dart';
 import 'package:flutterpp/App/Models/project_local_path_model.dart';
 import 'package:flutterpp/App/Models/project_model.dart';
+import 'package:flutterpp/App/Services/Cmd/cmd_init_bloc_services.dart';
 import 'package:flutterpp/App/Services/Cmd/cmd_init_getx_mvc_services.dart';
 import 'package:flutterpp/App/Services/Cmd/cmd_read_create_dir_services.dart';
 import 'package:flutterpp/App/Services/Project/create_load_project_path.dart';
@@ -23,6 +25,7 @@ class ProjectSingleController extends GetxController {
 
   final CmdInitGetxMvcServices _cmdInitGetxMvcServices =
       CmdInitGetxMvcServices();
+  final CmdInitBlocServices _cmdInitBlocServices = CmdInitBlocServices();
 
   final _isLoading = true.obs;
   bool get isLoading => _isLoading.value;
@@ -125,11 +128,9 @@ class ProjectSingleController extends GetxController {
 
     Get.showOverlay(
       asyncFunction: () async {
-        String? path = await _cmdInitGetxMvcServices.createProject(
-          _project.value.title ?? 'NewFlutterPP${Random().nextInt(100)}',
+        String? path = await createProjectPathBasedOnState(
+          type: project.stateManagement,
         );
-
-        if (path == null) return;
 
         // save project path
         await _projectLocalPathStorage.write(
@@ -177,5 +178,34 @@ class ProjectSingleController extends GetxController {
     }
 
     return true;
+  }
+
+  // create project path based on state type
+  Future<String?> createProjectPathBasedOnState({String? type}) async {
+    if (type == null || type.isEmpty) return null;
+
+    StateManegmentEnum state = StateManegmentEnum.fromString(type);
+
+    String path = '';
+
+    await state.when(
+      type: state,
+      getx: () async {
+        String? localPath = await _cmdInitGetxMvcServices.createProject(
+          _project.value.title ?? 'NewFlutterPP${Random().nextInt(100)}',
+        );
+
+        if (localPath != null) path = localPath;
+      },
+      bloc: () async {
+        String? localPath = await _cmdInitBlocServices.createProject(
+          _project.value.title ?? 'NewFlutterPP${Random().nextInt(100)}',
+        );
+
+        if (localPath != null) path = localPath;
+      },
+    );
+
+    return path;
   }
 }
