@@ -56,6 +56,7 @@ class CmdInitBlocServices {
 
     // install dependencies
     await _cmdF.runFlutterPubCommand(path, ['add', 'flutter_bloc']);
+    await _cmdF.runFlutterPubCommand(path, ['add', 'go_router']);
     await _cmdF.runFlutterPubCommand(path, ['add', 'get_storage']);
     await _cmdF.runFlutterPubCommand(path, ['add', 'freezed_annotation']);
     await _cmdF.runFlutterPubCommand(path, ['add', 'json_annotation']);
