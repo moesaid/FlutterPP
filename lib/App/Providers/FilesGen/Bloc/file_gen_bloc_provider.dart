@@ -16,6 +16,8 @@ class FileGenBlocProvider {
     import 'package:flutter/material.dart';
     import 'package:$nameSpace/Config/Exernal/app_initializer.dart';
     import 'package:$nameSpace/Config/Theme/app_theme.dart';
+    import 'package:$nameSpace/App/Blocs/Theme/theme_bloc.dart';
+    import 'package:$nameSpace/App/Blocs/Theme/theme_event.dart';
     import 'package:$nameSpace/Routes/app_pages.dart';
 
     Future<void> main() async {
@@ -33,13 +35,18 @@ class FileGenBlocProvider {
 
       @override
       Widget build(BuildContext context) {
-       return MaterialApp.router(
-          title: 'Google',
-          debugShowCheckedModeBanner: false,
-          theme: AppTheme().lightThemeData(),
-          darkTheme: AppTheme().darkThemeData(),
-          themeMode: ThemeMode.light,
-          routerConfig: AppPages.router,
+        return BlocProvider(
+          create: (context) => ThemeBloc()..add(InitialThemeSetEvent()),
+          child: BlocBuilder<ThemeBloc, ThemeData>(
+            builder: (context, state) {
+              return MaterialApp.router(
+                title: 'Google',
+                debugShowCheckedModeBanner: false,
+                routerConfig: AppPages.router,
+                theme: state,
+              );
+            },
+          ),
         );
       }
     }
