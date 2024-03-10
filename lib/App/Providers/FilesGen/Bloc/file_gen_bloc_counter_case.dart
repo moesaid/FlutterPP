@@ -405,21 +405,26 @@ class FileGenBlocCounterCase {
 
           //while switch is clicked
           on<ThemeSwitchEvent>((event, emit) {
-            final isDark = state == ThemeData.dark();
-            emit(isDark ? ThemeData.light() : ThemeData.dark());
-            setTheme(isDark);
+            final hasDarkTheme = isDark();
+            setTheme(!hasDarkTheme);
+
+            final newIsDark = isDark();
+
+            emit(newIsDark ? ThemeData.dark() : ThemeData.light());
           });
         }
 
         // setTheme
         Future<void> setTheme(bool isDark) async {
           final ThemeStorage themeStorage = ThemeStorage();
-          await themeStorage.setThemeMode(isDark);
+          await themeStorage.write(isDark);
         }
 
         bool isDark() {
           final ThemeStorage themeStorage = ThemeStorage();
-          return themeStorage.isDark();
+          final bool isDark = themeStorage.read();
+
+          return isDark;
         }
       }
 
@@ -450,20 +455,40 @@ class FileGenBlocCounterCase {
       import 'package:get_storage/get_storage.dart';
 
       class ThemeStorage {
-        GetStorage box = GetStorage();
+        final box = GetStorage();
 
-        Future<void> setThemeMode(bool isDark) async {
-          await box.write('isDark', isDark);
+        final String key = 'isDarkMode';
+
+        // read
+        bool read() {
+          // read from storage
+          final String? theme = box.read(key);
+
+          // if null return false
+          if (theme == null) {
+            return false;
+          }
+
+          // if not null value is string
+          // convert to bool
+          return theme == 'true';
         }
 
-        bool isDark() {
-          return box.read('isDark') ?? false;
+        // write
+        Future<bool> write(bool isDark) async {
+          // write to storage
+          await box.write(key, isDark.toString());
+
+          return read();
         }
 
-        Future<void> clear() async {
-          await box.erase();
+        // remove
+        remove() async {
+          // remove from storage
+          await box.remove(key);
         }
       }
+
     ''';
 
     // create file

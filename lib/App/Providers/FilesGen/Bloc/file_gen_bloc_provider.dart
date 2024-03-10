@@ -238,9 +238,11 @@ class FileGenBlocProvider {
   // app initializer
   Future<void> appInitializerGen(String path) async {
     String content = '''
-    import 'package:get/get.dart';
+    import 'package:get_storage/get_storage.dart';
     class AppInitializer {
       static Future<void> initialize() async {
+        await GetStorage.init();
+
         // init external services
         // e.g await Firebase.initializeApp();
       }
