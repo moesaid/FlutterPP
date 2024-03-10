@@ -2,26 +2,24 @@ import 'package:flutterpp/App/Enums/state_manegment_enum.dart';
 import 'package:flutterpp/App/Models/build_option_model.dart';
 import 'package:flutterpp/App/Providers/Cmd/cmd_flutter_provider.dart';
 import 'package:flutterpp/App/Providers/Device/file_maneger_provider.dart';
-import 'package:flutterpp/App/Providers/FilesGen/Getx/file_gen_getx_counter_case.dart';
-import 'package:flutterpp/App/Providers/FilesGen/Getx/file_gen_getx_provider.dart';
-import 'package:flutterpp/App/Providers/FilesGen/Getx/file_gen_gex_binding_provider.dart';
-import 'package:flutterpp/App/Providers/FilesGen/Getx/file_gen_gex_router_provider.dart';
+import 'package:flutterpp/App/Providers/FilesGen/Bloc/file_gen_bloc_counter_case.dart';
+import 'package:flutterpp/App/Providers/FilesGen/Bloc/file_gen_bloc_provider.dart';
 import 'package:flutterpp/App/Providers/FilesGen/build_runner_provider.dart';
+import 'package:flutterpp/App/Providers/FilesGen/go_router_gen_provider.dart';
 import 'package:flutterpp/App/Providers/FilesGen/vs_code_provider.dart';
 import 'package:flutterpp/App/Providers/Yaml/yaml_provider.dart';
 import 'package:flutterpp/App/Services/Cmd/cmd_flutter_create.dart';
 import 'package:flutterpp/App/Services/Cmd/cmd_read_create_dir_services.dart';
 import 'package:flutterpp/Helpers/text_helper.dart';
 
-class CmdInitGetxMvcServices {
+class CmdInitBlocServices {
   final VsCodeProvider _vsCode = VsCodeProvider();
   final CmdReadCreateDirServices _cmdRCD = CmdReadCreateDirServices();
   final CmdFlutterProvider _cmdF = CmdFlutterProvider();
   final YamlProvider _ymal = YamlProvider();
-  final FileGenGetxProvider _fileGen = FileGenGetxProvider();
-  final FileGenGetxCounterCase _fileGenCase = FileGenGetxCounterCase();
-  final FileGenGexBindingProvider _binding = FileGenGexBindingProvider();
-  final FileGenGetxRouterProvider _router = FileGenGetxRouterProvider();
+  final FileGenBlocProvider _fileGen = FileGenBlocProvider();
+  final FileGenBlocCounterCase _fileGenCase = FileGenBlocCounterCase();
+  final GoRouterGenProvider _router = GoRouterGenProvider();
   final BuildRunnerProvider _build = BuildRunnerProvider();
   final FileManegerProvider _fileManeger = FileManegerProvider();
 
@@ -51,11 +49,12 @@ class CmdInitGetxMvcServices {
     await _cmdRCD.configDefaultAnalysisOptions(path);
     await _cmdRCD.createDefultFlutterppYaml(
       path,
-      state: StateManegmentEnum.getx,
+      state: StateManegmentEnum.bloc,
     );
 
     // install dependencies
-    await _cmdF.runFlutterPubCommand(path, ['add', 'get']);
+    await _cmdF.runFlutterPubCommand(path, ['add', 'flutter_bloc']);
+    await _cmdF.runFlutterPubCommand(path, ['add', 'go_router']);
     await _cmdF.runFlutterPubCommand(path, ['add', 'get_storage']);
     await _cmdF.runFlutterPubCommand(path, ['add', 'freezed_annotation']);
     await _cmdF.runFlutterPubCommand(path, ['add', 'json_annotation']);
@@ -78,7 +77,8 @@ class CmdInitGetxMvcServices {
 
   // create project structure
   Future<void> createProjectStructure(String path) async {
-    await _cmdRCD.createDirectory('$path/lib/App/Controllers');
+    await _cmdRCD.createDirectory('$path/lib/App/Blocs');
+    await _cmdRCD.createDirectory('$path/lib/App/Cubits');
     await _cmdRCD.createDirectory('$path/lib/App/Models');
     await _cmdRCD.createDirectory('$path/lib/App/Enums');
     await _cmdRCD.createDirectory('$path/lib/App/Providers');
@@ -87,19 +87,18 @@ class CmdInitGetxMvcServices {
     await _cmdRCD.createDirectory('$path/lib/App/Views/Global/Molecules');
     await _cmdRCD.createDirectory('$path/lib/App/Views/Global/Organisms');
     await _cmdRCD.createDirectory('$path/lib/App/Views/Global/Layouts');
-    await _cmdRCD.createDirectory('$path/lib/App/Views/Pages/Counter/Widgets');
-    await _cmdRCD.createDirectory('$path/lib/Config/Bindings');
+    await _cmdRCD.createDirectory('$path/lib/App/Views/Pages');
     await _cmdRCD.createDirectory('$path/lib/Config/Exernal');
     await _cmdRCD.createDirectory('$path/lib/Config/Theme');
     await _cmdRCD.createDirectory('$path/lib/Helpers');
-    await _cmdRCD.createDirectory('$path/lib/Middlewares');
     await _cmdRCD.createDirectory('$path/lib/Routes');
     await _cmdRCD.createDirectory('$path/lib/Storage');
   }
 
   // create init case
   createInitCase(String nameSpace, String path) async {
-    String controllerPath = '$path/lib/App/Controllers';
+    String blocPath = '$path/lib/App/Blocs';
+    String cubitsPath = '$path/lib/App/Cubits';
     String pagePath = '$path/lib/App/Views/Pages';
 
     // main
@@ -112,9 +111,6 @@ class CmdInitGetxMvcServices {
     await _fileGen.appRoutesGen('$path/lib/Routes');
     await _fileGen.appPagesGen(nameSpace, '$path/lib/Routes');
 
-    // app binding
-    await _fileGen.bindingGen(nameSpace, '$path/lib/Config/Bindings');
-
     // initlaizer
     await _fileGen.appInitializerGen('$path/lib/Config/Exernal');
 
@@ -122,25 +118,28 @@ class CmdInitGetxMvcServices {
     await _fileGen.appThemeGen('$path/lib/Config/Theme');
 
     // create directories
-    await _cmdRCD.createDirectory('$controllerPath/Counter');
-    await _cmdRCD.createDirectory('$controllerPath/Home');
-    await _cmdRCD.createDirectory('$controllerPath/Auth');
+    await _cmdRCD.createDirectory('$cubitsPath/Counter');
+    await _cmdRCD.createDirectory('$cubitsPath/Home');
+    await _cmdRCD.createDirectory('$cubitsPath/Auth');
+    await _cmdRCD.createDirectory('$blocPath/Theme');
     await _cmdRCD.createDirectory('$pagePath/Counter');
     await _cmdRCD.createDirectory('$pagePath/Home');
     await _cmdRCD.createDirectory('$pagePath/Auth');
 
     // create controller
-    await _fileGenCase.counterControllerGen(
+    await _fileGenCase.counterCubitGen(
       'counter',
-      '$controllerPath/Counter',
+      '$cubitsPath/Counter',
     );
-    await _fileGenCase.homeControllerGen('home', '$controllerPath/Home');
-    await _fileGenCase.splashControllerGen(
-        nameSpace, 'splash', '$controllerPath/Auth');
+    await _fileGenCase.homeCubitGen('home', '$cubitsPath/Home');
+    await _fileGenCase.splashCubitGen(nameSpace, 'splash', '$cubitsPath/Auth');
 
     // create page
     await _fileGenCase.pageGenCounter(
-        nameSpace, 'counter', '$pagePath/Counter');
+      nameSpace,
+      'counter',
+      '$pagePath/Counter',
+    );
     await _fileGenCase.pageGenHome(nameSpace, 'home', '$pagePath/Home');
     await _fileGenCase.pageGenSplash(
       nameSpace,
@@ -148,6 +147,10 @@ class CmdInitGetxMvcServices {
       '$pagePath/Auth',
       custom: 'auth',
     );
+
+    // theme
+    await _fileGenCase.themeBlocGen(nameSpace, '$blocPath/Theme');
+    await _fileGenCase.themeStorageGen(nameSpace, '$path/lib/Storage');
   }
 
   // create Case for GetX MVC
@@ -158,47 +161,104 @@ class CmdInitGetxMvcServices {
     required BuildOptionModel option,
   }) async {
     String nameSpace = await _ymal.getNameSpace('$path/pubspec.yaml');
-    String controllerPath = '$path/lib/App/Controllers';
+    String blocPath = '$path/lib/App/Blocs';
+    String cubitPath = '$path/lib/App/Cubits';
     String pagePath = '$path/lib/App/Views/Pages';
-    String bindingPath = '$path/lib/Config/Bindings/app_binding.dart';
+    bool isBloc = option.blocs == true;
 
     // format and fix files
     await _cmdF.runDartCommand(path, ['fix', '--apply']);
     await _cmdF.runDartCommand(path, ['format', '.']);
 
     // create directories
-    if (option.controllers == true) {
-      await _cmdRCD.createDirectory(
-        '$controllerPath/${caseName.toFolderName()}',
-      );
+    if (option.blocs == true) {
+      await _cmdRCD.createDirectory('$blocPath/${caseName.toFolderName()}');
+      if (isCrud == true) {
+        await _cmdRCD
+            .createDirectory('$blocPath/${caseName.toFolderName()}/Index');
+        await _cmdRCD
+            .createDirectory('$blocPath/${caseName.toFolderName()}/Single');
+        await _cmdRCD
+            .createDirectory('$blocPath/${caseName.toFolderName()}/Create');
+        await _cmdRCD
+            .createDirectory('$blocPath/${caseName.toFolderName()}/Edit');
+      }
+    }
+
+    if (option.cubits == true) {
+      await _cmdRCD.createDirectory('$cubitPath/${caseName.toFolderName()}');
+      if (isCrud == true) {
+        await _cmdRCD
+            .createDirectory('$cubitPath/${caseName.toFolderName()}/Index');
+        await _cmdRCD
+            .createDirectory('$cubitPath/${caseName.toFolderName()}/Single');
+        await _cmdRCD
+            .createDirectory('$cubitPath/${caseName.toFolderName()}/Create');
+        await _cmdRCD
+            .createDirectory('$cubitPath/${caseName.toFolderName()}/Edit');
+      }
     }
 
     if (option.pages == true) {
       await _cmdRCD.createDirectory('$pagePath/${caseName.toFolderName()}');
     }
 
-    // create controller
-    if (isCrud == true && option.controllers == true) {
-      await _fileGen.controllerGen(
+    // create blocs
+    if (isCrud == true && option.blocs == true) {
+      await _fileGen.blocGen(
+        nameSpace,
         '${caseName}Index',
-        '$controllerPath/${caseName.toFolderName()}',
+        '$blocPath/${caseName.toFolderName()}/Index',
+        custom: '$caseName/Index',
       );
-      await _fileGen.controllerGen(
+      await _fileGen.blocGen(
+        nameSpace,
         '${caseName}Single',
-        '$controllerPath/${caseName.toFolderName()}',
+        '$blocPath/${caseName.toFolderName()}/Single',
+        custom: '$caseName/Single',
       );
-      await _fileGen.controllerGen(
+      await _fileGen.blocGen(
+        nameSpace,
         '${caseName}Create',
-        '$controllerPath/${caseName.toFolderName()}',
+        '$blocPath/${caseName.toFolderName()}/Create',
+        custom: '$caseName/Create',
       );
-      await _fileGen.controllerGen(
+      await _fileGen.blocGen(
+        nameSpace,
         '${caseName}Edit',
-        '$controllerPath/${caseName.toFolderName()}',
+        '$blocPath/${caseName.toFolderName()}/Edit',
+        custom: '$caseName/Edit',
       );
-    } else if (isCrud == false && option.controllers == true) {
-      await _fileGen.controllerGen(
+    } else if (isCrud == false && option.blocs == true) {
+      await _fileGen.blocGen(
+        nameSpace,
         caseName,
-        '$controllerPath/${caseName.toFolderName()}',
+        '$blocPath/${caseName.toFolderName()}',
+      );
+    }
+
+    // create cubits
+    if (isCrud == true && option.cubits == true) {
+      await _fileGen.cubitGen(
+        '${caseName}Index',
+        '$cubitPath/${caseName.toFolderName()}/Index',
+      );
+      await _fileGen.cubitGen(
+        '${caseName}Single',
+        '$cubitPath/${caseName.toFolderName()}/Single',
+      );
+      await _fileGen.cubitGen(
+        '${caseName}Create',
+        '$cubitPath/${caseName.toFolderName()}/Create',
+      );
+      await _fileGen.cubitGen(
+        '${caseName}Edit',
+        '$cubitPath/${caseName.toFolderName()}/Edit',
+      );
+    } else if (isCrud == false && option.cubits == true) {
+      await _fileGen.cubitGen(
+        caseName,
+        '$cubitPath/${caseName.toFolderName()}',
       );
     }
 
@@ -207,42 +267,42 @@ class CmdInitGetxMvcServices {
       await _fileGen.pageGen(
         nameSpace,
         '${caseName}Index',
+        custom: '$caseName/Index',
         '$pagePath/${caseName.toFolderName()}',
-        custom: caseName,
+        isBloc: isBloc,
+        isCubit: option.blocs == null && option.cubits == true,
       );
       await _fileGen.pageGen(
         nameSpace,
         '${caseName}Single',
         '$pagePath/${caseName.toFolderName()}',
-        custom: caseName,
+        custom: '$caseName/Single',
+        isBloc: isBloc,
+        isCubit: option.blocs == null && option.cubits == true,
       );
       await _fileGen.pageGen(
         nameSpace,
         '${caseName}Create',
         '$pagePath/${caseName.toFolderName()}',
-        custom: caseName,
+        custom: '$caseName/Create',
+        isBloc: isBloc,
+        isCubit: option.blocs == null && option.cubits == true,
       );
       await _fileGen.pageGen(
         nameSpace,
         '${caseName}Edit',
         '$pagePath/${caseName.toFolderName()}',
-        custom: caseName,
+        custom: '$caseName/Edit',
+        isBloc: isBloc,
+        isCubit: option.blocs == null && option.cubits == true,
       );
     } else if (isCrud == false && option.pages == true) {
       await _fileGen.pageGen(
         nameSpace,
         caseName,
         '$pagePath/${caseName.toFolderName()}',
-      );
-    }
-
-    // add binding
-    if (option.bindings == true) {
-      await _binding.updateBindingFile(
-        nameSpace,
-        bindingPath,
-        caseName,
-        isCrud ?? false,
+        isBloc: isBloc,
+        isCubit: option.blocs == null && option.cubits == true,
       );
     }
 

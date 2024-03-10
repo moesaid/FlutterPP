@@ -22,7 +22,6 @@ class SignupPage extends GetView<SignupController> {
             child: Center(
               child: FormBuilder(
                 key: formKey,
-                // autovalidateMode: AutovalidateMode.onUserInteraction,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
@@ -87,9 +86,11 @@ class SignupPage extends GetView<SignupController> {
                             width: Get.width,
                             child: ElevatedButton(
                               onPressed: () {
+                                if (formKey.currentState == null) return;
                                 if (formKey.currentState!.saveAndValidate()) {
-                                  controller
-                                      .signup(formKey.currentState!.value);
+                                  controller.signup(
+                                    formKey.currentState!.value,
+                                  );
                                 }
                               },
                               child: const Text('sign up'),

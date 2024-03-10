@@ -1,10 +1,12 @@
 import 'package:flutter_platform_alert/flutter_platform_alert.dart';
 import 'package:flutterpp/App/Controllers/Project/Single/project_single_controller.dart';
+import 'package:flutterpp/App/Enums/state_manegment_enum.dart';
 import 'package:flutterpp/App/Models/build_option_model.dart';
 import 'package:flutterpp/App/Models/model_config_model.dart';
 import 'package:flutterpp/App/Providers/Cmd/cmd_flutter_provider.dart';
 import 'package:flutterpp/App/Providers/FilesGen/Json/json_to_freezed_class_provider.dart';
 import 'package:flutterpp/App/Providers/FilesGen/build_runner_provider.dart';
+import 'package:flutterpp/App/Services/Cmd/cmd_init_bloc_services.dart';
 import 'package:flutterpp/App/Services/Cmd/cmd_init_getx_mvc_services.dart';
 import 'package:flutterpp/App/Services/Cmd/cmd_read_create_dir_services.dart';
 import 'package:flutterpp/App/Services/Project/project_model_services.dart';
@@ -21,6 +23,8 @@ class ProjectSingleCodeGenController extends GetxController {
       CmdReadCreateDirServices();
   final CmdInitGetxMvcServices _cmdInitGetxMvcServices =
       CmdInitGetxMvcServices();
+
+  final CmdInitBlocServices _cmdInitBlocServices = CmdInitBlocServices();
 
   final JsonToFreezedClassProvider _jsonToFreezedClassProvider =
       JsonToFreezedClassProvider();
@@ -314,6 +318,18 @@ class ProjectSingleCodeGenController extends GetxController {
 
   // generate code
   Future<void> generateCode(BuildOptionModel option) async {
+    // must have at least one option true
+    if (option.models == null || !option.models!) {
+      FlutterPlatformAlert.playAlertSound();
+      FlutterPlatformAlert.showAlert(
+        windowTitle: 'Oops!',
+        text: 'models must be selected to generate code!',
+        alertStyle: AlertButtonStyle.ok,
+        iconStyle: IconStyle.error,
+      );
+      return;
+    }
+
     FlutterPlatformAlert.playAlertSound();
     CustomButton res = await FlutterPlatformAlert.showCustomAlert(
       windowTitle: 'note!'.toUpperCase(),
@@ -323,6 +339,11 @@ class ProjectSingleCodeGenController extends GetxController {
     );
 
     if (res == CustomButton.negativeButton) return;
+
+    // project State
+    StateManegmentEnum state = useController.project.stateManagement != null
+        ? StateManegmentEnum.fromString(useController.project.stateManagement!)
+        : StateManegmentEnum.getx;
 
     Get.showOverlay(
       asyncFunction: () async {
@@ -334,18 +355,35 @@ class ProjectSingleCodeGenController extends GetxController {
             );
           }
 
-          await _cmdInitGetxMvcServices.createCase(
-            useController.projectLocalPath,
-            item.modelName!,
-            isCrud: item.isCrud,
-            option: option,
+          await state.when(
+            type: state,
+            getx: () async {
+              await _cmdInitGetxMvcServices.createCase(
+                useController.projectLocalPath,
+                item.modelName!,
+                isCrud: item.isCrud,
+                option: option,
+              );
+            },
+
+            // bloc
+            bloc: () async {
+              await _cmdInitBlocServices.createCase(
+                useController.projectLocalPath,
+                item.modelName!,
+                isCrud: item.isCrud,
+                option: option,
+              );
+            },
           );
         }
 
         // run build runner
         await _cmdBuild.createBuildYaml(useController.projectLocalPath);
-        await _cmdF.runDartCommand(useController.projectLocalPath,
-            ['run', 'build_runner', 'build', '--delete-conflicting-outputs']);
+        await _cmdF.runDartCommand(
+          useController.projectLocalPath,
+          ['run', 'build_runner', 'build', '--delete-conflicting-outputs'],
+        );
 
         await checkModelDiff();
       },

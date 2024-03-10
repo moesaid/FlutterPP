@@ -1,6 +1,8 @@
+import 'package:flutterpp/App/Enums/state_manegment_enum.dart';
 import 'package:flutterpp/App/Providers/Cmd/cmd_read_create_dir_provider.dart';
 import 'package:flutterpp/Config/app_print.dart';
 import 'package:json2yaml/json2yaml.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 
 class CmdReadCreateDirServices {
   final CmdReadCreateDirProvider _dirProvider = CmdReadCreateDirProvider();
@@ -13,10 +15,6 @@ class CmdReadCreateDirServices {
     if (res == null) {
       AppPrint.print('res is null');
       return false;
-    }
-
-    for (var item in res) {
-      AppPrint.print('item: $item');
     }
 
     // check if theres a .flutterpp file
@@ -37,35 +35,14 @@ class CmdReadCreateDirServices {
   }
 
   // create default flutterpp.yaml
-  Future<void> createDefultFlutterppYaml(String path) async {
-    var developerData = {
-      'owner': 'FlutterPP',
-      'description': 'FlutterPP Project Configration file',
-      'path': path,
-      'version': '0.0.1',
-      'base': {
-        'language': 'dart',
-        'framework': 'flutter',
-      },
-      'principles': {
-        'ui_methodology': 'atomic_design',
-        'architectural_pattern': 'MVC',
-        'state_management': 'GetX',
-        'routing': 'GetRouter',
-        'dependency_injection': 'GetBindings',
-      },
-      'default_dependency': [
-        'get',
-        'get_storage',
-        'freezed_annotation',
-        'json_annotation',
-      ],
-      'default_dev_dependency': [
-        'build_runner',
-        'freezed',
-        'json_serializable',
-      ],
-    };
+  Future<void> createDefultFlutterppYaml(
+    String path, {
+    required StateManegmentEnum state,
+  }) async {
+    PackageInfo packageInfo = await PackageInfo.fromPlatform();
+    String version = packageInfo.version;
+
+    var developerData = flutterppYamlContent(path, version, state);
 
     // create file
     await _dirProvider.createFileWithContent(
@@ -81,6 +58,60 @@ class CmdReadCreateDirServices {
           '\n# Manual configuration is on the task list - just not in this lifetime. 🛠️📅',
       position: FileAppendPosition.top,
     );
+  }
+
+  Map<String, Object> flutterppYamlContent(
+    String path,
+    String version,
+    StateManegmentEnum state,
+  ) {
+    print('❌ state: $state');
+
+    return {
+      'owner': 'FlutterPP',
+      'description': 'FlutterPP Project Configration file',
+      'path': path,
+      'version': version,
+      'base': {
+        'language': 'dart',
+        'framework': 'flutter',
+      },
+      if (state == StateManegmentEnum.getx)
+        'principles': {
+          'ui_methodology': 'atomic_design',
+          'architectural_pattern': 'MVC',
+          'state_management': 'GetX',
+          'routing': 'GetRouter',
+          'dependency_injection': 'GetBindings',
+        },
+      if (state == StateManegmentEnum.bloc)
+        'principles': {
+          'ui_methodology': 'atomic_design',
+          'architectural_pattern': ['clean_architecture', 'bloc_pattern'],
+          'state_management': 'Bloc',
+          'routing': 'BlocRouter',
+          'dependency_injection': 'BlocBindings',
+        },
+      if (state == StateManegmentEnum.getx)
+        'default_dependency': [
+          'get',
+          'get_storage',
+          'freezed_annotation',
+          'json_annotation',
+        ],
+      if (state == StateManegmentEnum.bloc)
+        'default_dependency': [
+          'bloc',
+          'get_storage',
+          'freezed_annotation',
+          'json_annotation',
+        ],
+      'default_dev_dependency': [
+        'build_runner',
+        'freezed',
+        'json_serializable',
+      ],
+    };
   }
 
   // config default analysis_options.yaml

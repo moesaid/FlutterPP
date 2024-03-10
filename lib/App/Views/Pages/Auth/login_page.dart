@@ -55,6 +55,8 @@ class LoginPage extends GetView<LoginController> {
                               width: Get.width,
                               child: ElevatedButton(
                                 onPressed: () {
+                                  if (formKey.currentState == null) return;
+
                                   if (formKey.currentState!.saveAndValidate()) {
                                     controller
                                         .login(formKey.currentState!.value);

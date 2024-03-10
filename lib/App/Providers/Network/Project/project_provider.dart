@@ -48,6 +48,7 @@ class ProjectProvider {
     required String color2,
     required String teamId,
     required String description,
+    required String stateManagement,
     String? cleintId,
   }) async {
     List<Map> data = await supabase.from('projects').insert([
@@ -61,6 +62,7 @@ class ProjectProvider {
         'color_1': color1,
         'color_2': color2,
         'created_at': DateTime.now().toIso8601String(),
+        'state_management': stateManagement,
       }
     ]).select();
 

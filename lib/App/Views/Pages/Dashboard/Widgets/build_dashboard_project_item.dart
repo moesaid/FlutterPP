@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutterpp/App/Controllers/Dashboard/dashboard_controller.dart';
 import 'package:flutterpp/App/Models/project_model.dart';
 import 'package:flutterpp/App/Views/Pages/Project/Widgets/build_project_avatar.dart';
-import 'package:flutterpp/Config/app_print.dart';
 import 'package:flutterpp/Helpers/colors_helper.dart';
 import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
@@ -21,10 +20,6 @@ class BuildDashboardProjectItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    AppPrint.print({
-      'item': item.id,
-      'active': controller.activeProject.id,
-    });
     return Stack(
       children: [
         InkWell(

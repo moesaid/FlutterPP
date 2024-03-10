@@ -23,10 +23,14 @@ class AppUpdateController extends GetxController {
   final _url = ''.obs;
   String get url => _url.value;
 
+  final _updateAvailable = false.obs;
+  bool get updateAvailable => _updateAvailable.value;
+
   @override
   Future<void> onInit() async {
     await _fetchCurrentVersion();
     await _fetchApi();
+    await _checkIfUpdateAvailable();
     _updateLoading(false);
 
     AppPrint.print({
@@ -87,7 +91,6 @@ class AppUpdateController extends GetxController {
       throw UnsupportedError("Unsupported platform");
     }
 
-    // https://github.com/moesaid/FlutterPP_Public/releases/download/0.0.4/FlutterPP-macos-0.0.4.dmg
     return "https://github.com/moesaid/FlutterPP_Public/releases/download/$val/FlutterPP-$operatingSystem-$val.$platformExt";
   }
 
@@ -98,6 +101,15 @@ class AppUpdateController extends GetxController {
     Uri url = Uri.parse(href);
     if (await canLaunchUrl(url)) {
       launchUrl(url);
+    }
+  }
+
+  // check if update available
+  _checkIfUpdateAvailable() {
+    if (currentVersion.isEmpty || lastVersion.isEmpty) return;
+
+    if (currentVersion != lastVersion) {
+      _updateAvailable.value = true;
     }
   }
 }
