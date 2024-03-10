@@ -59,6 +59,7 @@ class ProjectCreateController extends GetxController {
     // form data
     String title = formData['title'];
     String description = formData['description'];
+    String stateManagement = formData['stateManagement'];
 
     await Get.showOverlay(
       loadingWidget: const BuildOverlay(),
@@ -70,6 +71,7 @@ class ProjectCreateController extends GetxController {
           icon: _selectedSVG.value,
           title: title,
           description: description,
+          stateManagement: stateManagement,
         );
 
         // if project is null

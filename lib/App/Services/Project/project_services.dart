@@ -32,6 +32,7 @@ class ProjectServices {
     required String color2,
     required String teamId,
     required String description,
+    required String stateManagement,
     String? cleintId,
   }) async {
     return await _callPipeline.futurePipeline(
@@ -43,6 +44,7 @@ class ProjectServices {
         teamId: teamId,
         description: description,
         cleintId: cleintId,
+        stateManagement: stateManagement,
       ),
       name: 'createProject',
     );

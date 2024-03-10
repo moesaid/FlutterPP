@@ -2,8 +2,8 @@ import 'package:flutterpp/App/Enums/state_manegment_enum.dart';
 import 'package:flutterpp/App/Models/build_option_model.dart';
 import 'package:flutterpp/App/Providers/Cmd/cmd_flutter_provider.dart';
 import 'package:flutterpp/App/Providers/Device/file_maneger_provider.dart';
-import 'package:flutterpp/App/Providers/FilesGen/Getx/file_gen_getx_counter_case.dart';
-import 'package:flutterpp/App/Providers/FilesGen/Getx/file_gen_getx_provider.dart';
+import 'package:flutterpp/App/Providers/FilesGen/Bloc/file_gen_bloc_counter_case.dart';
+import 'package:flutterpp/App/Providers/FilesGen/Bloc/file_gen_bloc_provider.dart';
 import 'package:flutterpp/App/Providers/FilesGen/Getx/file_gen_gex_binding_provider.dart';
 import 'package:flutterpp/App/Providers/FilesGen/Getx/file_gen_gex_router_provider.dart';
 import 'package:flutterpp/App/Providers/FilesGen/build_runner_provider.dart';
@@ -18,8 +18,8 @@ class CmdInitBlocServices {
   final CmdReadCreateDirServices _cmdRCD = CmdReadCreateDirServices();
   final CmdFlutterProvider _cmdF = CmdFlutterProvider();
   final YamlProvider _ymal = YamlProvider();
-  final FileGenGetxProvider _fileGen = FileGenGetxProvider();
-  final FileGenGetxCounterCase _fileGenCase = FileGenGetxCounterCase();
+  final FileGenBlocProvider _fileGen = FileGenBlocProvider();
+  final FileGenBlocCounterCase _fileGenCase = FileGenBlocCounterCase();
   final FileGenGexBindingProvider _binding = FileGenGexBindingProvider();
   final FileGenGetxRouterProvider _router = FileGenGetxRouterProvider();
   final BuildRunnerProvider _build = BuildRunnerProvider();
@@ -100,7 +100,7 @@ class CmdInitBlocServices {
 
   // create init case
   createInitCase(String nameSpace, String path) async {
-    String blocPath = '$path/lib/App/Blocs';
+    String blocPath = '$path/lib/App/Cubits';
     String pagePath = '$path/lib/App/Views/Pages';
 
     // main
@@ -112,9 +112,6 @@ class CmdInitBlocServices {
     // routes
     await _fileGen.appRoutesGen('$path/lib/Routes');
     await _fileGen.appPagesGen(nameSpace, '$path/lib/Routes');
-
-    // app binding
-    await _fileGen.bindingGen(nameSpace, '$path/lib/Config/Bindings');
 
     // initlaizer
     await _fileGen.appInitializerGen('$path/lib/Config/Exernal');
@@ -131,24 +128,24 @@ class CmdInitBlocServices {
     await _cmdRCD.createDirectory('$pagePath/Auth');
 
     // create controller
-    await _fileGenCase.counterControllerGen(
-      'counter',
-      '$blocPath/Counter',
-    );
-    await _fileGenCase.homeControllerGen('home', '$blocPath/Home');
-    await _fileGenCase.splashControllerGen(
-        nameSpace, 'splash', '$blocPath/Auth');
+    // await _fileGenCase.counterControllerGen(
+    //   'counter',
+    //   '$blocPath/Counter',
+    // );
+    // await _fileGenCase.homeControllerGen('home', '$blocPath/Home');
+    // await _fileGenCase.splashControllerGen(
+    //     nameSpace, 'splash', '$blocPath/Auth');
 
-    // create page
-    await _fileGenCase.pageGenCounter(
-        nameSpace, 'counter', '$pagePath/Counter');
-    await _fileGenCase.pageGenHome(nameSpace, 'home', '$pagePath/Home');
-    await _fileGenCase.pageGenSplash(
-      nameSpace,
-      'splash',
-      '$pagePath/Auth',
-      custom: 'auth',
-    );
+    // // create page
+    // await _fileGenCase.pageGenCounter(
+    //     nameSpace, 'counter', '$pagePath/Counter');
+    // await _fileGenCase.pageGenHome(nameSpace, 'home', '$pagePath/Home');
+    // await _fileGenCase.pageGenSplash(
+    //   nameSpace,
+    //   'splash',
+    //   '$pagePath/Auth',
+    //   custom: 'auth',
+    // );
   }
 
   // create Case for GetX MVC
@@ -180,24 +177,24 @@ class CmdInitBlocServices {
 
     // create controller
     if (isCrud == true && option.controllers == true) {
-      await _fileGen.controllerGen(
+      await _fileGen.blocGen(
         '${caseName}Index',
         '$blocPath/${caseName.toFolderName()}',
       );
-      await _fileGen.controllerGen(
+      await _fileGen.blocGen(
         '${caseName}Single',
         '$blocPath/${caseName.toFolderName()}',
       );
-      await _fileGen.controllerGen(
+      await _fileGen.blocGen(
         '${caseName}Create',
         '$blocPath/${caseName.toFolderName()}',
       );
-      await _fileGen.controllerGen(
+      await _fileGen.blocGen(
         '${caseName}Edit',
         '$blocPath/${caseName.toFolderName()}',
       );
     } else if (isCrud == false && option.controllers == true) {
-      await _fileGen.controllerGen(
+      await _fileGen.blocGen(
         caseName,
         '$blocPath/${caseName.toFolderName()}',
       );

@@ -3,12 +3,17 @@ import 'dart:io';
 import 'package:flutterpp/Helpers/text_helper.dart';
 
 class FileGenBlocProvider {
+  // remove Test folder
+  Future<void> removeTestFolder(String path) async {
+    if (Directory('$path/test').existsSync()) {
+      Directory('$path/test').deleteSync(recursive: true);
+    }
+  }
+
   // generate main
   Future<void> mainGen(String nameSpace, String path) async {
     String content = '''
     import 'package:flutter/material.dart';
-    import 'package:get/get.dart';
-    import 'package:$nameSpace/Config/Bindings/app_binding.dart';
     import 'package:$nameSpace/Config/Exernal/app_initializer.dart';
     import 'package:$nameSpace/Config/Theme/app_theme.dart';
     import 'package:$nameSpace/Routes/app_pages.dart';
@@ -28,15 +33,13 @@ class FileGenBlocProvider {
 
       @override
       Widget build(BuildContext context) {
-        return GetMaterialApp(
-          title: '${nameSpace.toPascalCase()}',
+       return MaterialApp.router(
+          title: 'Google',
           debugShowCheckedModeBanner: false,
           theme: AppTheme().lightThemeData(),
           darkTheme: AppTheme().darkThemeData(),
-          themeMode: Get.isDarkMode ? ThemeMode.dark : ThemeMode.light,
-          initialBinding: AppBinding(),
-          getPages: AppPages.pages,
-          defaultTransition: Transition.native,
+          themeMode: ThemeMode.light,
+          routerConfig: AppPages.router,
         );
       }
     }
@@ -54,20 +57,117 @@ class FileGenBlocProvider {
     file.writeAsStringSync(content);
   }
 
+  // create bloc
+  Future<void> blocGen(String name, String path) async {
+    /// event class
+    String eventContent = '''
+      import 'package:flutter_bloc/flutter_bloc.dart';
+
+      part of '${name.toSnakeCase()}_bloc.dart';
+
+      sealed class ${name.toPascalCase()}Event {}
+    ''';
+
+    /// state class
+    String stateContent = '''
+      import 'package:flutter_bloc/flutter_bloc.dart';
+
+      part of '${name.toSnakeCase()}_bloc.dart';
+
+      sealed class ${name.toPascalCase()}State {}
+
+      final class ${name.toPascalCase()}Initial extends ${name.toPascalCase()}State {}
+      ''';
+
+    /// bloc class
+    String blocContent = '''
+      import 'package:flutter_bloc/flutter_bloc.dart';
+
+      part '${name.toSnakeCase()}_event.dart';
+      part '${name.toSnakeCase()}_state.dart';
+
+      class ${name.toPascalCase()}Bloc extends Bloc<${name.toPascalCase()}Event, ${name.toPascalCase()}State> {
+        ${name.toPascalCase()}Bloc() : super(${name.toPascalCase()}Initial()) {
+          on<${name.toPascalCase()}Event>((event, emit) {
+            // TODO: implement event handler
+          });
+        }
+      }
+    ''';
+
+    /// write files
+    File eventFile = File('$path/${name.toSnakeCase()}_event.dart');
+    File stateFile = File('$path/${name.toSnakeCase()}_state.dart');
+    File blocFile = File('$path/${name.toSnakeCase()}_bloc.dart');
+    eventFile.writeAsStringSync(eventContent);
+    stateFile.writeAsStringSync(stateContent);
+    blocFile.writeAsStringSync(blocContent);
+  }
+
+  // create cubit
+  Future<void> cubitGen(String name, String path) async {
+    /// state class
+    String stateContent = '''
+      part of '${name.toSnakeCase()}_cubit.dart';
+
+      sealed class ${name.toPascalCase()}State {}
+
+      final class ${name.toPascalCase()}Initial extends ${name.toPascalCase()}State {}
+      ''';
+
+    /// cubit class
+    String cubitContent = '''
+      import 'package:flutter_bloc/flutter_bloc.dart';
+
+      part '${name.toSnakeCase()}_state.dart';
+
+      class ${name.toPascalCase()}Cubit extends Cubit<${name.toPascalCase()}State> {
+        ${name.toPascalCase()}Cubit() : super(${name.toPascalCase()}Initial());
+      }
+    ''';
+
+    /// write files
+    File stateFile = File('$path/${name.toSnakeCase()}_state.dart');
+    File cubitFile = File('$path/${name.toSnakeCase()}_cubit.dart');
+
+    stateFile.writeAsStringSync(stateContent);
+    cubitFile.writeAsStringSync(cubitContent);
+  }
+
   // create page
   Future<void> pageGen(
     String nameSpace,
     String name,
     String path, {
     String? custom,
+    bool? isBloc,
+    bool? isCubit,
   }) async {
     String content = '''
     import 'package:flutter/material.dart';
-    import 'package:get/get.dart';
-    import 'package:$nameSpace/App/Blocs/${(custom?.toPascalCase() ?? name.toPascalCase())}/${name.toSnakeCase()}_Bloc.dart';
+    import 'package:flutter_bloc/flutter_bloc.dart';
+
+    ${isBloc == true ? "import 'package:$nameSpace/App/Blocs/${(custom?.toPascalCase() ?? name.toPascalCase())}/${name.toSnakeCase()}_bloc.dart';" : ""}
+    ${isCubit == true ? "import 'package:$nameSpace/App/Cubits/${(custom?.toPascalCase() ?? name.toPascalCase())}/${name.toSnakeCase()}_cubit.dart';" : ""}
 
 
+    class ${name.toPascalCase()}Page extends StatelessWidget {
+      const ${name.toPascalCase()}Page({super.key});
 
+      @override
+      Widget build(BuildContext context) {
+        ${isBloc == true ? "return BlocBuilder<${name.toPascalCase()}Bloc, ${name.toPascalCase()}BlocState>(" : ""}
+        ${isCubit == true ? "return BlocBuilder<${name.toPascalCase()}Cubit, ${name.toPascalCase()}CubitState>(" : ""}
+
+          create: (_) => ${isBloc == true ? "${name.toPascalCase()}Bloc()" : "${name.toPascalCase()}Cubit()"},
+          builder: (context, state) {
+            return Scaffold(
+              appBar: AppBar(title: const Text('${name.toPascalCase()} Page')),
+              body: const SafeArea(child: Text('${name.toPascalCase()} Page')),
+            );
+          },
+        );
+      }
     }
     ''';
 
@@ -81,7 +181,7 @@ class FileGenBlocProvider {
   // create app pages
   Future<void> appPagesGen(String nameSpace, String path) async {
     String content = '''
-    import 'package:get/get.dart';
+    import 'package:go_router/go_router.dart';
     import 'package:$nameSpace/App/Views/Pages/Auth/splash_page.dart';
     import 'package:$nameSpace/App/Views/Pages/Counter/counter_page.dart';
     import 'package:$nameSpace/App/Views/Pages/Home/home_page.dart';
@@ -89,16 +189,23 @@ class FileGenBlocProvider {
     part 'app_routes.dart';
 
     class AppPages {
-      final router = GoRouter(initialLocation: AppRoutes.SPLASH, routes: [
-        GoRoute(
-          path: AppRoutes.HOME,
-          builder: (context, state) => const HomePage(),
-        ),
-        GoRoute(
-          path: AppRoutes.COUNTER,
-          builder: (context, state) => const CounterPage(),
-        ),
-      ]);
+      static final router = GoRouter(
+        initialLocation: AppRoutes.SPLASH,
+        routes: [
+          GoRoute(
+            path: AppRoutes.SPLASH,
+            builder: (context, state) => const SplashPage(),
+          ),
+          GoRoute(
+            path: AppRoutes.HOME,
+            builder: (context, state) => const HomePage(),
+          ),
+          GoRoute(
+            path: AppRoutes.COUNTER,
+            builder: (context, state) => const CounterPage(),
+          ),
+        ],
+      );
     }
     ''';
 

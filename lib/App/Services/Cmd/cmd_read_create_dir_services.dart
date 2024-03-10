@@ -65,6 +65,8 @@ class CmdReadCreateDirServices {
     String version,
     StateManegmentEnum state,
   ) {
+    print('❌ state: $state');
+
     return {
       'owner': 'FlutterPP',
       'description': 'FlutterPP Project Configration file',
@@ -85,7 +87,7 @@ class CmdReadCreateDirServices {
       if (state == StateManegmentEnum.bloc)
         'principles': {
           'ui_methodology': 'atomic_design',
-          'architectural_pattern': 'MVC',
+          'architectural_pattern': ['clean_architecture', 'bloc_pattern'],
           'state_management': 'Bloc',
           'routing': 'BlocRouter',
           'dependency_injection': 'BlocBindings',

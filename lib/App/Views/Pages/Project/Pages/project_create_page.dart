@@ -150,7 +150,9 @@ class ProjectCreatePage extends GetView<ProjectCreateController> {
                     width: Get.width,
                     child: ElevatedButton(
                       onPressed: () {
-                        if (formKey.currentState!.saveAndValidate()) {
+                        if (formKey.currentState?.saveAndValidate() == true) {
+                          if (formKey.currentState?.value == null) return;
+
                           controller.createProject(
                             formData: formKey.currentState!.value,
                             onCreateProject: onCreateProject,
