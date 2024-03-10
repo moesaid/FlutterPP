@@ -66,12 +66,12 @@ class FileGenBlocProvider {
   }
 
   // create bloc
-  Future<void> blocGen(String name, String path) async {
+  Future<void> blocGen(String nameSpace, String name, String path,
+      {String? custom}) async {
     /// event class
     String eventContent = '''
       import 'package:flutter_bloc/flutter_bloc.dart';
-
-      part of '${name.toSnakeCase()}_bloc.dart';
+      import 'package:meta/meta.dart';
 
       sealed class ${name.toPascalCase()}Event {}
     ''';
@@ -79,8 +79,6 @@ class FileGenBlocProvider {
     /// state class
     String stateContent = '''
       import 'package:flutter_bloc/flutter_bloc.dart';
-
-      part of '${name.toSnakeCase()}_bloc.dart';
 
       sealed class ${name.toPascalCase()}State {}
 
@@ -90,9 +88,8 @@ class FileGenBlocProvider {
     /// bloc class
     String blocContent = '''
       import 'package:flutter_bloc/flutter_bloc.dart';
-
-      part '${name.toSnakeCase()}_event.dart';
-      part '${name.toSnakeCase()}_state.dart';
+      import 'package:$nameSpace/App/Blocs/${custom?.toPascalCase() ?? name.toPascalCase()}/${name.toFlutterFileName()}_event.dart';
+      import 'package:$nameSpace/App/Blocs/${custom?.toPascalCase() ?? name.toPascalCase()}/${name.toFlutterFileName()}_state.dart';
 
       class ${name.toPascalCase()}Bloc extends Bloc<${name.toPascalCase()}Event, ${name.toPascalCase()}State> {
         ${name.toPascalCase()}Bloc() : super(${name.toPascalCase()}Initial()) {
@@ -113,7 +110,10 @@ class FileGenBlocProvider {
   }
 
   // create cubit
-  Future<void> cubitGen(String name, String path) async {
+  Future<void> cubitGen(
+    String name,
+    String path,
+  ) async {
     /// state class
     String stateContent = '''
       part of '${name.toSnakeCase()}_cubit.dart';
@@ -156,7 +156,9 @@ class FileGenBlocProvider {
     import 'package:flutter_bloc/flutter_bloc.dart';
 
     ${isBloc == true ? "import 'package:$nameSpace/App/Blocs/${(custom?.toPascalCase() ?? name.toPascalCase())}/${name.toSnakeCase()}_bloc.dart';" : ""}
+    ${isBloc == true ? "import 'package:$nameSpace/App/Blocs/${(custom?.toPascalCase() ?? name.toPascalCase())}/${name.toSnakeCase()}_state.dart';" : ""}
     ${isCubit == true ? "import 'package:$nameSpace/App/Cubits/${(custom?.toPascalCase() ?? name.toPascalCase())}/${name.toSnakeCase()}_cubit.dart';" : ""}
+    ${isCubit == true ? "import 'package:$nameSpace/App/Cubits/${(custom?.toPascalCase() ?? name.toPascalCase())}/${name.toSnakeCase()}_state.dart';" : ""}
 
 
     class ${name.toPascalCase()}Page extends StatelessWidget {
@@ -164,10 +166,10 @@ class FileGenBlocProvider {
 
       @override
       Widget build(BuildContext context) {
-        ${isBloc == true ? "return BlocBuilder<${name.toPascalCase()}Bloc, ${name.toPascalCase()}BlocState>(" : ""}
-        ${isCubit == true ? "return BlocBuilder<${name.toPascalCase()}Cubit, ${name.toPascalCase()}CubitState>(" : ""}
+        ${isBloc == true ? "return BlocBuilder<${name.toPascalCase()}Bloc, ${name.toPascalCase()}State>(" : ""}
+        ${isCubit == true ? "return BlocBuilder<${name.toPascalCase()}Cubit, ${name.toPascalCase()}State>(" : ""}
 
-          create: (_) => ${isBloc == true ? "${name.toPascalCase()}Bloc()" : "${name.toPascalCase()}Cubit()"},
+          bloc: ${isBloc == true ? "${name.toPascalCase()}Bloc()" : "${name.toPascalCase()}Cubit()"},
           builder: (context, state) {
             return Scaffold(
               appBar: AppBar(title: const Text('${name.toPascalCase()} Page')),

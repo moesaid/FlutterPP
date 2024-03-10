@@ -4,9 +4,8 @@ import 'package:flutterpp/App/Providers/Cmd/cmd_flutter_provider.dart';
 import 'package:flutterpp/App/Providers/Device/file_maneger_provider.dart';
 import 'package:flutterpp/App/Providers/FilesGen/Bloc/file_gen_bloc_counter_case.dart';
 import 'package:flutterpp/App/Providers/FilesGen/Bloc/file_gen_bloc_provider.dart';
-import 'package:flutterpp/App/Providers/FilesGen/Getx/file_gen_gex_binding_provider.dart';
-import 'package:flutterpp/App/Providers/FilesGen/Getx/file_gen_gex_router_provider.dart';
 import 'package:flutterpp/App/Providers/FilesGen/build_runner_provider.dart';
+import 'package:flutterpp/App/Providers/FilesGen/go_router_gen_provider.dart';
 import 'package:flutterpp/App/Providers/FilesGen/vs_code_provider.dart';
 import 'package:flutterpp/App/Providers/Yaml/yaml_provider.dart';
 import 'package:flutterpp/App/Services/Cmd/cmd_flutter_create.dart';
@@ -20,8 +19,7 @@ class CmdInitBlocServices {
   final YamlProvider _ymal = YamlProvider();
   final FileGenBlocProvider _fileGen = FileGenBlocProvider();
   final FileGenBlocCounterCase _fileGenCase = FileGenBlocCounterCase();
-  final FileGenGexBindingProvider _binding = FileGenGexBindingProvider();
-  final FileGenGetxRouterProvider _router = FileGenGetxRouterProvider();
+  final GoRouterGenProvider _router = GoRouterGenProvider();
   final BuildRunnerProvider _build = BuildRunnerProvider();
   final FileManegerProvider _fileManeger = FileManegerProvider();
 
@@ -163,47 +161,104 @@ class CmdInitBlocServices {
     required BuildOptionModel option,
   }) async {
     String nameSpace = await _ymal.getNameSpace('$path/pubspec.yaml');
-    String blocPath = '$path/lib/App/Controllers';
+    String blocPath = '$path/lib/App/Blocs';
+    String cubitPath = '$path/lib/App/Cubits';
     String pagePath = '$path/lib/App/Views/Pages';
-    String bindingPath = '$path/lib/Config/Bindings/app_binding.dart';
+    bool isBloc = option.blocs == true;
 
     // format and fix files
     await _cmdF.runDartCommand(path, ['fix', '--apply']);
     await _cmdF.runDartCommand(path, ['format', '.']);
 
     // create directories
-    if (option.controllers == true) {
-      await _cmdRCD.createDirectory(
-        '$blocPath/${caseName.toFolderName()}',
-      );
+    if (option.blocs == true) {
+      await _cmdRCD.createDirectory('$blocPath/${caseName.toFolderName()}');
+      if (isCrud == true) {
+        await _cmdRCD
+            .createDirectory('$blocPath/${caseName.toFolderName()}/Index');
+        await _cmdRCD
+            .createDirectory('$blocPath/${caseName.toFolderName()}/Single');
+        await _cmdRCD
+            .createDirectory('$blocPath/${caseName.toFolderName()}/Create');
+        await _cmdRCD
+            .createDirectory('$blocPath/${caseName.toFolderName()}/Edit');
+      }
+    }
+
+    if (option.cubits == true) {
+      await _cmdRCD.createDirectory('$cubitPath/${caseName.toFolderName()}');
+      if (isCrud == true) {
+        await _cmdRCD
+            .createDirectory('$cubitPath/${caseName.toFolderName()}/Index');
+        await _cmdRCD
+            .createDirectory('$cubitPath/${caseName.toFolderName()}/Single');
+        await _cmdRCD
+            .createDirectory('$cubitPath/${caseName.toFolderName()}/Create');
+        await _cmdRCD
+            .createDirectory('$cubitPath/${caseName.toFolderName()}/Edit');
+      }
     }
 
     if (option.pages == true) {
       await _cmdRCD.createDirectory('$pagePath/${caseName.toFolderName()}');
     }
 
-    // create controller
-    if (isCrud == true && option.controllers == true) {
+    // create blocs
+    if (isCrud == true && option.blocs == true) {
       await _fileGen.blocGen(
+        nameSpace,
         '${caseName}Index',
-        '$blocPath/${caseName.toFolderName()}',
+        '$blocPath/${caseName.toFolderName()}/Index',
+        custom: '$caseName/Index',
       );
       await _fileGen.blocGen(
+        nameSpace,
         '${caseName}Single',
-        '$blocPath/${caseName.toFolderName()}',
+        '$blocPath/${caseName.toFolderName()}/Single',
+        custom: '$caseName/Single',
       );
       await _fileGen.blocGen(
+        nameSpace,
         '${caseName}Create',
-        '$blocPath/${caseName.toFolderName()}',
+        '$blocPath/${caseName.toFolderName()}/Create',
+        custom: '$caseName/Create',
       );
       await _fileGen.blocGen(
+        nameSpace,
         '${caseName}Edit',
-        '$blocPath/${caseName.toFolderName()}',
+        '$blocPath/${caseName.toFolderName()}/Edit',
+        custom: '$caseName/Edit',
       );
-    } else if (isCrud == false && option.controllers == true) {
+    } else if (isCrud == false && option.blocs == true) {
       await _fileGen.blocGen(
+        nameSpace,
         caseName,
         '$blocPath/${caseName.toFolderName()}',
+      );
+    }
+
+    // create cubits
+    if (isCrud == true && option.cubits == true) {
+      await _fileGen.cubitGen(
+        '${caseName}Index',
+        '$cubitPath/${caseName.toFolderName()}/Index',
+      );
+      await _fileGen.cubitGen(
+        '${caseName}Single',
+        '$cubitPath/${caseName.toFolderName()}/Single',
+      );
+      await _fileGen.cubitGen(
+        '${caseName}Create',
+        '$cubitPath/${caseName.toFolderName()}/Create',
+      );
+      await _fileGen.cubitGen(
+        '${caseName}Edit',
+        '$cubitPath/${caseName.toFolderName()}/Edit',
+      );
+    } else if (isCrud == false && option.cubits == true) {
+      await _fileGen.cubitGen(
+        caseName,
+        '$cubitPath/${caseName.toFolderName()}',
       );
     }
 
@@ -212,42 +267,42 @@ class CmdInitBlocServices {
       await _fileGen.pageGen(
         nameSpace,
         '${caseName}Index',
+        custom: '$caseName/Index',
         '$pagePath/${caseName.toFolderName()}',
-        custom: caseName,
+        isBloc: isBloc,
+        isCubit: option.blocs == null && option.cubits == true,
       );
       await _fileGen.pageGen(
         nameSpace,
         '${caseName}Single',
         '$pagePath/${caseName.toFolderName()}',
-        custom: caseName,
+        custom: '$caseName/Single',
+        isBloc: isBloc,
+        isCubit: option.blocs == null && option.cubits == true,
       );
       await _fileGen.pageGen(
         nameSpace,
         '${caseName}Create',
         '$pagePath/${caseName.toFolderName()}',
-        custom: caseName,
+        custom: '$caseName/Create',
+        isBloc: isBloc,
+        isCubit: option.blocs == null && option.cubits == true,
       );
       await _fileGen.pageGen(
         nameSpace,
         '${caseName}Edit',
         '$pagePath/${caseName.toFolderName()}',
-        custom: caseName,
+        custom: '$caseName/Edit',
+        isBloc: isBloc,
+        isCubit: option.blocs == null && option.cubits == true,
       );
     } else if (isCrud == false && option.pages == true) {
       await _fileGen.pageGen(
         nameSpace,
         caseName,
         '$pagePath/${caseName.toFolderName()}',
-      );
-    }
-
-    // add binding
-    if (option.bindings == true) {
-      await _binding.updateBindingFile(
-        nameSpace,
-        bindingPath,
-        caseName,
-        isCrud ?? false,
+        isBloc: isBloc,
+        isCubit: option.blocs == null && option.cubits == true,
       );
     }
 

@@ -6,15 +6,20 @@ class BuildOptionModel {
   bool? bindings;
   bool? services;
   bool? providers;
+  bool? blocs;
+  bool? cubits;
 
-  BuildOptionModel(
-      {this.models,
-      this.pages,
-      this.routes,
-      this.controllers,
-      this.bindings,
-      this.services,
-      this.providers});
+  BuildOptionModel({
+    this.models,
+    this.pages,
+    this.routes,
+    this.controllers,
+    this.bindings,
+    this.services,
+    this.providers,
+    this.blocs,
+    this.cubits,
+  });
 
   BuildOptionModel.fromJson(Map<String, dynamic> json) {
     models = json['models'];
@@ -24,6 +29,8 @@ class BuildOptionModel {
     bindings = json['bindings'];
     services = json['services'];
     providers = json['providers'];
+    blocs = json['blocs'];
+    cubits = json['cubits'];
   }
 
   Map<String, dynamic> toJson() {
@@ -35,6 +42,8 @@ class BuildOptionModel {
     data['bindings'] = bindings;
     data['services'] = services;
     data['providers'] = providers;
+    data['blocs'] = blocs;
+    data['cubits'] = cubits;
     return data;
   }
 }
