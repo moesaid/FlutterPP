@@ -3,7 +3,6 @@ import 'package:awesome_side_sheet/side_sheet.dart';
 import 'package:flutter/material.dart';
 import 'package:flutterpp/App/Controllers/Dashboard/dashboard_controller.dart';
 import 'package:flutterpp/App/Views/Pages/Project/Pages/project_create_page.dart';
-import 'package:flutterpp/Config/app_print.dart';
 import 'package:flutterpp/Routes/app_pages.dart';
 import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
@@ -31,18 +30,17 @@ class BuildDashboardCreateProject extends StatelessWidget {
           footer: const SizedBox.shrink(),
           title: 'Create new project'.capitalize!,
           sheetWidth: context.width * 0.8,
-          body: Obx(() {
-            AppPrint.print("❌${controller.selectedColors}");
-            return ProjectCreatePage(
-              createProject: (data) => controller.createProject(formData: data),
-              onColorChange: (data) => controller.onColorChange(data),
-              onSvgChange: (data) => controller.onSVGChange(data),
-              activeColors: controller.selectedColors,
-              activeSVG: controller.selectedSVG,
-              colors: controller.colors,
-              svgs: controller.svgs,
-            );
-          }),
+          body: ProjectCreatePage(
+            onCreateProject: (project) =>
+                controller.onCreateProject(project: project),
+            onColorChange: (data) => controller.onColorChange(data),
+            onSvgChange: (data) => controller.onSVGChange(data),
+            activeColors: controller.selectedColors,
+            activeSVG: controller.selectedSVG,
+            colors: controller.colors,
+            svgs: controller.svgs,
+            team: controller.team,
+          ),
         );
       },
       child: Container(

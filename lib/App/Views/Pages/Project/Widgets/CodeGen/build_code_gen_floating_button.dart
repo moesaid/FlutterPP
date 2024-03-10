@@ -3,6 +3,7 @@ import 'package:awesome_side_sheet/side_sheet.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutterpp/App/Controllers/Project/Single/project_single_code_gen_controller.dart';
+import 'package:flutterpp/App/Enums/state_manegment_enum.dart';
 import 'package:flutterpp/App/Models/build_option_model.dart';
 import 'package:flutterpp/App/Views/Global/buiuld_dialog.dart';
 import 'package:flutterpp/App/Views/Pages/Project/Widgets/build_create_or_edit_sheet.dart';
@@ -23,6 +24,12 @@ class BuildCodeGenFloatingButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    StateManegmentEnum state =
+        controller.useController.project.stateManagement != null
+            ? StateManegmentEnum.fromString(
+                controller.useController.project.stateManagement!)
+            : StateManegmentEnum.getx;
+
     return Row(
       mainAxisSize: MainAxisSize.min,
       children: [
@@ -45,6 +52,7 @@ class BuildCodeGenFloatingButton extends StatelessWidget {
                     context: context,
                     builder: (context) => BuildCodeGenBuildOption(
                       onBuild: controller.generateCode,
+                      state: state,
                     ),
                   ),
           style: FilledButton.styleFrom(
@@ -64,9 +72,11 @@ class BuildCodeGenFloatingButton extends StatelessWidget {
 
 class BuildCodeGenBuildOption extends StatelessWidget {
   final Future<void> Function(BuildOptionModel option) onBuild;
+  final StateManegmentEnum state;
   const BuildCodeGenBuildOption({
     super.key,
     required this.onBuild,
+    required this.state,
   });
 
   @override
@@ -151,59 +161,92 @@ class BuildCodeGenBuildOption extends StatelessWidget {
               ),
             ),
             SizedBox(height: 2.sp),
-            FormBuilderSwitch(
-              name: 'controllers',
-              initialValue: false,
-              activeColor: Get.theme.colorScheme.secondary,
-              activeTrackColor:
-                  Get.theme.colorScheme.secondary.withOpacity(0.3),
-              decoration: const InputDecoration(
-                contentPadding: EdgeInsets.symmetric(
-                  vertical: 10,
-                  horizontal: 15,
+            if (state == StateManegmentEnum.getx)
+              FormBuilderSwitch(
+                name: 'controllers',
+                initialValue: false,
+                activeColor: Get.theme.colorScheme.secondary,
+                activeTrackColor:
+                    Get.theme.colorScheme.secondary.withOpacity(0.3),
+                decoration: const InputDecoration(
+                  contentPadding: EdgeInsets.symmetric(
+                    vertical: 10,
+                    horizontal: 15,
+                  ),
                 ),
+                title: const Text('Controllers'),
               ),
-              title: const Text('Controllers'),
-            ),
-            SizedBox(height: 2.sp),
-            FormBuilderSwitch(
-              name: 'bindings',
-              initialValue: false,
-              activeColor: Get.theme.colorScheme.secondary,
-              activeTrackColor:
-                  Get.theme.colorScheme.secondary.withOpacity(0.3),
-              decoration: const InputDecoration(
-                contentPadding: EdgeInsets.symmetric(
-                  vertical: 10,
-                  horizontal: 15,
+            if (state == StateManegmentEnum.getx) SizedBox(height: 2.sp),
+            if (state == StateManegmentEnum.getx)
+              FormBuilderSwitch(
+                name: 'bindings',
+                initialValue: false,
+                activeColor: Get.theme.colorScheme.secondary,
+                activeTrackColor:
+                    Get.theme.colorScheme.secondary.withOpacity(0.3),
+                decoration: const InputDecoration(
+                  contentPadding: EdgeInsets.symmetric(
+                    vertical: 10,
+                    horizontal: 15,
+                  ),
                 ),
-              ),
-              title: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
-                    crossAxisAlignment: CrossAxisAlignment.end,
-                    children: [
-                      const Text('Bindings'),
-                      SizedBox(width: 2.sp),
-                      Text(
-                        '(recommended when adding controllers)',
-                        style: TextStyle(
-                          color: Get.theme.colorScheme.secondary,
-                          fontSize: 4.sp,
+                title: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: [
+                        const Text('Bindings'),
+                        SizedBox(width: 2.sp),
+                        Text(
+                          '(recommended when adding controllers)',
+                          style: TextStyle(
+                            color: Get.theme.colorScheme.secondary,
+                            fontSize: 4.sp,
+                          ),
                         ),
-                      ),
-                    ],
-                  ),
-                  SizedBox(height: 2.sp),
-                  Text(
-                    'bindings are always appended to the existing bindings'
-                        .capitalize!,
-                    style: Get.theme.textTheme.bodySmall,
-                  ),
-                ],
+                      ],
+                    ),
+                    SizedBox(height: 2.sp),
+                    Text(
+                      'bindings are always appended to the existing bindings'
+                          .capitalize!,
+                      style: Get.theme.textTheme.bodySmall,
+                    ),
+                  ],
+                ),
               ),
-            ),
+            if (state == StateManegmentEnum.bloc)
+              FormBuilderSwitch(
+                name: 'blocs',
+                initialValue: false,
+                activeColor: Get.theme.colorScheme.secondary,
+                activeTrackColor:
+                    Get.theme.colorScheme.secondary.withOpacity(0.3),
+                decoration: const InputDecoration(
+                  contentPadding: EdgeInsets.symmetric(
+                    vertical: 10,
+                    horizontal: 15,
+                  ),
+                ),
+                title: const Text('Blocs'),
+              ),
+            if (state == StateManegmentEnum.bloc) SizedBox(height: 2.sp),
+            if (state == StateManegmentEnum.bloc)
+              FormBuilderSwitch(
+                name: 'cubits',
+                initialValue: false,
+                activeColor: Get.theme.colorScheme.secondary,
+                activeTrackColor:
+                    Get.theme.colorScheme.secondary.withOpacity(0.3),
+                decoration: const InputDecoration(
+                  contentPadding: EdgeInsets.symmetric(
+                    vertical: 10,
+                    horizontal: 15,
+                  ),
+                ),
+                title: const Text('Cubits'),
+              ),
             SizedBox(height: 10.sp),
             Row(
               children: [
@@ -218,6 +261,8 @@ class BuildCodeGenBuildOption extends StatelessWidget {
                         routes: formKey.currentState?.value['routes'],
                         controllers: formKey.currentState?.value['controllers'],
                         bindings: formKey.currentState?.value['bindings'],
+                        blocs: formKey.currentState?.value['blocs'],
+                        cubits: formKey.currentState?.value['cubits'],
                       );
 
                       Get.back();
