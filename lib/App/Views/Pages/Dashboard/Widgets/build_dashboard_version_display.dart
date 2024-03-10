@@ -117,22 +117,29 @@ class BuildDashboardVersionDesplayView extends StatelessWidget {
                             ),
                           ),
                           SizedBox(width: 2.sp),
-                          AnimatedGradientBorder(
-                            borderSize: 1,
-                            glowSize: 0,
-                            gradientColors: [
-                              Get.theme.colorScheme.secondary,
-                              Get.theme.colorScheme.secondaryContainer,
-                              Get.theme.colorScheme.secondary,
-                              Get.theme.colorScheme.primaryContainer,
-                            ],
-                            borderRadius: BorderRadius.circular(100),
-                            child: Icon(
+                          if (_.updateAvailable)
+                            AnimatedGradientBorder(
+                              borderSize: 1,
+                              glowSize: 0,
+                              gradientColors: [
+                                Get.theme.colorScheme.secondary,
+                                Get.theme.colorScheme.secondaryContainer,
+                                Get.theme.colorScheme.secondary,
+                                Get.theme.colorScheme.primaryContainer,
+                              ],
+                              borderRadius: BorderRadius.circular(100),
+                              child: Icon(
+                                Icons.info_rounded,
+                                size: context.width * 0.013,
+                                color: Get.theme.colorScheme.onBackground,
+                              ),
+                            ),
+                          if (!_.updateAvailable)
+                            Icon(
                               Icons.info_rounded,
                               size: context.width * 0.013,
                               color: Get.theme.colorScheme.onBackground,
                             ),
-                          ),
                         ],
                       ),
                     ),
