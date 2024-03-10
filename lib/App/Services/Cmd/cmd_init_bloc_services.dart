@@ -90,7 +90,6 @@ class CmdInitBlocServices {
     await _cmdRCD.createDirectory('$path/lib/App/Views/Global/Organisms');
     await _cmdRCD.createDirectory('$path/lib/App/Views/Global/Layouts');
     await _cmdRCD.createDirectory('$path/lib/App/Views/Pages');
-    await _cmdRCD.createDirectory('$path/lib/Config/Bindings');
     await _cmdRCD.createDirectory('$path/lib/Config/Exernal');
     await _cmdRCD.createDirectory('$path/lib/Config/Theme');
     await _cmdRCD.createDirectory('$path/lib/Helpers');
@@ -100,7 +99,8 @@ class CmdInitBlocServices {
 
   // create init case
   createInitCase(String nameSpace, String path) async {
-    String blocPath = '$path/lib/App/Cubits';
+    String blocPath = '$path/lib/App/Blocs';
+    String cubitsPath = '$path/lib/App/Cubits';
     String pagePath = '$path/lib/App/Views/Pages';
 
     // main
@@ -120,32 +120,39 @@ class CmdInitBlocServices {
     await _fileGen.appThemeGen('$path/lib/Config/Theme');
 
     // create directories
-    await _cmdRCD.createDirectory('$blocPath/Counter');
-    await _cmdRCD.createDirectory('$blocPath/Home');
-    await _cmdRCD.createDirectory('$blocPath/Auth');
+    await _cmdRCD.createDirectory('$cubitsPath/Counter');
+    await _cmdRCD.createDirectory('$cubitsPath/Home');
+    await _cmdRCD.createDirectory('$cubitsPath/Auth');
+    await _cmdRCD.createDirectory('$blocPath/Theme');
     await _cmdRCD.createDirectory('$pagePath/Counter');
     await _cmdRCD.createDirectory('$pagePath/Home');
     await _cmdRCD.createDirectory('$pagePath/Auth');
 
     // create controller
-    // await _fileGenCase.counterControllerGen(
-    //   'counter',
-    //   '$blocPath/Counter',
-    // );
-    // await _fileGenCase.homeControllerGen('home', '$blocPath/Home');
-    // await _fileGenCase.splashControllerGen(
-    //     nameSpace, 'splash', '$blocPath/Auth');
+    await _fileGenCase.counterCubitGen(
+      'counter',
+      '$cubitsPath/Counter',
+    );
+    await _fileGenCase.homeCubitGen('home', '$cubitsPath/Home');
+    await _fileGenCase.splashCubitGen(nameSpace, 'splash', '$cubitsPath/Auth');
 
-    // // create page
-    // await _fileGenCase.pageGenCounter(
-    //     nameSpace, 'counter', '$pagePath/Counter');
-    // await _fileGenCase.pageGenHome(nameSpace, 'home', '$pagePath/Home');
-    // await _fileGenCase.pageGenSplash(
-    //   nameSpace,
-    //   'splash',
-    //   '$pagePath/Auth',
-    //   custom: 'auth',
-    // );
+    // create page
+    await _fileGenCase.pageGenCounter(
+      nameSpace,
+      'counter',
+      '$pagePath/Counter',
+    );
+    await _fileGenCase.pageGenHome(nameSpace, 'home', '$pagePath/Home');
+    await _fileGenCase.pageGenSplash(
+      nameSpace,
+      'splash',
+      '$pagePath/Auth',
+      custom: 'auth',
+    );
+
+    // theme
+    await _fileGenCase.themeBlocGen(nameSpace, '$blocPath/Theme');
+    await _fileGenCase.themeStorageGen(nameSpace, '$path/lib/Storage');
   }
 
   // create Case for GetX MVC

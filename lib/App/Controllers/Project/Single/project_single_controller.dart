@@ -9,7 +9,7 @@ import 'package:flutterpp/App/Services/Cmd/cmd_init_getx_mvc_services.dart';
 import 'package:flutterpp/App/Services/Cmd/cmd_read_create_dir_services.dart';
 import 'package:flutterpp/App/Services/Project/create_load_project_path.dart';
 import 'package:flutterpp/App/Services/Project/project_services.dart';
-import 'package:flutterpp/App/Views/Global/build_overlay.dart';
+import 'package:flutterpp/App/Views/Global/build_time_overlay.dart';
 import 'package:flutterpp/Routes/app_pages.dart';
 import 'package:flutterpp/Storage/local_flutter_path.dart';
 import 'package:flutterpp/Storage/projects_local_path_storage.dart';
@@ -146,7 +146,7 @@ class ProjectSingleController extends GetxController {
         // check if project is flutterpp project
         await checkIfFlutterPPProject();
       },
-      loadingWidget: const BuildOverlay(),
+      loadingWidget: const BuildTimeOverlay(),
     );
   }
 

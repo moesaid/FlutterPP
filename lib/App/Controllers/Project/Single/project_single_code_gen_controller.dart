@@ -344,8 +344,10 @@ class ProjectSingleCodeGenController extends GetxController {
 
         // run build runner
         await _cmdBuild.createBuildYaml(useController.projectLocalPath);
-        await _cmdF.runDartCommand(useController.projectLocalPath,
-            ['run', 'build_runner', 'build', '--delete-conflicting-outputs']);
+        await _cmdF.runDartCommand(
+          useController.projectLocalPath,
+          ['run', 'build_runner', 'build', '--delete-conflicting-outputs'],
+        );
 
         await checkModelDiff();
       },

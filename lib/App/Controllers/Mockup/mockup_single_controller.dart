@@ -710,8 +710,6 @@ class MockupSingleController extends GetxController {
         await MockupExportServices().export(items: _mockup.value.jsonData!);
       },
       loadingWidget: const BuildTimeOverlay(),
-      opacity: 0.8,
-      opacityColor: Get.theme.colorScheme.background,
     );
   }
 }

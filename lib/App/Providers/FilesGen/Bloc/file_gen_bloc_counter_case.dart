@@ -77,34 +77,27 @@ class FileGenBlocCounterCase {
   // create counter cubit
   Future<void> counterCubitGen(String name, String path) async {
     String content = '''
-      import 'package:get/get.dart';
+      import 'package:flutter_bloc/flutter_bloc.dart';
 
-      class ${name.toPascalCase()}Controller extends GetxController {
-          final _count = 0.obs;
-          int get count => _count.value;
+      class CounterCubit extends Cubit<int> {
+        CounterCubit() : super(0);
 
-          // increase count
-          void increaseCount() {
-            _count.value++;
-            update();
+        void increment() {
+          emit(state + 1);
+        }
+
+        void decrement() {
+          if (state > 0) {
+            emit(state - 1);
           }
+        }
 
-          // decrease count
-          void decreaseCount() {
-            if (_count.value > 0) _count.value--;
-            update();
-          }
-
-          // reset count
-          void resetCount() {
-            _count.value = 0;
-            update();
-          }
+        void reset() => emit(0);
       }
     ''';
 
     // create file
-    File file = File('$path/${name.toSnakeCase()}_controller.dart');
+    File file = File('$path/${name.toSnakeCase()}_cubit.dart');
 
     // write to file
     file.writeAsStringSync(content);
@@ -119,7 +112,7 @@ class FileGenBlocCounterCase {
   }) async {
     String content = '''
     import 'package:flutter/material.dart';
-    import 'package:get/get.dart';
+    import 'package:flutter_bloc/flutter_bloc.dart';
     import 'package:$nameSpace/App/Cubits/${(custom?.toPascalCase() ?? name.toPascalCase())}/${name.toSnakeCase()}_cubit.dart';
 
       class SplashPage extends StatelessWidget {
@@ -171,7 +164,6 @@ class FileGenBlocCounterCase {
           );
         }
       }
-    }
     ''';
 
     // create file
@@ -276,103 +268,112 @@ class FileGenBlocCounterCase {
   }) async {
     String content = '''
     import 'package:flutter/material.dart';
-    import 'package:get/get.dart';
-    import 'package:$nameSpace/App/Controllers/${(custom?.toPascalCase() ?? name.toPascalCase())}/${name.toSnakeCase()}_controller.dart';
+    import 'package:flutter_bloc/flutter_bloc.dart';
+    import 'package:$nameSpace/App/Cubits/Counter/counter_cubit.dart';
 
 
-    class ${name.toPascalCase()}Page extends GetView<${name.toPascalCase()}Controller> {
-      const ${name.toPascalCase()}Page({super.key});
+    class CounterPage extends StatelessWidget {
+      const CounterPage({super.key});
 
-      @override
-      Widget build(BuildContext context) {
-        return GetBuilder<${name.toPascalCase()}Controller>(
-          init: ${name.toPascalCase()}Controller(),
-          initState: (_) {},
-          builder: (_) {
-            return Scaffold(
-              appBar: AppBar(title: const Text('Counter Page')),
-              body: SafeArea(
-                child: SizedBox.expand(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Stack(
-                        alignment: Alignment.topRight,
-                        clipBehavior: Clip.none,
-                        children: [
-                          AnimatedContainer(
-                            duration: const Duration(milliseconds: 300),
-                            width: context.width * 0.25,
-                            height: context.width * 0.25,
-                            decoration: BoxDecoration(
-                              border: Border.all(
-                                width: 2,
-                                color: Colors.grey.withOpacity(0.2),
-                              ),
-                              shape: BoxShape.circle,
-                              color: Colors.black.withOpacity(
-                                controller.count / 100,
-                              ),
-                              boxShadow: [
-                                BoxShadow(
-                                  blurRadius: 20,
-                                  spreadRadius: -6,
-                                  color: Colors.black.withOpacity(
-                                    controller.count / 100,
+       @override
+        Widget build(BuildContext context) {
+          final double width = MediaQuery.of(context).size.width;
+          final bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
+          final counterCubit = CounterCubit();
+          return BlocBuilder<CounterCubit, int>(
+            bloc: counterCubit,
+            builder: (context, state) {
+              return Scaffold(
+                appBar: AppBar(title: const Text('Counter Page')),
+                body: SafeArea(
+                  child: SizedBox.expand(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Stack(
+                          alignment: Alignment.topRight,
+                          clipBehavior: Clip.none,
+                          children: [
+                            AnimatedContainer(
+                              duration: const Duration(milliseconds: 300),
+                              width: width * 0.25,
+                              height: width * 0.25,
+                              decoration: BoxDecoration(
+                                border: Border.all(
+                                  width: 2,
+                                  color: Colors.grey.withOpacity(0.2),
+                                ),
+                                shape: BoxShape.circle,
+                                color: Colors.black.withOpacity(
+                                  state / 100,
+                                ),
+                                boxShadow: [
+                                  BoxShadow(
+                                    blurRadius: 20,
+                                    spreadRadius: -6,
+                                    color: Colors.black.withOpacity(
+                                      state / 100,
+                                    ),
+                                    offset: const Offset(0, 10),
                                   ),
-                                  offset: const Offset(0, 10),
+                                ],
+                              ),
+                              child: Center(
+                                child: AnimatedDefaultTextStyle(
+                                  duration: const Duration(milliseconds: 300),
+                                  style: TextStyle(
+                                    fontSize:
+                                        MediaQuery.of(context).size.width * 0.07,
+                                    fontWeight: FontWeight.bold,
+                                    color: (state < 20)
+                                        ? isDarkMode
+                                            ? Colors.white
+                                            : Colors.black
+                                        : Colors.white,
+                                  ),
+                                  child: Text('\$state'),
                                 ),
-                              ],
-                            ),
-                            child: Center(
-                              child: AnimatedDefaultTextStyle(
-                                duration: const Duration(milliseconds: 300),
-                                style: TextStyle(
-                                  fontSize: context.width * 0.07,
-                                  fontWeight: FontWeight.bold,
-                                  color: controller.count.isLowerThan(20)
-                                      ? Get.isDarkMode
-                                          ? Colors.white
-                                          : Colors.black
-                                      : Colors.white,
-                                ),
-                                child: Text('\${controller.count}'),
                               ),
                             ),
-                          ),
-                          Positioned(
-                            right: -context.width * 0.02,
-                            top: -context.width * 0.02,
-                            child: IconButton.filled(
-                              onPressed: () => controller.resetCount(),
-                              icon: const Icon(Icons.refresh),
+                            Positioned(
+                              right: width * -0.02,
+                              top: width * -0.02,
+                              child: IconButton.filled(
+                                onPressed: () {
+                                  counterCubit.reset();
+                                },
+                                icon: const Icon(Icons.refresh),
+                              ),
                             ),
-                          ),
-                        ],
-                      ),
-                      const SizedBox(height: 20),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          FilledButton(
-                            onPressed: () => controller.increaseCount(),
-                            child: const Text('Increase'),
-                          ),
-                          const SizedBox(width: 20),
-                          FilledButton(
-                            onPressed: () => controller.decreaseCount(),
-                            child: const Text('Decrease'),
-                          ),
-                        ],
-                      ),
-                    ],
+                          ],
+                        ),
+                        const SizedBox(height: 20),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            FilledButton(
+                              onPressed: () {
+                                counterCubit.increment();
+                              },
+                              child: const Text('Increase'),
+                            ),
+                            const SizedBox(width: 20),
+                            FilledButton(
+                              onPressed: () {
+                                counterCubit.decrement();
+                              },
+                              child: const Text('Decrease'),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
                   ),
                 ),
-              ),
-            );
-          },
-        );
-      }
+              );
+            },
+          );
+        }
     }
     ''';
 

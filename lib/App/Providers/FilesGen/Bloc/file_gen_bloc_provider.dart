@@ -14,6 +14,7 @@ class FileGenBlocProvider {
   Future<void> mainGen(String nameSpace, String path) async {
     String content = '''
     import 'package:flutter/material.dart';
+    import 'package:flutter_bloc/flutter_bloc.dart';
     import 'package:$nameSpace/Config/Exernal/app_initializer.dart';
     import 'package:$nameSpace/Config/Theme/app_theme.dart';
     import 'package:$nameSpace/App/Blocs/Theme/theme_bloc.dart';
@@ -40,7 +41,7 @@ class FileGenBlocProvider {
           child: BlocBuilder<ThemeBloc, ThemeData>(
             builder: (context, state) {
               return MaterialApp.router(
-                title: 'Google',
+                title: '$nameSpace',
                 debugShowCheckedModeBanner: false,
                 routerConfig: AppPages.router,
                 theme: state,
