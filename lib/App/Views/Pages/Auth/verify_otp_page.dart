@@ -59,12 +59,13 @@ class VerifyOtpPage extends GetView<VerifyOtpController> {
                               SizedBox(
                                 width: Get.width,
                                 child: ElevatedButton(
-                                  onPressed: () {
-                                    if (formKey.currentState!
-                                        .saveAndValidate()) {
-                                      controller.verifyOtp(
-                                        formKey.currentState!.value,
-                                      );
+                                  onPressed: () async {
+                                    if (formKey.currentState
+                                            ?.saveAndValidate() ==
+                                        true) {
+                                      await controller.verifyOtp(
+                                          formKey.currentState?.value);
+                                      formKey.currentState?.reset();
                                     }
                                   },
                                   child: const Text('verify'),

@@ -7,7 +7,8 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 class LoginController extends GetxController {
   final supabase = Supabase.instance.client;
 
-  Future<void> login(Map<String, dynamic> value) async {
+  Future<void> login(Map<String, dynamic>? value) async {
+    if (value == null) return;
     bool? isSend = await Get.showOverlay(
       asyncFunction: () async {
         return await AuthServices().signInWithOtp(email: value['email']);

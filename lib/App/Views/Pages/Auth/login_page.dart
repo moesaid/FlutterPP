@@ -54,12 +54,15 @@ class LoginPage extends GetView<LoginController> {
                             SizedBox(
                               width: Get.width,
                               child: ElevatedButton(
-                                onPressed: () {
+                                onPressed: () async {
                                   if (formKey.currentState == null) return;
 
-                                  if (formKey.currentState!.saveAndValidate()) {
-                                    controller
-                                        .login(formKey.currentState!.value);
+                                  if (formKey.currentState?.saveAndValidate() ==
+                                      true) {
+                                    await controller
+                                        .login(formKey.currentState?.value);
+
+                                    formKey.currentState?.reset();
                                   }
                                 },
                                 child: const Text('login'),
