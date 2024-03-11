@@ -7,7 +7,9 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 
 class SignupController extends GetxController {
   // signup
-  Future<void> signup(Map<String, dynamic> value) async {
+  Future<void> signup(Map<String, dynamic>? value) async {
+    if (value == null) return;
+
     AuthResponse? res = await Get.showOverlay(
       asyncFunction: () async {
         return await AuthServices().signUp(
@@ -19,7 +21,7 @@ class SignupController extends GetxController {
       loadingWidget: const BuildOverlay(),
     );
 
-    if (res == null || res.user?.id == null) {
+    if (res == null || res.user == null || res.user?.id == null) {
       BuildSnackBar(
         title: 'Error',
         message: 'Something went wrong while signing up , please try again',
@@ -28,9 +30,12 @@ class SignupController extends GetxController {
       return;
     }
 
-    Get.toNamed(AppRoutes.VERIFY_OTP, arguments: {
-      'email': value['email'],
-      'otpType': OtpType.signup,
-    });
+    Get.toNamed(
+      AppRoutes.VERIFY_OTP,
+      arguments: {
+        'email': value['email'],
+        'otpType': OtpType.signup,
+      },
+    );
   }
 }

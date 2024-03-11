@@ -85,12 +85,15 @@ class SignupPage extends GetView<SignupController> {
                           SizedBox(
                             width: Get.width,
                             child: ElevatedButton(
-                              onPressed: () {
+                              onPressed: () async {
                                 if (formKey.currentState == null) return;
-                                if (formKey.currentState!.saveAndValidate()) {
-                                  controller.signup(
-                                    formKey.currentState!.value,
+                                if (formKey.currentState?.saveAndValidate() ==
+                                    true) {
+                                  await controller.signup(
+                                    formKey.currentState?.value,
                                   );
+
+                                  formKey.currentState?.reset();
                                 }
                               },
                               child: const Text('sign up'),
