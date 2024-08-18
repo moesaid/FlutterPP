@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutterpp/App/Providers/Local/app_mode.dart';
 import 'package:flutterpp/Config/app_config.dart';
 import 'package:flutterpp/Config/app_window_config.dart';
@@ -17,6 +18,9 @@ import 'package:syntax_highlight/syntax_highlight.dart';
 
 class AppInitializer {
   static Future<void> initialize() async {
+    // .env
+    await dotenv.load(fileName: ".env");
+
     // config window
     AppWindowConfig().config();
 

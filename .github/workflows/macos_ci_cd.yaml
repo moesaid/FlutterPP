@@ -19,9 +19,9 @@ jobs:
       - name: create .env file
         run: |
           touch .env
-          echo supabaseURL=${{ secrets.supabaseURL }} >> .env
-          echo supabaseKey=${{ secrets.supabaseKey }} >> .env
-          echo sentryDSN=${{ secrets.sentryDSN }} >> .env
+          echo supabaseURL=${{ secrets.SUBAPASE_URL }} >> .env
+          echo supabaseKey=${{ secrets.SUBAPASE_ANON_KEY }} >> .env
+          echo sentryDSN=${{ secrets.SENTRY_DNS }} >> .env
           cat .env
 
       - name: read yaml
