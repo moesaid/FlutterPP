@@ -23,8 +23,8 @@ class BuildSearchForm extends StatelessWidget {
         width: context.width * 0.2,
         clipBehavior: Clip.antiAlias,
         padding: EdgeInsets.symmetric(
-          horizontal: 4.sp,
-          vertical: 2.sp,
+          horizontal: 4.spa,
+          vertical: 2.spa,
         ),
         decoration: BoxDecoration(
           color: Get.theme.colorScheme.primaryContainer,
@@ -44,7 +44,7 @@ class BuildSearchForm extends StatelessWidget {
                   hintText: 'Search',
                   border: InputBorder.none,
                   contentPadding: EdgeInsets.symmetric(
-                    vertical: 2.sp,
+                    vertical: 2.spa,
                     horizontal: 0,
                   ),
                   isDense: true,
@@ -59,12 +59,12 @@ class BuildSearchForm extends StatelessWidget {
                     ),
                   ),
                   hintStyle: Get.textTheme.bodyMedium?.copyWith(
-                    color: Get.theme.colorScheme.onBackground.withOpacity(0.4),
+                    color: Get.theme.colorScheme.onSurface.withOpacity(0.4),
                   ),
                 ),
               ),
             ),
-            SizedBox(width: 2.sp),
+            SizedBox(width: 2.spa),
             InkWell(
               onTap: () {
                 if (searchKey != null && searchKey!.isNotEmpty) {
@@ -80,7 +80,7 @@ class BuildSearchForm extends StatelessWidget {
                 (searchKey != null && searchKey!.isNotEmpty)
                     ? Icons.close
                     : Icons.search_rounded,
-                size: 6.sp,
+                size: 6.spa,
               ),
             ),
           ],

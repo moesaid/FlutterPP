@@ -61,7 +61,7 @@ class MockupIndexPage extends GetView<MockupIndexController> {
                   ],
                 ),
                 Divider(
-                  height: 20.sp,
+                  height: 20.spa,
                   thickness: 0.5,
                 ),
                 Expanded(
@@ -69,9 +69,9 @@ class MockupIndexPage extends GetView<MockupIndexController> {
                     itemCount: controller.items.length,
                     gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 4,
-                      crossAxisSpacing: 5.sp,
-                      mainAxisSpacing: 5.sp,
-                      mainAxisExtent: 60.sp,
+                      crossAxisSpacing: 5.spa,
+                      mainAxisSpacing: 5.spa,
+                      mainAxisExtent: 35.spa,
                     ),
                     itemBuilder: (context, index) => BuildMockupIndexItem(
                         controller: controller, item: controller.items[index]),
@@ -105,7 +105,7 @@ class BuildMockupIndexItem extends StatelessWidget {
         duration: const Duration(milliseconds: 300),
         padding: const EdgeInsets.all(20),
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(2.sp),
+          borderRadius: BorderRadius.circular(2.spa),
           border: Border.all(
             color: controller.hoveredId == item.id
                 ? ColorHelper.hexToColor(item.color1!).withOpacity(0.5)
@@ -166,7 +166,7 @@ class BuildMockupIndexItem extends StatelessWidget {
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                   style: Get.theme.textTheme.titleMedium?.copyWith(
-                    fontSize: 6.sp,
+                    fontSize: 6.spa,
                   ),
                 ),
                 Text(
@@ -174,7 +174,7 @@ class BuildMockupIndexItem extends StatelessWidget {
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                   style: Get.theme.textTheme.bodySmall?.copyWith(
-                    fontSize: 4.sp,
+                    fontSize: 4.spa,
                   ),
                 ),
               ],

@@ -56,15 +56,15 @@ class BuildCodeGenNode extends StatelessWidget {
           ),
           Padding(
             padding: EdgeInsets.only(
-              top: 2.sp,
-              right: 2.sp,
-              bottom: 2.sp,
+              top: 2.spa,
+              right: 2.spa,
+              bottom: 2.spa,
             ),
             child: Row(
               children: [
                 Icon(
                   Icons.drag_indicator,
-                  color: Get.theme.colorScheme.onBackground.withOpacity(0.3),
+                  color: Get.theme.colorScheme.onSurface.withOpacity(0.3),
                 ),
                 Text(item.modelName != null
                     ? '${item.modelName}_model'.toPascalCase()
@@ -73,12 +73,12 @@ class BuildCodeGenNode extends StatelessWidget {
                 IconButton.filled(
                   onPressed: onEditPressed,
                   icon: const Icon(Icons.edit),
-                  iconSize: 5.sp,
+                  iconSize: 5.spa,
                   padding: EdgeInsets.zero,
                   visualDensity: VisualDensity.compact,
                   style: ButtonStyle(
-                    padding: MaterialStateProperty.all(EdgeInsets.zero),
-                    backgroundColor: MaterialStateProperty.all(
+                    padding: WidgetStateProperty.all(EdgeInsets.zero),
+                    backgroundColor: WidgetStateProperty.all(
                       Get.theme.colorScheme.secondaryContainer,
                     ),
                   ),
@@ -107,7 +107,7 @@ class BuildCodeGenNode extends StatelessWidget {
                           return ListTile(
                             title: Text(
                               property.name ?? 'Property',
-                              style: TextStyle(fontSize: 4.sp),
+                              style: TextStyle(fontSize: 4.spa),
                             ),
                             trailing: Badge(
                               label: Text(property.type?.type ?? 'Type11'),
@@ -115,11 +115,11 @@ class BuildCodeGenNode extends StatelessWidget {
                                   property.type?.color.withOpacity(0.1),
                               textColor: property.type?.color,
                               textStyle: TextStyle(
-                                fontSize: 3.5.sp,
+                                fontSize: 3.5.spa,
                                 color: property.type?.color,
                               ),
-                              padding: EdgeInsets.symmetric(horizontal: 3.sp),
-                              largeSize: 8.sp,
+                              padding: EdgeInsets.symmetric(horizontal: 3.spa),
+                              largeSize: 8.spa,
                             ),
                             visualDensity: VisualDensity.compact,
                             dense: true,
@@ -149,18 +149,18 @@ class BuildCodeGenNode extends StatelessWidget {
                         return ListTile(
                           title: Text(
                             property.name ?? 'Property',
-                            style: TextStyle(fontSize: 4.sp),
+                            style: TextStyle(fontSize: 4.spa),
                           ),
                           trailing: Badge(
                             label: Text(
                               property.type?.type ?? 'Type',
-                              style: TextStyle(fontSize: 3.5.sp),
+                              style: TextStyle(fontSize: 3.5.spa),
                             ),
                             backgroundColor:
                                 property.type?.color.withOpacity(0.1),
                             textColor: property.type?.color,
-                            padding: EdgeInsets.symmetric(horizontal: 3.sp),
-                            largeSize: 8.sp,
+                            padding: EdgeInsets.symmetric(horizontal: 3.spa),
+                            largeSize: 8.spa,
                           ),
                           visualDensity: VisualDensity.compact,
                           dense: true,

@@ -29,7 +29,7 @@ class BuildClientList extends StatelessWidget {
                 itemCount: _.clients.length,
                 shrinkWrap: true,
                 separatorBuilder: (_, __) {
-                  return SizedBox(height: 1.sp);
+                  return SizedBox(height: 1.spa);
                 },
                 itemBuilder: (__, int index) {
                   ClientModel item = _.clients[index];
@@ -40,8 +40,8 @@ class BuildClientList extends StatelessWidget {
                       dense: true,
                       onTap: () => onClientSelected?.call(item),
                       contentPadding: EdgeInsets.symmetric(
-                        horizontal: 3.sp,
-                        vertical: 1.sp,
+                        horizontal: 3.spa,
+                        vertical: 1.spa,
                       ),
                       title: Text(
                         item.name ?? '',
@@ -50,7 +50,7 @@ class BuildClientList extends StatelessWidget {
                       subtitle: Text(item.email ?? ''),
                       trailing: Icon(
                         Icons.arrow_forward_ios_rounded,
-                        size: 4.sp,
+                        size: 4.spa,
                       ),
                       leading: CircleAvatar(
                         backgroundColor:

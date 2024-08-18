@@ -26,8 +26,8 @@ class SignupPage extends GetView<SignupController> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    BuildLogo(size: 22.sp),
-                    SizedBox(height: 4.sp),
+                    BuildLogo(size: 22.spa),
+                    SizedBox(height: 4.spa),
                     Text(
                       'Sign up for Flutter++',
                       style: Get.theme.textTheme.headlineSmall,
@@ -37,7 +37,7 @@ class SignupPage extends GetView<SignupController> {
                       'to start creating and sharing your projects.',
                       style: Get.theme.textTheme.bodySmall,
                     ),
-                    SizedBox(height: 14.sp),
+                    SizedBox(height: 14.spa),
                     SizedBox(
                       width: 300,
                       child: Column(
@@ -56,7 +56,7 @@ class SignupPage extends GetView<SignupController> {
                             ]),
                             maxLines: 1,
                           ),
-                          SizedBox(height: 4.sp),
+                          SizedBox(height: 4.spa),
                           FormBuilderTextField(
                             name: 'email',
                             decoration: const InputDecoration(
@@ -68,7 +68,7 @@ class SignupPage extends GetView<SignupController> {
                               FormBuilderValidators.email(),
                             ]),
                           ),
-                          SizedBox(height: 4.sp),
+                          SizedBox(height: 4.spa),
                           FormBuilderTextField(
                             name: 'password',
                             obscureText: true,
@@ -81,7 +81,7 @@ class SignupPage extends GetView<SignupController> {
                               FormBuilderValidators.minLength(8),
                             ]),
                           ),
-                          SizedBox(height: 8.sp),
+                          SizedBox(height: 8.spa),
                           SizedBox(
                             width: Get.width,
                             child: ElevatedButton(
@@ -99,14 +99,14 @@ class SignupPage extends GetView<SignupController> {
                               child: const Text('sign up'),
                             ),
                           ),
-                          SizedBox(height: 10.sp),
+                          SizedBox(height: 10.spa),
                           const Text(
                             'do you have an account?',
                             style: TextStyle(
                               color: Colors.grey,
                             ),
                           ),
-                          SizedBox(height: 2.sp),
+                          SizedBox(height: 2.spa),
                           Row(
                             children: [
                               TextButton(

@@ -30,7 +30,7 @@ class BuildInvoiceHighlightsItem extends StatelessWidget {
                       ? title?.toUpperCase() ?? ''
                       : title?.capitalize ?? '',
                   style: TextStyle(
-                    fontSize: 5.sp,
+                    fontSize: 5.spa,
                     color: Colors.black,
                     fontWeight: FontWeight.bold,
                   ),
@@ -39,7 +39,7 @@ class BuildInvoiceHighlightsItem extends StatelessWidget {
             ],
           ),
         ),
-        SizedBox(width: 6.sp),
+        SizedBox(width: 6.spa),
         Flexible(
           flex: 1,
           child: Row(
@@ -49,7 +49,7 @@ class BuildInvoiceHighlightsItem extends StatelessWidget {
                 child: Text(
                   value ?? '',
                   style: TextStyle(
-                    fontSize: 5.sp,
+                    fontSize: 5.spa,
                     color: isAmount != null
                         ? Colors.black
                         : Colors.black.withOpacity(0.6),

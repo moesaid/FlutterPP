@@ -9,7 +9,7 @@ import 'package:flutterpp/App/Views/Pages/Mockup/Widgets/Create/Sidebar/build_sl
 import 'package:flutterpp/App/Views/Pages/Mockup/Widgets/build_sidebar_option.dart';
 import 'package:uuid/uuid.dart';
 
-ExpansionTileBorderItem buildDeviceStep({
+ExpansionTileItem buildDeviceStep({
   String? title,
   String? mockupId,
   Widget? leading,
@@ -56,7 +56,7 @@ ExpansionTileBorderItem buildDeviceStep({
   bool? showDevice,
 }) {
   String uuid = const Uuid().v4();
-  return ExpansionTileBorderItem(
+  return ExpansionTileItem(
     title: Text(title ?? 'Device'),
     leading: leading ?? const Icon(Icons.devices),
     collapsedBorderColor: Colors.transparent,

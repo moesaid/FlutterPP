@@ -68,16 +68,16 @@ class ProjectSingleCodeGen extends GetView<ProjectSingleCodeGenController> {
                           );
                         },
                       ),
-                      paintBuilder: (edge) {
-                        var p = Paint()
-                          ..color = Get.theme.colorScheme.primary
-                          ..style = PaintingStyle.stroke
-                          ..strokeCap = StrokeCap.round
-                          ..strokeJoin = StrokeJoin.round
-                          ..strokeWidth = 2;
+                      // paintBuilder: (edge) {
+                      //   var p = Paint()
+                      //     ..color = Get.theme.colorScheme.primary
+                      //     ..style = PaintingStyle.stroke
+                      //     ..strokeCap = StrokeCap.round
+                      //     ..strokeJoin = StrokeJoin.round
+                      //     ..strokeWidth = 2;
 
-                        return p;
-                      },
+                      //   return p;
+                      // },
                     ),
                   ],
                 ),

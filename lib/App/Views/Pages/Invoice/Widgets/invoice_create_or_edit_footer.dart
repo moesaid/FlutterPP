@@ -26,7 +26,7 @@ class InvoiceCreateOrEditFooter extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.end,
       children: [
         Padding(
-          padding: EdgeInsets.all(8.0.sp),
+          padding: EdgeInsets.all(8.0.spa),
           child: ElevatedButton.icon(
             onPressed: () {
               controller.onSubmit(
@@ -41,7 +41,7 @@ class InvoiceCreateOrEditFooter extends StatelessWidget {
                   ? 'Create Invoice'
                   : 'Update Invoice',
               style: TextStyle(
-                fontSize: 5.sp,
+                fontSize: 5.spa,
                 fontWeight: FontWeight.w600,
               ),
             ),
@@ -51,7 +51,7 @@ class InvoiceCreateOrEditFooter extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.end,
           children: [
             Padding(
-              padding: EdgeInsets.only(right: 8.0.sp),
+              padding: EdgeInsets.only(right: 8.0.spa),
               child: ElevatedButton(
                 onPressed: () {
                   showCurrencyPicker(
@@ -67,7 +67,7 @@ class InvoiceCreateOrEditFooter extends StatelessWidget {
                     Text(
                       controller.customInvoice.currency ?? 'USD',
                       style: TextStyle(
-                        fontSize: 5.sp,
+                        fontSize: 5.spa,
                         fontWeight: FontWeight.w600,
                       ),
                     ),

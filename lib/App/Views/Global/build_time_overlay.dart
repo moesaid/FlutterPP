@@ -13,17 +13,17 @@ class BuildTimeOverlay extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Container(
-          width: 200.sp,
+          width: 200.spa,
           clipBehavior: Clip.antiAlias,
           decoration: BoxDecoration(
-            color: Get.theme.colorScheme.background,
-            borderRadius: BorderRadius.circular(4.sp),
+            color: Get.theme.colorScheme.surface,
+            borderRadius: BorderRadius.circular(4.spa),
           ),
           child: Column(
             children: [
               SizedBox(
-                width: 200.sp,
-                height: 80.sp,
+                width: 200.spa,
+                height: 80.spa,
                 child: Image.asset(
                   'assets/images/time.gif',
                   fit: BoxFit.cover,
@@ -31,23 +31,23 @@ class BuildTimeOverlay extends StatelessWidget {
               ),
               Material(
                 child: Padding(
-                  padding: EdgeInsets.all(8.0.sp),
+                  padding: EdgeInsets.all(8.0.spa),
                   child: Column(
                     children: [
                       Text(
                         'Hold tight!',
                         textAlign: TextAlign.center,
                         style: TextStyle(
-                          fontSize: 6.sp,
+                          fontSize: 6.spa,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-                      SizedBox(height: 2.sp),
+                      SizedBox(height: 2.spa),
                       Text(
                         r'''This might take longer than a snail's coffee break, so feel free to practice your air guitar solos while we work our magic behind the scenes. 🐌🎸''',
                         textAlign: TextAlign.center,
                         style: TextStyle(
-                          fontSize: 5.sp,
+                          fontSize: 5.spa,
                         ),
                       ),
                     ],
@@ -58,7 +58,7 @@ class BuildTimeOverlay extends StatelessWidget {
                 color: Get.theme.colorScheme.secondary,
                 size: 30,
               ),
-              SizedBox(height: 10.sp),
+              SizedBox(height: 10.spa),
             ],
           ),
         ),

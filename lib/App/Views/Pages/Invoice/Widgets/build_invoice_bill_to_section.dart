@@ -19,7 +19,7 @@ class BuildInvoiceBillToSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.all(10.sp),
+      padding: EdgeInsets.all(10.spa),
       width: double.infinity,
       child: Row(
         children: [
@@ -31,11 +31,11 @@ class BuildInvoiceBillToSection extends StatelessWidget {
                 Text(
                   'bill to'.toUpperCase(),
                   style: TextStyle(
-                    fontSize: 6.sp,
+                    fontSize: 6.spa,
                     color: Colors.black45,
                   ),
                 ),
-                SizedBox(height: 2.sp),
+                SizedBox(height: 2.spa),
                 BuildInvoiceCompanyInfo(
                   companyName: client.name,
                   ownerName: client.contactName,
@@ -58,19 +58,19 @@ class BuildInvoiceBillToSection extends StatelessWidget {
                   title: 'invoice number:',
                   value: invoice.number.toString(),
                 ),
-                SizedBox(height: 2.sp),
+                SizedBox(height: 2.spa),
                 BuildInvoiceHighlightsItem(
                   title: 'invoice date:',
                   value: InvoiceHelper.fromDateToYMD(invoice.createdAt),
                 ),
-                SizedBox(height: 2.sp),
+                SizedBox(height: 2.spa),
                 BuildInvoiceHighlightsItem(
                   title: 'due date:',
                   value: invoice.dueDate,
                 ),
-                SizedBox(height: 2.sp),
+                SizedBox(height: 2.spa),
                 Container(
-                  padding: EdgeInsets.all(1.0.sp),
+                  padding: EdgeInsets.all(1.0.spa),
                   color: Colors.black12,
                   child: BuildInvoiceHighlightsItem(
                     isAmount: true,

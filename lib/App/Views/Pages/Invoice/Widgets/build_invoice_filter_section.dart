@@ -33,7 +33,7 @@ class BuildInvoiceFilterSection extends StatelessWidget {
                   ? () => onFilterChanged?.call('all')
                   : null,
               style: ButtonStyle(
-                backgroundColor: MaterialStateProperty.all(
+                backgroundColor: WidgetStateProperty.all(
                   filter == 'all'
                       ? Get.theme.colorScheme.primary
                       : Get.theme.colorScheme.primaryContainer,
@@ -41,13 +41,13 @@ class BuildInvoiceFilterSection extends StatelessWidget {
               ),
               child: Text('all'.capitalize!),
             ),
-            SizedBox(width: 3.sp),
+            SizedBox(width: 3.spa),
             FilledButton(
               onPressed: onFilterChanged != null
                   ? () => onFilterChanged?.call('draft')
                   : null,
               style: ButtonStyle(
-                backgroundColor: MaterialStateProperty.all(
+                backgroundColor: WidgetStateProperty.all(
                   filter == 'draft'
                       ? Get.theme.colorScheme.primary
                       : Get.theme.colorScheme.primaryContainer,
@@ -55,13 +55,13 @@ class BuildInvoiceFilterSection extends StatelessWidget {
               ),
               child: Text('draft'.capitalize!),
             ),
-            SizedBox(width: 3.sp),
+            SizedBox(width: 3.spa),
             FilledButton(
               onPressed: onFilterChanged != null
                   ? () => onFilterChanged?.call('unpaid')
                   : null,
               style: ButtonStyle(
-                backgroundColor: MaterialStateProperty.all(
+                backgroundColor: WidgetStateProperty.all(
                   filter == 'unpaid'
                       ? Get.theme.colorScheme.primary
                       : Get.theme.colorScheme.primaryContainer,
@@ -69,13 +69,13 @@ class BuildInvoiceFilterSection extends StatelessWidget {
               ),
               child: Text('unpaid'.capitalize!),
             ),
-            SizedBox(width: 3.sp),
+            SizedBox(width: 3.spa),
             FilledButton(
               onPressed: onFilterChanged != null
                   ? () => onFilterChanged?.call('paid')
                   : null,
               style: ButtonStyle(
-                backgroundColor: MaterialStateProperty.all(
+                backgroundColor: WidgetStateProperty.all(
                   filter == 'paid'
                       ? Get.theme.colorScheme.primary
                       : Get.theme.colorScheme.primaryContainer,
@@ -86,11 +86,11 @@ class BuildInvoiceFilterSection extends StatelessWidget {
           ],
         ),
         Positioned(
-          left: 10.sp,
+          left: 10.spa,
           child: FilledButton(
             onPressed: onCreate,
             style: ButtonStyle(
-              backgroundColor: MaterialStateProperty.all(
+              backgroundColor: WidgetStateProperty.all(
                 Get.theme.colorScheme.primaryContainer,
               ),
             ),
@@ -98,7 +98,7 @@ class BuildInvoiceFilterSection extends StatelessWidget {
           ),
         ),
         Positioned(
-          right: 10.sp,
+          right: 10.spa,
           child: BuildCustomDropdown(
             items: [
               PopupMenuItem(
@@ -128,8 +128,8 @@ class BuildInvoiceFilterSection extends StatelessWidget {
             ],
             child: Container(
               padding: EdgeInsets.symmetric(
-                horizontal: 3.sp,
-                vertical: 1.sp,
+                horizontal: 3.spa,
+                vertical: 1.spa,
               ),
               decoration: BoxDecoration(
                 color: Get.theme.colorScheme.primaryContainer,
@@ -138,7 +138,7 @@ class BuildInvoiceFilterSection extends StatelessWidget {
               child: Row(
                 children: [
                   Text(length == 1000 ? "ALL" : length.toString().capitalize!),
-                  Icon(Icons.arrow_drop_down, size: 6.sp),
+                  Icon(Icons.arrow_drop_down, size: 6.spa),
                 ],
               ),
             ),

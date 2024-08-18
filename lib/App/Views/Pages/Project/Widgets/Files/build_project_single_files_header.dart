@@ -15,7 +15,7 @@ class BuildProjectSingleFilesHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.all(5.sp),
+      padding: EdgeInsets.all(5.spa),
       decoration: BoxDecoration(
         border: Border(
           bottom: BorderSide(
@@ -36,7 +36,7 @@ class BuildProjectSingleFilesHeader extends StatelessWidget {
             onSearch: controller.searchFiles,
             onClear: controller.clearSearch,
           ),
-          SizedBox(width: 5.sp),
+          SizedBox(width: 5.spa),
           FilledButton.icon(
             onPressed: () => controller.uploadFile(),
             icon: const Icon(Icons.cloud_upload_rounded),
@@ -48,8 +48,8 @@ class BuildProjectSingleFilesHeader extends StatelessWidget {
             ),
             style: FilledButton.styleFrom(
               padding: EdgeInsets.symmetric(
-                vertical: 5.sp,
-                horizontal: 6.sp,
+                vertical: 5.spa,
+                horizontal: 6.spa,
               ),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(10),

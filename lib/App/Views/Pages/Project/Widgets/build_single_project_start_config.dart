@@ -28,12 +28,12 @@ class BuildSingleProjectStartConfig
                 'This project is not a FlutterPP project.',
                 style: Get.textTheme.titleLarge,
               ),
-              SizedBox(height: 3.sp),
+              SizedBox(height: 3.spa),
               const Text(
                 'Code confusion alert! Our project seems lost in the tech wilderness. \n Ready to play detective and configure its identity?',
                 textAlign: TextAlign.center,
               ),
-              SizedBox(height: 8.sp),
+              SizedBox(height: 8.spa),
               ElevatedButton(
                 onPressed: () => controller.startConfig(),
                 child: Text(

@@ -19,7 +19,7 @@ class BuildSingleProjectParkedAt extends StatelessWidget {
           'parked at'.capitalize!,
           style: Get.textTheme.labelSmall,
         ),
-        SizedBox(height: 1.sp),
+        SizedBox(height: 1.spa),
         InkWell(
           onTap: () {
             if (path == null) return;
@@ -27,22 +27,22 @@ class BuildSingleProjectParkedAt extends StatelessWidget {
           },
           child: Container(
             padding: EdgeInsets.symmetric(
-              vertical: 1.sp,
-              horizontal: 4.sp,
+              vertical: 1.spa,
+              horizontal: 4.spa,
             ),
             decoration: BoxDecoration(
               color: Get.theme.colorScheme.secondaryContainer,
-              borderRadius: BorderRadius.circular(2.sp),
+              borderRadius: BorderRadius.circular(2.spa),
             ),
             child: Row(
               children: [
                 Icon(
                   Icons.folder,
-                  size: 4.sp,
+                  size: 4.spa,
                   color: Get.theme.colorScheme.onPrimaryContainer,
                 ),
                 const Text(' :: '),
-                SizedBox(width: 1.sp),
+                SizedBox(width: 1.spa),
                 Text(
                   path ?? 'No path',
                   style: Get.textTheme.bodySmall!.copyWith(

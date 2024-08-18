@@ -7,7 +7,6 @@ list(APPEND FLUTTER_PLUGIN_LIST
   flutter_platform_alert
   gtk
   printing
-  rich_clipboard_linux
   screen_retriever
   sentry_flutter
   system_tray

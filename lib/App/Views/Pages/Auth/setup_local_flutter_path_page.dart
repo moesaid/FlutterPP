@@ -26,15 +26,16 @@ class SetupLocalFlutterPathPage
             child: BuildLoadingSwitch(
               isLoading: controller.isLoading,
               child: Container(
-                padding: EdgeInsets.only(top: 20.sp, left: 20.sp, right: 20.sp),
+                padding:
+                    EdgeInsets.only(top: 20.spa, left: 20.spa, right: 20.spa),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     const CloseButton(),
-                    SizedBox(height: 10.sp),
+                    SizedBox(height: 10.spa),
                     Row(
                       children: [
-                        BuildLogo(size: 20.sp),
+                        BuildLogo(size: 20.spa),
 
                         const Spacer(),
 
@@ -54,24 +55,24 @@ class SetupLocalFlutterPathPage
                         ),
                       ],
                     ),
-                    SizedBox(height: 10.sp),
+                    SizedBox(height: 10.spa),
                     Text(
                       'Setup FlutterPP CLI',
                       style: TextStyle(
-                        fontSize: 10.sp,
+                        fontSize: 10.spa,
                         fontWeight: FontWeight.w600,
                       ),
                     ),
-                    SizedBox(height: 5.sp),
+                    SizedBox(height: 5.spa),
                     Text(
                       'please provide the path to your local flutter sdk installation'
                           .capitalize!,
                       style: TextStyle(
-                        fontSize: 5.sp,
+                        fontSize: 5.spa,
                         fontWeight: FontWeight.w300,
                       ),
                     ),
-                    Divider(height: 20.sp, thickness: 0.5),
+                    Divider(height: 20.spa, thickness: 0.5),
                     Expanded(
                       child: BuildListView(controller: controller),
                     ),
@@ -98,7 +99,7 @@ class SetupLocalFlutterPathDialog extends StatelessWidget {
   Widget build(BuildContext context) {
     final formKey = GlobalKey<FormBuilderState>();
     return BuildDefultDialog(
-      height: 100.sp,
+      height: 100.spa,
       child: FormBuilder(
         key: formKey,
         child: Column(
@@ -108,25 +109,25 @@ class SetupLocalFlutterPathDialog extends StatelessWidget {
             Text(
               'Add Path',
               style: TextStyle(
-                fontSize: 10.sp,
+                fontSize: 10.spa,
                 fontWeight: FontWeight.w600,
               ),
             ),
-            SizedBox(height: 4.sp),
+            SizedBox(height: 4.spa),
             Text(
               'please provide the path to your local flutter sdk installation'
                   .capitalize!,
               style: TextStyle(
-                fontSize: 5.sp,
+                fontSize: 5.spa,
                 fontWeight: FontWeight.w300,
               ),
             ),
-            SizedBox(height: 1.sp),
+            SizedBox(height: 1.spa),
             RichText(
               text: TextSpan(
                 text: 'the end of the path should be'.capitalize!,
                 style: TextStyle(
-                  fontSize: 5.sp,
+                  fontSize: 5.spa,
                   fontWeight: FontWeight.w300,
                 ),
                 children: [
@@ -139,19 +140,19 @@ class SetupLocalFlutterPathDialog extends StatelessWidget {
                 ],
               ),
             ),
-            SizedBox(height: 10.sp),
+            SizedBox(height: 10.spa),
             FormBuilderTextField(
               name: 'path',
               decoration: InputDecoration(
                 labelText: 'Path',
                 hintText: 'path to your local flutter sdk installation',
                 border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(5.sp),
+                  borderRadius: BorderRadius.circular(5.spa),
                 ),
               ),
               validator: FormBuilderValidators.required(),
             ),
-            SizedBox(height: 10.sp),
+            SizedBox(height: 10.spa),
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
@@ -195,14 +196,14 @@ class BuildListView extends StatelessWidget {
           'check your flutter installation by running the following command in your terminal or command prompt:'
               .capitalize!,
         ),
-        SizedBox(height: 10.sp),
+        SizedBox(height: 10.spa),
         BuildCodeBlock(
           height: 130,
           theme: controller.theme,
           onCopy: controller.onCopy,
           code: controller.codes[0],
         ),
-        SizedBox(height: 2.sp),
+        SizedBox(height: 2.spa),
 
         Text(
           'if you get a sucsessful response, then you have flutter installed on your machine. continue to the next step.'
@@ -218,7 +219,7 @@ class BuildListView extends StatelessWidget {
             color: Get.theme.colorScheme.error,
           ),
         ),
-        SizedBox(height: 6.sp),
+        SizedBox(height: 6.spa),
         Row(
           children: [
             Text('if needed: '.toUpperCase()),
@@ -240,13 +241,13 @@ class BuildListView extends StatelessWidget {
           ],
         ),
 
-        SizedBox(height: 10.sp),
+        SizedBox(height: 10.spa),
         Text(
           'if you don\'t know the path to your local flutter sdk installation,'
                   '\nyou can find it by running the following command in your terminal or command prompt:'
               .capitalize!,
         ),
-        SizedBox(height: 10.sp),
+        SizedBox(height: 10.spa),
         if (!controller.isLoading)
           BuildCodeBlock(
             height: 130,
@@ -254,7 +255,7 @@ class BuildListView extends StatelessWidget {
             onCopy: controller.onCopy,
             code: controller.codes[1],
           ),
-        SizedBox(height: 10.sp),
+        SizedBox(height: 10.spa),
         Text(
           'after running the command, you will see all the paths in your terminal or command prompt.'
               .capitalize!,
@@ -275,18 +276,18 @@ class BuildListView extends StatelessWidget {
             ],
           ),
         ),
-        SizedBox(height: 10.sp),
+        SizedBox(height: 10.spa),
         Container(
-          padding: EdgeInsets.all(10.sp),
+          padding: EdgeInsets.all(10.spa),
           decoration: BoxDecoration(
             color: Get.theme.colorScheme.primaryContainer,
-            borderRadius: BorderRadius.circular(5.sp),
+            borderRadius: BorderRadius.circular(5.spa),
           ),
           child: ListView.separated(
             shrinkWrap: true,
             physics: const NeverScrollableScrollPhysics(),
             itemCount: controller.pathsList.length,
-            separatorBuilder: (_, __) => SizedBox(height: 2.sp),
+            separatorBuilder: (_, __) => SizedBox(height: 2.spa),
             itemBuilder: (_, int index) {
               String path = controller.pathsList[index];
               bool isFlutter = path.contains('flutter');
@@ -294,24 +295,24 @@ class BuildListView extends StatelessWidget {
                 margin: !isFlutter
                     ? null
                     : EdgeInsets.symmetric(
-                        vertical: 2.sp,
+                        vertical: 2.spa,
                       ),
                 padding: !isFlutter
                     ? null
                     : EdgeInsets.symmetric(
-                        horizontal: 5.sp,
-                        vertical: 2.sp,
+                        horizontal: 5.spa,
+                        vertical: 2.spa,
                       ),
                 decoration: !isFlutter
                     ? null
                     : BoxDecoration(
                         color: Get.theme.colorScheme.primary,
-                        borderRadius: BorderRadius.circular(2.sp),
+                        borderRadius: BorderRadius.circular(2.spa),
                       ),
                 child: Text(
                   controller.pathsList[index],
                   style: TextStyle(
-                      fontSize: 4.sp,
+                      fontSize: 4.spa,
                       fontWeight: FontWeight.w300,
                       color: isFlutter
                           ? Get.theme.colorScheme.onPrimary
@@ -321,7 +322,7 @@ class BuildListView extends StatelessWidget {
             },
           ),
         ),
-        SizedBox(height: 10.sp),
+        SizedBox(height: 10.spa),
       ],
     );
   }
@@ -347,8 +348,11 @@ class BuildCodeBlock extends StatelessWidget {
       height: height ?? 250,
       child: TabContainer(
         color: Get.theme.colorScheme.primaryContainer,
-        tabEnd: 0.2,
-        tabs: const ['mac', 'windows'],
+        tabsEnd: 0.2,
+        tabs: const [
+          Tab(text: 'mac'),
+          Tab(text: 'windows'),
+        ],
         children: [
           Stack(
             children: [
@@ -356,7 +360,7 @@ class BuildCodeBlock extends StatelessWidget {
                 top: 0,
                 left: 0,
                 child: Padding(
-                  padding: EdgeInsets.all(8.0.sp),
+                  padding: EdgeInsets.all(8.0.spa),
                   child: Text.rich(
                     Highlighter(
                       language: 'dart',
@@ -366,11 +370,11 @@ class BuildCodeBlock extends StatelessWidget {
                 ),
               ),
               Positioned(
-                top: 6.sp,
-                right: 6.sp,
+                top: 6.spa,
+                right: 6.spa,
                 child: IconButton(
                   onPressed: () => onCopy?.call(code['mac'] ?? ''),
-                  icon: Icon(Icons.copy, size: 6.sp),
+                  icon: Icon(Icons.copy, size: 6.spa),
                 ),
               ),
             ],
@@ -381,7 +385,7 @@ class BuildCodeBlock extends StatelessWidget {
                 top: 0,
                 left: 0,
                 child: Padding(
-                  padding: EdgeInsets.all(8.0.sp),
+                  padding: EdgeInsets.all(8.0.spa),
                   child: Text.rich(
                     Highlighter(
                       language: 'dart',
@@ -391,11 +395,11 @@ class BuildCodeBlock extends StatelessWidget {
                 ),
               ),
               Positioned(
-                top: 6.sp,
-                right: 6.sp,
+                top: 6.spa,
+                right: 6.spa,
                 child: IconButton(
                   onPressed: () => onCopy?.call(code['windows'] ?? ''),
-                  icon: Icon(Icons.copy, size: 6.sp),
+                  icon: Icon(Icons.copy, size: 6.spa),
                 ),
               ),
             ],

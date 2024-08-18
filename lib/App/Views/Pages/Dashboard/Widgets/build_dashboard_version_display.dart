@@ -40,7 +40,7 @@ class BuildDashboardVersionDesplayView extends StatelessWidget {
       width: context.width * 0.1,
       decoration: BoxDecoration(
         color: Get.theme.colorScheme.primaryContainer,
-        borderRadius: BorderRadius.circular(3.sp),
+        borderRadius: BorderRadius.circular(3.spa),
         border: Border.all(
           width: 1,
           color: Get.theme.colorScheme.secondaryContainer,
@@ -66,7 +66,7 @@ class BuildDashboardVersionDesplayView extends StatelessWidget {
                       ),
                     ),
                   ),
-                  SizedBox(height: 1.sp),
+                  SizedBox(height: 1.spa),
                   Text(
                     _.currentVersion,
                     style: TextStyle(
@@ -92,7 +92,7 @@ class BuildDashboardVersionDesplayView extends StatelessWidget {
                       ),
                     ),
                   ),
-                  SizedBox(height: 1.sp),
+                  SizedBox(height: 1.spa),
                   Tooltip(
                     message: 'view changelog',
                     child: InkWell(
@@ -116,7 +116,7 @@ class BuildDashboardVersionDesplayView extends StatelessWidget {
                               fontWeight: FontWeight.w500,
                             ),
                           ),
-                          SizedBox(width: 2.sp),
+                          SizedBox(width: 2.spa),
                           if (_.updateAvailable)
                             AnimatedGradientBorder(
                               borderSize: 1,
@@ -131,14 +131,14 @@ class BuildDashboardVersionDesplayView extends StatelessWidget {
                               child: Icon(
                                 Icons.info_rounded,
                                 size: context.width * 0.013,
-                                color: Get.theme.colorScheme.onBackground,
+                                color: Get.theme.colorScheme.onSurface,
                               ),
                             ),
                           if (!_.updateAvailable)
                             Icon(
                               Icons.info_rounded,
                               size: context.width * 0.013,
-                              color: Get.theme.colorScheme.onBackground,
+                              color: Get.theme.colorScheme.onSurface,
                             ),
                         ],
                       ),
@@ -198,7 +198,7 @@ class BuildDashboardVersionDisplayDialog extends StatelessWidget {
             },
             icon: HeroIcon(
               HeroIcons.link,
-              size: 6.sp,
+              size: 6.spa,
             ),
             label: const Text('open release page'),
           ),

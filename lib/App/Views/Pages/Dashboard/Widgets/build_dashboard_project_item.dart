@@ -28,9 +28,9 @@ class BuildDashboardProjectItem extends StatelessWidget {
             duration: const Duration(milliseconds: 300),
             width: 180,
             height: 180,
-            padding: EdgeInsets.all(5.sp),
+            padding: EdgeInsets.all(5.spa),
             decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(2.sp),
+              borderRadius: BorderRadius.circular(2.spa),
               border: Border.all(
                 width: 1,
                 color: item.id == controller.activeProject.id
@@ -49,25 +49,25 @@ class BuildDashboardProjectItem extends StatelessWidget {
                   ],
                   icon: item.icon!,
                 ),
-                SizedBox(height: 2.sp),
+                SizedBox(height: 2.spa),
                 Text(
                   item.title?.capitalize ?? '',
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                   textAlign: TextAlign.center,
                   style: TextStyle(
-                    fontSize: 5.sp,
+                    fontSize: 5.spa,
                     fontWeight: FontWeight.w600,
                   ),
                 ),
-                SizedBox(height: 1.sp),
+                SizedBox(height: 1.spa),
                 Text(
                   item.description ?? '',
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
                   textAlign: TextAlign.center,
                   style: TextStyle(
-                    fontSize: 3.6.sp,
+                    fontSize: 3.6.spa,
                     color: Colors.grey.shade400,
                     fontWeight: FontWeight.w300,
                   ),

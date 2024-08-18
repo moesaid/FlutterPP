@@ -71,7 +71,7 @@ class VerifyOtpPage extends GetView<VerifyOtpController> {
                                   child: const Text('verify'),
                                 ),
                               ),
-                              SizedBox(height: 10.sp),
+                              SizedBox(height: 10.spa),
                               Row(
                                 children: [
                                   TextButton(
@@ -104,20 +104,20 @@ class VerifyOtpPage extends GetView<VerifyOtpController> {
                                           controller.sentCount.toString(),
                                           style: TextStyle(
                                             color: Colors.white,
-                                            fontSize: 4.sp,
+                                            fontSize: 4.spa,
                                           ),
                                         ),
                                       ),
                                     ),
                                 ],
                               ),
-                              SizedBox(height: 10.sp),
+                              SizedBox(height: 10.spa),
                               TextButton(
                                 onPressed: () => Get.back(),
                                 child: Text(
                                   'go back to login page',
                                   style: TextStyle(
-                                    color: Get.theme.colorScheme.onBackground,
+                                    color: Get.theme.colorScheme.onSurface,
                                   ),
                                 ),
                               )

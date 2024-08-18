@@ -24,8 +24,8 @@ class BuildCreateMockupLinkProject extends StatelessWidget {
         children: [
           FormBuilderChoiceChip(
             name: 'projects',
-            spacing: 3.sp,
-            runSpacing: 3.sp,
+            spacing: 3.spa,
+            runSpacing: 3.spa,
             shape: ContinuousRectangleBorder(
               side: BorderSide(
                 color: Get.theme.colorScheme.secondaryContainer,
@@ -52,14 +52,14 @@ class BuildCreateMockupLinkProject extends StatelessWidget {
                     avatar: Padding(
                       padding: const EdgeInsets.all(3),
                       child: BuildProjectAvatar(
-                        height: 10.sp,
+                        height: 10.spa,
                         colors: [
                           ColorHelper.hexToColor(e.color1!),
                           ColorHelper.hexToColor(e.color2!)
                         ],
                         icon: e.icon!,
-                        svgHeight: 5.sp,
-                        svgWidth: 5.sp,
+                        svgHeight: 5.spa,
+                        svgWidth: 5.spa,
                       ),
                     ),
                     child: Text(
@@ -73,7 +73,7 @@ class BuildCreateMockupLinkProject extends StatelessWidget {
                 )
                 .toList(),
           ),
-          SizedBox(height: 20.sp),
+          SizedBox(height: 20.spa),
         ],
       ),
     );

@@ -42,7 +42,7 @@ class BuildInvoiceCreateOrEditHeaderForm extends StatelessWidget {
                 FormBuilderValidators.numeric(),
               ]),
             ),
-            SizedBox(height: 4.sp),
+            SizedBox(height: 4.spa),
             FormBuilderDateTimePicker(
               name: 'date',
               inputType: InputType.date,
@@ -53,7 +53,7 @@ class BuildInvoiceCreateOrEditHeaderForm extends StatelessWidget {
                 FormBuilderValidators.required(),
               ]),
             ),
-            SizedBox(height: 4.sp),
+            SizedBox(height: 4.spa),
             FormBuilderDateTimePicker(
               name: 'dueDate',
               inputType: InputType.date,

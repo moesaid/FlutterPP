@@ -58,7 +58,7 @@ class BuildSlider extends StatelessWidget {
             valueIndicatorColor: Colors.black,
             valueIndicatorTextStyle: TextStyle(
               color: Colors.white,
-              fontSize: 6.sp,
+              fontSize: 6.spa,
             ),
           ),
           child: Slider(

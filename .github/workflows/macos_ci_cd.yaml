@@ -16,6 +16,14 @@ jobs:
     steps:
       - uses: actions/checkout@v2.4.0
 
+      - name: create .env file
+        run: |
+          touch .env
+          echo supabaseURL=${{ secrets.supabaseURL }} >> .env
+          echo supabaseKey=${{ secrets.supabaseKey }} >> .env
+          echo sentryDSN=${{ secrets.sentryDSN }} >> .env
+          cat .env
+
       - name: read yaml
         id: read_action_js
         uses: pietrobolcato/action-read-yaml@1.1.0

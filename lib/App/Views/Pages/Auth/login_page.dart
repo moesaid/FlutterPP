@@ -25,15 +25,15 @@ class LoginPage extends GetView<LoginController> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      BuildLogo(size: 12.sp),
-                      SizedBox(height: 4.sp),
+                      BuildLogo(size: 12.spa),
+                      SizedBox(height: 4.spa),
                       Text('Login', style: Get.theme.textTheme.headlineSmall),
-                      SizedBox(height: 4.sp),
+                      SizedBox(height: 4.spa),
                       Text(
                         'welcome back to flutter++ ',
                         style: Get.theme.textTheme.bodySmall,
                       ),
-                      SizedBox(height: 16.sp),
+                      SizedBox(height: 16.spa),
                       SizedBox(
                         width: 300,
                         child: Column(
@@ -50,7 +50,7 @@ class LoginPage extends GetView<LoginController> {
                                 FormBuilderValidators.email(),
                               ]),
                             ),
-                            SizedBox(height: 3.sp),
+                            SizedBox(height: 3.spa),
                             SizedBox(
                               width: Get.width,
                               child: ElevatedButton(
@@ -68,12 +68,12 @@ class LoginPage extends GetView<LoginController> {
                                 child: const Text('login'),
                               ),
                             ),
-                            SizedBox(height: 10.sp),
+                            SizedBox(height: 10.spa),
                             const Text(
                               'Don\'t have an account?',
                               style: TextStyle(color: Colors.grey),
                             ),
-                            SizedBox(height: 4.sp),
+                            SizedBox(height: 4.spa),
                             Row(
                               children: [
                                 Icon(

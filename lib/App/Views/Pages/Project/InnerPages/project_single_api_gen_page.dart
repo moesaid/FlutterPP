@@ -33,7 +33,7 @@ class ProjectSingleApiGenPage extends GetView<ProjectSingleApiGenController> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        SizedBox(height: 5.sp),
+                        SizedBox(height: 5.spa),
                         // node
                         const BuildApiGenNode(),
                         const BuildApiGenNode(),
@@ -72,14 +72,14 @@ class ProjectSingleApiGenPageSidebar extends StatelessWidget {
         children: [
           Container(
             width: double.infinity,
-            margin: EdgeInsets.all(3.sp),
+            margin: EdgeInsets.all(3.spa),
             padding: EdgeInsets.symmetric(
-              vertical: 3.5.sp,
-              horizontal: 3.sp,
+              vertical: 3.5.spa,
+              horizontal: 3.spa,
             ),
             decoration: BoxDecoration(
               color: Get.theme.colorScheme.primaryContainer,
-              borderRadius: BorderRadius.circular(2.sp),
+              borderRadius: BorderRadius.circular(2.spa),
             ),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -103,7 +103,7 @@ class ProjectSingleApiGenPageSidebar extends StatelessWidget {
                 ),
                 InkWell(
                   onTap: () => AppPrint.print('add workflow'),
-                  child: Icon(Icons.add, size: 6.sp),
+                  child: Icon(Icons.add, size: 6.spa),
                 ),
               ],
             ),
@@ -112,7 +112,7 @@ class ProjectSingleApiGenPageSidebar extends StatelessWidget {
           Expanded(
             child: ListView.separated(
               itemCount: 50,
-              padding: EdgeInsets.all(3.sp),
+              padding: EdgeInsets.all(3.spa),
               separatorBuilder: (context, index) {
                 return const Divider(thickness: 0.1);
               },
@@ -121,17 +121,17 @@ class ProjectSingleApiGenPageSidebar extends StatelessWidget {
                   onTap: () => AppPrint.print('open workflow'),
                   child: Container(
                     padding: EdgeInsets.symmetric(
-                      vertical: 1.5.sp,
-                      horizontal: 3.sp,
+                      vertical: 1.5.spa,
+                      horizontal: 3.spa,
                     ),
                     decoration: BoxDecoration(
                       color: Get.theme.colorScheme.primaryContainer,
-                      borderRadius: BorderRadius.circular(2.sp),
+                      borderRadius: BorderRadius.circular(2.spa),
                     ),
                     child: Row(
                       children: [
-                        Icon(Icons.api, size: 5.sp),
-                        SizedBox(width: 2.sp),
+                        Icon(Icons.api, size: 5.spa),
+                        SizedBox(width: 2.spa),
                         Text('data'.capitalize!),
                         const Spacer(),
                         BuildCustomDropdown(
@@ -144,7 +144,7 @@ class ProjectSingleApiGenPageSidebar extends StatelessWidget {
                           ],
                           child: Icon(
                             Icons.more_horiz,
-                            size: 8.sp,
+                            size: 8.spa,
                             color: Get.theme.colorScheme.onPrimary
                                 .withOpacity(0.5),
                           ),

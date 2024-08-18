@@ -12,7 +12,7 @@ import 'package:flutterpp/App/Views/Pages/Mockup/Widgets/build_sidebar_option.da
 import 'package:get/get.dart';
 import 'package:uuid/uuid.dart';
 
-ExpansionTileBorderItem buildTitleStep({
+ExpansionTileItem buildTitleStep({
   String? widgetTitle = 'title',
   String? titleText,
   String? titleFontFamily,
@@ -36,7 +36,7 @@ ExpansionTileBorderItem buildTitleStep({
   Function(double, PaddingDestination)? onTitlePaddingChanged,
 }) {
   String uuid = const Uuid().v4();
-  return ExpansionTileBorderItem(
+  return ExpansionTileItem(
     title: Text(widgetTitle!),
     leading: const Icon(Icons.text_fields),
     collapsedBorderColor: Colors.transparent,

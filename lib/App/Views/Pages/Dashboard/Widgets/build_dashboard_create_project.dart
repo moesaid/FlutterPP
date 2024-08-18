@@ -47,8 +47,8 @@ class BuildDashboardCreateProject extends StatelessWidget {
         width: 180,
         height: 180,
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(2.sp),
-          color: Get.theme.colorScheme.background,
+          borderRadius: BorderRadius.circular(2.spa),
+          color: Get.theme.colorScheme.surface,
           border: Border.all(
             width: 1,
             color: Get.theme.colorScheme.primaryContainer,
@@ -59,13 +59,13 @@ class BuildDashboardCreateProject extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             const Icon(Icons.add_rounded, size: 50),
-            SizedBox(height: 1.sp),
+            SizedBox(height: 1.spa),
             Text(
               'create new project'.capitalize!,
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
               textAlign: TextAlign.center,
-              style: TextStyle(fontSize: 4.sp),
+              style: TextStyle(fontSize: 4.spa),
             ),
           ],
         ),

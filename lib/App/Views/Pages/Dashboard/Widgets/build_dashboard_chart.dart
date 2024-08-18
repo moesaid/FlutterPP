@@ -28,10 +28,10 @@ class BuildDashboardChart extends StatelessWidget {
     return Container(
       clipBehavior: Clip.antiAlias,
       height: context.height * 0.23,
-      padding: EdgeInsets.all(5.sp),
+      padding: EdgeInsets.all(5.spa),
       decoration: BoxDecoration(
         color: Get.theme.colorScheme.primaryContainer,
-        borderRadius: BorderRadius.circular(3.sp),
+        borderRadius: BorderRadius.circular(3.spa),
         border: Border.all(
           width: 1,
           color: Get.theme.colorScheme.secondaryContainer,
@@ -45,7 +45,7 @@ class BuildDashboardChart extends StatelessWidget {
               Text(
                 'invoices'.toUpperCase(),
                 style: TextStyle(
-                  fontSize: 4.sp,
+                  fontSize: 4.spa,
                   fontWeight: FontWeight.w500,
                 ),
               ),
@@ -54,13 +54,13 @@ class BuildDashboardChart extends StatelessWidget {
                 onTap: onMorePressed,
                 child: HeroIcon(
                   HeroIcons.chevronDoubleRight,
-                  size: 4.sp,
-                  color: Get.theme.colorScheme.onBackground,
+                  size: 4.spa,
+                  color: Get.theme.colorScheme.onSurface,
                 ),
               ),
             ],
           ),
-          SizedBox(height: 5.sp),
+          SizedBox(height: 5.spa),
           if (_invoices.isNotEmpty)
             Expanded(
               child: ListView.separated(
@@ -85,8 +85,8 @@ class BuildDashboardChart extends StatelessWidget {
               child: Text(
                 'no invoices yet'.capitalize!,
                 style: TextStyle(
-                  fontSize: 4.sp,
-                  color: Get.theme.colorScheme.onBackground.withOpacity(0.5),
+                  fontSize: 4.spa,
+                  color: Get.theme.colorScheme.onSurface.withOpacity(0.5),
                 ),
               ),
             ),

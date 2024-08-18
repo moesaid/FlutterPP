@@ -16,7 +16,7 @@ class BuildInvoiceAnalyticsSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.all(8.0.sp),
+      padding: EdgeInsets.all(8.0.spa),
       child: Row(
         children: [
           Expanded(
@@ -26,7 +26,7 @@ class BuildInvoiceAnalyticsSection extends StatelessWidget {
               unit: '',
             ),
           ),
-          SizedBox(width: 6.sp),
+          SizedBox(width: 6.spa),
           Expanded(
             child: BuildInvoiceAnalyticsItem(
               title: 'invoices',
@@ -34,7 +34,7 @@ class BuildInvoiceAnalyticsSection extends StatelessWidget {
               unit: '',
             ),
           ),
-          SizedBox(width: 6.sp),
+          SizedBox(width: 6.spa),
           Expanded(
             child: BuildInvoiceAnalyticsItem(
               unit: 'USD',
@@ -43,7 +43,7 @@ class BuildInvoiceAnalyticsSection extends StatelessWidget {
               value: outstanding?.toString() ?? '0',
             ),
           ),
-          SizedBox(width: 6.sp),
+          SizedBox(width: 6.spa),
           Expanded(
             child: BuildInvoiceAnalyticsItem(
               unit: 'USD',

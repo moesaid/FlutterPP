@@ -103,7 +103,7 @@ class BuildIconAndGradients extends StatelessWidget {
                 right: 20,
                 child: BuildCloseButton(
                   bgColor: Get.theme.primaryColor,
-                  size: 20.sp,
+                  size: 20.spa,
                   onTap: () {
                     Navigator.pop(context);
                   },
@@ -165,8 +165,8 @@ class _BuildColorsSection extends StatelessWidget {
                 },
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: crossAxisCount ?? 6,
-                  crossAxisSpacing: crossAxisSpacing ?? 2.sp,
-                  mainAxisSpacing: mainAxisSpacing ?? 2.sp,
+                  crossAxisSpacing: crossAxisSpacing ?? 2.spa,
+                  mainAxisSpacing: mainAxisSpacing ?? 2.spa,
                   childAspectRatio: childAspectRatio ?? 1,
                 ),
               ),
@@ -207,9 +207,9 @@ class _BuildIconSection extends StatelessWidget {
               '${svgs.length} Icons',
               style: Get.textTheme.titleLarge,
             ),
-            SizedBox(height: 1.sp),
+            SizedBox(height: 1.spa),
             const Text('Time to choose an icon, peeps!'),
-            SizedBox(height: 10.sp),
+            SizedBox(height: 10.spa),
             Expanded(
               child: GridView.builder(
                 itemCount: svgs.length,
@@ -223,7 +223,7 @@ class _BuildIconSection extends StatelessWidget {
                       alignment: Alignment.center,
                       children: [
                         Container(
-                          padding: EdgeInsets.all(3.sp),
+                          padding: EdgeInsets.all(3.spa),
                           decoration: BoxDecoration(
                             color: Colors.grey.withOpacity(0.1),
                             border: Border.all(
@@ -246,8 +246,8 @@ class _BuildIconSection extends StatelessWidget {
                 },
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: crossAxisCount ?? 6,
-                  crossAxisSpacing: crossAxisSpacing ?? 2.sp,
-                  mainAxisSpacing: mainAxisSpacing ?? 2.sp,
+                  crossAxisSpacing: crossAxisSpacing ?? 2.spa,
+                  mainAxisSpacing: mainAxisSpacing ?? 2.spa,
                   childAspectRatio: childAspectRatio ?? 1,
                 ),
               ),
