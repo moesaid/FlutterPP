@@ -1,4 +1,4 @@
-![preview](https://github.com/moesaid/flutterpp/blob/stage/marketing/pre.png)
+![preview](https://github.com/moesaid/flutterpp/blob/stage/marketing/poster.png)
 
 <p align="center">
   <a href="preview.md"><img src="https://github.com/moesaid/flutterpp/blob/stage/marketing/pre.png" width="32%" /></a>
