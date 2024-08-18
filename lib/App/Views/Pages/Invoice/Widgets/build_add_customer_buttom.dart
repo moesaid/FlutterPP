@@ -58,13 +58,13 @@ class BuildAddCustomerButtom extends StatelessWidget {
                   email: client?.email,
                   phone: client?.phone,
                 ),
-                SizedBox(height: 4.sp),
+                SizedBox(height: 4.spa),
                 InkWell(
                   onTap: () => _openSheet(context),
                   child: Text(
                     'change customer'.capitalize!,
                     style: TextStyle(
-                      color: Get.theme.colorScheme.onBackground,
+                      color: Get.theme.colorScheme.onSurface,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
@@ -81,7 +81,7 @@ class BuildAddCustomerButtom extends StatelessWidget {
       title: 'choose a client',
       footer: const SizedBox.shrink(),
       body: Padding(
-        padding: EdgeInsets.all(4.sp),
+        padding: EdgeInsets.all(4.spa),
         child: BuildClientList(onClientSelected: onPressed),
       ),
     );

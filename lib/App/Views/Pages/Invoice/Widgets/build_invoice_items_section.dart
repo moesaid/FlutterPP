@@ -23,7 +23,7 @@ class BuildInvoiceItemsSection extends StatelessWidget {
             separatorBuilder: (_, __) {
               return Divider(
                 thickness: 0.5,
-                height: 0.5.sp,
+                height: 0.5.spa,
                 color: Colors.black12,
               );
             },

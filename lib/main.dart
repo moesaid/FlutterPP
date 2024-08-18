@@ -1,5 +1,6 @@
 import 'package:appflowy_editor/appflowy_editor.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutterpp/Config/Bindings/app_binding.dart';
 import 'package:flutterpp/Config/app_initializer.dart';
 import 'package:flutterpp/Config/app_theme.dart';
@@ -33,7 +34,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Sizer(
+    return ResponsiveSizer(
       builder: (context, orientation, deviceType) {
         return GetMaterialApp(
           title: 'Flutter ++',
@@ -49,6 +50,9 @@ class MyApp extends StatelessWidget {
             AppFlowyEditorLocalizations.delegate,
             FormBuilderLocalizations.delegate,
             FormBuilderLocalizationsImpl.delegate,
+            GlobalMaterialLocalizations.delegate,
+            GlobalWidgetsLocalizations.delegate,
+            GlobalCupertinoLocalizations.delegate,
           ],
           supportedLocales:
               AppFlowyEditorLocalizations.delegate.supportedLocales,

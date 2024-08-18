@@ -7,7 +7,7 @@ import 'package:flutterpp/App/Views/Pages/Mockup/Widgets/Create/Sidebar/build_al
 import 'package:flutterpp/App/Views/Pages/Mockup/Widgets/Create/Sidebar/build_slider_enable_option.dart';
 import 'package:flutterpp/App/Views/Pages/Mockup/Widgets/build_sidebar_option.dart';
 
-ExpansionTileBorderItem buildingIconStep({
+ExpansionTileItem buildingIconStep({
   bool? isIconToggled,
   String? mockupId,
   void Function(bool)? onIconToggle,
@@ -21,7 +21,7 @@ ExpansionTileBorderItem buildingIconStep({
   double? initialIconBottomPadding,
   double? initialIconTopPadding,
 }) {
-  return ExpansionTileBorderItem(
+  return ExpansionTileItem(
     title: const Text('Icon'),
     leading: const Icon(Icons.invert_colors_on_sharp),
     collapsedBorderColor: Colors.transparent,

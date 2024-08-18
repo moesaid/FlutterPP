@@ -28,8 +28,8 @@ class BuildInvoiceItem extends StatelessWidget {
                   ? Colors.black26
                   : Colors.white,
           padding: EdgeInsets.symmetric(
-            vertical: 4.0.sp,
-            horizontal: 10.sp,
+            vertical: 4.0.spa,
+            horizontal: 10.spa,
           ),
           child: Row(
             children: [
@@ -38,7 +38,7 @@ class BuildInvoiceItem extends StatelessWidget {
                 child: Text(
                   isHeader == true ? 'items'.capitalize! : item?.title ?? '',
                   style: TextStyle(
-                    fontSize: isHeader == true ? 6.sp : 4.5.sp,
+                    fontSize: isHeader == true ? 6.sp : 4.5.spa,
                     color: isHeader == true
                         ? Colors.white
                         : inVerceColor == true
@@ -58,7 +58,7 @@ class BuildInvoiceItem extends StatelessWidget {
                           ? 'qty'.capitalize!
                           : item?.quantity.toString() ?? '',
                       style: TextStyle(
-                        fontSize: isHeader == true ? 6.sp : 4.5.sp,
+                        fontSize: isHeader == true ? 6.sp : 4.5.spa,
                         color: isHeader == true
                             ? Colors.white
                             : inVerceColor == true
@@ -80,7 +80,7 @@ class BuildInvoiceItem extends StatelessWidget {
                           ? 'price'.capitalize!
                           : item?.price.toString() ?? '',
                       style: TextStyle(
-                        fontSize: isHeader == true ? 6.sp : 4.5.sp,
+                        fontSize: isHeader == true ? 6.sp : 4.5.spa,
                         color: isHeader == true
                             ? Colors.white
                             : inVerceColor == true
@@ -104,7 +104,7 @@ class BuildInvoiceItem extends StatelessWidget {
                               .toString()
                               .toPriceFormat(),
                       style: TextStyle(
-                        fontSize: isHeader == true ? 6.sp : 4.5.sp,
+                        fontSize: isHeader == true ? 6.sp : 4.5.spa,
                         color: isHeader == true
                             ? Colors.white
                             : inVerceColor == true
@@ -121,8 +121,8 @@ class BuildInvoiceItem extends StatelessWidget {
         ),
         if (onDeleted != null)
           Positioned(
-            top: 3.sp,
-            left: 1.sp,
+            top: 3.spa,
+            left: 1.spa,
             child: IconButton(
               onPressed: onDeleted,
               visualDensity: VisualDensity.compact,
@@ -131,7 +131,7 @@ class BuildInvoiceItem extends StatelessWidget {
               constraints: const BoxConstraints(),
               icon: Icon(
                 Icons.delete,
-                size: 7.sp,
+                size: 7.spa,
                 color: Get.theme.colorScheme.error,
               ),
             ),

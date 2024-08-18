@@ -9,7 +9,7 @@ import 'package:flutterpp/App/Views/Pages/Mockup/Widgets/Create/Sidebar/Widgets/
 import 'package:flutterpp/App/Views/Pages/Mockup/Widgets/build_sidebar_option.dart';
 import 'package:get/get.dart';
 
-ExpansionTileBorderItem buildBackgroundStep({
+ExpansionTileItem buildBackgroundStep({
   String? mockupId,
   Color? initialColor,
   GradientModel? activeGradient,
@@ -18,7 +18,7 @@ ExpansionTileBorderItem buildBackgroundStep({
   void Function(GradientModel, {bool? repeatForAll})? onGradiantChangedCallback,
   required BuildCreateMockupSidebarSelectedStateController controller,
 }) {
-  return ExpansionTileBorderItem(
+  return ExpansionTileItem(
     title: const Text('Background'),
     leading: const Icon(Icons.crop_original_rounded),
     collapsedBorderColor: Colors.transparent,

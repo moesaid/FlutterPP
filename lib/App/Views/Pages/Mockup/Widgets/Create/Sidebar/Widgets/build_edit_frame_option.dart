@@ -62,9 +62,9 @@ class _BuildBody extends StatelessWidget {
       child: Container(
         width: context.width,
         padding: EdgeInsets.only(
-          top: 12.sp,
-          left: 8.sp,
-          right: 8.sp,
+          top: 12.spa,
+          left: 8.spa,
+          right: 8.spa,
         ),
         child: SingleChildScrollView(
           child: Column(
@@ -74,19 +74,19 @@ class _BuildBody extends StatelessWidget {
               Text(
                 'change frame'.capitalize!,
                 style: TextStyle(
-                  fontSize: 8.sp,
+                  fontSize: 8.spa,
                   fontWeight: FontWeight.w600,
                 ),
               ),
               Text(
                 'change the frame of your mockup'.capitalize!,
                 style: TextStyle(
-                  fontSize: 5.sp,
+                  fontSize: 5.spa,
                   fontStyle: FontStyle.italic,
-                  color: Get.theme.colorScheme.onBackground.withOpacity(0.5),
+                  color: Get.theme.colorScheme.onSurface.withOpacity(0.5),
                 ),
               ),
-              Divider(height: 10.sp, thickness: 0.4),
+              Divider(height: 10.spa, thickness: 0.4),
               Obx(
                 () => _BuildDeviceList(
                   items: controller.allIOS,
@@ -97,7 +97,7 @@ class _BuildBody extends StatelessWidget {
                   selectedDevice: controller.selectedDevice,
                 ),
               ),
-              Divider(height: 20.sp),
+              Divider(height: 20.spa),
               Obx(
                 () => _BuildDeviceList(
                   items: controller.allAndroid,
@@ -108,7 +108,7 @@ class _BuildBody extends StatelessWidget {
                   selectedDevice: controller.selectedDevice,
                 ),
               ),
-              SizedBox(height: 10.sp),
+              SizedBox(height: 10.spa),
             ],
           ),
         ),
@@ -141,11 +141,11 @@ class _BuildDeviceList extends StatelessWidget {
       height: 35.h,
       child: ListView.separated(
         shrinkWrap: true,
-        padding: EdgeInsets.all(5.sp),
+        padding: EdgeInsets.all(5.spa),
         itemCount: items.length,
         scrollDirection: Axis.horizontal,
         separatorBuilder: (context, index) => SizedBox(
-          width: 5.sp,
+          width: 5.spa,
         ),
         itemBuilder: (BuildContext context, int index) {
           DeviceInfo device = items[index];
@@ -171,11 +171,11 @@ class _BuildDeviceList extends StatelessWidget {
                         ),
                       ),
                     ),
-                    SizedBox(height: 3.sp),
+                    SizedBox(height: 3.spa),
                     AnimatedDefaultTextStyle(
                       duration: const Duration(milliseconds: 200),
                       style: TextStyle(
-                        fontSize: 5.sp,
+                        fontSize: 5.spa,
                         fontWeight: FontWeight.w600,
                         color: selectedDevice?.name == device.name
                             ? Get.theme.colorScheme.secondary
@@ -184,14 +184,14 @@ class _BuildDeviceList extends StatelessWidget {
                       child: Row(
                         children: [
                           Text(device.name),
-                          SizedBox(width: 2.sp),
+                          SizedBox(width: 2.spa),
                           AnimatedOpacity(
                             duration: const Duration(milliseconds: 200),
                             opacity:
                                 selectedDevice?.name == device.name ? 1.0 : 0.0,
                             child: Icon(
                               Icons.check_circle,
-                              size: 6.sp,
+                              size: 6.spa,
                               color: Colors.green,
                             ),
                           )

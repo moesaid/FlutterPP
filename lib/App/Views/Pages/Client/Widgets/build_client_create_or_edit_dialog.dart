@@ -48,14 +48,14 @@ class BuildClientCreateOrEditDialog extends StatelessWidget {
               controlsBuilder: ((context, details) {
                 return Column(
                   children: [
-                    SizedBox(height: 4.sp),
+                    SizedBox(height: 4.spa),
                     Row(
                       children: [
                         if (_.currentStep != 1)
                           FilledButton(
                             onPressed: details.onStepContinue,
                             style: ButtonStyle(
-                              backgroundColor: MaterialStateProperty.all(
+                              backgroundColor: WidgetStateProperty.all(
                                 Get.theme.colorScheme.secondaryContainer,
                               ),
                             ),

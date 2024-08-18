@@ -38,7 +38,7 @@ class BuildInvoiceCompanyInfo extends StatelessWidget {
           Text(
             companyName!.toUpperCase(),
             style: TextStyle(
-              fontSize: 6.sp,
+              fontSize: 6.spa,
               fontWeight: FontWeight.bold,
               color: inVerseColor == true ? Colors.white : Colors.black,
             ),
@@ -47,7 +47,7 @@ class BuildInvoiceCompanyInfo extends StatelessWidget {
           Text(
             ownerName!.capitalize!,
             style: TextStyle(
-              fontSize: 5.sp,
+              fontSize: 5.spa,
               color: inVerseColor == true
                   ? Colors.white.withOpacity(0.7)
                   : Colors.black87,
@@ -58,7 +58,7 @@ class BuildInvoiceCompanyInfo extends StatelessWidget {
             address!.capitalize!,
             textAlign: TextAlign.end,
             style: TextStyle(
-              fontSize: 5.sp,
+              fontSize: 5.spa,
               color: inVerseColor == true
                   ? Colors.white.withOpacity(0.7)
                   : Colors.black87,
@@ -69,7 +69,7 @@ class BuildInvoiceCompanyInfo extends StatelessWidget {
             '${city!.capitalize!}, ${state?.capitalize ?? ''} ${zip ?? ''}',
             textAlign: TextAlign.end,
             style: TextStyle(
-              fontSize: 5.sp,
+              fontSize: 5.spa,
               color: inVerseColor == true
                   ? Colors.white.withOpacity(0.7)
                   : Colors.black87,
@@ -80,19 +80,19 @@ class BuildInvoiceCompanyInfo extends StatelessWidget {
             country!.capitalize!,
             textAlign: TextAlign.end,
             style: TextStyle(
-              fontSize: 5.sp,
+              fontSize: 5.spa,
               color: inVerseColor == true
                   ? Colors.white.withOpacity(0.7)
                   : Colors.black87,
             ),
           ),
-        if (phone != null || email != null) SizedBox(height: 6.sp),
+        if (phone != null || email != null) SizedBox(height: 6.spa),
         if (phone != null)
           Text(
             phone!.toLowerCase(),
             textAlign: TextAlign.end,
             style: TextStyle(
-              fontSize: 6.sp,
+              fontSize: 6.spa,
               color: inVerseColor == true
                   ? Colors.white.withOpacity(0.7)
                   : Colors.black87,
@@ -103,7 +103,7 @@ class BuildInvoiceCompanyInfo extends StatelessWidget {
             email!.toLowerCase(),
             textAlign: TextAlign.end,
             style: TextStyle(
-              fontSize: 6.sp,
+              fontSize: 6.spa,
               color: inVerseColor == true
                   ? Colors.white.withOpacity(0.7)
                   : Colors.black87,

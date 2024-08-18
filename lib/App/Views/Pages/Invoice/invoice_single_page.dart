@@ -37,7 +37,7 @@ class InvoiceSinglePage extends GetView<InvoiceSingleController> {
                   Flexible(
                     flex: 3,
                     child: Container(
-                      padding: EdgeInsets.all(10.sp),
+                      padding: EdgeInsets.all(10.spa),
                       child: BuildInvoicePrintableBody(
                         invoice: controller.invoice,
                         team: controller.team,

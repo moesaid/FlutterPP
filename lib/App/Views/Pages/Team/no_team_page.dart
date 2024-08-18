@@ -31,7 +31,7 @@ class NoTeamPage extends GetView<NoTeamController> {
                       'kick off your journey with Flutter++ !',
                       style: Get.theme.textTheme.bodyLarge,
                     ),
-                    SizedBox(height: 1.sp),
+                    SizedBox(height: 1.spa),
                     Text(
                       'by creating a team or joining one !',
                       style: Get.theme.textTheme.bodyMedium,

@@ -19,7 +19,7 @@ class BuildProjectSingleFilesSidebar extends StatelessWidget {
     return Flexible(
       flex: 1,
       child: Container(
-        padding: EdgeInsets.all(5.sp),
+        padding: EdgeInsets.all(5.spa),
         decoration: BoxDecoration(
           border: Border(
             left: BorderSide(
@@ -35,7 +35,7 @@ class BuildProjectSingleFilesSidebar extends StatelessWidget {
                 shrinkWrap: true,
                 children: [
                   Container(
-                    padding: EdgeInsets.all(2.sp),
+                    padding: EdgeInsets.all(2.spa),
                     width: context.width * 0.18,
                     child: DashedCircularProgressBar.aspectRatio(
                       aspectRatio: 1,
@@ -55,7 +55,7 @@ class BuildProjectSingleFilesSidebar extends StatelessWidget {
                               ? '0%'
                               : '${controller.usedPercentage.toStringAsFixed(2)}%',
                           style: TextStyle(
-                            fontSize: 10.sp,
+                            fontSize: 10.spa,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
@@ -71,7 +71,7 @@ class BuildProjectSingleFilesSidebar extends StatelessWidget {
                           Text(
                             'used Storage'.capitalize!,
                             style: Get.textTheme.bodyMedium?.copyWith(
-                              color: Get.theme.colorScheme.onBackground
+                              color: Get.theme.colorScheme.onSurface
                                   .withOpacity(0.4),
                             ),
                           ),
@@ -88,7 +88,7 @@ class BuildProjectSingleFilesSidebar extends StatelessWidget {
                           Text(
                             'total Storage'.capitalize!,
                             style: Get.textTheme.bodyMedium?.copyWith(
-                              color: Get.theme.colorScheme.onBackground
+                              color: Get.theme.colorScheme.onSurface
                                   .withOpacity(0.4),
                             ),
                           ),
@@ -113,21 +113,21 @@ class BuildProjectSingleFilesSidebar extends StatelessWidget {
                   title: 'media',
                   size: controller.mediaSize.toFileSize(),
                 ),
-                SizedBox(height: 2.sp),
+                SizedBox(height: 2.spa),
                 BuildProjectSingleFilesTypeWithSize(
                   icon: Icons.upload_file_rounded,
                   color: Colors.blueAccent,
                   title: 'documents',
                   size: controller.documentsSize.toFileSize(),
                 ),
-                SizedBox(height: 2.sp),
+                SizedBox(height: 2.spa),
                 BuildProjectSingleFilesTypeWithSize(
                   icon: Icons.folder_zip_rounded,
                   color: Colors.redAccent,
                   title: 'compressed',
                   size: controller.compressedSize.toFileSize(),
                 ),
-                SizedBox(height: 2.sp),
+                SizedBox(height: 2.spa),
                 BuildProjectSingleFilesTypeWithSize(
                   icon: Icons.follow_the_signs_rounded,
                   color: Colors.orangeAccent,

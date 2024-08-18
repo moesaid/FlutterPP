@@ -30,7 +30,7 @@ class BuildCreateOrEditSheet extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             Container(
-              padding: EdgeInsets.all(8.0.sp),
+              padding: EdgeInsets.all(8.0.spa),
               decoration: BoxDecoration(
                 color: Get.theme.colorScheme.primaryContainer,
                 border: Border(
@@ -53,9 +53,9 @@ class BuildCreateOrEditSheet extends StatelessWidget {
                         ? controller.deleteModel(controller.tempModel.id ?? '')
                         : controller.resetTempModel(),
                     style: ButtonStyle(
-                      backgroundColor: MaterialStateProperty.all(
+                      backgroundColor: WidgetStateProperty.all(
                         controller.tempModel.id == null
-                            ? Get.theme.colorScheme.background
+                            ? Get.theme.colorScheme.surface
                             : Get.theme.colorScheme.errorContainer,
                       ),
                     ),
@@ -65,7 +65,7 @@ class BuildCreateOrEditSheet extends StatelessWidget {
                           : 'delete'.capitalize!,
                     ),
                   ),
-                  SizedBox(width: 5.sp),
+                  SizedBox(width: 5.spa),
                   FilledButton(
                     onPressed: () {
                       // validate the form
@@ -83,11 +83,11 @@ class BuildCreateOrEditSheet extends StatelessWidget {
             Expanded(
               child: SingleChildScrollView(
                 child: Padding(
-                  padding: EdgeInsets.all(8.0.sp),
+                  padding: EdgeInsets.all(8.0.spa),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      SizedBox(height: 10.sp),
+                      SizedBox(height: 10.spa),
                       Row(
                         children: [
                           Expanded(
@@ -109,10 +109,10 @@ class BuildCreateOrEditSheet extends StatelessWidget {
                               },
                             ),
                           ),
-                          SizedBox(width: 4.sp),
+                          SizedBox(width: 4.spa),
                           SizedBox(
-                            width: 20.sp,
-                            height: 16.sp,
+                            width: 20.spa,
+                            height: 16.spa,
                             child: BuildPickColor(
                               controllerTag: 'tempModel',
                               initialColor: ColorHelper.hexToColor(
@@ -130,20 +130,20 @@ class BuildCreateOrEditSheet extends StatelessWidget {
                           ),
                         ],
                       ),
-                      SizedBox(height: 2.sp),
+                      SizedBox(height: 2.spa),
                       Obx(
                         () => Text(
                           '${controller.tempModel.modelName?.toPascalCase() ?? '_'}Model',
                           style: Theme.of(context).textTheme.labelMedium,
                         ),
                       ),
-                      // Divider(height: 20.sp, thickness: 0.2),
-                      SizedBox(height: 10.sp),
+                      // Divider(height: 20.spa, thickness: 0.2),
+                      SizedBox(height: 10.spa),
                       Text(
                         'options'.capitalize!,
                         style: Theme.of(context).textTheme.titleSmall,
                       ),
-                      SizedBox(height: 4.sp),
+                      SizedBox(height: 4.spa),
                       FormBuilderCheckbox(
                         name: 'isCrud',
                         title: const Text('enable CRUD pages and controllers'),
@@ -157,9 +157,9 @@ class BuildCreateOrEditSheet extends StatelessWidget {
                           );
                         },
                       ),
-                      Divider(height: 20.sp, thickness: 0.2),
+                      Divider(height: 20.spa, thickness: 0.2),
                       BuildAddRelationshipSection(controller: controller),
-                      Divider(height: 20.sp, thickness: 0.2),
+                      Divider(height: 20.spa, thickness: 0.2),
                       BuildAddPropertiesSection(controller: controller),
                     ],
                   ),
@@ -219,14 +219,14 @@ class BuildAddPropertiesSection extends StatelessWidget {
                     'Add Property',
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
-                      fontSize: 4.sp,
+                      fontSize: 4.spa,
                       letterSpacing: 1,
                     ),
                   ),
                 ),
               ],
             ),
-            SizedBox(height: 4.sp),
+            SizedBox(height: 4.spa),
             Column(
               children: [
                 if (controller.tempModel.properties != null)
@@ -245,7 +245,7 @@ class BuildAddPropertiesSection extends StatelessWidget {
                         return ListTile(
                           title: Text(
                             property.name ?? 'Property',
-                            style: TextStyle(fontSize: 4.sp),
+                            style: TextStyle(fontSize: 4.spa),
                           ),
                           trailing: Row(
                             mainAxisSize: MainAxisSize.min,
@@ -256,12 +256,13 @@ class BuildAddPropertiesSection extends StatelessWidget {
                                     property.type?.color.withOpacity(0.1),
                                 textColor: property.type?.color,
                                 textStyle: TextStyle(
-                                  fontSize: 3.5.sp,
+                                  fontSize: 3.5.spa,
                                   color: property.type?.color,
                                 ),
-                                padding: EdgeInsets.symmetric(horizontal: 3.sp),
+                                padding:
+                                    EdgeInsets.symmetric(horizontal: 3.spa),
                               ),
-                              SizedBox(width: 5.sp),
+                              SizedBox(width: 5.spa),
                               IconButton(
                                 onPressed: () {
                                   controller
@@ -269,7 +270,7 @@ class BuildAddPropertiesSection extends StatelessWidget {
                                 },
                                 icon: Icon(
                                   Icons.close,
-                                  size: 4.sp,
+                                  size: 4.spa,
                                   color: Get.theme.colorScheme.error,
                                 ),
                               ),
@@ -322,7 +323,7 @@ class BuildAddPropertyDialog extends StatelessWidget {
               'Add Property',
               style: Theme.of(context).textTheme.titleMedium,
             ),
-            SizedBox(height: 10.sp),
+            SizedBox(height: 10.spa),
             Column(
               children: [
                 FormBuilderTextField(
@@ -332,7 +333,7 @@ class BuildAddPropertyDialog extends StatelessWidget {
                     hintText: 'Enter property name',
                   ),
                 ),
-                SizedBox(height: 5.sp),
+                SizedBox(height: 5.spa),
                 FormBuilderDropdown(
                   name: 'type',
                   decoration: const InputDecoration(
@@ -347,7 +348,7 @@ class BuildAddPropertyDialog extends StatelessWidget {
                       )
                       .toList(),
                 ),
-                SizedBox(height: 5.sp),
+                SizedBox(height: 5.spa),
                 if (relations != null && relations!.isNotEmpty)
                   FormBuilderDropdown(
                     name: 'relation_name',
@@ -364,7 +365,7 @@ class BuildAddPropertyDialog extends StatelessWidget {
                         )
                         .toList(),
                   ),
-                SizedBox(height: 5.sp),
+                SizedBox(height: 5.spa),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
@@ -430,25 +431,25 @@ class BuildAddPropertyDialog extends StatelessWidget {
                           'Add',
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
-                            fontSize: 4.sp,
+                            fontSize: 4.spa,
                             letterSpacing: 1,
                           ),
                         ),
                       ),
                     ),
-                    SizedBox(width: 5.sp),
+                    SizedBox(width: 5.spa),
                     ElevatedButton(
                       onPressed: () {
                         Get.back();
                       },
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: Get.theme.colorScheme.background,
+                        backgroundColor: Get.theme.colorScheme.surface,
                       ),
                       child: Text(
                         'Cancel',
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
-                          fontSize: 4.sp,
+                          fontSize: 4.spa,
                           letterSpacing: 1,
                         ),
                       ),
@@ -522,38 +523,38 @@ class BuildAddRelationshipSection extends StatelessWidget {
                 'Add Relationship',
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
-                  fontSize: 4.sp,
+                  fontSize: 4.spa,
                   letterSpacing: 1,
                 ),
               ),
             ),
           ],
         ),
-        SizedBox(height: 4.sp),
+        SizedBox(height: 4.spa),
         Obx(
           () => SizedBox(
-            height: 10.sp,
+            height: 10.spa,
             width: double.infinity,
             child: ListView.separated(
               itemCount: controller.tempModel.relations?.length ?? 0,
               scrollDirection: Axis.horizontal,
               separatorBuilder: (BuildContext context, int index) {
-                return SizedBox(width: 2.sp);
+                return SizedBox(width: 2.spa);
               },
               itemBuilder: (BuildContext context, int index) {
                 String? item = controller.tempModel.relations?[index].name;
                 return Badge(
                   backgroundColor: Get.theme.colorScheme.secondaryContainer,
-                  largeSize: 10.sp,
+                  largeSize: 10.spa,
                   padding: EdgeInsets.symmetric(
-                    horizontal: 4.sp,
+                    horizontal: 4.spa,
                     vertical: 0,
                   ),
                   textColor: Colors.white,
                   label: Row(
                     children: [
                       Text(item != null ? '${item.capitalize}Model' : ''),
-                      SizedBox(width: 2.sp),
+                      SizedBox(width: 2.spa),
                       InkWell(
                         onTap: () {
                           controller.updateTempModel(
@@ -565,7 +566,7 @@ class BuildAddRelationshipSection extends StatelessWidget {
                         },
                         child: Icon(
                           Icons.close,
-                          size: 4.sp,
+                          size: 4.spa,
                         ),
                       ),
                     ],
@@ -601,7 +602,7 @@ class BuildAddRelationshipModel extends StatelessWidget {
             'Add Relationship',
             style: Theme.of(context).textTheme.titleMedium,
           ),
-          SizedBox(height: 10.sp),
+          SizedBox(height: 10.spa),
           Column(
             children: [
               FormBuilder(
@@ -620,7 +621,7 @@ class BuildAddRelationshipModel extends StatelessWidget {
                   ],
                 ),
               ),
-              SizedBox(height: 5.sp),
+              SizedBox(height: 5.spa),
               Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
@@ -638,25 +639,25 @@ class BuildAddRelationshipModel extends StatelessWidget {
                         'Add',
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
-                          fontSize: 4.sp,
+                          fontSize: 4.spa,
                           letterSpacing: 1,
                         ),
                       ),
                     ),
                   ),
-                  SizedBox(width: 5.sp),
+                  SizedBox(width: 5.spa),
                   ElevatedButton(
                     onPressed: () {
                       Get.back();
                     },
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: Get.theme.colorScheme.background,
+                      backgroundColor: Get.theme.colorScheme.surface,
                     ),
                     child: Text(
                       'Cancel',
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
-                        fontSize: 4.sp,
+                        fontSize: 4.spa,
                         letterSpacing: 1,
                       ),
                     ),

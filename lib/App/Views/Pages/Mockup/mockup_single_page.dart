@@ -37,7 +37,7 @@ class MockupSinglePage extends GetView<MockupSingleController> {
                       bottom: 0,
                       right: 0,
                       child: Container(
-                        padding: EdgeInsets.all(10.sp),
+                        padding: EdgeInsets.all(10.spa),
                         width: 300,
                         decoration: BoxDecoration(
                           gradient: LinearGradient(
@@ -70,7 +70,7 @@ class MockupSinglePage extends GetView<MockupSingleController> {
                               child: ElevatedButton(
                                 style: ElevatedButton.styleFrom(
                                   backgroundColor:
-                                      Get.theme.colorScheme.background,
+                                      Get.theme.colorScheme.surface,
                                 ),
                                 onPressed: () => controller.export(),
                                 child: Text('export'.capitalize!),
@@ -272,7 +272,7 @@ class BuildMockupSinglePageBuddy extends StatelessWidget {
     return Positioned.fill(
       child: Container(
         color: Colors.black26,
-        padding: EdgeInsets.all(10.sp),
+        padding: EdgeInsets.all(10.spa),
         child: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -289,10 +289,10 @@ class BuildMockupSinglePageBuddy extends StatelessWidget {
                           shrinkWrap: true,
                           itemCount: controller.mockup.jsonData!.length,
                           padding: EdgeInsets.only(
-                            right: 2.sp,
-                            left: 2.sp,
-                            top: 2.sp,
-                            bottom: 2.sp,
+                            right: 2.spa,
+                            left: 2.spa,
+                            top: 2.spa,
+                            bottom: 2.spa,
                           ),
                           itemBuilder: (_, int i) {
                             TemplateConfigModel config =
@@ -315,7 +315,7 @@ class BuildMockupSinglePageBuddy extends StatelessWidget {
                             );
                           },
                           separatorBuilder: (_, __) => SizedBox(
-                            width: 1.sp,
+                            width: 1.spa,
                           ),
                         ),
                       ),
@@ -338,7 +338,7 @@ class BuildMockupSinglePageBuddy extends StatelessWidget {
                           ),
                         ),
                       ),
-                      SizedBox(width: 140.sp),
+                      SizedBox(width: 140.spa),
                     ],
                   ),
                 ),

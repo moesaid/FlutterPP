@@ -20,7 +20,7 @@ class BuildClientIndexGrid extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListView.builder(
       itemCount: controller.clients.length,
-      padding: EdgeInsets.all(3.sp),
+      padding: EdgeInsets.all(3.spa),
       itemBuilder: (_, int index) {
         ClientModel item = controller.clients[index];
         return Card(
@@ -28,8 +28,8 @@ class BuildClientIndexGrid extends StatelessWidget {
           color: Get.theme.colorScheme.primaryContainer,
           child: Padding(
             padding: EdgeInsets.symmetric(
-              horizontal: 3.sp,
-              vertical: 0.sp,
+              horizontal: 3.spa,
+              vertical: 0.spa,
             ),
             child: Row(
               children: [
@@ -63,20 +63,20 @@ class BuildClientIndexGrid extends StatelessWidget {
                   item.country ?? '',
                   style: Get.textTheme.bodyMedium,
                 ),
-                SizedBox(width: 5.sp),
+                SizedBox(width: 5.spa),
                 Badge(
                   label: Text(
                     item.currency?.toUpperCase() ?? 'usd'.toUpperCase(),
                   ),
                 ),
                 SizedBox(
-                  height: 10.sp,
-                  width: 20.sp,
+                  height: 10.spa,
+                  width: 20.spa,
                   child: const VerticalDivider(),
                 ),
                 FilledButton(
                   style: ButtonStyle(
-                    backgroundColor: MaterialStateProperty.all(
+                    backgroundColor: WidgetStateProperty.all(
                       Get.theme.colorScheme.secondaryContainer,
                     ),
                   ),

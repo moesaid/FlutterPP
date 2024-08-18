@@ -22,13 +22,13 @@ class SplashPage extends GetView<SplashController> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    BuildLogo(size: 30.sp),
+                    BuildLogo(size: 30.spa),
                   ],
                 ),
               ),
               if (controller.version.isNotEmpty)
                 Positioned(
-                  bottom: 10.sp,
+                  bottom: 10.spa,
                   child: Column(
                     children: [
                       SizedBox(
@@ -36,7 +36,7 @@ class SplashPage extends GetView<SplashController> {
                         height: context.width * 0.015,
                         child: const CircularProgressIndicator(strokeWidth: 2),
                       ),
-                      SizedBox(height: 5.sp),
+                      SizedBox(height: 5.spa),
                       Text(controller.version),
                     ],
                   ),

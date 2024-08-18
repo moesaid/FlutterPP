@@ -13,7 +13,7 @@ class BuildInvoiceOwnerSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.all(10.sp),
+      padding: EdgeInsets.all(10.spa),
       width: double.infinity,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.end,
@@ -21,12 +21,12 @@ class BuildInvoiceOwnerSection extends StatelessWidget {
           Text(
             'INVOICE',
             style: TextStyle(
-              fontSize: 14.sp,
+              fontSize: 14.spa,
               fontWeight: FontWeight.bold,
               color: Colors.black,
             ),
           ),
-          SizedBox(height: 2.sp),
+          SizedBox(height: 2.spa),
           BuildInvoiceCompanyInfo(
             crossAxisAlignment: CrossAxisAlignment.end,
             companyName: team.name,

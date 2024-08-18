@@ -20,11 +20,11 @@ class BuildDashboardProjectSection extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text('projects'.capitalize!),
-        SizedBox(height: 3.sp),
+        SizedBox(height: 3.spa),
         Row(
           children: [
             BuildDashboardCreateProject(controller: controller),
-            SizedBox(width: 5.sp),
+            SizedBox(width: 5.spa),
             Expanded(
               child: SizedBox(
                 height: 180,
@@ -32,7 +32,7 @@ class BuildDashboardProjectSection extends StatelessWidget {
                   scrollDirection: Axis.horizontal,
                   itemCount: controller.projects.length,
                   separatorBuilder: (context, index) => SizedBox(
-                    width: 5.sp,
+                    width: 5.spa,
                   ),
                   itemBuilder: (context, index) {
                     ProjectModel item = controller.projects[index];

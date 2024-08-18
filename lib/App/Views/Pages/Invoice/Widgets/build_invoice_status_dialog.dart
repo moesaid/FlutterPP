@@ -13,15 +13,15 @@ class BuildInvoiceStatusDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BuildDefultDialog(
-      height: 40.sp,
+      height: 40.spa,
       width: 200,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const Text('Change Status'),
-          SizedBox(height: 5.sp),
+          SizedBox(height: 5.spa),
           SizedBox(
-            height: 10.sp,
+            height: 10.spa,
             child: ListView.separated(
               shrinkWrap: true,
               scrollDirection: Axis.horizontal,
@@ -31,7 +31,7 @@ class BuildInvoiceStatusDialog extends StatelessWidget {
                 'paid',
               ].length,
               separatorBuilder: (_, __) {
-                return SizedBox(width: 2.sp);
+                return SizedBox(width: 2.spa);
               },
               itemBuilder: (_, index) {
                 String status = [
@@ -43,7 +43,7 @@ class BuildInvoiceStatusDialog extends StatelessWidget {
                   onTap: () => onStatusChanged?.call(status),
                   child: Badge(
                     label: Text(status),
-                    padding: EdgeInsets.symmetric(horizontal: 3.sp),
+                    padding: EdgeInsets.symmetric(horizontal: 3.spa),
                     textColor: InvoiceHelper.getStatusColor(status),
                     backgroundColor:
                         InvoiceHelper.getStatusColor(status).withOpacity(0.1),

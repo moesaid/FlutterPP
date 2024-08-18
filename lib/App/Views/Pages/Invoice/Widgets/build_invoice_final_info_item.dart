@@ -21,9 +21,9 @@ class BuildInvoiceFinalInfoItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.only(
-        right: 10.sp,
-        top: 5.sp,
-        bottom: 5.sp,
+        right: 10.spa,
+        top: 5.spa,
+        bottom: 5.spa,
       ),
       width: context.width * 0.35,
       decoration: BoxDecoration(
@@ -52,7 +52,7 @@ class BuildInvoiceFinalInfoItem extends StatelessWidget {
                             ? title?.toUpperCase() ?? ''
                             : title?.capitalize ?? '',
                         style: TextStyle(
-                          fontSize: 5.sp,
+                          fontSize: 5.spa,
                           color: Colors.black,
                           fontWeight: FontWeight.bold,
                         ),
@@ -61,7 +61,7 @@ class BuildInvoiceFinalInfoItem extends StatelessWidget {
                   ],
                 ),
               ),
-              SizedBox(width: 10.sp),
+              SizedBox(width: 10.spa),
               Expanded(
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.end,
@@ -70,7 +70,7 @@ class BuildInvoiceFinalInfoItem extends StatelessWidget {
                       child: Text(
                         value ?? '',
                         style: TextStyle(
-                          fontSize: 5.sp,
+                          fontSize: 5.spa,
                           color: Colors.black,
                           fontWeight: isAmount == true ? FontWeight.bold : null,
                         ),
@@ -94,7 +94,7 @@ class BuildInvoiceFinalInfoItem extends StatelessWidget {
                         child: Text(
                           'discount:'.capitalize!,
                           style: TextStyle(
-                            fontSize: 5.sp,
+                            fontSize: 5.spa,
                             color: Colors.green,
                           ),
                         ),
@@ -102,7 +102,7 @@ class BuildInvoiceFinalInfoItem extends StatelessWidget {
                     ],
                   ),
                 ),
-                SizedBox(width: 10.sp),
+                SizedBox(width: 10.spa),
                 Expanded(
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.end,
@@ -111,7 +111,7 @@ class BuildInvoiceFinalInfoItem extends StatelessWidget {
                         child: Text(
                           discountValue ?? '',
                           style: TextStyle(
-                            fontSize: 5.sp,
+                            fontSize: 5.spa,
                             color: Colors.green,
                           ),
                         ),
@@ -134,7 +134,7 @@ class BuildInvoiceFinalInfoItem extends StatelessWidget {
                         child: Text(
                           'tax:'.capitalize!,
                           style: TextStyle(
-                            fontSize: 5.sp,
+                            fontSize: 5.spa,
                             color: Colors.red,
                           ),
                         ),
@@ -142,7 +142,7 @@ class BuildInvoiceFinalInfoItem extends StatelessWidget {
                     ],
                   ),
                 ),
-                SizedBox(width: 10.sp),
+                SizedBox(width: 10.spa),
                 Expanded(
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.end,
@@ -151,7 +151,7 @@ class BuildInvoiceFinalInfoItem extends StatelessWidget {
                         child: Text(
                           taxValue ?? '',
                           style: TextStyle(
-                            fontSize: 5.sp,
+                            fontSize: 5.spa,
                             color: Colors.red,
                           ),
                         ),

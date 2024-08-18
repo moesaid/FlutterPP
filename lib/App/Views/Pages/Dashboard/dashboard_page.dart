@@ -27,9 +27,9 @@ class DashboardPage extends GetView<DashboardController> {
               child: Container(
                 width: double.infinity,
                 padding: EdgeInsets.only(
-                  left: 5.sp,
-                  right: 7.sp,
-                  top: 5.sp,
+                  left: 5.spa,
+                  right: 7.spa,
+                  top: 5.spa,
                 ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -42,7 +42,7 @@ class DashboardPage extends GetView<DashboardController> {
                         fontWeight: FontWeight.w600,
                       ),
                     ),
-                    SizedBox(height: 1.sp),
+                    SizedBox(height: 1.spa),
                     Text(
                       'welcome to the mysterious realm of limitless potential, where blank pages eagerly await your unique imprint. 🚀',
                       style: TextStyle(
@@ -50,7 +50,7 @@ class DashboardPage extends GetView<DashboardController> {
                         fontWeight: FontWeight.w300,
                       ),
                     ),
-                    SizedBox(height: 10.sp),
+                    SizedBox(height: 10.spa),
                     BuildDashboardChartSection(
                       projectsCount: controller.projects.length,
                       teamsCount: controller.teamMembers.length,
@@ -59,7 +59,7 @@ class DashboardPage extends GetView<DashboardController> {
                       invoices: controller.invoices,
                       onMorePressed: controller.navigateToInvoiceIndex,
                     ),
-                    SizedBox(height: 10.sp),
+                    SizedBox(height: 10.spa),
                     BuildDashboardProjectSection(controller: controller),
                   ],
                 ),
@@ -91,14 +91,14 @@ class BuildDashboardChartSection extends StatelessWidget {
     return Row(
       children: [
         const BuildDashboardEnvCheck(),
-        SizedBox(width: 5.sp),
+        SizedBox(width: 5.spa),
         Expanded(
           child: Column(
             children: [
               Row(
                 children: [
                   const BuildDashboardVersionDisplay(),
-                  SizedBox(width: 5.sp),
+                  SizedBox(width: 5.spa),
                   Expanded(
                     child: BuildDashboardChart(
                       invoices: invoices,
@@ -107,7 +107,7 @@ class BuildDashboardChartSection extends StatelessWidget {
                   ),
                 ],
               ),
-              SizedBox(height: 5.sp),
+              SizedBox(height: 5.spa),
               SizedBox(
                 height: context.height * 0.15,
                 child: GridView(
@@ -115,8 +115,8 @@ class BuildDashboardChartSection extends StatelessWidget {
                   physics: const NeverScrollableScrollPhysics(),
                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 4,
-                    crossAxisSpacing: 5.sp,
-                    mainAxisSpacing: 5.sp,
+                    crossAxisSpacing: 5.spa,
+                    mainAxisSpacing: 5.spa,
                     mainAxisExtent: context.height * 0.15,
                   ),
                   children: [

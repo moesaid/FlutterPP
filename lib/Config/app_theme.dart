@@ -90,8 +90,8 @@ class AppTheme {
         color: Colors.grey.shade800,
       ),
       switchTheme: SwitchThemeData(
-        thumbColor: MaterialStateProperty.all(Colors.black38),
-        trackColor: MaterialStateProperty.all(Colors.black),
+        thumbColor: WidgetStateProperty.all(Colors.black38),
+        trackColor: WidgetStateProperty.all(Colors.black),
       ),
       navigationRailTheme: NavigationRailThemeData(
         backgroundColor: lightColors['background'],
@@ -242,13 +242,13 @@ class AppTheme {
           ),
         ),
         menuStyle: MenuStyle(
-          padding: MaterialStateProperty.all(
+          padding: WidgetStateProperty.all(
             const EdgeInsets.symmetric(
               vertical: 8,
               horizontal: 16,
             ),
           ),
-          backgroundColor: MaterialStateProperty.all(
+          backgroundColor: WidgetStateProperty.all(
             Colors.black12,
           ),
         ),
@@ -338,8 +338,8 @@ class AppTheme {
         color: Colors.grey.shade800,
       ),
       switchTheme: SwitchThemeData(
-        thumbColor: MaterialStateProperty.all(Colors.white38),
-        trackColor: MaterialStateProperty.all(Colors.white10),
+        thumbColor: WidgetStateProperty.all(Colors.white38),
+        trackColor: WidgetStateProperty.all(Colors.white10),
       ),
       navigationRailTheme: NavigationRailThemeData(
         backgroundColor: darkColors['background'],
@@ -573,13 +573,13 @@ class AppTheme {
           ),
         ),
         menuStyle: MenuStyle(
-          padding: MaterialStateProperty.all(
+          padding: WidgetStateProperty.all(
             const EdgeInsets.symmetric(
               vertical: 8,
               horizontal: 16,
             ),
           ),
-          backgroundColor: MaterialStateProperty.all(
+          backgroundColor: WidgetStateProperty.all(
             Colors.white10,
           ),
         ),

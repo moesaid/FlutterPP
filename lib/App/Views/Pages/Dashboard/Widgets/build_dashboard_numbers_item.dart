@@ -23,9 +23,9 @@ class BuildDashboardNumbersItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.all(4.sp),
+      padding: EdgeInsets.all(4.spa),
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(2.sp),
+        borderRadius: BorderRadius.circular(2.spa),
         color: Get.theme.colorScheme.primaryContainer,
         border: Border.all(
           width: 1,
@@ -41,7 +41,7 @@ class BuildDashboardNumbersItem extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Container(
-                  padding: EdgeInsets.all(2.5.sp),
+                  padding: EdgeInsets.all(2.5.spa),
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
                     gradient: LinearGradient(
@@ -55,7 +55,7 @@ class BuildDashboardNumbersItem extends StatelessWidget {
                     ),
                   ),
                   child: HeroIcon(
-                    size: 7.sp,
+                    size: 7.spa,
                     icon ?? HeroIcons.commandLine,
                     style: HeroIconStyle.solid,
                   ),
@@ -70,7 +70,7 @@ class BuildDashboardNumbersItem extends StatelessWidget {
                         style: TextStyle(
                           fontSize: context.width * 0.01,
                           fontWeight: FontWeight.w400,
-                          color: Get.theme.colorScheme.onBackground.withOpacity(
+                          color: Get.theme.colorScheme.onSurface.withOpacity(
                             0.3,
                           ),
                         ),

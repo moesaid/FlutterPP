@@ -54,15 +54,15 @@ class InvoiceIndexPage extends GetView<InvoiceIndexController> {
                 ),
                 Container(
                   margin: EdgeInsets.only(
-                    right: 10.0.sp,
-                    left: 10.0.sp,
-                    top: 20.sp,
+                    right: 10.0.spa,
+                    left: 10.0.spa,
+                    top: 20.spa,
                   ),
                   padding: EdgeInsets.only(
-                    left: 5.0.sp,
-                    right: 5.sp,
-                    top: 5.sp,
-                    bottom: 5.sp,
+                    left: 5.0.spa,
+                    right: 5.spa,
+                    top: 5.spa,
+                    bottom: 5.spa,
                   ),
                   decoration: BoxDecoration(
                     color: Get.theme.colorScheme.primaryContainer,
@@ -76,10 +76,10 @@ class InvoiceIndexPage extends GetView<InvoiceIndexController> {
                     isEmpty: controller.filteredInvoices.isEmpty,
                     title: 'No Invoices Found',
                     child: ListView.separated(
-                      padding: EdgeInsets.all(10.sp),
+                      padding: EdgeInsets.all(10.spa),
                       itemCount: controller.filteredInvoices.length,
                       separatorBuilder: (_, __) {
-                        return SizedBox(height: 5.sp);
+                        return SizedBox(height: 5.spa);
                       },
                       itemBuilder: (_, int index) {
                         InvoiceModel invoice =
@@ -90,7 +90,7 @@ class InvoiceIndexPage extends GetView<InvoiceIndexController> {
                             color: Get.theme.colorScheme.primaryContainer,
                             borderRadius: BorderRadius.circular(10),
                           ),
-                          padding: EdgeInsets.all(5.sp),
+                          padding: EdgeInsets.all(5.spa),
                           child: BuildInvoiceBody(
                             onView: controller.viewInvoice,
                             onDelete: controller.deleteInvoice,

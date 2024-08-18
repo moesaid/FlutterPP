@@ -24,13 +24,13 @@ class BuildApiGenNode extends GetView<BuildApiGenNodeController> {
             alignment: Alignment.bottomCenter,
             children: [
               Container(
-                padding: EdgeInsets.only(bottom: 5.sp),
+                padding: EdgeInsets.only(bottom: 5.spa),
                 child: AnimatedContainer(
                   duration: const Duration(milliseconds: 200),
                   width: context.width * 0.25,
                   decoration: BoxDecoration(
                     color: Get.theme.colorScheme.primaryContainer,
-                    borderRadius: BorderRadius.circular(2.sp),
+                    borderRadius: BorderRadius.circular(2.spa),
                     border: Border.all(
                       color: _.isHovring
                           ? Get.theme.colorScheme.inversePrimary
@@ -66,7 +66,7 @@ class BuildApiGenNode extends GetView<BuildApiGenNodeController> {
                           color: Get.theme.colorScheme.secondary,
                         ),
                       ),
-                      child: Icon(Icons.add_rounded, size: 5.sp),
+                      child: Icon(Icons.add_rounded, size: 5.spa),
                     ),
                   ),
                 ),
@@ -179,7 +179,7 @@ class BuildApiGenFormTextItem extends StatelessWidget {
                   vertical: context.width * 0.008,
                   horizontal: context.width * 0.007,
                 ),
-                fillColor: Get.theme.colorScheme.background,
+                fillColor: Get.theme.colorScheme.surface,
                 focusedBorder: OutlineInputBorder(
                   borderSide: BorderSide(
                     color: Get.theme.colorScheme.inversePrimary,
@@ -230,14 +230,14 @@ class BuildApiGenFormDropdownItem extends StatelessWidget {
               isDense: true,
               name: title ?? '',
               initialValue: value,
-              dropdownColor: Get.theme.colorScheme.background,
+              dropdownColor: Get.theme.colorScheme.surface,
               style: TextStyle(fontSize: context.width * 0.01),
               decoration: InputDecoration(
                 contentPadding: EdgeInsets.symmetric(
                   vertical: context.width * 0.006,
                   horizontal: context.width * 0.007,
                 ),
-                fillColor: Get.theme.colorScheme.background,
+                fillColor: Get.theme.colorScheme.surface,
                 enabledBorder: const OutlineInputBorder(
                   borderSide: BorderSide(
                     color: Colors.transparent,

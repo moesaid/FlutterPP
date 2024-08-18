@@ -44,7 +44,7 @@ class BuildCodeGenFloatingButton extends StatelessWidget {
           ),
           child: Text('Create new Model'.capitalize!),
         ),
-        SizedBox(width: 4.sp),
+        SizedBox(width: 4.spa),
         FilledButton(
           onPressed: controller.models.isEmpty
               ? null
@@ -93,7 +93,7 @@ class BuildCodeGenBuildOption extends StatelessWidget {
               'Build options'.capitalize!,
               style: Get.theme.textTheme.titleLarge,
             ),
-            Divider(height: 16.sp),
+            Divider(height: 16.spa),
             FormBuilderSwitch(
               name: 'models',
               initialValue: true,
@@ -108,7 +108,7 @@ class BuildCodeGenBuildOption extends StatelessWidget {
                 ),
               ),
             ),
-            SizedBox(height: 2.sp),
+            SizedBox(height: 2.spa),
             FormBuilderSwitch(
               name: 'pages',
               initialValue: false,
@@ -125,7 +125,7 @@ class BuildCodeGenBuildOption extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const Text('Pages'),
-                  SizedBox(height: 2.sp),
+                  SizedBox(height: 2.spa),
                   Text(
                     'Note: This will generate pages for all the models \nand overwriting the existing pages'
                         .capitalize!,
@@ -134,7 +134,7 @@ class BuildCodeGenBuildOption extends StatelessWidget {
                 ],
               ),
             ),
-            SizedBox(height: 2.sp),
+            SizedBox(height: 2.spa),
             FormBuilderSwitch(
               name: 'routes',
               initialValue: false,
@@ -151,7 +151,7 @@ class BuildCodeGenBuildOption extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const Text('Routes'),
-                  SizedBox(height: 2.sp),
+                  SizedBox(height: 2.spa),
                   Text(
                     'Routes are always appended to the existing routes.'
                         .capitalize!,
@@ -160,7 +160,7 @@ class BuildCodeGenBuildOption extends StatelessWidget {
                 ],
               ),
             ),
-            SizedBox(height: 2.sp),
+            SizedBox(height: 2.spa),
             if (state == StateManegmentEnum.getx)
               FormBuilderSwitch(
                 name: 'controllers',
@@ -176,7 +176,7 @@ class BuildCodeGenBuildOption extends StatelessWidget {
                 ),
                 title: const Text('Controllers'),
               ),
-            if (state == StateManegmentEnum.getx) SizedBox(height: 2.sp),
+            if (state == StateManegmentEnum.getx) SizedBox(height: 2.spa),
             if (state == StateManegmentEnum.getx)
               FormBuilderSwitch(
                 name: 'bindings',
@@ -197,17 +197,17 @@ class BuildCodeGenBuildOption extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.end,
                       children: [
                         const Text('Bindings'),
-                        SizedBox(width: 2.sp),
+                        SizedBox(width: 2.spa),
                         Text(
                           '(recommended when adding controllers)',
                           style: TextStyle(
                             color: Get.theme.colorScheme.secondary,
-                            fontSize: 4.sp,
+                            fontSize: 4.spa,
                           ),
                         ),
                       ],
                     ),
-                    SizedBox(height: 2.sp),
+                    SizedBox(height: 2.spa),
                     Text(
                       'bindings are always appended to the existing bindings'
                           .capitalize!,
@@ -231,7 +231,7 @@ class BuildCodeGenBuildOption extends StatelessWidget {
                 ),
                 title: const Text('Blocs'),
               ),
-            if (state == StateManegmentEnum.bloc) SizedBox(height: 2.sp),
+            if (state == StateManegmentEnum.bloc) SizedBox(height: 2.spa),
             if (state == StateManegmentEnum.bloc)
               FormBuilderSwitch(
                 name: 'cubits',
@@ -247,7 +247,7 @@ class BuildCodeGenBuildOption extends StatelessWidget {
                 ),
                 title: const Text('Cubits'),
               ),
-            SizedBox(height: 10.sp),
+            SizedBox(height: 10.spa),
             Row(
               children: [
                 Expanded(

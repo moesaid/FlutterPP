@@ -19,7 +19,7 @@ class BuildSingleProjectHeader extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: context.width,
-      padding: EdgeInsets.all(10.sp),
+      padding: EdgeInsets.all(10.spa),
       decoration: BoxDecoration(
         gradient: LinearGradient(
           colors: [

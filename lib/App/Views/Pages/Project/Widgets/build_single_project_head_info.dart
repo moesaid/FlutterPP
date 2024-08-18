@@ -31,7 +31,7 @@ class BuildSingleProjectHeadInfo extends StatelessWidget {
             ColorHelper.hexToColor(controller.project.color2 ?? '#000000'),
           ],
         ),
-        SizedBox(width: 6.sp),
+        SizedBox(width: 6.spa),
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -42,18 +42,18 @@ class BuildSingleProjectHeadInfo extends StatelessWidget {
                   controller.project.title ?? '',
                   style: Get.textTheme.titleLarge,
                 ),
-                SizedBox(width: 2.sp),
+                SizedBox(width: 2.spa),
                 IconButton.filledTonal(
                   onPressed: () {
                     openEditProjectSheet(context);
                   },
                   style: ButtonStyle(
                     visualDensity: VisualDensity.compact,
-                    iconColor: MaterialStateProperty.all(
+                    iconColor: WidgetStateProperty.all(
                       Get.theme.colorScheme.onPrimaryContainer,
                     ),
-                    iconSize: MaterialStateProperty.all(5.sp),
-                    backgroundColor: MaterialStateProperty.all(
+                    iconSize: WidgetStateProperty.all(5.spa),
+                    backgroundColor: WidgetStateProperty.all(
                       Colors.transparent,
                     ),
                   ),
@@ -63,7 +63,7 @@ class BuildSingleProjectHeadInfo extends StatelessWidget {
                 ),
               ],
             ),
-            SizedBox(height: 1.sp),
+            SizedBox(height: 1.spa),
             SizedBox(
               width: context.width * 0.3,
               child: Text(
@@ -73,7 +73,7 @@ class BuildSingleProjectHeadInfo extends StatelessWidget {
                 style: Get.textTheme.bodySmall,
               ),
             ),
-            SizedBox(height: 1.sp),
+            SizedBox(height: 1.spa),
           ],
         ),
       ],
@@ -124,7 +124,7 @@ class BuildEditProject extends StatelessWidget {
             'description': controller.project.description,
           },
           child: Padding(
-            padding: EdgeInsets.all(8.0.sp),
+            padding: EdgeInsets.all(8.0.spa),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -151,14 +151,14 @@ class BuildEditProject extends StatelessWidget {
                     icon: _.activeIcon,
                   ),
                 ),
-                SizedBox(height: 8.sp),
+                SizedBox(height: 8.spa),
                 FormBuilderTextField(
                   name: 'title',
                   decoration: const InputDecoration(
                     labelText: 'Title',
                   ),
                 ),
-                SizedBox(height: 8.sp),
+                SizedBox(height: 8.spa),
                 FormBuilderTextField(
                   name: 'description',
                   decoration: const InputDecoration(
@@ -168,7 +168,7 @@ class BuildEditProject extends StatelessWidget {
                 const Spacer(),
                 const Divider(),
                 Container(
-                  padding: EdgeInsets.only(top: 5.sp),
+                  padding: EdgeInsets.only(top: 5.spa),
                   child: Row(
                     children: [
                       FilledButton(

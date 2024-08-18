@@ -22,16 +22,16 @@ class BuildProjectSingleFilesList extends StatelessWidget {
       itemCount: controller.searchResults.isNotEmpty
           ? controller.searchResults.length
           : controller.files.length,
-      padding: EdgeInsets.all(5.sp),
-      separatorBuilder: (_, __) => SizedBox(height: 2.sp),
+      padding: EdgeInsets.all(5.spa),
+      separatorBuilder: (_, __) => SizedBox(height: 2.spa),
       itemBuilder: (_, int index) {
         MediaModel file = controller.searchResults.isNotEmpty
             ? controller.searchResults[index]
             : controller.files[index];
         return Container(
           padding: EdgeInsets.symmetric(
-            vertical: 4.sp,
-            horizontal: 3.sp,
+            vertical: 4.spa,
+            horizontal: 3.spa,
           ),
           decoration: BoxDecoration(
             color: Get.theme.colorScheme.primaryContainer,
@@ -42,25 +42,25 @@ class BuildProjectSingleFilesList extends StatelessWidget {
             children: [
               Icon(
                 file.type?.getIcon() ?? 'default'.getIcon(),
-                size: 8.sp,
+                size: 8.spa,
                 color: Get.theme.colorScheme.secondary,
               ),
-              SizedBox(width: 2.sp),
+              SizedBox(width: 2.spa),
               Text(
                 file.fileName ?? '',
                 style: Get.textTheme.bodyMedium?.copyWith(
-                  fontSize: 4.5.sp,
+                  fontSize: 4.5.spa,
                 ),
               ),
               const Spacer(),
               Text(
                 file.size?.toFileSize() ?? '',
                 style: Get.textTheme.bodyMedium?.copyWith(
-                  fontSize: 5.sp,
-                  color: Get.theme.colorScheme.onBackground.withOpacity(0.4),
+                  fontSize: 5.spa,
+                  color: Get.theme.colorScheme.onSurface.withOpacity(0.4),
                 ),
               ),
-              SizedBox(width: 2.sp),
+              SizedBox(width: 2.spa),
               BuildCustomDropdown(
                 items: [
                   PopupMenuItem(

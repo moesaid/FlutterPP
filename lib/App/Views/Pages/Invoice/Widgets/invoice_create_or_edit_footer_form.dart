@@ -18,7 +18,7 @@ class InvoiceCreateOrEditFooterForm extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.all(8.sp),
+      padding: EdgeInsets.all(8.spa),
       child: FormBuilder(
         key: formFooterKey,
         autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -41,7 +41,7 @@ class InvoiceCreateOrEditFooterForm extends StatelessWidget {
                 ]),
               ),
             ),
-            SizedBox(height: 4.sp),
+            SizedBox(height: 4.spa),
             SizedBox(
               width: context.width * 0.2,
               child: FormBuilderTextField(

@@ -10,13 +10,13 @@ import 'package:flutterpp/App/Views/Pages/Mockup/Widgets/build_device_card.dart'
 import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
 
-ExpansionTileBorderItem buildLayoutStep({
+ExpansionTileItem buildLayoutStep({
   required BuildContext context,
   void Function(TemplateConfigModel)? onLayoutChanged,
   String? controllerTag,
   String? layoutName,
 }) {
-  return ExpansionTileBorderItem(
+  return ExpansionTileItem(
     title: const Text('Layout'),
     leading: const Icon(Icons.crop_free),
     collapsedBorderColor: Colors.transparent,
@@ -36,7 +36,7 @@ ExpansionTileBorderItem buildLayoutStep({
                 sheetPosition: SheetPosition.right,
                 footer: const SizedBox.shrink(),
                 header: Padding(
-                  padding: EdgeInsets.all(4.sp),
+                  padding: EdgeInsets.all(4.spa),
                   child: const Row(
                     children: [
                       Spacer(),
@@ -107,12 +107,12 @@ class BuildScreenLayoutsWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.all(5.sp),
+      padding: EdgeInsets.all(5.spa),
       child: GridView.builder(
-        padding: EdgeInsets.only(top: 5.sp),
+        padding: EdgeInsets.only(top: 5.spa),
         gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
-          crossAxisSpacing: 1.sp,
-          mainAxisSpacing: 1.sp,
+          crossAxisSpacing: 1.spa,
+          mainAxisSpacing: 1.spa,
           mainAxisExtent: 650,
           maxCrossAxisExtent: 350,
         ),

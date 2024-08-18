@@ -59,18 +59,19 @@ class VerifyOtpPage extends GetView<VerifyOtpController> {
                               SizedBox(
                                 width: Get.width,
                                 child: ElevatedButton(
-                                  onPressed: () {
-                                    if (formKey.currentState!
-                                        .saveAndValidate()) {
-                                      controller.verifyOtp(
-                                        formKey.currentState!.value,
-                                      );
+                                  onPressed: () async {
+                                    if (formKey.currentState
+                                            ?.saveAndValidate() ==
+                                        true) {
+                                      await controller.verifyOtp(
+                                          formKey.currentState?.value);
+                                      formKey.currentState?.reset();
                                     }
                                   },
                                   child: const Text('verify'),
                                 ),
                               ),
-                              SizedBox(height: 10.sp),
+                              SizedBox(height: 10.spa),
                               Row(
                                 children: [
                                   TextButton(
@@ -103,20 +104,20 @@ class VerifyOtpPage extends GetView<VerifyOtpController> {
                                           controller.sentCount.toString(),
                                           style: TextStyle(
                                             color: Colors.white,
-                                            fontSize: 4.sp,
+                                            fontSize: 4.spa,
                                           ),
                                         ),
                                       ),
                                     ),
                                 ],
                               ),
-                              SizedBox(height: 10.sp),
+                              SizedBox(height: 10.spa),
                               TextButton(
                                 onPressed: () => Get.back(),
                                 child: Text(
                                   'go back to login page',
                                   style: TextStyle(
-                                    color: Get.theme.colorScheme.onBackground,
+                                    color: Get.theme.colorScheme.onSurface,
                                   ),
                                 ),
                               )

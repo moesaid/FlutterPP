@@ -18,8 +18,8 @@ class BuildProjectSingleFilesTypeWithSize extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.symmetric(
-        vertical: 2.sp,
-        horizontal: 4.sp,
+        vertical: 2.spa,
+        horizontal: 4.spa,
       ),
       decoration: BoxDecoration(
         color:
@@ -30,10 +30,10 @@ class BuildProjectSingleFilesTypeWithSize extends StatelessWidget {
         children: [
           Icon(
             icon ?? Icons.folder,
-            size: 5.sp,
+            size: 5.spa,
             color: color,
           ),
-          SizedBox(width: 2.sp),
+          SizedBox(width: 2.spa),
           Text(
             title?.capitalize ?? 'Files',
             style: TextStyle(color: color),

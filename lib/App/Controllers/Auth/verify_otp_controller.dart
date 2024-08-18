@@ -23,7 +23,9 @@ class VerifyOtpController extends GetxController {
     super.onInit();
   }
 
-  Future<void> verifyOtp(Map<String, dynamic> value) async {
+  Future<void> verifyOtp(Map<String, dynamic>? value) async {
+    if (value == null) return;
+
     try {
       AuthResponse? res = await Get.showOverlay(
         asyncFunction: () async {

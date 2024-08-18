@@ -27,10 +27,10 @@ class BuildDashboardEnvCheck extends GetView<DashboardEnvCheckController> {
             gradientColors: [Colors.transparent, Get.theme.colorScheme.primary],
             child: Container(
               padding: EdgeInsets.symmetric(
-                horizontal: 4.sp,
+                horizontal: 4.spa,
                 vertical: controller.checkEnvModel.dartInstalled != null
                     ? 4.sp
-                    : 2.sp,
+                    : 2.spa,
               ),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(5),
@@ -70,13 +70,13 @@ class BuildEnvCheckEmptyState extends StatelessWidget {
           'Flutter Health Check',
           style: Get.textTheme.titleLarge,
         ),
-        SizedBox(height: 2.sp),
+        SizedBox(height: 2.spa),
         Text(
           'Let\'s Peek at Your Setup: Making Sure Your Dev Playground Is a Code Carnival!',
           textAlign: TextAlign.center,
           style: Get.textTheme.bodySmall,
         ),
-        SizedBox(height: 8.sp),
+        SizedBox(height: 8.spa),
         ElevatedButton(
           onPressed: () => controller.recheckEnv(),
           onHover: (value) => controller.updateIsHovring(value),
@@ -137,8 +137,8 @@ class BuildEnvCheckDataState extends StatelessWidget {
             Expanded(
               child: Container(
                 padding: EdgeInsets.symmetric(
-                  horizontal: 6.sp,
-                  vertical: 3.sp,
+                  horizontal: 6.spa,
+                  vertical: 3.spa,
                 ),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(5),
@@ -156,13 +156,13 @@ class BuildEnvCheckDataState extends StatelessWidget {
                           child: Text(
                             'flutter installed'.capitalize!,
                             style: Get.textTheme.titleSmall?.copyWith(
-                              fontSize: 5.sp,
+                              fontSize: 5.spa,
                             ),
                           ),
                         ),
-                        SizedBox(width: 2.sp),
+                        SizedBox(width: 2.spa),
                         Icon(
-                          size: 7.sp,
+                          size: 7.spa,
                           controller.checkEnvModel.flutterInstalled == true
                               ? Icons.check_circle
                               : Icons.cancel,
@@ -174,25 +174,25 @@ class BuildEnvCheckDataState extends StatelessWidget {
                       ],
                     ),
                     if (controller.checkEnvModel.flutterVersion != null)
-                      SizedBox(height: 2.sp),
+                      SizedBox(height: 2.spa),
                     if (controller.checkEnvModel.flutterVersion != null)
                       Text(
                         'flutter version: ${controller.checkEnvModel.flutterVersion}'
                             .capitalize!,
                         style: Get.textTheme.bodySmall?.copyWith(
-                          fontSize: 4.sp,
+                          fontSize: 4.spa,
                         ),
                       ),
                   ],
                 ),
               ),
             ),
-            SizedBox(width: 4.sp),
+            SizedBox(width: 4.spa),
             Expanded(
               child: Container(
                 padding: EdgeInsets.symmetric(
-                  horizontal: 6.sp,
-                  vertical: 3.sp,
+                  horizontal: 6.spa,
+                  vertical: 3.spa,
                 ),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(5),
@@ -210,13 +210,13 @@ class BuildEnvCheckDataState extends StatelessWidget {
                           child: Text(
                             'dart installed'.capitalize!,
                             style: Get.textTheme.titleSmall?.copyWith(
-                              fontSize: 5.sp,
+                              fontSize: 5.spa,
                             ),
                           ),
                         ),
-                        SizedBox(width: 2.sp),
+                        SizedBox(width: 2.spa),
                         Icon(
-                          size: 7.sp,
+                          size: 7.spa,
                           controller.checkEnvModel.dartInstalled!
                               ? Icons.check_circle
                               : Icons.cancel,
@@ -227,13 +227,13 @@ class BuildEnvCheckDataState extends StatelessWidget {
                       ],
                     ),
                     if (controller.checkEnvModel.dartVersion != null)
-                      SizedBox(height: 2.sp),
+                      SizedBox(height: 2.spa),
                     if (controller.checkEnvModel.dartVersion != null)
                       Text(
                         'dart version: ${controller.checkEnvModel.dartVersion}'
                             .capitalize!,
                         style: Get.textTheme.bodySmall?.copyWith(
-                          fontSize: 4.sp,
+                          fontSize: 4.spa,
                         ),
                       ),
                   ],
@@ -258,7 +258,7 @@ class BuildEnvCheckDataState extends StatelessWidget {
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                     style: Get.textTheme.titleSmall!.copyWith(
-                      fontSize: 4.9.sp,
+                      fontSize: 4.9.spa,
                       color:
                           controller.checkEnvModel.flutterDoctor![index].head ==
                                   null
@@ -271,7 +271,7 @@ class BuildEnvCheckDataState extends StatelessWidget {
                     ),
                   ),
                   trailing: Icon(
-                    size: 7.sp,
+                    size: 7.spa,
                     controller.checkEnvModel.flutterDoctor![index].head == null
                         ? Icons.warning_amber_rounded
                         : controller.checkEnvModel.flutterDoctor![index].head!

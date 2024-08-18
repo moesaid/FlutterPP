@@ -39,12 +39,12 @@ class BuildInvoicePrintableBody extends StatelessWidget {
         child: Column(
           children: [
             BuildInvoiceOwnerSection(team: team),
-            Divider(thickness: 2, height: 4.sp, color: Colors.black12),
+            Divider(thickness: 2, height: 4.spa, color: Colors.black12),
             BuildInvoiceBillToSection(client: client, invoice: invoice),
             BuildInvoiceItemsSection(invoice: invoice),
-            Divider(thickness: 2, height: 4.sp, color: Colors.black12),
+            Divider(thickness: 2, height: 4.spa, color: Colors.black12),
             BuildInvoiceFinalInfo(invoice: invoice),
-            SizedBox(height: 30.sp),
+            SizedBox(height: 30.spa),
           ],
         ),
       ),

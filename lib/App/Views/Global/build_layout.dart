@@ -55,8 +55,8 @@ class BuildLayout extends StatelessWidget {
             ],
           ),
           Positioned(
-            bottom: 10.sp,
-            left: 10.sp,
+            bottom: 10.spa,
+            left: 10.spa,
             child: const BuildAppUpdateWidget(),
           ),
         ],

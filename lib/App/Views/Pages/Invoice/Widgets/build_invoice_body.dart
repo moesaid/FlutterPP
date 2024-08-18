@@ -43,7 +43,7 @@ class BuildInvoiceBody extends StatelessWidget {
                 onTap: () => onStatusPressed?.call(invoice),
                 child: Badge(
                   label: Text(invoice.status?.capitalize ?? ''),
-                  padding: EdgeInsets.symmetric(horizontal: 3.sp),
+                  padding: EdgeInsets.symmetric(horizontal: 3.spa),
                   textColor: InvoiceHelper.getStatusColor(invoice.status),
                   backgroundColor: InvoiceHelper.getStatusColor(invoice.status)
                       .withOpacity(0.1),
@@ -58,7 +58,7 @@ class BuildInvoiceBody extends StatelessWidget {
             child: Text(
               invoice.dueDate?.capitalize ?? '',
               style: TextStyle(
-                color: Get.theme.colorScheme.onBackground
+                color: Get.theme.colorScheme.onSurface
                     .withOpacity(hasGrey == true ? 0.5 : 1),
               ),
             ),
@@ -67,7 +67,7 @@ class BuildInvoiceBody extends StatelessWidget {
           child: Text(
             invoice.number.toString(),
             style: TextStyle(
-              color: Get.theme.colorScheme.onBackground
+              color: Get.theme.colorScheme.onSurface
                   .withOpacity(hasGrey == true ? 0.5 : 1),
             ),
           ),
@@ -77,7 +77,7 @@ class BuildInvoiceBody extends StatelessWidget {
           child: Text(
             invoice.clientName?.capitalize ?? '',
             style: TextStyle(
-              color: Get.theme.colorScheme.onBackground
+              color: Get.theme.colorScheme.onSurface
                   .withOpacity(hasGrey == true ? 0.5 : 1),
             ),
           ),
@@ -89,14 +89,14 @@ class BuildInvoiceBody extends StatelessWidget {
                 TextSpan(
                   text: totalAmount.toString(),
                   style: TextStyle(
-                    color: Get.theme.colorScheme.onBackground
+                    color: Get.theme.colorScheme.onSurface
                         .withOpacity(hasGrey == true ? 0.5 : 1),
                   ),
                 ),
                 TextSpan(
                   text: '  ${(invoice.currency?.toUpperCase() ?? '')}',
                   style: TextStyle(
-                    color: Get.theme.colorScheme.onBackground
+                    color: Get.theme.colorScheme.onSurface
                         .withOpacity(hasGrey == true ? 0.1 : 0.5),
                   ),
                 ),
@@ -117,8 +117,8 @@ class BuildInvoiceBody extends StatelessWidget {
                           onView != null ? () => onView?.call(invoice) : null,
                       child: Row(
                         children: [
-                          Icon(Icons.remove_red_eye, size: 6.sp),
-                          SizedBox(width: 2.sp),
+                          Icon(Icons.remove_red_eye, size: 6.spa),
+                          SizedBox(width: 2.spa),
                           Text('view'.capitalize!),
                         ],
                       ),
@@ -128,8 +128,8 @@ class BuildInvoiceBody extends StatelessWidget {
                           onEdit != null ? () => onEdit?.call(invoice) : null,
                       child: Row(
                         children: [
-                          Icon(Icons.edit, size: 6.sp),
-                          SizedBox(width: 2.sp),
+                          Icon(Icons.edit, size: 6.spa),
+                          SizedBox(width: 2.spa),
                           Text('edit'.capitalize!),
                         ],
                       ),
@@ -140,8 +140,8 @@ class BuildInvoiceBody extends StatelessWidget {
                           : null,
                       child: Row(
                         children: [
-                          Icon(Icons.delete, size: 6.sp),
-                          SizedBox(width: 2.sp),
+                          Icon(Icons.delete, size: 6.spa),
+                          SizedBox(width: 2.spa),
                           Text('delete'.capitalize!),
                         ],
                       ),
@@ -152,8 +152,8 @@ class BuildInvoiceBody extends StatelessWidget {
                           : null,
                       child: Row(
                         children: [
-                          Icon(Icons.copy, size: 6.sp),
-                          SizedBox(width: 2.sp),
+                          Icon(Icons.copy, size: 6.spa),
+                          SizedBox(width: 2.spa),
                           Text('duplicate'.capitalize!),
                         ],
                       ),
@@ -164,8 +164,8 @@ class BuildInvoiceBody extends StatelessWidget {
                           : null,
                       child: Row(
                         children: [
-                          Icon(Icons.picture_as_pdf, size: 6.sp),
-                          SizedBox(width: 2.sp),
+                          Icon(Icons.picture_as_pdf, size: 6.spa),
+                          SizedBox(width: 2.spa),
                           Text('export as pdf'.capitalize!),
                         ],
                       ),
@@ -176,8 +176,8 @@ class BuildInvoiceBody extends StatelessWidget {
                           : null,
                       child: Row(
                         children: [
-                          Icon(Icons.print, size: 6.sp),
-                          SizedBox(width: 2.sp),
+                          Icon(Icons.print, size: 6.spa),
+                          SizedBox(width: 2.spa),
                           Text('print invoice'.capitalize!),
                         ],
                       ),

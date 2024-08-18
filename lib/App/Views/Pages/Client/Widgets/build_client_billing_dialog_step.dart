@@ -12,7 +12,7 @@ class BuildClientBillingDialogStep extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        SizedBox(height: 4.sp),
+        SizedBox(height: 4.spa),
         FormBuilderTextField(
           name: 'address',
           decoration: const InputDecoration(
@@ -23,7 +23,7 @@ class BuildClientBillingDialogStep extends StatelessWidget {
             FormBuilderValidators.required(),
           ]),
         ),
-        SizedBox(height: 3.sp),
+        SizedBox(height: 3.spa),
         FormBuilderTextField(
           name: 'city',
           decoration: const InputDecoration(
@@ -34,7 +34,7 @@ class BuildClientBillingDialogStep extends StatelessWidget {
             FormBuilderValidators.required(),
           ]),
         ),
-        SizedBox(height: 3.sp),
+        SizedBox(height: 3.spa),
         FormBuilderTextField(
           name: 'state',
           decoration: const InputDecoration(
@@ -45,7 +45,7 @@ class BuildClientBillingDialogStep extends StatelessWidget {
             FormBuilderValidators.required(),
           ]),
         ),
-        SizedBox(height: 3.sp),
+        SizedBox(height: 3.spa),
         FormBuilderTextField(
           name: 'zip',
           decoration: const InputDecoration(
@@ -57,7 +57,7 @@ class BuildClientBillingDialogStep extends StatelessWidget {
             FormBuilderValidators.numeric(),
           ]),
         ),
-        SizedBox(height: 3.sp),
+        SizedBox(height: 3.spa),
         FormBuilderTextField(
           name: 'country',
           decoration: const InputDecoration(

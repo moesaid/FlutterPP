@@ -14,7 +14,7 @@ class BuildPageLayout extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Padding(
-        padding: padding ?? EdgeInsets.all(8.sp),
+        padding: padding ?? EdgeInsets.all(8.spa),
         child: child,
       ),
     );

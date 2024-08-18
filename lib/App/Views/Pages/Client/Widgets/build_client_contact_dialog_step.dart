@@ -12,7 +12,7 @@ class BuildClientContactDialogStep extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        SizedBox(height: 4.sp),
+        SizedBox(height: 4.spa),
         FormBuilderTextField(
           name: 'name',
           decoration: const InputDecoration(
@@ -23,7 +23,7 @@ class BuildClientContactDialogStep extends StatelessWidget {
             FormBuilderValidators.required(),
           ]),
         ),
-        SizedBox(height: 3.sp),
+        SizedBox(height: 3.spa),
         FormBuilderTextField(
           name: 'contact_name',
           decoration: const InputDecoration(
@@ -34,7 +34,7 @@ class BuildClientContactDialogStep extends StatelessWidget {
             FormBuilderValidators.required(),
           ]),
         ),
-        SizedBox(height: 3.sp),
+        SizedBox(height: 3.spa),
         FormBuilderTextField(
           name: 'email',
           decoration: const InputDecoration(
@@ -46,7 +46,7 @@ class BuildClientContactDialogStep extends StatelessWidget {
             FormBuilderValidators.email(),
           ]),
         ),
-        SizedBox(height: 3.sp),
+        SizedBox(height: 3.spa),
         FormBuilderTextField(
           name: 'phone',
           decoration: const InputDecoration(
@@ -58,7 +58,7 @@ class BuildClientContactDialogStep extends StatelessWidget {
             FormBuilderValidators.numeric(),
           ]),
         ),
-        SizedBox(height: 3.sp),
+        SizedBox(height: 3.spa),
         FormBuilderTextField(
           name: 'website',
           decoration: const InputDecoration(

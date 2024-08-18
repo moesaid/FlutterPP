@@ -186,7 +186,7 @@ class BuildProjectSingleWikiSidebar extends StatelessWidget {
                           ],
                           child: Icon(
                             Icons.more_vert_sharp,
-                            size: 6.sp,
+                            size: 6.spa,
                           ),
                         ),
                       ],
@@ -204,7 +204,7 @@ class BuildProjectSingleWikiSidebar extends StatelessWidget {
               onPressed: () => controller.createNewPage(),
               style: TextButton.styleFrom(
                 textStyle: Get.theme.textTheme.labelMedium,
-                foregroundColor: Get.theme.colorScheme.onBackground,
+                foregroundColor: Get.theme.colorScheme.onSurface,
               ),
               child: Row(
                 children: [
@@ -279,7 +279,7 @@ class BuildEmojiDialog extends StatelessWidget {
                   },
                 ),
               ),
-              Divider(height: 20.sp, thickness: 0.5),
+              Divider(height: 20.spa, thickness: 0.5),
               Expanded(
                 child: GridView.builder(
                   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
@@ -321,11 +321,11 @@ class BuildEmojiDialog extends StatelessWidget {
 EditorStyle customizeEditorStyle() {
   return EditorStyle(
     padding: const EdgeInsets.only(left: 20, right: 20, top: 20),
-    cursorColor: Get.theme.colorScheme.onBackground,
+    cursorColor: Get.theme.colorScheme.onSurface,
     selectionColor: Colors.red.withOpacity(0.3),
     textStyleConfiguration: TextStyleConfiguration(
       text: TextStyle(
-        color: Get.theme.colorScheme.onBackground,
+        color: Get.theme.colorScheme.onSurface,
       ),
     ),
     dragHandleColor: Colors.green,
@@ -359,7 +359,7 @@ Map<String, BlockComponentBuilder> customBuilder() {
       configuration: BlockComponentConfiguration(
         textStyle: (node) {
           return TextStyle(
-            color: Get.theme.colorScheme.onBackground,
+            color: Get.theme.colorScheme.onSurface,
           );
         },
       ),
@@ -370,21 +370,21 @@ Map<String, BlockComponentBuilder> customBuilder() {
       ),
       textStyleBuilder: (value) {
         return TextStyle(
-          color: Get.theme.colorScheme.onBackground.withOpacity(
+          color: Get.theme.colorScheme.onSurface.withOpacity(
             value ? 0.5 : 1,
           ),
           fontStyle: value ? FontStyle.italic : FontStyle.normal,
           decoration: value ? TextDecoration.lineThrough : null,
         );
       },
-      iconBuilder: (context, node) {
+      iconBuilder: (context, node, fun) {
         final checked = node.attributes[TodoListBlockKeys.checked] as bool;
         return InkWell(
           onTap: () => node.updateAttributes(
             {TodoListBlockKeys.checked: !checked},
           ),
           child: Padding(
-            padding: EdgeInsets.only(right: 3.sp),
+            padding: EdgeInsets.only(right: 3.spa),
             child: Icon(
               checked ? Icons.check_circle : Icons.circle_outlined,
               size: 20,
