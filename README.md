@@ -1,17 +1,34 @@
-# flutterpp
+![preview](https://github.com/moesaid/FlutterPP_Public/assets/38924585/f051188a-2982-4afd-acdc-7c63c80768a0)
 
-A new Flutter project.
+<p align="center">
+  <a href="preview.md"><img src="https://github.com/moesaid/FlutterPP_Public/assets/38924585/a9016fcd-9376-44ff-80b5-24070582d854" width="32%" /></a>
+  &nbsp;
+  <a href="https://github.com/moesaid/FlutterPP_Public/releases"><img src="https://github.com/moesaid/FlutterPP_Public/assets/38924585/23e01e90-50ed-4bcb-b837-2c6d34376d1b" width="32%" /></a>
+  &nbsp;
+   <a href="https://github.com/moesaid/FlutterPP_Public/releases"><img src="https://github.com/moesaid/FlutterPP_Public/assets/38924585/46dd4a07-f314-4ba2-b589-1e77c96d112d" width="32%" /></a>
+</p>
+
+# FlutterPP [Quick Video Demo](https://youtu.be/j8yr95t9LIM)
+
+Welcome to FlutterPP, your developer companion for building Flutter apps with ease.
+
+## Overview
+
+FlutterPP (Flutter Plus Plus) is a low-code tool designed to significantly reduce development time by automating code generation for Flutter applications. This initial release, marks the beginning of an exciting journey towards making Flutter development more efficient and accessible.
+
+## Features
+
+- **Code Generation:** Automatically generate.
+- **User-Friendly Interface:** Intuitive design for developers of all levels.
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+To start using FlutterPP, follow these simple steps:
 
-A few resources to get you started if this is your first Flutter project:
+1. download your executable!
+2. create an account.
+3. enjoy fluttering!.
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+## Feedback and Contribution
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
-# flutterpp
+We value your feedback! If you encounter any issues or have suggestions for improvement, please [open an issue](https://github.com/moesaid/FlutterPP_Public/issues) or [start a discussion](https://github.com/moesaid/FlutterPP_Public/discussions)
