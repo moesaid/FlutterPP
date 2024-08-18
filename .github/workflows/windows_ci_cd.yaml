@@ -96,10 +96,11 @@ jobs:
           Remove-Item -Path $env:PFX_PATH;
 
       - name: Upload MSIX to release
-        uses: svenstaro/upload-release-action@2.2.1
+        uses: svenstaro/upload-release-action@2.9.0
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
-          file: build/windows/x64/Runner/release/FlutterPP.msix
+          file: build/windows/x64/runner/Release/flutterpp.msix
           asset_name: FlutterPP-windows-${{ steps.versions.outputs.version }}-MS-NS.msix
           tag: ${{ steps.versions.outputs.version }}
           release_name: Release ${{ steps.versions.outputs.version }}
+          overwrite: true
