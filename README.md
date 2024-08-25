@@ -5,7 +5,7 @@
   &nbsp;
   <a href="https://github.com/moesaid/flutterpp/releases"><img src="https://github.com/moesaid/flutterpp/blob/stage/marketing/down-mac.png" width="32%" /></a>
   &nbsp;
-   <a href="https://github.com/moesaid/flutterpp/releases"><img src="https://github.com/moesaid/flutterpp/blob/stage/marketing/down-mac.png" width="32%" /></a>
+   <a href="https://github.com/moesaid/flutterpp/releases"><img src="https://github.com/moesaid/flutterpp/blob/stage/marketing/down-win.png" width="32%" /></a>
 </p>
 
 # FlutterPP [Quick Video Demo](https://youtu.be/j8yr95t9LIM)
