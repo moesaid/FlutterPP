@@ -108,7 +108,7 @@ class BuildMockupIndexItem extends StatelessWidget {
           borderRadius: BorderRadius.circular(2.spa),
           border: Border.all(
             color: controller.hoveredId == item.id
-                ? ColorHelper.hexToColor(item.color1!).withOpacity(0.5)
+                ? ColorHelper.hexToColor(item.color1!).withValues(alpha: 0.5)
                 : Get.theme.colorScheme.secondaryContainer,
             width: 1,
           ),
@@ -116,10 +116,10 @@ class BuildMockupIndexItem extends StatelessWidget {
             center: Alignment.topLeft,
             radius: 1,
             colors: [
-              ColorHelper.hexToColor(item.color1 ?? '#000000')
-                  .withOpacity(controller.hoveredId == item.id ? 0.2 : 0.1),
-              Get.theme.colorScheme.primaryContainer
-                  .withOpacity(controller.hoveredId == item.id ? 0.2 : 0.1),
+              ColorHelper.hexToColor(item.color1 ?? '#000000').withValues(
+                  alpha: controller.hoveredId == item.id ? 0.2 : 0.1),
+              Get.theme.colorScheme.primaryContainer.withValues(
+                  alpha: controller.hoveredId == item.id ? 0.2 : 0.1),
             ],
           ),
         ),

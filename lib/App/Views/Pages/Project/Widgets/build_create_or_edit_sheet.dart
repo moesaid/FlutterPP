@@ -232,7 +232,7 @@ class BuildAddPropertiesSection extends StatelessWidget {
                 if (controller.tempModel.properties != null)
                   Container(
                     color: Get.theme.colorScheme.secondaryContainer
-                        .withOpacity(0.3),
+                        .withValues(alpha: 0.3),
                     child: ListView.separated(
                       itemCount: controller.tempModel.properties?.length ?? 0,
                       shrinkWrap: true,
@@ -253,7 +253,7 @@ class BuildAddPropertiesSection extends StatelessWidget {
                               Badge(
                                 label: Text(property.type?.type ?? 'Type'),
                                 backgroundColor:
-                                    property.type?.color.withOpacity(0.1),
+                                    property.type?.color.withValues(alpha: 0.1),
                                 textColor: property.type?.color,
                                 textStyle: TextStyle(
                                   fontSize: 3.5.spa,

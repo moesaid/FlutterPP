@@ -16,10 +16,10 @@ class BuildApiGenNode extends GetView<BuildApiGenNodeController> {
     return GetBuilder(
       init: BuildApiGenNodeController(),
       tag: 'api-gen-node-${const Uuid().v4()}',
-      builder: (_) {
+      builder: (localController) {
         return MouseRegion(
-          onHover: (event) => _.toggleHovring(true),
-          onExit: (event) => _.toggleHovring(false),
+          onHover: (event) => localController.toggleHovring(true),
+          onExit: (event) => localController.toggleHovring(false),
           child: Stack(
             alignment: Alignment.bottomCenter,
             children: [
@@ -32,7 +32,7 @@ class BuildApiGenNode extends GetView<BuildApiGenNodeController> {
                     color: Get.theme.colorScheme.primaryContainer,
                     borderRadius: BorderRadius.circular(2.spa),
                     border: Border.all(
-                      color: _.isHovring
+                      color: localController.isHovring
                           ? Get.theme.colorScheme.inversePrimary
                           : Get.theme.colorScheme.secondaryContainer,
                     ),
@@ -51,10 +51,10 @@ class BuildApiGenNode extends GetView<BuildApiGenNodeController> {
                 bottom: context.width * 0.002,
                 child: InkWell(
                   onTap: () => AppPrint.print('add workflow'),
-                  onHover: (value) => _.togglePlusHovring(value),
+                  onHover: (value) => localController.togglePlusHovring(value),
                   child: AnimatedScale(
                     duration: const Duration(milliseconds: 200),
-                    scale: _.isPlusHovering ? 1.2 : 1,
+                    scale: localController.isPlusHovering ? 1.2 : 1,
                     child: Container(
                       width: context.width * 0.015,
                       height: context.width * 0.015,

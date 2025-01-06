@@ -36,7 +36,8 @@ class MockupCreatePage extends GetView<MockupCreateController> {
                               ElevatedButton(
                                 onPressed: () => controller.onStepCancel(),
                                 style: ElevatedButton.styleFrom(
-                                  backgroundColor: Colors.grey.withOpacity(0.1),
+                                  backgroundColor:
+                                      Colors.grey.withValues(alpha: 0.1),
                                 ),
                                 child: const Text('back'),
                               ),

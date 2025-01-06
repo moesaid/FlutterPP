@@ -34,14 +34,14 @@ class BuildSlider extends StatelessWidget {
           state.controller?.onChange(value: defaultValue ?? 0);
         }
       },
-      builder: (_) {
+      builder: (controller) {
         final double localMax = max ?? 100;
         final double localMin = min ?? 0;
-        final double localValue = _.sliderValue > localMax
+        final double localValue = controller.sliderValue > localMax
             ? localMax
-            : _.sliderValue < localMin
+            : controller.sliderValue < localMin
                 ? localMin
-                : _.sliderValue;
+                : controller.sliderValue;
 
         return SliderTheme(
           data: SliderTheme.of(context).copyWith(
@@ -66,7 +66,8 @@ class BuildSlider extends StatelessWidget {
             max: localMax,
             divisions: divisions ?? 20,
             activeColor: Get.theme.primaryColor,
-            inactiveColor: Get.theme.colorScheme.onBackground.withOpacity(0.1),
+            inactiveColor:
+                Get.theme.colorScheme.onSurface.withValues(alpha: 0.1),
             thumbColor: Get.theme.primaryColor,
             value: localValue,
             label: localValue.toStringAsFixed(fractionDigits ?? 0),
@@ -81,7 +82,7 @@ class BuildSlider extends StatelessWidget {
                 return;
               }
 
-              _.onChange(
+              controller.onChange(
                 value: value,
                 callback: onChanged,
               );

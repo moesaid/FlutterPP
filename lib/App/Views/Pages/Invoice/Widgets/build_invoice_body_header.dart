@@ -17,7 +17,7 @@ class BuildInvoiceBodyHeader extends StatelessWidget {
               Text(
                 'Status',
                 style: TextStyle(
-                  color: Get.theme.colorScheme.onSurface.withOpacity(0.5),
+                  color: Get.theme.colorScheme.onSurface.withValues(alpha: 0.5),
                 ),
               )
             ],
@@ -28,7 +28,7 @@ class BuildInvoiceBodyHeader extends StatelessWidget {
           child: Text(
             'Due Date',
             style: TextStyle(
-              color: Get.theme.colorScheme.onSurface.withOpacity(0.5),
+              color: Get.theme.colorScheme.onSurface.withValues(alpha: 0.5),
             ),
           ),
         ),
@@ -36,7 +36,7 @@ class BuildInvoiceBodyHeader extends StatelessWidget {
           child: Text(
             '#',
             style: TextStyle(
-              color: Get.theme.colorScheme.onSurface.withOpacity(0.5),
+              color: Get.theme.colorScheme.onSurface.withValues(alpha: 0.5),
             ),
           ),
         ),
@@ -45,7 +45,7 @@ class BuildInvoiceBodyHeader extends StatelessWidget {
           child: Text(
             'Client',
             style: TextStyle(
-              color: Get.theme.colorScheme.onSurface.withOpacity(0.5),
+              color: Get.theme.colorScheme.onSurface.withValues(alpha: 0.5),
             ),
           ),
         ),
@@ -56,7 +56,7 @@ class BuildInvoiceBodyHeader extends StatelessWidget {
               Text(
                 'Amount',
                 style: TextStyle(
-                  color: Get.theme.colorScheme.onSurface.withOpacity(0.5),
+                  color: Get.theme.colorScheme.onSurface.withValues(alpha: 0.5),
                 ),
               ),
             ],
@@ -72,7 +72,8 @@ class BuildInvoiceBodyHeader extends StatelessWidget {
                 child: Text(
                   'Actions',
                   style: TextStyle(
-                    color: Get.theme.colorScheme.onSurface.withOpacity(0.5),
+                    color:
+                        Get.theme.colorScheme.onSurface.withValues(alpha: 0.5),
                   ),
                 ),
               ),

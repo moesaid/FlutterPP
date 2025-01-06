@@ -177,7 +177,8 @@ class _BuildTabs extends StatelessWidget {
       automaticIndicatorColorAdjustment: true,
       dividerColor: Colors.transparent,
       labelColor: Get.theme.colorScheme.secondary,
-      unselectedLabelColor: Get.theme.colorScheme.secondary.withOpacity(0.5),
+      unselectedLabelColor:
+          Get.theme.colorScheme.secondary.withValues(alpha: 0.5),
       tabs: const [
         Tab(text: 'Create Team'),
         Tab(text: 'Join Team'),

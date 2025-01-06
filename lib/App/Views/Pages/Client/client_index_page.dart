@@ -15,7 +15,7 @@ class ClientIndexPage extends GetView<ClientIndexController> {
     return GetBuilder<ClientIndexController>(
       init: ClientIndexController(),
       initState: (_) {},
-      builder: (_) {
+      builder: (localController) {
         final formKey = GlobalKey<FormBuilderState>();
         return Scaffold(
           body: SafeArea(
@@ -25,7 +25,7 @@ class ClientIndexPage extends GetView<ClientIndexController> {
               hasButton: true,
               buttonText: 'create your first client'.capitalize!,
               onButtonPressed: () {
-                _.clearFormState(formKey);
+                localController.clearFormState(formKey);
                 showDialog(
                   context: context,
                   builder: (_) {

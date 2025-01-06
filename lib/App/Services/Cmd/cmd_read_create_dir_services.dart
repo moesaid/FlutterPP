@@ -65,7 +65,7 @@ class CmdReadCreateDirServices {
     String version,
     StateManegmentEnum state,
   ) {
-    print('❌ state: $state');
+    AppPrint.print('❌ state: $state');
 
     return {
       'owner': 'FlutterPP',

@@ -42,14 +42,15 @@ class MockupSinglePage extends GetView<MockupSingleController> {
                         decoration: BoxDecoration(
                           gradient: LinearGradient(
                             colors: [
-                              Get.theme.colorScheme.secondary.withOpacity(0.1),
+                              Get.theme.colorScheme.secondary
+                                  .withValues(alpha: 0.1),
                               Get.theme.colorScheme.secondary,
                             ],
                             begin: Alignment.topCenter,
                             end: Alignment.bottomCenter,
                           ),
                           color: Get.theme.colorScheme.primaryContainer
-                              .withOpacity(0.3),
+                              .withValues(alpha: 0.3),
                           border: Border(
                             top: BorderSide(
                               width: 1,
@@ -325,7 +326,7 @@ class BuildMockupSinglePageBuddy extends StatelessWidget {
                         width: 322.5,
                         decoration: BoxDecoration(
                           color: Get.theme.colorScheme.primaryContainer
-                              .withOpacity(0.3),
+                              .withValues(alpha: 0.3),
                           border: Border.all(
                             color: Get.theme.colorScheme.secondaryContainer,
                             width: 1,

@@ -396,7 +396,7 @@ class BuildDeviceHead extends StatelessWidget {
     return Container(
       width: width ?? 350,
       height: height ?? 50,
-      color: Colors.grey.withOpacity(0.25),
+      color: Colors.grey.withValues(alpha: 0.25),
       padding: const EdgeInsets.symmetric(horizontal: 10),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,

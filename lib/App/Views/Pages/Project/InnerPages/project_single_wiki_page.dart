@@ -240,7 +240,7 @@ class BuildEmojiDialog extends StatelessWidget {
       init: EmojiDialogController(),
       tag: controllerTag,
       initState: (_) {},
-      builder: (_) {
+      builder: (localController) {
         return BuildDefultDialog(
           child: Column(
             children: [
@@ -256,12 +256,12 @@ class BuildEmojiDialog extends StatelessWidget {
                     final group = groups[index];
 
                     return InkWell(
-                      onTap: () => _.changeActiveGroup(group),
+                      onTap: () => localController.changeActiveGroup(group),
                       child: Container(
                         height: 35,
                         width: 35,
                         decoration: BoxDecoration(
-                          color: _.activeGroup.name == group.name
+                          color: localController.activeGroup.name == group.name
                               ? Get.theme.colorScheme.primary
                               : Get.theme.colorScheme.secondaryContainer,
                           borderRadius: BorderRadius.circular(50),
@@ -287,9 +287,9 @@ class BuildEmojiDialog extends StatelessWidget {
                     crossAxisSpacing: 10,
                     mainAxisSpacing: 10,
                   ),
-                  itemCount: _.emojiList.length,
+                  itemCount: localController.emojiList.length,
                   itemBuilder: (context, index) {
-                    final emoji = _.emojiList[index];
+                    final emoji = localController.emojiList[index];
                     return InkWell(
                       onTap: () {
                         onEmojiSelected?.call(emoji.char);
@@ -322,7 +322,7 @@ EditorStyle customizeEditorStyle() {
   return EditorStyle(
     padding: const EdgeInsets.only(left: 20, right: 20, top: 20),
     cursorColor: Get.theme.colorScheme.onSurface,
-    selectionColor: Colors.red.withOpacity(0.3),
+    selectionColor: Colors.red.withValues(alpha: 0.3),
     textStyleConfiguration: TextStyleConfiguration(
       text: TextStyle(
         color: Get.theme.colorScheme.onSurface,
@@ -370,8 +370,8 @@ Map<String, BlockComponentBuilder> customBuilder() {
       ),
       textStyleBuilder: (value) {
         return TextStyle(
-          color: Get.theme.colorScheme.onSurface.withOpacity(
-            value ? 0.5 : 1,
+          color: Get.theme.colorScheme.onSurface.withValues(
+            alpha: value ? 0.5 : 1,
           ),
           fontStyle: value ? FontStyle.italic : FontStyle.normal,
           decoration: value ? TextDecoration.lineThrough : null,

@@ -31,7 +31,7 @@ class BuildPresetGradientList
 
         return Scaffold(
           backgroundColor:
-              Get.theme.colorScheme.primaryContainer.withOpacity(0.95),
+              Get.theme.colorScheme.primaryContainer.withValues(alpha: 0.95),
           body: SizedBox(
             width: double.infinity,
             height: double.infinity,
@@ -63,7 +63,7 @@ class BuildPresetGradientList
                           borderRadius: BorderRadius.circular(5),
                           border: Border.all(
                             color: Get.theme.colorScheme.onPrimary
-                                .withOpacity(0.1),
+                                .withValues(alpha: 0.1),
                           ),
                         ),
                         child: Column(

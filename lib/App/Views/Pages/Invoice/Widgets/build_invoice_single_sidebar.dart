@@ -37,7 +37,7 @@ class BuildInvoiceSingleSidebar extends StatelessWidget {
               label: Text('download'.capitalize!),
               style: ButtonStyle(
                 backgroundColor: WidgetStateProperty.all(
-                  Get.theme.colorScheme.secondary.withOpacity(0.6),
+                  Get.theme.colorScheme.secondary.withValues(alpha: 0.6),
                 ),
               ),
             ),

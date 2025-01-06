@@ -115,7 +115,7 @@ class BuildLeading extends StatelessWidget {
           SizedBox(
             height: preferredSize.height,
             width: 0,
-            child: VerticalDivider(color: Colors.grey.withOpacity(0.35)),
+            child: VerticalDivider(color: Colors.grey.withValues(alpha: 0.35)),
           ),
         if (hasBackButton != null && hasBackButton!)
           InkWell(
@@ -124,7 +124,7 @@ class BuildLeading extends StatelessWidget {
               height: preferredSize.height,
               width: preferredSize.height,
               decoration: BoxDecoration(
-                color: Colors.grey.withOpacity(0.1),
+                color: Colors.grey.withValues(alpha: 0.1),
               ),
               child: Icon(
                 Icons.arrow_back,
@@ -137,7 +137,7 @@ class BuildLeading extends StatelessWidget {
           height: preferredSize.height,
           width: 0,
           child: VerticalDivider(
-            color: Colors.grey.withOpacity(0.35),
+            color: Colors.grey.withValues(alpha: 0.35),
           ),
         ),
       ],

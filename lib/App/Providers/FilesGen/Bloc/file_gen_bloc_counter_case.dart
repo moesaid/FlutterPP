@@ -301,17 +301,17 @@ class FileGenBlocCounterCase {
                               decoration: BoxDecoration(
                                 border: Border.all(
                                   width: 2,
-                                  color: Colors.grey.withOpacity(0.2),
+                                  color: Colors.grey.withValues(alpha:0.2),
                                 ),
                                 shape: BoxShape.circle,
-                                color: Colors.black.withOpacity(
+                                color: Colors.black.withValues(alpha:
                                   state / 100,
                                 ),
                                 boxShadow: [
                                   BoxShadow(
                                     blurRadius: 20,
                                     spreadRadius: -6,
-                                    color: Colors.black.withOpacity(
+                                    color: Colors.black.withValues(alpha:
                                       state / 100,
                                     ),
                                     offset: const Offset(0, 10),

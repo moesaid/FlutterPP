@@ -12,8 +12,6 @@ enum BackgroundEnum {
         return 'gradient';
       case BackgroundEnum.image:
         return 'image';
-      default:
-        return 'solid';
     }
   }
 }

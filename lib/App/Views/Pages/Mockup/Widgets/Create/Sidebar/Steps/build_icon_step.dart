@@ -25,9 +25,9 @@ ExpansionTileItem buildingIconStep({
     title: const Text('Icon'),
     leading: const Icon(Icons.invert_colors_on_sharp),
     collapsedBorderColor: Colors.transparent,
-    collapsedTextColor: Colors.grey.withOpacity(0.8),
-    collapsedIconColor: Colors.grey.withOpacity(0.8),
-    expendedBorderColor: Colors.grey.withOpacity(0.2),
+    collapsedTextColor: Colors.grey.withValues(alpha: 0.8),
+    collapsedIconColor: Colors.grey.withValues(alpha: 0.8),
+    expendedBorderColor: Colors.grey.withValues(alpha: 0.2),
     textColor: Colors.white,
     iconColor: Colors.white,
     children: [

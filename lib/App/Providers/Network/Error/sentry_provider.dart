@@ -19,7 +19,7 @@ class SentryProvider {
         final entries = feedback?.extra?.entries;
         if (entries != null) {
           for (final extra in entries) {
-            scope.setExtra(extra.key, extra.value);
+            scope.setContexts(extra.key, extra.value);
           }
         }
         scope.setUser(

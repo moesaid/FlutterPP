@@ -52,9 +52,6 @@ class TemplateLayoutConfig {
         return twoDevicesConnectedRightTitleAbove();
       case TemplateLayoutEnum.twoDevicesConnectedLeftTitleAbove:
         return twoDevicesConnectedLeftTitleAbove();
-
-      default:
-        return titleUp();
     }
   }
 }

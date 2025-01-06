@@ -46,7 +46,7 @@ class BuildInvoiceBody extends StatelessWidget {
                   padding: EdgeInsets.symmetric(horizontal: 3.spa),
                   textColor: InvoiceHelper.getStatusColor(invoice.status),
                   backgroundColor: InvoiceHelper.getStatusColor(invoice.status)
-                      .withOpacity(0.1),
+                      .withValues(alpha: 0.1),
                 ),
               ),
             ],
@@ -59,7 +59,7 @@ class BuildInvoiceBody extends StatelessWidget {
               invoice.dueDate?.capitalize ?? '',
               style: TextStyle(
                 color: Get.theme.colorScheme.onSurface
-                    .withOpacity(hasGrey == true ? 0.5 : 1),
+                    .withValues(alpha: hasGrey == true ? 0.5 : 1),
               ),
             ),
           ),
@@ -68,7 +68,7 @@ class BuildInvoiceBody extends StatelessWidget {
             invoice.number.toString(),
             style: TextStyle(
               color: Get.theme.colorScheme.onSurface
-                  .withOpacity(hasGrey == true ? 0.5 : 1),
+                  .withValues(alpha: hasGrey == true ? 0.5 : 1),
             ),
           ),
         ),
@@ -78,7 +78,7 @@ class BuildInvoiceBody extends StatelessWidget {
             invoice.clientName?.capitalize ?? '',
             style: TextStyle(
               color: Get.theme.colorScheme.onSurface
-                  .withOpacity(hasGrey == true ? 0.5 : 1),
+                  .withValues(alpha: hasGrey == true ? 0.5 : 1),
             ),
           ),
         ),
@@ -90,14 +90,14 @@ class BuildInvoiceBody extends StatelessWidget {
                   text: totalAmount.toString(),
                   style: TextStyle(
                     color: Get.theme.colorScheme.onSurface
-                        .withOpacity(hasGrey == true ? 0.5 : 1),
+                        .withValues(alpha: hasGrey == true ? 0.5 : 1),
                   ),
                 ),
                 TextSpan(
                   text: '  ${(invoice.currency?.toUpperCase() ?? '')}',
                   style: TextStyle(
                     color: Get.theme.colorScheme.onSurface
-                        .withOpacity(hasGrey == true ? 0.1 : 0.5),
+                        .withValues(alpha: hasGrey == true ? 0.1 : 0.5),
                   ),
                 ),
               ],

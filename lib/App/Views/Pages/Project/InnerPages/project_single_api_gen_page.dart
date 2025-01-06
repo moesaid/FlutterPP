@@ -94,8 +94,8 @@ class ProjectSingleApiGenPageSidebar extends StatelessWidget {
                       TextSpan(
                         text: ' / 5',
                         style: TextStyle(
-                          color:
-                              Get.theme.colorScheme.onPrimary.withOpacity(0.5),
+                          color: Get.theme.colorScheme.onPrimary
+                              .withValues(alpha: 0.5),
                         ),
                       ),
                     ],
@@ -146,7 +146,7 @@ class ProjectSingleApiGenPageSidebar extends StatelessWidget {
                             Icons.more_horiz,
                             size: 8.spa,
                             color: Get.theme.colorScheme.onPrimary
-                                .withOpacity(0.5),
+                                .withValues(alpha: 0.5),
                           ),
                         )
                       ],

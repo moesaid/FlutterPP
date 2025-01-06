@@ -47,7 +47,7 @@ class BuildSingleProjectParkedAt extends StatelessWidget {
                   path ?? 'No path',
                   style: Get.textTheme.bodySmall!.copyWith(
                     color: Get.theme.colorScheme.onPrimaryContainer
-                        .withOpacity(0.7),
+                        .withValues(alpha: 0.7),
                     fontStyle: FontStyle.italic,
                   ),
                 ),

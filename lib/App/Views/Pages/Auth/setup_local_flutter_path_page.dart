@@ -316,7 +316,8 @@ class BuildListView extends StatelessWidget {
                       fontWeight: FontWeight.w300,
                       color: isFlutter
                           ? Get.theme.colorScheme.onPrimary
-                          : Get.theme.colorScheme.onPrimary.withOpacity(0.5)),
+                          : Get.theme.colorScheme.onPrimary
+                              .withValues(alpha: 0.5)),
                 ),
               );
             },

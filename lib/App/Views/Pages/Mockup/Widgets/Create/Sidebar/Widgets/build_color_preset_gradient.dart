@@ -45,10 +45,10 @@ class BuildColorPresetGradient extends StatelessWidget {
             child: Container(
               padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
               decoration: BoxDecoration(
-                color: Get.theme.primaryColor.withOpacity(0.5),
+                color: Get.theme.primaryColor.withValues(alpha: 0.5),
                 borderRadius: BorderRadius.circular(5),
                 border: Border.all(
-                  color: Colors.white.withOpacity(0.1),
+                  color: Colors.white.withValues(alpha: 0.1),
                   width: 0.5,
                 ),
               ),

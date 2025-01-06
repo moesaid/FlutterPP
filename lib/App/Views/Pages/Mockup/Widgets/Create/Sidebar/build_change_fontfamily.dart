@@ -30,7 +30,7 @@ class BuildChangeFontFamily extends GetView<ChangeFontfamilyController> {
         if (fontFamily == null) return;
         state.controller?.changeFontFamily(key: fontFamily!);
       },
-      builder: (_) {
+      builder: (localController) {
         return InkWell(
           onTap: () => aweSideSheet(
             sheetWidth: sheetContext.width,
@@ -39,17 +39,17 @@ class BuildChangeFontFamily extends GetView<ChangeFontfamilyController> {
             footer: const SizedBox.shrink(),
             header: const SizedBox.shrink(),
             body: BuildChangeFontBottomSheet(
-              controller: _,
+              controller: localController,
               callback: callback,
             ),
           ),
           child: Container(
             padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
             decoration: BoxDecoration(
-              color: Get.theme.primaryColor.withOpacity(0.5),
+              color: Get.theme.primaryColor.withValues(alpha: 0.5),
               borderRadius: BorderRadius.circular(5),
               border: Border.all(
-                color: Colors.white.withOpacity(0.1),
+                color: Colors.white.withValues(alpha: 0.1),
                 width: 0.5,
               ),
             ),
@@ -58,7 +58,7 @@ class BuildChangeFontFamily extends GetView<ChangeFontfamilyController> {
                 Expanded(
                   child: Obx(
                     () => Text(
-                      '${_.fontKey} ',
+                      '${localController.fontKey} ',
                       maxLines: 1,
                     ),
                   ),
@@ -88,7 +88,7 @@ class BuildChangeFontBottomSheet extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BuildFullPageBottomSheet(
-      bgColor: Get.theme.colorScheme.background,
+      bgColor: Get.theme.colorScheme.surface,
       closeWidget: BuildBottomSheetTopNavFullWidth(
         onSave: () => controller.saveFontFamily(callback: callback),
         onCancle: () => controller.onCancle(),
@@ -149,8 +149,8 @@ class BuildBottomSheetTopNavFullWidth extends StatelessWidget {
           color: Get.theme.colorScheme.primaryContainer,
           border: Border(
             bottom: BorderSide(
-              color: Get.theme.colorScheme.onPrimaryContainer.withOpacity(
-                0.2,
+              color: Get.theme.colorScheme.onPrimaryContainer.withValues(
+                alpha: 0.2,
               ),
               width: 0.5,
             ),
@@ -171,8 +171,8 @@ class BuildBottomSheetTopNavFullWidth extends StatelessWidget {
               children: [
                 ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                    foregroundColor: Colors.grey.withOpacity(1),
-                    backgroundColor: Colors.grey.withOpacity(0.1),
+                    foregroundColor: Colors.grey.withValues(alpha: 1),
+                    backgroundColor: Colors.grey.withValues(alpha: 0.1),
                   ),
                   onPressed: onCancle ?? () => Get.back(),
                   child: const Text(
@@ -283,7 +283,7 @@ class BuildFontList extends StatelessWidget {
                     Text(
                       'Font Family $e',
                       style: Get.textTheme.bodySmall?.copyWith(
-                        color: Colors.grey.withOpacity(0.5),
+                        color: Colors.grey.withValues(alpha: 0.5),
                       ),
                     ),
                     const SizedBox(height: 20),

@@ -18,8 +18,8 @@ class BuildDashboardVersionDisplay extends StatelessWidget {
     return GetBuilder<AppUpdateController>(
       init: AppUpdateController(),
       initState: (_) {},
-      builder: (_) {
-        return BuildDashboardVersionDesplayView(controller: _);
+      builder: (localController) {
+        return BuildDashboardVersionDesplayView(controller: localController);
       },
     );
   }
@@ -34,7 +34,7 @@ class BuildDashboardVersionDesplayView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final _ = controller;
+    final localController = controller;
     return Container(
       height: context.height * 0.23,
       width: context.width * 0.1,
@@ -47,7 +47,7 @@ class BuildDashboardVersionDesplayView extends StatelessWidget {
         ),
       ),
       child: BuildLoadingSwitch(
-        isLoading: _.isLoading,
+        isLoading: localController.isLoading,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -61,14 +61,14 @@ class BuildDashboardVersionDesplayView extends StatelessWidget {
                     'current version'.capitalize!,
                     style: TextStyle(
                       fontSize: context.width * 0.01,
-                      color: Get.theme.colorScheme.onPrimary.withOpacity(
-                        0.5,
+                      color: Get.theme.colorScheme.onPrimary.withValues(
+                        alpha: 0.5,
                       ),
                     ),
                   ),
                   SizedBox(height: 1.spa),
                   Text(
-                    _.currentVersion,
+                    localController.currentVersion,
                     style: TextStyle(
                       fontSize: context.width * 0.013,
                       fontWeight: FontWeight.w500,
@@ -87,8 +87,8 @@ class BuildDashboardVersionDesplayView extends StatelessWidget {
                     'latest version'.capitalize!,
                     style: TextStyle(
                       fontSize: context.width * 0.01,
-                      color: Get.theme.colorScheme.onPrimary.withOpacity(
-                        0.5,
+                      color: Get.theme.colorScheme.onPrimary.withValues(
+                        alpha: 0.5,
                       ),
                     ),
                   ),
@@ -101,7 +101,7 @@ class BuildDashboardVersionDesplayView extends StatelessWidget {
                           context: context,
                           builder: (__) {
                             return BuildDashboardVersionDisplayDialog(
-                              controller: _,
+                              controller: localController,
                             );
                           },
                         );
@@ -110,14 +110,14 @@ class BuildDashboardVersionDesplayView extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text(
-                            _.lastVersion,
+                            localController.lastVersion,
                             style: TextStyle(
                               fontSize: context.width * 0.013,
                               fontWeight: FontWeight.w500,
                             ),
                           ),
                           SizedBox(width: 2.spa),
-                          if (_.updateAvailable)
+                          if (localController.updateAvailable)
                             AnimatedGradientBorder(
                               borderSize: 1,
                               glowSize: 0,
@@ -134,7 +134,7 @@ class BuildDashboardVersionDesplayView extends StatelessWidget {
                                 color: Get.theme.colorScheme.onSurface,
                               ),
                             ),
-                          if (!_.updateAvailable)
+                          if (!localController.updateAvailable)
                             Icon(
                               Icons.info_rounded,
                               size: context.width * 0.013,
@@ -173,7 +173,7 @@ class BuildDashboardVersionDisplayDialog extends StatelessWidget {
               styleSheet: MarkdownStyleSheet(
                 p: TextStyle(
                   fontSize: context.width * 0.01,
-                  color: Get.theme.colorScheme.onPrimary.withOpacity(0.5),
+                  color: Get.theme.colorScheme.onPrimary.withValues(alpha: 0.5),
                 ),
                 h1: TextStyle(
                   fontSize: context.width * 0.013,

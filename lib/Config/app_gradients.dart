@@ -11,8 +11,8 @@ class AppGradients {
   }) {
     return LinearGradient(
       colors: [
-        colors[0].withOpacity(firstOpacity),
-        colors[1].withOpacity(secondOpacity),
+        colors[0].withValues(alpha: firstOpacity),
+        colors[1].withValues(alpha: secondOpacity),
       ],
       begin: Alignment.topLeft,
       end: Alignment.bottomRight,

@@ -20,7 +20,7 @@ class BuildInvoiceAnalyticsItem extends StatelessWidget {
       padding: EdgeInsets.all(10.spa),
       decoration: BoxDecoration(
         border: Border.all(
-          color: Get.theme.colorScheme.onSurface.withOpacity(0.1),
+          color: Get.theme.colorScheme.onSurface.withValues(alpha: 0.1),
         ),
         borderRadius: BorderRadius.circular(10),
       ),
@@ -31,7 +31,7 @@ class BuildInvoiceAnalyticsItem extends StatelessWidget {
           Text(
             title?.capitalize ?? '',
             style: Get.textTheme.titleMedium?.copyWith(
-              color: Get.theme.colorScheme.onSurface.withOpacity(0.5),
+              color: Get.theme.colorScheme.onSurface.withValues(alpha: 0.5),
               fontWeight: FontWeight.w600,
             ),
           ),
@@ -55,7 +55,7 @@ class BuildInvoiceAnalyticsItem extends StatelessWidget {
                 unit ?? 'USD',
                 style: Get.textTheme.bodyLarge?.copyWith(
                   fontWeight: FontWeight.w200,
-                  color: Get.theme.colorScheme.onSurface.withOpacity(0.4),
+                  color: Get.theme.colorScheme.onSurface.withValues(alpha: 0.4),
                 ),
               ),
             ],

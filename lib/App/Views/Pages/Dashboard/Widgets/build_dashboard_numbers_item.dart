@@ -49,8 +49,8 @@ class BuildDashboardNumbersItem extends StatelessWidget {
                       end: Alignment.bottomRight,
                       colors: [
                         bgColor ?? Colors.indigo,
-                        bgColor?.withOpacity(0.5) ??
-                            Colors.indigo.withOpacity(0.5),
+                        bgColor?.withValues(alpha: 0.5) ??
+                            Colors.indigo.withValues(alpha: 0.5),
                       ],
                     ),
                   ),
@@ -70,8 +70,8 @@ class BuildDashboardNumbersItem extends StatelessWidget {
                         style: TextStyle(
                           fontSize: context.width * 0.01,
                           fontWeight: FontWeight.w400,
-                          color: Get.theme.colorScheme.onSurface.withOpacity(
-                            0.3,
+                          color: Get.theme.colorScheme.onSurface.withValues(
+                            alpha: 0.3,
                           ),
                         ),
                       ),

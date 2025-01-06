@@ -75,15 +75,17 @@ class BuildAppUpdateWidget extends StatelessWidget {
     return GetBuilder<AppUpdateController>(
       init: AppUpdateController(),
       initState: (_) {},
-      builder: (_) {
-        if (_.isLoading || _.currentVersion.isEmpty || _.lastVersion.isEmpty) {
+      builder: (controller) {
+        if (controller.isLoading ||
+            controller.currentVersion.isEmpty ||
+            controller.lastVersion.isEmpty) {
           return const SizedBox.shrink();
         }
 
         return UpdatWidget(
-          currentVersion: _.currentVersion,
-          getLatestVersion: _.getLatestVersion,
-          getBinaryUrl: _.getBinaryUrl,
+          currentVersion: controller.currentVersion,
+          getLatestVersion: controller.getLatestVersion,
+          getBinaryUrl: controller.getBinaryUrl,
           appName: "FlutterPP",
           updateChipBuilder: floatingExtendedChipWithSilentDownload,
         );
@@ -102,7 +104,7 @@ class BuildLayoutAppbar extends StatelessWidget {
       height: 28,
       width: context.width,
       decoration: BoxDecoration(
-        color: Get.theme.colorScheme.background.withOpacity(0.2),
+        color: Get.theme.colorScheme.surface.withValues(alpha: 0.2),
         border: Border(
           bottom: BorderSide(
             width: 1,
