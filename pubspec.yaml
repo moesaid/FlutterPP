@@ -1,7 +1,7 @@
 name: flutterpp
 description: flutterpp is a desktop app for creating and managing Flutter projects.
 publish_to: "none"
-version: 0.0.9
+version: 0.0.10
 environment:
   sdk: ^3.5.0
 
