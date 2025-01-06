@@ -205,7 +205,9 @@ class ProjectSingleCodeGenController extends GetxController {
     }
 
     // if name already exists
-    if (_models.any((el) => el.modelName == _tempModel.value.modelName)) {
+    if (_models.any((el) =>
+        el.modelName == _tempModel.value.modelName &&
+        el.id != _tempModel.value.id)) {
       FlutterPlatformAlert.playAlertSound();
       FlutterPlatformAlert.showAlert(
         windowTitle: 'Oops!',
