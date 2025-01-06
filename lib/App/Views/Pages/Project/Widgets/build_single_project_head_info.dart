@@ -57,7 +57,7 @@ class BuildSingleProjectHeadInfo extends StatelessWidget {
                       Colors.transparent,
                     ),
                   ),
-                  icon: const Icon(
+                  icon: Icon(
                     Icons.settings,
                   ),
                 ),

@@ -47,6 +47,7 @@ class BuildRail extends StatelessWidget {
           ),
           Expanded(
             child: NavigationRail(
+              backgroundColor: Get.theme.colorScheme.surface,
               minWidth: AppConfig.rail * 0.7,
               selectedIndex: selectedIndex,
               onDestinationSelected: (int index) =>

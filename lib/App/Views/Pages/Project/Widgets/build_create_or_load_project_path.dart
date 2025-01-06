@@ -19,6 +19,7 @@ class BuildCreateOrLoadProjectPath extends StatelessWidget {
           onPressed: onCreate,
           icon: Icon(
             Icons.add_circle_sharp,
+            color: Get.theme.colorScheme.onSurface.withValues(alpha: 0.7),
             size: 6.spa,
           ),
           label: const Text('Create'),
@@ -35,6 +36,7 @@ class BuildCreateOrLoadProjectPath extends StatelessWidget {
           onPressed: onLoad,
           icon: Icon(
             Icons.folder,
+            color: Get.theme.colorScheme.onSurface.withValues(alpha: 0.7),
             size: 6.spa,
           ),
           label: const Text('Load'),

@@ -245,7 +245,7 @@ class BuildCreateMockupSidebar extends StatelessWidget {
         height: 600,
         padding: EdgeInsets.only(
           top: 15,
-          bottom: 40.spa,
+          bottom: 30.spa,
           left: 15,
           right: 15,
         ),
