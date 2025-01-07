@@ -24,9 +24,9 @@ class BuildSingleProjectHeader extends StatelessWidget {
         gradient: LinearGradient(
           colors: [
             ColorHelper.hexToColor(controller.project.color1 ?? '#000000')
-                .withOpacity(0.1),
+                .withValues(alpha: 0.1),
             ColorHelper.hexToColor(controller.project.color2 ?? '#000000')
-                .withOpacity(0.06),
+                .withValues(alpha: 0.06),
           ],
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,

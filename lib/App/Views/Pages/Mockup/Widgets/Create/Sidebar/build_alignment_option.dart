@@ -28,16 +28,16 @@ class BuildAlignmentOption extends GetView<AlignmentOptionController> {
       didChangeDependencies: (state) {
         state.controller?.setAlignment(alignment: initialAlignment);
       },
-      builder: (_) {
+      builder: (localController) {
         return BuildSidebarOption(
           title: title ?? 'Alignment',
           rightWidget: Container(
             padding: const EdgeInsets.all(2),
             decoration: BoxDecoration(
-              color: Get.theme.colorScheme.background.withOpacity(0.3),
+              color: Get.theme.colorScheme.surface.withValues(alpha: 0.3),
               borderRadius: BorderRadius.circular(5),
               border: Border.all(
-                color: Colors.white.withOpacity(0.1),
+                color: Colors.white.withValues(alpha: 0.1),
                 width: 0.5,
               ),
             ),
@@ -45,15 +45,18 @@ class BuildAlignmentOption extends GetView<AlignmentOptionController> {
               children: [
                 Expanded(
                   child: InkWell(
-                    onTap: () => _.setAlignment(
+                    onTap: () => localController.setAlignment(
                       alignment: MainAxisAlignment.start,
                       onToggle: onToggle,
                     ),
                     child: Container(
                       padding: const EdgeInsets.all(5),
                       decoration: BoxDecoration(
-                        color: Colors.white.withOpacity(
-                            _.alignment == MainAxisAlignment.start ? 0.1 : 0),
+                        color: Colors.white.withValues(
+                            alpha: localController.alignment ==
+                                    MainAxisAlignment.start
+                                ? 0.1
+                                : 0),
                         borderRadius: BorderRadius.circular(5),
                       ),
                       child: Icon(
@@ -66,15 +69,18 @@ class BuildAlignmentOption extends GetView<AlignmentOptionController> {
                 ),
                 Expanded(
                   child: InkWell(
-                    onTap: () => _.setAlignment(
+                    onTap: () => localController.setAlignment(
                       alignment: MainAxisAlignment.center,
                       onToggle: onToggle,
                     ),
                     child: Container(
                       padding: const EdgeInsets.all(5),
                       decoration: BoxDecoration(
-                        color: Colors.white.withOpacity(
-                            _.alignment == MainAxisAlignment.center ? 0.1 : 0),
+                        color: Colors.white.withValues(
+                            alpha: localController.alignment ==
+                                    MainAxisAlignment.center
+                                ? 0.1
+                                : 0),
                         borderRadius: BorderRadius.circular(5),
                       ),
                       child: Icon(
@@ -87,15 +93,18 @@ class BuildAlignmentOption extends GetView<AlignmentOptionController> {
                 ),
                 Expanded(
                   child: InkWell(
-                    onTap: () => _.setAlignment(
+                    onTap: () => localController.setAlignment(
                       alignment: MainAxisAlignment.end,
                       onToggle: onToggle,
                     ),
                     child: Container(
                       padding: const EdgeInsets.all(5),
                       decoration: BoxDecoration(
-                        color: Colors.white.withOpacity(
-                            _.alignment == MainAxisAlignment.end ? 0.1 : 0),
+                        color: Colors.white.withValues(
+                            alpha: localController.alignment ==
+                                    MainAxisAlignment.end
+                                ? 0.1
+                                : 0),
                         borderRadius: BorderRadius.circular(5),
                       ),
                       child: Icon(

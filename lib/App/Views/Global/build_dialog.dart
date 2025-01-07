@@ -19,7 +19,7 @@ class BuildDialog extends StatelessWidget {
       alignment: Alignment.center,
       children: [
         Container(
-          color: Get.theme.dialogBackgroundColor.withOpacity(0.5),
+          color: Get.theme.dialogBackgroundColor.withValues(alpha: 0.5),
           child: GestureDetector(
             onTap: () => Get.back(),
           ),

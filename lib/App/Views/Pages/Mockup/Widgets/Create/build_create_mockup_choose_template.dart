@@ -31,17 +31,17 @@ class BuildCreateMockupChooseTemplate extends StatelessWidget {
                 height: 300,
                 decoration: BoxDecoration(
                   color: templateId == array[index]
-                      ? Get.theme.colorScheme.secondary.withOpacity(
-                          0.4,
+                      ? Get.theme.colorScheme.secondary.withValues(
+                          alpha: 0.4,
                         )
                       : Get.theme.colorScheme.primaryContainer,
                   border: Border.all(
                     color: templateId == array[index]
-                        ? Get.theme.colorScheme.onPrimaryContainer.withOpacity(
-                            0.2,
+                        ? Get.theme.colorScheme.onPrimaryContainer.withValues(
+                            alpha: 0.2,
                           )
-                        : Get.theme.colorScheme.onPrimaryContainer.withOpacity(
-                            0.1,
+                        : Get.theme.colorScheme.onPrimaryContainer.withValues(
+                            alpha: 0.1,
                           ),
                   ),
                   borderRadius: const BorderRadius.all(Radius.circular(5)),

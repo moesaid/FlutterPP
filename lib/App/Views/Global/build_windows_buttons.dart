@@ -27,7 +27,7 @@ class BuildWindowsButtons extends StatelessWidget {
           //   },
           //   afterHoverColor: Colors.green,
           //   beforeHoverColor:
-          //       Get.theme.colorScheme.onBackground.withOpacity(0.4),
+          //       Get.theme.colorScheme.onBackground.withValues(alpha:0.4),
           // ),
           // const SizedBox(width: 6),
           BuildAppbarPlatformButton(
@@ -37,7 +37,7 @@ class BuildWindowsButtons extends StatelessWidget {
             onTap: () async => await win.minimize(),
             afterHoverColor: Colors.yellow,
             beforeHoverColor:
-                Get.theme.colorScheme.onBackground.withOpacity(0.4),
+                Get.theme.colorScheme.onSurface.withValues(alpha: 0.4),
           ),
           const SizedBox(width: 6),
           BuildAppbarPlatformButton(
@@ -50,7 +50,7 @@ class BuildWindowsButtons extends StatelessWidget {
               await systemTray.destroy();
             },
             beforeHoverColor:
-                Get.theme.colorScheme.onBackground.withOpacity(0.4),
+                Get.theme.colorScheme.onSurface.withValues(alpha: 0.4),
           ),
           const SizedBox(width: 6),
         ],

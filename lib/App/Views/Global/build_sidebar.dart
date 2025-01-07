@@ -15,7 +15,7 @@ class BuildSidebar extends StatelessWidget {
       width: AppConfig.sidebar,
       height: double.infinity,
       decoration: BoxDecoration(
-        color: Get.theme.colorScheme.background.withOpacity(0.7),
+        color: Get.theme.colorScheme.surface.withValues(alpha: 0.7),
         border: Border(
           right: BorderSide(
             width: 1,

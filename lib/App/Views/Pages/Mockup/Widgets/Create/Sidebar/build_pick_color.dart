@@ -27,14 +27,14 @@ class BuildPickColor extends GetView<PickupColorController> {
           );
         }
       },
-      builder: (_) {
+      builder: (localController) {
         return InkWell(
           onTap: () async {
             await colorPickerDialog(
               context: context,
               customColorSwatchesAndNames: {},
-              dialogPickerColor: _.dialogPickerColor,
-              onColorChanged: (Color color) => _.onColorChanged(
+              dialogPickerColor: localController.dialogPickerColor,
+              onColorChanged: (Color color) => localController.onColorChanged(
                 color: color,
                 callback: onColorChangedCallback,
               ),
@@ -44,7 +44,7 @@ class BuildPickColor extends GetView<PickupColorController> {
             () => Container(
               height: 30,
               decoration: BoxDecoration(
-                color: _.screenPickerColor,
+                color: localController.screenPickerColor,
                 borderRadius: BorderRadius.circular(5),
               ),
             ),

@@ -27,7 +27,7 @@ class BuildEditFrame extends StatelessWidget {
         state.controller?.setupController(fram: initialValue);
       },
       initState: (_) {},
-      builder: (_) {
+      builder: (localController) {
         return ElevatedButton(
           onPressed: () {
             aweSideSheet(
@@ -36,8 +36,8 @@ class BuildEditFrame extends StatelessWidget {
               sheetPosition: SheetPosition.right,
               header: const SizedBox.shrink(),
               onCancel: () => Get.back(),
-              onConfirm: () => _.onConfirm(callback: callback),
-              body: _BuildBody(controller: _, callback: callback),
+              onConfirm: () => localController.onConfirm(callback: callback),
+              body: _BuildBody(controller: localController, callback: callback),
             );
           },
           child: Text('edit Frame'.capitalize!),
@@ -83,7 +83,7 @@ class _BuildBody extends StatelessWidget {
                 style: TextStyle(
                   fontSize: 5.spa,
                   fontStyle: FontStyle.italic,
-                  color: Get.theme.colorScheme.onSurface.withOpacity(0.5),
+                  color: Get.theme.colorScheme.onSurface.withValues(alpha: 0.5),
                 ),
               ),
               Divider(height: 10.spa, thickness: 0.4),
@@ -179,7 +179,8 @@ class _BuildDeviceList extends StatelessWidget {
                         fontWeight: FontWeight.w600,
                         color: selectedDevice?.name == device.name
                             ? Get.theme.colorScheme.secondary
-                            : Get.theme.colorScheme.onPrimary.withOpacity(0.5),
+                            : Get.theme.colorScheme.onPrimary
+                                .withValues(alpha: 0.5),
                       ),
                       child: Row(
                         children: [

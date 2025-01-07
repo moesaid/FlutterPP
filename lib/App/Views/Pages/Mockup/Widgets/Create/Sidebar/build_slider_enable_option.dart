@@ -29,7 +29,7 @@ class BuildSliderEnableOption extends GetView<BoolToggleController> {
       didChangeDependencies: (state) {
         state.controller?.setInitialValue(initialValue ?? false);
       },
-      builder: (_) {
+      builder: (localController) {
         return BuildSidebarOption(
           title: title ?? 'Enable',
           flexLeft: flexLeft,
@@ -37,9 +37,9 @@ class BuildSliderEnableOption extends GetView<BoolToggleController> {
           fontWeight: fontWeight,
           rightWidget: Obx(
             () => Switch(
-              value: _.isOn,
+              value: localController.isOn,
               onChanged: (bool value) {
-                _.toggle();
+                localController.toggle();
                 onToggle?.call(value);
               },
               activeColor: Get.theme.primaryColor,

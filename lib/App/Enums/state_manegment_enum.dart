@@ -40,9 +40,6 @@ enum StateManegmentEnum {
       case StateManegmentEnum.cubit:
         await cubit?.call();
         break;
-      default:
-        await getx?.call();
-        break;
     }
   }
 }

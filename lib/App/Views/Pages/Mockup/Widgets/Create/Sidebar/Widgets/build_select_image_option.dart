@@ -25,7 +25,7 @@ class BuildSelectImageOption extends StatelessWidget {
       init: SelectImageOptionController(),
       tag: controllerTag,
       initState: (_) {},
-      builder: (_) {
+      builder: (localController) {
         return ElevatedButton(
           onPressed: () async {
             // if askForRepeat is true, then we need to ask the user if they want to repeat the image
@@ -42,19 +42,19 @@ class BuildSelectImageOption extends StatelessWidget {
               );
 
               if (result == CustomButton.neutralButton) {
-                _.getImage(
+                localController.getImage(
                   mockupId: mockupId,
                   callback: callbackForRepeat,
                 );
               } else {
-                _.getImage(
+                localController.getImage(
                   mockupId: mockupId,
                   callbackForRepeat: callbackForRepeat,
                   shouldRepeat: true,
                 );
               }
             } else {
-              _.getImage(
+              localController.getImage(
                 mockupId: mockupId,
                 callback: callback,
               );

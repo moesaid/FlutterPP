@@ -86,7 +86,7 @@ class BuildDashboardChart extends StatelessWidget {
                 'no invoices yet'.capitalize!,
                 style: TextStyle(
                   fontSize: 4.spa,
-                  color: Get.theme.colorScheme.onSurface.withOpacity(0.5),
+                  color: Get.theme.colorScheme.onSurface.withValues(alpha: 0.5),
                 ),
               ),
             ),

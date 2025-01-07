@@ -34,7 +34,7 @@ class BuildFullPageBottomSheet extends StatelessWidget {
           decoration: decoration ??
               BoxDecoration(
                 color: bgColor ??
-                    Get.theme.scaffoldBackgroundColor.withOpacity(0.9),
+                    Get.theme.scaffoldBackgroundColor.withValues(alpha: 0.9),
               ),
           child: child ??
               Text(

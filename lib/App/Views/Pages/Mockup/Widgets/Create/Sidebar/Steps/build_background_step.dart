@@ -22,9 +22,9 @@ ExpansionTileItem buildBackgroundStep({
     title: const Text('Background'),
     leading: const Icon(Icons.crop_original_rounded),
     collapsedBorderColor: Colors.transparent,
-    collapsedTextColor: Colors.grey.withOpacity(0.8),
-    collapsedIconColor: Colors.grey.withOpacity(0.8),
-    expendedBorderColor: Colors.grey.withOpacity(0.2),
+    collapsedTextColor: Colors.grey.withValues(alpha: 0.8),
+    collapsedIconColor: Colors.grey.withValues(alpha: 0.8),
+    expendedBorderColor: Colors.grey.withValues(alpha: 0.2),
     textColor: Colors.white,
     iconColor: Colors.white,
     children: [
@@ -34,12 +34,12 @@ ExpansionTileItem buildBackgroundStep({
         didChangeDependencies: (state) {
           state.controller?.updateActive();
         },
-        builder: (_) {
+        builder: (localController) {
           return BuildSidebarOption(
             title: 'Type',
             rightWidget: Obx(
               () => DropdownButton<String>(
-                value: _.activeBackgroundType.name,
+                value: localController.activeBackgroundType.name,
                 icon: const Expanded(
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.end,

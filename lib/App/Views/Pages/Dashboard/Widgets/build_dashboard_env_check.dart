@@ -14,15 +14,15 @@ class BuildDashboardEnvCheck extends GetView<DashboardEnvCheckController> {
   Widget build(BuildContext context) {
     return GetBuilder<DashboardEnvCheckController>(
       init: DashboardEnvCheckController(),
-      builder: (_) {
+      builder: (localController) {
         return Obx(
           () => AnimatedGradientBorder(
             glowSize: 0,
             borderSize: 1,
-            animationProgress:
-                _.isLoading || _.checkEnvModel.dartInstalled != null
-                    ? 0.8
-                    : null,
+            animationProgress: localController.isLoading ||
+                    localController.checkEnvModel.dartInstalled != null
+                ? 0.8
+                : null,
             borderRadius: BorderRadius.circular(5),
             gradientColors: [Colors.transparent, Get.theme.colorScheme.primary],
             child: Container(
@@ -262,11 +262,11 @@ class BuildEnvCheckDataState extends StatelessWidget {
                       color:
                           controller.checkEnvModel.flutterDoctor![index].head ==
                                   null
-                              ? Colors.yellow.withOpacity(0.8)
+                              ? Colors.yellow.withValues(alpha: 0.8)
                               : controller.checkEnvModel.flutterDoctor![index]
                                           .head ==
                                       true
-                                  ? Colors.green.withOpacity(0.8)
+                                  ? Colors.green.withValues(alpha: 0.8)
                                   : Colors.red,
                     ),
                   ),

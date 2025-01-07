@@ -72,7 +72,7 @@ class BuildProjectSingleFilesSidebar extends StatelessWidget {
                             'used Storage'.capitalize!,
                             style: Get.textTheme.bodyMedium?.copyWith(
                               color: Get.theme.colorScheme.onSurface
-                                  .withOpacity(0.4),
+                                  .withValues(alpha: 0.4),
                             ),
                           ),
                           Text(
@@ -89,7 +89,7 @@ class BuildProjectSingleFilesSidebar extends StatelessWidget {
                             'total Storage'.capitalize!,
                             style: Get.textTheme.bodyMedium?.copyWith(
                               color: Get.theme.colorScheme.onSurface
-                                  .withOpacity(0.4),
+                                  .withValues(alpha: 0.4),
                             ),
                           ),
                           Text(

@@ -17,22 +17,22 @@ class BuildClientList extends StatelessWidget {
     return GetBuilder<ClientListController>(
       init: ClientListController(),
       initState: (_) {},
-      builder: (_) {
+      builder: (localController) {
         return Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             BuildLoadingOrEmptyLayout(
-              isLoading: _.isLoading,
-              isEmpty: _.clients.isEmpty,
+              isLoading: localController.isLoading,
+              isEmpty: localController.clients.isEmpty,
               title: 'No Clients Found',
               child: ListView.separated(
-                itemCount: _.clients.length,
+                itemCount: localController.clients.length,
                 shrinkWrap: true,
                 separatorBuilder: (_, __) {
                   return SizedBox(height: 1.spa);
                 },
                 itemBuilder: (__, int index) {
-                  ClientModel item = _.clients[index];
+                  ClientModel item = localController.clients[index];
                   return Card(
                     elevation: 0,
                     color: Get.theme.colorScheme.primaryContainer,

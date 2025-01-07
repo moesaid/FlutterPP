@@ -111,8 +111,8 @@ class BuildCreateOrEditSheet extends StatelessWidget {
                           ),
                           SizedBox(width: 4.spa),
                           SizedBox(
-                            width: 20.spa,
-                            height: 16.spa,
+                            width: context.width * 0.05,
+                            height: context.width * 0.035,
                             child: BuildPickColor(
                               controllerTag: 'tempModel',
                               initialColor: ColorHelper.hexToColor(
@@ -122,7 +122,8 @@ class BuildCreateOrEditSheet extends StatelessWidget {
                                 controller.updateTempModel(
                                   ModelConfigModel(
                                     color: ColorHelper.colorToHexWithoutHash(
-                                        color),
+                                      color,
+                                    ),
                                   ),
                                 );
                               },
@@ -231,8 +232,11 @@ class BuildAddPropertiesSection extends StatelessWidget {
               children: [
                 if (controller.tempModel.properties != null)
                   Container(
-                    color: Get.theme.colorScheme.secondaryContainer
-                        .withOpacity(0.3),
+                    decoration: BoxDecoration(
+                      color: Get.theme.colorScheme.secondaryContainer
+                          .withValues(alpha: 0.3),
+                      borderRadius: BorderRadius.circular(5),
+                    ),
                     child: ListView.separated(
                       itemCount: controller.tempModel.properties?.length ?? 0,
                       shrinkWrap: true,
@@ -245,7 +249,7 @@ class BuildAddPropertiesSection extends StatelessWidget {
                         return ListTile(
                           title: Text(
                             property.name ?? 'Property',
-                            style: TextStyle(fontSize: 4.spa),
+                            style: Get.textTheme.bodyMedium,
                           ),
                           trailing: Row(
                             mainAxisSize: MainAxisSize.min,
@@ -253,24 +257,28 @@ class BuildAddPropertiesSection extends StatelessWidget {
                               Badge(
                                 label: Text(property.type?.type ?? 'Type'),
                                 backgroundColor:
-                                    property.type?.color.withOpacity(0.1),
+                                    property.type?.color.withValues(alpha: 0.1),
                                 textColor: property.type?.color,
-                                textStyle: TextStyle(
-                                  fontSize: 3.5.spa,
+                                textStyle: Get.textTheme.bodyMedium?.copyWith(
+                                  fontSize: context.width * 0.01,
                                   color: property.type?.color,
                                 ),
-                                padding:
-                                    EdgeInsets.symmetric(horizontal: 3.spa),
+                                padding: EdgeInsets.symmetric(
+                                  horizontal: context.width * 0.008,
+                                  vertical: context.width * 0.002,
+                                ),
                               ),
-                              SizedBox(width: 5.spa),
+                              SizedBox(width: context.width * 0.001),
                               IconButton(
+                                visualDensity: VisualDensity.compact,
                                 onPressed: () {
-                                  controller
-                                      .removePropertiesFromTempModel(index);
+                                  controller.removePropertiesFromTempModel(
+                                    index,
+                                  );
                                 },
                                 icon: Icon(
-                                  Icons.close,
-                                  size: 4.spa,
+                                  Icons.close_rounded,
+                                  size: context.width * 0.014,
                                   color: Get.theme.colorScheme.error,
                                 ),
                               ),

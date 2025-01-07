@@ -59,7 +59,8 @@ class BuildSearchForm extends StatelessWidget {
                     ),
                   ),
                   hintStyle: Get.textTheme.bodyMedium?.copyWith(
-                    color: Get.theme.colorScheme.onSurface.withOpacity(0.4),
+                    color:
+                        Get.theme.colorScheme.onSurface.withValues(alpha: 0.4),
                   ),
                 ),
               ),

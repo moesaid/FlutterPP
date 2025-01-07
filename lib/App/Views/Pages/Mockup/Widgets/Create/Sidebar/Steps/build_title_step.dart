@@ -40,9 +40,9 @@ ExpansionTileItem buildTitleStep({
     title: Text(widgetTitle!),
     leading: const Icon(Icons.text_fields),
     collapsedBorderColor: Colors.transparent,
-    collapsedTextColor: Colors.grey.withOpacity(0.8),
-    collapsedIconColor: Colors.grey.withOpacity(0.8),
-    expendedBorderColor: Colors.grey.withOpacity(0.2),
+    collapsedTextColor: Colors.grey.withValues(alpha: 0.8),
+    collapsedIconColor: Colors.grey.withValues(alpha: 0.8),
+    expendedBorderColor: Colors.grey.withValues(alpha: 0.2),
     textColor: Colors.white,
     iconColor: Colors.white,
     children: [
@@ -60,7 +60,7 @@ ExpansionTileItem buildTitleStep({
           decoration: InputDecoration(
             hintText: titleText,
             hintStyle: Get.textTheme.bodyMedium?.copyWith(
-              color: Colors.grey.withOpacity(0.5),
+              color: Colors.grey.withValues(alpha: 0.5),
             ),
             border: InputBorder.none,
           ),

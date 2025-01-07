@@ -22,8 +22,8 @@ class BuildProjectSingleFilesTypeWithSize extends StatelessWidget {
         horizontal: 4.spa,
       ),
       decoration: BoxDecoration(
-        color:
-            color?.withOpacity(0.07) ?? Get.theme.colorScheme.primaryContainer,
+        color: color?.withValues(alpha: 0.07) ??
+            Get.theme.colorScheme.primaryContainer,
         borderRadius: BorderRadius.circular(10),
       ),
       child: Row(

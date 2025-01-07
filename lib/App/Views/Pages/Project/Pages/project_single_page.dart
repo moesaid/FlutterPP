@@ -27,7 +27,7 @@ class ProjectSinglePage extends GetView<ProjectSingleController> {
         state.controller?.fetchApi(projectId: id);
       },
       initState: (_) {},
-      builder: (_) {
+      builder: (localController) {
         return Material(
           child: BuildLoadingOrEmptyLayout(
             isLoading: controller.isLoading,
@@ -37,7 +37,7 @@ class ProjectSinglePage extends GetView<ProjectSingleController> {
             child: Scaffold(
               appBar: hasAppBar == true
                   ? BuildAppBar(
-                      title: _.project.title ?? '',
+                      title: localController.project.title ?? '',
                       hasBackButton: true,
                       onBack: () => Get.back(),
                     )

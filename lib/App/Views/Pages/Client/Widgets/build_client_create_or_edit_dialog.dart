@@ -21,37 +21,37 @@ class BuildClientCreateOrEditDialog extends StatelessWidget {
       child: GetBuilder<ClientIndexController>(
         init: ClientIndexController(),
         initState: (_) {},
-        builder: (_) {
+        builder: (localController) {
           return FormBuilder(
             key: formKey,
             autovalidateMode: AutovalidateMode.onUserInteraction,
             initialValue: {
-              'name': _.activeClient.name,
-              'contact_name': _.activeClient.contactName,
-              'email': _.activeClient.email,
-              'phone': _.activeClient.phone,
-              'address': _.activeClient.address,
-              'city': _.activeClient.city,
-              'state': _.activeClient.state,
-              'zip': _.activeClient.zip,
-              'country': _.activeClient.country,
-              'website': _.activeClient.website,
-              'internal_notes': _.activeClient.internalNotes,
-              'currency': _.activeClient.currency,
-              'currency_symbol': _.activeClient.currencySymbol,
+              'name': localController.activeClient.name,
+              'contact_name': localController.activeClient.contactName,
+              'email': localController.activeClient.email,
+              'phone': localController.activeClient.phone,
+              'address': localController.activeClient.address,
+              'city': localController.activeClient.city,
+              'state': localController.activeClient.state,
+              'zip': localController.activeClient.zip,
+              'country': localController.activeClient.country,
+              'website': localController.activeClient.website,
+              'internal_notes': localController.activeClient.internalNotes,
+              'currency': localController.activeClient.currency,
+              'currency_symbol': localController.activeClient.currencySymbol,
             },
             child: Stepper(
               type: StepperType.vertical,
-              onStepContinue: () => _.onStepContinue(formKey!),
-              onStepTapped: _.onStepTapped,
-              currentStep: _.currentStep,
+              onStepContinue: () => localController.onStepContinue(formKey!),
+              onStepTapped: localController.onStepTapped,
+              currentStep: localController.currentStep,
               controlsBuilder: ((context, details) {
                 return Column(
                   children: [
                     SizedBox(height: 4.spa),
                     Row(
                       children: [
-                        if (_.currentStep != 1)
+                        if (localController.currentStep != 1)
                           FilledButton(
                             onPressed: details.onStepContinue,
                             style: ButtonStyle(
@@ -61,9 +61,10 @@ class BuildClientCreateOrEditDialog extends StatelessWidget {
                             ),
                             child: const Text('Next'),
                           ),
-                        if (_.currentStep == 1)
+                        if (localController.currentStep == 1)
                           FilledButton(
-                            onPressed: () => _.onStepContinue(formKey!),
+                            onPressed: () =>
+                                localController.onStepContinue(formKey!),
                             child: const Text('Save'),
                           ),
                       ],
@@ -75,7 +76,7 @@ class BuildClientCreateOrEditDialog extends StatelessWidget {
                 Step(
                   title: const Text('Contact'),
                   subtitle: const Text('Client Contact Information'),
-                  state: _.currentStep == 0
+                  state: localController.currentStep == 0
                       ? StepState.editing
                       : StepState.indexed,
                   content: const BuildClientContactDialogStep(),
@@ -83,7 +84,7 @@ class BuildClientCreateOrEditDialog extends StatelessWidget {
                 Step(
                   title: const Text('Billing'),
                   subtitle: const Text('Client Billing Information'),
-                  state: _.currentStep == 1
+                  state: localController.currentStep == 1
                       ? StepState.editing
                       : StepState.indexed,
                   content: const BuildClientBillingDialogStep(),

@@ -235,7 +235,7 @@ class BuildCreateMockupSidebar extends StatelessWidget {
         color: Get.theme.scaffoldBackgroundColor,
         border: Border(
           left: BorderSide(
-            color: Colors.grey.withOpacity(0.2),
+            color: Colors.grey.withValues(alpha: 0.2),
             width: 0.5,
           ),
         ),
@@ -245,7 +245,7 @@ class BuildCreateMockupSidebar extends StatelessWidget {
         height: 600,
         padding: EdgeInsets.only(
           top: 15,
-          bottom: 40.spa,
+          bottom: 30.spa,
           left: 15,
           right: 15,
         ),
@@ -253,7 +253,7 @@ class BuildCreateMockupSidebar extends StatelessWidget {
           color: Get.theme.scaffoldBackgroundColor,
           border: Border(
             left: BorderSide(
-              color: Colors.grey.withOpacity(0.2),
+              color: Colors.grey.withValues(alpha: 0.2),
               width: 0.5,
             ),
           ),

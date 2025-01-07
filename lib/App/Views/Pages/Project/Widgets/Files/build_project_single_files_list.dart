@@ -57,7 +57,7 @@ class BuildProjectSingleFilesList extends StatelessWidget {
                 file.size?.toFileSize() ?? '',
                 style: Get.textTheme.bodyMedium?.copyWith(
                   fontSize: 5.spa,
-                  color: Get.theme.colorScheme.onSurface.withOpacity(0.4),
+                  color: Get.theme.colorScheme.onSurface.withValues(alpha: 0.4),
                 ),
               ),
               SizedBox(width: 2.spa),

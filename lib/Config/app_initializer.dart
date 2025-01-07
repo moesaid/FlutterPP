@@ -6,6 +6,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutterpp/App/Providers/Local/app_mode.dart';
 import 'package:flutterpp/Config/app_config.dart';
+import 'package:flutterpp/Config/app_print.dart';
 import 'package:flutterpp/Config/app_window_config.dart';
 import 'package:get_storage/get_storage.dart';
 // ignore: depend_on_referenced_packages
@@ -54,14 +55,17 @@ class AppInitializer {
   static Future<void> _lunchAppOnStartup() async {
     PackageInfo packageInfo = await PackageInfo.fromPlatform();
 
-    launchAtStartup.setup(
-      appName: packageInfo.appName,
-      appPath: Platform.resolvedExecutable,
-    );
-
-    bool isEnabled = await launchAtStartup.isEnabled();
-    if (!isEnabled) {
-      launchAtStartup.enable();
+    try {
+      launchAtStartup.setup(
+        appName: packageInfo.appName,
+        appPath: Platform.resolvedExecutable,
+      );
+      bool isEnabled = await launchAtStartup.isEnabled();
+      if (!isEnabled) {
+        launchAtStartup.enable();
+      }
+    } catch (e) {
+      AppPrint.print('Error: $e');
     }
   }
 

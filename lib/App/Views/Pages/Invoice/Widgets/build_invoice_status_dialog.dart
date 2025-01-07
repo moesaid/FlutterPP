@@ -45,8 +45,8 @@ class BuildInvoiceStatusDialog extends StatelessWidget {
                     label: Text(status),
                     padding: EdgeInsets.symmetric(horizontal: 3.spa),
                     textColor: InvoiceHelper.getStatusColor(status),
-                    backgroundColor:
-                        InvoiceHelper.getStatusColor(status).withOpacity(0.1),
+                    backgroundColor: InvoiceHelper.getStatusColor(status)
+                        .withValues(alpha: 0.1),
                   ),
                 );
               },

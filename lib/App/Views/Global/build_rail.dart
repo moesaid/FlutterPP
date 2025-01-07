@@ -22,7 +22,7 @@ class BuildRail extends StatelessWidget {
     return Container(
       width: AppConfig.rail,
       decoration: BoxDecoration(
-        color: Get.theme.colorScheme.background,
+        color: Get.theme.colorScheme.surface,
         border: Border(
           right: BorderSide(
             width: 1,
@@ -47,6 +47,7 @@ class BuildRail extends StatelessWidget {
           ),
           Expanded(
             child: NavigationRail(
+              backgroundColor: Get.theme.colorScheme.surface,
               minWidth: AppConfig.rail * 0.7,
               selectedIndex: selectedIndex,
               onDestinationSelected: (int index) =>

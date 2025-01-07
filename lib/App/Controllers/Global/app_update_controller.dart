@@ -44,7 +44,7 @@ class AppUpdateController extends GetxController {
   _fetchApi() async {
     final data = await http.get(
       Uri.parse(
-        "https://api.github.com/repos/moesaid/FlutterPP_Public/releases/latest",
+        "https://api.github.com/repos/moesaid/FlutterPP/releases/latest",
       ),
     );
 

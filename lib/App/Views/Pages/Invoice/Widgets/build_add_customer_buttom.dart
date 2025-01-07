@@ -25,8 +25,8 @@ class BuildAddCustomerButtom extends StatelessWidget {
               width: context.width * 0.2,
               height: context.height * 0.2,
               decoration: BoxDecoration(
-                color:
-                    Get.theme.colorScheme.secondaryContainer.withOpacity(0.2),
+                color: Get.theme.colorScheme.secondaryContainer
+                    .withValues(alpha: 0.2),
                 border: Border.all(
                   color: Get.theme.colorScheme.secondaryContainer,
                   width: 2,

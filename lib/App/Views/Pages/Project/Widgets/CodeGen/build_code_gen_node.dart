@@ -64,7 +64,7 @@ class BuildCodeGenNode extends StatelessWidget {
               children: [
                 Icon(
                   Icons.drag_indicator,
-                  color: Get.theme.colorScheme.onSurface.withOpacity(0.3),
+                  color: Get.theme.colorScheme.onSurface.withValues(alpha: 0.3),
                 ),
                 Text(item.modelName != null
                     ? '${item.modelName}_model'.toPascalCase()
@@ -94,7 +94,7 @@ class BuildCodeGenNode extends StatelessWidget {
                   if (propertiesNoRelation.isNotEmpty)
                     Container(
                       color: Get.theme.colorScheme.secondaryContainer
-                          .withOpacity(0.3),
+                          .withValues(alpha: 0.3),
                       child: ListView.separated(
                         itemCount: propertiesNoRelation.length,
                         shrinkWrap: true,
@@ -112,7 +112,7 @@ class BuildCodeGenNode extends StatelessWidget {
                             trailing: Badge(
                               label: Text(property.type?.type ?? 'Type11'),
                               backgroundColor:
-                                  property.type?.color.withOpacity(0.1),
+                                  property.type?.color.withValues(alpha: 0.1),
                               textColor: property.type?.color,
                               textStyle: TextStyle(
                                 fontSize: 3.5.spa,
@@ -157,7 +157,7 @@ class BuildCodeGenNode extends StatelessWidget {
                               style: TextStyle(fontSize: 3.5.spa),
                             ),
                             backgroundColor:
-                                property.type?.color.withOpacity(0.1),
+                                property.type?.color.withValues(alpha: 0.1),
                             textColor: property.type?.color,
                             padding: EdgeInsets.symmetric(horizontal: 3.spa),
                             largeSize: 8.spa,

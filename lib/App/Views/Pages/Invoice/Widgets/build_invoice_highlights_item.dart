@@ -52,7 +52,7 @@ class BuildInvoiceHighlightsItem extends StatelessWidget {
                     fontSize: 5.spa,
                     color: isAmount != null
                         ? Colors.black
-                        : Colors.black.withOpacity(0.6),
+                        : Colors.black.withValues(alpha: 0.6),
                     fontWeight: isAmount != null ? FontWeight.bold : null,
                   ),
                 ),

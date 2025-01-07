@@ -57,7 +57,7 @@ class BuildSingleProjectHeadInfo extends StatelessWidget {
                       Colors.transparent,
                     ),
                   ),
-                  icon: const Icon(
+                  icon: Icon(
                     Icons.settings,
                   ),
                 ),
@@ -116,7 +116,7 @@ class BuildEditProject extends StatelessWidget {
         state.controller?.updateIcon(controller.project.icon ?? '');
       },
       initState: (_) {},
-      builder: (_) {
+      builder: (localController) {
         return FormBuilder(
           key: formKey,
           initialValue: {
@@ -136,8 +136,9 @@ class BuildEditProject extends StatelessWidget {
                       header: const SizedBox.shrink(),
                       footer: const SizedBox.shrink(),
                       body: BuildIconAndGradients(
-                        onColorChange: (val) => _.updateColors(val),
-                        onSvgChange: (val) => _.updateIcon(val),
+                        onColorChange: (val) =>
+                            localController.updateColors(val),
+                        onSvgChange: (val) => localController.updateIcon(val),
                         hasCloseButton: false,
                         alignment: PossionAlignment.topBottom,
                       ),
@@ -145,10 +146,11 @@ class BuildEditProject extends StatelessWidget {
                   },
                   child: BuildProjectAvatar(
                     colors: [
-                      ColorHelper.hexToColor(_.activeColors.first),
-                      ColorHelper.hexToColor(_.activeColors.last),
+                      ColorHelper.hexToColor(
+                          localController.activeColors.first),
+                      ColorHelper.hexToColor(localController.activeColors.last),
                     ],
-                    icon: _.activeIcon,
+                    icon: localController.activeIcon,
                   ),
                 ),
                 SizedBox(height: 8.spa),
@@ -173,7 +175,8 @@ class BuildEditProject extends StatelessWidget {
                     children: [
                       FilledButton(
                         onPressed: () async {
-                          ProjectModel? item = await _.updateProject(
+                          ProjectModel? item =
+                              await localController.updateProject(
                             project: controller.project.copyWith(
                               title:
                                   formKey.currentState?.fields['title']?.value,

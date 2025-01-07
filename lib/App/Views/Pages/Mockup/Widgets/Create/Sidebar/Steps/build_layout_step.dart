@@ -20,15 +20,15 @@ ExpansionTileItem buildLayoutStep({
     title: const Text('Layout'),
     leading: const Icon(Icons.crop_free),
     collapsedBorderColor: Colors.transparent,
-    collapsedTextColor: Colors.grey.withOpacity(0.8),
-    collapsedIconColor: Colors.grey.withOpacity(0.8),
-    expendedBorderColor: Colors.grey.withOpacity(0.2),
+    collapsedTextColor: Colors.grey.withValues(alpha: 0.8),
+    collapsedIconColor: Colors.grey.withValues(alpha: 0.8),
+    expendedBorderColor: Colors.grey.withValues(alpha: 0.2),
     textColor: Colors.white,
     iconColor: Colors.white,
     children: [
       GetBuilder<BuildLayoutOptionController>(
         init: BuildLayoutOptionController(),
-        builder: (_) {
+        builder: (localController) {
           return InkWell(
             onTap: () {
               aweSideSheet(
@@ -56,9 +56,9 @@ ExpansionTileItem buildLayoutStep({
                 sheetWidth: 100.h,
                 body: Obx(
                   () => BuildScreenLayoutsWidget(
-                    activeLayout: _.activeLayout,
-                    onEnter: _.onEnter,
-                    onExit: _.onExit,
+                    activeLayout: localController.activeLayout,
+                    onEnter: localController.onEnter,
+                    onExit: localController.onExit,
                     onLayoutChanged: onLayoutChanged,
                   ),
                 ),
@@ -67,10 +67,10 @@ ExpansionTileItem buildLayoutStep({
             child: Container(
               padding: const EdgeInsets.all(10),
               decoration: BoxDecoration(
-                color: Get.theme.primaryColor.withOpacity(0.5),
+                color: Get.theme.primaryColor.withValues(alpha: 0.5),
                 borderRadius: BorderRadius.circular(5),
                 border: Border.all(
-                  color: Colors.white.withOpacity(0.1),
+                  color: Colors.white.withValues(alpha: 0.1),
                   width: 0.5,
                 ),
               ),

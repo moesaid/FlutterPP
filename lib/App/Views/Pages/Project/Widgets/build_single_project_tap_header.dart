@@ -12,7 +12,7 @@ class BuildSingleProjectTapHeader extends StatelessWidget {
       dividerColor: Get.theme.colorScheme.secondaryContainer,
       indicatorColor: Get.theme.primaryColorLight,
       labelColor: Get.theme.primaryColorLight,
-      unselectedLabelColor: Get.theme.colorScheme.onBackground,
+      unselectedLabelColor: Get.theme.colorScheme.onSurface,
       indicatorSize: TabBarIndicatorSize.label,
       isScrollable: true,
       enableFeedback: true,

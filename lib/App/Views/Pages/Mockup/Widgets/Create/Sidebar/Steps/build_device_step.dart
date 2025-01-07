@@ -60,9 +60,9 @@ ExpansionTileItem buildDeviceStep({
     title: Text(title ?? 'Device'),
     leading: leading ?? const Icon(Icons.devices),
     collapsedBorderColor: Colors.transparent,
-    collapsedTextColor: Colors.grey.withOpacity(0.8),
-    collapsedIconColor: Colors.grey.withOpacity(0.8),
-    expendedBorderColor: Colors.grey.withOpacity(0.2),
+    collapsedTextColor: Colors.grey.withValues(alpha: 0.8),
+    collapsedIconColor: Colors.grey.withValues(alpha: 0.8),
+    expendedBorderColor: Colors.grey.withValues(alpha: 0.2),
     textColor: Colors.white,
     iconColor: Colors.white,
     children: [

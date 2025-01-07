@@ -49,7 +49,7 @@ class BuildInvoiceCompanyInfo extends StatelessWidget {
             style: TextStyle(
               fontSize: 5.spa,
               color: inVerseColor == true
-                  ? Colors.white.withOpacity(0.7)
+                  ? Colors.white.withValues(alpha: 0.7)
                   : Colors.black87,
             ),
           ),
@@ -60,7 +60,7 @@ class BuildInvoiceCompanyInfo extends StatelessWidget {
             style: TextStyle(
               fontSize: 5.spa,
               color: inVerseColor == true
-                  ? Colors.white.withOpacity(0.7)
+                  ? Colors.white.withValues(alpha: 0.7)
                   : Colors.black87,
             ),
           ),
@@ -71,7 +71,7 @@ class BuildInvoiceCompanyInfo extends StatelessWidget {
             style: TextStyle(
               fontSize: 5.spa,
               color: inVerseColor == true
-                  ? Colors.white.withOpacity(0.7)
+                  ? Colors.white.withValues(alpha: 0.7)
                   : Colors.black87,
             ),
           ),
@@ -82,7 +82,7 @@ class BuildInvoiceCompanyInfo extends StatelessWidget {
             style: TextStyle(
               fontSize: 5.spa,
               color: inVerseColor == true
-                  ? Colors.white.withOpacity(0.7)
+                  ? Colors.white.withValues(alpha: 0.7)
                   : Colors.black87,
             ),
           ),
@@ -94,7 +94,7 @@ class BuildInvoiceCompanyInfo extends StatelessWidget {
             style: TextStyle(
               fontSize: 6.spa,
               color: inVerseColor == true
-                  ? Colors.white.withOpacity(0.7)
+                  ? Colors.white.withValues(alpha: 0.7)
                   : Colors.black87,
             ),
           ),
@@ -105,7 +105,7 @@ class BuildInvoiceCompanyInfo extends StatelessWidget {
             style: TextStyle(
               fontSize: 6.spa,
               color: inVerseColor == true
-                  ? Colors.white.withOpacity(0.7)
+                  ? Colors.white.withValues(alpha: 0.7)
                   : Colors.black87,
             ),
           ),

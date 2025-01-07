@@ -124,13 +124,15 @@ class ProjectSingleController extends GetxController {
     }
 
     // if project id is empty
-    if (project.id == null || project.id!.isEmpty) return;
+    if (project.id == null || project.id?.isEmpty == true) return;
 
-    Get.showOverlay(
+    await Get.showOverlay(
       asyncFunction: () async {
         String? path = await createProjectPathBasedOnState(
-          type: project.stateManagement,
+          type: project.stateManagement ?? StateManegmentEnum.getx.name,
         );
+
+        if (path == null || path.isEmpty) return;
 
         // save project path
         await _projectLocalPathStorage.write(

@@ -38,8 +38,7 @@ class AppTheme {
         onPrimary: Colors.black,
         secondary: lightColors['secondary']!,
         onSecondary: Colors.black,
-        background: lightColors['background']!,
-        onBackground: Colors.black,
+        onSurface: Colors.black,
         primaryContainer: lightColors['primaryContainer']!,
         secondaryContainer: lightColors['secondaryContainer']!,
         surface: lightColors['scaffoldBackgroundColor']!,
@@ -53,7 +52,8 @@ class AppTheme {
       outlinedButtonTheme: OutlinedButtonThemeData(
         style: OutlinedButton.styleFrom(
           side: BorderSide(color: lightColors['secondaryContainer']!),
-          backgroundColor: lightColors['primaryContainer']!.withOpacity(0.3),
+          backgroundColor:
+              lightColors['primaryContainer']!.withValues(alpha: 0.3),
           padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 16),
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
           foregroundColor: lightColors['secondary']!,
@@ -286,11 +286,10 @@ class AppTheme {
         onPrimary: Colors.white,
         secondary: darkColors['secondary']!,
         onSecondary: Colors.white,
-        background: darkColors['background']!,
-        onBackground: Colors.white,
         primaryContainer: darkColors['primaryContainer']!,
         secondaryContainer: darkColors['secondaryContainer']!,
         surface: darkColors['scaffoldBackgroundColor']!,
+        onSurface: Colors.white,
       ),
       dialogBackgroundColor: darkColors['primaryContainer']!,
       hoverColor: Colors.transparent,
@@ -301,7 +300,8 @@ class AppTheme {
       outlinedButtonTheme: OutlinedButtonThemeData(
         style: OutlinedButton.styleFrom(
           side: BorderSide(color: darkColors['secondaryContainer']!),
-          backgroundColor: darkColors['primaryContainer']!.withOpacity(0.3),
+          backgroundColor:
+              darkColors['primaryContainer']!.withValues(alpha: 0.3),
           padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 16),
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
           foregroundColor: darkColors['secondary']!,
@@ -491,7 +491,7 @@ class AppTheme {
           letterSpacing: 1.25,
         ),
         bodySmall: TextStyle(
-          color: Colors.white.withOpacity(0.5),
+          color: Colors.white.withValues(alpha: 0.5),
           fontSize: 12,
           fontWeight: FontWeight.w400,
           letterSpacing: 0.4,

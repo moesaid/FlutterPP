@@ -13,7 +13,7 @@ class BuildTimeOverlay extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Container(
-          width: 200.spa,
+          width: context.width * 0.5,
           clipBehavior: Clip.antiAlias,
           decoration: BoxDecoration(
             color: Get.theme.colorScheme.surface,
@@ -22,8 +22,8 @@ class BuildTimeOverlay extends StatelessWidget {
           child: Column(
             children: [
               SizedBox(
-                width: 200.spa,
-                height: 80.spa,
+                width: context.width,
+                height: context.width * 0.3,
                 child: Image.asset(
                   'assets/images/time.gif',
                   fit: BoxFit.cover,
@@ -38,7 +38,7 @@ class BuildTimeOverlay extends StatelessWidget {
                         'Hold tight!',
                         textAlign: TextAlign.center,
                         style: TextStyle(
-                          fontSize: 6.spa,
+                          fontSize: context.textTheme.titleLarge?.fontSize,
                           fontWeight: FontWeight.bold,
                         ),
                       ),

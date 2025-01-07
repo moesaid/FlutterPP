@@ -13,7 +13,6 @@ import 'package:flutterpp/App/Services/Auth/profile_services.dart';
 import 'package:flutterpp/App/Services/Client/client_services.dart';
 import 'package:flutterpp/App/Services/Invoice/invoice_services.dart';
 import 'package:flutterpp/App/Services/Project/project_services.dart';
-import 'package:flutterpp/App/Services/Project/wiki_services.dart';
 import 'package:flutterpp/App/Services/Team/team_member_services.dart';
 import 'package:flutterpp/App/Services/Team/team_services.dart';
 import 'package:flutterpp/App/Views/Global/build_overlay.dart';
@@ -31,7 +30,7 @@ class DashboardController extends GetxController {
   final _activeProjectStorage = ActiveProjectStorage();
   final _teamMemberServices = TeamMemberServices();
   final _profileServices = ProfileServices();
-  final _wikiServices = WikiServices();
+  // final _wikiServices = WikiServices();
   final _clientServices = ClientServices();
   final _invoiceServices = InvoiceServices();
 

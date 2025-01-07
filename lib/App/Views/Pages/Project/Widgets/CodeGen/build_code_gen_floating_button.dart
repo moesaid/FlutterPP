@@ -56,7 +56,7 @@ class BuildCodeGenFloatingButton extends StatelessWidget {
                     ),
                   ),
           style: FilledButton.styleFrom(
-            backgroundColor: Colors.black.withOpacity(0.5),
+            backgroundColor: Colors.black.withValues(alpha: 0.5),
           ),
           child: Badge.count(
             count: controller.diffCount,
@@ -100,7 +100,7 @@ class BuildCodeGenBuildOption extends StatelessWidget {
               title: const Text('Models'),
               activeColor: Get.theme.colorScheme.secondary,
               activeTrackColor:
-                  Get.theme.colorScheme.secondary.withOpacity(0.3),
+                  Get.theme.colorScheme.secondary.withValues(alpha: 0.3),
               decoration: const InputDecoration(
                 contentPadding: EdgeInsets.symmetric(
                   vertical: 10,
@@ -114,7 +114,7 @@ class BuildCodeGenBuildOption extends StatelessWidget {
               initialValue: false,
               activeColor: Get.theme.colorScheme.secondary,
               activeTrackColor:
-                  Get.theme.colorScheme.secondary.withOpacity(0.3),
+                  Get.theme.colorScheme.secondary.withValues(alpha: 0.3),
               decoration: const InputDecoration(
                 contentPadding: EdgeInsets.symmetric(
                   vertical: 10,
@@ -140,7 +140,7 @@ class BuildCodeGenBuildOption extends StatelessWidget {
               initialValue: false,
               activeColor: Get.theme.colorScheme.secondary,
               activeTrackColor:
-                  Get.theme.colorScheme.secondary.withOpacity(0.3),
+                  Get.theme.colorScheme.secondary.withValues(alpha: 0.3),
               decoration: const InputDecoration(
                 contentPadding: EdgeInsets.symmetric(
                   vertical: 10,
@@ -167,7 +167,7 @@ class BuildCodeGenBuildOption extends StatelessWidget {
                 initialValue: false,
                 activeColor: Get.theme.colorScheme.secondary,
                 activeTrackColor:
-                    Get.theme.colorScheme.secondary.withOpacity(0.3),
+                    Get.theme.colorScheme.secondary.withValues(alpha: 0.3),
                 decoration: const InputDecoration(
                   contentPadding: EdgeInsets.symmetric(
                     vertical: 10,
@@ -183,7 +183,7 @@ class BuildCodeGenBuildOption extends StatelessWidget {
                 initialValue: false,
                 activeColor: Get.theme.colorScheme.secondary,
                 activeTrackColor:
-                    Get.theme.colorScheme.secondary.withOpacity(0.3),
+                    Get.theme.colorScheme.secondary.withValues(alpha: 0.3),
                 decoration: const InputDecoration(
                   contentPadding: EdgeInsets.symmetric(
                     vertical: 10,
@@ -222,7 +222,7 @@ class BuildCodeGenBuildOption extends StatelessWidget {
                 initialValue: false,
                 activeColor: Get.theme.colorScheme.secondary,
                 activeTrackColor:
-                    Get.theme.colorScheme.secondary.withOpacity(0.3),
+                    Get.theme.colorScheme.secondary.withValues(alpha: 0.3),
                 decoration: const InputDecoration(
                   contentPadding: EdgeInsets.symmetric(
                     vertical: 10,
@@ -238,7 +238,7 @@ class BuildCodeGenBuildOption extends StatelessWidget {
                 initialValue: false,
                 activeColor: Get.theme.colorScheme.secondary,
                 activeTrackColor:
-                    Get.theme.colorScheme.secondary.withOpacity(0.3),
+                    Get.theme.colorScheme.secondary.withValues(alpha: 0.3),
                 decoration: const InputDecoration(
                   contentPadding: EdgeInsets.symmetric(
                     vertical: 10,

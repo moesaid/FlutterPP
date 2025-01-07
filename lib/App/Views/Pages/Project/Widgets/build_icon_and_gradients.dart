@@ -35,7 +35,7 @@ class BuildIconAndGradients extends StatelessWidget {
       init: BuildIconAndGradientsController(),
       tag: controllerTag,
       initState: (_) {},
-      builder: (_) {
+      builder: (localController) {
         return Stack(
           clipBehavior: Clip.none,
           children: [
@@ -51,24 +51,25 @@ class BuildIconAndGradients extends StatelessWidget {
                   ),
                 ),
               ),
-              child: (_.colors.isEmpty || _.svgs.isEmpty)
+              child: (localController.colors.isEmpty ||
+                      localController.svgs.isEmpty)
                   ? const BuildLoadingPage()
                   : alignment == PossionAlignment.sideBySide
                       ? Row(
                           children: [
                             _BuildIconSection(
-                              svgs: _.svgs,
+                              svgs: localController.svgs,
                               onSvgChange: (val) {
-                                _.onSVGChange(val);
+                                localController.onSVGChange(val);
                                 onSvgChange.call(val);
                               },
-                              colors: _.colors,
+                              colors: localController.colors,
                             ),
                             const VerticalDivider(width: 0),
                             _BuildColorsSection(
-                              colors: _.colors,
+                              colors: localController.colors,
                               onColorChange: (val) {
-                                _.onColorChange(val);
+                                localController.onColorChange(val);
                                 onColorChange.call(val);
                               },
                             ),
@@ -77,19 +78,19 @@ class BuildIconAndGradients extends StatelessWidget {
                       : Column(
                           children: [
                             _BuildIconSection(
-                              svgs: _.svgs,
+                              svgs: localController.svgs,
                               onSvgChange: (val) {
-                                _.onSVGChange(val);
+                                localController.onSVGChange(val);
                                 onSvgChange.call(val);
                               },
-                              colors: _.colors,
+                              colors: localController.colors,
                               crossAxisCount: 10,
                             ),
                             const Divider(),
                             _BuildColorsSection(
-                              colors: _.colors,
+                              colors: localController.colors,
                               onColorChange: (val) {
-                                _.onColorChange(val);
+                                localController.onColorChange(val);
                                 onColorChange.call(val);
                               },
                               crossAxisCount: 10,
@@ -225,15 +226,15 @@ class _BuildIconSection extends StatelessWidget {
                         Container(
                           padding: EdgeInsets.all(3.spa),
                           decoration: BoxDecoration(
-                            color: Colors.grey.withOpacity(0.1),
+                            color: Colors.grey.withValues(alpha: 0.1),
                             border: Border.all(
-                              color: Colors.grey.withOpacity(0.1),
+                              color: Colors.grey.withValues(alpha: 0.1),
                             ),
                             borderRadius: BorderRadius.circular(6),
                           ),
                           child: SvgPicture.asset(
                             'assets/svg/${svgs[i]}',
-                            // color: Colors.grey.withOpacity(0.5),
+                            // color: Colors.grey.withValues(alpha:0.5),
                             colorFilter: const ColorFilter.mode(
                               Colors.white,
                               BlendMode.srcATop,
