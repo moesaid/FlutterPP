@@ -1,5 +1,5 @@
 import 'package:flutterpp/Config/app_print.dart';
-import 'package:sentry_flutter/sentry_flutter.dart';
+// import 'package:sentry_flutter/sentry_flutter.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 class CallPipeline {
@@ -16,18 +16,20 @@ class CallPipeline {
 
       User? user = Supabase.instance.client.auth.currentUser;
 
-      await Sentry.captureException(
-        exception,
-        stackTrace: stackTrace,
-        withScope: (scope) {
-          scope.setUser(
-            SentryUser(
-              id: user?.id,
-              email: user?.email,
-            ),
-          );
-        },
-      );
+      //TODO: Uncomment the following lines to enable Sentry error tracking when sdk issue is addressed
+
+      // await Sentry.captureException(
+      //   exception,
+      //   stackTrace: stackTrace,
+      //   withScope: (scope) {
+      //     scope.setUser(
+      //       SentryUser(
+      //         id: user?.id,
+      //         email: user?.email,
+      //       ),
+      //     );
+      //   },
+      // );
 
       return null;
     }

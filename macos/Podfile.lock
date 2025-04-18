@@ -17,11 +17,6 @@ PODS:
     - FlutterMacOS
   - screen_retriever (0.0.1):
     - FlutterMacOS
-  - Sentry/HybridSDK (8.42.0)
-  - sentry_flutter (8.12.0):
-    - Flutter
-    - FlutterMacOS
-    - Sentry/HybridSDK (= 8.42.0)
   - shared_preferences_foundation (0.0.1):
     - Flutter
     - FlutterMacOS
@@ -42,15 +37,10 @@ DEPENDENCIES:
   - path_provider_foundation (from `Flutter/ephemeral/.symlinks/plugins/path_provider_foundation/darwin`)
   - printing (from `Flutter/ephemeral/.symlinks/plugins/printing/macos`)
   - screen_retriever (from `Flutter/ephemeral/.symlinks/plugins/screen_retriever/macos`)
-  - sentry_flutter (from `Flutter/ephemeral/.symlinks/plugins/sentry_flutter/macos`)
   - shared_preferences_foundation (from `Flutter/ephemeral/.symlinks/plugins/shared_preferences_foundation/darwin`)
   - system_tray (from `Flutter/ephemeral/.symlinks/plugins/system_tray/macos`)
   - url_launcher_macos (from `Flutter/ephemeral/.symlinks/plugins/url_launcher_macos/macos`)
   - window_manager (from `Flutter/ephemeral/.symlinks/plugins/window_manager/macos`)
-
-SPEC REPOS:
-  trunk:
-    - Sentry
 
 EXTERNAL SOURCES:
   app_links:
@@ -71,8 +61,6 @@ EXTERNAL SOURCES:
     :path: Flutter/ephemeral/.symlinks/plugins/printing/macos
   screen_retriever:
     :path: Flutter/ephemeral/.symlinks/plugins/screen_retriever/macos
-  sentry_flutter:
-    :path: Flutter/ephemeral/.symlinks/plugins/sentry_flutter/macos
   shared_preferences_foundation:
     :path: Flutter/ephemeral/.symlinks/plugins/shared_preferences_foundation/darwin
   system_tray:
@@ -84,7 +72,7 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   app_links: 10e0a0ab602ffaf34d142cd4862f29d34b303b2a
-  device_info_plus: ce1b7762849d3ec103d0e0517299f2db7ad60720
+  device_info_plus: 1b14eed9bf95428983aed283a8d51cce3d8c4215
   file_selector_macos: cc3858c981fe6889f364731200d6232dac1d812d
   flutter_platform_alert: 49f22b31593e29e7a5e65f1b80f8d3de02b95dd4
   FlutterMacOS: 8f6f14fa908a6fb3fba0cd85dbd81ec4b251fb24
@@ -92,8 +80,6 @@ SPEC CHECKSUMS:
   path_provider_foundation: 2b6b4c569c0fb62ec74538f866245ac84301af46
   printing: 1dd6a1fce2209ec240698e2439a4adbb9b427637
   screen_retriever: 59634572a57080243dd1bf715e55b6c54f241a38
-  Sentry: 38ed8bf38eab5812787274bf591e528074c19e02
-  sentry_flutter: 7d1f1df30f3768c411603ed449519bbb90a7d87b
   shared_preferences_foundation: fcdcbc04712aee1108ac7fda236f363274528f78
   system_tray: e53c972838c69589ff2e77d6d3abfd71332f9e5d
   url_launcher_macos: c82c93949963e55b228a30115bd219499a6fe404

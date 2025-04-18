@@ -13,7 +13,7 @@ import 'package:get_storage/get_storage.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:launch_at_startup/launch_at_startup.dart';
 import 'package:package_info_plus/package_info_plus.dart';
-import 'package:sentry_flutter/sentry_flutter.dart';
+// import 'package:sentry_flutter/sentry_flutter.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:syntax_highlight/syntax_highlight.dart';
 
@@ -82,13 +82,13 @@ class AppInitializer {
       return;
     }
 
-    await SentryFlutter.init(
-      (options) {
-        options.dsn = AppConfig.sentryDNS;
-        options.tracesSampleRate = 1.0;
-      },
-      appRunner: appRunner,
-    );
+    // await SentryFlutter.init(
+    //   (options) {
+    //     options.dsn = AppConfig.sentryDNS;
+    //     options.tracesSampleRate = 1.0;
+    //   },
+    //   appRunner: appRunner,
+    // );
   }
 
   // init lets encrypt

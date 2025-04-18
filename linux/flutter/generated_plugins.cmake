@@ -8,7 +8,6 @@ list(APPEND FLUTTER_PLUGIN_LIST
   gtk
   printing
   screen_retriever
-  sentry_flutter
   system_tray
   url_launcher_linux
   window_manager
