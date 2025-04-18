@@ -3,6 +3,7 @@ import 'package:flutterpp/App/Controllers/Project/Single/project_single_code_gen
 import 'package:flutterpp/App/Views/Global/build_loading_or_empty_layout.dart';
 import 'package:flutterpp/App/Views/Pages/Project/Widgets/CodeGen/build_code_gen_floating_button.dart';
 import 'package:flutterpp/App/Views/Pages/Project/Widgets/CodeGen/build_code_gen_node.dart';
+import 'package:flutterpp/Helpers/colors_helper.dart';
 import 'package:get/get.dart';
 import 'package:graphite/graphite.dart';
 
@@ -68,16 +69,27 @@ class ProjectSingleCodeGen extends GetView<ProjectSingleCodeGenController> {
                           );
                         },
                       ),
-                      // paintBuilder: (edge) {
-                      //   var p = Paint()
-                      //     ..color = Get.theme.colorScheme.primary
-                      //     ..style = PaintingStyle.stroke
-                      //     ..strokeCap = StrokeCap.round
-                      //     ..strokeJoin = StrokeJoin.round
-                      //     ..strokeWidth = 2;
-
-                      //   return p;
-                      // },
+                      styleBuilder: (edge) {
+                        // return style
+                        return EdgeStyle(
+                          // borderRadius: 100,
+                          linePaint: Paint()
+                            ..style = PaintingStyle.stroke
+                            ..strokeWidth = 1
+                            ..color = controller.models
+                                        .firstWhere(
+                                          (e) => e.id == edge.to.id,
+                                        )
+                                        .color !=
+                                    null
+                                ? ColorHelper.hexToColor(
+                                    controller.models
+                                        .firstWhere((e) => e.id == edge.to.id)
+                                        .color!,
+                                  )
+                                : Get.theme.colorScheme.secondary,
+                        );
+                      },
                     ),
                   ],
                 ),
