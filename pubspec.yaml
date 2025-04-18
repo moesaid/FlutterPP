@@ -16,7 +16,7 @@ dependencies:
   window_manager: ^0.3.8
   get_storage: ^2.1.1
   supabase_flutter: ^2.3.4
-  flutter_form_builder: ^9.0.0
+  flutter_form_builder: ^10.0.1
   form_builder_validators: ^11.0.0
   heroicons: ^0.11.0
   loading_animation_widget: ^1.2.0+4
@@ -29,20 +29,20 @@ dependencies:
   file_selector: ^1.0.2
   awesome_side_sheet: ^0.0.3
   device_frame: ^1.1.0
-  flutter_platform_alert: ^0.6.1
+  flutter_platform_alert: ^0.7.0
   screenshot: ^3.0.0
   image: ^4.1.4
   process_run: ^1.1.0
   glowy_borders: ^1.0.2
-  device_info_plus: ^10.1.2
+  device_info_plus: ^11.3.3
   lottie: ^3.0.0
   json2yaml: ^3.0.1
   yaml: ^3.1.2
   widget_arrows: ^0.6.0
   graphite: ^1.1.2
-  appflowy_editor: ^4.0.0
+  appflowy_editor: ^5.2.0
   emojis: ^0.9.9
-  launch_at_startup: ^0.3.1
+  launch_at_startup: ^0.5.1
   package_info_plus: ^8.0.2
   dashed_circular_progress_bar: ^0.0.6
   animated_flip_counter: ^0.3.4

@@ -22,7 +22,7 @@ class BuildCreateMockupLinkProject extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          FormBuilderChoiceChip(
+          FormBuilderChoiceChips(
             name: 'projects',
             spacing: 3.spa,
             runSpacing: 3.spa,

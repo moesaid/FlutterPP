@@ -343,7 +343,7 @@ Map<String, BlockComponentBuilder> customBuilder() {
       }
       return const EdgeInsets.symmetric(vertical: 0, horizontal: 0);
     },
-    textStyle: (node) {
+    textStyle: (node, {TextSpan? textSpan}) {
       if (HeadingBlockKeys.type == node.type) {
         return TextStyle(color: Get.theme.colorScheme.secondary);
       }
@@ -357,7 +357,7 @@ Map<String, BlockComponentBuilder> customBuilder() {
     // heading block
     HeadingBlockKeys.type: HeadingBlockComponentBuilder(
       configuration: BlockComponentConfiguration(
-        textStyle: (node) {
+        textStyle: (node, {TextSpan? textSpan}) {
           return TextStyle(
             color: Get.theme.colorScheme.onSurface,
           );

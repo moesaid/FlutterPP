@@ -106,7 +106,7 @@ class ProjectCreatePage extends GetView<ProjectCreateController> {
                   ),
                   const SizedBox(height: 10),
                   // check box
-                  FormBuilderChoiceChip(
+                  FormBuilderChoiceChips(
                     name: 'stateManagement',
                     spacing: 10,
                     runSpacing: 10,
